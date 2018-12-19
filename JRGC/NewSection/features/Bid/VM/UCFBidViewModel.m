@@ -8,8 +8,12 @@
 
 #import "UCFBidViewModel.h"
 #import "UCFToolsMehod.h"
-@interface UCFBidViewModel()
+#import "NetworkModule.h"
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
+@interface UCFBidViewModel()<NetworkModuleDelegate>
 @property (nonatomic, strong)UCFBidModel *model;
+@property (nonatomic, strong)UCFContractTypleModel *contractTmpModel;
 @end
 
 @implementation UCFBidViewModel
@@ -154,7 +158,76 @@
     
     NSArray *contractMsg = self.model.data.contractMsg;
     self.contractMsg = contractMsg;
-    //pdf 合同
-//    NSArray *downContractList = self.model.data
+}
+- (void)bidViewModel:(UCFBidViewModel *)viewModel WithContractName:(NSString *)contractName
+{
+    UCFContractTypleModel *model = [UCFContractTypleModel new];
+    if ([contractName isEqualToString:@"网络借贷出借风险及禁止性行为提示"]) {
+        model.type = @"1";
+        model.url = PROTOCOLRISKPROMPT;
+        model.title = @"网络借贷出借风险及禁止性行为提示";
+        self.contractTypeModel = model;
+    }else if ([contractName isEqualToString:@"《CFCA数字证书服务协议》"]) {
+        model.type = @"1";
+        model.url = self.model.data.cfcaContractUrl;
+        model.title = self.model.data.cfcaContractName;
+        self.contractTypeModel = model;
+    } else {
+        for (ContractModel *tmpModel in self.model.data.contractMsg) {
+            if ([tmpModel.contractName isEqualToString:contractName]) {
+                if (tmpModel.contractUrl && tmpModel.contractUrl.length > 0) {
+                    model.type = @"1";
+                    model.title = tmpModel.contractName;
+                    model.url =tmpModel.contractUrl;
+                    self.contractTypeModel = model;
+                } else {
+                    
+                    NSString *projectId = self.model.data.prdClaim.ID;
+                    NSString *contractTypeStr = tmpModel.contractType;
+                    
+                    model.type = @"3";
+                    model.title = tmpModel.contractName;
+
+                    
+                    self.contractTmpModel = model;
+         
+                    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutTypeP2P];
+                }
+                break;
+            }
+        }
+    }
+}
+
+- (void)beginPost:(kSXTag)tag {
+    if (_superView) {
+        [MBProgressHUD showHUDAddedTo:_superView animated:YES];
+    }
+}
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    if (_superView) {
+        [MBProgressHUD hideAllHUDsForView:_superView animated:YES];
+    }
+    if(tag.intValue == kSXTagGetContractMsg) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        NSDictionary *dictionary =  [dic objectSafeDictionaryForKey:@"contractMess"];
+        NSString *status = [dic objectSafeForKey:@"status"];
+        if ([status intValue] == 1) {
+            NSString *contractMessStr = [dictionary objectSafeForKey:@"contractMess"];
+            self.contractTmpModel.htmlContent = contractMessStr;
+            self.contractTypeModel = self.contractTmpModel;
+        }else{
+
+        }
+    }
+}
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    if (_superView) {
+        [MBProgressHUD hideAllHUDsForView:_superView animated:YES];
+    }
 }
 @end

@@ -10,11 +10,12 @@
 #import "UCFBidModel.h"
 #import "FBKVOController.h"
 #import "NSObject+FBKVOController.h"
+#import "UCFContractTypleModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFBidViewModel : NSObject
 - (void)setDataModel:(UCFBidModel *)model;
-
+@property(nonatomic,strong) UIView    *superView;
 @property(nonatomic, strong)NSString *prdName;
 @property(nonatomic, strong)NSArray  *prdLabelsList;
 @property(nonatomic, copy) NSString  *platformSubsidyExpense; //贴
@@ -118,9 +119,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- PDF合同
+ 返回合同t标题
+
+ @param viewModel self
+ @param contractName 合同名称
  */
-@property(nonatomic,strong)NSArray       *downContractList;
+- (void)bidViewModel:(UCFBidViewModel *)viewModel WithContractName:(NSString *)contractName;
+
+@property(nonatomic,strong)UCFContractTypleModel *contractTypeModel;
+
 
 @end
 

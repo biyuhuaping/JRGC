@@ -37,6 +37,7 @@
 		3307E22621A3B153009FFF6D /* QuickRechargeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22521A3B153009FFF6D /* QuickRechargeHeadView.xib */; };
 		3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */; };
 		3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */; };
+		330DF7AA21C9F44C009553A4 /* UCFContractTypleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 330DF7A921C9F44C009553A4 /* UCFContractTypleModel.m */; };
 		3319B6D321C23308007DB14E /* UCFInvestFundsBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3319B6D221C23308007DB14E /* UCFInvestFundsBoard.m */; };
 		3336D23F21C383AD001644E1 /* UCFCouponBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3336D23E21C383AD001644E1 /* UCFCouponBoard.m */; };
 		3336D24621C3A029001644E1 /* NSObject+FBKVOController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3336D24321C3A029001644E1 /* NSObject+FBKVOController.m */; };
@@ -1215,6 +1216,8 @@
 		3307E22721A3D7B6009FFF6D /* QuickIntroduceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickIntroduceTableViewCell.h; sourceTree = "<group>"; };
 		3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickIntroduceTableViewCell.m; sourceTree = "<group>"; };
 		3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickIntroduceTableViewCell.xib; sourceTree = "<group>"; };
+		330DF7A821C9F44C009553A4 /* UCFContractTypleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFContractTypleModel.h; sourceTree = "<group>"; };
+		330DF7A921C9F44C009553A4 /* UCFContractTypleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFContractTypleModel.m; sourceTree = "<group>"; };
 		3319B6D121C23308007DB14E /* UCFInvestFundsBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestFundsBoard.h; sourceTree = "<group>"; };
 		3319B6D221C23308007DB14E /* UCFInvestFundsBoard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestFundsBoard.m; sourceTree = "<group>"; };
 		3336D23D21C383AD001644E1 /* UCFCouponBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCouponBoard.h; sourceTree = "<group>"; };
@@ -3276,6 +3279,8 @@
 			children = (
 				3336D25221C3B0BF001644E1 /* UCFBidModel.h */,
 				3336D25321C3B0BF001644E1 /* UCFBidModel.m */,
+				330DF7A821C9F44C009553A4 /* UCFContractTypleModel.h */,
+				330DF7A921C9F44C009553A4 /* UCFContractTypleModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -8024,6 +8029,7 @@
 				83CD843A1F13A50800227704 /* UCFBatchBidModel.m in Sources */,
 				7404CA041FB4502E002811E0 /* UCFExtractGoldItemModel.m in Sources */,
 				3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */,
+				330DF7AA21C9F44C009553A4 /* UCFContractTypleModel.m in Sources */,
 				4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */,
 				330611BD212ABAAB00955BD6 /* UCFLanchViewController.m in Sources */,
 				74BDA9881F09F6C60054403F /* FSCalendarCell.m in Sources */,

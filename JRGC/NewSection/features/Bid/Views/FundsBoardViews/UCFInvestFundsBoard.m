@@ -10,7 +10,7 @@
 #import "MinuteCountDownView.h"
 
 @interface UCFInvestFundsBoard ()
-@property(nonatomic, strong)UCFBidViewModel *myVM;
+@property(nonatomic, weak)UCFBidViewModel *myVM;
 /**
  倒计时
  */

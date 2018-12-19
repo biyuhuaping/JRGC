@@ -18,10 +18,14 @@
 @property(nonatomic, strong) YYLabel    *contractMsgLabel;
 @property(nonatomic, strong) UIView     *fiveSectionView;
 @property(nonatomic, strong) UIView     *sixSectionView;
+
+@property(nonatomic, weak)UCFBidViewModel *myVM;
+
 @end
 @implementation UCFBidFootBoardView
 - (void)showView:(UCFBidViewModel *)viewModel
 {
+    self.myVM = viewModel;
     [self.KVOController observe:viewModel keyPaths:@[@"limitAmountMess",@"limitAmountNum",@"cfcaContractName",@"contractMsg"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"limitAmountMess"]) {
@@ -29,6 +33,8 @@
             if (limitAmountMess.length > 0) {
                 NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:limitAmountMess];
                 text.yy_color = UIColorWithRGB(0x999999);
+                _limitAmountMessLabel.text = limitAmountMess;
+                [_limitAmountMessLabel sizeToFit];
                 _limitAmountMessLabel.attributedText = text;
                 self.firstSectionView.myVisibility = MyVisibility_Visible;
             } else {
@@ -61,6 +67,7 @@
                 }
                 NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:totalStr];
                 text.yy_color = UIColorWithRGB(0x999999);
+                __weak typeof(self) weakSelf = self;
                 for (int i = 0; i < contractMsg.count; i++) {
                     NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsg objectAtIndex:i] valueForKey:@"contractName"]] ;
                     [text yy_setTextHighlightRange:[totalStr rangeOfString:tmpStr]
@@ -68,6 +75,7 @@
                                    backgroundColor:[UIColor lightGrayColor]
                                          tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
                                              NSLog(@"333");
+                                             [weakSelf totalString:text andRange:range];
                                          }];
                     
                 }
@@ -82,7 +90,15 @@
         }
     }];
 }
-
+- (void)totalString:(NSAttributedString *)text andRange:(NSRange)range
+{
+    NSString *string = [text string];
+    NSString *constractName = [string substringWithRange:range];
+    constractName = [constractName stringByReplacingOccurrencesOfString:@"《" withString:@""];
+    constractName = [constractName stringByReplacingOccurrencesOfString:@"》" withString:@""];
+    DLog(@"%@",constractName);
+    [self.myVM bidViewModel:self.myVM WithContractName:constractName];
+}
 - (void)createAllShowView
 {
 
@@ -95,7 +111,7 @@
 - (void)createSectionOne
 {
     UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor greenColor];
+    view.backgroundColor = [UIColor clearColor];
     view.myTop = 0;
     view.myHeight = 20;
     view.myHorzMargin = 0;
@@ -113,7 +129,7 @@
     limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
     limitAmountMessLabel.numberOfLines = 0;
     //不要删除，需要占位，要不数据反射回来 这个lab的frame 会变成0
-    limitAmountMessLabel.text = @"经过风险评估，您本次出借金额上限为1000万";
+//    limitAmountMessLabel.text = @"经过风险评估，您本次出借金额上限为1000万";
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
     [self.firstSectionView addSubview:limitAmountMessLabel];
@@ -123,7 +139,7 @@
 - (void)createSectionTwo
 {
     UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor purpleColor];
+    view.backgroundColor = [UIColor clearColor];
     view.topPos.equalTo(self.firstSectionView.bottomPos);
     view.myHeight = 20;
     view.myHorzMargin = 0;
@@ -152,19 +168,19 @@
     
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:showStr];
     text.yy_color = UIColorWithRGB(0x999999);
+    __weak typeof(self) weakSelf = self;
     [text yy_setTextHighlightRange:[showStr rangeOfString:@"《CFCA数字证书服务协议》"]
                              color:UIColorWithRGB(0x4aa1f9)
                    backgroundColor:[UIColor lightGrayColor]
                          tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
-                             
-
+                             [weakSelf totalString:text andRange:range];
                          }];
     limitAmountMessLabel.attributedText = text;
 }
 - (void)createSectionThree
 {
     UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor blueColor];
+    view.backgroundColor = [UIColor clearColor];
     view.topPos.equalTo(self.secondSectionView.bottomPos);
     view.wrapContentHeight = YES;
     view.myHorzMargin = 0;
@@ -196,18 +212,20 @@
     
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:showStr];
     text.yy_color = UIColorWithRGB(0x999999);
+     __weak typeof(self) weakSelf = self;
     [text yy_setTextHighlightRange:[showStr rangeOfString:@"《网络借贷出借风险及禁止性行为提示》"]
                              color:UIColorWithRGB(0x4aa1f9)
                    backgroundColor:[UIColor lightGrayColor]
                          tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
                              NSLog(@"111");
+                             [weakSelf totalString:text andRange:range];
                          }];
     limitAmountMessLabel.attributedText = text;
 }
 - (void)createSectionFour
 {
     UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor redColor];
+    view.backgroundColor = [UIColor clearColor];
     view.topPos.equalTo(self.thirdSectionView.bottomPos);
     view.wrapContentHeight = YES;
 //    view.myHeight = 20;
@@ -280,7 +298,7 @@
 - (void)createSectionsix
 {
     UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor yellowColor];
+    view.backgroundColor = [UIColor clearColor];
     view.topPos.equalTo(self.fourSectionView.bottomPos);
     view.myHeight = 20;
     view.myHorzMargin = 0;

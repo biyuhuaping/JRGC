@@ -9,7 +9,7 @@
 #import "UCFCouponBoard.h"
 
 @interface UCFCouponBoard ()
-@property(nonatomic, strong)UCFBidViewModel *myVM;
+@property(nonatomic, weak)UCFBidViewModel *myVM;
 @property(nonatomic, strong) UILabel        *couponLab;
 @property(nonatomic, strong) UILabel        *cashLab;
 

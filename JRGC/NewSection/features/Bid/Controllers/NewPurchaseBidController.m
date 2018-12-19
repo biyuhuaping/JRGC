@@ -14,7 +14,7 @@
 #import "UCFCouponBoard.h"
 #import "UCFBidViewModel.h"
 #import "UCFBidFootBoardView.h"
-
+#import "FullWebViewController.h"
 @interface NewPurchaseBidController ()<UCFCouponBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -116,26 +116,35 @@
     
     [self.footView showView:vm];
     
-    
     [vm setDataModel:_bidDetaiModel];
-
-    
+    vm.superView = self.view;
+    __weak typeof(self) weakSelf = self;
+    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"contractTypeModel"]) {
+            id funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if ([funds isKindOfClass:[UCFContractTypleModel class]]) {
+                UCFContractTypleModel *model = (UCFContractTypleModel *)funds;
+                if ([model.type isEqualToString:@"1"]) {
+                    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:model.url title:model.title];
+                    controller.baseTitleType = @"detail_heTong";
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                } else if ([model.type isEqualToString:@"3"]) {
+                    FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:model.htmlContent title:model.title];
+                    controller.baseTitleType = @"detail_heTong";
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                }
+            }
+            NSLog(@"%@",funds);
+        }
+    }];
 }
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
     
 }
-- (void)beginPost:(kSXTag)tag {
-    
-}
-- (void)endPost:(id)result tag:(NSNumber *)tag
-{
-    
-}
-- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
-{
-    
-}
+
+
 
 
 @end

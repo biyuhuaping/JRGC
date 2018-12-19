@@ -118,5 +118,6 @@
 
 @property (nonatomic, copy) NSString *contractType;
 
+@property (nonatomic, copy) NSString *contractUrl;
 @end
 
