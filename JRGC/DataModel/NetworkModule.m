@@ -1364,7 +1364,9 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:HOMEPAGERECOMMENDPRDCLAIMURL];
         case kSXTagShowCouponTips:
             parameter = [NEW_SERVER_IP stringByAppendingString:HOMESHOWCOUPONTIPS];
-
+            break;
+        case kSXTagInvestCouponTicktList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:InvestCouponTicktList];
             break;
     }
     //给原有参数字典添加公共参数
