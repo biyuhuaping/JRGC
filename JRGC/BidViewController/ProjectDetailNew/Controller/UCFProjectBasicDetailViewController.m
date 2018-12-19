@@ -76,7 +76,7 @@
 {
     [super viewDidLoad];
     [self addLeftButton];
-    self.tableView.contentInset = UIEdgeInsetsMake( 0, 0, 10, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     baseTitleLabel.text = @"基础详情";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _isOpenWebViewOpen = NO;

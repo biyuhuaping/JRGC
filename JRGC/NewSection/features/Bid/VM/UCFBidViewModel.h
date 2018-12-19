@@ -129,6 +129,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UCFContractTypleModel *contractTypeModel;
 
 
+- (BOOL)dealInvestLogic;
+
+
+@property(nonatomic, assign)BOOL      isExistRecomder;
 @end
 
 NS_ASSUME_NONNULL_END

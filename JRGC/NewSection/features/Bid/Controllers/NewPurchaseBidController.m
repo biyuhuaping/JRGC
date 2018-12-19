@@ -15,6 +15,8 @@
 #import "UCFBidViewModel.h"
 #import "UCFBidFootBoardView.h"
 #import "FullWebViewController.h"
+#import "UCFRecommendView.h"
+#import "UCFFundsInvestButton.h"
 @interface NewPurchaseBidController ()<UCFCouponBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -23,15 +25,43 @@
 @property(nonatomic, strong) UCFRemindFlowView *remind;
 @property(nonatomic, strong) UCFInvestFundsBoard *fundsBoardView;
 @property(nonatomic, strong) UCFCouponBoard *couponBoard;
+@property(nonatomic, strong) UCFRecommendView *recommendView;
 @property(nonatomic, strong) UCFBidFootBoardView    *footView;
+@property(nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic, strong) UCFFundsInvestButton *investButton;
 @end
 
 @implementation NewPurchaseBidController
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+//    if (@available(iOS 11.0, *)) {
+//       CGRect frame = self.scrollView.frame;
+//        frame.origin.x = self.view.safeAreaInsets.left;
+//        frame.size.width = self.view.frame.size.width - self.view.safeAreaInsets.left - self.view.safeAreaInsets.right;
+//        frame.size.height = self.view.frame.size.height - self.view.safeAreaInsets.bottom - 67;
+//        self.scrollView.frame = frame;
+//    }
+}
 - (void)loadView
 {
+    self.edgesForExtendedLayout = UIRectEdgeNone;  //设置视图控制器中的视图尺寸不延伸到导航条或者工具条下面。您可以注释这句代码看看效果。
+
+    MyRelativeLayout *rootLayout = [MyRelativeLayout new];
+    rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+    self.view = rootLayout;
+    rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
+    rootLayout.insetsPaddingFromSafeArea = UIRectEdgeBottom;  //您可以在这里将值改变为UIRectEdge的其他类型然后试试运行的效果。并且在运行时切换横竖屏看看效果
+    
     UIScrollView *scrollView = [UIScrollView new];
-    scrollView.backgroundColor = UIColorWithRGB(0xebebee);
-    self.view = scrollView;
+    scrollView.backgroundColor = [UIColor clearColor];
+    scrollView.myHorzMargin = 0;
+    scrollView.topPos.equalTo(@0);
+    scrollView.bottomPos.equalTo(@57);
+    scrollView.myHorzMargin = 0;
+    [rootLayout addSubview:scrollView];
+    self.scrollView = scrollView;
     
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     contentLayout.padding = UIEdgeInsetsMake(10, 0, 0, 0);
@@ -81,15 +111,32 @@
     [couponBoard addSubSectionViews];
     self.couponBoard = couponBoard;
     
+    UCFRecommendView *recommendView = [UCFRecommendView linearLayoutWithOrientation:MyOrientation_Vert];
+    recommendView.myHorzMargin = 0;
+    [self.contentLayout addSubview:recommendView];
+    [recommendView addSubSectionViews];
+    self.recommendView = recommendView;
+    
     UCFBidFootBoardView *footView = [UCFBidFootBoardView linearLayoutWithOrientation:MyOrientation_Vert];
     footView.myVertMargin = 10;
     footView.myHorzMargin = 0;
     footView.backgroundColor = UIColorWithRGB(0xebebee);
-//    footView.backgroundColor = [UIColor yellowColor];
     footView.userInteractionEnabled = YES;
     [self.contentLayout addSubview:footView];
     self.footView = footView;
     [footView createAllShowView];
+    
+ 
+    
+    UCFFundsInvestButton *investButton = [UCFFundsInvestButton new];
+    investButton.myHorzMargin = 0;
+    investButton.bottomPos.equalTo(@0);
+    investButton.myHeight = 57;
+    investButton.backgroundColor = [UIColor whiteColor];
+    [rootLayout addSubview:investButton];
+    [investButton createSubviews];
+    self.investButton = investButton;
+
 }
 - (void)fetchNetData
 {
@@ -114,7 +161,11 @@
     
     [self.couponBoard showView:vm];
     
+    [self.recommendView showView:vm];
+    
     [self.footView showView:vm];
+    
+    [self.investButton showView:vm];
     
     [vm setDataModel:_bidDetaiModel];
     vm.superView = self.view;
