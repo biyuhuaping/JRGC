@@ -1023,6 +1023,9 @@
 		E32020151CC4BCEF0065579C /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020141CC4BCEF0065579C /* WKWebViewJavascriptBridge.m */; };
 		E32B8F4E1E85188D00B7871F /* UCFRegisterFinshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E32B8F4C1E85188D00B7871F /* UCFRegisterFinshViewController.m */; };
 		E32B8F4F1E85188D00B7871F /* UCFRegisterFinshViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */; };
+		E33223CC21CA29C30062FE23 /* UCFInvestmentCouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E33223CB21CA29C30062FE23 /* UCFInvestmentCouponModel.m */; };
+		E33223CF21CA2BEE0062FE23 /* UCFInvestmentCouponCashTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = E33223CE21CA2BEE0062FE23 /* UCFInvestmentCouponCashTicketController.m */; };
+		E33223D221CA2C490062FE23 /* UCFInvestmentCouponInterestTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = E33223D121CA2C490062FE23 /* UCFInvestmentCouponInterestTicketController.m */; };
 		E37086B51D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B31D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m */; };
 		E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086B41D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib */; };
 		E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B81D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m */; };
@@ -2872,6 +2875,12 @@
 		E32B8F4B1E85188D00B7871F /* UCFRegisterFinshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRegisterFinshViewController.h; sourceTree = "<group>"; };
 		E32B8F4C1E85188D00B7871F /* UCFRegisterFinshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterFinshViewController.m; sourceTree = "<group>"; };
 		E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRegisterFinshViewController.xib; sourceTree = "<group>"; };
+		E33223CA21CA29C30062FE23 /* UCFInvestmentCouponModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponModel.h; sourceTree = "<group>"; };
+		E33223CB21CA29C30062FE23 /* UCFInvestmentCouponModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentCouponModel.m; sourceTree = "<group>"; };
+		E33223CD21CA2BEE0062FE23 /* UCFInvestmentCouponCashTicketController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponCashTicketController.h; sourceTree = "<group>"; };
+		E33223CE21CA2BEE0062FE23 /* UCFInvestmentCouponCashTicketController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentCouponCashTicketController.m; sourceTree = "<group>"; };
+		E33223D021CA2C490062FE23 /* UCFInvestmentCouponInterestTicketController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponInterestTicketController.h; sourceTree = "<group>"; };
+		E33223D121CA2C490062FE23 /* UCFInvestmentCouponInterestTicketController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentCouponInterestTicketController.m; sourceTree = "<group>"; };
 		E37086B21D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFHuiShangChooseBankViewController.h; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.h; sourceTree = "<group>"; };
 		E37086B31D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFHuiShangChooseBankViewController.m; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.m; sourceTree = "<group>"; };
 		E37086B41D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFHuiShangChooseBankViewController.xib; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.xib; sourceTree = "<group>"; };
@@ -3310,6 +3319,7 @@
 		33813A2421BFB495004666E5 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				E39BC35D21CA26CA0098607D /* InvestmentCoupon(投资选择优惠券) */,
 				E31BD51221C0C03900D3651F /* CouponPopup(优惠券弹窗) */,
 				33813A1921BFB216004666E5 /* Bid */,
 			);
@@ -7143,6 +7153,51 @@
 			path = "TransitionModel(转成model的方法)";
 			sourceTree = "<group>";
 		};
+		E39BC35D21CA26CA0098607D /* InvestmentCoupon(投资选择优惠券) */ = {
+			isa = PBXGroup;
+			children = (
+				E39BC35E21CA26CA0098607D /* Controller */,
+				E39BC35F21CA26CA0098607D /* Model */,
+				E39BC36021CA26CA0098607D /* View */,
+				E39BC36121CA26CA0098607D /* Api */,
+			);
+			path = "InvestmentCoupon(投资选择优惠券)";
+			sourceTree = "<group>";
+		};
+		E39BC35E21CA26CA0098607D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E33223CD21CA2BEE0062FE23 /* UCFInvestmentCouponCashTicketController.h */,
+				E33223CE21CA2BEE0062FE23 /* UCFInvestmentCouponCashTicketController.m */,
+				E33223D021CA2C490062FE23 /* UCFInvestmentCouponInterestTicketController.h */,
+				E33223D121CA2C490062FE23 /* UCFInvestmentCouponInterestTicketController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E39BC35F21CA26CA0098607D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E33223CA21CA29C30062FE23 /* UCFInvestmentCouponModel.h */,
+				E33223CB21CA29C30062FE23 /* UCFInvestmentCouponModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E39BC36021CA26CA0098607D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E39BC36121CA26CA0098607D /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		E3A96B051CBF830400E8884F /* workpoints（工分） */ = {
 			isa = PBXGroup;
 			children = (
@@ -8038,6 +8093,7 @@
 				E31BD53221C0C10100D3651F /* UIImage+ImageEffects.m in Sources */,
 				83CD843A1F13A50800227704 /* UCFBatchBidModel.m in Sources */,
 				7404CA041FB4502E002811E0 /* UCFExtractGoldItemModel.m in Sources */,
+				E33223CF21CA2BEE0062FE23 /* UCFInvestmentCouponCashTicketController.m in Sources */,
 				3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */,
 				330DF7AA21C9F44C009553A4 /* UCFContractTypleModel.m in Sources */,
 				4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */,
@@ -8136,6 +8192,7 @@
 				FB1A6A961BE8BD1E004C73B8 /* Touch3DSingle.m in Sources */,
 				3382D21A21A2698A00104CCD /* BankDetailTableViewCell.m in Sources */,
 				74EC4B7F1F4AEA6000E4ACB0 /* UCFGoldIncreaseListModel.m in Sources */,
+				E33223CC21CA29C30062FE23 /* UCFInvestmentCouponModel.m in Sources */,
 				833A6EAD1E55466B00C8A494 /* UCFCollectionListViewController.m in Sources */,
 				83CD843D1F13A50800227704 /* UCFLoadingView.m in Sources */,
 				EDEC8BFB1CB3BA6300815228 /* WPHotspotLabel.m in Sources */,
@@ -8212,6 +8269,7 @@
 				FB2173191AF20DFC00649AA0 /* UCFBackMoneyCell.m in Sources */,
 				A851F3481F132713003DE8B8 /* UCFGoldTransactionHeadView.m in Sources */,
 				833CC9EF1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.m in Sources */,
+				E33223D221CA2C490062FE23 /* UCFInvestmentCouponInterestTicketController.m in Sources */,
 				FB4F9E4F1D62A6D600CCB492 /* AccountSuccessVC.m in Sources */,
 				74F291131AE0DBB4003E0E86 /* UCFFacCodeViewController.m in Sources */,
 				74EC8D251AF089A4000CAF35 /* UCFPersonalInfoModel.m in Sources */,

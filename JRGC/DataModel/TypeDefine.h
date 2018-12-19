@@ -308,7 +308,7 @@
 #define GOLDCHANGECASH          @"api/nmAccount/v2/liquidateGold.json"    //黄金变现
 #define USERSTATUSINFO          @"api/prdClaims/v2/statusInfo.json"    //个人状态信息
 #define EXTRACTGOLDLIST         @"api/nmTrade/v2/pickUpGoldList.json"  //提金订单列表
-
+#define InvestCouponTicktList    @"api/discountCoupon/v2/queryInvestCouponList.json" //投资选择优惠券列表
 //预约的url
 #define NEWUSER_PRODUCTS_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/novice-bid/info"
 #define NEWUSER_APPLY_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/novice-bid/apply"
@@ -605,8 +605,7 @@ enum kSXTag
 
     kSXTagRecommendPrdClaim,            //推荐表列表
     kSXTagShowCouponTips,            //新券过期券提示接口
-    
-    
+    kSXTagInvestCouponTicktList,            //投资选择优惠券列表(新)
 
 };
 
