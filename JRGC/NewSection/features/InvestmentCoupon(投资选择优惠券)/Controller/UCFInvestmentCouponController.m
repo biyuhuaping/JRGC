@@ -20,9 +20,11 @@
 - (void)addChildControllers
 {
     self.ctController = [[UCFInvestmentCouponCashTicketController alloc] init];//返现券
+    self.ctController.db = self;
     [self addChildViewController:self.ctController];
 
     self.itController = [[UCFInvestmentCouponInterestTicketController alloc] init];//返现券
+    self.itController.db = self;
     [self addChildViewController:self.itController];
 
     
@@ -40,6 +42,12 @@
                                        lineHeight:3];
     
     [self.view addSubview:_pagerView];
+
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
 
 }
 - (void)viewDidLoad {
