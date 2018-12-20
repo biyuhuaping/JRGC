@@ -175,7 +175,58 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (indexPath.section == 1) {
+        [self alertUnableToUseCoupons];
+    }
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];//创建一个视图
+    headerView.backgroundColor = UIColorWithRGB(0xbebebe);
     
+    UIView *view = [[UIView alloc] init];
+    view.frame = CGRectMake(0,10,ScreenWidth,37);
+    view.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0];
+    
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 90, 37)];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.font = [UIFont boldSystemFontOfSize:13.0];
+    headerLabel.textColor = UIColorWithRGB(0x555555);
+    [view addSubview:headerLabel];
+    
+    if (section == 0) {
+        headerLabel.text = @"可使用优惠券";
+    }
+    else
+    {
+        headerLabel.text = @"不可使用优惠券";
+        UIButton *button = [UIButton buttonWithType:0];
+        button.frame = CGRectMake(CGRectGetMaxX(headerLabel.frame), (headerLabel.frame.size.height -20)/2, 20, 20);
+        [button setImage:[UIImage imageNamed:@"gold_account_icon_info_03"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(moreConfusion) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:button];
+    }
+    
+    return headerView;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;//设置尾视图高度为0.01
+}
+
+- (void)moreConfusion
+{
+    [self alertUnableToUseCoupons];
+}
+//无法使用的优惠券
+- (void)alertUnableToUseCoupons
+{
+    BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"优惠券使用条件不足,输入的出借金额小于优惠券的最低使用金额" cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+        if (index == 1) {
+            //重新输入金额
+        }
+    } otherButtonTitles:@"重新输入金额"];
+    [alert show];
 }
 
 -(void)checkButtonClick:(UIButton *)btn

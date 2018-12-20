@@ -1053,6 +1053,7 @@
 		E3C117AF1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C117AD1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.xib */; };
 		E3E05C5C1DD07D710066B65C /* UCFCouponExchangeToFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E05C5A1DD07D710066B65C /* UCFCouponExchangeToFriends.m */; };
 		E3E05C5D1DD07D710066B65C /* UCFCouponExchangeToFriends.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E05C5B1DD07D710066B65C /* UCFCouponExchangeToFriends.xib */; };
+		E3E62D9921CB478000A794B1 /* UCFInvestmentCouponController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E62D9821CB478000A794B1 /* UCFInvestmentCouponController.m */; };
 		ED0647F91C7ABE1E00311AA1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647F81C7ABE1E00311AA1 /* libc++.tbd */; };
 		ED0647FB1C7ABF7300311AA1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647FA1C7ABF7300311AA1 /* AssetsLibrary.framework */; };
 		ED0647FD1C7ABFA400311AA1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647FC1C7ABFA400311AA1 /* CoreImage.framework */; };
@@ -2925,6 +2926,8 @@
 		E3E05C591DD07D710066B65C /* UCFCouponExchangeToFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCouponExchangeToFriends.h; sourceTree = "<group>"; };
 		E3E05C5A1DD07D710066B65C /* UCFCouponExchangeToFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCouponExchangeToFriends.m; sourceTree = "<group>"; };
 		E3E05C5B1DD07D710066B65C /* UCFCouponExchangeToFriends.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCouponExchangeToFriends.xib; sourceTree = "<group>"; };
+		E3E62D9721CB478000A794B1 /* UCFInvestmentCouponController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponController.h; sourceTree = "<group>"; };
+		E3E62D9821CB478000A794B1 /* UCFInvestmentCouponController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentCouponController.m; sourceTree = "<group>"; };
 		ED0647F81C7ABE1E00311AA1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		ED0647FA1C7ABF7300311AA1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		ED0647FC1C7ABFA400311AA1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -7171,6 +7174,8 @@
 				E33223CE21CA2BEE0062FE23 /* UCFInvestmentCouponCashTicketController.m */,
 				E33223D021CA2C490062FE23 /* UCFInvestmentCouponInterestTicketController.h */,
 				E33223D121CA2C490062FE23 /* UCFInvestmentCouponInterestTicketController.m */,
+				E3E62D9721CB478000A794B1 /* UCFInvestmentCouponController.h */,
+				E3E62D9821CB478000A794B1 /* UCFInvestmentCouponController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -8234,6 +8239,7 @@
 				83FCCA7A1F174B05002921C5 /* UCFGoldInvestDetailCell.m in Sources */,
 				83DAEFBD1F166A3000D7948F /* UCFContractTableCell.m in Sources */,
 				833A6EBC1E55902A00C8A494 /* UCFCollectionListCell.m in Sources */,
+				E3E62D9921CB478000A794B1 /* UCFInvestmentCouponController.m in Sources */,
 				7BC8AA1F1AD4C74200BF4660 /* UCFMyInvestment.m in Sources */,
 				7BC3048B1ACBC22D007767F1 /* UIView+AddLine.m in Sources */,
 				83CD84341F13A50800227704 /* UCFP2PViewController.m in Sources */,
