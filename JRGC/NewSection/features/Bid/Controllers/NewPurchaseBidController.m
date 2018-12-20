@@ -37,7 +37,9 @@
 @property(nonatomic, strong) UCFBidViewModel       *viewModel;
 
 @property(nonatomic, copy) NSString *rechargeMoneyStr;
-
+@property(nonatomic, strong)NSArray *cashArray;
+@property(nonatomic, strong)NSArray *couponArray;
+@property(nonatomic, copy) NSString *preMoney; //上次输入金额
 @end
 
 @implementation NewPurchaseBidController
@@ -125,8 +127,6 @@
     self.footView = footView;
     [footView createAllShowView];
     
- 
-    
     UCFFundsInvestButton *investButton = [UCFFundsInvestButton new];
     investButton.myHorzMargin = 0;
     investButton.bottomPos.equalTo(@0);
@@ -135,7 +135,6 @@
     [rootLayout addSubview:investButton];
     [investButton createSubviews];
     self.investButton = investButton;
-
 }
 - (void)fetchNetData
 {
@@ -179,30 +178,31 @@
 {
     NSString *prdclaimid = [self.viewModel getDataModelBidID];
     NSString *investAmt = [self.viewModel getTextFeildInputMoeny];
-    
+    if (![self.preMoney isEqualToString:investAmt]) {
+        self.cashArray = [NSArray array];
+        self.couponArray = [NSArray array];
+    }
     if (prdclaimid == nil || [prdclaimid isEqualToString:@""] || investAmt == nil || [investAmt isEqualToString:@""]) {
         return;
     }
     UCFInvestmentCouponController *uc = [[UCFInvestmentCouponController alloc] init];
     uc.prdclaimid = prdclaimid;
     uc.investAmt = investAmt;
+    self.preMoney = investAmt;
     [self.navigationController pushViewController:uc animated:YES];
     [self bindCoupleView:uc];
-
 }
 - (void)investFundsBoard:(UCFInvestFundsBoard *)board withRechargeButtonClick:(UIButton *)button
 {
     UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
     vc.accoutType = SelectAccoutTypeP2P;
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
 - (void)bindCoupleView:(UCFInvestmentCouponController *)vc
 {
     __weak typeof(self) weakSelf = self;
     [self.KVOController observe:vc keyPaths:@[@"cashSelectArr"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
-//        weakSelf.viewModel;
         if ([keyPath isEqualToString:@"cashSelectArr"]) {
             NSArray *arr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (arr.count > 0) {
@@ -222,6 +222,10 @@
                 weakSelf.viewModel.repayCash = [NSString stringWithFormat:@"%.2f",totalcouponAmount];
                 weakSelf.viewModel.cashTotalcouponAmount = [NSString stringWithFormat:@"%.2f",totalInvestMultip];
                 weakSelf.viewModel.cashTotalIDStr = totalIDStr;
+            } else {
+                weakSelf.viewModel.repayCash = @"0";
+                weakSelf.viewModel.cashTotalcouponAmount = @"0";
+                weakSelf.viewModel.cashTotalIDStr = @"";
             }
         }
     }];
@@ -246,6 +250,10 @@
                 weakSelf.viewModel.repayCoupon = [NSString stringWithFormat:@"%.2f",totalcouponAmount];
                 weakSelf.viewModel.couponTotalcouponAmount = [NSString stringWithFormat:@"%.2f",totalInvestMultip];
                 weakSelf.viewModel.couponIDStr = totalIDStr;
+            } else {
+                weakSelf.viewModel.repayCoupon = @"0";
+                weakSelf.viewModel.couponTotalcouponAmount = @"0";
+                weakSelf.viewModel.couponIDStr = @"";
             }
         }
     }];

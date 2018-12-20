@@ -96,6 +96,7 @@
                 NSString *cashStr = [NSString stringWithFormat:@"¥%@",repayCash];
                 NSString *allText = [NSString stringWithFormat:@"返现%@",cashStr];
                 self.cashLab.text = allText;
+                self.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:cashStr WithTotalString:allText];
                 [self.cashLab sizeToFit];
             } else {
                 NSString *cashStr = self.myVM.cashNum;
