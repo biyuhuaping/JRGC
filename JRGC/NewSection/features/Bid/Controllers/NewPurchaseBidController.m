@@ -17,6 +17,7 @@
 #import "FullWebViewController.h"
 #import "UCFRecommendView.h"
 #import "UCFFundsInvestButton.h"
+#import "UCFPurchaseWebView.h"
 @interface NewPurchaseBidController ()<UCFCouponBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -168,9 +169,19 @@
     [self.investButton showView:vm];
     
     [vm setDataModel:_bidDetaiModel];
+    
+    [self bindData:vm];
+
+}
+- (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
+{
+    
+}
+- (void)bindData:(UCFBidViewModel *)vm
+{
     vm.superView = self.view;
     __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"contractTypeModel"]) {
             id funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -187,14 +198,26 @@
                 }
             }
             NSLog(@"%@",funds);
+        } else if ([keyPath isEqualToString:@"hsbidInfoDict"]) {
+            NSDictionary *dic = [change objectSafeDictionaryForKey:NSKeyValueChangeNewKey];
+            if ([[dic allKeys] count] > 0) {
+                NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
+                NSString *urlStr = dic[@"data"][@"url"];
+                UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
+                webView.url = urlStr;
+                webView.rootVc = self.rootVc;
+                webView.webDataDic =dataDict;
+                webView.navTitle = @"即将跳转";
+                webView.accoutType = self.accoutType;
+                [self.navigationController pushViewController:webView animated:YES];
+                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+                [navVCArray removeObjectAtIndex:navVCArray.count-2];
+                [self.navigationController setViewControllers:navVCArray animated:NO];
+            }
+            
         }
     }];
 }
-- (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
-{
-    
-}
-
 
 
 

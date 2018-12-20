@@ -18,9 +18,9 @@
 - (void)showView:(UCFBidViewModel *)viewModel
 {
     self.myVM = viewModel;
-    [self.KVOController observe:viewModel keyPaths:@[@"isExistRecomder"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:viewModel keyPaths:@[@"isLimit"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
-        if ([keyPath isEqualToString:@"isExistRecomder"]) {
+        if ([keyPath isEqualToString:@"isLimit"]) {
             BOOL isExistRecomder = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
             if (isExistRecomder) {
                 self.myVisibility = MyVisibility_Gone;
@@ -33,8 +33,28 @@
 
 - (void)addSubSectionViews
 {
+    [self addSepateteView];
     [self addheadView];
     [self addInputView];
+}
+- (void)addSepateteView
+{
+    UIView *topView =[[UIView alloc] init];
+    topView.backgroundColor = UIColorWithRGB(0xebebee);
+    topView.myHeight = 10;
+    topView.myHorzMargin = 0;
+    [self addSubview:topView];
+    
+    UIView *topLineView = [[UIView alloc] init];
+    topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    topLineView.myTop = 0;
+    topLineView.myHorzMargin = 0;
+    topLineView.heightSize.equalTo(@0.5);
+    [topView addSubview:topLineView];
+    
+    
+//    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
+//    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
 }
 - (void)addheadView
 {
@@ -70,7 +90,6 @@
     endLineView.myRight = 0;
     endLineView.heightSize.equalTo(@0.5);
     [view addSubview:endLineView];
-    
 }
 - (void)addInputView
 {
@@ -101,6 +120,7 @@
     gCCodeTextField.returnKeyType = UIReturnKeyDone;
     gCCodeTextField.keyboardType = UIKeyboardTypeEmailAddress;
     gCCodeTextField.placeholder = @"点击填写工场码";
+    [gCCodeTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     [inputBaseView addSubview:gCCodeTextField];
     self.gCCodeTextField = gCCodeTextField;
     
@@ -111,5 +131,9 @@
     endLineView.myRight = 0;
     endLineView.heightSize.equalTo(@0.5);
     [view addSubview:endLineView];
+}
+- (void)textfieldLength:(UITextField *)textField
+{
+    [self.myVM outputRecommendCode:textField.text];
 }
 @end

@@ -129,10 +129,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UCFContractTypleModel *contractTypeModel;
 
 
-- (BOOL)dealInvestLogic;
+- (void)dealInvestLogic;
 
 
 @property(nonatomic, assign)BOOL      isExistRecomder;
+@property(nonatomic, assign)BOOL      isLimit;
+
+- (void)outputRecommendCode:(NSString *)string;
+
+
+//投标数据
+@property(nonatomic, strong)NSDictionary    *hsbidInfoDict;
 @end
 
 NS_ASSUME_NONNULL_END

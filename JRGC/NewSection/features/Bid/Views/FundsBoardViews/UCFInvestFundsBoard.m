@@ -69,6 +69,14 @@
             NSString *myBeansNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
             _beanNumLab.text = myBeansNum;
             [_beanNumLab sizeToFit];
+            NSString *num = [myBeansNum stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+            if ([num doubleValue] >= 0.01) {
+                _beanSwitch.on = YES;
+            } else {
+                _beanSwitch.on = NO;
+            }
+            [self changeSwitchStatue:_beanSwitch];
+
         } else if ([keyPath isEqualToString:@"inputViewPlaceStr"]) {
             NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             _investMoneyTextfield.placeholder = inputViewPlaceStr;
