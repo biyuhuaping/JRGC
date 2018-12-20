@@ -177,9 +177,15 @@
 }
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
+    NSString *prdclaimid = [self.viewModel getDataModelBidID];
+    NSString *investAmt = [self.viewModel getTextFeildInputMoeny];
+    
+    if (prdclaimid == nil || [prdclaimid isEqualToString:@""] || investAmt == nil || [investAmt isEqualToString:@""]) {
+        return;
+    }
     UCFInvestmentCouponController *uc = [[UCFInvestmentCouponController alloc] init];
-    uc.prdclaimid = [self.viewModel getDataModelBidID];
-    uc.investAmt = [self.viewModel getTextFeildInputMoeny];
+    uc.prdclaimid = prdclaimid;
+    uc.investAmt = investAmt;
     [self.navigationController pushViewController:uc animated:YES];
     [self bindCoupleView:uc];
 

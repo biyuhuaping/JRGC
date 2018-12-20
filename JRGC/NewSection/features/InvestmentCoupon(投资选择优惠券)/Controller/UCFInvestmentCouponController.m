@@ -10,6 +10,7 @@
 
 @interface UCFInvestmentCouponController ()
 @property (strong, nonatomic)  UIScrollView *scrollView;
+@property (strong, nonatomic) UIViewController *currentVC;
 @end
 
 @implementation UCFInvestmentCouponController
@@ -41,59 +42,117 @@
     
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1)];
+    self.scrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight - NavigationBarHeight1);
     [self.view addSubview:self.scrollView];
 
     self.ctController = [[UCFInvestmentCouponCashTicketController alloc] init];//返现券
     self.ctController.db = self;
+    self.ctController.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1);
     [self addChildViewController:self.ctController];
+//    addChildViewController 会调用 [child willMoveToParentViewController:self] 方法，但是不会调用 didMoveToParentViewController:方法，官方建议显示调用
+    [self.ctController didMoveToParentViewController:self];
     [self.scrollView addSubview:self.ctController.view];
 
-    self.itController = [[UCFInvestmentCouponInterestTicketController alloc] init];//返息券
-    self.itController.db = self;
-    [self addChildViewController:self.itController];
-    [self.scrollView addSubview:self.itController.view];
+    self.currentVC = self.ctController;
+    
+    
+    
+    
+//    self.itController = [[UCFInvestmentCouponInterestTicketController alloc] init];//返息券
+//    self.itController.db = self;
+//    self.itController.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1);
+//    //addChildViewController 会调用 [child willMoveToParentViewController:self] 方法，但是不会调用 didMoveToParentViewController:方法，官方建议显示调用
+//    [self.itController didMoveToParentViewController:self];
+//    [self addChildViewController:self.itController];
+//    [self.scrollView addSubview:self.itController.view];
+    
+    
+    
+
+    
+    
+    
+    
+    
     
 }
-- (void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
-    self.scrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight - NavigationBarHeight1);
-    self.ctController.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1);
-    self.itController.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1);
-    [self.view layoutIfNeeded];
-}
+//- (void)viewDidLayoutSubviews{
+//    [super viewDidLayoutSubviews];
+//
+//    [self.view layoutIfNeeded];
+//}
 
 - (void)transitionToViewController:(UIButton *)btn
 {
+//    if (btn.tag == 100) {
+//        [self changeControllerFromOldController:self.itController toNewController:self.itControlle]
+//    }
+}
+- (void)changeControllerFromOldController:(UIViewController *)oldController toNewController:(UIViewController *)newController
+{
     
-    if (btn.tag == 100)
-    {
-        [self transitionFromViewController:self.itController toViewController:self.ctController duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            CATransition *animation = [CATransition animation];
-            [animation setDuration:0.25];
-            [animation setFillMode:kCAFillModeForwards];
-            [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
-            [animation setType:kCATransitionPush];
-            [animation setSubtype:kCATransitionFromRight];
-//            [toViewController.view.layer addAnimation:animation forKey:nil];
-        } completion:^(BOOL finished) {
-           
-        }];
-    }
-    else
-    {
-        [self transitionFromViewController:self.ctController toViewController:self.itController duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            CATransition *animation = [CATransition animation];
-            [animation setDuration:0.25];
-            [animation setFillMode:kCAFillModeForwards];
-            [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
-            [animation setType:kCATransitionPush];
-            [animation setSubtype:kCATransitionFromRight];
-            //            [toViewController.view.layer addAnimation:animation forKey:nil];
-        } completion:^(BOOL finished) {
+    [self addChildViewController:newController];
+    /**
+     *  切换ViewController
+     */
+    [self transitionFromViewController:oldController toViewController:newController duration:0.3 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        
+        //做一些动画
+        
+    } completion:^(BOOL finished) {
+        
+        if (finished) {
             
-        }];
-    }
+            //移除oldController，但在removeFromParentViewController：方法前不会调用willMoveToParentViewController:nil 方法，所以需要显示调用
+            [newController didMoveToParentViewController:self];
+            [oldController willMoveToParentViewController:nil];
+            [oldController removeFromParentViewController];
+            self.currentVC = newController;
+            
+        }else
+        {
+            self.currentVC = oldController;
+        }
+        
+    }];
     
+    
+    
+    
+    
+    
+    
+    
+    
+//    if (btn.tag == 100)
+//    {
+//        [self transitionFromViewController:self.itController toViewController:self.ctController duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//            CATransition *animation = [CATransition animation];
+//            [animation setDuration:0.25];
+//            [animation setFillMode:kCAFillModeForwards];
+//            [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+//            [animation setType:kCATransitionPush];
+//            [animation setSubtype:kCATransitionFromRight];
+////            [toViewController.view.layer addAnimation:animation forKey:nil];
+//        } completion:^(BOOL finished) {
+//
+//        }];
+//    }
+//    else
+//    {
+//        [self transitionFromViewController:self.ctController toViewController:self.itController duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//            CATransition *animation = [CATransition animation];
+//            [animation setDuration:0.25];
+//            [animation setFillMode:kCAFillModeForwards];
+//            [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+//            [animation setType:kCATransitionPush];
+//            [animation setSubtype:kCATransitionFromRight];
+//            //            [toViewController.view.layer addAnimation:animation forKey:nil];
+//        } completion:^(BOOL finished) {
+//
+//        }];
+//    }
+//
     
 }
 /*

@@ -50,7 +50,7 @@
         _couponTypeLayout = [MyRelativeLayout new];
         _couponTypeLayout.topPos.equalTo(@10);
         _couponTypeLayout.clipsToBounds = NO;
-        _couponTypeLayout.leftPos.equalTo(self.selectCouponsBtn.rightPos).offset(15);
+        _couponTypeLayout.leftPos.equalTo(self.selectCouponsBtn.rightPos).offset(0);
         _couponTypeLayout.rightPos.equalTo(@15);
         _couponTypeLayout.heightSize.equalTo(@62);
         _couponTypeLayout.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
@@ -73,6 +73,7 @@
         _couponAmounLabel = [YYLabel new];
         _couponAmounLabel.topPos.equalTo(@5);
         _couponAmounLabel.leftPos.equalTo(@10);
+        _couponAmounLabel.rightPos.equalTo(@10);
         _couponAmounLabel.textAlignment = NSTextAlignmentLeft;
         _couponAmounLabel.font = [UIFont systemFontOfSize:30.0];
         _couponAmounLabel.textColor = [UIColor whiteColor];
@@ -87,9 +88,10 @@
     {
         _selectCouponsBtn = [UIButton buttonWithType:0];
         _selectCouponsBtn.centerYPos.equalTo(self.rootLayout.centerYPos);
-        _selectCouponsBtn.leftPos.equalTo(@14);
-        _selectCouponsBtn.widthSize.equalTo(@25);
-        _selectCouponsBtn.heightSize.equalTo(@25);
+        _selectCouponsBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _selectCouponsBtn.leftPos.equalTo(@0);
+        _selectCouponsBtn.widthSize.equalTo(@50);
+        _selectCouponsBtn.heightSize.equalTo(@50 );
         
     }
     return _selectCouponsBtn;
