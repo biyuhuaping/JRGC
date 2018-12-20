@@ -79,7 +79,7 @@
         
         InvestmentCouponCouponlist *newObj = obj;
         //判断投资界面带回来的值,在列表页面勾选
-        if ([self.selectArray containsObject: [NSNumber numberWithInteger:newObj.couponId ]]) {
+        if ([self.db.cashSelectArr containsObject: [NSNumber numberWithInteger:newObj.couponId ]]) {
             newObj.isCheck = YES;
         }
         
@@ -136,11 +136,15 @@
 
 - (void)useEnterBtnClick
 {
+    [self.db confirmTheCouponOfYourChoice];
+}
+- (void)couponOfChoice
+{
     NSMutableArray *selectArray = [NSMutableArray array];
     [self.arryData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSMutableArray *array = obj;
-
+        
         [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             InvestmentCouponCouponlist *newObj = obj;
@@ -151,9 +155,40 @@
             
         }];
     }];
-//    self.selectArray = [selectArray mutableCopy];
     self.db.cashSelectArr = [selectArray mutableCopy];
-    [self.db.navigationController popViewControllerAnimated:YES];
+}
+- (BOOL)calculateTheSelectedAmount
+{
+    //计算s每次勾选的金额相加是否大于投资金额,大于则不能勾选
+    __block NSInteger moneyValue = 0;
+    [self.arryData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSMutableArray *array = obj;
+        
+        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            InvestmentCouponCouponlist *newObj = obj;
+            //判断投资界面带回来的值,在列表页面勾选
+            if (newObj.isCheck ) {
+                moneyValue += newObj.investMultip;
+            }
+            
+        }];
+    }];
+    if (moneyValue > [self.db.investAmt integerValue]) {
+        
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"返现券使用条件不足,需出借￥%zd.00才可使用",moneyValue] cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+            if (index == 1) {
+                //重新输入金额
+                [self.db backToTheInvestmentPage];
+            }
+        } otherButtonTitles:@"重新输入金额"];
+        [alert show];
+        return NO;//勾选优惠券的金额大于输入的金额
+    }
+    else{
+        return YES;
+    }
 }
 #pragma mark--tableView delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
@@ -253,6 +288,7 @@
     BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"优惠券使用条件不足,输入的出借金额小于优惠券的最低使用金额" cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
         if (index == 1) {
             //重新输入金额
+            [self.db backToTheInvestmentPage];
         }
     } otherButtonTitles:@"重新输入金额"];
     [alert show];
@@ -268,7 +304,14 @@
     point = [self.tableView convertPoint:point fromView:btn.superview];
     NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:point];
     InvestmentCouponCouponlist *newObj = [[self.arryData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-
+    
+    [self setButtonType:btn withData:newObj];
+    if (![self calculateTheSelectedAmount]) {
+        [self setButtonType:btn withData:newObj];
+    }
+}
+-(void)setButtonType:(UIButton *)btn withData:(InvestmentCouponCouponlist *)newObj
+{
     btn.selected = !btn.selected;
     if (btn.selected)
     {
@@ -280,7 +323,6 @@
         newObj.isCheck = NO;
         [btn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
     }
-    
 }
 /*
 #pragma mark - Navigation

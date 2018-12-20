@@ -25,8 +25,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *investAmt;//投资金额
 
-@property (nonatomic, copy)NSMutableArray   *cashSelectArr;
-@property (nonatomic, copy)NSMutableArray   *couponSelectArr;
+@property (nonatomic, copy)NSMutableArray   *cashSelectArr;//返现券选中的数组
+
+@property (nonatomic, copy)NSMutableArray   *couponSelectArr;//返息券选中的数组
+
+- (void)confirmTheCouponOfYourChoice;
+
+- (void)backToTheInvestmentPage;
 
 @end
 

@@ -84,7 +84,7 @@
         
         InvestmentCouponCouponlist *newObj = obj;
         //判断投资界面带回来的值,在列表页面勾选
-        if ([self.selectArray containsObject: [NSNumber numberWithInteger:newObj.couponId ]]) {
+        if ([self.db.couponSelectArr containsObject: [NSNumber numberWithInteger:newObj.couponId ]]) {
             newObj.isCheck = YES;
         }
         
@@ -141,7 +141,27 @@
 
 - (void)useEnterBtnClick
 {
+    [self.db confirmTheCouponOfYourChoice];
     
+}
+- (void)couponOfChoic
+{
+    NSMutableArray *selectArray = [NSMutableArray array];
+    [self.arryData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSMutableArray *array = obj;
+        
+        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            InvestmentCouponCouponlist *newObj = obj;
+            //判断投资界面带回来的值,在列表页面勾选
+            if (newObj.isCheck ) {
+                [selectArray addObject:newObj];
+            }
+            
+        }];
+    }];
+    self.db.couponSelectArr = [selectArray mutableCopy];
 }
 #pragma mark--tableView delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
@@ -241,6 +261,7 @@
     BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"优惠券使用条件不足,输入的出借金额小于优惠券的最低使用金额" cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
         if (index == 1) {
             //重新输入金额
+            [self.db backToTheInvestmentPage];
         }
     } otherButtonTitles:@"重新输入金额"];
     [alert show];
@@ -256,7 +277,7 @@
     if (self.oldIndexPath == nil)
     {
         //上次的勾选没有记录
-        if (self.selectArray == nil || self.selectArray.count == 0) {
+        if (self.db.couponSelectArr == nil || self.db.couponSelectArr.count == 0) {
             //没有勾选,投资页面传来的也没有勾选
             self.oldIndexPath = indexPath;
         }
@@ -268,7 +289,7 @@
                 
                 InvestmentCouponCouponlist *arrayObj = obj;
                 //判断投资界面带回来的值,在列表页面勾选
-                if ([self.selectArray containsObject: [NSNumber numberWithInteger:arrayObj.couponId ]]) {
+                if ([self.db.couponSelectArr containsObject: [NSNumber numberWithInteger:arrayObj.couponId ]]) {
                     arrayObj.isCheck = YES;
                     *stop = YES;
                     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:idx inSection:0];

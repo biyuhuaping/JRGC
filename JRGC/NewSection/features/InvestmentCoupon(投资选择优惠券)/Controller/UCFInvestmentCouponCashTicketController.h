@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFInvestmentCouponCashTicketController : UCFBaseViewController
 
-@property (nonatomic, copy) NSMutableArray *selectArray;//选中的数组
-
 @property (nonatomic, weak) UCFInvestmentCouponController *db;
+
+- (void)couponOfChoice;
 
 @end
 

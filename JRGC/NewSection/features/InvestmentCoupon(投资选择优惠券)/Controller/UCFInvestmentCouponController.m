@@ -45,26 +45,26 @@
     self.scrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight - NavigationBarHeight1);
     [self.view addSubview:self.scrollView];
 
-    self.ctController = [[UCFInvestmentCouponCashTicketController alloc] init];//返现券
-    self.ctController.db = self;
-    self.ctController.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1);
-    [self addChildViewController:self.ctController];
-//    addChildViewController 会调用 [child willMoveToParentViewController:self] 方法，但是不会调用 didMoveToParentViewController:方法，官方建议显示调用
-    [self.ctController didMoveToParentViewController:self];
-    [self.scrollView addSubview:self.ctController.view];
-
-    self.currentVC = self.ctController;
+//    self.ctController = [[UCFInvestmentCouponCashTicketController alloc] init];//返现券
+//    self.ctController.db = self;
+//    self.ctController.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1);
+//    [self addChildViewController:self.ctController];
+////    addChildViewController 会调用 [child willMoveToParentViewController:self] 方法，但是不会调用 didMoveToParentViewController:方法，官方建议显示调用
+//    [self.ctController didMoveToParentViewController:self];
+//    [self.scrollView addSubview:self.ctController.view];
+//
+//    self.currentVC = self.ctController;
     
     
     
     
-//    self.itController = [[UCFInvestmentCouponInterestTicketController alloc] init];//返息券
-//    self.itController.db = self;
-//    self.itController.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1);
-//    //addChildViewController 会调用 [child willMoveToParentViewController:self] 方法，但是不会调用 didMoveToParentViewController:方法，官方建议显示调用
-//    [self.itController didMoveToParentViewController:self];
-//    [self addChildViewController:self.itController];
-//    [self.scrollView addSubview:self.itController.view];
+    self.itController = [[UCFInvestmentCouponInterestTicketController alloc] init];//返息券
+    self.itController.db = self;
+    self.itController.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1);
+    //addChildViewController 会调用 [child willMoveToParentViewController:self] 方法，但是不会调用 didMoveToParentViewController:方法，官方建议显示调用
+    [self.itController didMoveToParentViewController:self];
+    [self addChildViewController:self.itController];
+    [self.scrollView addSubview:self.itController.view];
     
     
     
@@ -155,6 +155,15 @@
 //
     
 }
+- (void)confirmTheCouponOfYourChoice
+{
+    [self.ctController couponOfChoice];//返现券
+    [self.itController couponOfChoic];//返息券
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
+
 /*
 #pragma mark - Navigation
 
