@@ -98,6 +98,7 @@
 		33E1A5E020FDC5A9008244BD /* UCFOpenRedBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */; };
 		33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */; };
 		33E1A5E220FDC5A9008244BD /* UCFRedBagViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33E1A5DE20FDC5A8008244BD /* UCFRedBagViewController.xib */; };
+		33FE660221CBC2580000DD03 /* PageControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FE660121CBC2580000DD03 /* PageControlView.m */; };
 		4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */; };
 		4A04F8301F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */; };
 		4A04F8331F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F8321F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m */; };
@@ -1333,6 +1334,8 @@
 		33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRedBagViewController.m; sourceTree = "<group>"; };
 		33E1A5DD20FDC5A8008244BD /* UCFRedBagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRedBagViewController.h; sourceTree = "<group>"; };
 		33E1A5DE20FDC5A8008244BD /* UCFRedBagViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRedBagViewController.xib; sourceTree = "<group>"; };
+		33FE660021CBC2580000DD03 /* PageControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageControlView.h; sourceTree = "<group>"; };
+		33FE660121CBC2580000DD03 /* PageControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageControlView.m; sourceTree = "<group>"; };
 		4A04F82C1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAccountViewController.h; sourceTree = "<group>"; };
 		4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAccountViewController.m; sourceTree = "<group>"; };
 		4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldAccountViewController.xib; sourceTree = "<group>"; };
@@ -3470,6 +3473,15 @@
 				33E1A5DB20FDC5A8008244BD /* UCFCustomPopTransitionAnimation.h */,
 			);
 			path = Transition;
+			sourceTree = "<group>";
+		};
+		33FE65FF21CBC2270000DD03 /* PageControlView */ = {
+			isa = PBXGroup;
+			children = (
+				33FE660021CBC2580000DD03 /* PageControlView.h */,
+				33FE660121CBC2580000DD03 /* PageControlView.m */,
+			);
+			path = PageControlView;
 			sourceTree = "<group>";
 		};
 		4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */ = {
@@ -6883,6 +6895,7 @@
 		E31BD50521C0BFD500D3651F /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				33FE65FF21CBC2270000DD03 /* PageControlView */,
 				E37FC7ED21C25BD30019C01D /* TransitionModel(转成model的方法) */,
 				E31BD54521C0C91400D3651F /* View */,
 				E31BD53D21C0C71500D3651F /* TableView */,
@@ -8266,6 +8279,7 @@
 				EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */,
 				749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */,
 				A8E02DAD1F0DDC5000FC2260 /* GoldAccountFirstCell.m in Sources */,
+				33FE660221CBC2580000DD03 /* PageControlView.m in Sources */,
 				4A0DA1551B26D8C4004E84F6 /* UCFPurchaseBidViewController.m in Sources */,
 				741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */,
 				FB7EDE3F1D6BFCD700C3E924 /* UCFBaseViewController.m in Sources */,

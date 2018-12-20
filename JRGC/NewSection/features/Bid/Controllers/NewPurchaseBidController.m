@@ -188,6 +188,8 @@
     UCFInvestmentCouponController *uc = [[UCFInvestmentCouponController alloc] init];
     uc.prdclaimid = prdclaimid;
     uc.investAmt = investAmt;
+    uc.cashSelectArr = self.cashArray;
+    uc.couponSelectArr = self.couponArray;
     self.preMoney = investAmt;
     [self.navigationController pushViewController:uc animated:YES];
     [self bindCoupleView:uc];
@@ -229,9 +231,9 @@
             }
         }
     }];
-    [self.KVOController observe:vc.itController keyPaths:@[@"selectArray"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:vc keyPaths:@[@"couponSelectArr"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
-        if ([keyPath isEqualToString:@"selectArray"]) {
+        if ([keyPath isEqualToString:@"couponSelectArr"]) {
             NSArray *arr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (arr.count > 0) {
                 double totalInvestMultip = 0;

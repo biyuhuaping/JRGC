@@ -7,10 +7,10 @@
 //
 
 #import "UCFInvestmentCouponController.h"
-#import "PagerView.h"
+#import "PageControlView.h"
 @interface UCFInvestmentCouponController ()
 {
-    PagerView    * _pagerView;
+    PageControlView    * _pagerView;
 }
 @property (strong, nonatomic)  UIScrollView *scrollView;
 @property (strong, nonatomic) UIViewController *currentVC;
@@ -33,8 +33,9 @@
     [titleArray addObject:@"返现券"];
 
     [titleArray addObject:@"返息券"];
+    
     CGRect stateFrame = [[UIApplication sharedApplication] statusBarFrame];
-    _pagerView = [[PagerView alloc] initWithFrame:CGRectMake(0,stateFrame.size.height,ScreenWidth,ScreenHeight - 20 - 49)
+    _pagerView = [[PageControlView alloc] initWithFrame:CGRectMake(0,stateFrame.size.height,ScreenWidth,ScreenHeight)
                                 SegmentViewHeight:44
                                        titleArray:titleArray
                                        Controller:self
@@ -42,7 +43,36 @@
                                        lineHeight:3];
     
     [self.view addSubview:_pagerView];
+    
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setFrame:CGRectMake(0, 0, 44, 44)];
+    [leftButton setBackgroundColor:[UIColor clearColor]];
+    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
 
+    [leftButton setImage:[UIImage imageNamed:@"icon_back.png"]forState:UIControlStateNormal];
+
+    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_pagerView.segmentView addSubview:leftButton];
+    
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.frame = CGRectMake(ScreenWidth - 55,0, 44, 44);
+    rightbutton.backgroundColor = [UIColor clearColor];
+    [rightbutton setImage:[UIImage imageNamed:@"icon_question.png"] forState:UIControlStateNormal];
+    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+  
+    [_pagerView.segmentView addSubview:rightbutton];
+    
+
+}
+- (void)clickRightBtn
+{
+    NSString *isP2PTipStr =  self.accoutType == SelectAccoutTypeP2P  ? @"出借":@"投资";
+    NSString *messageStr = [NSString stringWithFormat:@"1.返现券和返息券可在一笔%@中共用\n2.返现券可叠加使用\n3.返息券只能使用一张,不可叠加",isP2PTipStr];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr  delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+    [alert show];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
