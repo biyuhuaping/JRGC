@@ -7,18 +7,48 @@
 //
 
 #import "UCFInvestmentCouponController.h"
-
+#import "PagerView.h"
 @interface UCFInvestmentCouponController ()
+{
+    PagerView    * _pagerView;
+}
 @property (strong, nonatomic)  UIScrollView *scrollView;
 @property (strong, nonatomic) UIViewController *currentVC;
 @end
 
 @implementation UCFInvestmentCouponController
+- (void)addChildControllers
+{
+    self.ctController = [[UCFInvestmentCouponCashTicketController alloc] init];//返现券
+    [self addChildViewController:self.ctController];
 
+    self.itController = [[UCFInvestmentCouponInterestTicketController alloc] init];//返现券
+    [self addChildViewController:self.itController];
+
+    
+    NSMutableArray *titleArray = [[NSMutableArray alloc] init];
+
+    [titleArray addObject:@"返现券"];
+
+    [titleArray addObject:@"返息券"];
+    CGRect stateFrame = [[UIApplication sharedApplication] statusBarFrame];
+    _pagerView = [[PagerView alloc] initWithFrame:CGRectMake(0,stateFrame.size.height,ScreenWidth,ScreenHeight - 20 - 49)
+                                SegmentViewHeight:44
+                                       titleArray:titleArray
+                                       Controller:self
+                                        lineWidth:70
+                                       lineHeight:3];
+    
+    [self.view addSubview:_pagerView];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    [self addChildControllers];
+    
+    return;
 
     UIView *navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 141, 44)];
     navView.backgroundColor = [UIColor clearColor];
