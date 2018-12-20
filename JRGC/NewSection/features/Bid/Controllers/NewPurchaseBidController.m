@@ -171,13 +171,15 @@
     [vm setRootController:self];
     
     [self bindData:vm];
+    
+    self.viewModel = vm;
 
 }
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
     UCFInvestmentCouponController *uc = [[UCFInvestmentCouponController alloc] init];
-    uc.prdclaimid =@"";
-    uc.investAmt =@"";
+    uc.prdclaimid = [self.viewModel getDataModelBidID];
+    uc.investAmt = [self.viewModel getTextFeildInputMoeny];
     [self.navigationController pushViewController:uc animated:YES];
 }
 - (void)investFundsBoard:(UCFInvestFundsBoard *)board withRechargeButtonClick:(UIButton *)button

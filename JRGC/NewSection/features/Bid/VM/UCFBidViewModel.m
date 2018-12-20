@@ -48,6 +48,11 @@
 {
     return self.model.data.prdClaim.ID;
 }
+- (NSString *)getTextFeildInputMoeny
+{
+    return self.investMoeny;
+}
+
 - (void)dealBidHeader
 {
     

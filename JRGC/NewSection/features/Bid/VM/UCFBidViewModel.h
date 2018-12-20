@@ -24,6 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)getDataModelBidID;
 
+/**
+ 获取输入框金额
+
+ @return 金额
+ */
+- (NSString *)getTextFeildInputMoeny;
 @property(nonatomic,strong) UIView    *superView;
 @property(nonatomic, strong)NSString *prdName;
 @property(nonatomic, strong)NSArray  *prdLabelsList;
