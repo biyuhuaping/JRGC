@@ -68,6 +68,45 @@
             } else {
                 self.myVisibility = MyVisibility_Visible;
             }
+        } else if ([keyPath isEqualToString:@"repayCoupon"]) {
+            //返息券返的金额
+            NSString *repayCoupon = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if ([repayCoupon doubleValue] > 0.01) {
+                NSString *repayCoupon = [change objectSafeForKey:NSKeyValueChangeNewKey];
+                NSString *repayCouponStr = [NSString stringWithFormat:@"¥%@",repayCoupon];
+                NSString *allText = [NSString stringWithFormat:@"返现%@",repayCouponStr];
+                self.couponLab.text = allText;
+                self.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:repayCouponStr WithTotalString:allText];
+                [self.couponLab sizeToFit];
+            } else {
+                NSString *couponNum = self.myVM.couponNum;
+                if (couponNum.length > 0) {
+                    self.couponLab.text = couponNum;
+                    if ([couponNum containsString:@"张可用"]) {
+                        NSString *tmpStr = [couponNum stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
+                        self.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:couponNum];
+                    }
+                    [self.couponLab sizeToFit];
+                }
+            }
+        } else if ([keyPath isEqualToString:@"repayCash"]) {
+            //返现券返的金额
+            NSString *repayCash = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if ([repayCash doubleValue] > 0.01) {
+                NSString *cashStr = [NSString stringWithFormat:@"¥%@",repayCash];
+                NSString *allText = [NSString stringWithFormat:@"返现%@",cashStr];
+                self.cashLab.text = allText;
+            } else {
+                NSString *cashStr = self.myVM.cashNum;
+                if (cashStr.length > 0) {
+                    self.cashLab.text = cashStr;
+                    if ([cashStr containsString:@"张可用"]) {
+                        NSString *tmpStr = [cashStr stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
+                        self.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:cashStr];
+                    }
+                    [self.cashLab sizeToFit];
+                }
+            }
         }
     }];
     

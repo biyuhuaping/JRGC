@@ -408,9 +408,9 @@
     }
     
     
-    NSString *availableFundsStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2f",self.model.data.accountAmount]];
+    NSString *availableFundsStr = [NSString stringWithFormat:@"%.2f",self.model.data.accountAmount];
     
-    NSString *gondDouBalancStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2f",self.model.data.beanAmount/100.0f]];
+    NSString *gondDouBalancStr =[NSString stringWithFormat:@"%.2f",self.model.data.beanAmount/100.0f];
     
     NSString *availableBalance = nil;
     
@@ -435,41 +435,166 @@
         [alert show];
         return;
     }
-    /*
-    int compare = [Common stringA:investMoney ComparedStringB:@"1000.00"];
+    
+    BOOL isHaveCashNum = [self.cashNum integerValue] > 0 ? YES : NO;
+    BOOL isHaveCouponNum = [self.couponNum integerValue] > 0 ? YES : NO;
+    //有返息券 和 返现券 可用
+    if (isHaveCashNum && isHaveCouponNum) {
+        
+        BOOL noSelectCash = self.cashTotalIDStr.length == 0 ? YES : NO;
+        BOOL noSelectCoupon = self.couponIDStr.length == 0 ? YES : NO;
+        //返现券和返息券都未勾选
+        if (noSelectCash && noSelectCoupon) {
+            NSString *messageStr = @"有可用优惠券，确认不使用并继续出借吗？";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 4000;
+            [alert show];
+            return;
+        } else if (noSelectCoupon && !noSelectCoupon) {
+            //勾选返现券 没有勾选返息全
+            NSString *couponPrdaimSum1 = self.cashTotalcouponAmount;
+            NSString *invenestMoney = self.investMoeny;
+            int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum1];
+            NSString *showStr = @"";
+            if (compareResult1 == -1) {
+                showStr = [NSString stringWithFormat:@"返现券使用条件不足,需出借满¥%@可用",[UCFToolsMehod AddComma:couponPrdaimSum1]];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"重新输入", nil];
+                alert.tag = 1000;
+                [alert show];
+                return;
+            }
+            NSString *messageStr =@"有可用返息券，确认不使用并继续出借吗？";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 4000;
+            [alert show];
+            return;
+        } else if (!noSelectCoupon && noSelectCoupon) {
+            //勾选息现券 没有勾选返现券
+            //勾选使用条件不足
+            NSString *couponPrdaimSum2 = self.couponTotalcouponAmount;
+            NSString *invenestMoney = self.investMoeny;
+            int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum2];
+            NSString *showStr = @"";
+            if (compareResult1 == -1) {
+                showStr = [NSString stringWithFormat:@"返息券使用条件不足,需出借满¥%@可用",[UCFToolsMehod AddComma:couponPrdaimSum2]];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"重新输入", nil];
+                alert.tag = 1000;
+                [alert show];
+                return;
+            }
+            NSString *messageStr =@"有可用返现券，确认不使用并继续出借吗？";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 4000;
+            [alert show];
+            return;
+        } else {
+            //全部勾选的情况下
+            NSString *couponPrdaimSum1 = self.cashTotalcouponAmount;
+            NSString *couponPrdaimSum2 = self.couponTotalcouponAmount;
+    
+            
+            NSString *couponPrdaimSum = [couponPrdaimSum1 doubleValue] > [couponPrdaimSum2 doubleValue] ? couponPrdaimSum1 : couponPrdaimSum2;
+            NSString *invenestMoney = self.investMoeny;
+            
+            //计算出使用该返息券所需投的金额
+            int compareResult = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum];
+            if (compareResult == -1) {
+                NSString *showStr = @"";
+                int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum1];
+                int compareResult2 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum2];
+                if (compareResult1 == -1 && compareResult2 == -1) {
+                    showStr = [NSString stringWithFormat:@"优惠券使用条件不足,需出借满¥%@可用",[UCFToolsMehod AddComma:couponPrdaimSum]] ;
+                } else if (compareResult1 == -1) {
+                    showStr = [NSString stringWithFormat:@"返现券使用条件不足,需出借满¥%@可用",[UCFToolsMehod AddComma:couponPrdaimSum1]];
+                } else if (compareResult2 == -1) {
+                    showStr = [NSString stringWithFormat:@"返息券使用条件不足,需出借满¥%@可用",[UCFToolsMehod AddComma:couponPrdaimSum2]];
+                }
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"重新输入", nil];
+                alert.tag = 1000;
+                [alert show];
+                return;
+            }
+        }
+    } else if (isHaveCouponNum && !isHaveCashNum) {
+        //只有返息券
+        if (self.couponIDStr) {
+            //勾选使用条件不足
+            NSString *couponPrdaimSum2 = self.couponTotalcouponAmount;
+            NSString *invenestMoney = self.investMoeny;
+            int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum2];
+            NSString *showStr = @"";
+            if (compareResult1 == -1) {
+                showStr = [NSString stringWithFormat:@"返息券使用条件不足,需出借满¥%@可用",[UCFToolsMehod AddComma:couponPrdaimSum2]];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"重新输入", nil];
+                alert.tag = 1000;
+                [alert show];
+                return;
+            }
+            
+        } else {
+            NSString *messageStr = [NSString stringWithFormat:@"有可用返息券,确认不使用继续出借吗"];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 4000;
+            [alert show];
+            return;
+        }
+    } else if (isHaveCashNum && !isHaveCouponNum) {
+        //只有返现券
+        if (self.cashTotalIDStr.length > 0) {
+            //勾选使用条件不足
+            NSString *couponPrdaimSum1 = self.cashTotalcouponAmount;
+            NSString *invenestMoney =   self.investMoeny;
+            int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum1];
+            NSString *showStr = @"";
+            if (compareResult1 == -1) {
+                showStr = [NSString stringWithFormat:@"返现券使用条件不足,需出借满¥%@可用",[UCFToolsMehod AddComma:couponPrdaimSum1]];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"重新输入", nil];
+                alert.tag = 1000;
+                [alert show];
+                return;
+            }
+            
+        } else {
+            NSString *messageStr = [NSString stringWithFormat:@"有可用返现券,确认不使用并继续出借吗"];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 4000;
+            [alert show];
+            return;
+        }
+    }
+    
+    int compare = [Common stringA:self.investMoeny ComparedStringB:@"1000.00"];
     if (compare == 1 || compare == 0 ) {
         [self showLastAlert:investMoney];
     } else {
         [self getNormalBidNetData];
     }
-     */
-    [self getNormalBidNetData];
 }
-/*
+
 //投资超过1000最后的提醒框
 - (void)showLastAlert:(NSString *)investMoney
 {
     NSString *showStr = @"";
-    if (self.coupDict && self.cashDict) {
-        NSString *cashNum = [self.cashDict valueForKey:@"youhuiNum"];
-        NSString *coupNum = [self.coupDict valueForKey:@"youhuiNum"];
-        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?\n使用返现券%@张(共¥%@)、返息券%@张",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr, cashNum,[UCFToolsMehod AddComma:[self.cashDict valueForKey:@"youhuiMoney"]], coupNum];
-    } else if(self.coupDict) {
-        NSString *coupNum = [self.coupDict valueForKey:@"youhuiNum"];
-        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?\n使用返息券%@张",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr, coupNum];
+    if (self.couponIDStr.length > 0 && self.cashTotalIDStr.length > 0) {
+        NSString *cashNum = self.model.data.cashNum;
+        NSString *coupNum = self.model.data.couponNum;
+        showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?\n使用返现券%@张(共¥%@)、返息券%@张",[UCFToolsMehod AddComma:investMoney], cashNum,[UCFToolsMehod AddComma:self.repayCash], coupNum];
+    } else if(self.couponIDStr.length > 0) {
+        NSString *coupNum = self.model.data.couponNum;
+        showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?\n使用返息券%@张",[UCFToolsMehod AddComma:investMoney], coupNum];
         
-    } else if(self.cashDict){
-        NSString *cashNum = [self.cashDict valueForKey:@"youhuiNum"];
-        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?\n使用返现券%@张(共¥%@)",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr, cashNum,[UCFToolsMehod AddComma:[self.cashDict valueForKey:@"youhuiMoney"]]];
+    } else if(self.cashTotalIDStr.length > 0){
+        NSString *cashNum = self.model.data.cashNum;
+        showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?\n使用返现券%@张(共¥%@)",[UCFToolsMehod AddComma:investMoney], cashNum,[UCFToolsMehod AddComma:self.repayCash]];
     } else {
-        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr];
+        showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?",[UCFToolsMehod AddComma:investMoney]];
     }
-    NSString *buttonTitle = _isP2P ? @"立即出借":@"立即认购";
+    NSString *buttonTitle = @"立即出借";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:buttonTitle, nil];
     alert.tag = 3000;
     [alert show];
 }
- */
+
 
 - (void)getNormalBidNetData
 {
@@ -509,25 +634,19 @@
         [paramDict setValue:recommendCode forKey:@"recomendFactoryCode"];
     }
     
-//    if (self.coupDict && self.cashDict) {
-//        //返现券反息券共用
-//        NSString *beanIds0 = [self.coupDict valueForKey:@"idStr"];//返息
-//        NSString *beanIds1 = [self.cashDict valueForKey:@"idStr"]; //返现
-//        [paramDict setValue:beanIds1 forKey:@"cashBackIds"];
-//        [paramDict setValue:beanIds0 forKey:@"couponId"];
-//    } else if (self.coupDict) {
-//        //使用返息券
-//        NSString *beanIds = [self.coupDict valueForKey:@"idStr"];
-//        [paramDict setValue:beanIds forKey:@"couponId"];
-//    } else if (self.cashDict) {
-//        //使用返现券
-//        NSString *beanIds = [self.cashDict valueForKey:@"idStr"];
-//        [paramDict setValue:beanIds forKey:@"cashBackIds"];
-//
-//    }
+    if (self.couponIDStr.length > 0 && self.cashTotalIDStr.length > 0) {
+        //返现券反息券共用
+        [paramDict setValue:self.cashTotalIDStr forKey:@"cashBackIds"];
+        [paramDict setValue:self.couponIDStr forKey:@"couponId"];
+    } else if (self.couponIDStr.length > 0) {
+        //使用返息券
+        [paramDict setValue:self.couponIDStr forKey:@"couponId"];
+    } else if (self.cashTotalIDStr.length > 0) {
+        //使用返现券
+        [paramDict setValue:self.cashTotalIDStr forKey:@"cashBackIds"];
+    }
     NSString *apptzticket =  self.model.data.apptzticket;
     [paramDict setValue:apptzticket forKey:@"investClaimsTicket"];
-    [paramDict setValue:@"" forKey:@"recomendFactoryCode"];
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagInvestSubmit owner:self signature:YES Type:SelectAccoutTypeP2P];
 }
 
@@ -548,28 +667,5 @@
             }
         }
     }
-}
-//投资超过1000最后的提醒框
-- (void)showLastAlert:(NSString *)investMoney
-{
-//    NSString *showStr = @"";
-//    if (self.coupDict && self.cashDict) {
-//        NSString *cashNum = [self.cashDict valueForKey:@"youhuiNum"];
-//        NSString *coupNum = [self.coupDict valueForKey:@"youhuiNum"];
-//        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?\n使用返现券%@张(共¥%@)、返息券%@张",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr, cashNum,[UCFToolsMehod AddComma:[self.cashDict valueForKey:@"youhuiMoney"]], coupNum];
-//    } else if(self.coupDict) {
-//        NSString *coupNum = [self.coupDict valueForKey:@"youhuiNum"];
-//        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?\n使用返息券%@张",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr, coupNum];
-//
-//    } else if(self.cashDict){
-//        NSString *cashNum = [self.cashDict valueForKey:@"youhuiNum"];
-//        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?\n使用返现券%@张(共¥%@)",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr, cashNum,[UCFToolsMehod AddComma:[self.cashDict valueForKey:@"youhuiMoney"]]];
-//    } else {
-//        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr];
-//    }
-//    NSString *buttonTitle = _isP2P ? @"立即出借":@"立即认购";
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:buttonTitle, nil];
-//    alert.tag = 3000;
-//    [alert show];
 }
 @end

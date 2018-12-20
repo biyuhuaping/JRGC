@@ -81,6 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
  输入框默认填充
  */
 @property(nonatomic, copy)NSString          *inputViewPlaceStr;
+//******************************************************
+
+
 
 /**
  返息券可用张数
@@ -88,23 +91,52 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString          *couponNum;
 
 @property(nonatomic, assign)BOOL            couponIsHide;
-
 /**
- 返息券反的钱数
+ 返息券反的总钱数
  */
 @property(nonatomic, copy)NSString          *repayCoupon;
+
+/**
+ 返息券需要投资资金
+ */
+@property(nonatomic, copy)NSString          *couponTotalcouponAmount;
+
+/**
+ 选中返息券ID串
+ */
+@property(nonatomic, copy)NSString          *couponIDStr;
+
+
 /**
 返现券可用张数
  */
 @property(nonatomic, copy)NSString          *cashNum;
 @property(nonatomic, assign)BOOL            cashIsHide;
 /**
- 返现券反的钱数
+ 返现券返钱总额
  */
 @property(nonatomic, copy)NSString          *repayCash;
 
+/**
+ 返现券需要投资资金
+ */
+@property(nonatomic, copy)NSString          *cashTotalcouponAmount;
+
+/**
+ 选中返现券ID串
+ */
+@property(nonatomic, copy)NSString          *cashTotalIDStr;
+
+
+/**
+ 优惠券提示框
+ */
 @property(nonatomic, assign)BOOL          headherIsHide;
 
+
+/**
+ 最大填充金额
+ */
 @property(nonatomic, copy)NSString          *allMoneyInputNum;
 
 - (void)dealMyfundsNumWithBeansSwitch:(UISwitch *)switchView;

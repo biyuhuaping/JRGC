@@ -21,7 +21,7 @@
 #import "UCFNewRechargeViewController.h"
 #import "UCFInvestmentCouponController.h"
 #import "UCFBidViewModel.h"
-
+#import "UCFInvestmentCouponModel.h"
 @interface NewPurchaseBidController ()<UCFCouponBoardDelegate,UCFInvestFundsBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -181,12 +181,68 @@
     uc.prdclaimid = [self.viewModel getDataModelBidID];
     uc.investAmt = [self.viewModel getTextFeildInputMoeny];
     [self.navigationController pushViewController:uc animated:YES];
+    [self bindCoupleView:uc];
+
 }
 - (void)investFundsBoard:(UCFInvestFundsBoard *)board withRechargeButtonClick:(UIButton *)button
 {
     UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
     vc.accoutType = SelectAccoutTypeP2P;
     [self.navigationController pushViewController:vc animated:YES];
+    
+}
+- (void)bindCoupleView:(UCFInvestmentCouponController *)vc
+{
+    __weak typeof(self) weakSelf = self;
+    [self.KVOController observe:vc.ctController keyPaths:@[@"selectArray"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+//        weakSelf.viewModel;
+        if ([keyPath isEqualToString:@"selectArray"]) {
+            NSArray *arr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            if (arr.count > 0) {
+                double totalInvestMultip = 0;
+                double totalcouponAmount = 0;
+                NSString *totalIDStr = @"";
+                for (int i = 0; i < arr.count; i++) {
+                    InvestmentCouponCouponlist *model = arr[i];
+                    totalInvestMultip += model.investMultip;
+                    totalcouponAmount += [model.couponAmount doubleValue];
+                    if (i == arr.count - 1) {
+                        totalIDStr = [totalIDStr stringByAppendingString:@"%@"];
+                    } else {
+                        totalIDStr = [totalIDStr stringByAppendingString:@"%@,"];
+                    }
+                }
+                weakSelf.viewModel.repayCash = [NSString stringWithFormat:@"%.2f",totalcouponAmount];
+                weakSelf.viewModel.cashTotalcouponAmount = [NSString stringWithFormat:@"%.2f",totalInvestMultip];
+                weakSelf.viewModel.cashTotalIDStr = totalIDStr;
+            }
+        }
+    }];
+    [self.KVOController observe:vc.itController keyPaths:@[@"selectArray"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"selectArray"]) {
+            NSArray *arr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            if (arr.count > 0) {
+                double totalInvestMultip = 0;
+                double totalcouponAmount = 0;
+                NSString *totalIDStr = @"";
+                for (int i = 0; i < arr.count; i++) {
+                    InvestmentCouponCouponlist *model = arr[i];
+                    totalInvestMultip += model.investMultip;
+                    totalcouponAmount += [model.couponAmount doubleValue];
+                    if (i == arr.count - 1) {
+                        totalIDStr = [totalIDStr stringByAppendingString:@"%@"];
+                    } else {
+                        totalIDStr = [totalIDStr stringByAppendingString:@"%@,"];
+                    }
+                }
+                weakSelf.viewModel.repayCoupon = [NSString stringWithFormat:@"%.2f",totalcouponAmount];
+                weakSelf.viewModel.couponTotalcouponAmount = [NSString stringWithFormat:@"%.2f",totalInvestMultip];
+                weakSelf.viewModel.couponIDStr = totalIDStr;
+            }
+        }
+    }];
 }
 - (void)bindData:(UCFBidViewModel *)vm
 {
@@ -253,5 +309,9 @@
     }
 }
 
+-(void)dealloc
+{
+    NSLog(@"释放了");
+}
 
 @end
