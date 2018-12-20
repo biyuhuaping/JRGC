@@ -274,6 +274,19 @@
     NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:point];
     InvestmentCouponCouponlist *newObj = [[self.arryData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
+    btn.selected = !btn.selected;
+    if (btn.selected)
+    {
+        newObj.isCheck = YES;
+        [btn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        newObj.isCheck = NO;
+        [btn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
+    }
+    
+    
     if (self.oldIndexPath == nil)
     {
         //上次的勾选没有记录
@@ -304,25 +317,15 @@
         //上次的勾选有记录,由于是单选,所以点击新的cell,需要把老的cell的按钮取消勾选
         if (self.oldIndexPath == indexPath) {
             //点击的是同一个cell上的勾选
-            btn.selected = !btn.selected;
-            if (btn.selected)
-            {
-                newObj.isCheck = YES;
-                [btn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateNormal];
-            }
-            else
-            {
-                newObj.isCheck = NO;
-                [btn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
-            }
+            
         }
         else
         {
             //点击的不是同一个cell上的勾选,需要把上一次的取消掉
-            InvestmentCouponCouponlist *lastObj = [[self.arryData objectAtIndex:self.oldIndexPath.section] objectAtIndex:indexPath.row];
+            InvestmentCouponCouponlist *lastObj = [[self.arryData objectAtIndex:self.oldIndexPath.section] objectAtIndex:self.oldIndexPath.row];
             lastObj.isCheck = NO;
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:self.oldIndexPath.row inSection:0];
-            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            NSIndexPath *newIndexPath=[NSIndexPath indexPathForRow:self.oldIndexPath.row inSection:0];
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:newIndexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             
         }
        
