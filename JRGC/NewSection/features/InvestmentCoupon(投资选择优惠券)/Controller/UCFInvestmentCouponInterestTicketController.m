@@ -46,11 +46,10 @@
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     if (![userId isEqualToString:@""] && userId != nil) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,
-                                                          @"fromSite":self.db.fromSite,
                                                           @"prdclaimid":self.db.prdclaimid,
                                                           @"investAmt":self.db.investAmt,
                                                           @"couponType":@"1"}//0：返现券  1：返息券
-                                                    tag:kSXTagShowCouponTips owner:self signature:YES Type:SelectAccoutDefault];
+                                                    tag:kSXTagShowCouponTips owner:self signature:YES Type:SelectAccoutTypeP2P];
         
     }
     
