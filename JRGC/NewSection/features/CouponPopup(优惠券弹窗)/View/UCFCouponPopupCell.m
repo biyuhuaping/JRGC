@@ -211,7 +211,8 @@
     [self.couponAmounLabel sizeToFit];
     self.remarkLabel.text = cpData.remark;
     [self.remarkLabel sizeToFit];
-    self.overdueTimeLabel.text = [NSString stringWithFormat:@"有效期至%@",cpData.overdueTime];
+    NSString *string = [NSString stringWithFormat:@"有效期至%@",cpData.overdueTime];
+    self.overdueTimeLabel.text = [string substringToIndex:14];//截取掉下标5之前的字符串
     [self.overdueTimeLabel sizeToFit];
     self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额≥%ld元可用",(long)cpData.investMultip] ;
     [self.investMultipLabel sizeToFit];

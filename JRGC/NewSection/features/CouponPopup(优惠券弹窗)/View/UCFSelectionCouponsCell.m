@@ -7,7 +7,7 @@
 //
 
 #import "UCFSelectionCouponsCell.h"
-#import "UCFCouponPopupModel.h"
+#import "UCFInvestmentCouponModel.h"
 @implementation UCFSelectionCouponsCell
 
 - (void)awakeFromNib {
@@ -50,7 +50,7 @@
         _couponTypeLayout = [MyRelativeLayout new];
         _couponTypeLayout.topPos.equalTo(@10);
         _couponTypeLayout.clipsToBounds = NO;
-        _couponTypeLayout.leftPos.equalTo(self.selectCouponsBtn.rightPos).offset(13);
+        _couponTypeLayout.leftPos.equalTo(self.selectCouponsBtn.rightPos).offset(15);
         _couponTypeLayout.rightPos.equalTo(@15);
         _couponTypeLayout.heightSize.equalTo(@62);
         _couponTypeLayout.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
@@ -129,7 +129,7 @@
         label.textAlignment = NSTextAlignmentCenter;
         [_willExpireLayout addSubview:willExpireImageView];
         [_willExpireLayout addSubview:label];
-        _willExpireLayout.hidden = YES;
+        _willExpireLayout.myVisibility = MyVisibility_Gone;
         
     }
     return _willExpireLayout;
@@ -226,21 +226,37 @@
 {
     [super refreshCellData:data];
     
-    UCFCouponPopupCouponlist *cpData = data;
+    InvestmentCouponCouponlist *cpData = data;
     
-    if (YES) {
-        self.willExpireLayout.hidden = NO;
+    if ([cpData.overdueFlag isEqualToString:@"1"]) {//即将过期标识,再展示图标
+        self.willExpireLayout.myVisibility = MyVisibility_Visible;
     }
+    
     //优惠券是否可用
-    if (NO) {
-        if ([cpData.couponType isEqualToString:@"0"]) {
-            //        0返现券 1返息券
+    if (cpData.isCanUse)
+    {
+        //        0返现券 1返息券
+        if ([cpData.couponType isEqualToString:@"0"])
+        {
             
             self.couponTypeLayout.backgroundColor = UIColorWithRGB(0x70CBF4);
-        }else{
+        }
+        else
+        {
             self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
         }
-        [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
+       
+        //YES勾选,no正常模式
+        if (cpData.isCheck)
+        {
+            self.selectCouponsBtn.selected = YES;
+            [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            self.selectCouponsBtn.selected = NO;
+            [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
+        }
         
     }else
     {
@@ -253,7 +269,8 @@
     [self.couponAmounLabel sizeToFit];
     self.remarkLabel.text = cpData.remark;
     [self.remarkLabel sizeToFit];
-    self.overdueTimeLabel.text = [NSString stringWithFormat:@"有效期至%@",cpData.overdueTime];
+    NSString *string = [NSString stringWithFormat:@"有效期至%@",cpData.overdueTime];
+    self.overdueTimeLabel.text = [string substringToIndex:14];//截取掉下标5之前的字符串
     [self.overdueTimeLabel sizeToFit];
     self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额≥%ld元可用",cpData.investMultip] ;
     [self.investMultipLabel sizeToFit];
@@ -261,6 +278,7 @@
     [self.inverstPeriodLabel sizeToFit];
     
 }
+
 // 根据颜色生成UIImage
 - (UIImage*) createImageWithColor:(UIColor*) color
 {

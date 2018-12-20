@@ -56,6 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger inverstPeriod;
 
+@property (nonatomic, assign) BOOL isCheck;//是否勾选
+
 @end
 
 NS_ASSUME_NONNULL_END
