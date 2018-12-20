@@ -44,6 +44,10 @@
     //我的合同
     [self dealMyContract];
 }
+- (NSString *)getDataModelBidID
+{
+    return self.model.data.prdClaim.ID;
+}
 - (void)dealBidHeader
 {
     

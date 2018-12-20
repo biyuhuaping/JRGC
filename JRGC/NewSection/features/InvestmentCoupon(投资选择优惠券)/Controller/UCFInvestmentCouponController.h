@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFInvestmentCouponController : UCFBaseViewController
 
+
+
 @property (nonatomic, strong) UCFInvestmentCouponCashTicketController *ctController;//返现券
 
 @property (nonatomic, strong) UCFInvestmentCouponInterestTicketController *itController;//返息券

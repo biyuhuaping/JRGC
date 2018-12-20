@@ -16,6 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFBidViewModel : NSObject
 - (void)setDataModel:(UCFBidModel *)model;
+
+/**
+ 获取标ID
+
+ @return 标ID
+ */
+- (NSString *)getDataModelBidID;
+
 @property(nonatomic,strong) UIView    *superView;
 @property(nonatomic, strong)NSString *prdName;
 @property(nonatomic, strong)NSArray  *prdLabelsList;

@@ -19,7 +19,8 @@
 #import "UCFFundsInvestButton.h"
 #import "UCFPurchaseWebView.h"
 #import "UCFNewRechargeViewController.h"
-#import "UCFInvestmentCouponCashTicketController.h"
+#import "UCFInvestmentCouponController.h"
+#import "UCFBidViewModel.h"
 @interface NewPurchaseBidController ()<UCFCouponBoardDelegate,UCFInvestFundsBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -32,6 +33,7 @@
 @property(nonatomic, strong) UCFBidFootBoardView    *footView;
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) UCFFundsInvestButton *investButton;
+@property(nonatomic, strong) UCFBidViewModel       *viewModel;
 
 @property(nonatomic, copy) NSString *rechargeMoneyStr;
 
@@ -172,6 +174,11 @@
 }
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
+    
+    UCFInvestmentCouponController *vc = [[UCFInvestmentCouponController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
     NSInteger tag = button.tag;
     if (tag == 100) {
         
