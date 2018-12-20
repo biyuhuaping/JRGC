@@ -10,7 +10,7 @@
 #import "BaseBottomButtonView.h"
 #import "UCFSelectionCouponsCell.h"
 #import "UCFInvestmentCouponModel.h"
-
+#import "UCFInvestmentCouponController.h"
 @interface UCFInvestmentCouponCashTicketController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -20,6 +20,7 @@
 @property (nonatomic, strong) BaseBottomButtonView *useEnterBtn;//确认使用
 
 @property (nonatomic, strong) NSMutableArray *arryData;
+
 @end
 
 @implementation UCFInvestmentCouponCashTicketController
@@ -34,17 +35,15 @@
     
     [self.rootLayout addSubview:self.tableView];
     [self.rootLayout addSubview:self.useEnterBtn];
-    
-    
 }
 - (void)request
 {
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     if (![userId isEqualToString:@""] && userId != nil) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,
-                                                          @"fromSite":self.fromSite,
-                                                          @"prdclaimid":self.prdclaimid,
-                                                          @"investAmt":self.investAmt,
+                                                          @"fromSite":self.db.fromSite,
+                                                          @"prdclaimid":self.db.prdclaimid,
+                                                          @"investAmt":self.db.investAmt,
                                                           @"couponType":@"0"}//0：返现券  1：返息券
                                                     tag:kSXTagShowCouponTips owner:self signature:YES Type:SelectAccoutDefault];
         

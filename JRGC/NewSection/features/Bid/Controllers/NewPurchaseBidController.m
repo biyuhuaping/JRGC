@@ -19,6 +19,8 @@
 #import "UCFFundsInvestButton.h"
 #import "UCFPurchaseWebView.h"
 #import "UCFNewRechargeViewController.h"
+#import "UCFInvestmentCouponCashTicketController.h"
+#import "UCFInvestmentCouponController.h"
 @interface NewPurchaseBidController ()<UCFCouponBoardDelegate,UCFInvestFundsBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -171,7 +173,10 @@
 }
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
-    
+    UCFInvestmentCouponController *uc = [[UCFInvestmentCouponController alloc] init];
+    uc.prdclaimid =@"";
+    uc.investAmt =@"";
+    [self.navigationController pushViewController:uc animated:YES];
 }
 - (void)investFundsBoard:(UCFInvestFundsBoard *)board withRechargeButtonClick:(UIButton *)button
 {

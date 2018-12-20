@@ -17,6 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UCFInvestmentCouponInterestTicketController *itController;//返息券
 
+@property (nonatomic, copy) NSString *fromSite; //微金尊享标识
+
+@property (nonatomic, copy) NSString *prdclaimid;//标id
+
+@property (nonatomic, copy) NSString *investAmt;//投资金额
 @end
 
 NS_ASSUME_NONNULL_END

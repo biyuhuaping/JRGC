@@ -7,20 +7,14 @@
 //
 
 #import "UCFBaseViewController.h"
-
+@class UCFInvestmentCouponController;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFInvestmentCouponInterestTicketController : UCFBaseViewController
 
-@property (nonatomic, copy) NSString *fromSite; //微金尊享标识
-
-@property (nonatomic, copy) NSString *prdclaimid;//标id
-
-@property (nonatomic, copy) NSString *investAmt;//投资金额
-
 @property (nonatomic, copy) NSMutableArray *selectArray;//选中的数组
 
-@property (nonatomic, weak) id db;
+@property (nonatomic, weak) UCFInvestmentCouponController *db;
 
 @end
 
