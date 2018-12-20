@@ -9,8 +9,16 @@
 #import "MyRelativeLayout.h"
 #import "UCFBidViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
+@class UCFInvestFundsBoard;
+@protocol UCFInvestFundsBoardDelegate <NSObject>
+
+- (void)investFundsBoard:(UCFInvestFundsBoard *)board withRechargeButtonClick:(UIButton *)button;
+
+@end
 
 @interface UCFInvestFundsBoard : MyLinearLayout
+
+@property(nonatomic, weak)id<UCFInvestFundsBoardDelegate>delegate;
 
 - (void)showView:(UCFBidViewModel *)viewModel;
 

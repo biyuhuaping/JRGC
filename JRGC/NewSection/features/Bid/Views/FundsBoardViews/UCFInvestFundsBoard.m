@@ -55,7 +55,7 @@
 - (void)showView:(UCFBidViewModel *)viewModel
 {
     self.myVM = viewModel;
-    [self.KVOController observe:viewModel keyPaths:@[@"totalFunds",@"myFundsNum",@"myBeansNum",@"expectedInterestNum",@"inputViewPlaceStr"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:viewModel keyPaths:@[@"totalFunds",@"myFundsNum",@"myBeansNum",@"expectedInterestNum",@"inputViewPlaceStr",@"allMoneyInputNum"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"myFundsNum"]) {
             NSString *funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -85,6 +85,12 @@
             NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             _interestNumLab.text = [inputViewPlaceStr isEqualToString:@""] ? @"¥0.00" : inputViewPlaceStr;
             [_interestNumLab sizeToFit];
+        } else if ([keyPath isEqualToString:@"allMoneyInputNum"]) {
+            NSString *allMoneyInputNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (allMoneyInputNum.length > 0) {
+                _investMoneyTextfield.text = allMoneyInputNum;
+                [self textfieldLength:_investMoneyTextfield];
+            }
         }
     }];
 }
@@ -113,26 +119,6 @@
     [_minuteCountDownView startTimer];
     _minuteCountDownView.sourceVC = @"UCFPurchaseBidVC";//投资页面
     [self addSubview:self.minuteCountDownView];
-    
-//    NSString *stopStatusStr = [_dic objectSafeForKey:@"stopStatus"];// 0投标中,1满标
-//    _minuteCountDownView.isStopStatus = stopStatusStr;
-//    if ([stopStatusStr intValue] == 0) {
-//        _minuteCountDownView.timeInterval= [[_dic objectSafeForKey:@"intervalMilli"]  integerValue];
-//        //        _minuteCountDownView.timeInterval= timeSp;
-//        [_minuteCountDownView startTimer];
-//        _minuteCountDownView.tipLabel.text = @"距结束";//
-//    }else{
-//        NSString *startTimeStr = [_dic objectSafeForKey:@"startTime"];
-//        NSString *endTimeStr = [_dic objectSafeForKey:@"fullTime"];
-//        if (_type == PROJECTDETAILTYPEBONDSRRANSFER){//债权转让
-//            startTimeStr = [_dic objectSafeForKey:@"putawaytime"];
-//            endTimeStr = [_dic objectSafeForKey:@"soldOutTime"];
-//            _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"转让期: %@ 至 %@",startTimeStr,endTimeStr];
-//        }else{
-//            _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"筹标期: %@ 至 %@",startTimeStr,endTimeStr];
-//        }
-//    }
-    
 }
 #pragma mark view two
 - (void)addMoneyBoardSection1
@@ -242,7 +228,7 @@
 }
 - (void)goToRecharge:(UIButton *)button
 {
-    
+    [self.delegate investFundsBoard:self withRechargeButtonClick:button];
 }
 #pragma mark view four
 - (void)addMoneyBoardSection3
@@ -385,7 +371,7 @@
 }
 - (void)allInvestClick:(UIButton *)button
 {
-    
+    [self.myVM calculateTotalMoney];
 }
 #pragma ---------------------------------------------
 @end

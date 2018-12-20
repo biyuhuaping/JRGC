@@ -150,6 +150,60 @@
     }
     self.expectedInterestNum = [NSString stringWithFormat:@"¥%.2f",totalIntersate < 0.01 ? 0.00 : totalIntersate];
 }
+
+/**
+ 获取可投资最大金额
+ */
+- (void)calculateTotalMoney
+{
+    NSString *mostMoney = [self getDefaultText];
+    self.allMoneyInputNum = mostMoney;
+}
+//获取默认填写金额
+- (NSString *)getDefaultText
+{
+    long long int keTouJinE = round((self.model.data.prdClaim.borrowAmount - self.model.data.prdClaim.completeLoan)* 100);
+    long long int keYongZiJin = round(self.model.data.accountAmount * 100);
+    NSInteger gongDouCount = self.model.data.beanAmount;
+    if (!beansSwitch) {
+        gongDouCount = 0;
+    }
+    keYongZiJin += gongDouCount;
+    long long int minInVestNum = round(self.model.data.prdClaim.minInvest* 100);
+    
+    //判断是不是最后一笔
+    if (keTouJinE - minInVestNum < minInVestNum) {
+        return [self checkBeyondLimit:[NSString stringWithFormat:@"%.2lf",(double)(keTouJinE)/100.0f]];
+    } else {
+        if (keYongZiJin < minInVestNum) {
+            return [self checkBeyondLimit:[NSString stringWithFormat:@"%.2lf",(double)(minInVestNum)/100.0f]];
+        }
+        if (keYongZiJin >= minInVestNum && keYongZiJin < keTouJinE) {
+            if (keYongZiJin + minInVestNum < keTouJinE) {
+                return [self checkBeyondLimit:[NSString stringWithFormat:@"%.2lf",(double)(keYongZiJin)/100.0f]];
+            } else {
+                return [self checkBeyondLimit:[NSString stringWithFormat:@"%.2lf",(double)(keTouJinE - minInVestNum)/100.0f]];
+            }
+        }
+        if (keYongZiJin >= minInVestNum && keYongZiJin >= keTouJinE) {
+            return [self checkBeyondLimit:[NSString stringWithFormat:@"%.2lf",(double)(keTouJinE)/100.0f]];
+        }
+    }
+    return @"100.0";
+}
+- (NSString *)checkBeyondLimit:(NSString *)investMoney
+{
+    NSString *maxIn = [NSString stringWithFormat:@"%@",self.model.data.prdClaim.maxInvest];
+    if (maxIn.length != 0) {
+        NSString *maxInvest = [NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",self.model.data.prdClaim.maxInvest] doubleValue]];
+        if ([Common stringA:investMoney ComparedStringB:maxInvest] == 1) {
+            return maxInvest;
+        } else {
+            return investMoney;
+        }
+    }
+    return investMoney;
+}
 - (void)dealMycoupon
 {
     if ([self.model.data.cashNum integerValue] > 0) {
@@ -365,6 +419,7 @@
     {
         NSString *keyongMoney = availableBalance;
         needToRechare = [investMoney doubleValue] - [keyongMoney doubleValue];
+        self.rechargeStr =[NSString stringWithFormat:@"%.2f", needToRechare];
         NSString *showStr = [NSString stringWithFormat:@"总计出借金额¥%@\n可用金额%@\n另需充值金额¥%.2f", investMoney,availableBalance,needToRechare];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"可用金额不足" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即充值", nil];
         alert.tag = 2000;
@@ -465,5 +520,47 @@
     [paramDict setValue:apptzticket forKey:@"investClaimsTicket"];
     [paramDict setValue:@"" forKey:@"recomendFactoryCode"];
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagInvestSubmit owner:self signature:YES Type:SelectAccoutTypeP2P];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [_rootController reflectAlertView:alertView clickedButtonAtIndex:buttonIndex];
+    } else if (buttonIndex == 1) {
+        if (alertView.tag == 3000) {
+            [self getNormalBidNetData];
+        }
+        if (alertView.tag == 4000) {
+            int compare = [Common stringA:[NSString stringWithFormat:@"%.2f",[self.investMoeny doubleValue]] ComparedStringB:@"1000.00"];
+            if (compare == 1 || compare == 0 ) {
+                [self showLastAlert:self.investMoeny];
+            } else {
+                [self getNormalBidNetData];
+            }
+        }
+    }
+}
+//投资超过1000最后的提醒框
+- (void)showLastAlert:(NSString *)investMoney
+{
+//    NSString *showStr = @"";
+//    if (self.coupDict && self.cashDict) {
+//        NSString *cashNum = [self.cashDict valueForKey:@"youhuiNum"];
+//        NSString *coupNum = [self.coupDict valueForKey:@"youhuiNum"];
+//        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?\n使用返现券%@张(共¥%@)、返息券%@张",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr, cashNum,[UCFToolsMehod AddComma:[self.cashDict valueForKey:@"youhuiMoney"]], coupNum];
+//    } else if(self.coupDict) {
+//        NSString *coupNum = [self.coupDict valueForKey:@"youhuiNum"];
+//        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?\n使用返息券%@张",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr, coupNum];
+//
+//    } else if(self.cashDict){
+//        NSString *cashNum = [self.cashDict valueForKey:@"youhuiNum"];
+//        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?\n使用返现券%@张(共¥%@)",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr, cashNum,[UCFToolsMehod AddComma:[self.cashDict valueForKey:@"youhuiMoney"]]];
+//    } else {
+//        showStr = [NSString stringWithFormat:@"%@金额¥%@,确认%@吗?",_wJOrZxStr,[UCFToolsMehod AddComma:investMoney],_wJOrZxStr];
+//    }
+//    NSString *buttonTitle = _isP2P ? @"立即出借":@"立即认购";
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:buttonTitle, nil];
+//    alert.tag = 3000;
+//    [alert show];
 }
 @end

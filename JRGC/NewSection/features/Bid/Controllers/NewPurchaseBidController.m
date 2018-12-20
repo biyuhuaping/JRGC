@@ -18,7 +18,8 @@
 #import "UCFRecommendView.h"
 #import "UCFFundsInvestButton.h"
 #import "UCFPurchaseWebView.h"
-@interface NewPurchaseBidController ()<UCFCouponBoardDelegate>
+#import "UCFNewRechargeViewController.h"
+@interface NewPurchaseBidController ()<UCFCouponBoardDelegate,UCFInvestFundsBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
 @property(nonatomic, strong) UCFSectionHeadView *bidHeadView;
@@ -30,21 +31,13 @@
 @property(nonatomic, strong) UCFBidFootBoardView    *footView;
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) UCFFundsInvestButton *investButton;
+
+@property(nonatomic, copy) NSString *rechargeMoneyStr;
+
 @end
 
 @implementation NewPurchaseBidController
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
-//    if (@available(iOS 11.0, *)) {
-//       CGRect frame = self.scrollView.frame;
-//        frame.origin.x = self.view.safeAreaInsets.left;
-//        frame.size.width = self.view.frame.size.width - self.view.safeAreaInsets.left - self.view.safeAreaInsets.right;
-//        frame.size.height = self.view.frame.size.height - self.view.safeAreaInsets.bottom - 67;
-//        self.scrollView.frame = frame;
-//    }
-}
+
 - (void)loadView
 {
     self.edgesForExtendedLayout = UIRectEdgeNone;  //设置视图控制器中的视图尺寸不延伸到导航条或者工具条下面。您可以注释这句代码看看效果。
@@ -100,6 +93,7 @@
 
     UCFInvestFundsBoard *fundsBoard = [UCFInvestFundsBoard linearLayoutWithOrientation:MyOrientation_Vert];
     fundsBoard.myHorzMargin = 0;
+    fundsBoard.delegate = self;
     [self.contentLayout addSubview:fundsBoard];
     [fundsBoard addSubSectionViews];
     self.fundsBoardView = fundsBoard;
@@ -170,6 +164,8 @@
     
     [vm setDataModel:_bidDetaiModel];
     
+    [vm setRootController:self];
+    
     [self bindData:vm];
 
 }
@@ -177,11 +173,17 @@
 {
     
 }
+- (void)investFundsBoard:(UCFInvestFundsBoard *)board withRechargeButtonClick:(UIButton *)button
+{
+    UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+    vc.accoutType = SelectAccoutTypeP2P;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)bindData:(UCFBidViewModel *)vm
 {
     vm.superView = self.view;
     __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict",@"rechargeStr"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"contractTypeModel"]) {
             id funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -205,20 +207,42 @@
                 NSString *urlStr = dic[@"data"][@"url"];
                 UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
                 webView.url = urlStr;
-                webView.rootVc = self.rootVc;
+                webView.rootVc = weakSelf.rootVc;
                 webView.webDataDic =dataDict;
                 webView.navTitle = @"即将跳转";
-                webView.accoutType = self.accoutType;
-                [self.navigationController pushViewController:webView animated:YES];
-                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+                webView.accoutType = SelectAccoutTypeP2P;
+                [weakSelf.navigationController pushViewController:webView animated:YES];
+                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:weakSelf.navigationController.viewControllers];
                 [navVCArray removeObjectAtIndex:navVCArray.count-2];
-                [self.navigationController setViewControllers:navVCArray animated:NO];
+                [weakSelf.navigationController setViewControllers:navVCArray animated:NO];
             }
-            
+        } else if ([keyPath isEqualToString:@"rechargeStr"]) {
+            NSString *str = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (str.length > 0) {
+                weakSelf.rechargeMoneyStr = str;
+            }
         }
     }];
 }
 
+- (void)reflectAlertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSInteger tag = alertView.tag;
+    if (buttonIndex == 0) {
+        if (tag == 1000 || tag == 6000) {
+            [self.view endEditing:YES];
+        } else if (tag == 10023) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    } else if (buttonIndex == 1) {
+        if (tag == 2000) {
+            UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+            vc.defaultMoney = self.rechargeMoneyStr;
+            vc.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+}
 
 
 @end

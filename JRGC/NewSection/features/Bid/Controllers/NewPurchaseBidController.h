@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NewPurchaseBidController : UCFBaseViewController
 @property(nonatomic, strong)UCFBidModel *bidDetaiModel;
+- (void)reflectAlertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+
 @end
 
 NS_ASSUME_NONNULL_END

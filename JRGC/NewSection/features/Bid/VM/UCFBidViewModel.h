@@ -11,6 +11,7 @@
 #import "FBKVOController.h"
 #import "NSObject+FBKVOController.h"
 #import "UCFContractTypleModel.h"
+#import "NewPurchaseBidController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFBidViewModel : NSObject
@@ -90,9 +91,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign)BOOL          headherIsHide;
 
+@property(nonatomic, copy)NSString          *allMoneyInputNum;
+
 - (void)dealMyfundsNumWithBeansSwitch:(UISwitch *)switchView;
 - (void)calculate:(NSString *)investMoney;
-
+- (void)calculateTotalMoney;
 
 //******************************************************
 //我的合同
@@ -140,6 +143,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 //投标数据
 @property(nonatomic, strong)NSDictionary    *hsbidInfoDict;
+@property(nonatomic, weak) NewPurchaseBidController *rootController;
+@property(nonatomic, copy) NSString         *rechargeStr;
+
+- (void)bidViewModel:(UCFBidViewModel *)viewModel Witalert:(UIAlertView *)alertView;
 @end
 
 NS_ASSUME_NONNULL_END
