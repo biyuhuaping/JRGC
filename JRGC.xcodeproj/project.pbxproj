@@ -38,6 +38,8 @@
 		3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */; };
 		3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */; };
 		330DF7AA21C9F44C009553A4 /* UCFContractTypleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 330DF7A921C9F44C009553A4 /* UCFContractTypleModel.m */; };
+		330DF7AD21CA2C60009553A4 /* UCFFundsInvestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 330DF7AC21CA2C60009553A4 /* UCFFundsInvestButton.m */; };
+		330DF7B021CA4C2E009553A4 /* UCFRecommendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330DF7AF21CA4C2E009553A4 /* UCFRecommendView.m */; };
 		3319B6D321C23308007DB14E /* UCFInvestFundsBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3319B6D221C23308007DB14E /* UCFInvestFundsBoard.m */; };
 		3336D23F21C383AD001644E1 /* UCFCouponBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3336D23E21C383AD001644E1 /* UCFCouponBoard.m */; };
 		3336D24621C3A029001644E1 /* NSObject+FBKVOController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3336D24321C3A029001644E1 /* NSObject+FBKVOController.m */; };
@@ -1221,6 +1223,10 @@
 		3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickIntroduceTableViewCell.xib; sourceTree = "<group>"; };
 		330DF7A821C9F44C009553A4 /* UCFContractTypleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFContractTypleModel.h; sourceTree = "<group>"; };
 		330DF7A921C9F44C009553A4 /* UCFContractTypleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFContractTypleModel.m; sourceTree = "<group>"; };
+		330DF7AB21CA2C60009553A4 /* UCFFundsInvestButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFFundsInvestButton.h; sourceTree = "<group>"; };
+		330DF7AC21CA2C60009553A4 /* UCFFundsInvestButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFFundsInvestButton.m; sourceTree = "<group>"; };
+		330DF7AE21CA4C2E009553A4 /* UCFRecommendView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFRecommendView.h; sourceTree = "<group>"; };
+		330DF7AF21CA4C2E009553A4 /* UCFRecommendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRecommendView.m; sourceTree = "<group>"; };
 		3319B6D121C23308007DB14E /* UCFInvestFundsBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestFundsBoard.h; sourceTree = "<group>"; };
 		3319B6D221C23308007DB14E /* UCFInvestFundsBoard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestFundsBoard.m; sourceTree = "<group>"; };
 		3336D23D21C383AD001644E1 /* UCFCouponBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCouponBoard.h; sourceTree = "<group>"; };
@@ -3214,6 +3220,10 @@
 				3336D23E21C383AD001644E1 /* UCFCouponBoard.m */,
 				33845CC721C8C448003C5566 /* UCFBidFootBoardView.h */,
 				33845CC821C8C448003C5566 /* UCFBidFootBoardView.m */,
+				330DF7AB21CA2C60009553A4 /* UCFFundsInvestButton.h */,
+				330DF7AC21CA2C60009553A4 /* UCFFundsInvestButton.m */,
+				330DF7AE21CA4C2E009553A4 /* UCFRecommendView.h */,
+				330DF7AF21CA4C2E009553A4 /* UCFRecommendView.m */,
 			);
 			path = FundsBoardViews;
 			sourceTree = "<group>";
@@ -8360,6 +8370,7 @@
 				74B98C901F70C2C100CB6A9F /* UCFMineViewController.m in Sources */,
 				E311A6631D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m in Sources */,
 				FBB685851AE4A76800F222B6 /* MJRefreshGifHeader.m in Sources */,
+				330DF7B021CA4C2E009553A4 /* UCFRecommendView.m in Sources */,
 				83974FDE1F14B25200C2252F /* UCFGoldMoneyBoadCell.m in Sources */,
 				7BCE01F51AC8FC260084C15C /* ASIAuthenticationDialog.m in Sources */,
 				A851F3531F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m in Sources */,
@@ -8780,6 +8791,7 @@
 				74EE33181AF707B100BDE197 /* UCFFundsDetailHeader.m in Sources */,
 				740586B91F417ADB00E2DE01 /* UCFGoldFlexibleCell.m in Sources */,
 				4A2484A821A3A059001B0703 /* UCFNewRechargeViewController.m in Sources */,
+				330DF7AD21CA2C60009553A4 /* UCFFundsInvestButton.m in Sources */,
 				4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */,
 				FB120BB51ADE462F00023365 /* CircleShapeLayer.m in Sources */,
 				7BA6E4C71AD6731900FE8C37 /* UIView+WebCacheOperation.m in Sources */,

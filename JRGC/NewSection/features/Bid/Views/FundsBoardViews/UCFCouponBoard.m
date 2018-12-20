@@ -133,10 +133,6 @@
     [self addSubview:cashCoupleView];
     self.cashView = cashCoupleView;
     
-
-    
-    
-    
     UILabel  *titleLab = [UILabel new];
     titleLab.font = [UIFont systemFontOfSize:14.0f];
     titleLab.textAlignment = NSTextAlignmentLeft;
@@ -198,8 +194,6 @@
     [self addSubview:cashCoupleView];
     self.coupleView = cashCoupleView;
 
-    
-    
     UILabel  *titleLab = [UILabel new];
     titleLab.font = [UIFont systemFontOfSize:14.0f];
     titleLab.textAlignment = NSTextAlignmentLeft;

@@ -14,6 +14,7 @@
 @interface UCFBidViewModel()<NetworkModuleDelegate>
 @property (nonatomic, strong)UCFBidModel *model;
 @property (nonatomic, strong)UCFContractTypleModel *contractTmpModel;
+@property (nonatomic, strong)NSString       *investMoeny;
 @end
 
 @implementation UCFBidViewModel
@@ -33,6 +34,8 @@
     [self dealMyFunds];
     //我的优惠券
     [self dealMycoupon];
+    
+    [self dealMyRecommend];
     //我的合同
     [self dealMyContract];
 }
@@ -75,6 +78,10 @@
         self.markList = tmpArr;
     }
 }
+
+/**
+ 给资金面板数据赋值，将反射到view上
+ */
 - (void)dealMyFunds
 {
     
@@ -94,6 +101,12 @@
     self.inputViewPlaceStr = palceText;
 
 }
+
+/**
+ 工豆开关回调方法
+
+ @param switchView 工豆开关
+ */
 - (void)dealMyfundsNumWithBeansSwitch:(UISwitch *)switchView
 {
     if (switchView.on) {
@@ -104,8 +117,15 @@
         self.totalFunds = [NSString stringWithFormat:@"¥%@",availableFundsStr];
     }
 }
+
+/**
+ 计算预期收益
+
+ @param investMoney 输入框金额
+ */
 - (void)calculate:(NSString *)investMoney
 {
+    self.investMoeny = investMoney;
     NSString *type = self.model.data.calcType;
     double currentMoney = [investMoney doubleValue];
     double calcRate = self.model.data.calcRate;
@@ -142,6 +162,13 @@
         self.headherIsHide = YES;
     }
 }
+
+- (void)dealMyRecommend
+{
+    BOOL isExistRecomder = self.model.data.isExistRecomder;
+    self.isExistRecomder = isExistRecomder;
+}
+
 - (void)dealMyContract
 {
     NSString *limitAmountMess = self.model.data.limitAmountMess;
@@ -159,6 +186,13 @@
     NSArray *contractMsg = self.model.data.contractMsg;
     self.contractMsg = contractMsg;
 }
+
+/**
+ 合同点击
+
+ @param viewModel self
+ @param contractName 合同名称
+ */
 - (void)bidViewModel:(UCFBidViewModel *)viewModel WithContractName:(NSString *)contractName
 {
     UCFContractTypleModel *model = [UCFContractTypleModel new];
@@ -181,16 +215,11 @@
                     model.url =tmpModel.contractUrl;
                     self.contractTypeModel = model;
                 } else {
-                    
                     NSString *projectId = self.model.data.prdClaim.ID;
                     NSString *contractTypeStr = tmpModel.contractType;
-                    
                     model.type = @"3";
                     model.title = tmpModel.contractName;
-
-                    
                     self.contractTmpModel = model;
-         
                     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutTypeP2P];
                 }
@@ -230,4 +259,11 @@
         [MBProgressHUD hideAllHUDsForView:_superView animated:YES];
     }
 }
+
+
+- (BOOL)dealInvestLogic
+{
+    return NO;
+}
+
 @end
