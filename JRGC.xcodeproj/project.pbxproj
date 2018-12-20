@@ -1016,7 +1016,6 @@
 		E31BD59821C0E83D00D3651F /* UCFCouponPopupHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD59721C0E83D00D3651F /* UCFCouponPopupHomeView.m */; };
 		E31BD59B21C10FC500D3651F /* BaseBottomButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD59921C10FC400D3651F /* BaseBottomButtonView.m */; };
 		E31BD59E21C112C200D3651F /* UCFCouponPopupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD59D21C112C200D3651F /* UCFCouponPopupCell.m */; };
-		E31BD5A121C1130A00D3651F /* UCFSelectionCouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD5A021C1130A00D3651F /* UCFSelectionCouponsCell.m */; };
 		E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */; };
 		E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200C1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m */; };
 		E32020121CC4BCE60065579C /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */; };
@@ -1054,6 +1053,7 @@
 		E3E05C5C1DD07D710066B65C /* UCFCouponExchangeToFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E05C5A1DD07D710066B65C /* UCFCouponExchangeToFriends.m */; };
 		E3E05C5D1DD07D710066B65C /* UCFCouponExchangeToFriends.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E05C5B1DD07D710066B65C /* UCFCouponExchangeToFriends.xib */; };
 		E3E62D9921CB478000A794B1 /* UCFInvestmentCouponController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E62D9821CB478000A794B1 /* UCFInvestmentCouponController.m */; };
+		E3F340F121CB99AE00759CF8 /* UCFSelectionCouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F340F021CB99AE00759CF8 /* UCFSelectionCouponsCell.m */; };
 		ED0647F91C7ABE1E00311AA1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647F81C7ABE1E00311AA1 /* libc++.tbd */; };
 		ED0647FB1C7ABF7300311AA1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647FA1C7ABF7300311AA1 /* AssetsLibrary.framework */; };
 		ED0647FD1C7ABFA400311AA1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647FC1C7ABFA400311AA1 /* CoreImage.framework */; };
@@ -2863,8 +2863,6 @@
 		E31BD59A21C10FC400D3651F /* BaseBottomButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseBottomButtonView.h; sourceTree = "<group>"; };
 		E31BD59C21C112C200D3651F /* UCFCouponPopupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCouponPopupCell.h; sourceTree = "<group>"; };
 		E31BD59D21C112C200D3651F /* UCFCouponPopupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCouponPopupCell.m; sourceTree = "<group>"; };
-		E31BD59F21C1130A00D3651F /* UCFSelectionCouponsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFSelectionCouponsCell.h; sourceTree = "<group>"; };
-		E31BD5A021C1130A00D3651F /* UCFSelectionCouponsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFSelectionCouponsCell.m; sourceTree = "<group>"; };
 		E32020091CC4BAD70065579C /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
 		E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
 		E320200B1CC4BAD70065579C /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
@@ -2928,6 +2926,8 @@
 		E3E05C5B1DD07D710066B65C /* UCFCouponExchangeToFriends.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCouponExchangeToFriends.xib; sourceTree = "<group>"; };
 		E3E62D9721CB478000A794B1 /* UCFInvestmentCouponController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponController.h; sourceTree = "<group>"; };
 		E3E62D9821CB478000A794B1 /* UCFInvestmentCouponController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentCouponController.m; sourceTree = "<group>"; };
+		E3F340EF21CB99AE00759CF8 /* UCFSelectionCouponsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSelectionCouponsCell.h; sourceTree = "<group>"; };
+		E3F340F021CB99AE00759CF8 /* UCFSelectionCouponsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSelectionCouponsCell.m; sourceTree = "<group>"; };
 		ED0647F81C7ABE1E00311AA1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		ED0647FA1C7ABF7300311AA1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		ED0647FC1C7ABFA400311AA1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -6948,8 +6948,6 @@
 				E31BD59721C0E83D00D3651F /* UCFCouponPopupHomeView.m */,
 				E31BD59C21C112C200D3651F /* UCFCouponPopupCell.h */,
 				E31BD59D21C112C200D3651F /* UCFCouponPopupCell.m */,
-				E31BD59F21C1130A00D3651F /* UCFSelectionCouponsCell.h */,
-				E31BD5A021C1130A00D3651F /* UCFSelectionCouponsCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7192,6 +7190,8 @@
 		E39BC36021CA26CA0098607D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E3F340EF21CB99AE00759CF8 /* UCFSelectionCouponsCell.h */,
+				E3F340F021CB99AE00759CF8 /* UCFSelectionCouponsCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -8451,7 +8451,6 @@
 				7BCE022E1AC9141A0084C15C /* MBProgressHUD.m in Sources */,
 				74B98CA41F711D7500CB6A9F /* UCFMineFuncSecCell.m in Sources */,
 				33813A5921BFB5D6004666E5 /* MyTableLayout.m in Sources */,
-				E31BD5A121C1130A00D3651F /* UCFSelectionCouponsCell.m in Sources */,
 				7BCE02361AC915720084C15C /* NSData+AES.m in Sources */,
 				838EDD6F1F6B7432008E60EC /* UCFCustomPieViewCell.m in Sources */,
 				33813A5421BFB5D6004666E5 /* MyGridLayout.m in Sources */,
@@ -8730,6 +8729,7 @@
 				4A0558DE1BFCA2A20021DF59 /* ToolSingleTon.m in Sources */,
 				7BD35A971AD61E4200389D6B /* LLLockIndicator.m in Sources */,
 				4AEA750A1B03764D00B03A46 /* UCFPurchaseTranBidViewController.m in Sources */,
+				E3F340F121CB99AE00759CF8 /* UCFSelectionCouponsCell.m in Sources */,
 				4A14F68A1BA94A84002BD5DF /* LockFlagSingle.m in Sources */,
 				8335BF081FF5E39C00E62833 /* UCFGoldRewardTableViewCell.m in Sources */,
 				744A5FAA1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m in Sources */,

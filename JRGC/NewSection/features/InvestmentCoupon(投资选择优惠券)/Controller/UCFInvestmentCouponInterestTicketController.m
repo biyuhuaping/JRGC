@@ -38,7 +38,7 @@
     
     [self.rootLayout addSubview:self.tableView];
     [self.rootLayout addSubview:self.useEnterBtn];
-    
+    [self request];
     
 }
 - (void)request
@@ -49,7 +49,7 @@
                                                           @"prdclaimid":self.db.prdclaimid,
                                                           @"investAmt":self.db.investAmt,
                                                           @"couponType":@"1"}//0：返现券  1：返息券
-                                                    tag:kSXTagShowCouponTips owner:self signature:YES Type:SelectAccoutTypeP2P];
+                                                    tag:kSXTagInvestCouponTicktList owner:self signature:YES Type:SelectAccoutTypeP2P];
         
     }
     
@@ -65,7 +65,7 @@
 
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    if ([tag intValue] == kSXTagShowCouponTips)
+    if ([tag intValue] == kSXTagInvestCouponTicktList)
     {
         NSMutableDictionary *dic = [result objectFromJSONString];
         [self starCouponPopup:dic];
@@ -77,7 +77,7 @@
     
     NSMutableArray *overdueArray = [NSMutableArray array];
     NSMutableArray *noOverdueArray = [NSMutableArray array];
-    
+    self.arryData = [NSMutableArray array];
     
     
     [model.data.couponList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -101,6 +101,7 @@
     
     [self.arryData addObject:overdueArray];
     [self.arryData addObject:noOverdueArray];
+    [self.tableView reloadData];
 }
 - (UITableView *)tableView
 {
@@ -122,7 +123,7 @@
 - (BaseBottomButtonView *)useEnterBtn
 {
     if (nil == _useEnterBtn) {
-        _useEnterBtn= [[BaseBottomButtonView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth*0.8, 57)];
+        _useEnterBtn= [[BaseBottomButtonView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 57)];
         [_useEnterBtn.enterButton addTarget:self action:@selector(useEnterBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _useEnterBtn.bottomPos.equalTo(@57);
         _useEnterBtn.widthSize.equalTo(self.rootLayout.widthSize);
@@ -182,14 +183,14 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];//创建一个视图
-    headerView.backgroundColor = UIColorWithRGB(0xbebebe);
+    headerView.backgroundColor = UIColorWithRGB(0xEBEBEE);
     
     UIView *view = [[UIView alloc] init];
     view.frame = CGRectMake(0,10,ScreenWidth,37);
     view.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0];
+    [headerView addSubview:view];
     
-    
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 90, 37)];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 95, 37)];
     headerLabel.backgroundColor = [UIColor clearColor];
     headerLabel.font = [UIFont boldSystemFontOfSize:13.0];
     headerLabel.textColor = UIColorWithRGB(0x555555);
@@ -208,8 +209,24 @@
         [view addSubview:button];
     }
     
-    return headerView;
+    if ([[self.arryData objectAtIndex:section] count] == 0) {
+        return nil;
+    }else
+    {
+        return headerView;
+    }
+
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if ([[self.arryData objectAtIndex:section] count] == 0) {
+        return 0.01;
+    }else
+    {
+        return 47;
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01;//设置尾视图高度为0.01
 }
