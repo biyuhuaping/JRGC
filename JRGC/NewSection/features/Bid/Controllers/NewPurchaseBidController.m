@@ -208,6 +208,7 @@
         if ([keyPath isEqualToString:@"cashSelectArr"]) {
             NSArray *arr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (arr.count > 0) {
+                self.cashArray = [arr mutableCopy];
                 double totalInvestMultip = 0;
                 double totalcouponAmount = 0;
                 NSString *totalIDStr = @"";
@@ -236,6 +237,7 @@
         if ([keyPath isEqualToString:@"couponSelectArr"]) {
             NSArray *arr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (arr.count > 0) {
+                self.couponArray = [arr mutableCopy];
                 double totalInvestMultip = 0;
                 double totalcouponAmount = 0;
                 NSString *totalIDStr = @"";
