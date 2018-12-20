@@ -200,10 +200,10 @@
 - (void)bindCoupleView:(UCFInvestmentCouponController *)vc
 {
     __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:vc.ctController keyPaths:@[@"selectArray"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:vc keyPaths:@[@"cashSelectArr"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
 //        weakSelf.viewModel;
-        if ([keyPath isEqualToString:@"selectArray"]) {
+        if ([keyPath isEqualToString:@"cashSelectArr"]) {
             NSArray *arr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (arr.count > 0) {
                 double totalInvestMultip = 0;

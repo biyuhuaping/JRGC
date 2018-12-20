@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *prdclaimid;//标id
 
 @property (nonatomic, copy) NSString *investAmt;//投资金额
+
+@property (nonatomic, copy)NSMutableArray   *cashSelectArr;
+@property (nonatomic, copy)NSMutableArray   *couponSelectArr;
+
 @end
 
 NS_ASSUME_NONNULL_END

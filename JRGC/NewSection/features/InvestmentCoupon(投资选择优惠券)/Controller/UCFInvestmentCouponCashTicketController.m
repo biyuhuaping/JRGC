@@ -151,7 +151,8 @@
             
         }];
     }];
-    self.selectArray = [selectArray mutableCopy];
+//    self.selectArray = [selectArray mutableCopy];
+    self.db.cashSelectArr = [selectArray mutableCopy];
     [self.db.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark--tableView delegate
