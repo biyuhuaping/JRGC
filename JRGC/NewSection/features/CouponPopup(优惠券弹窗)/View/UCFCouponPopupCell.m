@@ -197,7 +197,6 @@
 - (void)refreshCellData:(id)data
 {
     [super refreshCellData:data];
-    
     UCFCouponPopupCouponlist *cpData = data;
     
     if ([cpData.couponType isEqualToString:@"0"]) {
@@ -212,7 +211,10 @@
     self.remarkLabel.text = cpData.remark;
     [self.remarkLabel sizeToFit];
     NSString *string = [NSString stringWithFormat:@"有效期至%@",cpData.overdueTime];
-    self.overdueTimeLabel.text = [string substringToIndex:14];//截取掉下标5之前的字符串
+    if (string.length > 14) {
+        string =  [string substringToIndex:14];
+    }
+    self.overdueTimeLabel.text = string;//截取掉下标5之前的字符串
     [self.overdueTimeLabel sizeToFit];
     self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额≥%ld元可用",(long)cpData.investMultip] ;
     [self.investMultipLabel sizeToFit];

@@ -49,20 +49,13 @@
         self.rootLayout.backgroundColor = [UIColor clearColor];
         self.backgroundColor = [UIColor clearColor];
         self.arryData = [model copy];
-        [self reloadView];
+        [self.rootLayout addSubview:self.tableViewHeadImageView];
+        [self.rootLayout addSubview:self.tableView];
+        [self.rootLayout addSubview:self.tableViewFootView];
+        [self.rootLayout addSubview:self.projectionView];
+        [self.rootLayout addSubview:self.cancelImageView];
     }
     return self;
-}
-
-- (void)reloadView
-{
-    [self.rootLayout addSubview:self.tableViewHeadImageView];
-    [self.rootLayout addSubview:self.tableView];
-    [self.rootLayout addSubview:self.tableViewFootView];
-    [self.rootLayout addSubview:self.projectionView];
-    [self.rootLayout addSubview:self.cancelImageView];
-//    [self.rootLayout addSubview:self.lineView];
-//    [self.rootLayout addSubview:self.cancelButton];
 }
 
 - (UITableView *)tableView
@@ -212,11 +205,6 @@
     [self hideInWindow];
 }
 #pragma mark ---- UITableViewDelegate ----
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
-{
-    return 1;
-}
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
