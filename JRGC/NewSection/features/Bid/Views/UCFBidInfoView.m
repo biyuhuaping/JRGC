@@ -129,7 +129,7 @@
         _rateTipLab = [[UILabel alloc] init];
         _rateTipLab.textColor = UIColorWithRGB(0x777777);
         _rateTipLab.font = [UIFont systemFontOfSize:12.0f];
-        _rateTipLab.text = @"可预期年化率";
+        _rateTipLab.text = @"预期年化利率";
         [_rateTipLab sizeToFit];
     }
     return _rateTipLab;

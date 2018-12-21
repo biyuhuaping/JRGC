@@ -483,8 +483,8 @@
             return;
         } else if (noSelectCoupon && !noSelectCoupon) {
             //勾选返现券 没有勾选返息全
-            NSString *couponPrdaimSum1 = self.cashTotalcouponAmount;
-            NSString *invenestMoney = self.investMoeny;
+            NSString *couponPrdaimSum1 = [NSString stringWithFormat:@"%.2f",[self.cashTotalcouponAmount doubleValue]] ;
+            NSString *invenestMoney = [NSString stringWithFormat:@"%.2f",[self.investMoeny doubleValue]];
             int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum1];
             NSString *showStr = @"";
             if (compareResult1 == -1) {
@@ -502,8 +502,8 @@
         } else if (!noSelectCoupon && noSelectCoupon) {
             //勾选息现券 没有勾选返现券
             //勾选使用条件不足
-            NSString *couponPrdaimSum2 = self.couponTotalcouponAmount;
-            NSString *invenestMoney = self.investMoeny;
+            NSString *couponPrdaimSum2 = [NSString stringWithFormat:@"%.2f",[self.couponTotalcouponAmount doubleValue]];
+            NSString *invenestMoney = [NSString stringWithFormat:@"%.2f",[self.investMoeny doubleValue]];
             int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum2];
             NSString *showStr = @"";
             if (compareResult1 == -1) {
@@ -520,8 +520,8 @@
             return;
         } else {
             //全部勾选的情况下
-            NSString *couponPrdaimSum1 = self.cashTotalcouponAmount;
-            NSString *couponPrdaimSum2 = self.couponTotalcouponAmount;
+            NSString *couponPrdaimSum1 = [NSString stringWithFormat:@"%.2f",[self.cashTotalcouponAmount doubleValue]];
+            NSString *couponPrdaimSum2 = [NSString stringWithFormat:@"%.2f",[self.couponTotalcouponAmount doubleValue]];
     
             
             NSString *couponPrdaimSum = [couponPrdaimSum1 doubleValue] > [couponPrdaimSum2 doubleValue] ? couponPrdaimSum1 : couponPrdaimSum2;
@@ -550,8 +550,8 @@
         //只有返息券
         if (self.couponIDStr) {
             //勾选使用条件不足
-            NSString *couponPrdaimSum2 = self.couponTotalcouponAmount;
-            NSString *invenestMoney = self.investMoeny;
+            NSString *couponPrdaimSum2 = [NSString stringWithFormat:@"%.2f",[self.couponTotalcouponAmount doubleValue]];
+            NSString *invenestMoney = [NSString stringWithFormat:@"%.2f",[self.investMoeny doubleValue]];
             int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum2];
             NSString *showStr = @"";
             if (compareResult1 == -1) {
@@ -573,8 +573,9 @@
         //只有返现券
         if (self.cashTotalIDStr.length > 0) {
             //勾选使用条件不足
-            NSString *couponPrdaimSum1 = self.cashTotalcouponAmount;
-            NSString *invenestMoney =   self.investMoeny;
+            NSString *couponPrdaimSum1 = [NSString stringWithFormat:@"%.2f", [self.cashTotalcouponAmount doubleValue]];
+            NSString *invenestMoney =    [NSString stringWithFormat:@"%.2f", [self.investMoeny doubleValue]];
+            
             int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum1];
             NSString *showStr = @"";
             if (compareResult1 == -1) {
@@ -607,15 +608,15 @@
 {
     NSString *showStr = @"";
     if (self.couponIDStr.length > 0 && self.cashTotalIDStr.length > 0) {
-        NSString *cashNum = self.model.data.cashNum;
-        NSString *coupNum = self.model.data.couponNum;
+        NSString *cashNum = [NSString stringWithFormat:@"%ld",self.cashSelectCount];
+        NSString *coupNum = [NSString stringWithFormat:@"%ld",self.couponSelectCount];
         showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?\n使用返现券%@张(共¥%@)、返息券%@张",[UCFToolsMehod AddComma:investMoney], cashNum,[UCFToolsMehod AddComma:self.repayCash], coupNum];
     } else if(self.couponIDStr.length > 0) {
-        NSString *coupNum = self.model.data.couponNum;
+        NSString *coupNum = [NSString stringWithFormat:@"%ld",self.couponSelectCount];
         showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?\n使用返息券%@张",[UCFToolsMehod AddComma:investMoney], coupNum];
         
     } else if(self.cashTotalIDStr.length > 0){
-        NSString *cashNum = self.model.data.cashNum;
+        NSString *cashNum = [NSString stringWithFormat:@"%ld",self.cashSelectCount];
         showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?\n使用返现券%@张(共¥%@)",[UCFToolsMehod AddComma:investMoney], cashNum,[UCFToolsMehod AddComma:self.repayCash]];
     } else {
         showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?",[UCFToolsMehod AddComma:investMoney]];

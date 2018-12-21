@@ -74,7 +74,7 @@
             if ([repayCoupon doubleValue] > 0.01) {
                 NSString *repayCoupon = [change objectSafeForKey:NSKeyValueChangeNewKey];
                 NSString *repayCouponStr = [NSString stringWithFormat:@"¥%@",repayCoupon];
-                NSString *allText = [NSString stringWithFormat:@"返现%@",repayCouponStr];
+                NSString *allText = [NSString stringWithFormat:@"返息%@工豆，满¥%@可用",repayCouponStr,self.myVM.couponTotalcouponAmount];
                 self.couponLab.text = allText;
                 self.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:repayCouponStr WithTotalString:allText];
                 [self.couponLab sizeToFit];
@@ -94,7 +94,7 @@
             NSString *repayCash = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if ([repayCash doubleValue] > 0.01) {
                 NSString *cashStr = [NSString stringWithFormat:@"¥%@",repayCash];
-                NSString *allText = [NSString stringWithFormat:@"返现%@",cashStr];
+                NSString *allText = [NSString stringWithFormat:@"返现%@，满¥%@可用",cashStr,self.myVM.cashTotalcouponAmount];
                 self.cashLab.text = allText;
                 self.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:cashStr WithTotalString:allText];
                 [self.cashLab sizeToFit];

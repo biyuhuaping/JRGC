@@ -100,6 +100,10 @@ NS_ASSUME_NONNULL_BEGIN
  返息券需要投资资金
  */
 @property(nonatomic, copy)NSString          *couponTotalcouponAmount;
+/**
+ 选中返息券张数
+ */
+@property(nonatomic, assign)NSInteger       couponSelectCount;
 
 /**
  选中返息券ID串
@@ -121,6 +125,11 @@ NS_ASSUME_NONNULL_BEGIN
  返现券需要投资资金
  */
 @property(nonatomic, copy)NSString          *cashTotalcouponAmount;
+
+/**
+ 选中返现券张数
+ */
+@property(nonatomic, assign)NSInteger       cashSelectCount;
 
 /**
  选中返现券ID串

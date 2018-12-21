@@ -230,10 +230,13 @@
                         totalIDStr = [totalIDStr stringByAppendingString:@"%@,"];
                     }
                 }
-                weakSelf.viewModel.repayCash = [NSString stringWithFormat:@"%.2f",totalcouponAmount];
+                weakSelf.viewModel.cashSelectCount = arr.count;
                 weakSelf.viewModel.cashTotalcouponAmount = [NSString stringWithFormat:@"%.2f",totalInvestMultip];
                 weakSelf.viewModel.cashTotalIDStr = totalIDStr;
+                weakSelf.viewModel.repayCash = [NSString stringWithFormat:@"%.2f",totalcouponAmount];
+
             } else {
+                weakSelf.viewModel.cashSelectCount = 0;
                 weakSelf.viewModel.repayCash = @"0";
                 weakSelf.viewModel.cashTotalcouponAmount = @"0";
                 weakSelf.viewModel.cashTotalIDStr = @"";
@@ -249,7 +252,8 @@
                 double totalInvestMultip = 0;
                 double totalcouponAmount = 0;
                 NSString *totalIDStr = @"";
-            
+                
+                weakSelf.viewModel.couponSelectCount = 1;
                 InvestmentCouponCouponlist *model = arr[0];
                 totalInvestMultip = model.investMultip;
                 totalcouponAmount = [model.couponAmount doubleValue];
@@ -259,6 +263,7 @@
                 weakSelf.viewModel.couponTotalcouponAmount = [NSString stringWithFormat:@"%.2f",totalInvestMultip];
                 weakSelf.viewModel.couponIDStr = totalIDStr;
             } else {
+                weakSelf.viewModel.couponSelectCount = 0;
                 weakSelf.viewModel.repayCoupon = @"0";
                 weakSelf.viewModel.couponTotalcouponAmount = @"0";
                 weakSelf.viewModel.couponIDStr = @"";
