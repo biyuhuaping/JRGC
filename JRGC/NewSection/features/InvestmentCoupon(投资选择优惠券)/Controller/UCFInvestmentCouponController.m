@@ -227,10 +227,13 @@
 {
     [self.ctController couponOfChoice];//返现券
     [self.itController couponOfChoic];//返息券
-    [self.navigationController popViewControllerAnimated:YES];
-
+    [self backToTheInvestmentPage];
+    
 }
-
+- (void)backToTheInvestmentPage
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 /*
 #pragma mark - Navigation
