@@ -193,6 +193,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString         *rechargeStr;
 
 - (void)bidViewModel:(UCFBidViewModel *)viewModel Witalert:(UIAlertView *)alertView;
+
+- (UCFBidModel *)getDataData;
 @end
 
 NS_ASSUME_NONNULL_END
