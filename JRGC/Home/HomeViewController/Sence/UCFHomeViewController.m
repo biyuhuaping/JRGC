@@ -217,10 +217,7 @@
 
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
-    NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    return;
+
     if (![UserInfoSingle sharedManager].userId)
     {
         [self showLoginView];

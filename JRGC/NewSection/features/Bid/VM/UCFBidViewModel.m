@@ -112,7 +112,7 @@
     NSString *totalMoney =[UCFToolsMehod AddComma: [NSString stringWithFormat:@"%.2f",self.model.data.accountAmount + self.model.data.beanAmount/100.0f]];
     self.totalFunds = [NSString stringWithFormat:@"¥%@",totalMoney];
     
-    NSString *palceText = [NSString stringWithFormat:@"%ld元起投",self.model.data.prdClaim.minInvest];
+    NSString *palceText = [NSString stringWithFormat:@"%ld元起投",(long)self.model.data.prdClaim.minInvest];
     if ([self.model.data.prdClaim.maxInvest length] != 0) {
         palceText = [palceText stringByAppendingString:[NSString stringWithFormat:@",限投%@元",self.model.data.prdClaim.maxInvest]];
     }
@@ -236,6 +236,34 @@
     }
 }
 
+/**
+ 计算返息券反的工豆
+
+ @param backInterstae 返息券利率
+ @return 返息工豆价值
+ */
+- (NSString  *)getInvestGetBeansByCoupon:(NSString *)backInterstae
+{
+    double investAmtMoney = [self.investMoeny doubleValue];
+    NSString *annleRate = backInterstae;
+    NSString *repayPeriodDay = nil;
+    //灵活期限标如果有灵活期限holdtime取 holdtime 否则取repayPeriodDay
+    
+    NSString *holdTime = self.model.data.prdClaim.holdTime;
+    if (holdTime.length > 0) {
+        repayPeriodDay = holdTime;
+    } else {
+        repayPeriodDay = self.model.data.prdClaim.repayPeriod;
+    }
+    double liLv = [annleRate doubleValue]/100.0f;
+    double qiXian = [repayPeriodDay doubleValue];
+    double occupyRate = [self.model.data.occupyRate doubleValue];
+    //计算返息的工豆
+    double money1 = ((investAmtMoney * liLv)/360.0f) * qiXian * occupyRate;
+    
+    NSString *couponSum = [NSString stringWithFormat:@"%.2f",round(money1 * 100)/100.0f];
+    return couponSum;
+}
 - (void)dealMyRecommend
 {
     BOOL isLimit = self.model.data.isLimit;

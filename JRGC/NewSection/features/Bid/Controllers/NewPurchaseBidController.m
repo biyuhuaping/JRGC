@@ -143,6 +143,7 @@
 - (void)viewDidLoad {
 //    [super viewDidLoad];
     [self addLeftButton];
+    baseTitleLabel.text = @"出借";
     [self initializationData];
 }
 - (void)initializationData
@@ -250,11 +251,11 @@
                 NSString *totalIDStr = @"";
             
                 InvestmentCouponCouponlist *model = arr[0];
-                totalInvestMultip += model.investMultip;
-                totalcouponAmount += [model.couponAmount doubleValue];
+                totalInvestMultip = model.investMultip;
+                totalcouponAmount = [model.couponAmount doubleValue];
                 totalIDStr = [totalIDStr stringByAppendingString:@"%@"];
                 
-                weakSelf.viewModel.repayCoupon = [NSString stringWithFormat:@"%@",[self getInvestGetBeansByCoupon]];
+                weakSelf.viewModel.repayCoupon = [NSString stringWithFormat:@"%@",[self.viewModel getInvestGetBeansByCoupon:[NSString stringWithFormat:@"%.2f",totalInvestMultip]]];
                 weakSelf.viewModel.couponTotalcouponAmount = [NSString stringWithFormat:@"%.2f",totalInvestMultip];
                 weakSelf.viewModel.couponIDStr = totalIDStr;
             } else {
@@ -265,30 +266,7 @@
         }
     }];
 }
-- (NSString  *)getInvestGetBeansByCoupon
-{
-    double investAmtMoney = [[self.viewModel getTextFeildInputMoeny] doubleValue];
-     UCFBidModel * dataModel =[self.viewModel getDataData];
-    NSString *annleRate = dataModel.data.prdClaim.annualRate;
-    NSString *repayPeriodDay = nil;
-    //灵活期限标如果有灵活期限holdtime取 holdtime 否则取repayPeriodDay
-    
-    NSString *holdTime = dataModel.data.prdClaim.holdTime;
-    if (holdTime.length > 0) {
-        repayPeriodDay = holdTime;
-    } else {
-        
-        repayPeriodDay = dataModel.data.prdClaim.repayPeriod;
-    }
-    double liLv = [annleRate doubleValue]/100.0f;
-    double qiXian = [repayPeriodDay doubleValue];
-    double occupyRate = [dataModel.data.occupyRate doubleValue];
-    //计算返息的工豆
-    double money1 = ((investAmtMoney * liLv)/360.0f) * qiXian * occupyRate;
-    
-    NSString *couponSum = [NSString stringWithFormat:@"%.2f",round(money1 * 100)/100.0f];
-    return couponSum;
-}
+
 
 - (void)bindData:(UCFBidViewModel *)vm
 {

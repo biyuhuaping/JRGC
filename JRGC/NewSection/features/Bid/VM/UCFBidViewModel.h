@@ -195,6 +195,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)bidViewModel:(UCFBidViewModel *)viewModel Witalert:(UIAlertView *)alertView;
 
 - (UCFBidModel *)getDataData;
+
+/**
+ 计算返息券反的工豆
+ 
+ @param backInterstae 返息券利率
+ @return 返息工豆价值
+ */
+- (NSString  *)getInvestGetBeansByCoupon:(NSString *)backInterstae;
 @end
 
 NS_ASSUME_NONNULL_END
