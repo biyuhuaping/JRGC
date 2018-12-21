@@ -240,6 +240,7 @@
                 weakSelf.viewModel.repayCash = @"0";
                 weakSelf.viewModel.cashTotalcouponAmount = @"0";
                 weakSelf.viewModel.cashTotalIDStr = @"";
+                self.cashArray = [NSArray array];
             }
         }
     }];
@@ -267,6 +268,7 @@
                 weakSelf.viewModel.repayCoupon = @"0";
                 weakSelf.viewModel.couponTotalcouponAmount = @"0";
                 weakSelf.viewModel.couponIDStr = @"";
+                self.couponArray = [NSArray array];
             }
         }
     }];
