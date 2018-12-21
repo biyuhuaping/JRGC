@@ -34,6 +34,7 @@
 #import "UCFNewUserCell.h"
 #import "UCFRegisterStepOneViewController.h"
 #import "UCFMicroMoneyCell.h"
+#import "NewPurchaseBidController.h"
 @interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate,UCFInvestMicroMoneyCellDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
@@ -673,13 +674,21 @@
         NSDictionary * dic = [Data objectFromJSONString];
         if([dic[@"status"] integerValue] == 1)
         {
-            UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-            purchaseViewController.rootVc = self.rootVc;
-            purchaseViewController.dataDict = dic;
-            purchaseViewController.bidType = 0;
-            purchaseViewController.baseTitleType = @"detail_heTong";
-            purchaseViewController.accoutType = SelectAccoutTypeP2P;
-            [self.navigationController pushViewController:purchaseViewController animated:YES];
+            if (self.accoutType == SelectAccoutTypeP2P) {
+                NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
+                vc.bidDetaiModel = [UCFBidModel yy_modelWithJSON:result];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
+                purchaseViewController.rootVc = self.rootVc;
+                purchaseViewController.dataDict = dic;
+                purchaseViewController.bidType = 0;
+                purchaseViewController.baseTitleType = @"detail_heTong";
+                purchaseViewController.accoutType = SelectAccoutTypeP2P;
+                [self.navigationController pushViewController:purchaseViewController animated:YES];
+            }
+            
+
             
         }else if ([dic[@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
             [self checkUserCanInvestIsDetail:NO type:SelectAccoutTypeP2P];

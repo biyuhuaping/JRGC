@@ -22,6 +22,7 @@
 #import "RiskAssessmentViewController.h"
 #import "UCFHonorHeaderView.h"
 #import "UCFHomeListCell.h"
+#import "NewPurchaseBidController.h"
 @interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate,UCFHomeListCellHonorDelegate>
 {
     UCFMicroMoneyModel *_microMoneyModel;
@@ -206,19 +207,15 @@
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
-    else if (tag.intValue == kSXTagPrdClaimsDealBid){
+    else if (tag.intValue == kSXTagP2PPrdClaimsDealBid){
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
-        if([dic[@"status"] integerValue] == 1)
+        if([dic[@"ret"] integerValue] == 1)
         {
-            UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-            purchaseViewController.rootVc = self.rootVc;
-            purchaseViewController.dataDict = dic;
-            purchaseViewController.bidType = 0;
-            purchaseViewController.baseTitleType = @"detail_heTong";
-            purchaseViewController.accoutType = SelectAccoutTypeP2P;
-            [self.navigationController pushViewController:purchaseViewController animated:YES];
-            
+            NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
+            vc.bidDetaiModel = [UCFBidModel yy_modelWithJSON:result];
+            [self.navigationController pushViewController:vc animated:YES];
+    
         }else if ([dic[@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
             [self checkUserCanInvestIsDetail:NO];
         } else {
@@ -330,10 +327,16 @@
         }
         if ([self checkUserCanInvestIsDetail:NO]) {
             
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _microMoneyModel.Id,userid];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
+//            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//            NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+//            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _microMoneyModel.Id,userid];
+//            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagP2PPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
+            
+            NSDictionary *paraDict = @{
+                                       @"id":_microMoneyModel.Id,
+                                       @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
+                                       };
+            [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutDefault];
         }
     }
 }

@@ -25,7 +25,10 @@
 @implementation UCFBidViewModel
 
 
-
+- (UCFBidModel *)getDataData
+{
+    return self.model;
+}
 - (void)setDataModel:(UCFBidModel *)model
 {
     self.model = model;

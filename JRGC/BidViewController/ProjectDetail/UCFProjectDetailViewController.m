@@ -24,7 +24,7 @@
 #import "UCFProjectBasicDetailViewController.h"
 #import "UCFProjectSafetyGuaranteeViewController.h"
 #import "UCFProjectInvestmentRecordViewController.h"
-
+#import "NewPurchaseBidController.h"
 @interface UCFProjectDetailViewController ()
 {
     UCFNormalNewMarkView *_normalMarkView;// 普通标
@@ -656,12 +656,21 @@
                 NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:self.accoutType];
             } else {
-                //普通表
-                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                 NSString *projectId = [_dataDic  objectSafeForKey:@"id"];
-                NSString *strParameters = nil;
-                strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
+                if (self.accoutType == SelectAccoutTypeP2P) {
+                    NSDictionary *paraDict = @{
+                                               @"id":projectId,
+                                               @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
+                                               };
+                    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutTypeP2P];
+                } else {
+                    //普通表
+                    [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+                    NSString *strParameters = nil;
+                    strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
+                }
+
             }
         }
     }
@@ -717,13 +726,17 @@
         NSDictionary * dic = [Data objectFromJSONString];
         if([[dic objectForKey:@"status"] integerValue] == 1)
         {
-            UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-            purchaseViewController.dataDict = dic;
-            purchaseViewController.bidType = 0;
-            self.sourceVc = @"";
-            purchaseViewController.accoutType = self.accoutType;
-            purchaseViewController.rootVc = self.rootVc;
-            [self.navigationController pushViewController:purchaseViewController animated:YES];
+         
+       
+                UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
+                purchaseViewController.dataDict = dic;
+                purchaseViewController.bidType = 0;
+                self.sourceVc = @"";
+                purchaseViewController.accoutType = self.accoutType;
+                purchaseViewController.rootVc = self.rootVc;
+                [self.navigationController pushViewController:purchaseViewController animated:YES];
+            
+
             
         }else if ([[dic objectForKey:@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
             [self checkUserCanInvest];
@@ -815,6 +828,10 @@
         }else{
            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
+    } else if (tag.intValue == kSXTagP2PPrdClaimsDealBid) {
+        NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
+        vc.bidDetaiModel = [UCFBidModel yy_modelWithJSON:result];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 //请求失败
