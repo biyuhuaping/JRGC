@@ -84,10 +84,13 @@
         
         InvestmentCouponCouponlist *newObj = obj;
         //判断投资界面带回来的值,在列表页面勾选
-        if ([self.db.couponSelectArr containsObject: [NSNumber numberWithInteger:newObj.couponId ]]) {
-            newObj.isCheck = YES;
-        }
-        
+        [self.db.couponSelectArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            InvestmentCouponCouponlist *cashObj = obj;
+            if ( cashObj.couponId ==  newObj.couponId) {
+                newObj.isCheck = YES;
+            }
+        }];
         //把可用券和不可用券拆分成两个数组
         if (newObj.isCanUse)
         {
@@ -131,9 +134,9 @@
         _useEnterBtn.leftPos.equalTo(self.rootLayout.leftPos);
         
         [_useEnterBtn setButtonTitleWithString:@"确认使用"];
-        [_useEnterBtn setButtonTitleWithColor:[UIColor colorWithRed:219/255.0 green:81/255.0 blue:39/255.0 alpha:1.0]];
-        [_useEnterBtn setViewBackgroundColor:[UIColor colorWithRed:253/255.0 green:76/255.0 blue:69/255.0 alpha:1.0]];
-        [_useEnterBtn setButtonBackgroundColor:[UIColor whiteColor]];
+        [_useEnterBtn setButtonTitleWithColor:[UIColor whiteColor]];
+        [_useEnterBtn setViewBackgroundColor:[UIColor whiteColor]];
+        [_useEnterBtn setButtonBackgroundColor:UIColorWithRGB(0xFD4D4C)];
         
     }
     return _useEnterBtn;
@@ -289,26 +292,25 @@
     
     if (self.oldIndexPath == nil)
     {
-        //上次的勾选没有记录
-        if (self.db.couponSelectArr == nil || self.db.couponSelectArr.count == 0) {
-            //没有勾选,投资页面传来的也没有勾选
-            self.oldIndexPath = indexPath;
-        }
-        else
-        {
-            //没有勾选,但是投资页面传来的需要勾选
+        //没有勾选,但是投资页面传来的需要勾选
+        if (self.db.couponSelectArr != nil && self.db.couponSelectArr.count != 0) {
+            
             NSMutableArray *overdueArray = [self.arryData objectAtIndex:0];
-            [overdueArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.db.couponSelectArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 
-                InvestmentCouponCouponlist *arrayObj = obj;
+                InvestmentCouponCouponlist *newObj = obj;
                 //判断投资界面带回来的值,在列表页面勾选
-                if ([self.db.couponSelectArr containsObject: [NSNumber numberWithInteger:arrayObj.couponId ]]) {
-                    arrayObj.isCheck = YES;
-                    *stop = YES;
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:idx inSection:0];
-                    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-                }
-
+                [overdueArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    
+                    InvestmentCouponCouponlist *cashObj = obj;
+                    if ( cashObj.couponId ==  newObj.couponId) {
+                        cashObj.isCheck = NO;
+                        *stop = YES;
+                        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:idx inSection:0];
+                        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+                    }
+                }];
+                
             }];
         }
     }
@@ -328,10 +330,8 @@
             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:newIndexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             
         }
-       
-        self.oldIndexPath = indexPath;
-        
     }
+    self.oldIndexPath = indexPath;
 }
 
 /*

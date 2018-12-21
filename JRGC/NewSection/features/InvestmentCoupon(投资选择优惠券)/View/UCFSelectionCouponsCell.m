@@ -237,6 +237,7 @@
     //优惠券是否可用
     if (cpData.isCanUse)
     {
+        NSString *couponAmount = cpData.couponAmount;
         //        0返现券 1返息券
         if ([cpData.couponType isEqualToString:@"0"])
         {
@@ -246,8 +247,11 @@
         else
         {
             self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
+            couponAmount = [NSString stringWithFormat:@"%@%%",couponAmount];
         }
-       
+        self.couponAmounLabel.text = couponAmount;
+        [self.couponAmounLabel sizeToFit];
+
         //YES勾选,no正常模式
         if (cpData.isCheck)
         {
@@ -267,8 +271,7 @@
         [self.selectCouponsBtn setImage:image forState:UIControlStateNormal];
         self.selectCouponsBtn.userInteractionEnabled = NO;
     }
-    self.couponAmounLabel.text = cpData.couponAmount;
-    [self.couponAmounLabel sizeToFit];
+    
     self.remarkLabel.text = cpData.remark;
     [self.remarkLabel sizeToFit];
     NSString *string = [NSString stringWithFormat:@"有效期至%@",cpData.overdueTime];
