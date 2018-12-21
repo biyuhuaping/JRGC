@@ -171,10 +171,13 @@
 {
     if (nil == _investMultipLabel) {
         _investMultipLabel = [YYLabel new];
-        _investMultipLabel.centerYPos.equalTo(self.couponDateLayout.centerYPos);
+        _investMultipLabel.centerYPos.equalTo(@0);
         _investMultipLabel.leftPos.equalTo(@10);
+//        _investMultipLabel.myLeft = 10;
+        _investMultipLabel.myHeight = 20;
+//        _investMultipLabel.myTop = 0;
         _investMultipLabel.textAlignment = NSTextAlignmentLeft;
-        _investMultipLabel.font = self.remarkLabel.font;
+        _investMultipLabel.font = [UIFont systemFontOfSize:10.0];
         _investMultipLabel.textColor = UIColorWithRGB(0x999999);
         //        [_titleLabel sizeToFit];
     }
@@ -184,12 +187,15 @@
 {
     if (nil == _inverstPeriodLabel) {
         _inverstPeriodLabel = [YYLabel new];
-        _inverstPeriodLabel.centerYPos.equalTo(self.investMultipLabel.centerYPos);
+        _inverstPeriodLabel.centerYPos.equalTo(@0);
         _inverstPeriodLabel.rightPos.equalTo(@10);
+        _inverstPeriodLabel.myHeight = 20;
+//        _inverstPeriodLabel.myTop = 0;
+//        _inverstPeriodLabel.myLeft = 10;
         _inverstPeriodLabel.textAlignment = NSTextAlignmentRight;
-        _inverstPeriodLabel.font = self.remarkLabel.font;
-        _inverstPeriodLabel.textColor = self.investMultipLabel.textColor;
-        //        [_titleLabel sizeToFit];
+        _inverstPeriodLabel.font = [UIFont systemFontOfSize:10.0];
+        _inverstPeriodLabel.textColor = UIColorWithRGB(0x999999);
+//        [_inverstPeriodLabel sizeToFit];
     }
     return _inverstPeriodLabel;
 }
@@ -206,7 +212,7 @@
        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
     }
     
-    self.couponAmounLabel.text = cpData.couponAmount;
+    self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",cpData.couponAmount];
     [self.couponAmounLabel sizeToFit];
     self.remarkLabel.text = cpData.remark;
     [self.remarkLabel sizeToFit];
@@ -216,9 +222,9 @@
     }
     self.overdueTimeLabel.text = string;//截取掉下标5之前的字符串
     [self.overdueTimeLabel sizeToFit];
-    self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额≥%ld元可用",(long)cpData.investMultip] ;
+    self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额≥%@元可用",@"20"] ;
     [self.investMultipLabel sizeToFit];
-    self.inverstPeriodLabel.text = [NSString stringWithFormat:@"投资期限≥%ld天可用",(long)cpData.inverstPeriod];
+    self.inverstPeriodLabel.text = [NSString stringWithFormat:@"投资期限≥%@天可用",@"30"];
     [self.inverstPeriodLabel sizeToFit];
     
 }

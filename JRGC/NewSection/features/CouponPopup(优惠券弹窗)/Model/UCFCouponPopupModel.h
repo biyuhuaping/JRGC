@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *sendTime;
 
-@property (nonatomic, copy) NSString *isCanUse;
+@property (nonatomic, assign) BOOL isCanUse;
 
 @property (nonatomic, copy) NSString *overdueTime;
 

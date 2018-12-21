@@ -203,7 +203,7 @@
         _investMultipLabel = [YYLabel new];
         _investMultipLabel.centerYPos.equalTo(self.couponDateLayout.centerYPos);
         _investMultipLabel.leftPos.equalTo(@10);
-        _investMultipLabel.textAlignment = NSTextAlignmentLeft;
+//        _investMultipLabel.textAlignment = NSTextAlignmentLeft;
         _investMultipLabel.font = self.remarkLabel.font;
         _investMultipLabel.textColor = UIColorWithRGB(0x999999);
         //        [_titleLabel sizeToFit];
@@ -216,7 +216,7 @@
         _inverstPeriodLabel = [YYLabel new];
         _inverstPeriodLabel.centerYPos.equalTo(self.investMultipLabel.centerYPos);
         _inverstPeriodLabel.rightPos.equalTo(@10);
-        _inverstPeriodLabel.textAlignment = NSTextAlignmentRight;
+//        _inverstPeriodLabel.textAlignment = NSTextAlignmentRight;
         _inverstPeriodLabel.font = self.remarkLabel.font;
         _inverstPeriodLabel.textColor = self.investMultipLabel.textColor;
         //        [_titleLabel sizeToFit];
@@ -243,13 +243,14 @@
         {
             
             self.couponTypeLayout.backgroundColor = UIColorWithRGB(0x70CBF4);
+            self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",couponAmount];
         }
         else
         {
             self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
-            couponAmount = [NSString stringWithFormat:@"%@%%",couponAmount];
+            self.couponAmounLabel.text = [NSString stringWithFormat:@"%@%%",couponAmount];
         }
-        self.couponAmounLabel.text = couponAmount;
+        
         [self.couponAmounLabel sizeToFit];
 
         //YES勾选,no正常模式
@@ -266,6 +267,7 @@
         
     }else
     {
+        self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",cpData.couponAmount];
         self.couponTypeLayout.backgroundColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0];
         UIImage *image = [self createImageWithColor:[UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0]];
         [self.selectCouponsBtn setImage:image forState:UIControlStateNormal];
