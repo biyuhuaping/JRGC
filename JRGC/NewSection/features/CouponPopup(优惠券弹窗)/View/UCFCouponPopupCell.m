@@ -176,7 +176,7 @@
 //        _investMultipLabel.myLeft = 10;
         _investMultipLabel.myHeight = 20;
 //        _investMultipLabel.myTop = 0;
-        _investMultipLabel.textAlignment = NSTextAlignmentLeft;
+//        _investMultipLabel.textAlignment = NSTextAlignmentLeft;
         _investMultipLabel.font = [UIFont systemFontOfSize:10.0];
         _investMultipLabel.textColor = UIColorWithRGB(0x999999);
         //        [_titleLabel sizeToFit];
@@ -192,7 +192,7 @@
         _inverstPeriodLabel.myHeight = 20;
 //        _inverstPeriodLabel.myTop = 0;
 //        _inverstPeriodLabel.myLeft = 10;
-        _inverstPeriodLabel.textAlignment = NSTextAlignmentRight;
+//        _inverstPeriodLabel.textAlignment = NSTextAlignmentRight;
         _inverstPeriodLabel.font = [UIFont systemFontOfSize:10.0];
         _inverstPeriodLabel.textColor = UIColorWithRGB(0x999999);
 //        [_inverstPeriodLabel sizeToFit];

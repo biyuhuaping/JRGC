@@ -73,7 +73,7 @@
         self.segmentScrollV.pagingEnabled = YES;
         self.segmentScrollV.showsHorizontalScrollIndicator = NO;
         self.segmentScrollV.contentSize = CGSizeMake(frame.size.width * _viewController.childViewControllers.count, 0);
-        self.segmentScrollV.backgroundColor = [UIColor redColor];
+        self.segmentScrollV.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.segmentScrollV];
         
         //添加、取出ControllerView
