@@ -196,8 +196,9 @@
     UCFInvestmentCouponController *uc = [[UCFInvestmentCouponController alloc] init];
     uc.prdclaimid = prdclaimid;
     uc.investAmt = investAmt;
-    uc.cashSelectArr = self.cashArray;
-    uc.couponSelectArr = self.couponArray;
+    uc.barSelectIndex = button.tag - 100;
+    uc.cashSelectArr = [NSMutableArray arrayWithArray:self.cashArray];
+    uc.couponSelectArr = [NSMutableArray arrayWithArray:self.couponArray];
     self.preMoney = investAmt;
     [self.navigationController pushViewController:uc animated:YES];
     [self bindCoupleView:uc];

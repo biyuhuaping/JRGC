@@ -525,7 +525,7 @@
     
             
             NSString *couponPrdaimSum = [couponPrdaimSum1 doubleValue] > [couponPrdaimSum2 doubleValue] ? couponPrdaimSum1 : couponPrdaimSum2;
-            NSString *invenestMoney = self.investMoeny;
+            NSString *invenestMoney = [NSString stringWithFormat:@"%.2f",[self.investMoeny doubleValue]];
             
             //计算出使用该返息券所需投的金额
             int compareResult = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum];

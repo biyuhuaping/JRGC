@@ -65,6 +65,7 @@
   
     [_pagerView.segmentView addSubview:rightbutton];
     
+    [_pagerView setSelectIndex:_barSelectIndex];
 
 }
 - (void)clickRightBtn
@@ -80,6 +81,8 @@
     [self.navigationController setNavigationBarHidden:YES];
 
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
