@@ -434,9 +434,7 @@
 //    if (!_isFromRegister) {
 //        [[MongoliaLayerCenter sharedManager] showLogic];
 //    }
-    if (!_isFromRegister) {
-        [UCFCouponPopup startQueryCouponPopup];
-    }
+   
 }
 // 绘制有touchID 的界面
 - (void)initTouchIDLockView
@@ -726,6 +724,7 @@
     if (self.baseScrollView.contentOffset.x != ScreenWidth) {
         [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
     }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1375,6 +1374,10 @@
     }
 //    [[NSNotificationCenter defaultCenter] postNotificationName:CheckIsInitiaLogin object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"setindecatorbtnnofication" object:nil];
+    
+    if (!_isFromRegister) {
+        [[MongoliaLayerCenter sharedManager] showLogic];
+    }
 }
 
 @end

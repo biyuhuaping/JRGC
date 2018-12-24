@@ -67,10 +67,10 @@
 }
 
 
-- (YYLabel *)couponAmounLabel
+- (UILabel *)couponAmounLabel
 {
     if (nil == _couponAmounLabel) {
-        _couponAmounLabel = [YYLabel new];
+        _couponAmounLabel = [UILabel new];
         _couponAmounLabel.topPos.equalTo(@5);
         _couponAmounLabel.leftPos.equalTo(@10);
         _couponAmounLabel.rightPos.equalTo(@10);
@@ -137,10 +137,10 @@
     return _willExpireLayout;
 }
 
-- (YYLabel *)remarkLabel
+- (UILabel *)remarkLabel
 {
     if (nil == _remarkLabel) {
-        _remarkLabel = [YYLabel new];
+        _remarkLabel = [UILabel new];
         _remarkLabel.bottomPos.equalTo(@5);
         _remarkLabel.leftPos.equalTo(self.couponAmounLabel.leftPos);
         _remarkLabel.textAlignment = NSTextAlignmentLeft;
@@ -150,10 +150,10 @@
     }
     return _remarkLabel;
 }
-- (YYLabel *)overdueTimeLabel
+- (UILabel *)overdueTimeLabel
 {
     if (nil == _overdueTimeLabel) {
-        _overdueTimeLabel = [YYLabel new];
+        _overdueTimeLabel = [UILabel new];
         _overdueTimeLabel.centerYPos.equalTo(self.remarkLabel.centerYPos);
         _overdueTimeLabel.rightPos.equalTo(@10);
         _overdueTimeLabel.leftPos.equalTo(self.remarkLabel.rightPos);
@@ -197,10 +197,10 @@
 }
 
 //@property (nonatomic, strong) YYLabel     *inverstPeriodLabel;//投资期限
-- (YYLabel *)investMultipLabel
+- (UILabel *)investMultipLabel
 {
     if (nil == _investMultipLabel) {
-        _investMultipLabel = [YYLabel new];
+        _investMultipLabel = [UILabel new];
         _investMultipLabel.centerYPos.equalTo(self.couponDateLayout.centerYPos);
         _investMultipLabel.leftPos.equalTo(@10);
 //        _investMultipLabel.textAlignment = NSTextAlignmentLeft;
@@ -210,10 +210,10 @@
     }
     return _investMultipLabel;
 }
-- (YYLabel *)inverstPeriodLabel
+- (UILabel *)inverstPeriodLabel
 {
     if (nil == _inverstPeriodLabel) {
-        _inverstPeriodLabel = [YYLabel new];
+        _inverstPeriodLabel = [UILabel new];
         _inverstPeriodLabel.centerYPos.equalTo(self.investMultipLabel.centerYPos);
         _inverstPeriodLabel.rightPos.equalTo(@10);
 //        _inverstPeriodLabel.textAlignment = NSTextAlignmentRight;
@@ -231,49 +231,47 @@
     InvestmentCouponCouponlist *cpData = data;
     
     if ([cpData.overdueFlag isEqualToString:@"1"]) {//即将过期标识,再展示图标
+        self.willExpireLayout.myVisibility = MyVisibility_Gone;
+    }
+    else
+    {
         self.willExpireLayout.myVisibility = MyVisibility_Visible;
+    }
+    NSString *couponAmount = cpData.couponAmount;
+    //        0返现券 1返息券
+    if ([cpData.couponType isEqualToString:@"0"])
+    {
+        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0x70CBF4);
+        self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",couponAmount];
+    }
+    else
+    {
+        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
+        self.couponAmounLabel.text = [NSString stringWithFormat:@"%@%%",couponAmount];
+    }
+    //YES勾选,no正常模式
+    if (cpData.isCheck)
+    {
+        self.selectCouponsBtn.selected = YES;
+        [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        self.selectCouponsBtn.selected = NO;
+        [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
     }
     
     //优惠券是否可用
-    if (cpData.isCanUse)
+    if (!cpData.isCanUse)
     {
-        NSString *couponAmount = cpData.couponAmount;
-        //        0返现券 1返息券
-        if ([cpData.couponType isEqualToString:@"0"])
-        {
-            
-            self.couponTypeLayout.backgroundColor = UIColorWithRGB(0x70CBF4);
-            self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",couponAmount];
-        }
-        else
-        {
-            self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
-            self.couponAmounLabel.text = [NSString stringWithFormat:@"%@%%",couponAmount];
-        }
-        
-        [self.couponAmounLabel sizeToFit];
-
-        //YES勾选,no正常模式
-        if (cpData.isCheck)
-        {
-            self.selectCouponsBtn.selected = YES;
-            [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateNormal];
-        }
-        else
-        {
-            self.selectCouponsBtn.selected = NO;
-            [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
-        }
-        
-    }else
-    {
-        self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",cpData.couponAmount];
         self.couponTypeLayout.backgroundColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0];
         UIImage *image = [self createImageWithColor:[UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0]];
         [self.selectCouponsBtn setImage:image forState:UIControlStateNormal];
         self.selectCouponsBtn.userInteractionEnabled = NO;
+        
     }
     
+    [self.couponAmounLabel sizeToFit];
     self.remarkLabel.text = cpData.remark;
     [self.remarkLabel sizeToFit];
     NSString *string = [NSString stringWithFormat:@"有效期至%@",cpData.overdueTime];

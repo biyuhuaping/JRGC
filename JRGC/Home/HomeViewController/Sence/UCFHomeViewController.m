@@ -94,7 +94,7 @@
         [MongoliaLayerCenter sharedManager].tableView = self.homeListVC.tableView;
         
     });
-    [self homeCouponPopup];
+    
 
 }
 - (void)homeCouponPopup

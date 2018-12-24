@@ -364,6 +364,7 @@
 #define HOMEPAGERECOMMENDPRDCLAIMURL     @"/api/homePage/v2/recommendPrdClaim.json"//推荐标列表
 #define HOMESHOWCOUPONTIPS    @"api/discountCoupon/v2/showCouponTips.json"//新券过期券提示接口
 
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,

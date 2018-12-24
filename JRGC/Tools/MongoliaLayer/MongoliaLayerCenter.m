@@ -16,6 +16,7 @@
 #import "FestivalActivitiesWebView.h"
 #import "FullWebViewController.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
+#import "UCFCouponPopup.h"
 @interface MongoliaLayerCenter ()<MaskViewDelegate>
 {
     NSInteger num;
@@ -52,28 +53,39 @@
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UINavigationController *nav = app.tabBarController.selectedViewController;
-    if ( [self isCurrentViewControllerVisible:app.lockVc] || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
+    
+    if ( [self isCurrentViewControllerVisible:app.lockVc]) {
         return;
     }
-    
-    //下面是需要登录后查看的
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        return;
-    }
-    
-    NSString * lastActivityTpyeName = [[NSUserDefaults standardUserDefaults] objectForKey:LastActivityTpyeName]; 
-    if (self.activityType && ![self.activityType isEqualToString:lastActivityTpyeName] && self.switchFlag) {
-
-        //通知弹窗显示新手政策
+    if ([nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
+        //下面是需要登录后查看的
+        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            return;
+        }
         
-        [[NSUserDefaults standardUserDefaults] setObject:self.activityType forKey:LastActivityTpyeName];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [self.tableView setContentOffset:CGPointMake(0, 0)];
-        MjAlertView *alertView = [[MjAlertView alloc] initADViewAlertWithDelegate:self];
-        alertView.tag = 2001;
-        [alertView show];
+        NSString * lastActivityTpyeName = [[NSUserDefaults standardUserDefaults] objectForKey:LastActivityTpyeName];
+        if (self.activityType && ![self.activityType isEqualToString:lastActivityTpyeName] && self.switchFlag) {
+            
+            //通知弹窗显示新手政策
+            
+            [[NSUserDefaults standardUserDefaults] setObject:self.activityType forKey:LastActivityTpyeName];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self.tableView setContentOffset:CGPointMake(0, 0)];
+            MjAlertView *alertView = [[MjAlertView alloc] initADViewAlertWithDelegate:self];
+            alertView.tag = 2001;
+            [alertView show];
+            return;
+        }
+        
         return;
+    } else {
+        //下面是需要登录后查看的
+        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            return;
+        }
+        [UCFCouponPopup startQueryCouponPopup];
     }
+
     
     
     
