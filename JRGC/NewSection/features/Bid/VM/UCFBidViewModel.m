@@ -259,7 +259,7 @@
     double qiXian = [repayPeriodDay doubleValue];
     double occupyRate = [self.model.data.occupyRate doubleValue];
     //计算返息的工豆
-    double money1 = ((investAmtMoney * liLv)/360.0f) * qiXian * occupyRate;
+    double money1 = (investAmtMoney * liLv) * (qiXian/360.0f) * occupyRate;
     
     NSString *couponSum = [NSString stringWithFormat:@"%.2f",round(money1 * 100)/100.0f];
     return couponSum;
@@ -481,7 +481,7 @@
             alert.tag = 4000;
             [alert show];
             return;
-        } else if (noSelectCoupon && !noSelectCoupon) {
+        } else if (!noSelectCash && noSelectCoupon) {
             //勾选返现券 没有勾选返息全
             NSString *couponPrdaimSum1 = [NSString stringWithFormat:@"%.2f",[self.cashTotalcouponAmount doubleValue]] ;
             NSString *invenestMoney = [NSString stringWithFormat:@"%.2f",[self.investMoeny doubleValue]];
@@ -499,7 +499,7 @@
             alert.tag = 4000;
             [alert show];
             return;
-        } else if (!noSelectCoupon && noSelectCoupon) {
+        } else if (noSelectCash && !noSelectCoupon) {
             //勾选息现券 没有勾选返现券
             //勾选使用条件不足
             NSString *couponPrdaimSum2 = [NSString stringWithFormat:@"%.2f",[self.couponTotalcouponAmount doubleValue]];

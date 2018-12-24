@@ -251,17 +251,16 @@
             if (arr.count > 0) {
                 self.couponArray = [arr mutableCopy];
                 double totalInvestMultip = 0;
-                double totalcouponAmount = 0;
+                double couponAmount = 0;
                 NSString *totalIDStr = @"";
                 
                 weakSelf.viewModel.couponSelectCount = 1;
                 InvestmentCouponCouponlist *model = arr[0];
+                couponAmount = [model.couponAmount doubleValue];
                 totalInvestMultip = model.investMultip;
-                totalcouponAmount = [model.couponAmount doubleValue];
-                totalIDStr = [totalIDStr stringByAppendingString:@"%@"];
-                
-                weakSelf.viewModel.repayCoupon = [NSString stringWithFormat:@"%@",[self.viewModel getInvestGetBeansByCoupon:[NSString stringWithFormat:@"%.2f",totalInvestMultip]]];
+                totalIDStr =  [NSString stringWithFormat:@"%ld",model.couponId];
                 weakSelf.viewModel.couponTotalcouponAmount = [NSString stringWithFormat:@"%.2f",totalInvestMultip];
+                weakSelf.viewModel.repayCoupon = [NSString stringWithFormat:@"%@",[self.viewModel getInvestGetBeansByCoupon:[NSString stringWithFormat:@"%.2f",couponAmount]]];
                 weakSelf.viewModel.couponIDStr = totalIDStr;
             } else {
                 weakSelf.viewModel.couponSelectCount = 0;
