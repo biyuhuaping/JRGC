@@ -11,11 +11,13 @@
 #import "UCFSelectionCouponsCell.h"
 #import "UCFInvestmentCouponModel.h"
 #import "UCFInvestmentCouponController.h"
-@interface UCFInvestmentCouponCashTicketController ()<UITableViewDelegate, UITableViewDataSource>
+#import "BaseTableView.h"
+#import "UCFNoDataView.h"
+@interface UCFInvestmentCouponCashTicketController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) BaseTableView *tableView;
 
 @property (nonatomic, strong) BaseBottomButtonView *useEnterBtn;//确认使用
 
@@ -32,6 +34,7 @@
     self.rootLayout.backgroundColor = [UIColor whiteColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
+
     [self.rootLayout addSubview:self.tableView];
     [self.rootLayout addSubview:self.useEnterBtn];
     [self request];
@@ -68,6 +71,11 @@
         [self starCouponPopup:dic];
     }
 }
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    [self.tableView endRefresh];
+    [self.tableView cyl_reloadData];
+}
 -(void)starCouponPopup:(NSDictionary *)dic
 {
     UCFInvestmentCouponModel *model = [ModelTransition TransitionModelClassName:[UCFInvestmentCouponModel class] dataGenre:dic];
@@ -101,15 +109,18 @@
     
     [self.arryData addObject:overdueArray];
     [self.arryData addObject:noOverdueArray];
-    [self.tableView reloadData];
+    [self.tableView endRefresh];
+    [self.tableView cyl_reloadData];
 }
-- (UITableView *)tableView
+- (BaseTableView *)tableView
 {
     if (nil == _tableView) {
-        _tableView = [[UITableView alloc]init];
+        _tableView = [[BaseTableView alloc]init];
         _tableView.backgroundColor = UIColorWithRGB(0xEBEBEE);
         _tableView.delegate = self;
         _tableView.dataSource =self;
+        _tableView.tableRefreshDelegate= self;
+        _tableView.enableRefreshFooter = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.topPos.equalTo(@0);
         _tableView.leftPos.equalTo(@0);
@@ -331,14 +342,9 @@
         [btn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
     }
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)refreshTableViewHeader{
+    
+    [self request];
 }
-*/
 
 @end

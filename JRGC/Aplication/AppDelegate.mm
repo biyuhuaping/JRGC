@@ -43,6 +43,7 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 #import "UCFLanchViewController.h"
+#import "RealReachability.h"
 @interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
@@ -57,7 +58,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    
+    [self startGLobalRealReachability]; //开启网络监测
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -74,6 +76,13 @@
 //    出现这个现象的直接原因是 tabBar 内的按钮 UITabBarButton 被设置了错误的 frame，frame.size 变为 (0, 0) 导致的。
     [[UITabBar appearance] setTranslucent:NO];
     return YES;
+}
+#pragma mark - 初始化网络监控
+- (void)startGLobalRealReachability
+{
+    GLobalRealReachability.hostForPing = @"www.baidu.com";
+    GLobalRealReachability.hostForCheck = @"www.apple.com";
+    [GLobalRealReachability startNotifier];
 }
 #pragma 新手政策弹框
 - (void)checkNovicePoliceOnOff

@@ -111,7 +111,29 @@ shared##className = [[self alloc] init]; \
 }); \
 return shared##className; \
 }
+//适配ios11
+#define  adjustsScrollViewInsets(scrollView)\
+do {\
+_Pragma("clang diagnostic push")\
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")\
+if ([scrollView respondsToSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:")]) {\
+NSMethodSignature *signature = [UIScrollView instanceMethodSignatureForSelector:@selector(setContentInsetAdjustmentBehavior:)];\
+NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];\
+NSInteger argument = 2;\
+invocation.target = scrollView;\
+invocation.selector = @selector(setContentInsetAdjustmentBehavior:);\
+[invocation setArgument:&argument atIndex:2];\
+[invocation retainArguments];\
+[invocation invoke];\
+}\
+_Pragma("clang diagnostic pop")\
+} while (0)
 
+#pragma mark - weekSelf
+//@PGWeakObj(self);
+//@PGStrongObj(self);
+#define PGWeakObj(o) try{}@finally{} __weak typeof(o) o##Weak = o;
+#define PGStrongObj(o) try{}@finally{} __strong typeof(o) o = o##Weak;
 
 #define UUID            @"userId"
 #define TIME            @"time"
