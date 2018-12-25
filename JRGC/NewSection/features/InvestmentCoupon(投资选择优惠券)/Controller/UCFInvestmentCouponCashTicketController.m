@@ -145,22 +145,24 @@
 }
 - (void)couponOfChoice
 {
-    NSMutableArray *selectArray = [NSMutableArray array];
-    [self.arryData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        NSMutableArray *array = obj;
-        
-        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (self.arryData.count > 0) {
+        NSMutableArray *selectArray = [NSMutableArray array];
+        [self.arryData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
-            InvestmentCouponCouponlist *newObj = obj;
-            //判断投资界面带回来的值,在列表页面勾选
-            if (newObj.isCheck ) {
-                [selectArray addObject:newObj];
-            }
+            NSMutableArray *array = obj;
             
+            [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                InvestmentCouponCouponlist *newObj = obj;
+                //判断投资界面带回来的值,在列表页面勾选
+                if (newObj.isCheck ) {
+                    [selectArray addObject:newObj];
+                }
+                
+            }];
         }];
-    }];
-    self.db.cashSelectArr = [selectArray mutableCopy];
+        self.db.cashSelectArr = [selectArray mutableCopy];
+    }
 }
 - (BOOL)calculateTheSelectedAmount
 {

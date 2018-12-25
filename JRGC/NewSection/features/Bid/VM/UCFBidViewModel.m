@@ -151,11 +151,10 @@
     double calcTerm = self.model.data.calcTerm;
     double totalIntersate = 0;
     if ([type isEqualToString:@"PMT"]) {
-        double a = currentMoney*calcRate*(1+calcRate);
-        double value = pow(a, calcTerm);
+        double value =currentMoney * calcRate * pow((1+calcRate), calcTerm);
         double b = (1+calcRate);
-        double value1 = pow(b, calcTerm) - 1;
-        totalIntersate = value/value1 *calcTerm - currentMoney;
+        double value1 = (pow(b, calcTerm) - 1);
+        totalIntersate = (value/value1)*calcTerm  - currentMoney;
     } else {
         totalIntersate = currentMoney * calcRate * calcTerm;
         
