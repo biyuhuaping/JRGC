@@ -197,10 +197,12 @@
     uc.prdclaimid = prdclaimid;
     uc.investAmt = investAmt;
     uc.barSelectIndex = button.tag - 100;
+//    uc.barSelectIndex = 1;
     uc.cashSelectArr = [NSMutableArray arrayWithArray:self.cashArray];
     uc.couponSelectArr = [NSMutableArray arrayWithArray:self.couponArray];
     self.preMoney = investAmt;
     [self.navigationController pushViewController:uc animated:YES];
+    
     [self bindCoupleView:uc];
 }
 - (void)investFundsBoard:(UCFInvestFundsBoard *)board withRechargeButtonClick:(UIButton *)button
@@ -259,7 +261,7 @@
                 InvestmentCouponCouponlist *model = arr[0];
                 couponAmount = [model.couponAmount doubleValue];
                 totalInvestMultip = model.investMultip;
-                totalIDStr =  [NSString stringWithFormat:@"%ld",model.couponId];
+                totalIDStr =  [NSString stringWithFormat:@"%ld",(long)model.couponId];
                 weakSelf.viewModel.couponTotalcouponAmount = [NSString stringWithFormat:@"%.2f",totalInvestMultip];
                 weakSelf.viewModel.repayCoupon = [NSString stringWithFormat:@"%@",[self.viewModel getInvestGetBeansByCoupon:[NSString stringWithFormat:@"%.2f",couponAmount]]];
                 weakSelf.viewModel.couponIDStr = totalIDStr;

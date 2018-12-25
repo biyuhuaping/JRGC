@@ -38,16 +38,16 @@
 }
 - (void)request
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     if (![userId isEqualToString:@""] && userId != nil) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,
                                                           @"prdclaimid":self.db.prdclaimid,
                                                           @"investAmt":self.db.investAmt,
                                                           @"couponType":@"0"}//0：返现券  1：返息券
-                                                    tag:kSXTagInvestCouponTicktList owner:self signature:YES Type:SelectAccoutTypeP2P];
+                                                    tag:kSXTagInvestCashTicktList owner:self signature:YES Type:SelectAccoutTypeP2P];
         
     }
-    
 }
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
@@ -60,7 +60,9 @@
 
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    if ([tag intValue] == kSXTagInvestCouponTicktList)
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+    if ([tag intValue] == kSXTagInvestCashTicktList)
     {
         NSMutableDictionary *dic = [result objectFromJSONString];
         [self starCouponPopup:dic];

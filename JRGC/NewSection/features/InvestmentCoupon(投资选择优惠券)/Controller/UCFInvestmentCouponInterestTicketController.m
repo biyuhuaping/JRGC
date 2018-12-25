@@ -40,9 +40,16 @@
     [self.rootLayout addSubview:self.useEnterBtn];
     [self request];
     
+    
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
 }
 - (void)request
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     if (![userId isEqualToString:@""] && userId != nil) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,
@@ -54,10 +61,7 @@
     }
     
 }
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-    
-}
+
 -(void)beginPost:(kSXTag)tag
 {
     
@@ -65,6 +69,7 @@
 
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if ([tag intValue] == kSXTagInvestCouponTicktList)
     {
         NSMutableDictionary *dic = [result objectFromJSONString];

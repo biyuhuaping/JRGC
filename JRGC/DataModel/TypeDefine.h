@@ -607,6 +607,7 @@ enum kSXTag
     kSXTagRecommendPrdClaim,            //推荐表列表
     kSXTagShowCouponTips,            //新券过期券提示接口
     kSXTagInvestCouponTicktList,            //投资选择优惠券列表(新)
+    kSXTagInvestCashTicktList
 
 };
 

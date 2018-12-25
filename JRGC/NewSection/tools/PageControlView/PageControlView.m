@@ -76,7 +76,7 @@
         self.segmentScrollV.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.segmentScrollV];
         
-        //添加、取出ControllerView
+//        //添加、取出ControllerView
         [self initChildViewController];
     }
     

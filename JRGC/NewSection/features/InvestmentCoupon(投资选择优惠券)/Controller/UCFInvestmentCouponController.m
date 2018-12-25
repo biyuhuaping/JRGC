@@ -65,8 +65,12 @@
   
     [_pagerView.segmentView addSubview:rightbutton];
     
-    [_pagerView setSelectIndex:_barSelectIndex];
 
+    [self changeView];
+}
+- (void)changeView
+{
+    [_pagerView setSelectIndex:_barSelectIndex];
 }
 - (void)clickRightBtn
 {

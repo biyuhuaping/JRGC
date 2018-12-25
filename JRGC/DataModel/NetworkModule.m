@@ -1368,6 +1368,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagInvestCouponTicktList:
             parameter = [NEW_SERVER_IP stringByAppendingString:InvestCouponTicktList];
             break;
+        case kSXTagInvestCashTicktList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:InvestCouponTicktList];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

@@ -253,7 +253,7 @@
     if (holdTime.length > 0) {
         repayPeriodDay = holdTime;
     } else {
-        repayPeriodDay = self.model.data.prdClaim.repayPeriod;
+        repayPeriodDay = self.model.data.prdClaim.repayPeriodDay;
     }
     double liLv = [annleRate doubleValue]/100.0f;
     double qiXian = [repayPeriodDay doubleValue];
@@ -405,7 +405,7 @@
     }
 
     NSString *keTouJinE = [NSString stringWithFormat:@"%.2f",self.model.data.prdClaim.borrowAmount - self.model.data.prdClaim.completeLoan];
-    NSString *minInVestNum = [NSString stringWithFormat:@"%ld",self.model.data.prdClaim.minInvest];
+    NSString *minInVestNum = [NSString stringWithFormat:@"%ld",(long)self.model.data.prdClaim.minInvest];
     if([Common stringA:minInVestNum ComparedStringB:investMoney] == 1){
         NSString *messageStr = @"出借金额不可低于起投金额";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
@@ -608,15 +608,15 @@
 {
     NSString *showStr = @"";
     if (self.couponIDStr.length > 0 && self.cashTotalIDStr.length > 0) {
-        NSString *cashNum = [NSString stringWithFormat:@"%ld",self.cashSelectCount];
-        NSString *coupNum = [NSString stringWithFormat:@"%ld",self.couponSelectCount];
+        NSString *cashNum = [NSString stringWithFormat:@"%ld",(long)self.cashSelectCount];
+        NSString *coupNum = [NSString stringWithFormat:@"%ld",(long)self.couponSelectCount];
         showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?\n使用返现券%@张(共¥%@)、返息券%@张",[UCFToolsMehod AddComma:investMoney], cashNum,[UCFToolsMehod AddComma:self.repayCash], coupNum];
     } else if(self.couponIDStr.length > 0) {
-        NSString *coupNum = [NSString stringWithFormat:@"%ld",self.couponSelectCount];
+        NSString *coupNum = [NSString stringWithFormat:@"%ld",(long)self.couponSelectCount];
         showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?\n使用返息券%@张",[UCFToolsMehod AddComma:investMoney], coupNum];
         
     } else if(self.cashTotalIDStr.length > 0){
-        NSString *cashNum = [NSString stringWithFormat:@"%ld",self.cashSelectCount];
+        NSString *cashNum = [NSString stringWithFormat:@"%ld",(long)self.cashSelectCount];
         showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?\n使用返现券%@张(共¥%@)",[UCFToolsMehod AddComma:investMoney], cashNum,[UCFToolsMehod AddComma:self.repayCash]];
     } else {
         showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?",[UCFToolsMehod AddComma:investMoney]];
@@ -658,7 +658,7 @@
     [paramDict setValue:investAmt forKey:@"investAmount"];
     
     if (beansSwitch) {
-        [paramDict setValue:[NSString stringWithFormat:@"%ld",self.model.data.beanAmount] forKey:@"investBeans"];
+        [paramDict setValue:[NSString stringWithFormat:@"%ld",(long)self.model.data.beanAmount] forKey:@"investBeans"];
     }
     
     if (!self.isLimit) {

@@ -108,6 +108,8 @@
 
 @property (nonatomic, assign) NSInteger minInvest;
 
+@property (nonatomic, copy) NSString *repayPeriodDay;
+
 @end
 
 @interface ContractModel : BaseModel
