@@ -1043,6 +1043,25 @@
 		E3B26F481CA136F9002E87F4 /* DBColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B26F471CA136F9002E87F4 /* DBColor.m */; };
 		E3B57DB61DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B57DB41DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.m */; };
 		E3B57DB71DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B57DB51DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib */; };
+		E3B581B621D2159000DC7EAA /* MJLogoHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581A721D2158F00DC7EAA /* MJLogoHeader.m */; };
+		E3B581B721D2159000DC7EAA /* XTNetReloader.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581AB21D2158F00DC7EAA /* XTNetReloader.m */; };
+		E3B581B821D2159000DC7EAA /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581AC21D2158F00DC7EAA /* BaseTableView.m */; };
+		E3B581B921D2159000DC7EAA /* WeChatStylePlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581AE21D2159000DC7EAA /* WeChatStylePlaceHolder.m */; };
+		E3B581BA21D2159000DC7EAA /* UITableView+CYLTableViewPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581B221D2159000DC7EAA /* UITableView+CYLTableViewPlaceHolder.m */; };
+		E3B581DC21D22EFD00DC7EAA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E3B581C021D22EFD00DC7EAA /* README.md */; };
+		E3B581DD21D22EFD00DC7EAA /* PingFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581C121D22EFD00DC7EAA /* PingFoundation.m */; };
+		E3B581DE21D22EFD00DC7EAA /* PingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581C221D22EFD00DC7EAA /* PingHelper.m */; };
+		E3B581DF21D22EFD00DC7EAA /* LocalConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581C521D22EFD00DC7EAA /* LocalConnection.m */; };
+		E3B581E021D22EFD00DC7EAA /* NSObject+SimpleKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581C821D22EFD00DC7EAA /* NSObject+SimpleKVO.m */; };
+		E3B581E121D22EFD00DC7EAA /* ReachState.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581D121D22EFD00DC7EAA /* ReachState.m */; };
+		E3B581E221D22EFD00DC7EAA /* ReachStateUnloaded.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581D321D22EFD00DC7EAA /* ReachStateUnloaded.m */; };
+		E3B581E321D22EFD00DC7EAA /* ReachStateUnReachable.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581D421D22EFD00DC7EAA /* ReachStateUnReachable.m */; };
+		E3B581E421D22EFD00DC7EAA /* ReachStateWWAN.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581D521D22EFD00DC7EAA /* ReachStateWWAN.m */; };
+		E3B581E521D22EFD00DC7EAA /* ReachStateLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581D721D22EFD00DC7EAA /* ReachStateLoading.m */; };
+		E3B581E621D22EFD00DC7EAA /* FSMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581D821D22EFD00DC7EAA /* FSMEngine.m */; };
+		E3B581E721D22EFD00DC7EAA /* FSMStateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581D921D22EFD00DC7EAA /* FSMStateUtil.m */; };
+		E3B581E821D22EFD00DC7EAA /* ReachStateWIFI.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581DA21D22EFD00DC7EAA /* ReachStateWIFI.m */; };
+		E3B581E921D22EFD00DC7EAA /* RealReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B581DB21D22EFD00DC7EAA /* RealReachability.m */; };
 		E3C1179A1D40CFCC0053A052 /* UCFContributionValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C117921D40CFCC0053A052 /* UCFContributionValueCell.m */; };
 		E3C1179B1D40CFCC0053A052 /* UCFContributionValueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C117931D40CFCC0053A052 /* UCFContributionValueCell.xib */; };
 		E3C1179C1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C117951D40CFCC0053A052 /* UCFContributionValueTypeTowCell.m */; };
@@ -2912,6 +2931,46 @@
 		E3B57DB31DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCouponExchangeToFriendTableViewCell.h; sourceTree = "<group>"; };
 		E3B57DB41DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCouponExchangeToFriendTableViewCell.m; sourceTree = "<group>"; };
 		E3B57DB51DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCouponExchangeToFriendTableViewCell.xib; sourceTree = "<group>"; };
+		E3B581A721D2158F00DC7EAA /* MJLogoHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJLogoHeader.m; sourceTree = "<group>"; };
+		E3B581A821D2158F00DC7EAA /* MJLogoHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJLogoHeader.h; sourceTree = "<group>"; };
+		E3B581AA21D2158F00DC7EAA /* XTNetReloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTNetReloader.h; sourceTree = "<group>"; };
+		E3B581AB21D2158F00DC7EAA /* XTNetReloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTNetReloader.m; sourceTree = "<group>"; };
+		E3B581AC21D2158F00DC7EAA /* BaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableView.m; sourceTree = "<group>"; };
+		E3B581AE21D2159000DC7EAA /* WeChatStylePlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatStylePlaceHolder.m; sourceTree = "<group>"; };
+		E3B581AF21D2159000DC7EAA /* WeChatStylePlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatStylePlaceHolder.h; sourceTree = "<group>"; };
+		E3B581B021D2159000DC7EAA /* BaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableView.h; sourceTree = "<group>"; };
+		E3B581B221D2159000DC7EAA /* UITableView+CYLTableViewPlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CYLTableViewPlaceHolder.m"; sourceTree = "<group>"; };
+		E3B581B321D2159000DC7EAA /* CYLTableViewPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLTableViewPlaceHolder.h; sourceTree = "<group>"; };
+		E3B581B421D2159000DC7EAA /* CYLTableViewPlaceHolderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLTableViewPlaceHolderDelegate.h; sourceTree = "<group>"; };
+		E3B581B521D2159000DC7EAA /* UITableView+CYLTableViewPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CYLTableViewPlaceHolder.h"; sourceTree = "<group>"; };
+		E3B581BC21D22EFD00DC7EAA /* RealReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealReachability.h; sourceTree = "<group>"; };
+		E3B581BE21D22EFD00DC7EAA /* PingFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingFoundation.h; sourceTree = "<group>"; };
+		E3B581BF21D22EFD00DC7EAA /* PingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingHelper.h; sourceTree = "<group>"; };
+		E3B581C021D22EFD00DC7EAA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E3B581C121D22EFD00DC7EAA /* PingFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingFoundation.m; sourceTree = "<group>"; };
+		E3B581C221D22EFD00DC7EAA /* PingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingHelper.m; sourceTree = "<group>"; };
+		E3B581C421D22EFD00DC7EAA /* LocalConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalConnection.h; sourceTree = "<group>"; };
+		E3B581C521D22EFD00DC7EAA /* LocalConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalConnection.m; sourceTree = "<group>"; };
+		E3B581C721D22EFD00DC7EAA /* NSObject+SimpleKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SimpleKVO.h"; sourceTree = "<group>"; };
+		E3B581C821D22EFD00DC7EAA /* NSObject+SimpleKVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SimpleKVO.m"; sourceTree = "<group>"; };
+		E3B581CA21D22EFD00DC7EAA /* FSMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMDefines.h; sourceTree = "<group>"; };
+		E3B581CB21D22EFD00DC7EAA /* ReachStateUnReachable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateUnReachable.h; sourceTree = "<group>"; };
+		E3B581CC21D22EFD00DC7EAA /* ReachStateWWAN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateWWAN.h; sourceTree = "<group>"; };
+		E3B581CD21D22EFD00DC7EAA /* ReachStateUnloaded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateUnloaded.h; sourceTree = "<group>"; };
+		E3B581CE21D22EFD00DC7EAA /* FSMStateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMStateUtil.h; sourceTree = "<group>"; };
+		E3B581CF21D22EFD00DC7EAA /* FSMEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMEngine.h; sourceTree = "<group>"; };
+		E3B581D021D22EFD00DC7EAA /* ReachStateLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateLoading.h; sourceTree = "<group>"; };
+		E3B581D121D22EFD00DC7EAA /* ReachState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachState.m; sourceTree = "<group>"; };
+		E3B581D221D22EFD00DC7EAA /* ReachStateWIFI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateWIFI.h; sourceTree = "<group>"; };
+		E3B581D321D22EFD00DC7EAA /* ReachStateUnloaded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateUnloaded.m; sourceTree = "<group>"; };
+		E3B581D421D22EFD00DC7EAA /* ReachStateUnReachable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateUnReachable.m; sourceTree = "<group>"; };
+		E3B581D521D22EFD00DC7EAA /* ReachStateWWAN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateWWAN.m; sourceTree = "<group>"; };
+		E3B581D621D22EFD00DC7EAA /* ReachState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachState.h; sourceTree = "<group>"; };
+		E3B581D721D22EFD00DC7EAA /* ReachStateLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateLoading.m; sourceTree = "<group>"; };
+		E3B581D821D22EFD00DC7EAA /* FSMEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMEngine.m; sourceTree = "<group>"; };
+		E3B581D921D22EFD00DC7EAA /* FSMStateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMStateUtil.m; sourceTree = "<group>"; };
+		E3B581DA21D22EFD00DC7EAA /* ReachStateWIFI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateWIFI.m; sourceTree = "<group>"; };
+		E3B581DB21D22EFD00DC7EAA /* RealReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealReachability.m; sourceTree = "<group>"; };
 		E3C117911D40CFCC0053A052 /* UCFContributionValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFContributionValueCell.h; sourceTree = "<group>"; };
 		E3C117921D40CFCC0053A052 /* UCFContributionValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFContributionValueCell.m; sourceTree = "<group>"; };
 		E3C117931D40CFCC0053A052 /* UCFContributionValueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFContributionValueCell.xib; sourceTree = "<group>"; };
@@ -3394,6 +3453,7 @@
 			isa = PBXGroup;
 			children = (
 				333B8F7721D2086F009F7FCB /* YYText */,
+				E3B581BB21D22EFD00DC7EAA /* RealReachability */,
 				3336D24021C3A029001644E1 /* FBKVOController */,
 				E31BD51721C0C10100D3651F /* TYAlertController */,
 				E31BD50A21C0BFE000D3651F /* YYModel */,
@@ -6987,8 +7047,8 @@
 		E31BD50621C0BFD500D3651F /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
-				E31BD50721C0BFD500D3651F /* BaseModel.m */,
 				E31BD50821C0BFD500D3651F /* BaseModel.h */,
+				E31BD50721C0BFD500D3651F /* BaseModel.m */,
 			);
 			path = BaseModel;
 			sourceTree = "<group>";
@@ -7101,10 +7161,16 @@
 		E31BD53D21C0C71500D3651F /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				E3B581B021D2159000DC7EAA /* BaseTableView.h */,
+				E3B581AC21D2158F00DC7EAA /* BaseTableView.m */,
 				E31BD54121C0C71500D3651F /* BaseTableViewCell.h */,
 				E31BD53E21C0C71500D3651F /* BaseTableViewCell.m */,
 				E31BD53F21C0C71500D3651F /* CellConfig.m */,
 				E31BD54021C0C71500D3651F /* CellConfig.h */,
+				E3B581B121D2159000DC7EAA /* CYLTableViewPlaceHolder */,
+				E3B581A621D2158F00DC7EAA /* MJLogoHeader */,
+				E3B581AD21D2159000DC7EAA /* WeChatStyle */,
+				E3B581A921D2158F00DC7EAA /* XTNetReloader */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -7237,6 +7303,111 @@
 			);
 			name = "workpoints（工分）";
 			path = workpoints;
+			sourceTree = "<group>";
+		};
+		E3B581A621D2158F00DC7EAA /* MJLogoHeader */ = {
+			isa = PBXGroup;
+			children = (
+				E3B581A721D2158F00DC7EAA /* MJLogoHeader.m */,
+				E3B581A821D2158F00DC7EAA /* MJLogoHeader.h */,
+			);
+			path = MJLogoHeader;
+			sourceTree = "<group>";
+		};
+		E3B581A921D2158F00DC7EAA /* XTNetReloader */ = {
+			isa = PBXGroup;
+			children = (
+				E3B581AA21D2158F00DC7EAA /* XTNetReloader.h */,
+				E3B581AB21D2158F00DC7EAA /* XTNetReloader.m */,
+			);
+			path = XTNetReloader;
+			sourceTree = "<group>";
+		};
+		E3B581AD21D2159000DC7EAA /* WeChatStyle */ = {
+			isa = PBXGroup;
+			children = (
+				E3B581AE21D2159000DC7EAA /* WeChatStylePlaceHolder.m */,
+				E3B581AF21D2159000DC7EAA /* WeChatStylePlaceHolder.h */,
+			);
+			path = WeChatStyle;
+			sourceTree = "<group>";
+		};
+		E3B581B121D2159000DC7EAA /* CYLTableViewPlaceHolder */ = {
+			isa = PBXGroup;
+			children = (
+				E3B581B221D2159000DC7EAA /* UITableView+CYLTableViewPlaceHolder.m */,
+				E3B581B321D2159000DC7EAA /* CYLTableViewPlaceHolder.h */,
+				E3B581B421D2159000DC7EAA /* CYLTableViewPlaceHolderDelegate.h */,
+				E3B581B521D2159000DC7EAA /* UITableView+CYLTableViewPlaceHolder.h */,
+			);
+			path = CYLTableViewPlaceHolder;
+			sourceTree = "<group>";
+		};
+		E3B581BB21D22EFD00DC7EAA /* RealReachability */ = {
+			isa = PBXGroup;
+			children = (
+				E3B581BC21D22EFD00DC7EAA /* RealReachability.h */,
+				E3B581DB21D22EFD00DC7EAA /* RealReachability.m */,
+				E3B581BD21D22EFD00DC7EAA /* Ping */,
+				E3B581C321D22EFD00DC7EAA /* Connection */,
+				E3B581C621D22EFD00DC7EAA /* KVO */,
+				E3B581C921D22EFD00DC7EAA /* FSM */,
+			);
+			path = RealReachability;
+			sourceTree = "<group>";
+		};
+		E3B581BD21D22EFD00DC7EAA /* Ping */ = {
+			isa = PBXGroup;
+			children = (
+				E3B581BE21D22EFD00DC7EAA /* PingFoundation.h */,
+				E3B581BF21D22EFD00DC7EAA /* PingHelper.h */,
+				E3B581C021D22EFD00DC7EAA /* README.md */,
+				E3B581C121D22EFD00DC7EAA /* PingFoundation.m */,
+				E3B581C221D22EFD00DC7EAA /* PingHelper.m */,
+			);
+			path = Ping;
+			sourceTree = "<group>";
+		};
+		E3B581C321D22EFD00DC7EAA /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				E3B581C421D22EFD00DC7EAA /* LocalConnection.h */,
+				E3B581C521D22EFD00DC7EAA /* LocalConnection.m */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		E3B581C621D22EFD00DC7EAA /* KVO */ = {
+			isa = PBXGroup;
+			children = (
+				E3B581C721D22EFD00DC7EAA /* NSObject+SimpleKVO.h */,
+				E3B581C821D22EFD00DC7EAA /* NSObject+SimpleKVO.m */,
+			);
+			path = KVO;
+			sourceTree = "<group>";
+		};
+		E3B581C921D22EFD00DC7EAA /* FSM */ = {
+			isa = PBXGroup;
+			children = (
+				E3B581CA21D22EFD00DC7EAA /* FSMDefines.h */,
+				E3B581CB21D22EFD00DC7EAA /* ReachStateUnReachable.h */,
+				E3B581CC21D22EFD00DC7EAA /* ReachStateWWAN.h */,
+				E3B581CD21D22EFD00DC7EAA /* ReachStateUnloaded.h */,
+				E3B581CE21D22EFD00DC7EAA /* FSMStateUtil.h */,
+				E3B581CF21D22EFD00DC7EAA /* FSMEngine.h */,
+				E3B581D021D22EFD00DC7EAA /* ReachStateLoading.h */,
+				E3B581D121D22EFD00DC7EAA /* ReachState.m */,
+				E3B581D221D22EFD00DC7EAA /* ReachStateWIFI.h */,
+				E3B581D321D22EFD00DC7EAA /* ReachStateUnloaded.m */,
+				E3B581D421D22EFD00DC7EAA /* ReachStateUnReachable.m */,
+				E3B581D521D22EFD00DC7EAA /* ReachStateWWAN.m */,
+				E3B581D621D22EFD00DC7EAA /* ReachState.h */,
+				E3B581D721D22EFD00DC7EAA /* ReachStateLoading.m */,
+				E3B581D821D22EFD00DC7EAA /* FSMEngine.m */,
+				E3B581D921D22EFD00DC7EAA /* FSMStateUtil.m */,
+				E3B581DA21D22EFD00DC7EAA /* ReachStateWIFI.m */,
+			);
+			path = FSM;
 			sourceTree = "<group>";
 		};
 		E3C117A01D40D0520053A052 /* UCFWebView */ = {
@@ -7821,6 +7992,7 @@
 				83FD5FFD1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.xib in Resources */,
 				74EAF5B61B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib in Resources */,
 				4A2484B421A3AD37001B0703 /* UCFQuickRechargeViewController.xib in Resources */,
+				E3B581DC21D22EFD00DC7EAA /* README.md in Resources */,
 				833CC9FA1FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.xib in Resources */,
 				744EB7FE1EE7E871003C57C4 /* UCFInvestTransferViewController.xib in Resources */,
 				744EB7EF1EE7DD15003C57C4 /* UCFInvestViewController.xib in Resources */,
@@ -8100,6 +8272,7 @@
 				74270C9D1EC58F6800F9419B /* UCFHomeListCell.m in Sources */,
 				E31BD54821C0C91400D3651F /* BaseView.m in Sources */,
 				74270CA41EC58F6800F9419B /* UCFSignView.m in Sources */,
+				E3B581B921D2159000DC7EAA /* WeChatStylePlaceHolder.m in Sources */,
 				E31BD59E21C112C200D3651F /* UCFCouponPopupCell.m in Sources */,
 				339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */,
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
@@ -8111,6 +8284,7 @@
 				7404CA041FB4502E002811E0 /* UCFExtractGoldItemModel.m in Sources */,
 				E33223CF21CA2BEE0062FE23 /* UCFInvestmentCouponCashTicketController.m in Sources */,
 				3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */,
+				E3B581E521D22EFD00DC7EAA /* ReachStateLoading.m in Sources */,
 				330DF7AA21C9F44C009553A4 /* UCFContractTypleModel.m in Sources */,
 				4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */,
 				330611BD212ABAAB00955BD6 /* UCFLanchViewController.m in Sources */,
@@ -8125,6 +8299,7 @@
 				83C3E7E21F346188007BE065 /* UCFGoldCouponViewController.m in Sources */,
 				7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */,
 				A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */,
+				E3B581DF21D22EFD00DC7EAA /* LocalConnection.m in Sources */,
 				743B275F1F3D8B070098DC1B /* UCFGoldBankModel.m in Sources */,
 				EDEC8C021CB3BAB300815228 /* NSMutableString+TagReplace.m in Sources */,
 				743B27621F3D9BD40098DC1B /* UCFGoldLimitedBankModel.m in Sources */,
@@ -8175,6 +8350,7 @@
 				74877CD71FB2AC3900F32428 /* UCFCompleteViewController.m in Sources */,
 				7BCE020B1AC8FDEF0084C15C /* PostRequest.m in Sources */,
 				333B8FB221D20871009F7FCB /* YYTextLine.m in Sources */,
+				E3B581E421D22EFD00DC7EAA /* ReachStateWWAN.m in Sources */,
 				83AB49691F6A772400C4231F /* UCFTotalRevenuePieChartViewController.m in Sources */,
 				FBB6858B1AE4A76800F222B6 /* UIView+MJExtension.m in Sources */,
 				74270C9B1EC58F6800F9419B /* UCFHomeViewController.m in Sources */,
@@ -8244,6 +8420,7 @@
 				83FB3F621E5C68150094C9BA /* UCFCollctionKeyBidViewController.m in Sources */,
 				74270D501EC59FF100F9419B /* UCFInvitationRewardHeaderView.m in Sources */,
 				4A2484B321A3AD37001B0703 /* UCFQuickRechargeViewController.m in Sources */,
+				E3B581E821D22EFD00DC7EAA /* ReachStateWIFI.m in Sources */,
 				4ADA3A301B0DBBEF000B29FD /* CoupleHeadCell.m in Sources */,
 				748D935E1E641FF500E229A7 /* UCFLabel.m in Sources */,
 				74E535F01AE5FD7300DAABFC /* UCFFAQViewController.m in Sources */,
@@ -8320,6 +8497,7 @@
 				A8C34F331F2737BA00926B7F /* RotationButton.m in Sources */,
 				4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */,
 				4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */,
+				E3B581BA21D2159000DC7EAA /* UITableView+CYLTableViewPlaceHolder.m in Sources */,
 				74270D301EC595FA00F9419B /* UCFDataStatisticsViewController.m in Sources */,
 				74AFB1481EE93B8D007DBAFC /* UCFMicroMoneyModel.m in Sources */,
 				33E1A5E020FDC5A9008244BD /* UCFOpenRedBagButton.m in Sources */,
@@ -8339,6 +8517,7 @@
 				838EDD6B1F6B7244008E60EC /* CustomShapeLayer.m in Sources */,
 				83881D2F1FB589E0004CB2AF /* UCFDrawGoldHeaderView.m in Sources */,
 				7BCBF1201ADB611600C874FC /* UCFRegisterStepOneViewController.m in Sources */,
+				E3B581E221D22EFD00DC7EAA /* ReachStateUnloaded.m in Sources */,
 				74BDA9601F09EE3B0054403F /* UCFCalendarViewController.m in Sources */,
 				835B88891E8222CC00C8F0AB /* UCFP2POrHornerTabHeaderView.m in Sources */,
 				E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */,
@@ -8397,6 +8576,7 @@
 				833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */,
 				83382C1A1FD52EFD001BBF90 /* UCFAssetProofListModel.m in Sources */,
 				E37FC7E921C241470019C01D /* UCFCouponPopup.m in Sources */,
+				E3B581E121D22EFD00DC7EAA /* ReachState.m in Sources */,
 				83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */,
 				FB7EDE3E1D6BFCD700C3E924 /* AppDelegate.mm in Sources */,
 				7443C7371F1F3E64009669C0 /* UCFGoldRechargeRecordCell.m in Sources */,
@@ -8479,7 +8659,9 @@
 				749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */,
 				74673BC01FEB8C1400AF3727 /* UCFMineFuncView.m in Sources */,
 				E31BD53A21C0C10100D3651F /* TYShowAlertView.m in Sources */,
+				E3B581E021D22EFD00DC7EAA /* NSObject+SimpleKVO.m in Sources */,
 				E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */,
+				E3B581B821D2159000DC7EAA /* BaseTableView.m in Sources */,
 				33813A6021BFB5D6004666E5 /* MyBorderline.m in Sources */,
 				7BC304851ACBC22D007767F1 /* UIImage+Translation.m in Sources */,
 				7BCBF1231ADB613C00C874FC /* UCFRegisterStepTwoViewController.m in Sources */,
@@ -8545,6 +8727,7 @@
 				747B103B1F15F82200CECB2C /* UCFGoldenHeaderView.m in Sources */,
 				744BE8521F6BBCA200107FAA /* UCFHomeIconModel.m in Sources */,
 				74270D431EC5960100F9419B /* UCFDataStaticsModel.m in Sources */,
+				E3B581B721D2159000DC7EAA /* XTNetReloader.m in Sources */,
 				7BD180231B0EC7D30003A953 /* UCFNoDataView.m in Sources */,
 				83CD843F1F13A50800227704 /* UCFProjectListCell.m in Sources */,
 				749140BA1F18D1EA00E624CE /* UCFGoldCashMoneyViewController.m in Sources */,
@@ -8613,6 +8796,7 @@
 				7BCA210E1AEDCE67001CD258 /* InvestmentDetailTableViewCell.m in Sources */,
 				FB572C0C1C7C3000000031F1 /* UCFCouponInterest.m in Sources */,
 				EDEC8BFC1CB3BA6300815228 /* WPTappableLabel.m in Sources */,
+				E3B581DD21D22EFD00DC7EAA /* PingFoundation.m in Sources */,
 				7BCE01FC1AC8FC260084C15C /* ASINetworkQueue.m in Sources */,
 				E32B8F4E1E85188D00B7871F /* UCFRegisterFinshViewController.m in Sources */,
 				7BA6E4BE1AD6731900FE8C37 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -8622,6 +8806,7 @@
 				746FFE251B0059BB00FF927F /* UCFBindCardOneTableViewCell.m in Sources */,
 				83880A8320F753F800E3B888 /* UCFHonerCahTipAlterView.m in Sources */,
 				E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */,
+				E3B581E321D22EFD00DC7EAA /* ReachStateUnReachable.m in Sources */,
 				832C3C111F443AD200ECAA4A /* UCFGoldCouponReturn.m in Sources */,
 				83D64F631F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.m in Sources */,
 				748ED7A51CC74F3200690215 /* SettingMainButton.m in Sources */,
@@ -8738,6 +8923,7 @@
 				832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */,
 				747A91211B01B11100FE2334 /* UCFConstractModel.m in Sources */,
 				4A0558DE1BFCA2A20021DF59 /* ToolSingleTon.m in Sources */,
+				E3B581B621D2159000DC7EAA /* MJLogoHeader.m in Sources */,
 				7BD35A971AD61E4200389D6B /* LLLockIndicator.m in Sources */,
 				4AEA750A1B03764D00B03A46 /* UCFPurchaseTranBidViewController.m in Sources */,
 				E3F340F121CB99AE00759CF8 /* UCFSelectionCouponsCell.m in Sources */,
@@ -8753,12 +8939,14 @@
 				FB21732F1AF2362800649AA0 /* UCFBackMoneyModel.m in Sources */,
 				4A42BB321C27AC7B0084AB08 /* NewCalculator.m in Sources */,
 				74EB80EC1AE4FCC40071621E /* SecurityCell.m in Sources */,
+				E3B581DE21D22EFD00DC7EAA /* PingHelper.m in Sources */,
 				74931A311B1326FE00143424 /* OHAttributedLabel.m in Sources */,
 				74DBAC741D585FFD00F6F6B1 /* UCFTipButton.m in Sources */,
 				25CCDA9C1DDAE28C002C0F6D /* UCFLatesProjectTableViewCell.m in Sources */,
 				4A2484B821A3AD85001B0703 /* UCFTransRechargeViewController.m in Sources */,
 				74270CA21EC58F6800F9419B /* UCFHomeUserInfoCell.m in Sources */,
 				333B8FB021D20871009F7FCB /* YYTextInput.m in Sources */,
+				E3B581E721D22EFD00DC7EAA /* FSMStateUtil.m in Sources */,
 				83CD72A61FB451B5007138ED /* UCFExtractViewCell.m in Sources */,
 				74270D1B1EC595ED00F9419B /* UCFFriendRecCell1.m in Sources */,
 				74A2C0D41F4306A000EDF0FA /* UCFGoldCashFourthCell.m in Sources */,
@@ -8783,6 +8971,7 @@
 				747AAEBB1AEF89F6007A518F /* FundsDetailModel.m in Sources */,
 				7443C7231F1EFF45009669C0 /* UCFGoldCashOneCell.m in Sources */,
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
+				E3B581E621D22EFD00DC7EAA /* FSMEngine.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
 				4AC947D71E5598F600354CF8 /* BatchSetView.m in Sources */,
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
@@ -8813,6 +9002,7 @@
 				330DF7AD21CA2C60009553A4 /* UCFFundsInvestButton.m in Sources */,
 				333B8FAD21D20871009F7FCB /* YYTextMagnifier.m in Sources */,
 				4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */,
+				E3B581E921D22EFD00DC7EAA /* RealReachability.m in Sources */,
 				FB120BB51ADE462F00023365 /* CircleShapeLayer.m in Sources */,
 				7BA6E4C71AD6731900FE8C37 /* UIView+WebCacheOperation.m in Sources */,
 				74931A141B1326B400143424 /* pinyin.c in Sources */,

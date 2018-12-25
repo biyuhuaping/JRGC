@@ -38,6 +38,12 @@
 //        self.timer = [NSTimer scheduledTimerWithTimeInterval:5 * 60 target:self selector:@selector(getGoldPrice) userInfo:nil repeats:YES];
 //
 //        [_timer setFireDate:[NSDate distantPast]];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(networkChanged:)
+                                                     name:kRealReachabilityChangedNotification
+                                                   object:nil];
+        self.netWorkStatus  = [GLobalRealReachability currentReachabilityStatus];
     }
     return self;
 }
@@ -341,5 +347,11 @@
     [self.background removeFromSuperview];
     self.background = nil;
 }
-
+- (void)networkChanged:(NSNotification *)notification
+{
+    RealReachability *reachability = (RealReachability *)notification.object;
+    ReachabilityStatus status = [reachability currentReachabilityStatus];
+    self.netWorkStatus = status;
+    DBLOG(@"currentStatus:%@",@(status));
+}
 @end

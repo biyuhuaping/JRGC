@@ -11,12 +11,12 @@
 #import "UCFSelectionCouponsCell.h"
 #import "UCFInvestmentCouponModel.h"
 #import "UCFInvestmentCouponController.h"
-
-@interface UCFInvestmentCouponInterestTicketController ()<UITableViewDelegate, UITableViewDataSource>
+#import "BaseTableView.h"
+@interface UCFInvestmentCouponInterestTicketController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) BaseTableView *tableView;
 
 @property (nonatomic, strong) BaseBottomButtonView *useEnterBtn;//确认使用
 
@@ -76,6 +76,11 @@
         [self starCouponPopup:dic];
     }
 }
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    [self.tableView endRefresh];
+    [self.tableView cyl_reloadData];
+}
 -(void)starCouponPopup:(NSDictionary *)dic
 {
     UCFInvestmentCouponModel *model = [ModelTransition TransitionModelClassName:[UCFInvestmentCouponModel class] dataGenre:dic];
@@ -109,20 +114,23 @@
     
     [self.arryData addObject:overdueArray];
     [self.arryData addObject:noOverdueArray];
-    [self.tableView reloadData];
+    [self.tableView endRefresh];
+    [self.tableView cyl_reloadData];
 }
-- (UITableView *)tableView
+- (BaseTableView *)tableView
 {
     if (nil == _tableView) {
-        _tableView = [[UITableView alloc]init];
+        _tableView = [[BaseTableView alloc]init];
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.delegate = self;
         _tableView.dataSource =self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableRefreshDelegate= self;
+        _tableView.enableRefreshFooter = NO;
         _tableView.topPos.equalTo(@0);
         _tableView.leftPos.equalTo(@0);
         _tableView.rightPos.equalTo(@0);
-        _tableView.bottomPos.equalTo(self.useEnterBtn.topPos);
+        _tableView.bottomPos.equalTo(@0);
         
     }
     return _tableView;
