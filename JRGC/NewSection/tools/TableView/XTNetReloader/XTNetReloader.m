@@ -113,7 +113,7 @@ float const fontSize_bt              = 15.0 ;
 
 - (UIImageView *)nowifiImgView {
     if (!_nowifiImgView) {
-        _nowifiImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"default_no_wifi"]] ;
+        _nowifiImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"default_icon"]] ;
         _nowifiImgView.contentMode = UIViewContentModeScaleAspectFit ;
         if (![_nowifiImgView superview]) {
             [self addSubview:_nowifiImgView] ;
@@ -128,7 +128,7 @@ float const fontSize_bt              = 15.0 ;
         _lb.text = @"暂无网络";//NO_WIFI_WORDS
         _lb.font = [UIFont boldSystemFontOfSize:fontSize_labelshow] ;
         _lb.textAlignment = NSTextAlignmentCenter ;
-//        _lb.textColor = [Color color:9];
+        _lb.textColor = UIColorWithRGB(0x8591b3);
         if (![_lb superview]) {
             [self addSubview:_lb] ;
         }
