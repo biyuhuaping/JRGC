@@ -75,10 +75,10 @@
 }
 
 
-- (YYLabel *)couponAmounLabel
+- (UILabel *)couponAmounLabel
 {
     if (nil == _couponAmounLabel) {
-        _couponAmounLabel = [YYLabel new];
+        _couponAmounLabel = [UILabel new];
         _couponAmounLabel.topPos.equalTo(@5);
         _couponAmounLabel.leftPos.equalTo(@10);
         _couponAmounLabel.textAlignment = NSTextAlignmentLeft;
@@ -107,10 +107,10 @@
 }
 
 
-- (YYLabel *)remarkLabel
+- (UILabel *)remarkLabel
 {
     if (nil == _remarkLabel) {
-        _remarkLabel = [YYLabel new];
+        _remarkLabel = [UILabel new];
         _remarkLabel.bottomPos.equalTo(@5);
         _remarkLabel.leftPos.equalTo(self.couponAmounLabel.leftPos);
         _remarkLabel.textAlignment = NSTextAlignmentLeft;
@@ -120,10 +120,10 @@
     }
     return _remarkLabel;
 }
-- (YYLabel *)overdueTimeLabel
+- (UILabel *)overdueTimeLabel
 {
     if (nil == _overdueTimeLabel) {
-        _overdueTimeLabel = [YYLabel new];
+        _overdueTimeLabel = [UILabel new];
         _overdueTimeLabel.centerYPos.equalTo(self.remarkLabel.centerYPos);
         _overdueTimeLabel.rightPos.equalTo(@10);
         _overdueTimeLabel.leftPos.equalTo(self.remarkLabel.rightPos);
@@ -167,32 +167,32 @@
 }
 
 //@property (nonatomic, strong) YYLabel     *inverstPeriodLabel;//投资期限
-- (YYLabel *)investMultipLabel
+- (UILabel *)investMultipLabel
 {
     if (nil == _investMultipLabel) {
-        _investMultipLabel = [YYLabel new];
+        _investMultipLabel = [UILabel new];
         _investMultipLabel.centerYPos.equalTo(@0);
         _investMultipLabel.leftPos.equalTo(@10);
 //        _investMultipLabel.myLeft = 10;
         _investMultipLabel.myHeight = 20;
 //        _investMultipLabel.myTop = 0;
-//        _investMultipLabel.textAlignment = NSTextAlignmentLeft;
+        _investMultipLabel.textAlignment = NSTextAlignmentLeft;
         _investMultipLabel.font = [UIFont systemFontOfSize:10.0];
         _investMultipLabel.textColor = UIColorWithRGB(0x999999);
         //        [_titleLabel sizeToFit];
     }
     return _investMultipLabel;
 }
-- (YYLabel *)inverstPeriodLabel
+- (UILabel *)inverstPeriodLabel
 {
     if (nil == _inverstPeriodLabel) {
-        _inverstPeriodLabel = [YYLabel new];
+        _inverstPeriodLabel = [UILabel new];
         _inverstPeriodLabel.centerYPos.equalTo(@0);
         _inverstPeriodLabel.rightPos.equalTo(@10);
         _inverstPeriodLabel.myHeight = 20;
 //        _inverstPeriodLabel.myTop = 0;
 //        _inverstPeriodLabel.myLeft = 10;
-//        _inverstPeriodLabel.textAlignment = NSTextAlignmentRight;
+        _inverstPeriodLabel.textAlignment = NSTextAlignmentRight;
         _inverstPeriodLabel.font = [UIFont systemFontOfSize:10.0];
         _inverstPeriodLabel.textColor = UIColorWithRGB(0x999999);
 //        [_inverstPeriodLabel sizeToFit];
@@ -205,14 +205,16 @@
     [super refreshCellData:data];
     UCFCouponPopupCouponlist *cpData = data;
     
+    NSString *couponAmount = cpData.couponAmount;
     if ([cpData.couponType isEqualToString:@"0"]) {
 //        0返现券 1返息券
        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0x70CBF4);
+        self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",couponAmount];
     }else{
        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
+        self.couponAmounLabel.text = [NSString stringWithFormat:@"%@%%",couponAmount];
     }
     
-    self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",cpData.couponAmount];
     [self.couponAmounLabel sizeToFit];
     self.remarkLabel.text = cpData.remark;
     [self.remarkLabel sizeToFit];
@@ -222,9 +224,9 @@
     }
     self.overdueTimeLabel.text = string;//截取掉下标5之前的字符串
     [self.overdueTimeLabel sizeToFit];
-    self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额≥%@元可用",@"20"] ;
+    self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额≥%ld元可用",(long)cpData.investMultip] ;
     [self.investMultipLabel sizeToFit];
-    self.inverstPeriodLabel.text = [NSString stringWithFormat:@"投资期限≥%@天可用",@"30"];
+    self.inverstPeriodLabel.text = [NSString stringWithFormat:@"投资期限≥%ld天可用",(long)cpData.inverstPeriod];
     [self.inverstPeriodLabel sizeToFit];
     
 }
