@@ -38,7 +38,7 @@
     
     [self.rootLayout addSubview:self.tableView];
     [self.rootLayout addSubview:self.useEnterBtn];
-    [self request];
+    [self.tableView beginRefresh];
     
     
 }
@@ -61,7 +61,11 @@
     }
     
 }
-
+- (void)refreshTableViewHeader{
+    
+    [self request];
+    
+}
 -(void)beginPost:(kSXTag)tag
 {
     
@@ -75,6 +79,8 @@
         NSMutableDictionary *dic = [result objectFromJSONString];
         [self starCouponPopup:dic];
     }
+    [self.tableView endRefresh];
+    [self.tableView cyl_reloadData];
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
@@ -114,9 +120,8 @@
     
     [self.arryData addObject:overdueArray];
     [self.arryData addObject:noOverdueArray];
-    [self.tableView endRefresh];
-    [self.tableView cyl_reloadData];
 }
+
 - (BaseTableView *)tableView
 {
     if (nil == _tableView) {
@@ -216,6 +221,10 @@
     
     if (indexPath.section == 1) {
         [self alertUnableToUseCoupons];
+    }
+    else{
+        UCFSelectionCouponsCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        [self checkButtonClick: cell.selectCouponsBtn];
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
