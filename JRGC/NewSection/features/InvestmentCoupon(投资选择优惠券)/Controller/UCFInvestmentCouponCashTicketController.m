@@ -13,11 +13,15 @@
 #import "UCFInvestmentCouponController.h"
 #import "BaseTableView.h"
 #import "UCFNoDataView.h"
+#import "UCFInvestmentCouponInstructionsView.h"
+
 @interface UCFInvestmentCouponCashTicketController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
 @property (nonatomic, strong) BaseTableView *tableView;
+
+@property (nonatomic, strong) UCFInvestmentCouponInstructionsView *instructionsView;//说明
 
 @property (nonatomic, strong) BaseBottomButtonView *useEnterBtn;//确认使用
 
@@ -36,6 +40,7 @@
     self.view = self.rootLayout;
 
     [self.rootLayout addSubview:self.tableView];
+    [self.rootLayout addSubview:self.instructionsView];
     [self.rootLayout addSubview:self.useEnterBtn];
     [self.tableView beginRefresh];
 }
@@ -115,6 +120,7 @@
     [self.arryData addObject:noOverdueArray];
     
 }
+
 - (BaseTableView *)tableView
 {
     if (nil == _tableView) {
@@ -128,12 +134,22 @@
         _tableView.topPos.equalTo(@0);
         _tableView.leftPos.equalTo(@0);
         _tableView.rightPos.equalTo(@0);
-        _tableView.bottomPos.equalTo(self.useEnterBtn.topPos);
+        _tableView.bottomPos.equalTo(self.instructionsView.topPos);
         
     }
     return _tableView;
 }
-
+- (UCFInvestmentCouponInstructionsView *)instructionsView
+{
+    if (nil == _instructionsView) {
+        _instructionsView= [[UCFInvestmentCouponInstructionsView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 37)];
+        _instructionsView.bottomPos.equalTo(self.useEnterBtn.topPos);
+        _instructionsView.widthSize.equalTo(self.rootLayout.widthSize);
+        _instructionsView.heightSize.equalTo(@37);
+        _instructionsView.leftPos.equalTo(self.rootLayout.leftPos);
+    }
+    return _instructionsView;
+}
 - (BaseBottomButtonView *)useEnterBtn
 {
     if (nil == _useEnterBtn) {
