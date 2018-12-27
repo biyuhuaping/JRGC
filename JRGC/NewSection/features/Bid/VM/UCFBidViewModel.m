@@ -106,18 +106,35 @@
     self.myFundsNum  = [NSString stringWithFormat:@"¥%@",availableFundsStr];
   
     NSString *gondDouBalancStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2f",self.model.data.beanAmount/100.0f]];
-    
-    self.myBeansNum = [NSString stringWithFormat:@"¥%@",gondDouBalancStr];
-    
-    NSString *totalMoney =[UCFToolsMehod AddComma: [NSString stringWithFormat:@"%.2f",self.model.data.accountAmount + self.model.data.beanAmount/100.0f]];
+    NSString *totalMoney = @"";
+    if (self.model.data.isCompanyAgent) {
+        self.isCompanyAgent =  YES;
+        self.myBeansNum = [NSString stringWithFormat:@"¥0.00"];
+        totalMoney = [UCFToolsMehod AddComma: [NSString stringWithFormat:@"%.2f",self.model.data.accountAmount]];
+    } else {
+        self.isCompanyAgent =  NO;
+        if ([UserInfoSingle sharedManager].isShowCouple) {
+            if (self.model.data.isCompanyAgent) {
+                self.myBeansNum = [NSString stringWithFormat:@"¥0.00"];
+                totalMoney = [UCFToolsMehod AddComma: [NSString stringWithFormat:@"%.2f",self.model.data.accountAmount]];
+            } else {
+                self.myBeansNum = [NSString stringWithFormat:@"¥%@",gondDouBalancStr];
+                totalMoney = [UCFToolsMehod AddComma: [NSString stringWithFormat:@"%.2f",self.model.data.accountAmount + self.model.data.beanAmount/100.0f]];
+            }
+        } else {
+            self.myBeansNum = [NSString stringWithFormat:@"¥0.00"];
+            totalMoney = [UCFToolsMehod AddComma: [NSString stringWithFormat:@"%.2f",self.model.data.accountAmount]];
+        }
+    }
+
     self.totalFunds = [NSString stringWithFormat:@"¥%@",totalMoney];
-    
     NSString *palceText = [NSString stringWithFormat:@"%ld元起投",(long)self.model.data.prdClaim.minInvest];
     if ([self.model.data.prdClaim.maxInvest length] != 0) {
         palceText = [palceText stringByAppendingString:[NSString stringWithFormat:@",限投%@元",self.model.data.prdClaim.maxInvest]];
     }
     self.inputViewPlaceStr = palceText;
 
+    
 }
 
 /**
@@ -468,6 +485,11 @@
     
     BOOL isHaveCashNum = [self.cashNum integerValue] > 0 ? YES : NO;
     BOOL isHaveCouponNum = [self.couponNum integerValue] > 0 ? YES : NO;
+    if (![UserInfoSingle sharedManager].isShowCouple) {
+        isHaveCashNum = NO;
+        isHaveCouponNum = NO;
+    }
+    
     //有返息券 和 返现券 可用
     if (isHaveCashNum && isHaveCouponNum) {
         
@@ -686,6 +708,10 @@
     if (buttonIndex == 0) {
         [_rootController reflectAlertView:alertView clickedButtonAtIndex:buttonIndex];
     } else if (buttonIndex == 1) {
+        if (alertView.tag == 2000) {
+            [_rootController reflectAlertView:alertView clickedButtonAtIndex:buttonIndex];
+        }
+        
         if (alertView.tag == 3000) {
             [self getNormalBidNetData];
         }

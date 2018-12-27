@@ -45,7 +45,7 @@
 @implementation NewPurchaseBidController
 
 - (void)loadView
-{
+{    
     self.edgesForExtendedLayout = UIRectEdgeNone;  //设置视图控制器中的视图尺寸不延伸到导航条或者工具条下面。您可以注释这句代码看看效果。
 
     MyRelativeLayout *rootLayout = [MyRelativeLayout new];
@@ -104,13 +104,16 @@
     [fundsBoard addSubSectionViews];
     self.fundsBoardView = fundsBoard;
     
-    UCFCouponBoard *couponBoard = [UCFCouponBoard linearLayoutWithOrientation:MyOrientation_Vert];
-    couponBoard.myHorzMargin = 0;
-    couponBoard.myTop = 10;
-    couponBoard.delegate = self;
-    [self.contentLayout addSubview:couponBoard];
-    [couponBoard addSubSectionViews];
-    self.couponBoard = couponBoard;
+    if ([UserInfoSingle sharedManager].isShowCouple) {
+        UCFCouponBoard *couponBoard = [UCFCouponBoard linearLayoutWithOrientation:MyOrientation_Vert];
+        couponBoard.myHorzMargin = 0;
+        couponBoard.myTop = 10;
+        couponBoard.delegate = self;
+        [self.contentLayout addSubview:couponBoard];
+        [couponBoard addSubSectionViews];
+        self.couponBoard = couponBoard;
+    }
+
     
     UCFRecommendView *recommendView = [UCFRecommendView linearLayoutWithOrientation:MyOrientation_Vert];
     recommendView.myHorzMargin = 0;
@@ -158,7 +161,9 @@
     
     [self.fundsBoardView showView:vm];
     
-    [self.couponBoard showView:vm];
+    if ([UserInfoSingle sharedManager].isShowCouple) {
+        [self.couponBoard showView:vm];
+    }
     
     [self.recommendView showView:vm];
     
@@ -228,9 +233,9 @@
                     totalInvestMultip += model.investMultip;
                     totalcouponAmount += [model.couponAmount doubleValue];
                     if (i == arr.count - 1) {
-                        totalIDStr = [totalIDStr stringByAppendingString:@"%@"];
+                        totalIDStr = [totalIDStr stringByAppendingString:[NSString stringWithFormat:@"%ld",model.couponId]];
                     } else {
-                        totalIDStr = [totalIDStr stringByAppendingString:@"%@,"];
+                        totalIDStr = [totalIDStr stringByAppendingString:[NSString stringWithFormat:@"%ld,",model.couponId]];
                     }
                 }
                 weakSelf.viewModel.cashSelectCount = arr.count;

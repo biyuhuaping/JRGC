@@ -99,7 +99,9 @@
 }
 - (void)homeCouponPopup
 {
-    [self.ucfCp request];
+    if ([UserInfoSingle sharedManager].isShowCouple) {
+        [self.ucfCp request];
+    }
 }
 - (void)refresh {
     [self.cycleImageVC getNormalBannerData];
