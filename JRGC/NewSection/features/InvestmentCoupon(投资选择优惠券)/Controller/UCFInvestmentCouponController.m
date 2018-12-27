@@ -35,7 +35,7 @@
     [titleArray addObject:@"返息券"];
     
     CGRect stateFrame = [[UIApplication sharedApplication] statusBarFrame];
-    _pagerView = [[PageControlView alloc] initWithFrame:CGRectMake(0,stateFrame.size.height,ScreenWidth,ScreenHeight)
+    _pagerView = [[PageControlView alloc] initWithFrame:CGRectMake(0,stateFrame.size.height,ScreenWidth,ScreenHeight - stateFrame.size.height)
                                 SegmentViewHeight:44
                                        titleArray:titleArray
                                        Controller:self

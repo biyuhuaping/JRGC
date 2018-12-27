@@ -226,6 +226,7 @@
     }
     
     [cell refreshCellData:[self.arryData.data.couponList objectAtIndex:indexPath.row]];
+    [cell.immediateUseBtn addTarget:self action:@selector(immediateUseBtnClick) forControlEvents:UIControlEventTouchUpInside];
 
     return cell;
 }
@@ -291,14 +292,7 @@
 }
 - (void)queryMore
 {
-//    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
-//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:coupon];
-//    [delegate.tabBarController presentViewController:nav animated:YES completion:^{
-//        [self hideInWindow];
-//    }];
-    
-    
+    //切换到优惠券页面
     [UIView animateWithDuration:0.2
                           delay:0.2
          usingSpringWithDamping:.5
@@ -308,7 +302,25 @@
                          [self hideInWindow];
                      } completion:^(BOOL finished) {
                          AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                         UINavigationController *nav = [delegate.tabBarController.viewControllers objectAtIndex:4];
+                         UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+                         [nav pushViewController:coupon animated:NO];
                          [delegate.tabBarController setSelectedIndex:4];
+                     }];
+}
+- (void)immediateUseBtnClick
+{
+    //切换到投资列表页面
+    [UIView animateWithDuration:0.2
+                          delay:0.2
+         usingSpringWithDamping:.5
+          initialSpringVelocity:.5
+                        options:UIViewAnimationOptionRepeat
+                     animations:^{
+                         [self hideInWindow];
+                     } completion:^(BOOL finished) {
+                         AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                         [delegate.tabBarController setSelectedIndex:1];
                      }];
 }
 

@@ -136,7 +136,7 @@
     if (nil == _useEnterBtn) {
         _useEnterBtn= [[BaseBottomButtonView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 57)];
         [_useEnterBtn.enterButton addTarget:self action:@selector(useEnterBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        _useEnterBtn.bottomPos.equalTo(@57);
+        _useEnterBtn.bottomPos.equalTo(@0);
         _useEnterBtn.widthSize.equalTo(self.rootLayout.widthSize);
         _useEnterBtn.heightSize.equalTo(@57);
         _useEnterBtn.leftPos.equalTo(self.rootLayout.leftPos);
