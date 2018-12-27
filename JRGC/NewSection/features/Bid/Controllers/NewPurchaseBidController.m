@@ -233,9 +233,9 @@
                     totalInvestMultip += model.investMultip;
                     totalcouponAmount += [model.couponAmount doubleValue];
                     if (i == arr.count - 1) {
-                        totalIDStr = [totalIDStr stringByAppendingString:@"%@"];
+                        totalIDStr = [totalIDStr stringByAppendingString:[NSString stringWithFormat:@"%ld",model.couponId]];
                     } else {
-                        totalIDStr = [totalIDStr stringByAppendingString:@"%@,"];
+                        totalIDStr = [totalIDStr stringByAppendingString:[NSString stringWithFormat:@"%ld,",model.couponId]];
                     }
                 }
                 weakSelf.viewModel.cashSelectCount = arr.count;
