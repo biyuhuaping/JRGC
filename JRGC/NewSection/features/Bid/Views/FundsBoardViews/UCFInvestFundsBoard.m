@@ -55,7 +55,7 @@
 - (void)showView:(UCFBidViewModel *)viewModel
 {
     self.myVM = viewModel;
-    [self.KVOController observe:viewModel keyPaths:@[@"totalFunds",@"myFundsNum",@"myBeansNum",@"expectedInterestNum",@"inputViewPlaceStr",@"allMoneyInputNum"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:viewModel keyPaths:@[@"totalFunds",@"myFundsNum",@"myBeansNum",@"expectedInterestNum",@"inputViewPlaceStr",@"allMoneyInputNum",@"isCompanyAgent"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"myFundsNum"]) {
             NSString *funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -92,6 +92,16 @@
                 _investMoneyTextfield.text = allMoneyInputNum;
                 [self textfieldLength:_investMoneyTextfield];
             }
+        } else if ([keyPath isEqualToString:@"isCompanyAgent"]) {
+            BOOL isCompanyAgent = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+            if (isCompanyAgent) {
+                _beansBoard.myVisibility = MyVisibility_Gone;
+                _totalKeYongTipLabel.text = @"";
+ 
+            } else {
+                _beansBoard.myVisibility = MyVisibility_Visible;
+            }
+
         }
     }];
 }
@@ -102,7 +112,9 @@
 //    [self addCountDownView];
     [self addMoneyBoardSection1];
     [self addMoneyBoardSection2];
-    [self addMoneyBoardSection3];
+    if ([UserInfoSingle sharedManager].isShowCouple) {
+        [self addMoneyBoardSection3];
+    }
     [self addMoneyBoardSection4];
 }
 

@@ -81,6 +81,11 @@ NS_ASSUME_NONNULL_BEGIN
  输入框默认填充
  */
 @property(nonatomic, copy)NSString          *inputViewPlaceStr;
+
+/**
+ 是否为机构用户
+ */
+@property(nonatomic, assign)BOOL            isCompanyAgent;
 //******************************************************
 
 
