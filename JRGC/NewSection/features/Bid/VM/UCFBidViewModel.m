@@ -171,7 +171,8 @@
         double value =currentMoney * calcRate * pow((1+calcRate), calcTerm);
         double b = (1+calcRate);
         double value1 = (pow(b, calcTerm) - 1);
-        totalIntersate = (value/value1)*calcTerm  - currentMoney;
+        double value2 = [[NSString stringWithFormat:@"%.2f",(value/value1)] doubleValue];
+        totalIntersate =value2 * calcTerm  - currentMoney;
     } else {
         totalIntersate = currentMoney * calcRate * calcTerm;
         
