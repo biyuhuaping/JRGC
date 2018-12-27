@@ -7326,8 +7326,8 @@
 		E3B581AD21D2159000DC7EAA /* WeChatStyle */ = {
 			isa = PBXGroup;
 			children = (
-				E3B581AE21D2159000DC7EAA /* WeChatStylePlaceHolder.m */,
 				E3B581AF21D2159000DC7EAA /* WeChatStylePlaceHolder.h */,
+				E3B581AE21D2159000DC7EAA /* WeChatStylePlaceHolder.m */,
 			);
 			path = WeChatStyle;
 			sourceTree = "<group>";

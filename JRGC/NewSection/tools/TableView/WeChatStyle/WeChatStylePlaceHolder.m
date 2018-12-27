@@ -44,20 +44,20 @@ static float const kUIemptyOverlayLabelHeight    = 20;
     self.backgroundColor = [UIColor whiteColor];
   
     self.contentMode =   UIViewContentModeTop;
-//    [self addUIemptyOverlayImageView];
-//    [self addUIemptyOverlayLabel];
-//    [self setupUIemptyOverlay];
-    UIView *centerView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - 112) / 2, (self.frame.size.height - 112) / 2, 112, 112)];
-    centerView.backgroundColor = [UIColor clearColor];
-    [self addSubview:centerView];
-
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 83, 83)];
-    NSString *imageStr = isGold ? @"gold_transaction_icon_NoRecords" : @"default_icon.png";
-    iconView.image = [UIImage imageNamed:imageStr];
-    [centerView addSubview:iconView];
-    UIColor *showColor = isGold ? UIColorWithRGB(0xe3a257) : UIColorWithRGB(0x8591b3);
-    UILabel *errorLbl = [UILabel labelWithFrame:CGRectMake(-20, CGRectGetMaxY(iconView.frame) + 15, 152, 14) text:@"暂无数据" textColor:showColor font:[UIFont systemFontOfSize:14]];
-    [centerView addSubview:errorLbl];
+    [self addUIemptyOverlayImageView];
+    [self addUIemptyOverlayLabel];
+    [self setupUIemptyOverlay];
+//    UIView *centerView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - 112) / 2, (self.frame.size.height - 112) / 2, 112, 112)];
+//    centerView.backgroundColor = [UIColor clearColor];
+//    [self addSubview:centerView];
+//
+//    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 83, 83)];
+//    NSString *imageStr = isGold ? @"gold_transaction_icon_NoRecords" : @"default_icon.png";
+//    iconView.image = [UIImage imageNamed:imageStr];
+//    [centerView addSubview:iconView];
+//    UIColor *showColor = isGold ? UIColorWithRGB(0xe3a257) : UIColorWithRGB(0x8591b3);
+//    UILabel *errorLbl = [UILabel labelWithFrame:CGRectMake(-20, CGRectGetMaxY(iconView.frame) + 15, 152, 14) text:@"暂无数据" textColor:showColor font:[UIFont systemFontOfSize:14]];
+//    [centerView addSubview:errorLbl];
     return self;
 }
 
