@@ -45,7 +45,7 @@
     [self.view addSubview:_pagerView];
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setFrame:CGRectMake(0, 0, 44, 44)];
+    [leftButton setFrame:CGRectMake(15, 0, 44, 44)];
     [leftButton setBackgroundColor:[UIColor clearColor]];
     [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
