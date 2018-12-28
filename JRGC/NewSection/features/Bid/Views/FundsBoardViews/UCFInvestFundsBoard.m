@@ -183,7 +183,7 @@
     UIView *endLineView = [[UIView alloc] init];
     endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     endLineView.myBottom = 0;
-    endLineView.myLeft = 15;
+    endLineView.myLeft = 0;
     endLineView.myRight = 0;
     endLineView.heightSize.equalTo(@0.5);
     [_totalMoneyBoard addSubview:endLineView];
@@ -231,7 +231,7 @@
     [_balanceBoard addSubview: button];
     
     UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    endLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
     endLineView.myBottom = 0;
     endLineView.myRight = 0;
     endLineView.myLeft = 15;
@@ -282,7 +282,7 @@
     [_beansBoard addSubview:_beanSwitch];
     
     UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    endLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
     endLineView.myBottom = 0;
     endLineView.myRight = 0;
     endLineView.myLeft = 15;
@@ -304,7 +304,7 @@
     [self addSubview:_inputMoenyBoard];
     
     UIView *midLineView = [[UIView alloc] init];
-    midLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    midLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
 //    midLineView.backgroundColor = [UIColor redColor];
     midLineView.topPos.equalTo(@50);
     midLineView.leftPos.equalTo(@15);
@@ -370,7 +370,7 @@
     [_inputMoenyBoard addSubview:_interestNumLab];
     
     UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    endLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
     endLineView.myBottom = 0;
     endLineView.myHorzMargin = 0;
     endLineView.heightSize.equalTo(@0.5);

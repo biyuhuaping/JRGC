@@ -835,6 +835,7 @@
         else{
 //            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])
 //            {
+            
               [self.apiManager signWithToken:self.benefitModel.userCenterTicket];
 //            }
         }
