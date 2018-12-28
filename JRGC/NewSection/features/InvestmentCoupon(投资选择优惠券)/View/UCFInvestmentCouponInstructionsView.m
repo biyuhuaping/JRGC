@@ -35,7 +35,7 @@
         _instructionsLabel = [UILabel new];
         _instructionsLabel.leftPos.equalTo(@15);
         _instructionsLabel.rightPos.equalTo(@15);
-        _instructionsLabel.topPos.equalTo(@0);
+        _instructionsLabel.topPos.equalTo(@10);
         _instructionsLabel.bottomPos.equalTo(@0);
         _instructionsLabel.textAlignment = NSTextAlignmentLeft;
         _instructionsLabel.font = [UIFont systemFontOfSize:12.0];

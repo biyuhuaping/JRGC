@@ -48,7 +48,7 @@
 {
     if (nil == _couponTypeLayout) {
         _couponTypeLayout = [MyRelativeLayout new];
-        _couponTypeLayout.topPos.equalTo(@10);
+        _couponTypeLayout.topPos.equalTo(@15);
         _couponTypeLayout.clipsToBounds = NO;
         _couponTypeLayout.leftPos.equalTo(self.selectCouponsBtn.rightPos).offset(0);
         _couponTypeLayout.rightPos.equalTo(@15);
@@ -67,10 +67,10 @@
 }
 
 
-- (UILabel *)couponAmounLabel
+- (NZLabel *)couponAmounLabel
 {
     if (nil == _couponAmounLabel) {
-        _couponAmounLabel = [UILabel new];
+        _couponAmounLabel = [NZLabel new];
         _couponAmounLabel.topPos.equalTo(@5);
         _couponAmounLabel.leftPos.equalTo(@10);
         _couponAmounLabel.rightPos.equalTo(@10);
@@ -101,7 +101,7 @@
     if (nil == _willExpireLayout) {
         _willExpireLayout = [MyRelativeLayout new];
         _willExpireLayout.topPos.equalTo(self.couponTypeLayout.topPos).offset(-3);
-        _willExpireLayout.rightPos.equalTo(self.couponTypeLayout.rightPos).offset(2);
+        _willExpireLayout.rightPos.equalTo(self.couponTypeLayout.rightPos).offset(10);
         _willExpireLayout.widthSize.equalTo(@63);
         _willExpireLayout.heightSize.equalTo(@17);
         _willExpireLayout.clipsToBounds = NO;
@@ -243,11 +243,13 @@
     {
         self.couponTypeLayout.backgroundColor = UIColorWithRGB(0x70CBF4);
         self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",couponAmount];
+        [self.couponAmounLabel setFont:[UIFont systemFontOfSize:13.0] string:@"￥"];
     }
     else
     {
         self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
         self.couponAmounLabel.text = [NSString stringWithFormat:@"%@%%",couponAmount];
+        [self.couponAmounLabel setFont:[UIFont systemFontOfSize:13.0] string:@"%"];
     }
     //YES勾选,no正常模式
     if (cpData.isCheck)
@@ -264,8 +266,8 @@
     //优惠券是否可用
     if (!cpData.isCanUse)
     {
-        self.couponTypeLayout.backgroundColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0];
-        UIImage *image = [self createImageWithColor:[UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0]];
+        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xCCCCCC);
+        UIImage *image = [self createImageWithColor:UIColorWithRGB(0xdddddd)];
         [self.selectCouponsBtn setImage:image forState:UIControlStateNormal];
         self.selectCouponsBtn.userInteractionEnabled = NO;
         

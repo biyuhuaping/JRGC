@@ -75,10 +75,10 @@
 }
 
 
-- (UILabel *)couponAmounLabel
+- (NZLabel *)couponAmounLabel
 {
     if (nil == _couponAmounLabel) {
-        _couponAmounLabel = [UILabel new];
+        _couponAmounLabel = [NZLabel new];
         _couponAmounLabel.topPos.equalTo(@5);
         _couponAmounLabel.leftPos.equalTo(@10);
         _couponAmounLabel.textAlignment = NSTextAlignmentLeft;
@@ -94,13 +94,15 @@
     if(_immediateUseBtn==nil)
     {
         _immediateUseBtn = [UIButton buttonWithType:0];
-        [_immediateUseBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
         [_immediateUseBtn setTitle:@"立即使用" forState:UIControlStateNormal];
+        [_immediateUseBtn setBackgroundColor:[UIColor whiteColor]];
         _immediateUseBtn.titleLabel.font = [UIFont systemFontOfSize: 12.0];
         _immediateUseBtn.topPos.equalTo(@15);
         _immediateUseBtn.rightPos.equalTo(@10);
         _immediateUseBtn.widthSize.equalTo(@60);
         _immediateUseBtn.heightSize.equalTo(@22);
+        [_immediateUseBtn.layer setMasksToBounds:YES];
+        _immediateUseBtn.layer.cornerRadius = 2.0;//2.0是圆角的弧度，根据需求自己更改
         
     }
     return _immediateUseBtn;
@@ -208,11 +210,15 @@
     NSString *couponAmount = cpData.couponAmount;
     if ([cpData.couponType isEqualToString:@"0"]) {
 //        0返现券 1返息券
-       self.couponTypeLayout.backgroundColor = UIColorWithRGB(0x70CBF4);
+        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0x70CBF4);
         self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",couponAmount];
+        [self.couponAmounLabel setFont:[UIFont systemFontOfSize:13.0] string:@"￥"];
+        [self.immediateUseBtn setTitleColor:UIColorWithRGB(0x70CBF4)  forState:UIControlStateNormal];
     }else{
-       self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
+        [self.immediateUseBtn setTitleColor:UIColorWithRGB(0xFD4D4C)  forState:UIControlStateNormal];
+        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
         self.couponAmounLabel.text = [NSString stringWithFormat:@"%@%%",couponAmount];
+        [self.couponAmounLabel setFont:[UIFont systemFontOfSize:13.0] string:@"%"];
     }
     
     [self.couponAmounLabel sizeToFit];

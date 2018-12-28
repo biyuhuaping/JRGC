@@ -7,14 +7,14 @@
 //
 
 #import "BaseTableViewCell.h"
-#import "YYLabel.h"
+#import "NZLabel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFSelectionCouponsCell : BaseTableViewCell
 
 
 @property (nonatomic, strong) MyRelativeLayout *couponTypeLayout;
-@property (nonatomic, strong) UILabel     *couponAmounLabel;//券面值
+@property (nonatomic, strong) NZLabel     *couponAmounLabel;//券面值
 @property (nonatomic, strong) UILabel     *remarkLabel; //券名称
 @property (nonatomic, strong) UILabel     *overdueTimeLabel;//过期时间
 @property (nonatomic, strong) MyRelativeLayout *willExpireLayout; //即将过期的图标

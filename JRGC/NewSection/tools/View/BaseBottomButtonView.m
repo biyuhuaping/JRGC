@@ -22,7 +22,7 @@
     if (self) {
         
         self.backgroundColor = [UIColor whiteColor];
-        [self.rootLayout addSubview:self.projectionView];
+//        [self.rootLayout addSubview:self.projectionView];
         [self.rootLayout addSubview:self.enterButton];
     }
     return self;
@@ -30,7 +30,7 @@
 - (UIView *)projectionView {
     if (nil == _projectionView) {
         _projectionView = [UIView new]; 
-        _projectionView.backgroundColor = [DBColor colorWithHexString:@"d6d6d6" andAlpha:0.07];
+        _projectionView.backgroundColor = [DBColor colorWithHexString:@"d6d6d6" andAlpha:0.9];
         _projectionView.topPos.equalTo(self.rootLayout.topPos).offset(-13);
         _projectionView.leftPos.equalTo(@0);
         _projectionView.rightPos.equalTo(@0);

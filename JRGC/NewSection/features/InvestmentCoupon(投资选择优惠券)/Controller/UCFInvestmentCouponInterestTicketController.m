@@ -23,6 +23,8 @@
 
 @property (nonatomic, strong) BaseBottomButtonView *useEnterBtn;//确认使用
 
+@property (nonatomic, strong) UIImageView *shadowView; //阴影
+
 @property (nonatomic, strong) NSMutableArray *arryData;
 
 @property (nonatomic, strong) NSIndexPath *oldIndexPath;//记录上一次的选择
@@ -42,6 +44,7 @@
     [self.rootLayout addSubview:self.tableView];
     [self.rootLayout addSubview:self.instructionsView];
     [self.rootLayout addSubview:self.useEnterBtn];
+    [self.rootLayout addSubview:self.shadowView];
      [self.tableView beginRefresh];
     
     
@@ -130,7 +133,7 @@
 {
     if (nil == _tableView) {
         _tableView = [[BaseTableView alloc]init];
-        _tableView.backgroundColor = [UIColor whiteColor];
+        _tableView.backgroundColor = UIColorWithRGB(0xebebee);
         _tableView.delegate = self;
         _tableView.dataSource =self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -145,13 +148,27 @@
     return _tableView;
 }
 
+- (UIImageView *)shadowView
+{
+    if (nil == _shadowView) {
+        UIImageView *shadowView = [[UIImageView alloc] init];
+        shadowView.topPos.equalTo(self.instructionsView.topPos).offset(-2);
+        shadowView.leftPos.equalTo(self.instructionsView.leftPos);
+        shadowView.rightPos.equalTo(self.instructionsView.rightPos);
+        shadowView.myHeight = 2;
+        UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
+        shadowView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
+    }
+    return _shadowView;
+}
+
 - (UCFInvestmentCouponInstructionsView *)instructionsView
 {
     if (nil == _instructionsView) {
-        _instructionsView= [[UCFInvestmentCouponInstructionsView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 37)];
+        _instructionsView= [[UCFInvestmentCouponInstructionsView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
         _instructionsView.bottomPos.equalTo(self.useEnterBtn.topPos);
         _instructionsView.widthSize.equalTo(self.rootLayout.widthSize);
-        _instructionsView.heightSize.equalTo(@37);
+        _instructionsView.heightSize.equalTo(@47);
         _instructionsView.leftPos.equalTo(self.rootLayout.leftPos);
     }
     return _instructionsView;
@@ -210,7 +227,18 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 102;
+    if ([[self.arryData objectAtIndex:indexPath.section] count] >0 ) {
+        if ( indexPath.row == [[self.arryData objectAtIndex:indexPath.section] count] -1) {
+            return 112;
+        }
+        else
+        {
+            return 97;
+        }
+    }
+    else{
+        return 97;
+    }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -266,7 +294,7 @@
         headerLabel.text = @"不可使用优惠券";
         UIButton *button = [UIButton buttonWithType:0];
         button.frame = CGRectMake(CGRectGetMaxX(headerLabel.frame), (headerLabel.frame.size.height -20)/2, 20, 20);
-        [button setImage:[UIImage imageNamed:@"gold_account_icon_info_03"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"icon_question.png"] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(moreConfusion) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:button];
     }

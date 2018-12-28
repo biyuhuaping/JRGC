@@ -22,7 +22,8 @@
 
 @property (nonatomic, strong) UIView *projectionView;//阴影
 
-//@property (nonatomic, strong) UIView *lineView;//阴影
+
+@property (nonatomic, strong) UIImageView *shadowView; //阴影
 
 @property (nonatomic, strong) UIImageView *cancelImageView;
 
@@ -52,8 +53,9 @@
         [self.rootLayout addSubview:self.tableViewHeadImageView];
         [self.rootLayout addSubview:self.tableView];
         [self.rootLayout addSubview:self.tableViewFootView];
-        [self.rootLayout addSubview:self.projectionView];
+//        [self.rootLayout addSubview:self.projectionView];
         [self.rootLayout addSubview:self.cancelImageView];
+        [self.rootLayout addSubview:self.shadowView];
     }
     return self;
 }
@@ -107,7 +109,19 @@
     }
     return  _tableViewHeadImageView;
 }
-
+- (UIImageView *)shadowView
+{
+    if (nil == _shadowView) {
+        UIImageView *shadowView = [[UIImageView alloc] init];
+        shadowView.topPos.equalTo(self.tableViewFootView.topPos).offset(-2);
+        shadowView.leftPos.equalTo(self.tableViewFootView.leftPos);
+        shadowView.rightPos.equalTo(self.tableViewFootView.rightPos);
+        shadowView.myHeight = 2;
+        UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
+        shadowView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
+    }
+    return _shadowView;
+}
 
 - (BaseBottomButtonView *)tableViewFootView
 {
@@ -123,17 +137,17 @@
         if ([self.arryData.data.type isEqualToString:@"NEW"]) {
             
             [_tableViewFootView setButtonTitleWithColor:[UIColor colorWithRed:219/255.0 green:81/255.0 blue:39/255.0 alpha:1.0]];
-            [_tableViewFootView setViewBackgroundColor:[UIColor colorWithRed:253/255.0 green:76/255.0 blue:69/255.0 alpha:1.0]];
+            [_tableViewFootView setViewBackgroundColor:UIColorWithRGB(0xfd4c45)];
             [_tableViewFootView setButtonBackgroundColor:[UIColor whiteColor]];
         }else
         {
             [_tableViewFootView setButtonTitleWithColor:[UIColor colorWithRed:114/255.0 green:96/255.0 blue:251/255.0 alpha:1.0]];
-            [_tableViewFootView setViewBackgroundColor:[UIColor colorWithRed:114/255.0 green:96/255.0 blue:251/255.0 alpha:1.0]];
+            [_tableViewFootView setViewBackgroundColor:UIColorWithRGB(0x7260fb)];
             [_tableViewFootView setButtonBackgroundColor:[UIColor whiteColor]];
         }
        
 //        [_tableViewFootView setButtonBorderColor:[Color color:PGColorOptionThemeGreenColor]];
-        [_tableViewFootView setProjectionViewHidden:NO];
+        [_tableViewFootView setProjectionViewHidden:YES];
         _tableViewFootView.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
             //2.将指定的几个角切为圆角
