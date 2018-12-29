@@ -650,6 +650,8 @@
         [self presentViewController:loginNaviController animated:YES completion:nil];
     } else {
         if ([self checkUserCanInvest]) {
+            
+            
             if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
                 //债券转让
                 NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
@@ -829,9 +831,33 @@
            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     } else if (tag.intValue == kSXTagP2PPrdClaimsDealBid) {
-        NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
-        vc.bidDetaiModel = [UCFBidModel yy_modelWithJSON:result];
-        [self.navigationController pushViewController:vc animated:YES];
+        UCFBidModel *model = [UCFBidModel yy_modelWithJSON:result];
+        NSInteger code = model.code;
+        NSString *message = model.message;
+        if (model.ret) {
+            NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
+            vc.bidDetaiModel = model;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (code == 21 || code == 22){
+            [self checkUserCanInvest];
+        } else if (code == 15) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+        } else if (code == 19) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
+                alert.tag =7000;
+                [alert show];
+        } else if (code == 30) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+                alert.tag = 9000;
+                [alert show];
+        }else if (code == 40) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
+                alert.tag = 9001;
+                [alert show];
+        } else {
+            [MBProgressHUD displayHudError:model.message withShowTimes:3];
+        }
     }
 }
 //请求失败

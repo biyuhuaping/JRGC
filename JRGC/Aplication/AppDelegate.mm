@@ -44,6 +44,7 @@
 #endif
 #import "UCFLanchViewController.h"
 #import "RealReachability.h"
+#import "IQKeyboardManager.h"
 @interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
@@ -75,8 +76,26 @@
 //    后经过网络搜索，当 UITabBar 设置为透明，且 push viewController 为 hidesBottomBarWhenPushed = YES 返回的时候就会触发。
 //    出现这个现象的直接原因是 tabBar 内的按钮 UITabBarButton 被设置了错误的 frame，frame.size 变为 (0, 0) 导致的。
     [[UITabBar appearance] setTranslucent:NO];
+    [self IQBoardSetting];
     return YES;
 }
+#pragma mark IQBoardSetting
+- (void)IQBoardSetting
+{
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
+    keyboardManager.enable = YES; // 控制整个功能是否启用
+    keyboardManager.shouldResignOnTouchOutside = YES; // 控制点击背景是否收起键盘
+    keyboardManager.shouldToolbarUsesTextFieldTintColor = YES; // 控制键盘上的工具条文字颜色是否用户自定义
+    keyboardManager.toolbarManageBehaviour = IQAutoToolbarBySubviews; // 有多个输入框时，可以通过点击Toolbar 上的“前一个”“后一个”按钮来实现移动到不同的输入框
+    
+    keyboardManager.enableAutoToolbar = YES; // 控制是否显示键盘上的工具条
+    
+    
+    keyboardManager.placeholderFont = [UIFont boldSystemFontOfSize:17]; // 设置占位文字的字体
+    
+    keyboardManager.keyboardDistanceFromTextField = 10.0f; // 输入框距离键盘的距离
+}
+
 #pragma mark - 初始化网络监控
 - (void)startGLobalRealReachability
 {

@@ -578,6 +578,8 @@
                         [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                         return;
                     }
+                    
+                    
                 if ([model.type intValue] == 14) { //集合标
                     [self gotoCollectionDetailViewContoller:model];
                 }else{
@@ -589,14 +591,40 @@
                         }
                     }
                     if([self checkUserCanInvestIsDetail:NO type:self.accoutType]){//
-
+                        
                         NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4",@"status":model.status};
                         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                             
                             if ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"0"]) {
-                                NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
-                                vc.bidDetaiModel = [UCFBidModel yy_modelWithJSON:result];
-                                [self.navigationController pushViewController:vc animated:YES];
+                                UCFBidModel *model = [UCFBidModel yy_modelWithJSON:result];
+                                NSInteger code= model.code;
+                                NSString *message = model.message;
+                                if (model.ret) {
+                                    NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
+                                    vc.bidDetaiModel = model;
+                                    [self.navigationController pushViewController:vc animated:YES];
+                                } else if (code == 21 || code == 22){
+                                    [self checkUserCanInvestIsDetail:NO type:self.accoutType];
+                                } else {
+                                    if (code== 15) {
+                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                        [alert show];
+                                    } else if (code == 19) {
+                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                        alert.tag =7000;
+                                        [alert show];
+                                    }else if (code == 30) {
+                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+                                        alert.tag = 9000;
+                                        [alert show];
+                                    }else if (code == 40) {
+                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
+                                        alert.tag = 9001;
+                                        [alert show];
+                                    } else {
+                                        [MBProgressHUD displayHudError:model.message withShowTimes:3];
+                                    }
+                                }
                             } else {
                                 NSString *rstcode = [result objectForKey:@"status"];
                                 NSString *statusdes = [result objectForKey:@"statusdes"];
@@ -1198,10 +1226,6 @@
     switch (openStatus)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
-        {
-            return YES;
-            break;
-        }
         case 2://已开户 --->>>老用户(白名单)开户
         {
             [self showHSAlert:tipStr1];

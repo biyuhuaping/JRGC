@@ -186,14 +186,10 @@
     
     self.viewModel = vm;
     
-    UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fadeKeyboard)];
-    [self.view addGestureRecognizer:frade];
+
 
 }
-- (void)fadeKeyboard
-{
-    [self.view endEditing:YES];
-}
+
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
     NSString *prdclaimid = [self.viewModel getDataModelBidID];

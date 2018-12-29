@@ -208,35 +208,34 @@
         }
     }
     else if (tag.intValue == kSXTagP2PPrdClaimsDealBid){
-        NSString *Data = (NSString *)result;
-        NSDictionary * dic = [Data objectFromJSONString];
-        if([dic[@"ret"] integerValue] == 1)
-        {
+        UCFBidModel *model = [UCFBidModel yy_modelWithJSON:result];
+        NSInteger code= model.code;
+        NSString *message = model.message;
+        if (model.ret) {
             NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
-            vc.bidDetaiModel = [UCFBidModel yy_modelWithJSON:result];
+            vc.bidDetaiModel = model;
             [self.navigationController pushViewController:vc animated:YES];
-    
-        }else if ([dic[@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
+        } else if (code == 21 || code == 22){
             [self checkUserCanInvestIsDetail:NO];
         } else {
-            if ([dic[@"status"] integerValue] == 15) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            if (code== 15) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alert show];
-            } else if ([dic[@"status"] integerValue] == 19) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            } else if (code == 19) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 alert.tag =7000;
                 [alert show];
-            }else if ([dic[@"status"] integerValue] == 30) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+            }else if (code == 30) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
                 alert.tag = 9000;
                 [alert show];
-            }else if ([dic[@"status"] integerValue] == 40) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
+            }else if (code == 40) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
                 alert.tag = 9001;
                 [alert show];
-            }else {
-                [AuxiliaryFunc showAlertViewWithMessage:dic[@"statusdes"]];
-            }
+            } else {
+            [MBProgressHUD displayHudError:model.message withShowTimes:3];
+        }
         }
     }
     if ([self.tableview.header isRefreshing]) {
@@ -336,7 +335,7 @@
                                        @"id":_microMoneyModel.Id,
                                        @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
                                        };
-            [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutDefault];
+            [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutTypeP2P];
         }
     }
 }
