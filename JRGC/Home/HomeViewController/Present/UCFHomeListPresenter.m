@@ -130,12 +130,12 @@
     NSMutableArray *temp = [[NSMutableArray alloc] init];
     for (UCFHomeListCellModel *model in group.prdlist) {
         
-        if ([group.type isEqualToString:@"0"]) {
+        if ([group.type isEqualToString:@"0"]) {//新手标
             model.moedelType = UCFHomeListCellModelTypeNewUser;
         } else if ([group.type isEqualToString:@"19"]) {
             model.moedelType = UCFHomeListCellModelTypeDebtsTransfer;
         } else {
-            if ([model.type isEqualToString:@"0"]) { //预约
+            if ([model.type isEqualToString:@"0"]) { //预约宝
                 model.moedelType = UCFHomeListCellModelTypeReserved;
             } else if ([model.type isEqualToString:@"1"]) { //P2P散标
                 model.moedelType = UCFHomeListCellModelTypeDefault;

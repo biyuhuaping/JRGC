@@ -384,7 +384,9 @@
 
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
 {
+    
      __weak typeof(self) weakSelf = self;
+//    0 新手标 预约宝 1 p2p散标 3 智存宝 14批量
     switch ([model.type intValue]) {
         case 0:
         case 1:
@@ -393,7 +395,7 @@
         case 2:
             self.accoutType = SelectAccoutTypeHoner;
             break;
-        case 3://智存宝
+        case 3:
             self.accoutType = SelectAccoutTypeP2P;
             break;
         case 14:
