@@ -230,8 +230,8 @@
            [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
         }
         else {//普通用户
-            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])
-            {
+//            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])
+//            {
                 __weak typeof(self) weakSelf = self;
                 NSDictionary *parameter = @{@"Id": @"", @"userId": [UserInfoSingle sharedManager].userId, @"proType": @"",@"type":@"11",@"status":@""};
                 [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
@@ -259,7 +259,7 @@
                          [MBProgressHUD displayHudError:rsttext];
                     }
                 }];
-            }
+//            }
         }
     }
 }
