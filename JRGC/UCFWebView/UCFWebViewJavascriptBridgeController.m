@@ -301,9 +301,11 @@
     
     [_bridge registerHandler:@"nativeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         
-        DBLOG(@"testObjcCallback called: %@", data);
+//        DBLOG(@"testObjcCallback called: %@", data);
+        
         weakSelf.isHideNativeNav = NO;
         NSDictionary *nativeData = data;
+        
         if (nil == nativeData || [nativeData isKindOfClass:[NSNull class]] || nativeData.count == 0 || !nativeData[@"action"])
         {
             return ;
@@ -500,15 +502,9 @@
         else if ([nativeData[@"action"] isEqualToString:@"gotoGB"]) {//工力工贝 分享
             [weakSelf goToShareWeChat:nativeData];
         }
-        //----------------------------------------------------------------------------------------------------qyy
-        
-       /* else if ([nativeData[@"action"] isEqualToString:@"app_invest_error"]) //投标成功 跳转到 投资详情
-        {
-            [weakSelf jsToNativeHomeWithDic:nativeData];//跳入订单详情页面qyy
-        }*/
-      
+//     */
     }];
-    
+     
 }
 - (void)getContractContent:(NSString *)value
 {
