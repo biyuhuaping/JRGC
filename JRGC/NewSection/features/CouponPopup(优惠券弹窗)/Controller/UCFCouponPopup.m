@@ -104,21 +104,9 @@
             // use UIView Category
             
             [fir showInWindow];
-            [[NSUserDefaults standardUserDefaults] setObject:[self getNowTimeTimestamp] forKey:TIMESTAMP];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-//            AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//            [delegate.tabBarController dismissViewControllerAnimated:NO completion:^{
-//
-//                UCFCouponPopupHomeView *fir = [[UCFCouponPopupHomeView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-//                // use UIView Category
-//                [fir showInWindow];
-//                [[NSUserDefaults standardUserDefaults] setObject:[self getNowTimeTimestamp] forKey:TIMESTAMP];
-//
-//                NSUInteger selectedIndex = delegate.tabBarController.selectedIndex;
-//                UINavigationController *nav = [delegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
-//                [nav popToRootViewControllerAnimated:NO];
-//            }];
         }
+        [[NSUserDefaults standardUserDefaults] setObject:[self getNowTimeTimestamp] forKey:TIMESTAMP];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     else
     {
