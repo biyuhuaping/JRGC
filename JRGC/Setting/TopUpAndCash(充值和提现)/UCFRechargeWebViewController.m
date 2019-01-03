@@ -36,7 +36,7 @@
     }
     else if ([controllerName isEqualToString:@"app_invest_immediately"]) {
         NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
-        if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"]) {
+        if ([className hasSuffix:@"NewPurchaseBidController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"]) {
             [self.navigationController popToViewController:self.rootVc animated:YES];
         }
         else if([className hasSuffix:@"UCFRechargeOrCashViewController"])

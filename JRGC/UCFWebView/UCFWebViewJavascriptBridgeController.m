@@ -1165,6 +1165,7 @@
     {
         UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
         vc.accoutType = SelectAccoutTypeP2P;
+        vc.uperViewController = self;
         [self.navigationController pushViewController:vc animated:YES];
         
 //        //跳转到充值

@@ -594,6 +594,7 @@
             
             UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
             vc.accoutType = SelectAccoutTypeP2P;
+            vc.uperViewController = self;
             [self.navigationController pushViewController:vc animated:YES];
             
 //            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
