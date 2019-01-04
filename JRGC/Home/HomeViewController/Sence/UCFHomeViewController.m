@@ -479,15 +479,8 @@
           }
         else if (model.moedelType == UCFHomeListCellModelTypeAI || model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"0"] || [model.type isEqualToString:@"3"]))) {
             self.accoutType = SelectAccoutTypeP2P;
-            BOOL b = [self checkUserCanInvestIsDetail:YES type:self.accoutType];
+            BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
             if (!b) {
-                return;
-            }
-            if (![UserInfoSingle sharedManager].isRisk) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-                self.accoutType = SelectAccoutTypeP2P;
-                alert.tag =  9000;
-                [alert show];
                 return;
             }
             if (![UserInfoSingle sharedManager].isAutoBid) {
@@ -497,7 +490,14 @@
                 [self.navigationController pushViewController:batchInvestment animated:YES];
                 return;
             }
-            
+            if (![UserInfoSingle sharedManager].isRisk) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+                self.accoutType = SelectAccoutTypeP2P;
+                alert.tag =  9000;
+                [alert show];
+                return;
+            }
+
             UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
             if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", NEWUSER_PRODUCTS_URL, model.Id,model.status];
@@ -821,13 +821,6 @@
         if (!b) {
             return;
         }
-        if (![UserInfoSingle sharedManager].isRisk) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-            self.accoutType = SelectAccoutTypeP2P;
-            alert.tag =  9000;
-            [alert show];
-            return;
-        }
         if (![UserInfoSingle sharedManager].isAutoBid) {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.isStep = 1;
@@ -835,6 +828,14 @@
             [self.navigationController pushViewController:batchInvestment animated:YES];
             return;
         }
+        if (![UserInfoSingle sharedManager].isRisk) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            self.accoutType = SelectAccoutTypeP2P;
+            alert.tag =  9000;
+            [alert show];
+            return;
+        }
+  
         UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
         if (model.moedelType == UCFHomeListCellModelTypeReserved) {//预约宝 一键出借
             facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", RESERVEINVEST_APPLY_URL, model.Id,model.status];
