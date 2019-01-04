@@ -185,7 +185,7 @@
 
     [self bindData:vm];
 //
-//    self.viewModel = vm;
+    self.viewModel = vm;
 }
 
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
