@@ -24,6 +24,13 @@
 
 @implementation UCFBidViewModel
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(reloadVMData) name:@"UPDATEINVESTDATA" object:nil];
+    }
+    return self;
+}
 
 - (UCFBidModel *)getDataData
 {
@@ -387,18 +394,44 @@
     } else if (tag.intValue == kSXTagInvestSubmit){
         NSString *data = (NSString *)result;
         NSMutableDictionary *dic = [data objectFromJSONString];
-        NSString *rstcode = dic[@"ret"];
-        if([rstcode intValue] == 1)
+        BOOL rstcode = [dic[@"ret"] boolValue];
+        if(rstcode)
         {
             //赋值 反射到Controller 做操作
             self.hsbidInfoDict = dic;
         }
         else
         {
-//            [self reloadMainView];
-            [MBProgressHUD displayHudError:[dic objectSafeForKey:@"message"]];
+            if ([dic[@"code"] integerValue] == 43016) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
+                alert.tag = 10023;
+                [alert show];
+            } else {
+                [self reloadVMData];
+                [MBProgressHUD displayHudError:[dic objectSafeForKey:@"message"]];
+            }
         }
+    } else if (tag.intValue == kSXTagP2PPrdClaimsDealBid) {
+        NSString *data = (NSString *)result;
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        if ([dic[@"ret"] boolValue]) {
+            UCFBidModel *tmpModel = [UCFBidModel yy_modelWithJSON:result];
+            [self setDataModel:tmpModel];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
+            alert.tag = 10023;
+            [alert show];
+        }
+        
     }
+}
+- (void)reloadVMData
+{
+    NSDictionary *paraDict = @{
+                               @"id":self.model.data.prdClaim.ID,
+                               @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
+                               };
+    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutTypeP2P];
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {

@@ -154,7 +154,7 @@
     if (!_quickVC) {
         _quickVC = [[UCFQuickRechargeViewController alloc] initWithNibName:@"UCFQuickRechargeViewController" bundle:nil];
         _quickVC.view.frame = CGRectMake(0, 40, ScreenWidth, CGRectGetHeight(self.view.frame) - 40);
-        _quickVC.rootVc = self;
+        _quickVC.rootVc = _uperViewController;
         _quickVC.accoutType = SelectAccoutTypeP2P;
         
     }
@@ -163,6 +163,7 @@
 - (void)setDefaultMoney:(NSString *)defaultMoney
 {
     self.quickVC.defaultMoney = defaultMoney;
+    _quickVC.rootVc = _uperViewController;
 }
 
 

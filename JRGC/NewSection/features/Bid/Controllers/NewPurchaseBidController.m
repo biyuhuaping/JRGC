@@ -186,9 +186,6 @@
     [self bindData:vm];
     
     self.viewModel = vm;
-    
-
-
 }
 
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
@@ -218,6 +215,7 @@
 {
     UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
     vc.accoutType = SelectAccoutTypeP2P;
+    vc.uperViewController = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)bindCoupleView:(UCFInvestmentCouponController *)vc
@@ -344,6 +342,7 @@
     } else if (buttonIndex == 1) {
         if (tag == 2000) {
             UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+            vc.uperViewController = self;
             vc.defaultMoney = self.rechargeMoneyStr;
             vc.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:vc animated:YES];

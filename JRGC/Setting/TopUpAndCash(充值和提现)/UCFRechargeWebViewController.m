@@ -36,7 +36,7 @@
     }
     else if ([controllerName isEqualToString:@"app_invest_immediately"]) {
         NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
-        if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"]) {
+        if ([className hasSuffix:@"NewPurchaseBidController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"]) {
             [self.navigationController popToViewController:self.rootVc animated:YES];
         }
         else if([className hasSuffix:@"UCFRechargeOrCashViewController"])
@@ -60,14 +60,19 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+- (void)dealloc
+{
+    NSLog(@"释放了");
+    if (self.flagInvestSuc  || [baseTitleLabel.text isEqualToString:@"充值成功"]) { //提现成功返回个人中心
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
+    }
+}
 - (void)jsSetTitle:(NSString *)title
 {
     if ([title isEqualToString:@"充值成功"]) {
         self.flagInvestSuc  = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
     }
     baseTitleLabel.text = title;
 }
@@ -81,7 +86,7 @@
     if (self.flagInvestSuc  || [baseTitleLabel.text isEqualToString:@"充值成功"]) { //提现成功返回个人中心
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
         NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
-        if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"] ||[className hasSuffix:@"UCFP2POrHonerAccoutViewController"]||[className hasSuffix:@"UCFMineViewController"]) {
+        if ([className hasSuffix:@"NewPurchaseBidController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"] ||[className hasSuffix:@"UCFP2POrHonerAccoutViewController"]||[className hasSuffix:@"UCFMineViewController"]) {
             [self.navigationController popToViewController:self.rootVc animated:YES];
         }
         else if([className hasSuffix:@"UCFRechargeOrCashViewController"])

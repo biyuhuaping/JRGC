@@ -334,6 +334,7 @@
         if (alertView.tag == 2000) {
             if (self.accoutType == SelectAccoutTypeP2P) {
                 UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+                vc.uperViewController = self;
                 vc.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
                 vc.accoutType = SelectAccoutTypeP2P;
                 [self.navigationController pushViewController:vc animated:YES];
