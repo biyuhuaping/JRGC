@@ -56,17 +56,19 @@
 }
 - (void)showView:(UCFBidViewModel *)viewModel
 {
+    @PGWeakObj(self);
+
     [self.KVOController observe:viewModel keyPaths:@[@"markList"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"markList"]) {
             NSArray *markList = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (markList.count > 0) {
-                [self  reloadViewContentWithTextArr:markList];
-                self.heightSize.equalTo(@36);
-                self.myVisibility = MyVisibility_Visible;
+                [selfWeak  reloadViewContentWithTextArr:markList];
+                selfWeak.heightSize.equalTo(@36);
+                selfWeak.myVisibility = MyVisibility_Visible;
             } else {
-                self.myVisibility = MyVisibility_Visible;
-                self.heightSize.equalTo(@10);
+                selfWeak.myVisibility = MyVisibility_Visible;
+                selfWeak.heightSize.equalTo(@10);
 
             }
          }

@@ -23,50 +23,51 @@
 - (void)showView:(UCFBidViewModel *)viewModel
 {
     self.myVM = viewModel;
+    @PGWeakObj(self);
     [self.KVOController observe:viewModel keyPaths:@[@"headherIsHide",@"couponIsHide",@"cashIsHide",@"couponNum",@"repayCoupon",@"cashNum",@"repayCash"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"couponNum"]) {
             NSString *couponStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (couponStr.length > 0) {
-                self.couponLab.text = couponStr;
+                selfWeak.couponLab.text = couponStr;
                 if ([couponStr containsString:@"张可用"]) {
                     NSString *tmpStr = [couponStr stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-                 self.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:couponStr];
+                 selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:couponStr];
                 }
-                [self.couponLab sizeToFit];
+                [selfWeak.couponLab sizeToFit];
             }
         } else if ([keyPath isEqualToString:@"cashNum"]) {
             NSString *cashNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (cashNum.length > 0) {
-                self.cashLab.text = cashNum;
+                selfWeak.cashLab.text = cashNum;
                 if ([cashNum containsString:@"张可用"]) {
                     NSString *tmpStr = [cashNum stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-                    self.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:cashNum];
+                    selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:cashNum];
                 }
-                [_cashLab sizeToFit];
+                [selfWeak.cashLab sizeToFit];
             }
         } else if ([keyPath isEqualToString:@"couponIsHide"]) {
             BOOL ishide = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
             if (ishide) {
-                self.coupleView.myVisibility = MyVisibility_Gone;
+                selfWeak.coupleView.myVisibility = MyVisibility_Gone;
             } else {
-                self.coupleView.myVisibility = MyVisibility_Visible;
+                selfWeak.coupleView.myVisibility = MyVisibility_Visible;
 
             }
         } else if ([keyPath isEqualToString:@"cashIsHide"]) {
             BOOL ishide = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
             if (ishide) {
-                self.cashView.myVisibility = MyVisibility_Gone;
+                selfWeak.cashView.myVisibility = MyVisibility_Gone;
             } else {
-                self.cashView.myVisibility = MyVisibility_Visible;
+                selfWeak.cashView.myVisibility = MyVisibility_Visible;
             }
 
         } else if ([keyPath isEqualToString:@"headherIsHide"]) {
             BOOL ishide = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
             if (ishide) {
-                self.myVisibility = MyVisibility_Gone;
+                selfWeak.myVisibility = MyVisibility_Gone;
             } else {
-                self.myVisibility = MyVisibility_Visible;
+                selfWeak.myVisibility = MyVisibility_Visible;
             }
         } else if ([keyPath isEqualToString:@"repayCoupon"]) {
             //返息券返的金额
@@ -74,19 +75,19 @@
             if ([repayCoupon doubleValue] > 0.01) {
                 NSString *repayCoupon = [change objectSafeForKey:NSKeyValueChangeNewKey];
                 NSString *repayCouponStr = [NSString stringWithFormat:@"¥%@",repayCoupon];
-                NSString *allText = [NSString stringWithFormat:@"返息%@工豆，满¥%@可用",repayCouponStr,self.myVM.couponTotalcouponAmount];
-                self.couponLab.text = allText;
-                self.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:repayCouponStr WithTotalString:allText];
-                [self.couponLab sizeToFit];
+                NSString *allText = [NSString stringWithFormat:@"返息%@工豆，满¥%@可用",repayCouponStr,selfWeak.myVM.couponTotalcouponAmount];
+                selfWeak.couponLab.text = allText;
+                selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:repayCouponStr WithTotalString:allText];
+                [selfWeak.couponLab sizeToFit];
             } else {
-                NSString *couponNum = self.myVM.couponNum;
+                NSString *couponNum = selfWeak.myVM.couponNum;
                 if (couponNum.length > 0) {
-                    self.couponLab.text = couponNum;
+                    selfWeak.couponLab.text = couponNum;
                     if ([couponNum containsString:@"张可用"]) {
                         NSString *tmpStr = [couponNum stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-                        self.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:couponNum];
+                        selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:couponNum];
                     }
-                    [self.couponLab sizeToFit];
+                    [selfWeak.couponLab sizeToFit];
                 }
             }
         } else if ([keyPath isEqualToString:@"repayCash"]) {
@@ -94,19 +95,19 @@
             NSString *repayCash = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if ([repayCash doubleValue] > 0.01) {
                 NSString *cashStr = [NSString stringWithFormat:@"¥%@",repayCash];
-                NSString *allText = [NSString stringWithFormat:@"返现%@，满¥%@可用",cashStr,self.myVM.cashTotalcouponAmount];
-                self.cashLab.text = allText;
-                self.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:cashStr WithTotalString:allText];
-                [self.cashLab sizeToFit];
+                NSString *allText = [NSString stringWithFormat:@"返现%@，满¥%@可用",cashStr,selfWeak.myVM.cashTotalcouponAmount];
+                selfWeak.cashLab.text = allText;
+                selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:cashStr WithTotalString:allText];
+                [selfWeak.cashLab sizeToFit];
             } else {
-                NSString *cashStr = self.myVM.cashNum;
+                NSString *cashStr = selfWeak.myVM.cashNum;
                 if (cashStr.length > 0) {
-                    self.cashLab.text = cashStr;
+                    selfWeak.cashLab.text = cashStr;
                     if ([cashStr containsString:@"张可用"]) {
                         NSString *tmpStr = [cashStr stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-                        self.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:cashStr];
+                        selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:cashStr];
                     }
-                    [self.cashLab sizeToFit];
+                    [selfWeak.cashLab sizeToFit];
                 }
             }
         }

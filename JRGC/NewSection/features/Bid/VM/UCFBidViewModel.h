@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return 金额
  */
 - (NSString *)getTextFeildInputMoeny;
-@property(nonatomic,strong) UIView    *superView;
+@property(nonatomic, weak) UIView    *superView;
 @property(nonatomic, strong)NSString *prdName;
 @property(nonatomic, strong)NSArray  *prdLabelsList;
 @property(nonatomic, copy) NSString  *platformSubsidyExpense; //贴

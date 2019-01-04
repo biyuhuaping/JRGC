@@ -164,28 +164,28 @@
     [self.bidHeadView showView:vm];
 
     [self.bidInfoDetailView showView:vm];
-    
+
     [self.remind showView:vm];
-    
+
     [self.fundsBoardView showView:vm];
-    
+
     if ([UserInfoSingle sharedManager].isShowCouple) {
         [self.couponBoard showView:vm];
     }
-    
+
     [self.recommendView showView:vm];
-    
+
     [self.footView showView:vm];
-    
+
     [self.investButton showView:vm];
-    
+
     [vm setDataModel:_bidDetaiModel];
-    
+
     [vm setRootController:self];
-    
+
     [self bindData:vm];
-    
-    self.viewModel = vm;
+//
+//    self.viewModel = vm;
 }
 
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
@@ -366,4 +366,5 @@
     IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
     keyboardManager.enable = NO;
 }
+
 @end

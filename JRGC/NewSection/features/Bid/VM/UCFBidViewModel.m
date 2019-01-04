@@ -24,6 +24,10 @@
 
 @implementation UCFBidViewModel
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (instancetype)init
 {
     if (self = [super init]) {
@@ -420,10 +424,10 @@
         NSMutableDictionary *dic = [data objectFromJSONString];
         if ([dic[@"ret"] boolValue]) {
             UCFBidModel *tmpModel = [UCFBidModel yy_modelWithJSON:result];
-//            [self setDataModel:tmpModel];
-            self.model = tmpModel;
-            //我的资金
-            [self dealMyFunds];
+            [self setDataModel:tmpModel];
+//            self.model = tmpModel;
+//            //我的资金
+//            [self dealMyFunds];
             
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];

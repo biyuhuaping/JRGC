@@ -38,19 +38,20 @@
 }
 - (void)showView:(UCFBidViewModel *)viewModel
 {
+    @PGWeakObj(self);
     [self.KVOController observe:viewModel keyPaths:@[@"annualRate",@"timeLimitText",@"remainingMoney"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"annualRate"]) {
-            _rateLab.text =  [change objectSafeForKey:NSKeyValueChangeNewKey];
+            selfWeak.rateLab.text =  [change objectSafeForKey:NSKeyValueChangeNewKey];
         } else if ([keyPath isEqualToString:@"timeLimitText"]) {
             NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (markStr.length > 0) {
-                _timeLimitLab.text = [change objectSafeForKey:NSKeyValueChangeNewKey];
+                selfWeak.timeLimitLab.text = [change objectSafeForKey:NSKeyValueChangeNewKey];
             }
         } else if ([keyPath isEqualToString:@"remainingMoney"]) {
             NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (markStr.length > 0) {
-                _moneyAmountLab.text = [change objectSafeForKey:NSKeyValueChangeNewKey];
+                selfWeak.moneyAmountLab.text = [change objectSafeForKey:NSKeyValueChangeNewKey];
             }
         }
     }];
