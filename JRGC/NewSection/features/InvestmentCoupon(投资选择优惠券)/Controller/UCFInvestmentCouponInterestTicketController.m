@@ -328,10 +328,11 @@
 //无法使用的优惠券
 - (void)alertUnableToUseCoupons
 {
+    @PGWeakObj(self);
     BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"优惠券使用条件不足,输入的出借金额小于优惠券的最低使用金额" cancelButtonTitle:@"重新输入金额" clickButton:^(NSInteger index){
         if (index == 0) {
             //重新输入金额
-            [self.db backToTheInvestmentPage];
+            [selfWeak.db backToTheInvestmentPage];
         }
     } otherButtonTitles:@"取消"];
     [alert show];
