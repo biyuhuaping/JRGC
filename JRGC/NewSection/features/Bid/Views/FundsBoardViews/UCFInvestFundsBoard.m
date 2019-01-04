@@ -63,8 +63,11 @@
             [_mybalanceNumLab sizeToFit];
         } else if ([keyPath isEqualToString:@"totalFunds"]) {
             NSString *totalFunds = [change objectSafeForKey:NSKeyValueChangeNewKey];
-            _KeYongMoneyLabel.text = totalFunds;
-            [_KeYongMoneyLabel sizeToFit];
+            if (totalFunds.length > 0) {
+                _KeYongMoneyLabel.text = totalFunds;
+                [_KeYongMoneyLabel sizeToFit];
+            }
+
         } else if ([keyPath isEqualToString:@"myBeansNum"]) {
             NSString *myBeansNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
             _beanNumLab.text = myBeansNum;
