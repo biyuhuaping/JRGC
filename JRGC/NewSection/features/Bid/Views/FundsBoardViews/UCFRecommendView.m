@@ -18,14 +18,15 @@
 - (void)showView:(UCFBidViewModel *)viewModel
 {
     self.myVM = viewModel;
+    @PGWeakObj(self);
     [self.KVOController observe:viewModel keyPaths:@[@"isLimit"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"isLimit"]) {
             BOOL isExistRecomder = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
             if (isExistRecomder) {
-                self.myVisibility = MyVisibility_Gone;
+                selfWeak.myVisibility = MyVisibility_Gone;
             } else {
-                self.myVisibility = MyVisibility_Visible;
+                selfWeak.myVisibility = MyVisibility_Visible;
             }
         }
     }];

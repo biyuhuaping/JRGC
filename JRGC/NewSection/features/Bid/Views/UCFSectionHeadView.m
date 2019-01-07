@@ -61,34 +61,36 @@
 
 - (void)showView:(UCFBidViewModel *)viewModel
 {
+    @PGWeakObj(self);
     [self.KVOController observe:viewModel keyPaths:@[@"prdName",@"prdLabelsList",@"platformSubsidyExpense",@"holdTime",@"guaranteeCompanyName",@"fixedDate"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"prdName"]) {
-            _titleLab.text =  [change objectSafeForKey:NSKeyValueChangeNewKey];
-            [_titleLab sizeToFit];
+            selfWeak.titleLab.text =  [change objectSafeForKey:NSKeyValueChangeNewKey];
+            [selfWeak.titleLab sizeToFit];
         } else if ([keyPath isEqualToString:@"platformSubsidyExpense"]) {
            NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (markStr.length > 0) {
-                self.imageView1.myVisibility = MyVisibility_Visible;
-                self.imageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
+                selfWeak.imageView1.myVisibility = MyVisibility_Visible;
+                selfWeak.imageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
             }
         } else if ([keyPath isEqualToString:@"guaranteeCompanyName"]) {
            NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (markStr.length > 0) {
-                self.imageView2.myVisibility = MyVisibility_Visible;
-                self.imageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
+                selfWeak.imageView2.myVisibility = MyVisibility_Visible;
+                selfWeak.imageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
             }
         } else if ([keyPath isEqualToString:@"holdTime"]) {
            NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (markStr.length > 0) {
-                self.imageView3.myVisibility = MyVisibility_Visible;
-                self.imageView3.image = [UIImage imageNamed:@"invest_icon_ling"];
+                selfWeak.imageView3.myVisibility = MyVisibility_Visible;
+                selfWeak.imageView3.image = [UIImage imageNamed:@"invest_icon_ling"];
             }
         } else if ([keyPath isEqualToString:@"fixedDate"]) {
            NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (markStr.length > 0) {
-                self.imageView4.myVisibility = MyVisibility_Visible;
-                self.imageView4.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
+                selfWeak.imageView4.myVisibility = MyVisibility_Visible;
+                selfWeak.imageView4.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
             }
         }
     }];

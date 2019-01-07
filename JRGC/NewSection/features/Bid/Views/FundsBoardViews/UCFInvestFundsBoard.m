@@ -52,54 +52,62 @@
 @end
 
 @implementation UCFInvestFundsBoard
+- (void)dealloc
+{
+    NSLog(@"111");
+}
 - (void)showView:(UCFBidViewModel *)viewModel
 {
     self.myVM = viewModel;
+    @PGWeakObj(self);
     [self.KVOController observe:viewModel keyPaths:@[@"totalFunds",@"myFundsNum",@"myBeansNum",@"expectedInterestNum",@"inputViewPlaceStr",@"allMoneyInputNum",@"isCompanyAgent"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"myFundsNum"]) {
             NSString *funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
-            _mybalanceNumLab.text = funds;
-            [_mybalanceNumLab sizeToFit];
+            selfWeak.mybalanceNumLab.text = funds;
+            [selfWeak.mybalanceNumLab sizeToFit];
         } else if ([keyPath isEqualToString:@"totalFunds"]) {
             NSString *totalFunds = [change objectSafeForKey:NSKeyValueChangeNewKey];
-            _KeYongMoneyLabel.text = totalFunds;
-            [_KeYongMoneyLabel sizeToFit];
+            if (totalFunds.length > 0) {
+                selfWeak.KeYongMoneyLabel.text = totalFunds;
+                [selfWeak.KeYongMoneyLabel sizeToFit];
+            }
+
         } else if ([keyPath isEqualToString:@"myBeansNum"]) {
             NSString *myBeansNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
-            _beanNumLab.text = myBeansNum;
-            [_beanNumLab sizeToFit];
+            selfWeak.beanNumLab.text = myBeansNum;
+            [selfWeak.beanNumLab sizeToFit];
             NSString *num = [myBeansNum stringByReplacingOccurrencesOfString:@"¥" withString:@""];
             if ([num doubleValue] >= 0.01) {
-                _beanSwitch.on = YES;
-                _beanSwitch.userInteractionEnabled = YES;
+                selfWeak.beanSwitch.on = YES;
+                selfWeak.beanSwitch.userInteractionEnabled = YES;
             } else {
-                _beanSwitch.on = NO;
-                _beanSwitch.userInteractionEnabled = NO;
+                selfWeak.beanSwitch.on = NO;
+                selfWeak.beanSwitch.userInteractionEnabled = NO;
             }
-            [self changeSwitchStatue:_beanSwitch];
+            [selfWeak changeSwitchStatue:selfWeak.beanSwitch];
         } else if ([keyPath isEqualToString:@"inputViewPlaceStr"]) {
             NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
-            _investMoneyTextfield.placeholder = inputViewPlaceStr;
-            [_investMoneyTextfield sizeToFit];
+            selfWeak.investMoneyTextfield.placeholder = inputViewPlaceStr;
+            [selfWeak.investMoneyTextfield sizeToFit];
         } else if ([keyPath isEqualToString:@"expectedInterestNum"]) {
             NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
-            _interestNumLab.text = [inputViewPlaceStr isEqualToString:@""] ? @"¥0.00" : inputViewPlaceStr;
-            [_interestNumLab sizeToFit];
+            selfWeak.interestNumLab.text = [inputViewPlaceStr isEqualToString:@""] ? @"¥0.00" : inputViewPlaceStr;
+            [selfWeak.interestNumLab sizeToFit];
         } else if ([keyPath isEqualToString:@"allMoneyInputNum"]) {
             NSString *allMoneyInputNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (allMoneyInputNum.length > 0) {
-                _investMoneyTextfield.text = allMoneyInputNum;
-                [self textfieldLength:_investMoneyTextfield];
+                selfWeak.investMoneyTextfield.text = allMoneyInputNum;
+                [selfWeak textfieldLength:selfWeak.investMoneyTextfield];
             }
         } else if ([keyPath isEqualToString:@"isCompanyAgent"]) {
             BOOL isCompanyAgent = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
             if (isCompanyAgent) {
-                _beansBoard.myVisibility = MyVisibility_Gone;
-                _totalKeYongTipLabel.text = @"";
+                selfWeak.beansBoard.myVisibility = MyVisibility_Gone;
+                selfWeak.totalKeYongTipLabel.text = @"";
  
             } else {
-                _beansBoard.myVisibility = MyVisibility_Visible;
+                selfWeak.beansBoard.myVisibility = MyVisibility_Visible;
             }
 
         }

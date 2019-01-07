@@ -27,6 +27,7 @@
 - (void)showView:(UCFBidViewModel *)viewModel
 {
     self.myVM = viewModel;
+    @PGWeakObj(self);
     [self.KVOController observe:viewModel keyPaths:@[@"limitAmountMess",@"limitAmountNum",@"cfcaContractName",@"contractMsg"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"limitAmountMess"]) {
@@ -34,29 +35,29 @@
             if (limitAmountMess.length > 0) {
                 NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:limitAmountMess];
                 text.yy_color = UIColorWithRGB(0x999999);
-                _limitAmountMessLabel.text = limitAmountMess;
-                [_limitAmountMessLabel sizeToFit];
-                _limitAmountMessLabel.attributedText = text;
-                self.firstSectionView.myVisibility = MyVisibility_Visible;
+                selfWeak.limitAmountMessLabel.text = limitAmountMess;
+                [selfWeak.limitAmountMessLabel sizeToFit];
+                selfWeak.limitAmountMessLabel.attributedText = text;
+                selfWeak.firstSectionView.myVisibility = MyVisibility_Visible;
             } else {
-                self.firstSectionView.myVisibility = MyVisibility_Gone;
+                selfWeak.firstSectionView.myVisibility = MyVisibility_Gone;
             }
         } else if ([keyPath isEqualToString:@"limitAmountNum"]) {
             NSString *limitAmountNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (limitAmountNum.length > 0) {
-                NSString *string = [_limitAmountMessLabel.attributedText string];
+                NSString *string = [selfWeak.limitAmountMessLabel.attributedText string];
                 NSMutableAttributedString *attri_str = [[NSMutableAttributedString alloc] initWithString:string];
                 attri_str.yy_color = UIColorWithRGB(0x999999);
-                [attri_str yy_setColor:UIColorWithRGB(0xf3ab47) range:[_limitAmountMessLabel.text rangeOfString:limitAmountNum]];
-                _limitAmountMessLabel.attributedText = attri_str;
-                [_limitAmountMessLabel sizeToFit];
+                [attri_str yy_setColor:UIColorWithRGB(0xf3ab47) range:[selfWeak.limitAmountMessLabel.text rangeOfString:limitAmountNum]];
+                selfWeak.limitAmountMessLabel.attributedText = attri_str;
+                [selfWeak.limitAmountMessLabel sizeToFit];
             }
         } else if ([keyPath isEqualToString:@"cfcaContractName"]) {
             NSString *cfcaContractName = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (cfcaContractName.length > 0) {
-                _secondSectionView.myVisibility = MyVisibility_Visible;
+                selfWeak.secondSectionView.myVisibility = MyVisibility_Visible;
             } else {
-                _secondSectionView.myVisibility = MyVisibility_Gone;
+                selfWeak.secondSectionView.myVisibility = MyVisibility_Gone;
             }
         } else if ([keyPath isEqualToString:@"contractMsg"]) {
             NSArray *contractMsg = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
@@ -66,22 +67,22 @@
                     NSString *tmpStr = [[contractMsg objectAtIndex:i] valueForKey:@"contractName"];
                     totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
                 }
-                self.contractMsgLabel.text = totalStr;
-                __weak typeof(self) weakSelf = self;
+                selfWeak.contractMsgLabel.text = totalStr;
+//                __weak typeof(self) weakSelf = self;
                 for (int i = 0; i < contractMsg.count; i++) {
                     NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsg objectAtIndex:i] valueForKey:@"contractName"]] ;
-                    [self.contractMsgLabel setFontColor:UIColorWithRGB(0x4aa1f9) range:[totalStr rangeOfString:tmpStr]];
+                    [selfWeak.contractMsgLabel setFontColor:UIColorWithRGB(0x4aa1f9) range:[totalStr rangeOfString:tmpStr]];
                     
-                    [self.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+                    [selfWeak.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
                         NSLog(@"111");
-                        [weakSelf totalString:linkModel.linkString];
+                        [selfWeak totalString:linkModel.linkString];
                     }];
                     
                 }
-                _fourSectionView.myVisibility = MyVisibility_Visible;
+                selfWeak.fourSectionView.myVisibility = MyVisibility_Visible;
           
             } else {
-                _fourSectionView.myVisibility = MyVisibility_Gone;
+                selfWeak.fourSectionView.myVisibility = MyVisibility_Gone;
             }
         }
     }];

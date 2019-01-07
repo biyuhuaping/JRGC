@@ -36,7 +36,7 @@
 @property (assign, nonatomic) BOOL isHideNavigationBar;
 @property (strong, nonatomic) NSString *baseTitleType;
 @property (strong, nonatomic) NSString *baseTitleText;
-@property (strong, nonatomic) id rootVc;
+@property (weak, nonatomic) id rootVc;
 
 @property(assign,nonatomic) SelectAccoutType accoutType;//选择的账户 默认是P2P账户 hqy添加
 
