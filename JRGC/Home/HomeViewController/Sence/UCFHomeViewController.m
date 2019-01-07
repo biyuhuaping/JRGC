@@ -797,7 +797,7 @@
 }
 - (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model
 {
-        self.accoutType = SelectAccoutTypeP2P;
+    self.accoutType = SelectAccoutTypeP2P;
     if([model.type intValue] == 14) //批量出借标识
     {
         HSHelper *helper = [HSHelper new];
