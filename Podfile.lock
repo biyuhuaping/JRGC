@@ -14,21 +14,45 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - YTKNetwork (2.0.4):
-    - AFNetworking (~> 3.0)
+  - IQKeyboardManager (6.2.0)
+  - KVOController (1.2.0)
+  - MyLayout (1.6.1)
+  - RealReachability (1.3.0):
+    - RealReachability/Connection (= 1.3.0)
+    - RealReachability/Ping (= 1.3.0)
+  - RealReachability/Connection (1.3.0)
+  - RealReachability/Ping (1.3.0)
+  - YYModel (1.0.4)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
-  - YTKNetwork (~> 2.0.4)
+  - AFNetworking (~> 3.0)
+  - IQKeyboardManager
+  - KVOController
+  - MyLayout
+  - RealReachability
+  - YYModel
+  - YYText
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
-    - YTKNetwork
+    - IQKeyboardManager
+    - KVOController
+    - MyLayout
+    - RealReachability
+    - YYModel
+    - YYText
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  YTKNetwork: df8a7a5597bda1664a4efaa7ef871a818a887fe0
+  IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
+  KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
+  MyLayout: 833c4b24a69a1e3fd33abe827eeb2fdf19193408
+  RealReachability: eae9c58d2db52fadd8e1cba4b5d4c028454fbc47
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: f41d3567611ee9b749ee35c019f8b59f85e064dd
+PODFILE CHECKSUM: 1b42411c7cb907dc4e9aa9dce0e336f6f66adb47
 
 COCOAPODS: 1.6.0.beta.2
