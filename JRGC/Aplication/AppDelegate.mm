@@ -77,6 +77,7 @@
 //    出现这个现象的直接原因是 tabBar 内的按钮 UITabBarButton 被设置了错误的 frame，frame.size 变为 (0, 0) 导致的。
     [[UITabBar appearance] setTranslucent:NO];
     [self IQBoardSetting];
+    [self initializeLog];//初始化日志
     return YES;
 }
 #pragma mark IQBoardSetting
@@ -1053,6 +1054,53 @@
 //    #warning 灰度测试重新加cookies
     [Common addTestCookies];
 }
+#pragma mark - 初始化日志
+- (void)initializeLog
+{
+    DDLogDetailedMessage *logFormatter = [[DDLogDetailedMessage alloc] init];
+    [[DDTTYLogger sharedInstance] setLogFormatter:logFormatter];
+    
+    [DDLog addLogger:[DDTTYLogger sharedInstance]]; // TTY = Xcode console
+    //    [DDLog addLogger:[DDASLLogger sharedInstance]]; // ASL = Apple System Logs
+    
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; // File Logger
+    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+    [DDLog addLogger:fileLogger];
+    
+    //1> 开启使用XcodeColors
+    setenv("XcodeColors", "YES", 0);
+    //2 >检测是否开启 XcodeColors
+    char *xcode_colors = getenv("XcodeColors");
+    if (xcode_colors && (strcmp(xcode_colors, "YES")) == 0) {
+        // XcodeColors is installed and enabled!
+        DDLogDebug(@"XcodeColors is installed and enabled");
+    }
+    //3 >开启DDLog 颜色
+    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor blueColor] backgroundColor:nil forFlag:DDLogFlagVerbose];
+    
+    UIColor *rc = [UIColor colorWithRed:(89/255.0) green:(120/255.0) blue:(218/255.0) alpha:1.0];
+    [[DDTTYLogger sharedInstance] setForegroundColor:rc backgroundColor:nil forFlag:DDLogFlagInfo];
+    
+    UIColor *gr = [UIColor colorWithRed:(25/255.0) green:(210/255.0) blue:(153/255.0) alpha:1.0];
+    [[DDTTYLogger sharedInstance] setForegroundColor:gr backgroundColor:nil forFlag:DDLogFlagVerbose];
+    
+    UIColor *bl = [UIColor colorWithRed:(30/255.0) green:(231/255.0) blue:(249/255.0) alpha:1.0];
+    [[DDTTYLogger sharedInstance] setForegroundColor:bl backgroundColor:nil forFlag:DDLogFlagDebug];
+    
+    UIColor *ye = [UIColor colorWithRed:(249/255.0) green:(224/255.0) blue:(147/255.0) alpha:1.0];
+    [[DDTTYLogger sharedInstance] setForegroundColor:ye backgroundColor:nil forFlag:DDLogFlagWarning];
+    
+    UIColor *re = [UIColor colorWithRed:(234/255.0) green:(151/255.0) blue:(149/255.0) alpha:1.0];
+    [[DDTTYLogger sharedInstance] setForegroundColor:re backgroundColor:nil forFlag:DDLogFlagError];
+    
+    DDLogVerbose(@"Verbose");
+    DDLogDebug(@"Debug");
+    DDLogInfo(@"Info");
+    DDLogWarn(@"Warn");
+    DDLogError(@"Error");
+}
 
 @end
 // iOS10.2 之后如果info.plist里面的ATS 为YES 的情况下，也需要加这个
@@ -1061,4 +1109,5 @@
 {
     return YES;
 }
+
 @end
