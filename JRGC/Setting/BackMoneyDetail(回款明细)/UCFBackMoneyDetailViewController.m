@@ -147,7 +147,7 @@
 //设置按钮颜色和下划线
 - (void)setBtnAndLine:(NSInteger)offset{
     _index = (NSInteger)offset/ScreenWidth;
-    DBLOG(@"%ld",(long)_index);
+    DDLogDebug(@"%ld",(long)_index);
     
     switch (_index) {
         case 0:{
@@ -345,7 +345,7 @@
     NSString *rstcode = dic[@"status"];
     NSString *rsttext = dic[@"statusdes"];
     
-    DBLOG(@"回款明细页：%@",dic);
+    DDLogDebug(@"回款明细页：%@",dic);
     NSArray *tempArr = dic[@"pageData"][@"result"];
     if (tag.intValue == kSXTagPrdOrderRefundLsit) {
         if ([rstcode intValue] == 1) {

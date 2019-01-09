@@ -48,7 +48,7 @@
 }
 
 - (IBAction)submitDataButton:(id)sender {
-    DBLOG(@"设置交易密码")
+    DDLogDebug(@"设置交易密码");
     if (_fromVC == 1) {
 //        [P2PWalletHelper sharedManager].source = GetWalletDataOpenHS;
         [self dismissViewControllerAnimated:YES completion:^{

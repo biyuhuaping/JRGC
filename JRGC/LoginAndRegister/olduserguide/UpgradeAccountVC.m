@@ -707,12 +707,12 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    //    DBLOG(@"新用户开户：%@",data);
+    //    DDLogDebug(@"新用户开户：%@",data);
     
     id ret = dic[@"ret"];
     if (tag.intValue == kSXTagGetOpenAccountInfo) {//获取徽商开户页面信息
         if ([ret boolValue]) {
-            DBLOG(@"%@",dic[@"data"]);
+            DDLogDebug(@"%@",dic[@"data"]);
             NSString *cfcaContractNameStr = [dic[@"data"] objectSafeForKey:@"cfcaContractName"];
             NSString *cfcaContractUrlStr = [dic[@"data"] objectSafeForKey:@"cfcaContractUrl"];
             if(![cfcaContractNameStr isEqualToString:@""]){
@@ -826,7 +826,7 @@
                 weakSelf.buttonTopConstraint.constant = 50;
             }];
             _isSendVoiceMessage = YES;
-            DBLOG(@"%@",dic[@"data"]);
+            DDLogDebug(@"%@",dic[@"data"]);
             [_getCodeBtn setTitle:@"60秒后重新获取" forState:UIControlStateNormal];
             _getCodeBtn.userInteractionEnabled = YES;
             [_getCodeBtn setTitleColor:UIColorWithRGB(0xcccccc) forState:UIControlStateNormal];
@@ -850,7 +850,7 @@
     }
     else if (tag.intValue == kSXTagOpenAccount) {//徽商绑定银行卡
         if ([ret boolValue]) {
-            DBLOG(@"%@",dic[@"data"]);
+            DDLogDebug(@"%@",dic[@"data"]);
             if (self.accoutType == SelectAccoutTypeP2P) {
                 [UserInfoSingle sharedManager].openStatus = 3;
             } else {

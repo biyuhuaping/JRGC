@@ -21,7 +21,7 @@
     }
     else return NO;
     
-//    DLog(@"%f %f", lastLoginS, currentLoginS);
+//    DDLogDebug(@"%f %f", lastLoginS, currentLoginS);
     return YES;
 }
 

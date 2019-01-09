@@ -14,6 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - CocoaLumberjack (3.4.2):
+    - CocoaLumberjack/Default (= 3.4.2)
+    - CocoaLumberjack/Extensions (= 3.4.2)
+  - CocoaLumberjack/Default (3.4.2)
+  - CocoaLumberjack/Extensions (3.4.2):
+    - CocoaLumberjack/Default
   - IQKeyboardManager (6.2.0)
   - KVOController (1.2.0)
   - MyLayout (1.6.1)
@@ -27,6 +33,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - CocoaLumberjack
   - IQKeyboardManager
   - KVOController
   - MyLayout
@@ -37,6 +44,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - CocoaLumberjack
     - IQKeyboardManager
     - KVOController
     - MyLayout
@@ -46,6 +54,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   MyLayout: 833c4b24a69a1e3fd33abe827eeb2fdf19193408
@@ -53,6 +62,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 1b42411c7cb907dc4e9aa9dce0e336f6f66adb47
+PODFILE CHECKSUM: b50c7fba42d08e5b8c3f03f8d7cc6adf1adaa9c9
 
 COCOAPODS: 1.6.0.beta.2

@@ -166,7 +166,7 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 {
 //    NSString *data = (NSString *)result;
 //    NSMutableDictionary *dic = [data objectFromJSONString];
-//    DBLOG(@"UCFSettingViewController : %@",dic);
+//    DDLogDebug(@"UCFSettingViewController : %@",dic);
 //    NSString *pictimes = dic[@"picTimes"];
 //    if ([pictimes length] > 0) {
 //        [Common checkCachePicIsNeedsClear:pictimes PicType:BannerMorePic];

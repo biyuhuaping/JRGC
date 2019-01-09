@@ -89,7 +89,7 @@
     
     dispatch_queue_t queue= dispatch_get_main_queue();
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.1 * NSEC_PER_SEC)), queue, ^{
-        DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+        DDLogDebug(@"主队列--延迟执行------%@",[NSThread currentThread]);
         [[MongoliaLayerCenter sharedManager] showLogic];
         [MongoliaLayerCenter sharedManager].tableView = self.homeListVC.tableView;
         
@@ -163,13 +163,13 @@
     CGPoint curPoint = [recognizer locationInView:self.view];
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
-            DLog(@"press long began");
+            DDLogDebug(@"press long began");
             break;
         case UIGestureRecognizerStateEnded:
-            DLog(@"press long ended");
+            DDLogDebug(@"press long ended");
             break;
         case UIGestureRecognizerStateFailed:
-            DLog(@"press long failed");
+            DDLogDebug(@"press long failed");
             break;
         case UIGestureRecognizerStateChanged:
             //移动
@@ -178,7 +178,7 @@
             _dragBtn.frame = frame;
             break;
         default:
-            DLog(@"press long else");
+            DDLogDebug(@"press long else");
             break;
     }
 }

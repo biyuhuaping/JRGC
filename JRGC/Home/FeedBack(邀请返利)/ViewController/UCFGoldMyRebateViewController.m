@@ -197,7 +197,7 @@
 //设置按钮颜色和下划线
 - (void)setBtnAndLine:(NSInteger)offset{
     _index = (NSInteger)offset/ScreenWidth;
-    DBLOG(@"%ld",(long)_index);
+    DDLogDebug(@"%ld",(long)_index);
     
     switch (_index) {
         case 0:{
@@ -605,7 +605,7 @@
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     NSString *rsttext = dic[@"statusdes"];
-    DBLOG(@"我的返利页：%@",dic);
+    DDLogDebug(@"我的返利页：%@",dic);
     //（邀请返利-邀请投资明细）
      if (tag.intValue == kSXTagGoldFriendList) {
         NSArray *tempArr = dic[@"data"][@"pageData"][@"result"];

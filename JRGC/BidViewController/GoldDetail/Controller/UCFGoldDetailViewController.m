@@ -1077,7 +1077,7 @@
             [self addTopSegment];
         }
     }  else if (tag == 1001) {
-        DLog(@"111111scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
+        DDLogDebug(@"111111scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
         if (scrollView.contentOffset.y > offsetFloat) {
             if (!_oneScrollPull) {
                 [self addTopSegment];

@@ -65,7 +65,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *  urlStr = request.URL.absoluteString ;
-    DLog(@"urlStr----->>>> %@",urlStr);
+    DDLogDebug(@"urlStr----->>>> %@",urlStr);
     if ([urlStr rangeOfString:@"toReturnMoneyList.shtml"].location != NSNotFound) {
         UCFCouponViewController *subVC = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
         [self.navigationController pushViewController:subVC animated:YES];
@@ -100,7 +100,7 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    DBLOG(@"dic ===>>>> %@",dic);
+    DDLogDebug(@"dic ===>>>> %@",dic);
     NSString *rstcode = [dic objectSafeForKey:@"status"];
 //    NSString *rsttext = [dic objectSafeForKey:@"statusdes"];
     

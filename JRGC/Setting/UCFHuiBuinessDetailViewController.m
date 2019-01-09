@@ -75,12 +75,12 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    //    DBLOG(@"新用户开户：%@",data);
+    //    DDLogDebug(@"新用户开户：%@",data);
     
     id ret = dic[@"ret"];
     if (tag.intValue == kSXTagGetHSAccountList) {
         if (ret) {
-//            DBLOG(@"%@",dic[@"data"]);
+//            DDLogDebug(@"%@",dic[@"data"]);
             NSDictionary *dataDic  = [dic objectSafeDictionaryForKey:@"data"];
             NSArray *resultListArr = [[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             BOOL hasNextP = [[[[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];

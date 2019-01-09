@@ -18,9 +18,49 @@
 #import "UserInfoSingle.h"
 #import "BlockUIAlertView.h"
 #import "UIView+Extension.h"
-#import "MyLayout.h"
 #import "ModelTransition.h"
 #import "UIDic+Safe.h"
+
+
+//宏配置
+#import "Macro.h"
+//日志管理开关
+#import <CocoaLumberjack/CocoaLumberjack.h>
+#import "ConfigGuration.h"
+//布局
+#import "MyLayout.h"
+
+#import "RequestConstant.h"
+
+#import "BaseModel.h"
+
+#import "HUDManager.h"
+
+#import "YTKBatchRequest+AnimatingAccessory.h"
+
+#import "YTKChainRequest+AnimatingAccessory.h"
+
+#import "YTKBaseRequest+AnimatingAccessory.h"
+
+#import "YTKAnimatingRequestAccessory.h"
+
+
+#import "DDLogDetailedMessage.h"
+//导航
+//#import "UINavigationController+FDFullscreenPopGesture.h"
+//#import "RTRootNavigationController.h"
+//#import "UIViewController+RTRootNavigationController.h"
+
+//YYModel 转换
+#import "YYModel.h"
+
+#import <YYText/YYText.h>
+
+//颜色管理
+#import "Color.h"
+
+#import "AFNetworking.h"
+
 
 #define XPOS 15
 #define YPOS 25
@@ -111,29 +151,6 @@ shared##className = [[self alloc] init]; \
 }); \
 return shared##className; \
 }
-//适配ios11
-#define  adjustsScrollViewInsets(scrollView)\
-do {\
-_Pragma("clang diagnostic push")\
-_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")\
-if ([scrollView respondsToSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:")]) {\
-NSMethodSignature *signature = [UIScrollView instanceMethodSignatureForSelector:@selector(setContentInsetAdjustmentBehavior:)];\
-NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];\
-NSInteger argument = 2;\
-invocation.target = scrollView;\
-invocation.selector = @selector(setContentInsetAdjustmentBehavior:);\
-[invocation setArgument:&argument atIndex:2];\
-[invocation retainArguments];\
-[invocation invoke];\
-}\
-_Pragma("clang diagnostic pop")\
-} while (0)
-
-#pragma mark - weekSelf
-//@PGWeakObj(self);
-//@PGStrongObj(self);
-#define PGWeakObj(o) try{}@finally{} __weak typeof(o) o##Weak = o;
-#define PGStrongObj(o) try{}@finally{} __strong typeof(o) o = o##Weak;
 
 #define UUID            @"userId"
 #define TIME            @"time"
@@ -275,25 +292,6 @@ _Pragma("clang diagnostic pop")\
 #define ZXTIP2 @"请先设置尊享徽商存管账户交易密码"
 #define P2PTIP1 @"请先开通微金徽商存管账户"
 #define P2PTIP2 @"请先设置微金徽商存管账户交易密码"
-//================== 调试宏 ==================
-#ifdef DEBUG
-# define DBLOG(format, ...) printf("\n\n--->********************打印内容******************************\n--->class: %p \n--->文件名: < %s:(行号%d) > \n--->函数名: %s \n--->打印数据:\n%s\n********************打印结束******************************<---\n\n\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] );
-
-# define DBLog(format, ...) printf("\n\n--->********************打印内容******************************\n--->class: %p \n--->文件名: < %s:(行号%d) > \n--->函数名: %s \n--->打印数据:\n%s\n********************打印结束******************************<---\n\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] );
-#else
-# define DBLOG(...);
-# define DBLog(...);
-#endif
-
-
-
-#ifdef DEBUG
-#define DLog(...) NSLog(__VA_ARGS__)
-#else
-#define DLog(...) {}
-#endif
-
-
 
 
 #define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width

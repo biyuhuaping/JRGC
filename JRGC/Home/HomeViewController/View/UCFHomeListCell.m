@@ -101,7 +101,7 @@
                 self.circleProgressView.progress = progress;
         }
         else {
-            DBLOG(@"type : %@ %@", presenter.item.type, presenter.item.prdName);
+            DDLogDebug(@"type : %@ %@", presenter.item.type, presenter.item.prdName);
             progress = [presenter.item.completeLoan floatValue]/[presenter.item.borrowAmount floatValue];
             if (progress < 0 || progress > 1) {
                 progress = 1;
@@ -111,7 +111,7 @@
         }
         NSInteger status = [presenter.item.status integerValue];
     
-        DBLOG(@"type : %@", presenter.item.type);
+        DDLogDebug(@"type : %@", presenter.item.type);
         if([presenter.item.type isEqualToString:@"3"])
         {
 //            self.goldTtileThird.hidden = NO;
@@ -221,7 +221,7 @@
         
         
         NSInteger status = [presenter.item.status integerValue];
-        DBLOG(@"type : %@", presenter.item.type);
+        DDLogDebug(@"type : %@", presenter.item.type);
         //            self.goldTtileThird.hidden = YES;
         self.timeLabel.font = [UIFont systemFontOfSize:12];
         self.repayModelLabel.font = [UIFont systemFontOfSize:12];
@@ -555,7 +555,7 @@
     
     
 //    self.angleView.angleStatus = microMoneyModel.status;
-//    //        DBLOG(@"%@", model.status);
+//    //        DDLogDebug(@"%@", model.status);
 //    if (microMoneyModel.prdLabelsList.count>0) {
 //        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
 //        if ([projectLabel.labelPriority integerValue] == 1) {

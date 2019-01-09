@@ -98,12 +98,12 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    //    DBLOG(@"新用户开户：%@",data);
+    //    DDLogDebug(@"新用户开户：%@",data);
     
     id ret = dic[@"ret"];
     if (tag.intValue == kSXTagGetHSAccountInfo) {
         if ([ret boolValue]) {
-//            DBLOG(@"%@",dic[@"data"]);
+//            DDLogDebug(@"%@",dic[@"data"]);
             NSDictionary *accountDic = [[dic objectSafeForKey:@"data"] objectSafeForKey:@"hsAccountInfo"];
             NSString *accountName = [accountDic objectSafeForKey:@"accountName"];
             if (accountName.length > 0) {

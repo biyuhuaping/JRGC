@@ -248,7 +248,7 @@
 //    self.settingBaseBgView.hidden = YES;
     
     NSString *data = (NSString *)result;
-    //    DBLOG(@"首页获取最新项目列表：%@",data);
+    //    DDLogDebug(@"首页获取最新项目列表：%@",data);
     [_validCodeTextField resignFirstResponder];
     [_modifyPhoneTextField resignFirstResponder];
     
@@ -262,7 +262,7 @@
     if (tag.intValue == kSXTagIdentifyCode) {
         bool ret = [dic[@"ret"] boolValue];
         if (ret) {
-            DBLOG(@"%@",dic[@"data"]);
+            DDLogDebug(@"%@",dic[@"data"]);
 //            [_getValidCodeButton setTitle:@"60秒后重新获取" forState:UIControlStateDisabled];
             _getValidCodeButton.enabled = NO;
             

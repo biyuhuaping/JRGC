@@ -613,7 +613,7 @@
     [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
-    DBLOG(@"UCFP2POrHonerAccoutViewController : %@",dic);
+    DDLogDebug(@"UCFP2POrHonerAccoutViewController : %@",dic);
     BOOL ret = [[dic objectSafeForKey:@"ret"] boolValue];
     NSString *rsttext =  [dic objectSafeForKey:@"message"];
     switch (tag.integerValue) {

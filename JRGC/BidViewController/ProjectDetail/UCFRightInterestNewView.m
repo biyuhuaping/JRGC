@@ -806,7 +806,7 @@
         UILabel *countLabel = (UILabel*)[cell.contentView viewWithTag:103];
         UIImageView *phoneImageView = (UIImageView*)[cell.contentView viewWithTag:104];
         
-        DLog(@"%@",[_dataDic objectForKey:@"prdOrders"]);
+        DDLogDebug(@"%@",[_dataDic objectForKey:@"prdOrders"]);
         NSString *titleStr = [[[_dataDic objectForKey:@"prdOrders"] objectAtIndex:[indexPath row]]objectForKey:@"leftRealName"];
         //            titleStr = [titleStr stringByReplacingCharactersInRange:NSMakeRange(3, 2) withString:@"**"];
         titleLabel.text = titleStr;

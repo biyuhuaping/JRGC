@@ -175,7 +175,7 @@
 //设置按钮颜色和下划线
 - (void)setBtnAndLine:(NSInteger)offset{
     _index = (NSInteger)offset/ScreenWidth;
-    DBLOG(@"%ld",(long)_index);
+    DDLogDebug(@"%ld",(long)_index);
     
     //滑动下划线
     [UIView animateWithDuration:0.25 animations:^{
@@ -385,12 +385,12 @@
     [_tableView3.footer endRefreshing];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSString *data = (NSString *)result;
-    //DBLOG(@"首页获取最新项目列表：%@",data);
+    //DDLogDebug(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"status"];
     NSString *rsttext = dic[@"statusdes"];
-    DBLOG(@"我的债权列表请求结果：%@",dic);
+    DDLogDebug(@"我的债权列表请求结果：%@",dic);
     //zrc 修改 是否有下一页，取值错误
 //    BOOL hasNextPage = [dic[@"data"][@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
     BOOL hasNextPage = [dic[@"pageData"][@"pagination"][@"hasNextPage"] boolValue];

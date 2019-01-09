@@ -73,7 +73,7 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
 - (void)setMoreColor:(UIColor *)color string:(NSString *)string
 {
     if (self.text == nil) {
-        DBLOG(@"当前内容为空");
+        DDLogDebug(@"当前内容为空");
         return;
     }
     NSMutableString *strTemp = [[NSMutableString alloc] initWithString:self.text];
@@ -291,7 +291,7 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
     
     CFRelease(frame);
     CGPathRelease(path);
-    DBLog(@"点击第%ld个字符",idx);
+    DDLogDebug(@"点击第%ld个字符",idx);
     return idx;
 }
 

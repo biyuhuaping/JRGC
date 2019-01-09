@@ -423,7 +423,7 @@
 
 - (void)makeContractMsg:(NSDictionary*)msg tp:(NSString*)tp
 {
-    DLog(@"%@",msg);
+    DDLogDebug(@"%@",msg);
     NSMutableArray *returnArray = [NSMutableArray arrayWithCapacity:3];
     if ([tp isEqualToString:@"1"] || [tp isEqualToString:@"2"]) {
         if ([UCFToolsMehod isNullOrNilWithString:[msg valueForKey:@"borrowContractName"]]) {

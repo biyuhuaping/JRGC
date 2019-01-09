@@ -136,7 +136,7 @@
 
 - (void)setOffset:(CGFloat)offset
 {
-    DBLOG(@"%f", offset);
+    DDLogDebug(@"%f", offset);
     _offset = offset;
     
     if (offset < 40) {

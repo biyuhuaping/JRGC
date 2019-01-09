@@ -552,7 +552,7 @@
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"status"];
     if (tag.intValue == kSXTagColIntoDealBatch){
-        DLog(@"dic---->>>>%@",dic);
+        DDLogDebug(@"dic---->>>>%@",dic);
         [self performSelector:@selector(hideAllHUDsForView) withObject:nil afterDelay:2];
         if ([[dic valueForKey:@"ret"] integerValue] == 1) {
             self.dataDict = [dic objectSafeDictionaryForKey:@"data"];

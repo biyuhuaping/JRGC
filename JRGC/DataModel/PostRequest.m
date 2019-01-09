@@ -71,7 +71,7 @@
             return imagePath;
         }
         NSString *string = [[[NSString alloc] initWithData:data encoding:_enc] autorelease];
-        DBLog(@"%@请求返回数据:%@",self.owner, string);
+        DDLogDebug(@"%@请求返回数据:%@",self.owner, string);
         return string;
     } else {
         return nil;
@@ -94,7 +94,7 @@
         [_request addRequestHeader:@"jrgc-umark" value:@"0"];
     }
     [_request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded;charset=UTF-8"];
-    DLog(@"post data:%@",data);
+    DDLogDebug(@"post data:%@",data);
     // 重要
     _request.tag = _tag;
      NSData *sourceData = [data dataUsingEncoding:_enc];

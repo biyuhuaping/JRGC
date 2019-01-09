@@ -828,7 +828,7 @@
     if (_listType == 1) {
         NSDictionary *dataDict = [self.beansArray objectAtIndex:index];
         NSString * idMark = [NSString stringWithFormat:@"%ld",(long)[[dataDict objectForKey:@"id"] integerValue]];
-        DLog(@"idMark == %@",idMark);
+        DDLogDebug(@"idMark == %@",idMark);
         double xuYaoTouZiMoney = [[dataDict objectForKey:@"investMultip"] intValue];
         if ([self.beansSelectArray containsObject:idMark]) {
             [self.beansSelectArray removeAllObjects];
@@ -849,7 +849,7 @@
     } else {
         NSDictionary *dataDict = [self.youHuiArray objectAtIndex:index];
         NSString * idMark = [NSString stringWithFormat:@"%ld",(long)[[dataDict objectForKey:@"id"] integerValue]];
-        DLog(@"idMark == %@",idMark);
+        DDLogDebug(@"idMark == %@",idMark);
         double vaLueMoney = [[dataDict objectForKey:@"beanCount"] intValue]/100.0f;
         double xuYaoTouZiMoney = [[dataDict objectForKey:@"investMultip"] intValue];
         if ([self.selectedArray containsObject:idMark]) {

@@ -133,7 +133,7 @@
     
 //    if (self.theConnection) {
 //        //        SAFE_RELEASE(theConnection);
-//        DBLOG(@"safe release connection");
+//        DDDLogDebugDebug(@"safe release connection");
 //    }
     //    if (loadNotFinishCode == NSURLErrorCancelled)  {
     //        return;

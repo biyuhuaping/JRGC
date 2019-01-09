@@ -78,7 +78,7 @@
 {
     dispatch_queue_t queue= dispatch_get_main_queue();
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
-        DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+        DDLogDebug(@"主队列--延迟执行------%@",[NSThread currentThread]);
         self.refreshBtn.userInteractionEnabled = YES;
         [self setRealGoldPrice];
         [self endAnimation];

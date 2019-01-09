@@ -350,7 +350,7 @@
 #pragma mark 左滑点击按钮的操作
 -(BOOL) swipeTableCell:(MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion
 {
-    DLog(@"Delegate: button tapped, %@ position, index %d, from Expansion: %@",
+    DDLogDebug(@"Delegate: button tapped, %@ position, index %d, from Expansion: %@",
           direction == MGSwipeDirectionLeftToRight ? @"left" : @"right", (int)index, fromExpansion ? @"YES" : @"NO");
     
     if (direction == MGSwipeDirectionRightToLeft && index == 0) { //删除
@@ -448,7 +448,7 @@
             [deleteMessageIdStr appendFormat:@",%@",messageCenterModel.messageId];
         }
     }
-    DBLOG(@"deleteMessageIdStr----->>>>>%@",deleteMessageIdStr);
+    DDLogDebug(@"deleteMessageIdStr----->>>>>%@",deleteMessageIdStr);
     [self mutableDeleteMessageHttpRequest:deleteMessageIdStr];
 }
 #pragma mark 量批删除的实现
@@ -507,12 +507,12 @@
     }else{
         _allChooseBtn.selected = NO;
     }
-    DLog(@"chooseCells.count--- >>> %lu",(unsigned long)self.deleteDataArray.count);
+    DDLogDebug(@"chooseCells.count--- >>> %lu",(unsigned long)self.deleteDataArray.count);
 }
 #pragma mark - 进入消息设置页面
 - (void)gotoMessageSettingVC
 {
-    DBLOG(@"进入消息设置页面");
+    DDLogDebug(@"进入消息设置页面");
     UCFMessageSettingViewController * messageSettingVC = [[UCFMessageSettingViewController alloc]initWithNibName:@"UCFMessageSettingViewController" bundle:nil];
     messageSettingVC.title = @"消息设置";
     [self.navigationController pushViewController:messageSettingVC animated:YES];
@@ -558,7 +558,7 @@
    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self endRefreshing];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    DBLOG(@"dic ===>>>> %@",dic);
+    DDLogDebug(@"dic ===>>>> %@",dic);
     BOOL rstcode = [[dic objectSafeForKey:@"ret"] boolValue];
     NSString *rsttext = [dic objectSafeForKey:@"message"];
     

@@ -141,7 +141,7 @@
     NSString *data = (NSString *)result;
     if (tag.intValue == kSXTagIdentifyCard) {
         NSMutableDictionary *dic = [data objectFromJSONString];
-        DBLOG(@"UCFSettingViewController : %@",dic);
+        DDLogDebug(@"UCFSettingViewController : %@",dic);
 //        NSString *ret = dic[@"ret"];
         NSString *message = dic[@"message"];
         

@@ -13,15 +13,15 @@
 - (id)objectSafeForKey:(NSString *)key
 {
     if (!key) {
-        DBLog(@"key为空");
+        DDLogDebug(@"key为空");
         return @"";
     }
     else if([self[key] isKindOfClass:[NSNull class]]){
-        DBLog(@"字典为空(Null)");
+        DDLogDebug(@"字典为空(Null)");
         return @"";
     }
     else if (!self[key]) {
-        DBLog(@"字典为空(nil)");
+        DDLogDebug(@"字典为空(nil)");
         return @"";
     }
     return self[key];
@@ -29,15 +29,15 @@
 - (id)objectSafeDictionaryForKey:(NSString *)key
 {
     if (!key) {
-        DBLog(@"key为空");
+        DDLogDebug(@"key为空");
         return @{};
     }
     else if([self[key] isKindOfClass:[NSNull class]]){
-        DBLog(@"字典为空(Null)");
+        DDLogDebug(@"字典为空(Null)");
         return @{};
     }
     else if (!self[key]) {
-        DBLog(@"字典为空(nil)");
+        DDLogDebug(@"字典为空(nil)");
         return @{};
     }
     return self[key];
@@ -45,15 +45,15 @@
 - (id)objectSafeArrayForKey:(NSString *)key
 {
     if (!key) {
-        DBLog(@"key为空");
+        DDLogDebug(@"key为空");
         return @[];
     }
     else if([self[key] isKindOfClass:[NSNull class]]){
-        DBLog(@"字典为空(Null)");
+        DDLogDebug(@"字典为空(Null)");
         return @[];
     }
     else if (!self[key]) {
-        DBLog(@"字典为空(nil)");
+        DDLogDebug(@"字典为空(nil)");
         return @[];
     }
     return self[key];

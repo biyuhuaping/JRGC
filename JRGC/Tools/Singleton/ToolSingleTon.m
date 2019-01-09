@@ -131,7 +131,7 @@
             NSInteger signFlags = [dic[@"signflags"] integerValue];
             if (signFlags == 0) {
                     _alert = [[MjAlertView alloc] initSignAlertViewWithBlock:^(id blockContent) {
-                    DLog(@"%@", blockContent);
+                    DDLogDebug(@"%@", blockContent);
                     
                     NZLabel *lab1 = [[NZLabel alloc]initWithFrame:CGRectMake(20, 60, 228, 25)];
                     lab1.font = [UIFont systemFontOfSize:15];
@@ -230,7 +230,7 @@
 
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
-    DLog(@"%ld", (long)index);
+    DDLogDebug(@"%ld", (long)index);
     if (index == 1) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&apptzticket=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],self.apptzticket];
@@ -352,6 +352,6 @@
     RealReachability *reachability = (RealReachability *)notification.object;
     ReachabilityStatus status = [reachability currentReachabilityStatus];
     self.netWorkStatus = status;
-    DBLOG(@"currentStatus:%@",@(status));
+    DDLogDebug(@"currentStatus:%@",@(status));
 }
 @end

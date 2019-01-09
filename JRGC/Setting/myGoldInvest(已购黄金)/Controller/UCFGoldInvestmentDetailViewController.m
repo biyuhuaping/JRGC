@@ -268,7 +268,7 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    //    DBLOG(@"新用户开户：%@",data);
+    //    DDLogDebug(@"新用户开户：%@",data);
     
     BOOL ret = [dic[@"ret"] boolValue];
     NSString *rsttext = dic[@"message"];

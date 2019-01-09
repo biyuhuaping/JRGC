@@ -80,7 +80,7 @@
             //float angle_end = radians([_dataArray[i] floatValue] *bl + ff);  //结束
             CGFloat angle_end =([detail.amount  doubleValue] *bl + ff);  //结束
             ff += [detail.amount doubleValue] *bl;  //开始之前的角度
-            DBLog(@"angle-end:%f", angle_end);
+            DDLogDebug(@"angle-end:%f", angle_end);
             
             //drawArc(ctx, self.center, angle_start, angle_end, _colorArray[i]);
             

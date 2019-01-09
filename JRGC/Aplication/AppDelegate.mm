@@ -259,7 +259,7 @@
                      tags:(NSSet *)tags
                     alias:(NSString *)alias {
     NSString *callbackString = [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,tags,alias];
-    DLog(@"%@",callbackString);
+    DDLogDebug(@"%@",callbackString);
 }
 // 之所以把这个红点提到这里，是因为启动APP之后，没有点击个人中心页面的话，未初始化这个api，直接投资查看奖励列表，不能通知服务端把这个红点去掉
 
@@ -283,7 +283,7 @@
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
     
     // react to shortcut item selections
-    DBLOG(@"title:%@,type:%@,userInfo:%@",shortcutItem.localizedTitle,shortcutItem.type,shortcutItem.userInfo);
+    DDLogDebug(@"title:%@,type:%@,userInfo:%@",shortcutItem.localizedTitle,shortcutItem.type,shortcutItem.userInfo);
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         
         [Touch3DSingle sharedTouch3DSingle].isLoad = YES;
@@ -316,7 +316,7 @@
 {
     dispatch_queue_t queue= dispatch_get_main_queue();
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), queue, ^{
-    DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+    DDLogDebug(@"主队列--延迟执行------%@",[NSThread currentThread]);
           [[ToolSingleTon sharedManager] getGoldPrice];
     });
 }
@@ -346,7 +346,7 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 //    恢复屏幕的亮度
-        DBLog(@"\n ===> 程序暂行 !");
+        DDLogDebug(@"\n ===> 程序暂行 !");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -363,7 +363,7 @@
         _backgroundUpdateTask = UIBackgroundTaskInvalid;
     }];
     if (_backgroundUpdateTask == UIBackgroundTaskInvalid) {
-        DBLog(@"failed to start background task!");
+        DDLogDebug(@"failed to start background task!");
     }
     // Start the long-running task and return immediately.
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -452,7 +452,7 @@
 {
     dispatch_queue_t queue= dispatch_get_main_queue();
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
-        DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+        DDLogDebug(@"主队列--延迟执行------%@",[NSThread currentThread]);
         NSInteger selectIndex = self.tabBarController.selectedIndex;
         if (selectIndex == 0 && !self.lockVc) {
             UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:0];
@@ -656,7 +656,7 @@
                         [alert show];
                     }
                 } else if (versionMark == 2) {
-                    DBLog(@"升级期内");
+                    DDLogDebug(@"升级期内");
                 }
             }
             
@@ -848,7 +848,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [JPUSHService handleRemoteNotification:userInfo];// 处理收到的APNS消息，向服务器上报收到APNS消息
-    DBLOG(@"收到通知:%@", [self logDic:userInfo]);
+    DDLogDebug(@"收到通知:%@", [self logDic:userInfo]);
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
@@ -859,7 +859,7 @@
     // IOS 7 Support Required
     [JPUSHService handleRemoteNotification:userInfo];// 处理收到的APNS消息，向服务器上报收到APNS消息
     completionHandler(UIBackgroundFetchResultNewData);
-    DBLOG(@"收到通知:%@", [self logDic:userInfo]);
+    DDLogDebug(@"收到通知:%@", [self logDic:userInfo]);
 }
 // iOS 10 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {

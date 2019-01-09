@@ -94,8 +94,8 @@
     
     CGFloat menuItemW = (SCREEN_WIDTH - SEGLINE_WIDTH * 2) / 3;
     CGFloat menuItemH = (self.frame.size.height - SEGLINE_WIDTH *self.itemRows)/(self.itemRows-1);
-    DBLOG(@"%@", NSStringFromCGRect(self.frame));
-    DBLOG(@"%@", NSStringFromCGRect(self.tableview.frame));
+    DDLogDebug(@"%@", NSStringFromCGRect(self.frame));
+    DDLogDebug(@"%@", NSStringFromCGRect(self.tableview.frame));
     // 设置分割线
     CGFloat segline1_x = menuItemW;
     self.segLine_Verti_1.frame = CGRectMake(segline1_x, 0, SEGLINE_WIDTH, self.frame.size.height);

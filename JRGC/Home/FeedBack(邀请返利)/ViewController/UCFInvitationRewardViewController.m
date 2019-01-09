@@ -82,7 +82,7 @@
     NSMutableDictionary *dic = [result objectFromJSONString];
     
     //    _totalCountLab.text = [NSString stringWithFormat:@"共%@笔回款记录",dic[@"pageData"][@"pagination"][@"totalCount"]];
-    DBLOG(@"邀请返利页：%@",dic);
+    DDLogDebug(@"邀请返利页：%@",dic);
     if (tag.intValue == KSXTagMyInviteRewardinfo) {
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];

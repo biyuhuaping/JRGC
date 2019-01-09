@@ -438,7 +438,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    DBLOG(@"%@, %@ %@", textField.text, string, NSStringFromRange(range));
+    DDLogDebug(@"%@, %@ %@", textField.text, string, NSStringFromRange(range));
     if (string.length <= 0) {
         if (textField.text.length-1 < 1) {
             self.calculateButton.enabled = NO;

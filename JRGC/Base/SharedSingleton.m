@@ -109,18 +109,18 @@ static SharedSingleton *_sharedObj = nil;
     
     //两个日期对象
     NSDate *currentTime=[dateFormatter dateFromString:[dateFormatter stringFromDate:[[[NSDate alloc] init] autorelease]]];
-    DLog(@"currentTime = %@",currentTime);
+    DDLogDebug(@"currentTime = %@",currentTime);
     [dateFormatter release];
     
     NSDate *cTime=[dateFormatter dateFromString:createTime];
-    DLog(@"cTime = %@",cTime);
+    DDLogDebug(@"cTime = %@",cTime);
     NSTimeInterval time=[currentTime timeIntervalSinceDate:cTime];
 
     //间隔日期
     NSInteger days = time/(3600*24);
     NSInteger hours =  time/(3600);
     NSInteger minites =  time/60;
-    DLog(@"components = %f",time);
+    DDLogDebug(@"components = %f",time);
     if (days >= 7) {
         NSString * tempStr = [dateFormatter stringFromDate:cTime];
         return [tempStr substringToIndex:10];
@@ -150,15 +150,15 @@ static SharedSingleton *_sharedObj = nil;
     
     switch ([inputDate compare:currentDate]) {
         case NSOrderedSame:
-            DLog(@"相等");
+            DDLogDebug(@"相等");
             return NO;
             break;
         case NSOrderedAscending:
-            DLog(@"date1比date2小");
+            DDLogDebug(@"date1比date2小");
             return YES;
             break;
         case NSOrderedDescending:
-            DLog(@"date1比date2大");
+            DDLogDebug(@"date1比date2大");
             return NO;
             break;
         default:
@@ -191,15 +191,15 @@ static SharedSingleton *_sharedObj = nil;
     
     switch ([date1 compare:date2]) {
         case NSOrderedSame:
-            DLog(@"相等");
+            DDLogDebug(@"相等");
             return NO;
             break;
         case NSOrderedAscending:
-            DLog(@"date1比date2小");
+            DDLogDebug(@"date1比date2小");
             return YES;
             break;
         case NSOrderedDescending:
-            DLog(@"date1比date2大");
+            DDLogDebug(@"date1比date2大");
             return NO;
             break;
         default:
@@ -316,7 +316,7 @@ static SharedSingleton *_sharedObj = nil;
 +(bool)checkDevice:(NSString*)name
 {
     NSString* deviceType = [UIDevice currentDevice].model;
-    DLog(@"deviceType = %@", deviceType);
+    DDLogDebug(@"deviceType = %@", deviceType);
     
     NSRange range = [deviceType rangeOfString:name];
     return range.location != NSNotFound;
@@ -436,7 +436,7 @@ static SharedSingleton *_sharedObj = nil;
 //是否为英文字幕
 +(BOOL)IsEGString:(NSString *)aString
 {
-    DLog(@"email = %@",aString);
+    DDLogDebug(@"email = %@",aString);
     NSString *emailRegex = @"[A-Za-z]";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:aString];
@@ -473,7 +473,7 @@ static SharedSingleton *_sharedObj = nil;
     if (nil == email) {
         return NO;
     }
-    DLog(@"email = %@",email);
+    DDLogDebug(@"email = %@",email);
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     
     
@@ -526,7 +526,7 @@ static SharedSingleton *_sharedObj = nil;
     if (nil == searchText) {
         return NO;
     }
-    DLog(@"email = %@",searchText);
+    DDLogDebug(@"email = %@",searchText);
     NSString *searchTextRegex = @"[A-Za-z0-9]{1}";
     NSPredicate *searchTextTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", searchTextRegex];
     if ([searchTextTest evaluateWithObject:searchText]) {

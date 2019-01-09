@@ -59,7 +59,7 @@
             }
             else
                 [self setValue:@"" forKey:key];
-            DLog(@"%@",[NSString stringWithFormat:@"字段值%@读取异常(字段不存在或者值为空)",key]);
+            DDLogDebug(@"%@",[NSString stringWithFormat:@"字段值%@读取异常(字段不存在或者值为空)",key]);
         }
         
     }

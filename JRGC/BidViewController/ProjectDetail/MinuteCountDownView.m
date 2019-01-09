@@ -127,7 +127,7 @@
 //    [self.minutesLabel setFontColor:UIColorWithRGB(0x333333) string:@"分"];
 //    [self.secondsLabel setFontColor:UIColorWithRGB(0x333333) string:@"秒"];
     
-    DLog(@"距结束 %@天%@时%@分%@秒",self.daysLabel.text,
+    DDLogDebug(@"距结束 %@天%@时%@分%@秒",self.daysLabel.text,
          self.hoursLabel.text,
          self.minutesLabel.text,
          self.secondsLabel.text );

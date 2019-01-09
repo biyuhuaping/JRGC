@@ -262,7 +262,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _contentHeight.constant = CGRectGetMaxY(_telServiceLabel.frame);
         self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, _contentHeight.constant + 100);
-        DLog(@"%@",self.baseScrollView);
+        DDLogDebug(@"%@",self.baseScrollView);
     });
 }
 - (void)controldesLabel
@@ -330,7 +330,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _contentHeight.constant = CGRectGetMaxY(_telServiceLabel.frame);
         self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, _contentHeight.constant + 100);
-        DLog(@"%@",self.baseScrollView);
+        DDLogDebug(@"%@",self.baseScrollView);
     });
 }
 #pragma mark H5URl加载方式
@@ -864,7 +864,7 @@
     if (tag.intValue == kSxTagHSPayMobile){
         NSMutableDictionary *dic = [data objectFromJSONString];
         if ([dic[@"ret"] boolValue]){
-            DLog(@"%@",dic);
+            DDLogDebug(@"%@",dic);
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];

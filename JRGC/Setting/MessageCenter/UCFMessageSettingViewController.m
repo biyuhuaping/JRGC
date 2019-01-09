@@ -136,7 +136,7 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    DBLOG(@"dic ===>>>> %@",dic);
+    DDLogDebug(@"dic ===>>>> %@",dic);
     NSString *rstcode = [dic objectSafeForKey:@"status"];
     NSString *rsttext = [dic objectSafeForKey:@"statusdes"];
   
@@ -173,7 +173,7 @@
 #pragma mark
 #pragma mark 接收消息
 -(void)messageSwitchChange:(UISwitch *)clickSwitch{
-    DBLOG(@"clickSwitch.on ===>>> %d",clickSwitch.on);
+    DDLogDebug(@"clickSwitch.on ===>>> %d",clickSwitch.on);
     
     if (clickSwitch.on) {//短信通知由关>>>开
         UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:@"温馨提示：启用短信通知，可以使您通过手机短信收到与您投资相关的重要信息。" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"开启短信通知", nil];

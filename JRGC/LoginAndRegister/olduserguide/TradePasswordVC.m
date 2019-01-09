@@ -409,12 +409,12 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    //    DBLOG(@"新用户开户：%@",data);
+    //    DDLogDebug(@"新用户开户：%@",data);
     
     id ret = dic[@"ret"];
     if (tag.intValue == kSXTagIdentifyCode) {
         if ([ret boolValue]) {
-            DBLOG(@"%@",dic[@"data"]);
+            DDLogDebug(@"%@",dic[@"data"]);
             [_getCodeBtn setTitle:@"60秒后重新获取" forState:UIControlStateNormal];
             _getCodeBtn.userInteractionEnabled = YES;
             [_getCodeBtn setTitleColor:UIColorWithRGB(0xcccccc) forState:UIControlStateNormal];

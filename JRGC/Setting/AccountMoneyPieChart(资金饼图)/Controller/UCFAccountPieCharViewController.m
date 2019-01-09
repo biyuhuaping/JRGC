@@ -31,7 +31,7 @@
 
     _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"总资产", @"总收益"]];
 
-    DBLOG(@"%@",NSStringFromCGRect(self.view.frame));
+    DDLogDebug(@"%@",NSStringFromCGRect(self.view.frame));
     _segmentedCtrl.frame = CGRectMake(0, 0, ScreenWidth*0.5, 30);
     [_segmentedCtrl setTintColor:UIColorWithRGB(0x5b6993)];
     _segmentedCtrl.selectedSegmentIndex = _selectedSegmentIndex;

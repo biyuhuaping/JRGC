@@ -176,7 +176,7 @@
     [_tableView.footer endRefreshing];
     //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    DBLOG(@"返现券列表：%@",dic);
+    DDLogDebug(@"返现券列表：%@",dic);
     
     if (tag.intValue == kSXTagReturnCouponList) {
         if ([dic[@"ret"] boolValue]) {

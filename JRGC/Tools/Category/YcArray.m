@@ -13,12 +13,12 @@
 - (id)objectSafeAtIndex:(NSUInteger)index
 {
     if ([self isEqual:[NSNull null]]) {
-        DBLog(@"数组为空！");
+        DDLogDebug(@"数组为空！");
         return nil;
     }
     
     else if (index >= [self count]) {
-        DBLog(@"数组越界！");
+        DDLogDebug(@"数组越界！");
         return nil;
     }
     

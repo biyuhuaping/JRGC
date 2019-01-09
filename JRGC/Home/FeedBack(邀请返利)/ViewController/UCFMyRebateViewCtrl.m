@@ -248,7 +248,7 @@
 //设置按钮颜色和下划线
 - (void)setBtnAndLine:(NSInteger)offset{
     _index = (NSInteger)offset/ScreenWidth;
-    DBLOG(@"%ld",(long)_index);
+    DDLogDebug(@"%ld",(long)_index);
     
     switch (_index) {
         case 0:{
@@ -650,7 +650,7 @@
 - (void)didSelectReply:(UITapGestureRecognizer *)sender{
     [self showAlertView];
     NSIndexPath *indexPath = [_tableView1 indexPathForRowAtPoint:[sender locationInView:_tableView1]];
-    DBLOG(@"响应手势:%@",_dataArr1[indexPath.section][indexPath.row]);
+    DDLogDebug(@"响应手势:%@",_dataArr1[indexPath.section][indexPath.row]);
     
     NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&odrclaimsid=%@",userId,_dataArr1[indexPath.section][indexPath.row][@"id"]];//5644
@@ -716,7 +716,7 @@
     NSMutableDictionary *dic = [result objectFromJSONString];
     NSString *rstcode = dic[@"status"];
     NSString *rsttext = dic[@"statusdes"];
-    DBLOG(@"我的返利页：%@",dic);
+    DDLogDebug(@"我的返利页：%@",dic);
 
     if (tag.intValue == kAppQueryByManyList){
         _nperLab.text = [NSString stringWithFormat:@"第%@期/共%@期",dic[@"datasizepre"],dic[@"datasize"]];//期数

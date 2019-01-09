@@ -291,7 +291,7 @@
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
     NSString *data = (NSString *)result;
-    DBLOG(@"个人信息数据：%@",data);
+    DDLogDebug(@"个人信息数据：%@",data);
     
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"status"];

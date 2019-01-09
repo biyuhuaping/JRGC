@@ -97,7 +97,7 @@
     NSString *rsttext = dic[@"statusdes"];
     
     //    _totalCountLab.text = [NSString stringWithFormat:@"共%@笔回款记录",dic[@"pageData"][@"pagination"][@"totalCount"]];
-    DBLOG(@"修改返利比例页：%@",dic);
+    DDLogDebug(@"修改返利比例页：%@",dic);
     if (tag.intValue == kSXTagFactoryCodeSaveRate) {
         if ([rstcode intValue] == 1) {
             [self.navigationController popViewControllerAnimated:YES];

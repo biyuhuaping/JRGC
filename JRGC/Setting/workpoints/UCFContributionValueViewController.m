@@ -279,7 +279,7 @@
     NSString *rsttext = dic[@"message"];
   
     
-    DBLOG(@"UCFContributionValueViewController贡献值列表：%@",dic);
+    DDLogDebug(@"UCFContributionValueViewController贡献值列表：%@",dic);
     
     if (tag.intValue == kSXTagContributionValueInvot) {
         if (rstcode) {

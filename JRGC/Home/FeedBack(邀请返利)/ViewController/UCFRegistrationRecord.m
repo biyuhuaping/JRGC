@@ -160,7 +160,7 @@
     BOOL rstcode = [dic[@"ret"]  boolValue];
     NSString *rsttext = dic[@"message"];
     
-    DBLOG(@"我的返利页：%@",dic);
+    DDLogDebug(@"我的返利页：%@",dic);
     
     NSDictionary *dataDic = [dic objectSafeDictionaryForKey:@"data"];
     
@@ -192,7 +192,7 @@
                     [_tableView.footer endRefreshing];
                 }
             }
-            DBLOG(@"_dataArr:%@",_dataArr);
+            DDLogDebug(@"_dataArr:%@",_dataArr);
             [self getFormatData];
             [_tableView reloadData];
         }else {

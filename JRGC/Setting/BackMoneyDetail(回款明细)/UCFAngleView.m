@@ -26,7 +26,7 @@
     if (tempStr.length == 0) {
         return;
     }else if (tempStr.length <= 3){
-        DBLOG(@"111111111111111111111111111");
+        DDLogDebug(@"111111111111111111111111111");
         tempStr = [NSString stringWithFormat:@"  %@  ",tempStr];
     }
     UIImageView *imaView = [[UIImageView alloc]initWithFrame:self.bounds];

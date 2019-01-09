@@ -453,13 +453,13 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 #pragma mark 点击排序button响应事件
 -(void)clickSortButton:(UIButton *)button{
     
-    DLog(@"点击了排序button事件");
+    DDLogDebug(@"点击了排序button事件");
     
     MjAlertView *sortAlertView = [[MjAlertView alloc]initCollectionViewWithTitle:@"项目排序" sortArray:@[@"综合排序",@"可投额递减",@"可投额递增"]  selectedSortButtonTag:_currentSelectSortTag delegate:self cancelButtonTitle:@"" withOtherButtonTitle:@"确定"];
     [sortAlertView show];
 }
 -(void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
-    DLog(@"_lastSelectSortTag --->>>%d,_currentSelectSortTag--->>>>%d,index--->>>%d",_lastSelectSortTag,_currentSelectSortTag,index);
+    DDLogDebug(@"_lastSelectSortTag --->>>%d,_currentSelectSortTag--->>>>%d,index--->>>%d",_lastSelectSortTag,_currentSelectSortTag,index);
     if (clickedButton.tag != 0) {
         if(_lastSelectSortTag != index){
             _investmentCurrentPage = 1;
@@ -690,7 +690,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 }
 -(void)endPost:(id)result tag:(NSNumber *)tag{
     [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
-    //    DBLOG(@"首页获取最新项目列表：%@",data);
+    //    DDLogDebug(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [result objectFromJSONString];
     

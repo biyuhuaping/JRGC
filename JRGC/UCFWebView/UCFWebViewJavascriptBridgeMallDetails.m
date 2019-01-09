@@ -77,13 +77,13 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     self.loadCount ++;
-    DBLOG(@"webViewDidStartLoad");
+    DDLogDebug(@"webViewDidStartLoad");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.loadCount --;
-    DBLOG(@"webViewDidFinishLoad");
+    DDLogDebug(@"webViewDidFinishLoad");
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
     // Disable callout
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
@@ -91,7 +91,7 @@
     
     self.requestLastUrl = [NSString stringWithFormat:@"%@",self.webView.request.URL.absoluteString];
     
-    DBLOG(@"%@",self.requestLastUrl);
+    DDLogDebug(@"%@",self.requestLastUrl);
     
     if (!self.errorView.hidden) {
         self.errorView.hidden = YES;
@@ -104,11 +104,11 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     self.loadCount --;
-    DBLOG(@"webViewdidFailLoadWithError");
+    DDLogDebug(@"webViewdidFailLoadWithError");
     [self.webView.scrollView.header endRefreshing];
     if([error code] == NSURLErrorCancelled)
     {
-        DBLOG(@"Canceled request: %@", [webView.request.URL absoluteString]);
+        DDLogDebug(@"Canceled request: %@", [webView.request.URL absoluteString]);
         return;
     }
     self.errorView.hidden = NO;

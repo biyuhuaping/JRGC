@@ -115,11 +115,11 @@
     self.index = sender.tag -100;
     [self calcueAllStateButton];
     if (self.rateState) {
-        DBLOG(@"利率  升序");
+        DDLogDebug(@"利率  升序");
         [self.rateOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_up"] forState:UIControlStateNormal];
     }
     else {
-        DBLOG(@"利率  降序");
+        DDLogDebug(@"利率  降序");
       [self.rateOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_dnow"] forState:UIControlStateNormal];
     }
     if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
@@ -136,11 +136,11 @@
     self.index = sender.tag -100;
     [self calcueAllStateButton];
     if (self.limitState) {
-        DBLOG(@"期限  升序");
+        DDLogDebug(@"期限  升序");
         [self.limitOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_up"] forState:UIControlStateNormal];
     }
     else {
-        DBLOG(@"期限  降序");
+        DDLogDebug(@"期限  降序");
         [self.limitOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_dnow"] forState:UIControlStateNormal];
     }
     if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
@@ -158,11 +158,11 @@
     [self calcueAllStateButton];
     // 期限 YES 升序 NO 降序
     if (self.sumState) {
-        DBLOG(@"金额  降序");
+        DDLogDebug(@"金额  降序");
         [self.sumOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_dnow"] forState:UIControlStateNormal];
     }
     else {
-        DBLOG(@"金额  升序");
+        DDLogDebug(@"金额  升序");
         [self.sumOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_up"] forState:UIControlStateNormal];
     }
     if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {

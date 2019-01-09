@@ -296,7 +296,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    DBLOG(@"currentDay : %@", self.currentDay);
+    DDLogDebug(@"currentDay : %@", self.currentDay);
 }
 
 @end

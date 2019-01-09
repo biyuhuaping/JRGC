@@ -124,9 +124,9 @@
         [self.moneyLabel setText:[NSString stringWithFormat:@"¥%@", [UCFToolsMehod AddComma:self.fundsFrame.fundsDetailModel.cashValue]]];
         _moneyLabel.textColor = [UIColor blackColor];
     } else if ([self.fundsFrame.fundsDetailModel.cashValue hasPrefix:@"-"]) {
-        DLog(@"====>%@", self.fundsFrame.fundsDetailModel.cashValue);
+        DDLogDebug(@"====>%@", self.fundsFrame.fundsDetailModel.cashValue);
         NSString *temp = [self.fundsFrame.fundsDetailModel.cashValue stringByReplacingOccurrencesOfString:@"-" withString:@""];
-        DLog(@"===>%@", temp);
+        DDLogDebug(@"===>%@", temp);
         [self.moneyLabel setText:[NSString stringWithFormat:@"¥-%@", [UCFToolsMehod AddComma:temp]]];
         _moneyLabel.textColor = UIColorWithRGB(0x4db94f);
     } else {

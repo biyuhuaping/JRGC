@@ -333,7 +333,7 @@ static NetworkModule *gInstance = NULL;
     req.owner = owner;
     req.url = url;
     req.parmData = data;
-    DBLOG(@"%@",url);
+    DDLogDebug(@"%@",url);
 
     [req postData:data delegate:self];
 
@@ -1395,7 +1395,7 @@ static NetworkModule *gInstance = NULL;
     if([[NSUserDefaults standardUserDefaults] valueForKey:UUID]){
         [dict setValue:[UserInfoSingle sharedManager].jg_ckie forKey:@"jg_nyscclnjsygjr"];
     }
-    DLog(@"%@类新接口请求参数%@",owner,dict);
+    DDLogDebug(@"%@类新接口请求参数%@",owner,dict);
     if(isSignature) //是否需要验签
     {
         NSString *signature = [self getSinatureWithPar:[self newGetParStr:dict]];

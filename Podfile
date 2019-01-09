@@ -18,5 +18,6 @@ pod 'MyLayout'
 
 pod 'KVOController'
 
+pod 'CocoaLumberjack'
 
 end

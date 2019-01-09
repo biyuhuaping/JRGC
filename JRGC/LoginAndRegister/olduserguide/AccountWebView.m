@@ -30,7 +30,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.loadCount --;
-    DBLOG(@"webViewDidFinishLoad");
+    DDLogDebug(@"webViewDidFinishLoad");
     //    [self endRefresh];
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
     // Disable callout
@@ -42,7 +42,7 @@
 //    {
         baseTitleLabel.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 //    }
-    DBLOG(@"%@",self.requestLastUrl);
+    DDLogDebug(@"%@",self.requestLastUrl);
     if (!self.errorView.hidden) {
         self.errorView.hidden = YES;
     }

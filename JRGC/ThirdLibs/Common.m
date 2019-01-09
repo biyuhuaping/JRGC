@@ -1139,7 +1139,7 @@
     
 //   根据CIImage生成指定大小的UIImage
     UIImage *image = [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:85.0];
-    DLog(@"NSData-->>>%@",UIImagePNGRepresentation(image));
+    DDLogDebug(@"NSData-->>>%@",UIImagePNGRepresentation(image));
     return UIImagePNGRepresentation(image);
 }
 
@@ -1246,10 +1246,10 @@
     //覆盖方法，指哪打哪，这个方法是下载imagePath2的时候响应
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     [manager downloadImageWithURL:imagePath2 options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-        DLog(@"当前%ld 总共 %ld",receivedSize,expectedSize);
+        DDLogDebug(@"当前%ld 总共 %ld",receivedSize,expectedSize);
         
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-        DLog(@"下载完成");
+        DDLogDebug(@"下载完成");
         SDImageCache *cache = [[[SDImageCache alloc] init] autorelease];
         [cache storeImage:image forKey:imagePath2.absoluteString];
     }];

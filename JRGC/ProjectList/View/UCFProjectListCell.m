@@ -216,7 +216,7 @@
     }
     
     self.angleView.angleStatus = model.status;
-    DBLOG(@"%@", model.status);
+    DDLogDebug(@"%@", model.status);
     if (model.prdLabelsList.count>0) {
         for (UCFProjectLabel *projectLabel in model.prdLabelsList) {
             if ([projectLabel.labelPriority integerValue] == 1) {
@@ -332,7 +332,7 @@
 
     float totalAmt = [batchBidModel.totalAmt floatValue];
     float canBuyAmt = [batchBidModel.canBuyAmt floatValue];
-    DBLOG(@"%f=====%f", totalAmt, canBuyAmt);
+    DDLogDebug(@"%f=====%f", totalAmt, canBuyAmt);
     
     float progress = (totalAmt - canBuyAmt) / totalAmt * 1000;
     if (batchBidModel.full || canBuyAmt == 0) {

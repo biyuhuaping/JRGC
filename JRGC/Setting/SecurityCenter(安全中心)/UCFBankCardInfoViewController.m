@@ -397,7 +397,7 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSString *data = (NSString *)result;
-    //    DBLOG(@"首页获取最新项目列表：%@",data);
+    //    DDLogDebug(@"首页获取最新项目列表：%@",data);
     
     //    bankCard		string	@mock=6210***********6236
     //    bankCardStatus		string	1：银行卡有效 0：银行卡失效

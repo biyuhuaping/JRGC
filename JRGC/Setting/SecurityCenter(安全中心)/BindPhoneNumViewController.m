@@ -265,7 +265,7 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSString *data = (NSString *)result;
-    //    DBLOG(@"首页获取最新项目列表：%@",data);
+    //    DDLogDebug(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"ret"];

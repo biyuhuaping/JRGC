@@ -169,7 +169,7 @@
 //            manager->getDeviceInfoAsync(nil, self);
 //#warning 同盾修改
             NSString *blackBox = manager->getDeviceInfo();
-//            DBLOG(@"同盾设备指纹数据: %@", blackBox);
+//            DDLogDebug(@"同盾设备指纹数据: %@", blackBox);
             [self didReceiveDeviceBlackBox:blackBox];
         } else {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];

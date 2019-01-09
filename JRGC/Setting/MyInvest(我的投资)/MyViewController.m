@@ -58,7 +58,7 @@
         self.titleDescribeLabel.text = @"累计收益";
     }
 //    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",@"批量项目",titleStr]];
-    DBLOG(@"%@",NSStringFromCGRect(self.view.frame));
+    DDLogDebug(@"%@",NSStringFromCGRect(self.view.frame));
     _segmentedCtrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
     [_segmentedCtrl setTintColor:UIColorWithRGB(0x5b6993)];
 //    [_segmentedCtrl setTitleTextAttributes:@{[UIFont systemFontOfSize:15]:NSFontAttributeName} forState:UIControlStateNormal];
@@ -128,7 +128,7 @@
 }
 
 - (void)segmentedValueChanged:(UISegmentedControl *)sender{
-    DBLOG(@"%ld",(long)sender.selectedSegmentIndex);
+    DDLogDebug(@"%ld",(long)sender.selectedSegmentIndex);
 //    __weak typeof(self)weakSelf = self;
     switch (sender.selectedSegmentIndex) {
         case 0: {

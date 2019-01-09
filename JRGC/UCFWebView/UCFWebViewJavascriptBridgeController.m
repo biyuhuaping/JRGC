@@ -182,7 +182,7 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 
 {
-    DBLOG(@"%@------%@",gestureRecognizer,otherGestureRecognizer);
+    DDLogDebug(@"%@------%@",gestureRecognizer,otherGestureRecognizer);
     return NO; //这里一定要return NO,至于为什么大家去看看这个方法的文档吧。
     
     //还有就是这个委托在你长按的时候会被多次调用，大家可以用nslog输出gestureRecognizer和otherGestureRecognizer
@@ -301,7 +301,7 @@
     
     [_bridge registerHandler:@"nativeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         
-//        DBLOG(@"testObjcCallback called: %@", data);
+//        DDLogDebug(@"testObjcCallback called: %@", data);
         
         weakSelf.isHideNativeNav = NO;
         NSDictionary *nativeData = data;
@@ -527,7 +527,7 @@
     NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE];
     if(gcmCode){ //返回数据 工场码
         [_bridge callHandler:@"jsHandler" data:@{@"type": @"factory_code",@"value":gcmCode} responseCallback:^(id responseData) {
-            DBLOG(@"工场码返回成功");
+            DDLogDebug(@"工场码返回成功");
         }];
     }
 }
@@ -614,7 +614,7 @@
         if ([rstcode boolValue] == YES) {
             NSString *token = [[dic objectSafeDictionaryForKey:@"data"] objectForKey:@"tokenId"] ;
             [_bridge callHandler:@"jsHandler" data:@{@"token": token} responseCallback:^(id responseData) {
-                DBLOG(@".......");
+                DDLogDebug(@".......");
             }];
         }
     } else if (tag.integerValue == kSXTagContractDownLoad) {
@@ -697,7 +697,7 @@
     {
         [self.theConnection cancel];
         //        SAFE_RELEASE(theConnection);
-        DBLOG(@"safe release connection");
+        DDLogDebug(@"safe release connection");
     }
     if ([request.HTTPMethod isEqualToString:@"GET"])
     {
@@ -742,7 +742,7 @@
     
     if (self.theConnection) {
         //        SAFE_RELEASE(theConnection);
-        DBLOG(@"safe release connection");
+        DDLogDebug(@"safe release connection");
     }
     //    if (loadNotFinishCode == NSURLErrorCancelled)  {
     //        return;
@@ -782,9 +782,9 @@
 // 计算webView进度条
 - (void)setLoadCount:(NSUInteger)loadCount {
     _loadCount = loadCount;
-    DBLOG(@"loadCount----->>>>>%d",loadCount);
+    DDLogDebug(@"loadCount----->>>>>%d",loadCount);
     
-    DBLOG(@"%@", self);
+    DDLogDebug(@"%@", self);
     
     if (_loadCount == 0) {
        
@@ -797,7 +797,7 @@
         if (newP > 0.95) {
             newP = 0.95;
         }
-        DBLOG(@"newP----->>>>>%f",newP);
+        DDLogDebug(@"newP----->>>>>%f",newP);
         [self.progressView setProgress:newP animated:YES];
         
     }
@@ -811,14 +811,14 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     self.loadCount ++;
-    DBLOG(@"webViewDidStartLoad");
+    DDLogDebug(@"webViewDidStartLoad");
 //    [self beginRefresh];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.loadCount --;
-    DBLOG(@"webViewDidFinishLoad");
+    DDLogDebug(@"webViewDidFinishLoad");
 //    [self endRefresh];
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
     // Disable callout
@@ -833,7 +833,7 @@
     {
         baseTitleLabel.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
-    DBLOG(@"%@",self.requestLastUrl);
+    DDLogDebug(@"%@",self.requestLastUrl);
     
     if (!self.errorView.hidden) {
         self.errorView.hidden = YES;
@@ -845,11 +845,11 @@
 {
     self.loadCount --;
 //    [self endRefresh];
-    DBLOG(@"webViewdidFailLoadWithError");
+    DDLogDebug(@"webViewdidFailLoadWithError");
     [self.webView.scrollView.header endRefreshing];
     if([error code] == NSURLErrorCancelled)
     {
-        DBLOG(@"Canceled request: %@", [webView.request.URL absoluteString]);
+        DDLogDebug(@"Canceled request: %@", [webView.request.URL absoluteString]);
         return;
     }
     self.errorView.hidden = NO;
@@ -861,7 +861,7 @@
     NSString *requestString = [[[request URL]  absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];
     if ([requestString newRangeOfString:@"jrgc://9888.cn/?key=sjgl"])
     {
-        DBLOG(@"这个字符串中有\n");
+        DDLogDebug(@"这个字符串中有\n");
        // [self pushWebView:LEVELURLSHENGJI withTitle:@"升级攻略"];
         UCFWebViewJavascriptBridgeLevel*vc = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
         // vc.title = @"会员等级";
@@ -872,7 +872,7 @@
     }
     else if ([requestString newRangeOfString:@"jrgc://9888.cn/?key=gfxq"])
     {
-        DBLOG(@"这个字符串中有\n");
+        DDLogDebug(@"这个字符串中有\n");
         UCFWebViewJavascriptBridgeLevel*vc = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
         // vc.title = @"会员等级";
         vc.url = LEVELURLXIANGQING;
@@ -883,7 +883,7 @@
     }
     else if ([requestString newRangeOfString:@"https://m.9888.cn/static/wap/reset-deal-password/index.html"])
     {
-        DBLOG(@"这个字符串中有\n");
+        DDLogDebug(@"这个字符串中有\n");
         TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
         tradePasswordVC.title = @"修改交易密码";
         tradePasswordVC.isCompanyAgent = [UserInfoSingle sharedManager].companyAgent;
@@ -1289,7 +1289,7 @@
     //----------------------------------------------------------------------------------------------------qyy
     else
     {
-        DBLOG(@"没有符合的要求");
+        DDLogDebug(@"没有符合的要求");
     }
 }
 -(void)gotoOpenAccout
@@ -1489,7 +1489,7 @@
         
         //8.解析数据
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        DBLOG (@"%@",dict);
+        DDLogDebug (@"%@",dict);
         
     }];
     
@@ -1522,7 +1522,7 @@
 //    是否需要验签
     NSString *signature = [self getSinatureWithPar:[self newGetParStr:dict]];
     [dict setValue:signature forKey:@"signature"];
-    DLog(@"批量投标请求参数 ---->>>%@",dict);
+    DDLogDebug(@"批量投标请求参数 ---->>>%@",dict);
 //    对整体参数加密
     NSString * encryptParam  = [Common AESWithKey2:AES_TESTKEY WithDic:dict];
     NSString *  dataStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];

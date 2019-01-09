@@ -184,7 +184,7 @@
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    //    DBLOG(@"首页获取最新项目列表：%@",data);
+    //    DDDLogDebugDebug(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [result objectFromJSONString];
     
@@ -199,7 +199,7 @@
             }
             
             for (NSDictionary *dict in list_result) {
-                //                DBLOG(@"%@", dict);
+                //                DDDLogDebugDebug(@"%@", dict);
                 UCFTransferModel *model = [UCFTransferModel transferWithDict:dict];
                 model.isAnim = YES;
                 [self.dataArray addObject:model];

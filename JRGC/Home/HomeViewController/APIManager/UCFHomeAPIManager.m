@@ -205,7 +205,7 @@
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"ret"];
     NSString *rsttext = dic[@"message"];
-    DBLOG(@"UCFPersonAPIManager : %@",dic);
+    DDLogDebug(@"UCFPersonAPIManager : %@",dic);
     
     if (tag.intValue == kSXTagPrdClaimsNewVersion) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:HOMELIST];

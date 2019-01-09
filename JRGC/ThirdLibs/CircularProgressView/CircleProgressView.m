@@ -78,7 +78,7 @@
 
 //设置运行时间
 - (void)setElapsedTime:(NSTimeInterval)elapsedTime {
-//    DBLOG(@"elapsedTime:%f",elapsedTime);
+//    DDLogDebug(@"elapsedTime:%f",elapsedTime);
     if (elapsedTime < 0 && elapsedTime <= 100) {
         elapsedTime += 20;
     }

@@ -105,26 +105,26 @@
             [delegate gridItemDidEnterEditingMode:self];
             //放大这个item
             [self setAlpha:1.0];
-            DLog(@"press long began");
+            DDLogDebug(@"press long began");
             break;
         case UIGestureRecognizerStateEnded:
             point = [gestureRecognizer locationInView:self];
             [delegate gridItemDidEndMoved:self withLocation:point moveGestureRecognizer:gestureRecognizer];
             //变回原来大小
             //[self setAlpha:0.5f];
-            DLog(@"press long ended");
+            DDLogDebug(@"press long ended");
             break;
         case UIGestureRecognizerStateFailed:
-            DLog(@"press long failed");
+            DDLogDebug(@"press long failed");
             break;
         case UIGestureRecognizerStateChanged:
             //移动
             
             [delegate gridItemDidMoved:self withLocation:point moveGestureRecognizer:gestureRecognizer];
-            DLog(@"press long changed");
+            DDLogDebug(@"press long changed");
             break;
         default:
-            DLog(@"press long else");
+            DDLogDebug(@"press long else");
             break;
     }
 }

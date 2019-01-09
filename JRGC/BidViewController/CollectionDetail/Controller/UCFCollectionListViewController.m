@@ -148,7 +148,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 }
 -(void)endPost:(id)result tag:(NSNumber *)tag{
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    //    DBLOG(@"首页获取最新项目列表：%@",data);
+    //    DDDLogDebugDebug(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [result objectFromJSONString];
     

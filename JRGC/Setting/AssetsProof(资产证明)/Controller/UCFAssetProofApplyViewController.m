@@ -194,7 +194,7 @@
     }else if (tag.intValue == kSXTagIdentifyCode) {//发送验证码
         if ([ret boolValue]) {
 //            _isSendVoiceMessage = YES;
-            DBLOG(@"%@",dic[@"data"]);
+            DDLogDebug(@"%@",dic[@"data"]);
             [self.sendCodeBtn setTitle:@"60秒后重新获取" forState:UIControlStateNormal];
             self.sendCodeBtn.userInteractionEnabled = YES;
             [self.sendCodeBtn setTitleColor:UIColorWithRGB(0xcccccc) forState:UIControlStateNormal];

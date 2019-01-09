@@ -39,7 +39,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.loadCount --;
-    DBLOG(@"webViewDidFinishLoad");
+    DDLogDebug(@"webViewDidFinishLoad");
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
     // Disable callout
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
@@ -47,7 +47,7 @@
     
     self.requestLastUrl = [NSString stringWithFormat:@"%@",self.webView.request.URL.absoluteString];
     
-    DBLOG(@"%@",self.requestLastUrl);
+    DDLogDebug(@"%@",self.requestLastUrl);
     
     if (!self.errorView.hidden) {
         self.errorView.hidden = YES;

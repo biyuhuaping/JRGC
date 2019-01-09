@@ -175,12 +175,12 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSString *data = (NSString *)result;
-//    DBLog(@"首页获取最新项目列表：%@",data);
+//    DDLogDebug(@"首页获取最新项目列表：%@",data);
     NSMutableDictionary *dic = [data objectFromJSONString];
 
     NSString *rstcode = dic[@"status"];
     NSString *rsttext = dic[@"statusdes"];
-    DBLog(@"首页获取最新项目列表：%@", dic);
+    DDLogDebug(@"首页获取最新项目列表：%@", dic);
     if (tag.intValue == kSXTagPrdOrderInvestDetail) {
         NSInteger sign = [rstcode integerValue];
         if (sign == 1) {

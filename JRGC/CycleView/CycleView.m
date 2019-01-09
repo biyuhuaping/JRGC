@@ -172,14 +172,14 @@
 // 滑动scrollView，并且手指离开时执行。一次有效滑动，只执行一次。
 // 当pagingEnabled属性为YES时，不调用，该方法
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    DLog(@"scrollViewWillEndDragging");
+    DDLogDebug(@"scrollViewWillEndDragging");
     if (!_cycleTimer) {
         _cycleTimer = [NSTimer scheduledTimerWithTimeInterval:7.0f target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
     }
 }
 // 当开始滚动视图时，执行该方法。一次有效滑动（开始滑动，滑动一小段距离，只要手指不松开，只算一次滑动），只执行一次。
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    DLog(@"scrollViewWillBeginDragging");
+    DDLogDebug(@"scrollViewWillBeginDragging");
 //    [cycleTimer setFireDate:[NSDate distantFuture]];
     //取消定时器
     if (_cycleTimer) {

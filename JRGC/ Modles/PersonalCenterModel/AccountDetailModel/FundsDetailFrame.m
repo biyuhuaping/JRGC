@@ -90,10 +90,10 @@
     CGFloat markX = CGRectGetMaxX(_markTitleF) + HPadding;
     CGFloat markY = markTitleY;
     CGFloat markW = ScreenWidth - edgePadding * 2 - markTitleW - HPadding;
-//    DLog(@"%d", (int)(markContentSize.height/height));
+//    DDLogDebug(@"%d", (int)(markContentSize.height/height));
     CGFloat markH = (markContentSize.height > height) ? ((int)(markContentSize.height/height) * 15 + 20) : height;
     _markF = CGRectMake(markX, markY, markW, markH);
-//    DLog(@"%@", NSStringFromCGRect(_markF));
+//    DDLogDebug(@"%@", NSStringFromCGRect(_markF));
     
     _cellHeight = CGRectGetMaxY(_markF) + HPadding *2;
 }

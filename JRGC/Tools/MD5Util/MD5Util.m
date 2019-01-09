@@ -29,7 +29,7 @@
     NSString *md5Str = [UCFToolsMehod md5:resultString];
     md5Str = [md5Str stringByAppendingString:appPwdKey];
     resultString = [UCFToolsMehod md5:md5Str];
-    DLog(@"%@",md5Str);
+    DDLogDebug(@"%@",md5Str);
     return resultString;
 }
 

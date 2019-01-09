@@ -81,7 +81,7 @@
     NSString *rstcode = dic[@"status"];
     NSString *rsttext = dic[@"statusdes"];
     
-    DBLOG(@"我的工场码：%@",dic);
+    DDLogDebug(@"我的工场码：%@",dic);
     if (tag.intValue == kSXTagWorkshopCode) {
         if ([rstcode intValue] == 1) {
             NSString *tempStr = dic[@"gcm"];

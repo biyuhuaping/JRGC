@@ -236,7 +236,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         float scrollViewHeight = CGRectGetMaxY(_telServiceLabel.frame);
         self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, scrollViewHeight + 50);
-        DLog(@"%@",self.baseScrollView);
+        DDLogDebug(@"%@",self.baseScrollView);
     });
 #ifdef __IPHONE_5_0
     float version = [[[UIDevice currentDevice] systemVersion] floatValue];
@@ -1023,9 +1023,9 @@
     fmt2.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSDate *endDate = [fmt2 dateFromString:nowDateEndStr];
     
-    DLog(@"nowDateStr --->>>>> %@",nowDateStr);
-     DLog(@"startDate --->>>>> %@",startDate);
-     DLog(@"endDate --->>>>> %@",endDate);
+    DDLogDebug(@"nowDateStr --->>>>> %@",nowDateStr);
+     DDLogDebug(@"startDate --->>>>> %@",startDate);
+     DDLogDebug(@"endDate --->>>>> %@",endDate);
     
     /**
      NSComparisonResult的取值

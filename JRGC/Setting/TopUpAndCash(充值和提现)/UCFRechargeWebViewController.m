@@ -27,7 +27,7 @@
 }
 - (void)jsToNative:(NSString *)controllerName{
     
-    DBLOG(@"%@", controllerName);
+    DDLogDebug(@"%@", controllerName);
     if ([controllerName isEqualToString:@"app_recharge_success"])
     {
         self.flagInvestSuc = YES;

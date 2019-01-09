@@ -39,7 +39,7 @@
 
 - (void)createUI
 {
-    DBLOG(@"%@", NSStringFromCGSize(self.bounds.size));
+    DDLogDebug(@"%@", NSStringFromCGSize(self.bounds.size));
     UIView *bottomSignView = [[UIView alloc] init];
     [self addSubview:bottomSignView];
 //    bottomSignView.translatesAutoresizingMaskIntoConstraints=NO;

@@ -537,7 +537,7 @@
             return 3;
         } else if (section == 2) {
              //未获得等级加息时的判断条件
-            DLog(@"%@",self.investDetailModel.gradeIncreases);
+            DDLogDebug(@"%@",self.investDetailModel.gradeIncreases);
             if (!self.investDetailModel.gradeIncreases || [[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.gradeIncreases] isEqualToString:@""] || [self.investDetailModel.gradeIncreases doubleValue] == 0.0) {
                 return 0;
             }

@@ -208,7 +208,7 @@
     NSMutableDictionary *dic = [data objectFromJSONString];
     if (tag.intValue == kSXTagLogin) {
         if ([[dic valueForKey:@"ret"] boolValue]) {
-            DLog(@"log%@",dic);
+            DDLogDebug(@"log%@",dic);
 
             [Common deleteCookies];
             //登录成功保存用户的资料

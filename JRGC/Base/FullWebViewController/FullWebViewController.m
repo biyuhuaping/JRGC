@@ -304,13 +304,13 @@
     NSString *requestString = [[[request URL]  absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ]; ;
     if ([requestString rangeOfString:@"jrgc://9888.cn/?key=sjgl"].location != NSNotFound)
     {
-        DBLOG(@"这个字符串中有\n");
+        DDLogDebug(@"这个字符串中有\n");
         [self pushWebView:LEVELURLSHENGJI withTitle:@"升级攻略"];
         return NO;
     }
     else if ([requestString rangeOfString:@"jrgc://9888.cn/?key=gfxq"].location != NSNotFound)
     {
-        DBLOG(@"这个字符串中有\n");
+        DDLogDebug(@"这个字符串中有\n");
         [self pushWebView:LEVELURLXIANGQING withTitle:@"玩转工分"];
         return NO;
     }

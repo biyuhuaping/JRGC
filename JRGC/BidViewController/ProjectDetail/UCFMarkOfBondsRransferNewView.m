@@ -817,7 +817,7 @@
         {
             return 0;
         }  else {
-            DLog(@"%@",[_dataDic objectForKey:@"prdOrders"]);
+            DDLogDebug(@"%@",[_dataDic objectForKey:@"prdOrders"]);
             return [[_dataDic objectForKey:@"prdOrders"] count];
         }
     }

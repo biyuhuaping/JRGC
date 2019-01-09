@@ -319,7 +319,7 @@
     else if (_tableView3 == tableView){
         temp = _dataArr3;
     }
-    DBLog(@"%@", temp);
+    DDLogDebug(@"%@", temp);
 //    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSDictionary *dict = [temp objectAtIndex:indexPath.row];
     UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
@@ -388,12 +388,12 @@
     [_tableView3.header endRefreshing];
     [_tableView3.footer endRefreshing];
     NSString *data = (NSString *)result;
-    //DBLOG(@"首页获取最新项目列表：%@",data);
+    //DDLogDebug(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"status"];
     NSString *rsttext = dic[@"statusdes"];
-    DBLOG(@"我的投资请求结果：%@",dic);
+    DDLogDebug(@"我的投资请求结果：%@",dic);
     
     
     //headerView
