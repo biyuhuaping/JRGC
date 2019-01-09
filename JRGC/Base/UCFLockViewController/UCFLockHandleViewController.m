@@ -214,7 +214,7 @@
                      if (_nLockViewType == LLLockViewTypeCreate) {
                          [MBProgressHUD displayHudError:@"您已成功开启指纹解锁" withShowTimes:2];
                      }
-          
+            
                  } else {
                      if (error) {
                          switch (error.code) {
@@ -633,6 +633,8 @@
             if ([self.delegate respondsToSelector:@selector(lockHandleViewController:didClickLeapWithSign:)]) {
                 [self.delegate lockHandleViewController:self didClickLeapWithSign:NO];
             }
+            [UCFCouponPopup startQueryCouponPopup];
+            
         }
     }];
     //状态为0则表示不使用手势密码 1 则是使用
@@ -850,6 +852,7 @@
             
         } else { // 验证成功
             [self hide];
+
         }
         
     }
@@ -1061,7 +1064,9 @@
             [LLLockPassword saveLockPassword:nil];
         }
     }
-    
+    if (_nLockViewType == LLLockViewTypeCheck || _nLockViewType == LLLockViewTypeCreate) {
+        [UCFCouponPopup startQueryCouponPopup];
+    }
     // 在这里可能需要回调上个页面做一些刷新什么的动作
     
 #ifdef LLLockAnimationOn
