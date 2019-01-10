@@ -92,7 +92,11 @@
         DDLogDebug(@"主队列--延迟执行------%@",[NSThread currentThread]);
         [[MongoliaLayerCenter sharedManager] showLogic];
         [MongoliaLayerCenter sharedManager].tableView = self.homeListVC.tableView;
-        
+        NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+        //使用手势密码 显示
+        if (useLockView != 1) {
+            [self homeCouponPopup];
+        }
     });
     
 

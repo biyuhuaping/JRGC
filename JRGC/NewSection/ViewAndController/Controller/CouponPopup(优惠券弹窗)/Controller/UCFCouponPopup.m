@@ -152,51 +152,33 @@
 //计算两个时间戳的时间差
 - (BOOL)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime{
     
-    NSDateFormatter *date = [[NSDateFormatter alloc]init];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     
-    [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
     
-    NSDate *startD =[date dateFromString:startTime];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+
+
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
     
-    NSDate *endD = [date dateFromString:endTime];
+    [formatter setTimeZone:timeZone];
+    
+    NSDate *startD = [NSDate dateWithTimeIntervalSince1970:[startTime integerValue]];
+    
+    NSDate *endD = [NSDate dateWithTimeIntervalSince1970:[endTime integerValue]];
+
     
     NSTimeInterval start = [startD timeIntervalSince1970]*1;
     
     NSTimeInterval end = [endD timeIntervalSince1970]*1;
     
     NSTimeInterval value = end - start;
-    
-    int second = (int)value %60;//秒
-    
-    int minute = (int)value /60%60;
-    
-    int house = (int)value / (24 *3600)%3600;
-    
-    int day = (int)value / (24 *3600);
-    
-    NSString *str;
-    
-    if (day != 0) {
-        
-        str = [NSString stringWithFormat:@"耗时%d天%d小时%d分%d秒",day,house,minute,second];
-        
-    }else if (day==0 && house !=0) {
-            
-            str = [NSString stringWithFormat:@"耗时%d小时%d分%d秒",house,minute,second];
-            
-        }else if (day==0 && house==0 && minute!=0) {
-                
-                str = [NSString stringWithFormat:@"耗时%d分%d秒",minute,second];
-                
-            }else{
-                    
-                    str = [NSString stringWithFormat:@"耗时%d秒",second];
-                    
-                }
-    
-//    return str;
-
-    return house >= 24? YES:NO;
+    if (value > 24 * 60 * 60) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 

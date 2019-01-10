@@ -54,7 +54,7 @@
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UINavigationController *nav = app.tabBarController.selectedViewController;
     
-    if ( [self isCurrentViewControllerVisible:app.lockVc]) {
+    if ([self isCurrentViewControllerVisible:app.lockVc]) {
         return;
     }
     if ([nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
@@ -78,16 +78,10 @@
         }
         
         return;
-    } else {
-        //下面是需要登录后查看的
-        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-            return;
-        }
-        [UCFCouponPopup startQueryCouponPopup];
     }
 
     
-    
+
     
     
     
@@ -101,7 +95,7 @@
 
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
-    BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
+    BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; 是不是同一天
     //NO 代表当天只显示一回的
     if (!isBelongToToday) {
 //        //新手政策是否显示
