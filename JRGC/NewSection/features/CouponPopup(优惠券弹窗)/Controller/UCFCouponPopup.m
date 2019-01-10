@@ -104,9 +104,10 @@
             // use UIView Category
             
             [fir showInWindow];
+            [[NSUserDefaults standardUserDefaults] setObject:[self getNowTimeTimestamp] forKey:TIMESTAMP];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
-        [[NSUserDefaults standardUserDefaults] setObject:[self getNowTimeTimestamp] forKey:TIMESTAMP];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+
     }
     else
     {
