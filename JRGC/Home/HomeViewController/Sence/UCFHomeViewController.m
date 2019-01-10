@@ -54,6 +54,7 @@
 #import "NSString+Misc.h"
 #import "UCFCouponPopup.h"
 
+#import "UCFLockHandleViewController.h"
 #import "NewPurchaseBidController.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate, BJGridItemDelegate, UIAlertViewDelegate, MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -94,13 +95,57 @@
         [MongoliaLayerCenter sharedManager].tableView = self.homeListVC.tableView;
         NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
         //使用手势密码 显示
-        if (useLockView != 1) {
+//        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+       UIViewController *contro = [self jsd_getCurrentViewController];
+        if (useLockView != 1 && ![contro isKindOfClass:[UCFLockHandleViewController class]]) {
             [self homeCouponPopup];
         }
     });
     
 
 }
+- (UIViewController *)jsd_getRootViewController{
+    
+    UIWindow* window = [[[UIApplication sharedApplication] delegate] window];
+    NSAssert(window, @"The window is empty");
+    return window.rootViewController;
+}
+
+- (UIViewController *)jsd_getCurrentViewController{
+    
+    UIViewController* currentViewController = [self jsd_getRootViewController];
+    BOOL runLoopFind = YES;
+    while (runLoopFind) {
+        if (currentViewController.presentedViewController) {
+            
+            currentViewController = currentViewController.presentedViewController;
+        } else if ([currentViewController isKindOfClass:[UINavigationController class]]) {
+            
+            UINavigationController* navigationController = (UINavigationController* )currentViewController;
+            currentViewController = [navigationController.childViewControllers lastObject];
+            
+        } else if ([currentViewController isKindOfClass:[UITabBarController class]]) {
+            
+            UITabBarController* tabBarController = (UITabBarController* )currentViewController;
+            currentViewController = tabBarController.selectedViewController;
+        } else {
+            
+            NSUInteger childViewControllerCount = currentViewController.childViewControllers.count;
+            if (childViewControllerCount > 0) {
+                
+                currentViewController = currentViewController.childViewControllers.lastObject;
+                
+                return currentViewController;
+            } else {
+                
+                return currentViewController;
+            }
+        }
+        
+    }
+    return currentViewController;
+}
+
 - (void)homeCouponPopup
 {
     if ([UserInfoSingle sharedManager].isShowCouple) {
