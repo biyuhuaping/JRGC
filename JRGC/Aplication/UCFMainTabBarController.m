@@ -26,6 +26,7 @@
 #import "UCFInvestViewController.h"
 #import "UCFMineViewController.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
+#import "UCFNewHomeViewController.h"
 @interface UCFMainTabBarController ()
 
 
@@ -110,8 +111,7 @@
     for (int i=0; i<5; i++) {
         switch (i) {
             case 0:{
-                _LatestView = [[UCFHomeViewController alloc] initWithNibName:@"UCFHomeViewController" bundle:nil];
-                _LatestView.baseTitleType = @"list";
+                _LatestView = [[UCFNewHomeViewController alloc] init];
                 controller = _LatestView;
             }
                 break;

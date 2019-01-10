@@ -39,6 +39,8 @@
 		3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */; };
 		3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */; };
 		334654B6215E08270046A057 /* LOGO微金.png in Resources */ = {isa = PBXBuildFile; fileRef = 334654B5215E08270046A057 /* LOGO微金.png */; };
+		33480A2521E6E647007C8AAA /* UCFNewBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33480A2421E6E647007C8AAA /* UCFNewBaseViewController.m */; };
+		33480A2821E6E8EE007C8AAA /* UCFNewHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */; };
 		3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D20B21A25BD900104CCD /* UCFTransferTableView.m */; };
 		3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */; };
 		3382D21621A267CE00104CCD /* BankTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21421A267CE00104CCD /* BankTransferTableViewCell.xib */; };
@@ -1209,6 +1211,10 @@
 		3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickIntroduceTableViewCell.m; sourceTree = "<group>"; };
 		3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickIntroduceTableViewCell.xib; sourceTree = "<group>"; };
 		334654B5215E08270046A057 /* LOGO微金.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOGO微金.png"; sourceTree = "<group>"; };
+		33480A2321E6E647007C8AAA /* UCFNewBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewBaseViewController.h; sourceTree = "<group>"; };
+		33480A2421E6E647007C8AAA /* UCFNewBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBaseViewController.m; sourceTree = "<group>"; };
+		33480A2621E6E8EE007C8AAA /* UCFNewHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewHomeViewController.h; sourceTree = "<group>"; };
+		33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewHomeViewController.m; sourceTree = "<group>"; };
 		3382D20A21A25BD900104CCD /* UCFTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransferTableView.h; sourceTree = "<group>"; };
 		3382D20B21A25BD900104CCD /* UCFTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransferTableView.m; sourceTree = "<group>"; };
 		3382D21221A267CE00104CCD /* BankTransferTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTransferTableViewCell.h; sourceTree = "<group>"; };
@@ -3169,6 +3175,48 @@
 				25314C0A1D8FD7FA0066F446 /* UCFDirectCell.xib */,
 			);
 			name = TipCell;
+			sourceTree = "<group>";
+		};
+		33480A2121E6E1F0007C8AAA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				33480A2B21E6F242007C8AAA /* VM */,
+				33480A2A21E6F23A007C8AAA /* Views */,
+				33480A2921E6F140007C8AAA /* Controller */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		33480A2221E6E5E4007C8AAA /* Controler */ = {
+			isa = PBXGroup;
+			children = (
+				33480A2321E6E647007C8AAA /* UCFNewBaseViewController.h */,
+				33480A2421E6E647007C8AAA /* UCFNewBaseViewController.m */,
+			);
+			path = Controler;
+			sourceTree = "<group>";
+		};
+		33480A2921E6F140007C8AAA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				33480A2621E6E8EE007C8AAA /* UCFNewHomeViewController.h */,
+				33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		33480A2A21E6F23A007C8AAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		33480A2B21E6F242007C8AAA /* VM */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VM;
 			sourceTree = "<group>";
 		};
 		33813A1521BFB114004666E5 /* NewSection */ = {
@@ -6824,6 +6872,7 @@
 		E352FCED21E4AF0A00617AB7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				33480A2121E6E1F0007C8AAA /* Home */,
 				E352FCEE21E4AF0A00617AB7 /* CouponPopup(优惠券弹窗) */,
 				E352FCFA21E4AF0A00617AB7 /* InvestmentCoupon(投资选择优惠券) */,
 				E352FD0A21E4AF0A00617AB7 /* Bid */,
@@ -6956,13 +7005,13 @@
 		E352FD1621E4AF0B00617AB7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E352FD1721E4AF0B00617AB7 /* UCFRemindFlowView.m */,
 				E352FD1821E4AF0B00617AB7 /* FundsBoardViews */,
-				E352FD2321E4AF0B00617AB7 /* UCFBidInfoView.m */,
-				E352FD2421E4AF0B00617AB7 /* UCFSectionHeadView.m */,
-				E352FD2521E4AF0B00617AB7 /* UCFRemindFlowView.h */,
-				E352FD2621E4AF0B00617AB7 /* UCFSectionHeadView.h */,
 				E352FD2721E4AF0B00617AB7 /* UCFBidInfoView.h */,
+				E352FD2321E4AF0B00617AB7 /* UCFBidInfoView.m */,
+				E352FD2521E4AF0B00617AB7 /* UCFRemindFlowView.h */,
+				E352FD1721E4AF0B00617AB7 /* UCFRemindFlowView.m */,
+				E352FD2621E4AF0B00617AB7 /* UCFSectionHeadView.h */,
+				E352FD2421E4AF0B00617AB7 /* UCFSectionHeadView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -6987,6 +7036,7 @@
 		E352FD2821E4AF0B00617AB7 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				33480A2221E6E5E4007C8AAA /* Controler */,
 				E352FD2921E4AF0B00617AB7 /* TableView */,
 				E352FD3E21E4AF0B00617AB7 /* View */,
 			);
@@ -8681,6 +8731,7 @@
 				7BA6E4BE1AD6731900FE8C37 /* SDWebImageDownloaderOperation.m in Sources */,
 				74ED02081FDA84E200CAFED3 /* UCFCalculateResultView.m in Sources */,
 				74270D131EC595ED00F9419B /* CircleMapView.m in Sources */,
+				33480A2521E6E647007C8AAA /* UCFNewBaseViewController.m in Sources */,
 				746FFE251B0059BB00FF927F /* UCFBindCardOneTableViewCell.m in Sources */,
 				83880A8320F753F800E3B888 /* UCFHonerCahTipAlterView.m in Sources */,
 				E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */,
@@ -8850,6 +8901,7 @@
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
 				3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */,
 				74A2C0D81F4306A000EDF0FA /* UCFGoldCashThirdCell.m in Sources */,
+				33480A2821E6E8EE007C8AAA /* UCFNewHomeViewController.m in Sources */,
 				E352FD4321E4AF0B00617AB7 /* Toast.m in Sources */,
 				7BC8AA221AD4C74200BF4660 /* UCFRepayment.m in Sources */,
 				74CE8B861F220C7500512B15 /* UCFContractModel.m in Sources */,
