@@ -7,8 +7,8 @@
 //
 
 #import "UCFNewHomeViewController.h"
-
-@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate>
+#import "SDCycleScrollView.h"
+@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,SDCycleScrollViewDelegate>
 @property(nonatomic, strong)BaseTableView *showTableView;
 @end
 
@@ -16,12 +16,21 @@
 - (void)loadView
 {
     [super loadView];
-    self.showTableView.myVertMargin = 0;
-    self.showTableView.myHorzMargin = 0;
-    [self.rootLayout addSubview:self.showTableView];
-
+    SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, Screen_Width, ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16)) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
+//    adCycleScrollView.backgroundColor = [UIColor blueColor];
+    adCycleScrollView.zoomType = YES;  // 是否使用缩放效果
+    adCycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
+    adCycleScrollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    adCycleScrollView.currentPageDotColor = [UIColor whiteColor];
+    adCycleScrollView.pageDotColor = [UIColor colorWithWhite:1 alpha:0.5];
+    adCycleScrollView.pageControlDotSize = CGSizeMake(20, 6);  // pageControl小点的大小
+    adCycleScrollView.imageURLStringsGroup = @[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg",@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"];  // 网络图片
+//    adCycleScrollView.localizationImageNamesGroup = @[@"img1", @"img2", @"img3", @"img4"];  // 本地图片
+    [self.rootLayout addSubview:adCycleScrollView];
     
-    
+//    self.showTableView.myVertMargin = 0;
+//    self.showTableView.myHorzMargin = 0;
+//    [self.rootLayout addSubview:self.showTableView];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

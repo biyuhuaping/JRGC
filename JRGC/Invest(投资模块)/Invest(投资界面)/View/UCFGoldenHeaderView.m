@@ -29,12 +29,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginGetGoldPrice) name:BEHIN_GET_GOLD_PRICE object:nil];
      
     NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
-    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
-        cycleScrollView.delegate = self;
-    cycleScrollView.autoScrollTimeInterval = 7.0;
-    [self.headCycleBackView addSubview:cycleScrollView];
-    self.cycleView = cycleScrollView;
-    self.backgroundColor = UIColorWithRGB(0xebebee);
+//    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
+//        cycleScrollView.delegate = self;
+//    cycleScrollView.autoScrollTimeInterval = 7.0;
+//    [self.headCycleBackView addSubview:cycleScrollView];
+//    self.cycleView = cycleScrollView;
+//    self.backgroundColor = UIColorWithRGB(0xebebee);
     [self getNormalBannerData];
 }
 
@@ -112,8 +112,8 @@
             self.contentMode = UIViewContentModeScaleToFill;
             UCFCycleModel *model = [[UCFCycleModel alloc] init];
             model.thumb = imageStr;
-            weakSelf.cycleView.imagesGroup = @[model];
-            [weakSelf.cycleView refreshImage];
+//            weakSelf.cycleView.imagesGroup = @[model];
+//            [weakSelf.cycleView refreshImage];
 //            [self sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"banner_default"]];
         });
     });

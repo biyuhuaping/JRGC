@@ -21,13 +21,13 @@
 {
     [super awakeFromNib];
     NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
-    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
-//    cycleScrollView.delegate = self;
-    cycleScrollView.autoScrollTimeInterval = 7.0;
-    [self addSubview:cycleScrollView];
-    self.cycleView = cycleScrollView;
-    self.backgroundColor = UIColorWithRGB(0xebebee);
-    [self getNormalBannerData];
+//    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
+////    cycleScrollView.delegate = self;
+//    cycleScrollView.autoScrollTimeInterval = 7.0;
+//    [self addSubview:cycleScrollView];
+//    self.cycleView = cycleScrollView;
+//    self.backgroundColor = UIColorWithRGB(0xebebee);
+//    [self getNormalBannerData];
 }
 
 - (void)layoutSubviews
@@ -42,8 +42,8 @@
     
     UCFCycleModel *model = [[UCFCycleModel alloc] init];
     model.thumb = @"https://app.9888.cn/api/staticResource/img/p2pInvestClaim.jpg";
-    self.cycleView.imagesGroup = @[model];
-    [self.cycleView refreshImage];
+//    self.cycleView.imagesGroup = @[model];
+//    [self.cycleView refreshImage];
     
     
 //    __weak typeof(self) weakSelf = self;

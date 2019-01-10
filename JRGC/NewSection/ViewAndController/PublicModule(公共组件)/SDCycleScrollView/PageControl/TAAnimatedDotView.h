@@ -10,4 +10,7 @@
 
 @interface TAAnimatedDotView : TAAbstractDotView
 
+@property (nonatomic, strong) UIColor *dotColor;
+@property (nonatomic, strong) UIColor *normalColor;
+
 @end

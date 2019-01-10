@@ -21,11 +21,11 @@
 {
     [super awakeFromNib];
     NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
-    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
-    //    cycleScrollView.delegate = self;
-    cycleScrollView.autoScrollTimeInterval = 7.0;
-    [self addSubview:cycleScrollView];
-    self.cycleView = cycleScrollView;
+//    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
+//    //    cycleScrollView.delegate = self;
+//    cycleScrollView.autoScrollTimeInterval = 7.0;
+//    [self addSubview:cycleScrollView];
+//    self.cycleView = cycleScrollView;
     self.backgroundColor = UIColorWithRGB(0xebebee);
     [self getNormalBannerData];
 }
@@ -48,8 +48,8 @@
        model.thumb = @"https://app.9888.cn/api/staticResource/img/aiInvestClaim.png";
     }
   
-    self.cycleView.imagesGroup = @[model];
-    [self.cycleView refreshImage];
+//    self.cycleView.imagesGroup = @[model];
+//    [self.cycleView refreshImage];
 //    __weak typeof(self) weakSelf = self;
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanners.php?key=0ca175b9c0f726a831d895e&id=49&p=1"];

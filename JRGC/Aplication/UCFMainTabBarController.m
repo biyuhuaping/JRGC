@@ -30,7 +30,7 @@
 @interface UCFMainTabBarController ()
 
 
-@property (strong, nonatomic) UCFHomeViewController *LatestView;
+@property (strong, nonatomic) UCFNewHomeViewController *LatestView;
 @property (strong, nonatomic) UCFInvestViewController *AssignmentView;
 @property (strong, nonatomic) UCFMineViewController *mineView;
 @end
@@ -220,7 +220,7 @@
     
     switch (index) {
         case 0:{
-            [_LatestView refresh];
+//            [_LatestView refresh];
         }
             break;
         case 1:{

@@ -42,11 +42,11 @@ static NSString *cellId = @"iconCell";
     self.iconBackViewHeight.constant = 0;
     
     NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
-    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
-        cycleScrollView.delegate = self;
-    cycleScrollView.autoScrollTimeInterval = 7.0;
-    [self.view addSubview:cycleScrollView];
-    self.cycleImageView = cycleScrollView;
+//    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
+//        cycleScrollView.delegate = self;
+//    cycleScrollView.autoScrollTimeInterval = 7.0;
+//    [self.view addSubview:cycleScrollView];
+//    self.cycleImageView = cycleScrollView;
     
     UCFNoticeView *noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
     noticeView.delegate = self;
@@ -183,17 +183,17 @@ static NSString *cellId = @"iconCell";
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
-    id model = [cycleScrollView.imagesGroup objectAtIndex:index];
-    if ([model isKindOfClass:[UCFCycleModel class]]) {
-        UCFCycleModel *modell = model;
-        UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
-        webView.rootVc = self.parentViewController;
-        webView.baseTitleType = @"lunbotuhtml";
-        webView.url = modell.url;
-        webView.navTitle = modell.title;
-        webView.dicForShare = modell;
-        [self.parentViewController.navigationController pushViewController:webView animated:YES];
-    }
+//    id model = [cycleScrollView.imagesGroup objectAtIndex:index];
+//    if ([model isKindOfClass:[UCFCycleModel class]]) {
+//        UCFCycleModel *modell = model;
+//        UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+//        webView.rootVc = self.parentViewController;
+//        webView.baseTitleType = @"lunbotuhtml";
+//        webView.url = modell.url;
+//        webView.navTitle = modell.title;
+//        webView.dicForShare = modell;
+//        [self.parentViewController.navigationController pushViewController:webView animated:YES];
+//    }
 }
 
 #pragma mark - 获取正式环境的banner图
@@ -206,8 +206,8 @@ static NSString *cellId = @"iconCell";
         model.url = @"https://m.9888.cn/static/wap/invest/index.html#/features/big-deal";
         NSMutableArray *temp = [NSMutableArray new];
         [temp addObject:model];
-        self.cycleImageView.imagesGroup = temp;
-        [self.cycleImageView refreshImage];
+//        self.cycleImageView.imagesGroup = temp;
+//        [self.cycleImageView refreshImage];
         
         
         UCFNoticeModel *noticeModel = [[UCFNoticeModel alloc] init];
@@ -243,8 +243,8 @@ static NSString *cellId = @"iconCell";
             UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dict];
             [temp addObject:model];
         }
-        self.cycleImageView.imagesGroup = temp;
-        [self.cycleImageView refreshImage];
+//        self.cycleImageView.imagesGroup = temp;
+//        [self.cycleImageView refreshImage];
         
         UCFNoticeModel *model = [[UCFNoticeModel alloc] init];
         model.noticeUrl = [Common isNullValue:modelDic[@"siteNoticeMap"][@"noticeUrl"]] ? @"" : modelDic[@"siteNoticeMap"][@"noticeUrl"];

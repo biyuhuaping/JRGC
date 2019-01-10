@@ -39,8 +39,7 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
 /**
  *  Default dot size
  */
-//static CGSize const kDefaultDotSize = {8, 8};
-static CGSize const kDefaultDotSize = {6, 6};
+static CGSize const kDefaultDotSize = {8, 8};
 
 
 @interface TAPageControl()
@@ -216,6 +215,10 @@ static CGSize const kDefaultDotSize = {6, 6};
     
     if (self.dotViewClass) {
         dotView = [[self.dotViewClass alloc] initWithFrame:CGRectMake(0, 0, self.dotSize.width, self.dotSize.height)];
+        if ([dotView isKindOfClass:[TAAnimatedDotView class]] && self.dotColor) {
+            ((TAAnimatedDotView *)dotView).dotColor = self.dotColor;
+            ((TAAnimatedDotView *)dotView).normalColor = self.normalColor;
+        }
     } else {
         dotView = [[UIImageView alloc] initWithImage:self.dotImage];
         dotView.frame = CGRectMake(0, 0, self.dotSize.width, self.dotSize.height);
@@ -226,8 +229,7 @@ static CGSize const kDefaultDotSize = {6, 6};
         [self.dots addObject:dotView];
     }
     
-    dotView.userInteractionEnabled = YES;
-    
+    dotView.userInteractionEnabled = YES;    
     return dotView;
 }
 
