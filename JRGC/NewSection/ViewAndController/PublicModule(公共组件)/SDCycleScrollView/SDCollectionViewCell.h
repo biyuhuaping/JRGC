@@ -33,7 +33,7 @@
 #import <UIKit/UIKit.h>
 
 #define MaxWidth ([[UIScreen mainScreen] bounds].size.width - 54)
-#define MinWidth (MinHeight*16/9)
+#define MinWidth (MaxWidth - 24)
 #define MaxHeight ((MaxWidth * 9)/16)
 #define MinHeight ((MaxWidth * 9)/16 - 18)
 #define Screen_Width [[UIScreen mainScreen] bounds].size.width
