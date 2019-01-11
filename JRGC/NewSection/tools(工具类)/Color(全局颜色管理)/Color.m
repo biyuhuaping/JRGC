@@ -72,7 +72,10 @@
     }
     
 }
-
++ (UIFont*)gc_Font:(CGFloat)size
+{
+    return  [self font:size andFontName:@"PingFangSC-Regular"];;
+}
 + (UIFont *)scaleFontSize:(CGFloat)size andFontName:(NSString *)name
 {
     //按比例计算的size
@@ -88,6 +91,8 @@
         return  font;
     }
 }
+
+
 
 + (UIColor *)colorWithHexString:(NSString *)color withAlpha:(CGFloat)alpha
 {

@@ -7,66 +7,102 @@
 //
 
 #import "UCFNewHomeViewController.h"
-#import "SDCycleScrollView.h"
-@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,SDCycleScrollViewDelegate>
-@property(nonatomic, strong)BaseTableView *showTableView;
+#import "HomeHeadCycleView.h"
+#import "UCFNewHomeSectionView.h"
+#import "CellConfig.h"
+@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate>
+@property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
+@property(nonatomic, strong)BaseTableView     *showTableView;
+@property(nonatomic, strong)NSMutableArray    *dataArray;
 @end
 
 @implementation UCFNewHomeViewController
 - (void)loadView
 {
     [super loadView];
-    SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, Screen_Width, ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16)) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
-//    adCycleScrollView.backgroundColor = [UIColor blueColor];
-    adCycleScrollView.zoomType = YES;  // 是否使用缩放效果
-    adCycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
-    adCycleScrollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    adCycleScrollView.currentPageDotColor = [UIColor whiteColor];
-    adCycleScrollView.pageDotColor = [UIColor colorWithWhite:1 alpha:0.5];
-    adCycleScrollView.pageControlDotSize = CGSizeMake(20, 6);  // pageControl小点的大小
-    adCycleScrollView.imageURLStringsGroup = @[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg",@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"];  // 网络图片
-//    adCycleScrollView.localizationImageNamesGroup = @[@"img1", @"img2", @"img3", @"img4"];  // 本地图片
-    [self.rootLayout addSubview:adCycleScrollView];
-    
-//    self.showTableView.myVertMargin = 0;
-//    self.showTableView.myHorzMargin = 0;
-//    [self.rootLayout addSubview:self.showTableView];
+
+    HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
+    homeHeadView.myTop = 0;
+    homeHeadView.myHeight = ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
+    homeHeadView.myHorzMargin = 0;
+    [homeHeadView createSubviews];
+    self.homeHeadView = homeHeadView;
+
+    self.showTableView.myVertMargin = 0;
+    self.showTableView.myHorzMargin = 0;
+    [self.rootLayout addSubview:self.showTableView];
+    self.showTableView.backgroundColor = [UIColor clearColor];
+    self.showTableView.tableHeaderView = self.homeHeadView;
+
+}
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self fetchData];
+}
+- (void)fetchData
+{
+    self.dataArray = [NSMutableArray arrayWithCapacity:10];
+    CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门模块" showInfoMethod:nil heightOfCell:185];
+    NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
+    [section1 addObject:data1];
+    [self.dataArray addObject:section1];
 }
 #pragma BaseTableViewDelegate
 - (void)refreshTableViewHeader
 {
-    
+    [_showTableView endRefresh];
 }
 
 - (BaseTableView *)showTableView
 {
     if (!_showTableView) {
-        _showTableView = [[BaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _showTableView = [[BaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _showTableView.delegate = self;
         _showTableView.dataSource = self;
         _showTableView.tableRefreshDelegate = self;
         _showTableView.enableRefreshFooter = NO;
+        _showTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _showTableView;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 54;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UCFNewHomeSectionView *sectionView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 54)];
+    return sectionView;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.dataArray.count;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    NSArray *sectionArr = self.dataArray[section];
+    return sectionArr.count;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *sectionArr = self.dataArray[indexPath.section];
+    CellConfig *data = sectionArr[indexPath.row];
+    return data.heightOfCell;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellStr = @"1111";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
-    }
-    return cell;
+    NSArray *sectionArr = self.dataArray[indexPath.section];
+    CellConfig *config = sectionArr[indexPath.row];
+    return [config cellOfCellConfigWithTableView:tableView dataModel:config];
     
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 
 @end

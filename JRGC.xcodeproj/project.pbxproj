@@ -46,6 +46,11 @@
 		331089D921E74EB80073F71B /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331089CF21E74EB80073F71B /* TAAnimatedDotView.m */; };
 		331089DA21E74EB80073F71B /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331089D021E74EB80073F71B /* TAAbstractDotView.m */; };
 		334654B6215E08270046A057 /* LOGO微金.png in Resources */ = {isa = PBXBuildFile; fileRef = 334654B5215E08270046A057 /* LOGO微金.png */; };
+		334790C221E82E2B005131A5 /* HomeHeadCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334790C121E82E2B005131A5 /* HomeHeadCycleView.m */; };
+		334790C521E82F28005131A5 /* UCFHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334790C421E82F28005131A5 /* UCFHomeViewModel.m */; };
+		334790C921E83DB9005131A5 /* UIButton+Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 334790C821E83DB9005131A5 /* UIButton+Gradient.m */; };
+		334790CC21E83F1A005131A5 /* UCFNewUserGuideTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 334790CB21E83F1A005131A5 /* UCFNewUserGuideTableViewCell.m */; };
+		334790CF21E83F91005131A5 /* UCFNewHomeSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334790CE21E83F90005131A5 /* UCFNewHomeSectionView.m */; };
 		33480A2521E6E647007C8AAA /* UCFNewBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33480A2421E6E647007C8AAA /* UCFNewBaseViewController.m */; };
 		33480A2821E6E8EE007C8AAA /* UCFNewHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */; };
 		3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D20B21A25BD900104CCD /* UCFTransferTableView.m */; };
@@ -1225,6 +1230,16 @@
 		331089D221E74EB80073F71B /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
 		331089D321E74EB80073F71B /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
 		334654B5215E08270046A057 /* LOGO微金.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOGO微金.png"; sourceTree = "<group>"; };
+		334790C021E82E2B005131A5 /* HomeHeadCycleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeadCycleView.h; sourceTree = "<group>"; };
+		334790C121E82E2B005131A5 /* HomeHeadCycleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeadCycleView.m; sourceTree = "<group>"; };
+		334790C321E82F28005131A5 /* UCFHomeViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHomeViewModel.h; sourceTree = "<group>"; };
+		334790C421E82F28005131A5 /* UCFHomeViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeViewModel.m; sourceTree = "<group>"; };
+		334790C721E83DB9005131A5 /* UIButton+Gradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Gradient.h"; sourceTree = "<group>"; };
+		334790C821E83DB9005131A5 /* UIButton+Gradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Gradient.m"; sourceTree = "<group>"; };
+		334790CA21E83F1A005131A5 /* UCFNewUserGuideTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewUserGuideTableViewCell.h; sourceTree = "<group>"; };
+		334790CB21E83F1A005131A5 /* UCFNewUserGuideTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewUserGuideTableViewCell.m; sourceTree = "<group>"; };
+		334790CD21E83F90005131A5 /* UCFNewHomeSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewHomeSectionView.h; sourceTree = "<group>"; };
+		334790CE21E83F90005131A5 /* UCFNewHomeSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewHomeSectionView.m; sourceTree = "<group>"; };
 		33480A2321E6E647007C8AAA /* UCFNewBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewBaseViewController.h; sourceTree = "<group>"; };
 		33480A2421E6E647007C8AAA /* UCFNewBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBaseViewController.m; sourceTree = "<group>"; };
 		33480A2621E6E8EE007C8AAA /* UCFNewHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewHomeViewController.h; sourceTree = "<group>"; };
@@ -3206,6 +3221,22 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
+		334790C621E83DA5005131A5 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				334790C721E83DB9005131A5 /* UIButton+Gradient.h */,
+				334790C821E83DB9005131A5 /* UIButton+Gradient.m */,
+			);
+			path = UIButton;
+			sourceTree = "<group>";
+		};
+		334790D021E85275005131A5 /* CustomStyleButton */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomStyleButton;
+			sourceTree = "<group>";
+		};
 		33480A2121E6E1F0007C8AAA /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -3237,6 +3268,12 @@
 		33480A2A21E6F23A007C8AAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				334790C021E82E2B005131A5 /* HomeHeadCycleView.h */,
+				334790C121E82E2B005131A5 /* HomeHeadCycleView.m */,
+				334790CA21E83F1A005131A5 /* UCFNewUserGuideTableViewCell.h */,
+				334790CB21E83F1A005131A5 /* UCFNewUserGuideTableViewCell.m */,
+				334790CD21E83F90005131A5 /* UCFNewHomeSectionView.h */,
+				334790CE21E83F90005131A5 /* UCFNewHomeSectionView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3244,6 +3281,8 @@
 		33480A2B21E6F242007C8AAA /* VM */ = {
 			isa = PBXGroup;
 			children = (
+				334790C321E82F28005131A5 /* UCFHomeViewModel.h */,
+				334790C421E82F28005131A5 /* UCFHomeViewModel.m */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -6833,6 +6872,7 @@
 		E352FCE421E4AF0A00617AB7 /* PublicModule(公共组件) */ = {
 			isa = PBXGroup;
 			children = (
+				334790D021E85275005131A5 /* CustomStyleButton */,
 				331089C421E74EB80073F71B /* SDCycleScrollView */,
 				E352FCE521E4AF0A00617AB7 /* Toast */,
 				E352FCEA21E4AF0A00617AB7 /* PageControlView */,
@@ -7141,6 +7181,7 @@
 		E352FD7321E4AFD800617AB7 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				334790C621E83DA5005131A5 /* UIButton */,
 				E352FD7421E4AFD800617AB7 /* Component */,
 				E352FD7D21E4AFD800617AB7 /* Image */,
 			);
@@ -8266,11 +8307,13 @@
 				746BBEAB1AF8E93E00EBA0E7 /* UCFCouponUseCell.m in Sources */,
 				74AFB1451EE93ACC007DBAFC /* UCFMicroMoneyGroup.m in Sources */,
 				847103BA1D59AD7500935B19 /* UCFBankDepositoryAccountViewController.m in Sources */,
+				334790CF21E83F91005131A5 /* UCFNewHomeSectionView.m in Sources */,
 				83E780721F38004400A400CE /* UCFGoldCouponCell.m in Sources */,
 				EDF01E2A1C7C0A5B005BDBED /* UCFValidFaceLoginViewController.m in Sources */,
 				4A9230451B68B2D800E5844C /* UIImageView+NetImageView.m in Sources */,
 				E352FDCA21E4B08D00617AB7 /* YTKAnimatingRequestAccessory.m in Sources */,
 				83F9B6C71FDA64F9001EEAC6 /* UCFInvestmentSuccesseAlaterView.m in Sources */,
+				334790C221E82E2B005131A5 /* HomeHeadCycleView.m in Sources */,
 				FB1E7F881D8E43A0009CBE2C /* BlockUIAlertView.m in Sources */,
 				74931A2F1B1326FE00143424 /* NSAttributedString+Attributes.m in Sources */,
 				2526ADE11DD08D5F00114D9A /* JRGCCustomGroupCell.m in Sources */,
@@ -8348,6 +8391,7 @@
 				74BDA9901F09F6C60054403F /* FSCalendarScopeHandle.m in Sources */,
 				FBA5BE9C1B0EDB0D000CDDC3 /* GiFHUD.m in Sources */,
 				74F2AF891D616924008C433C /* UCFHuiBuinessListModel.m in Sources */,
+				334790CC21E83F1A005131A5 /* UCFNewUserGuideTableViewCell.m in Sources */,
 				4ADA3A431B0DCE82000B29FD /* SelectCoupleCell.m in Sources */,
 				7BCE022D1AC9141A0084C15C /* MBProgressHUD+HJ.m in Sources */,
 				E352FD5621E4AF0B00617AB7 /* UCFCouponBoard.m in Sources */,
@@ -8499,6 +8543,7 @@
 				74B98C901F70C2C100CB6A9F /* UCFMineViewController.m in Sources */,
 				E352FD4421E4AF0B00617AB7 /* HUDManager.m in Sources */,
 				E311A6631D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m in Sources */,
+				334790C921E83DB9005131A5 /* UIButton+Gradient.m in Sources */,
 				FBB685851AE4A76800F222B6 /* MJRefreshGifHeader.m in Sources */,
 				83974FDE1F14B25200C2252F /* UCFGoldMoneyBoadCell.m in Sources */,
 				7BCE01F51AC8FC260084C15C /* ASIAuthenticationDialog.m in Sources */,
@@ -8777,6 +8822,7 @@
 				84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */,
 				74D9B8541FD793650076F733 /* KTUpDownAnimationController.m in Sources */,
 				331089D621E74EB80073F71B /* SDCollectionViewCell.m in Sources */,
+				334790C521E82F28005131A5 /* UCFHomeViewModel.m in Sources */,
 				74270D5B1EC5AE8700F9419B /* UCFInvitationRewardCell2.m in Sources */,
 				A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */,
 				7BCE02381AC915720084C15C /* NSString+Base64.m in Sources */,

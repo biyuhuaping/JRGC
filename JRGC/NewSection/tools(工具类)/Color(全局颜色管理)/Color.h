@@ -97,4 +97,12 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
  */
 + (UIColor *)colorWithHexString:(NSString *)color withAlpha:(CGFloat)alpha;
 
+/**
+ 工场默认字体PingFangSC-Regular
+
+ @param size 字体大小
+ @return 生成后的font
+ */
++ (UIFont*)gc_Font:(CGFloat)size;
+
 @end
