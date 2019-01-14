@@ -53,6 +53,7 @@
 		334790CF21E83F91005131A5 /* UCFNewHomeSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334790CE21E83F90005131A5 /* UCFNewHomeSectionView.m */; };
 		33480A2521E6E647007C8AAA /* UCFNewBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33480A2421E6E647007C8AAA /* UCFNewBaseViewController.m */; };
 		33480A2821E6E8EE007C8AAA /* UCFNewHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */; };
+		33793F3C21EC2AA3001065D9 /* UIButton+MLSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F3B21EC2AA3001065D9 /* UIButton+MLSpace.m */; };
 		3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D20B21A25BD900104CCD /* UCFTransferTableView.m */; };
 		3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */; };
 		3382D21621A267CE00104CCD /* BankTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21421A267CE00104CCD /* BankTransferTableViewCell.xib */; };
@@ -1244,6 +1245,8 @@
 		33480A2421E6E647007C8AAA /* UCFNewBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBaseViewController.m; sourceTree = "<group>"; };
 		33480A2621E6E8EE007C8AAA /* UCFNewHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewHomeViewController.h; sourceTree = "<group>"; };
 		33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewHomeViewController.m; sourceTree = "<group>"; };
+		33793F3A21EC2AA3001065D9 /* UIButton+MLSpace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+MLSpace.h"; sourceTree = "<group>"; };
+		33793F3B21EC2AA3001065D9 /* UIButton+MLSpace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MLSpace.m"; sourceTree = "<group>"; };
 		3382D20A21A25BD900104CCD /* UCFTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransferTableView.h; sourceTree = "<group>"; };
 		3382D20B21A25BD900104CCD /* UCFTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransferTableView.m; sourceTree = "<group>"; };
 		3382D21221A267CE00104CCD /* BankTransferTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTransferTableViewCell.h; sourceTree = "<group>"; };
@@ -3226,6 +3229,8 @@
 			children = (
 				334790C721E83DB9005131A5 /* UIButton+Gradient.h */,
 				334790C821E83DB9005131A5 /* UIButton+Gradient.m */,
+				33793F3A21EC2AA3001065D9 /* UIButton+MLSpace.h */,
+				33793F3B21EC2AA3001065D9 /* UIButton+MLSpace.m */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -8876,6 +8881,7 @@
 				7BCE01FA1AC8FC260084C15C /* ASIHTTPRequest.m in Sources */,
 				74270D321EC595FA00F9419B /* UCFFeedBackViewController.m in Sources */,
 				7436F2D81F3C38AE003B77CA /* UCFGoldRechargeBankCell.m in Sources */,
+				33793F3C21EC2AA3001065D9 /* UIButton+MLSpace.m in Sources */,
 				74270D201EC595ED00F9419B /* UCFRebateCell1.m in Sources */,
 				74931A301B1326FE00143424 /* NSTextCheckingResult+ExtendedURL.m in Sources */,
 				74270C921EC58F6800F9419B /* UCFHomeListCellModel.m in Sources */,

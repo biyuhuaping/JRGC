@@ -9,6 +9,7 @@
 #import "UCFNewUserGuideTableViewCell.h"
 
 #import "UIButton+Gradient.h"
+#import "UIButton+MLSpace.h"
 @interface UCFNewUserGuideTableViewCell()
 @property(nonatomic, strong)UIButton    *leftTopbutton;
 @property(nonatomic, strong)UIButton    *rightTopbutton;
@@ -80,12 +81,11 @@
     self.leftTopbutton.leftPos.equalTo(@0);
     [superView addSubview:self.leftTopbutton];
     
-    self.leftTopbutton.titleLabel.font = [Color gc_Font:16];
+    self.leftTopbutton.titleLabel.font = [Color gc_Font:17];
     [self.leftTopbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
-    [self.leftTopbutton setImage:[UIImage imageNamed:@"hs_account_icon"] forState:UIControlStateNormal];
-    [self.leftTopbutton setTitle:@"存管开户" forState:UIControlStateNormal];
-    self.leftTopbutton.imageEdgeInsets = UIEdgeInsetsMake(0, -10/2.0, 0, 10/2.0);
-    self.leftTopbutton.titleEdgeInsets = UIEdgeInsetsMake(0, 10/2.0, 0, -10/2.0);
+    [self.leftTopbutton setImage:[UIImage imageNamed:@"regist_coupon_icon"] forState:UIControlStateNormal];
+    [self.leftTopbutton setTitle:@"注册领券" forState:UIControlStateNormal];
+    [self.leftTopbutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
 
 
     
@@ -93,24 +93,38 @@
     self.rightTopbutton.topPos.equalTo(@0);
     self.rightTopbutton.leftPos.equalTo(self.leftTopbutton.rightPos);
     [superView addSubview:self.rightTopbutton];
-    [self.rightTopbutton setBackgroundColor:[UIColor blueColor]];
+//    [self.rightTopbutton setBackgroundColor:[UIColor blueColor]];
+    [self.rightTopbutton setImage:[UIImage imageNamed:@"hs_account_icon"] forState:UIControlStateNormal];
+    [self.rightTopbutton setTitle:@"存管开户" forState:UIControlStateNormal];
+    [self.rightTopbutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
+    self.rightTopbutton.titleLabel.font = [Color gc_Font:17];
+    [self.rightTopbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     
     self.leftTopbutton.widthSize.equalTo(@[self.rightTopbutton.widthSize]);
     
     self.leftBottombutton.heightSize.equalTo(@65);
     self.leftBottombutton.topPos.equalTo(self.leftTopbutton.bottomPos);
     self.leftBottombutton.leftPos.equalTo(@0);
+//    [self.leftBottombutton setBackgroundColor:[UIColor purpleColor]];
+    [self.leftBottombutton setImage:[UIImage imageNamed:@"risk_test_icon"] forState:UIControlStateNormal];
+    [self.leftBottombutton setTitle:@"风险评测" forState:UIControlStateNormal];
+    [self.leftBottombutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
+    self.leftBottombutton.titleLabel.font = [Color gc_Font:17];
+    [self.leftBottombutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [superView addSubview:self.leftBottombutton];
-    [self.leftBottombutton setBackgroundColor:[UIColor purpleColor]];
+
     
     self.rightBottombutton.heightSize.equalTo(@65);
     self.rightBottombutton.topPos.equalTo(self.leftTopbutton.bottomPos);
     self.rightBottombutton.leftPos.equalTo(self.leftBottombutton.rightPos);
+    [self.rightBottombutton setImage:[UIImage imageNamed:@"new_user_icon"] forState:UIControlStateNormal];
+    [self.rightBottombutton setTitle:@"新人专享" forState:UIControlStateNormal];
+    [self.rightBottombutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
+    self.rightBottombutton.titleLabel.font = [Color gc_Font:17];
+    [self.rightBottombutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [superView addSubview:self.rightBottombutton];
-    [self.rightBottombutton setBackgroundColor:[UIColor yellowColor]];
-    
-    self.leftBottombutton.widthSize.equalTo(@[self.rightBottombutton.widthSize]);
-    
+    self.rightBottombutton.widthSize.equalTo(@[self.leftBottombutton.widthSize]);
+
 }
 
 - (UIButton *)leftTopbutton
