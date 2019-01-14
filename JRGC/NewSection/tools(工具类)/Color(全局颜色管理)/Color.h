@@ -8,34 +8,11 @@
 
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, PGColorOptions) {
-    PGColorOptionThemeGreenColor = 0,          //主题色--绿色 0x66b2bf
-    PGColorOptionThemeWhite,                   //主题色--白色 0xFFFFFF
-    PGColorOptionGrayBackgroundColor,          //背景颜色-- 灰色 0xf0f0f0
-    PGColorOptionBeforeInputGrayTextColor,     //文字--文字输入前颜色 0xcbd4d6
-    PGColorOptionAfterInputGrayTextColor,      //文字--文字输入后颜色 0x324852
-    PGColorOptionTbaleTitleGrayTextColor,      //文字--列表左侧标题颜色 0x8c999f
-    PGColorOptionButtonEnableColor,            //按钮--置灰的背景颜色 ＃dce0e1
-    PGColorOptionButtonColor,                  //按钮--背景颜色 ＃47b4c1
-    PGColorOptionCuttingLineColor,             //分割线--底部线条颜色 0xeeeeee
-    PGColorOptionNavigationTitleColor,         //导航栏--文字颜色 0x324852
-    PGColorHomePageCuttingLineColor,           //首页--十字分割线底部线条颜色 0xdddddd
-    PGColorSerchBarPageBoraderColor,           //搜索框--边框颜色  DDDDDD
-    PGColorOptionCreditCardSpecialBackgroundColor,   //银行卡--添加银行卡中支持信用卡背景色 0xf8f8f8
-    PGColorOptionTransactionDetailsRedColor,   //交易明细--列表失败红色 FB5960
     
+    PGColorOptionGrayBackgroundColor = 0, //背景颜色-- 灰色 0xebebee
+    PGColorOptionThemeWhite,              //主题色--白色 0xFFFFFF
     
-    //从这开始往上加颜色，下面是单独的控件颜色
-    PGColorOptionErroTextColor,                //无网络的文字颜色 0xa4acbb
-    PGColorOptionAlertTitleColor,              //弹框--标题文字颜色  0x66b2bf
-    PGColorOptionAlertContentColor,            //弹框--内容文字颜色  0x324852
-    PGColorOptionAlertButtonColor,             //弹框--按钮背景颜色  0x47b4c1
-    PGColorOptionAlertButtonTitleColor,        //弹框--按钮文字颜色  0x66b2bf
-    PGColorOptionVerificationCodeColor,        //倒计时--结束文字颜色 0x47b4c1
-    PGColorOptionStartVerificationCodeColor,   //倒计时--开始文字颜色 0xdddddd
-    PGColorOptionTabbarTitleNormalColor,       //tabbar--文字正常颜色 0x8A979D
-    PGColorOptionTabbarTitleSelectedColor,     //tabbar--文字选中颜色 0x66B2BF
-    PGColorOptionButtonEnablePressColor,        //按钮--置灰颜色 DBE0E1
-    PGColorOptionLoadingTitleColor              //下拉刷新--文字颜色 0x999999
+   
     
 };
 
