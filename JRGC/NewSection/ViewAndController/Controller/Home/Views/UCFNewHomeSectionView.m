@@ -30,6 +30,7 @@
         label.text = @"新手专享";
         [self.rootLayout addSubview:label];
         [label sizeToFit];
+        self.titleLab = label;
     }
     return self;
 }

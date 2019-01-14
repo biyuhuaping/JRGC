@@ -54,6 +54,8 @@
 		33480A2521E6E647007C8AAA /* UCFNewBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33480A2421E6E647007C8AAA /* UCFNewBaseViewController.m */; };
 		33480A2821E6E8EE007C8AAA /* UCFNewHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */; };
 		33793F3C21EC2AA3001065D9 /* UIButton+MLSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F3B21EC2AA3001065D9 /* UIButton+MLSpace.m */; };
+		33793F3F21EC392F001065D9 /* UCFNewUserBidCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F3E21EC392F001065D9 /* UCFNewUserBidCell.m */; };
+		33793F4521EC674D001065D9 /* UCFPromotionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F4421EC674D001065D9 /* UCFPromotionCell.m */; };
 		3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D20B21A25BD900104CCD /* UCFTransferTableView.m */; };
 		3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */; };
 		3382D21621A267CE00104CCD /* BankTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21421A267CE00104CCD /* BankTransferTableViewCell.xib */; };
@@ -1247,6 +1249,10 @@
 		33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewHomeViewController.m; sourceTree = "<group>"; };
 		33793F3A21EC2AA3001065D9 /* UIButton+MLSpace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+MLSpace.h"; sourceTree = "<group>"; };
 		33793F3B21EC2AA3001065D9 /* UIButton+MLSpace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MLSpace.m"; sourceTree = "<group>"; };
+		33793F3D21EC392F001065D9 /* UCFNewUserBidCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewUserBidCell.h; sourceTree = "<group>"; };
+		33793F3E21EC392F001065D9 /* UCFNewUserBidCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewUserBidCell.m; sourceTree = "<group>"; };
+		33793F4321EC674D001065D9 /* UCFPromotionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFPromotionCell.h; sourceTree = "<group>"; };
+		33793F4421EC674D001065D9 /* UCFPromotionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFPromotionCell.m; sourceTree = "<group>"; };
 		3382D20A21A25BD900104CCD /* UCFTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransferTableView.h; sourceTree = "<group>"; };
 		3382D20B21A25BD900104CCD /* UCFTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransferTableView.m; sourceTree = "<group>"; };
 		3382D21221A267CE00104CCD /* BankTransferTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTransferTableViewCell.h; sourceTree = "<group>"; };
@@ -3279,6 +3285,10 @@
 				334790CB21E83F1A005131A5 /* UCFNewUserGuideTableViewCell.m */,
 				334790CD21E83F90005131A5 /* UCFNewHomeSectionView.h */,
 				334790CE21E83F90005131A5 /* UCFNewHomeSectionView.m */,
+				33793F3D21EC392F001065D9 /* UCFNewUserBidCell.h */,
+				33793F3E21EC392F001065D9 /* UCFNewUserBidCell.m */,
+				33793F4321EC674D001065D9 /* UCFPromotionCell.h */,
+				33793F4421EC674D001065D9 /* UCFPromotionCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -8509,6 +8519,7 @@
 				E352FD4D21E4AF0B00617AB7 /* UCFInvestmentCouponModel.m in Sources */,
 				833345721F1F82BF00A0F30D /* UCFGoldInvestmentCell.m in Sources */,
 				74F2910A1AE0DB82003E0E86 /* UCFCouponViewController.m in Sources */,
+				33793F4521EC674D001065D9 /* UCFPromotionCell.m in Sources */,
 				83FB3F5E1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m in Sources */,
 				331089D721E74EB80073F71B /* TADotView.m in Sources */,
 				74067A3F1F50341B00747888 /* UCFFloatDetailView.m in Sources */,
@@ -8829,6 +8840,7 @@
 				331089D621E74EB80073F71B /* SDCollectionViewCell.m in Sources */,
 				334790C521E82F28005131A5 /* UCFHomeViewModel.m in Sources */,
 				74270D5B1EC5AE8700F9419B /* UCFInvitationRewardCell2.m in Sources */,
+				33793F3F21EC392F001065D9 /* UCFNewUserBidCell.m in Sources */,
 				A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */,
 				7BCE02381AC915720084C15C /* NSString+Base64.m in Sources */,
 				7BDD8FD91AE1043C007A5CE8 /* SDLoopProgressView.m in Sources */,

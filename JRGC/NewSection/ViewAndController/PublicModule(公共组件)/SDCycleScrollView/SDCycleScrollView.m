@@ -616,19 +616,14 @@ NSString * const ID = @"cycleCell";
         
         cell.imageView.center = cell.contentView.center;
     }
-//    if (indexPath.row%3 == 0) {
-//        cell.backgroundColor = [UIColor blueColor];
-//
-//    } else if(indexPath.row%3 == 1) {
-//        cell.backgroundColor = [UIColor grayColor];
-//
-//    } else {
-//        cell.backgroundColor = [UIColor purpleColor];
-//
-//    }
+    cell.imageCornerNotShow = _isHideImageCorner;
     return cell;
 }
-
+//- (void)setIsHideImageCorner:(BOOL)isHideImageCorner
+//{
+//    _isHideImageCorner = isHideImageCorner;
+//    [_mainView reloadData];
+//}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.delegate respondsToSelector:@selector(cycleScrollView:didSelectItemAtIndex:)]) {
