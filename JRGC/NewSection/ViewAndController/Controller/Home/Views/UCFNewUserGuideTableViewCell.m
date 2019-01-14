@@ -39,8 +39,10 @@
       
         
         [self creatContentView:whitBaseView];
-        
-        
+        [whitBaseView setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
+            v.layer.cornerRadius = 5.0f;
+            v.clipsToBounds = YES;
+        }];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.leftPos.equalTo(@45);
         button.rightPos.equalTo(@45);

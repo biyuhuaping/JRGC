@@ -10,6 +10,7 @@
 #import "HomeHeadCycleView.h"
 #import "UCFNewHomeSectionView.h"
 #import "CellConfig.h"
+#import "HomeFootView.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)BaseTableView     *showTableView;
@@ -33,6 +34,13 @@
     [self.rootLayout addSubview:self.showTableView];
     self.showTableView.backgroundColor = [UIColor clearColor];
     self.showTableView.tableHeaderView = self.homeHeadView;
+    
+    HomeFootView *homefootView = [HomeFootView new];
+    homefootView.myHeight = 181;
+    homefootView.myHorzMargin = 0;
+    [homefootView createSubviews];
+    self.showTableView.tableFooterView = homefootView;
+    
 
 }
 - (void)viewDidLayoutSubviews
@@ -59,11 +67,20 @@
     [section2 addObject:data2_1];
     [self.dataArray addObject:section2];
     
-//    CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"商城特惠" showInfoMethod:@selector(reflectDataModel:) heightOfCell:(Screen_Width - 30) * 6 /23];
-//    NSMutableArray *section3 = [NSMutableArray arrayWithCapacity:1];
-//    [section3 addObject:data3_0];
-//    [self.dataArray addObject:section3];
+    CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:nil heightOfCell:(Screen_Width - 30) * 6 /23 + 160];
+    NSMutableArray *section3 = [NSMutableArray arrayWithCapacity:1];
+    [section3 addObject:data3_0];
+    [self.dataArray addObject:section3];
 
+    CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:nil heightOfCell:150];
+    NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
+    [section4 addObject:data4_0];
+    [self.dataArray addObject:section4];
+    
+    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"推荐内容" showInfoMethod:@selector(reflectDataModel:) heightOfCell:((Screen_Width - 30) * 6 /23)];
+    NSMutableArray *section5 = [NSMutableArray arrayWithCapacity:1];
+    [section5 addObject:data5_0];
+    [self.dataArray addObject:section5];
     
     [self.showTableView reloadData];
 }
@@ -87,9 +104,6 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (self.dataArray.count - 1 == section) {
-        return 50;
-    }
     return 0.001;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -106,10 +120,10 @@
     }
     return sectionView;
 }
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-//{
-//    return nil;
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return nil;
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.dataArray.count;

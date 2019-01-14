@@ -36,6 +36,7 @@
         adCycleScrollView.imageURLStringsGroup = @[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"];
         [self.rootLayout addSubview:adCycleScrollView];
         self.adCycleScrollView = adCycleScrollView;
+        
     }
     return self;
 }
@@ -44,19 +45,17 @@
     CellConfig *mod = model;
     if ([mod.title isEqualToString:@"新手专享"]) {
         _cellType = HomeBeansAdType;
-    } else if ([mod.title isEqualToString:@"商城特惠"]) {
+    } else if ([mod.title isEqualToString:@"推荐内容"]) {
         _cellType = HomeShopAdType;
     }
     switch (_cellType) {
         case 0:
             _vTopSpace = _hLeftSpace = _hRightSpace = 15.0f;
             _vBottomSpace = 0;
-            self.adCycleScrollView.isHideImageCorner = NO;
             break;
         case 1:
             _hLeftSpace = _hRightSpace = 15.0f;
             _vTopSpace = _vBottomSpace = 0.0f;
-//            self.adCycleScrollView.isHideImageCorner = YES;
             break;
         default:
             break;
