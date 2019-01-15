@@ -19,7 +19,7 @@
  
         {0xeb,0xeb,0xee},          //背景颜色--灰色 0xebebee
         {0xFF,0xFF,0xFF},          //主题色--白色 0xFFFFFF
-        
+        {0xFF,0x17,0x1C},          //红色字体颜色
        
     
     };
@@ -47,6 +47,10 @@
         return  font;
     }
     
+}
++ (UIFont*)gc_ANC_font:(CGFloat)size
+{
+    return  [self font:size andFontName:@"AvenirNextCondensed-Regular"];;
 }
 + (UIFont*)gc_Font:(CGFloat)size
 {

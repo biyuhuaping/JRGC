@@ -72,7 +72,8 @@
         rateValueLab.text = @"9.5%";
         rateValueLab.bottomPos.equalTo(rateMarkLab.topPos).offset(3);
         rateValueLab.centerXPos.equalTo(rateMarkLab.centerXPos);
-        rateValueLab.font = [Color gc_Font:23.0f];
+        rateValueLab.font = [Color gc_ANC_font:23.0f];
+        rateValueLab.textColor = [Color color:PGColorOpttonTextRedColor];
         [self.rootLayout addSubview:rateValueLab];
         [rateValueLab sizeToFit];
         

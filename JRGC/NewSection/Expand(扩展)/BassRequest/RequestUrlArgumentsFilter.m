@@ -74,6 +74,16 @@
     
     [tempParametersDic addEntriesFromDictionary:originParameters];
     [tempParametersDic addEntriesFromDictionary:parameters];
+    
+//    if(isSignature) //是否需要验签
+//    {
+//        NSString *signature = [Encryption getSinatureWithPar:[self newGetParStr:dict]];
+//        [dict setValue:signature forKey:@"signature"];
+//    }
+//    NSString *encryptParam  = [Encryption AESWithKey:AES_TESTKEY WithDic:dict];
+//    NSDictionary *postDict = [NSDictionary dictionaryWithObject:encryptParam forKey:@"encryptParam"];
+//    [NetWorkingManager sendPOSTDataWithPath:[NSString stringWithFormat:@"%@%@",SERVER_IP_ONLINE_ONE,api] withParamters:postDict withProgress:nil success:success failure:failure];
+    
 //    if (SingShare.userData != nil) {
 //        [tempParametersDic setValue:SingShare.userData.memberCode forKey:@"memberCode"];
 //        [tempParametersDic setValue:SingShare.userData.token forKey:@"token"];

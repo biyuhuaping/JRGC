@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, PGColorOptions) {
     
+    
     PGColorOptionGrayBackgroundColor = 0, //背景颜色-- 灰色 0xebebee
     PGColorOptionThemeWhite,              //主题色--白色 0xFFFFFF
+    PGColorOpttonTextRedColor,            //红色字体颜色
+    
     
    
     
@@ -82,4 +85,12 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
  */
 + (UIFont*)gc_Font:(CGFloat)size;
 
+/**
+ 工场默认字体PingFangSC-Regular
+
+ @param size 字体大小
+ @return AvenirNextCondensed-Regular 字体
+ 
+ */
++ (UIFont*)gc_ANC_font:(CGFloat)size;
 @end
