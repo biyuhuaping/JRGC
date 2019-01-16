@@ -11,7 +11,8 @@
 #import "UCFNewHomeSectionView.h"
 #import "CellConfig.h"
 #import "HomeFootView.h"
-@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate>
+#import "UCFHomeListRequest.h"
+@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)BaseTableView     *showTableView;
 @property(nonatomic, strong)NSMutableArray    *dataArray;
@@ -50,6 +51,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self fetchData];
+    
+    UCFHomeListRequest *request = [[UCFHomeListRequest alloc] init];
+    request.delegate = self;
+    [request start];
+    
+}
+- (void)requestFinished:(YTKBaseRequest *)request {
+    NSLog(@"succeed");
+}
+
+- (void)requestFailed:(YTKBaseRequest *)request {
+    NSLog(@"failed");
 }
 - (void)fetchData
 {

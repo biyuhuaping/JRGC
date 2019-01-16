@@ -45,6 +45,9 @@
 #import "UCFLanchViewController.h"
 #import "RealReachability.h"
 #import "IQKeyboardManager.h"
+#import "YTKNetworkConfig.h"
+#import "RequestUrlArgumentsFilter.h"
+#import "BaseRequest.h"
 @interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
@@ -61,6 +64,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [self startGLobalRealReachability]; //开启网络监测
+    [self startNetConfig];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -79,6 +83,13 @@
     [self IQBoardSetting];
     [self initializeLog];//初始化日志
     return YES;
+}
+- (void)startNetConfig
+{
+    YTKNetworkConfig *config = [YTKNetworkConfig sharedConfig];
+    config.baseUrl = SERVER_IP;
+    RequestUrlArgumentsFilter *urlFilter = [RequestUrlArgumentsFilter filterWithArguments:[BaseRequest getPublicParameters]];
+    [config addUrlFilter:urlFilter];
 }
 #pragma mark IQBoardSetting
 - (void)IQBoardSetting

@@ -101,4 +101,14 @@
 {
     return nil;
 }
++ (NSDictionary *)getPublicParameters
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSString *tmpKeychain = [Encryption getKeychain];
+    [dict setValue:tmpKeychain forKey:@"imei"];
+    [dict setValue:@"1" forKey:@"sourceType"];
+    [dict setValue:[Encryption getIOSVersion] forKey:@"version"];
+    return dict;
+}
+
 @end
