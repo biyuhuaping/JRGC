@@ -19,9 +19,12 @@
  
         {0xeb,0xeb,0xee},          //背景颜色--灰色 0xebebee
         {0xFF,0xFF,0xFF},          //主题色--白色 0xFFFFFF
-        
-       
-    
+        {0xFF,0x4E,0x11},          //文字颜色--橘色 0xFF4E11
+        {0x00,0x00,0x00},               //文字颜色--黑色 0x000000
+        {0x33,0x33,0x33},           //文字颜色--黑灰色 0x333333
+        {0xB1,0xB5,0xC2},                //文字颜色--灰色 0xB1B5C2
+        {0xe3,0xe5,0xea},                //Cell分割线颜色--灰色 0xE3E5EA
+        {0x91,0xac,0xfb},          //Cell内容文字颜色--蓝色色 0x91ACFB
     };
     
     return [UIColor colorWithRed:colors[colorOptions][0]/255.0 green:colors[colorOptions][1]/255.0 blue:colors[colorOptions][2]/255.0 alpha:1];

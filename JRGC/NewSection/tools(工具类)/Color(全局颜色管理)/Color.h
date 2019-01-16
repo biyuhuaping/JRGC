@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, PGColorOptions) {
     
-    PGColorOptionGrayBackgroundColor = 0, //背景颜色-- 灰色 0xebebee
-    PGColorOptionThemeWhite,              //主题色--白色 0xFFFFFF
-    
+    PGColorOptionGrayBackgroundColor = 0,  //背景颜色-- 灰色 0xebebee
+    PGColorOptionThemeWhite,               //主题色--白色 0xFFFFFF
+    PGColorOptionTitleOrange,              //文字颜色--橘色 0xFF4E11
+    PGColorOptionTitleBlack,               //文字颜色--黑色 0x000000
+    PGColorOptionTitleBlackGray,           //文字颜色--黑灰色 0x333333
+    PGColorOptionTitleGray,                //文字颜色--灰色 0xB1B5C2
+    PGColorOptionCellSeparatorGray,        //Cell分割线颜色--灰色 0xE3E5EA
+    PGColorOptionCellContentBlue,          //Cell内容文字颜色--蓝色色 0x91ACFB
    
     
 };
