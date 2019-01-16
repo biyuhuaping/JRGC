@@ -112,6 +112,11 @@
         CGFloat titleLabelY = self.sd_height - titleLabelH;
         _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
     }
+    if (_imageCornerNotShow) {
+        _imageView.layer.cornerRadius = 0;
+    } else {
+        _imageView.layer.cornerRadius = 5;
+    }
 }
 
 @end

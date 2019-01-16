@@ -7,7 +7,7 @@
 //
 
 #import "YTKRequest.h"
-
+#import "Encryption.h"
 typedef NS_ENUM(NSUInteger, RequestState) {
     RequestStateSuccess,
     RequestStateFailure
@@ -24,5 +24,6 @@ typedef NS_ENUM(NSUInteger, RequestState) {
     
 //- (void)handleCompleteBlockWithSuccess:(void(^)(RequestState state, NSDictionary *resObj))success failure:(void(^)())failure;
 
++ (NSDictionary *)getPublicParameters;
     
 @end

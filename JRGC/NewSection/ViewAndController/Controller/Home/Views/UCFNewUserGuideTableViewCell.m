@@ -28,6 +28,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
         MyRelativeLayout *whitBaseView = [MyRelativeLayout new];
         whitBaseView.leftPos.equalTo(@15);
         whitBaseView.rightPos.equalTo(@15);
@@ -35,11 +36,13 @@
         whitBaseView.bottomPos.equalTo(@55);
         whitBaseView.backgroundColor = [UIColor whiteColor];
         [self.rootLayout addSubview:whitBaseView];
-        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+      
         
         [self creatContentView:whitBaseView];
-        
-        
+        [whitBaseView setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
+            v.layer.cornerRadius = 5.0f;
+            v.clipsToBounds = YES;
+        }];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.leftPos.equalTo(@45);
         button.rightPos.equalTo(@45);

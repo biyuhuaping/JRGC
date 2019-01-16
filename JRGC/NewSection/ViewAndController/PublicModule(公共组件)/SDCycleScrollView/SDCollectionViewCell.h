@@ -55,5 +55,7 @@
 @property (nonatomic, assign) BOOL onlyDisplayText;
 
 @property (assign, nonatomic) BOOL zoomType;
+//显示的图片是否有圆角
+@property (assign, nonatomic) BOOL imageCornerNotShow;
 
 @end

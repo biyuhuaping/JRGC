@@ -178,6 +178,12 @@ typedef enum {
 
 @property (nonatomic, weak) UICollectionView *mainView; // 显示图片的collectionView
 
+/**
+ 是否隐藏UICollectionCell的圆角 默认为NO，显示圆角，YES为隐藏
+ */
+@property (nonatomic, assign) BOOL isHideImageCorner;
+
+
 //////////////////////  清除缓存接口  //////////////////////
 
 /** 清除图片缓存（此次升级后统一使用SDWebImage管理图片加载和缓存）  */

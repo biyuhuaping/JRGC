@@ -9,7 +9,7 @@
 #import "RequestUrlArgumentsFilter.h"
 
 #import "AFURLRequestSerialization.h"
-
+#import "Encryption.h"
 
 @implementation RequestUrlArgumentsFilter
 {
@@ -71,18 +71,15 @@
 - (NSDictionary *)parametersStringWithOriginParametersString:(NSDictionary *)originParameters appendParameters:(NSDictionary *)parameters withRequest:(YTKBaseRequest *)request{
     
     NSMutableDictionary *tempParametersDic = [NSMutableDictionary dictionary];
-    
     [tempParametersDic addEntriesFromDictionary:originParameters];
     [tempParametersDic addEntriesFromDictionary:parameters];
-//    if (SingShare.userData != nil) {
-//        [tempParametersDic setValue:SingShare.userData.memberCode forKey:@"memberCode"];
-//        [tempParametersDic setValue:SingShare.userData.token forKey:@"token"];
-//    }
-//    DDLogDebug(@"未加密前的请求URL %@ \n 参数%@",request.spliceUrl,tempParametersDic);
-//    NSDictionary *aesDic = [NSDictionary dictionaryWithObjectsAndKeys:[ReuqestParameters getParametersEncryption:tempParametersDic andEncryptionKey:AES_TESTKEY],@"encryptParam", nil];
-//
-    return @"";
-    
+    if ([UserInfoSingle sharedManager].userId) {
+        [tempParametersDic setValue:[UserInfoSingle sharedManager].userId forKey:@"userId"];
+    }
+    NSDictionary *parametersDic = [Encryption getSinaturDictWithOrginalDict:tempParametersDic];
+    NSString *encryptParam  = [Encryption AESWithKey:AES_TESTKEY WithDic:parametersDic];
+    NSDictionary *postDict = [NSDictionary dictionaryWithObject:encryptParam forKey:@"encryptParam"];
+    return postDict;
 }
 
 @end
