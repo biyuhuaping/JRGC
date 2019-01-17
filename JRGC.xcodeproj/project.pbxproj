@@ -48,6 +48,7 @@
 		3328796321EEC68100832CE8 /* Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796221EEC68100832CE8 /* Encryption.m */; };
 		3328796721EEC75500832CE8 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796621EEC75500832CE8 /* NSString+MD5.m */; };
 		3328796B21EECE7600832CE8 /* UCFHomeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */; };
+		3328796F21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		334654B6215E08270046A057 /* LOGO微金.png in Resources */ = {isa = PBXBuildFile; fileRef = 334654B5215E08270046A057 /* LOGO微金.png */; };
 		334790C221E82E2B005131A5 /* HomeHeadCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334790C121E82E2B005131A5 /* HomeHeadCycleView.m */; };
 		334790C521E82F28005131A5 /* UCFHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334790C421E82F28005131A5 /* UCFHomeViewModel.m */; };
@@ -1057,7 +1058,6 @@
 		E3C117AF1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C117AD1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.xib */; };
 		E3C1EF2421EDC50D0014658E /* UCFMineActivitiesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C1EF2321EDC50D0014658E /* UCFMineActivitiesCell.m */; };
 		E3C1EF2721EDE2200014658E /* UCFMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C1EF2621EDE2200014658E /* UCFMineItemCell.m */; };
-		E3C1F48821E5EC2800F9394B /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C1F48721E5EC2800F9394B /* UINavigationController+FDFullscreenPopGesture.m */; };
 		E3C66A9D21E5FB0A001017DA /* UCFRechargeAndCashView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C66A9A21E5FB09001017DA /* UCFRechargeAndCashView.m */; };
 		E3C66A9E21E5FB0A001017DA /* UCFRechargeAndCashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C66A9B21E5FB09001017DA /* UCFRechargeAndCashView.xib */; };
 		E3E05C5C1DD07D710066B65C /* UCFCouponExchangeToFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E05C5A1DD07D710066B65C /* UCFCouponExchangeToFriends.m */; };
@@ -1250,6 +1250,8 @@
 		3328796621EEC75500832CE8 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		3328796921EECE7600832CE8 /* UCFHomeListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHomeListRequest.h; sourceTree = "<group>"; };
 		3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListRequest.m; sourceTree = "<group>"; };
+		3328796D21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		334654B5215E08270046A057 /* LOGO微金.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOGO微金.png"; sourceTree = "<group>"; };
 		334790C021E82E2B005131A5 /* HomeHeadCycleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeadCycleView.h; sourceTree = "<group>"; };
 		334790C121E82E2B005131A5 /* HomeHeadCycleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeadCycleView.m; sourceTree = "<group>"; };
@@ -2942,8 +2944,6 @@
 		E3C1EF2521EDE2200014658E /* UCFMineItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineItemCell.h; sourceTree = "<group>"; };
 		E3C1EF2621EDE2200014658E /* UCFMineItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineItemCell.m; sourceTree = "<group>"; };
 		E3C1F48421E5D28600F9394B /* ConfigGuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigGuration.h; sourceTree = "<group>"; };
-		E3C1F48621E5EC2800F9394B /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
-		E3C1F48721E5EC2800F9394B /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		E3C66A9A21E5FB09001017DA /* UCFRechargeAndCashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRechargeAndCashView.m; sourceTree = "<group>"; };
 		E3C66A9B21E5FB09001017DA /* UCFRechargeAndCashView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRechargeAndCashView.xib; sourceTree = "<group>"; };
 		E3C66A9C21E5FB09001017DA /* UCFRechargeAndCashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRechargeAndCashView.h; sourceTree = "<group>"; };
@@ -3282,6 +3282,15 @@
 				3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		3328796C21EF1C1F00832CE8 /* FDFullscreenPopGesture */ = {
+			isa = PBXGroup;
+			children = (
+				3328796D21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.h */,
+				3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */,
+			);
+			path = FDFullscreenPopGesture;
 			sourceTree = "<group>";
 		};
 		334790C621E83DA5005131A5 /* UIButton */ = {
@@ -6042,7 +6051,7 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
-				E3C1F48521E5EC2800F9394B /* FDFullscreenPopGesture */,
+				3328796C21EF1C1F00832CE8 /* FDFullscreenPopGesture */,
 				33B17641215A14F4007D1F91 /* LMJScrollTextView */,
 				A84EC2401FE1081E00B0C46A /* ImageScanner */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
@@ -7508,15 +7517,6 @@
 			path = UCFWebView;
 			sourceTree = "<group>";
 		};
-		E3C1F48521E5EC2800F9394B /* FDFullscreenPopGesture */ = {
-			isa = PBXGroup;
-			children = (
-				E3C1F48621E5EC2800F9394B /* UINavigationController+FDFullscreenPopGesture.h */,
-				E3C1F48721E5EC2800F9394B /* UINavigationController+FDFullscreenPopGesture.m */,
-			);
-			path = FDFullscreenPopGesture;
-			sourceTree = "<group>";
-		};
 		EDD13F661C196D860088A378 /* SCGifImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -8755,7 +8755,6 @@
 				74270D4C1EC5976100F9419B /* UCFInvitationRewardViewController.m in Sources */,
 				7BC304891ACBC22D007767F1 /* UITextField+ExtentRange.m in Sources */,
 				7BCE022E1AC9141A0084C15C /* MBProgressHUD.m in Sources */,
-				E3C1F48821E5EC2800F9394B /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				74B98CA41F711D7500CB6A9F /* UCFMineFuncSecCell.m in Sources */,
 				7BCE02361AC915720084C15C /* NSData+AES.m in Sources */,
 				838EDD6F1F6B7432008E60EC /* UCFCustomPieViewCell.m in Sources */,
@@ -8819,6 +8818,7 @@
 				74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */,
 				74AFB12F1EE8F848007DBAFC /* UCFTransferHeaderView.m in Sources */,
 				7456D3C71E82700500207349 /* UIView+Extension.m in Sources */,
+				3328796F21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				A81A6F5A1FBD92CD00BDCE50 /* ServiceChargeView2.m in Sources */,
 				E352FDC221E4B08D00617AB7 /* YTKChainRequest.m in Sources */,
 				74D9B8561FD793650076F733 /* KTCenterAnimationController.m in Sources */,
