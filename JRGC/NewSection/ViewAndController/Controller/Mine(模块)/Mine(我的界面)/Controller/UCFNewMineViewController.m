@@ -17,8 +17,7 @@
 #import "UCFMineNewSignApi.h"
 #import "UCFMineIntoCoinPageModel.h"
 #import "UCFMineIntoCoinPageApi.h"
-#import "UCFMineIntoCoinPageVipModel.h"
-#import "UCFMineIntoCoinPageVipApi.h"
+
 
 
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>

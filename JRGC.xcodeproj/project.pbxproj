@@ -950,9 +950,11 @@
 		E30C797F21F17E6A000183FA /* UCFMineNewSignModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C797E21F17E6A000183FA /* UCFMineNewSignModel.m */; };
 		E30C798221F17E8D000183FA /* UCFMineNewSignApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798121F17E8D000183FA /* UCFMineNewSignApi.m */; };
 		E30C798521F1828E000183FA /* UCFMineIntoCoinPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798421F1828E000183FA /* UCFMineIntoCoinPageModel.m */; };
-		E30C798821F182B5000183FA /* UCFMineIntoCoinPageVipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798721F182B5000183FA /* UCFMineIntoCoinPageVipModel.m */; };
 		E30C798B21F182D8000183FA /* UCFMineIntoCoinPageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798A21F182D8000183FA /* UCFMineIntoCoinPageApi.m */; };
-		E30C798E21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798D21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m */; };
+		E30C799121F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C799021F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.m */; };
+		E30C799421F1C00D000183FA /* UCFMineGetAccountBalanceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C799321F1C00D000183FA /* UCFMineGetAccountBalanceListModel.m */; };
+		E30C799721F1C287000183FA /* UCFMineGetWithdrawInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C799621F1C287000183FA /* UCFMineGetWithdrawInfoModel.m */; };
+		E30C799A21F1C2A7000183FA /* UCFMineGetWithdrawInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C799921F1C2A7000183FA /* UCFMineGetWithdrawInfoApi.m */; };
 		E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */ = {isa = PBXBuildFile; fileRef = E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */; };
 		E31141611D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib in Resources */ = {isa = PBXBuildFile; fileRef = E311415F1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib */; };
 		E311A6631D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m in Sources */ = {isa = PBXBuildFile; fileRef = E311A6611D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m */; };
@@ -2749,12 +2751,16 @@
 		E30C798121F17E8D000183FA /* UCFMineNewSignApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineNewSignApi.m; sourceTree = "<group>"; };
 		E30C798321F1828E000183FA /* UCFMineIntoCoinPageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineIntoCoinPageModel.h; sourceTree = "<group>"; };
 		E30C798421F1828E000183FA /* UCFMineIntoCoinPageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineIntoCoinPageModel.m; sourceTree = "<group>"; };
-		E30C798621F182B5000183FA /* UCFMineIntoCoinPageVipModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineIntoCoinPageVipModel.h; sourceTree = "<group>"; };
-		E30C798721F182B5000183FA /* UCFMineIntoCoinPageVipModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineIntoCoinPageVipModel.m; sourceTree = "<group>"; };
 		E30C798921F182D8000183FA /* UCFMineIntoCoinPageApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineIntoCoinPageApi.h; sourceTree = "<group>"; };
 		E30C798A21F182D8000183FA /* UCFMineIntoCoinPageApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineIntoCoinPageApi.m; sourceTree = "<group>"; };
-		E30C798C21F182EA000183FA /* UCFMineIntoCoinPageVipApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineIntoCoinPageVipApi.h; sourceTree = "<group>"; };
-		E30C798D21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineIntoCoinPageVipApi.m; sourceTree = "<group>"; };
+		E30C798F21F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineGetAccountBalanceListApi.h; sourceTree = "<group>"; };
+		E30C799021F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineGetAccountBalanceListApi.m; sourceTree = "<group>"; };
+		E30C799221F1C00D000183FA /* UCFMineGetAccountBalanceListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineGetAccountBalanceListModel.h; sourceTree = "<group>"; };
+		E30C799321F1C00D000183FA /* UCFMineGetAccountBalanceListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineGetAccountBalanceListModel.m; sourceTree = "<group>"; };
+		E30C799521F1C287000183FA /* UCFMineGetWithdrawInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineGetWithdrawInfoModel.h; sourceTree = "<group>"; };
+		E30C799621F1C287000183FA /* UCFMineGetWithdrawInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineGetWithdrawInfoModel.m; sourceTree = "<group>"; };
+		E30C799821F1C2A7000183FA /* UCFMineGetWithdrawInfoApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineGetWithdrawInfoApi.h; sourceTree = "<group>"; };
+		E30C799921F1C2A7000183FA /* UCFMineGetWithdrawInfoApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineGetWithdrawInfoApi.m; sourceTree = "<group>"; };
 		E311415D1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWebViewJavascriptBridgeBBS.h; sourceTree = "<group>"; };
 		E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWebViewJavascriptBridgeBBS.m; sourceTree = "<group>"; };
 		E311415F1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWebViewJavascriptBridgeBBS.xib; sourceTree = "<group>"; };
@@ -7513,8 +7519,10 @@
 				E30C797E21F17E6A000183FA /* UCFMineNewSignModel.m */,
 				E30C798321F1828E000183FA /* UCFMineIntoCoinPageModel.h */,
 				E30C798421F1828E000183FA /* UCFMineIntoCoinPageModel.m */,
-				E30C798621F182B5000183FA /* UCFMineIntoCoinPageVipModel.h */,
-				E30C798721F182B5000183FA /* UCFMineIntoCoinPageVipModel.m */,
+				E30C799221F1C00D000183FA /* UCFMineGetAccountBalanceListModel.h */,
+				E30C799321F1C00D000183FA /* UCFMineGetAccountBalanceListModel.m */,
+				E30C799521F1C287000183FA /* UCFMineGetWithdrawInfoModel.h */,
+				E30C799621F1C287000183FA /* UCFMineGetWithdrawInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -7543,8 +7551,10 @@
 				E30C798121F17E8D000183FA /* UCFMineNewSignApi.m */,
 				E30C798921F182D8000183FA /* UCFMineIntoCoinPageApi.h */,
 				E30C798A21F182D8000183FA /* UCFMineIntoCoinPageApi.m */,
-				E30C798C21F182EA000183FA /* UCFMineIntoCoinPageVipApi.h */,
-				E30C798D21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m */,
+				E30C798F21F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.h */,
+				E30C799021F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.m */,
+				E30C799821F1C2A7000183FA /* UCFMineGetWithdrawInfoApi.h */,
+				E30C799921F1C2A7000183FA /* UCFMineGetWithdrawInfoApi.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -8480,6 +8490,7 @@
 				740E2E941ECD4D55006FA335 /* UCFNoticeView.m in Sources */,
 				74D657931F2F135700177EB7 /* UCFHomeInvestCell.m in Sources */,
 				83C3E7E21F346188007BE065 /* UCFGoldCouponViewController.m in Sources */,
+				E30C799721F1C287000183FA /* UCFMineGetWithdrawInfoModel.m in Sources */,
 				7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */,
 				A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */,
 				743B275F1F3D8B070098DC1B /* UCFGoldBankModel.m in Sources */,
@@ -8558,6 +8569,7 @@
 				331089D521E74EB80073F71B /* UIView+SDExtension.m in Sources */,
 				83DAEFB31F16112000D7948F /* UCFGoldCalculatorView.m in Sources */,
 				A8E02DA91F0DD4BB00FC2260 /* UCFCellStyleModel.m in Sources */,
+				E30C799A21F1C2A7000183FA /* UCFMineGetWithdrawInfoApi.m in Sources */,
 				74270CF81EC5943200F9419B /* UCFInvitationRebateViewController.m in Sources */,
 				74270C971EC58F6800F9419B /* UCFHomeListCellPresenter.m in Sources */,
 				7412323C1F14BB150061408A /* UCFPickView.m in Sources */,
@@ -8589,6 +8601,7 @@
 				7482A5941F4C07AF006A9964 /* UCFGoldIncreContractModel.m in Sources */,
 				3307E22421A3B147009FFF6D /* QuickRechargeHeadView.m in Sources */,
 				7BA6E4BB1AD6731900FE8C37 /* SDWebImageCompat.m in Sources */,
+				E30C799121F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.m in Sources */,
 				FBB685881AE4A76800F222B6 /* MJRefreshLegendHeader.m in Sources */,
 				74270C9F1EC58F6800F9419B /* UCFHomeListHeaderSectionView.m in Sources */,
 				4A231C541BE9B18400228C88 /* UITabBar+TabBarBadge.m in Sources */,
@@ -8702,7 +8715,6 @@
 				835B88891E8222CC00C8F0AB /* UCFP2POrHornerTabHeaderView.m in Sources */,
 				E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */,
 				8366BFB91E151745008D027F /* UCFCashRecordCell.m in Sources */,
-				E30C798821F182B5000183FA /* UCFMineIntoCoinPageVipModel.m in Sources */,
 				83DFC9461FB0102A002999CA /* UCFDrawGoldViewController.m in Sources */,
 				7BCE02141AC9025A0084C15C /* Common.m in Sources */,
 				7482A5911F4C0622006A9964 /* UCFGoldIncreTransListModel.m in Sources */,
@@ -8941,7 +8953,6 @@
 				7BCE02261AC902FD0084C15C /* UCFToolsMehod.m in Sources */,
 				7BCE01FB1AC8FC260084C15C /* ASIInputStream.m in Sources */,
 				74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */,
-				E30C798E21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m in Sources */,
 				7BA6E4BD1AD6731900FE8C37 /* SDWebImageDownloader.m in Sources */,
 				7BDD8FC81AE0DD67007A5CE8 /* MDRadialProgressTheme.m in Sources */,
 				25F445C31D66E276006813BB /* UCFChoseBankViewController.m in Sources */,
@@ -9160,6 +9171,7 @@
 				E352FD6321E4AF0B00617AB7 /* BaseView.m in Sources */,
 				747AAEBB1AEF89F6007A518F /* FundsDetailModel.m in Sources */,
 				7443C7231F1EFF45009669C0 /* UCFGoldCashOneCell.m in Sources */,
+				E30C799421F1C00D000183FA /* UCFMineGetAccountBalanceListModel.m in Sources */,
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
 				4AC947D71E5598F600354CF8 /* BatchSetView.m in Sources */,

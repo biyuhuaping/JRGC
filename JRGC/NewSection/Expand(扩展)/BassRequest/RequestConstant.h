@@ -23,4 +23,7 @@ static NSString *NewSignApiURL = @"api/homePage/v2/newsign.json";//签到
 
 static NSString *IntoCoinPageApiURL = @"api/coin/v2/intoCoinPage.json"; // 进入工力佳贝页
 
+static NSString *GetWithdrawInfoApiURL = @"api/withdraw/v2/getWithdrawInfo.json";   //提现新接口
+
+
 #endif /* RequestConstant_h */

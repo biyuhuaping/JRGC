@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFMineIntoCoinPageApi : BaseRequest
 
+- (id)initWithPageType:(NSString *)vip; //传vip进入vip页面,不传vip正常进入工贝页面
+
 @end
+
 
 NS_ASSUME_NONNULL_END

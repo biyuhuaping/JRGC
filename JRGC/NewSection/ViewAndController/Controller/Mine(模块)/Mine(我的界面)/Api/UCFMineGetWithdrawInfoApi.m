@@ -1,27 +1,14 @@
 //
-//  UCFMineNewSignApi.m
+//  UCFMineGetWithdrawInfoApi.m
 //  JRGC
 //
 //  Created by kuangzhanzhidian on 2019/1/18.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "UCFMineNewSignApi.h"
+#import "UCFMineGetWithdrawInfoApi.h"
 
-@implementation UCFMineNewSignApi
-{
-    NSString* _token;
-    
-    
-}
-- (id)initWithApptzticket:(NSString *)token
-{
-    self = [super init];
-    if (self) {
-        _token= token;
-    }
-    return self;
-}
+@implementation UCFMineGetWithdrawInfoApi
 /**
  *  @author KZ, 17-09-11 20:09:12
  *
@@ -30,7 +17,7 @@
  *  @return 返回需要请求的借口的URI
  */
 - (NSString *)requestUrl {
-    return NewSignApiURL;
+    return GetWithdrawInfoApiURL;
 }
 /**
  *  @author KZ, 17-09-11 20:09:28
@@ -41,16 +28,11 @@
  */
 - (id)requestArgument {
     
-    
-    return @{
-             @"apptzticket":_token
-             };
-  
-    
+    return @{};
 }
 
 - (NSString *)modelClass
 {
-    return @"UCFMineNewSignModel";
+    return @"UCFMineGetWithdrawInfoModel";
 }
 @end

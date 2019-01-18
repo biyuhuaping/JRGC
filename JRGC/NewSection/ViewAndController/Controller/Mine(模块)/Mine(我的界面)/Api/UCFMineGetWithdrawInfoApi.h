@@ -1,5 +1,5 @@
 //
-//  UCFMineIntoCoinPageVipApi.h
+//  UCFMineGetWithdrawInfoApi.h
 //  JRGC
 //
 //  Created by kuangzhanzhidian on 2019/1/18.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UCFMineIntoCoinPageVipApi : BaseRequest
+@interface UCFMineGetWithdrawInfoApi : BaseRequest
 
 @end
 

@@ -11,3 +11,7 @@
 @implementation UCFMineNewSignModel
 
 @end
+@implementation UCFMineNewSignData
+
+
+@end

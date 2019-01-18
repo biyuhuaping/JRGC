@@ -11,3 +11,20 @@
 @implementation UCFMineIntoCoinPageModel
 
 @end
+
+@implementation UCFMineIntoCoinPageData
+
+
+@end
+
+
+@implementation UCFMineIntoCoinPageCoinrequest
+
+
+@end
+
+
+@implementation UCFMineIntoCoinPageParam
+
+
+@end

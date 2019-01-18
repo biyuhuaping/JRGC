@@ -11,3 +11,7 @@
 @implementation UCFMineMySimpleInfoModel
 
 @end
+@implementation UCFMineMySimpleInfoData
+
+
+@end

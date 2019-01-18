@@ -1,27 +1,14 @@
 //
-//  UCFMineNewSignApi.m
+//  UCFMineGetAccountBalanceListApi.m
 //  JRGC
 //
 //  Created by kuangzhanzhidian on 2019/1/18.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "UCFMineNewSignApi.h"
+#import "UCFMineGetAccountBalanceListApi.h"
 
-@implementation UCFMineNewSignApi
-{
-    NSString* _token;
-    
-    
-}
-- (id)initWithApptzticket:(NSString *)token
-{
-    self = [super init];
-    if (self) {
-        _token= token;
-    }
-    return self;
-}
+@implementation UCFMineGetAccountBalanceListApi
 /**
  *  @author KZ, 17-09-11 20:09:12
  *
@@ -30,7 +17,7 @@
  *  @return 返回需要请求的借口的URI
  */
 - (NSString *)requestUrl {
-    return NewSignApiURL;
+    return GetAccountBalanceListApiURL;
 }
 /**
  *  @author KZ, 17-09-11 20:09:28
@@ -41,16 +28,11 @@
  */
 - (id)requestArgument {
     
-    
-    return @{
-             @"apptzticket":_token
-             };
-  
-    
+    return @{};
 }
 
 - (NSString *)modelClass
 {
-    return @"UCFMineNewSignModel";
+    return @"UCFMineGetAccountBalanceListModel";
 }
 @end

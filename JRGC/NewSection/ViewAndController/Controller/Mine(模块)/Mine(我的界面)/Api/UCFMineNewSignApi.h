@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFMineNewSignApi : BaseRequest
-
+- (id)initWithApptzticket:(NSString *)token;
 @end
 
 NS_ASSUME_NONNULL_END
