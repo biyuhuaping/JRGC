@@ -9,6 +9,18 @@
 #import "UCFNewMineViewController.h"
 #import "BaseTableView.h"
 
+#import "UCFMineMyReceiptApi.h"
+#import "UCFMineMyReceiptModel.h"
+#import "UCFMineMySimpleInfoModel.h"
+#import "UCFMineMySimpleInfoApi.h"
+#import "UCFMineNewSignModel.h"
+#import "UCFMineNewSignApi.h"
+#import "UCFMineIntoCoinPageModel.h"
+#import "UCFMineIntoCoinPageApi.h"
+#import "UCFMineIntoCoinPageVipModel.h"
+#import "UCFMineIntoCoinPageVipApi.h"
+
+
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -17,6 +29,8 @@
 
 @property (nonatomic, strong) NSMutableArray *arryData;
 
+
+@property (nonatomic, strong) UCFMineMyReceiptModel *myReceiptModel;
 @end
 
 @implementation UCFNewMineViewController
@@ -30,6 +44,10 @@
     self.view = self.rootLayout;
     
     [self.rootLayout addSubview:self.tableView];
+    
+    
+    
+    
 }
 - (BaseTableView *)tableView
 {
@@ -103,13 +121,35 @@
         //信息中心
     }
     else if (btn.tag == 10003){
-        
+        //是否展示用户资金,关闭都是*****
     }
     else if (btn.tag == 10004){
-        
+        //只进入微金的充值
     }
     else if (btn.tag == 10005){
-        
+        //各个账户的充值与提现,尊享、黄金账户已经不允许充值,只能提现
     }
+}
+- (void)requestMyReceipt//请求总资产信息
+{
+    UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
+    
+//    request.animatingView = self.view;
+//    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        self.myReceiptModel = [request.responseJSONModel copy];
+        DDLogDebug(@"---------%@",self.myReceiptModel);
+        if (self.myReceiptModel.ret == YES) {
+           
+        }
+        else{
+            ShowMessage(self.myReceiptModel.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
+    
 }
 @end

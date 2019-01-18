@@ -945,6 +945,12 @@
 		A8FF32E51F1666DC00066A80 /* UCFGoldBidSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */; };
 		AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */; };
 		AEC5EEC31D9B65BA000C0321 /* RechargeFixedTelNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */; };
+		E30C797F21F17E6A000183FA /* UCFMineNewSignModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C797E21F17E6A000183FA /* UCFMineNewSignModel.m */; };
+		E30C798221F17E8D000183FA /* UCFMineNewSignApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798121F17E8D000183FA /* UCFMineNewSignApi.m */; };
+		E30C798521F1828E000183FA /* UCFMineIntoCoinPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798421F1828E000183FA /* UCFMineIntoCoinPageModel.m */; };
+		E30C798821F182B5000183FA /* UCFMineIntoCoinPageVipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798721F182B5000183FA /* UCFMineIntoCoinPageVipModel.m */; };
+		E30C798B21F182D8000183FA /* UCFMineIntoCoinPageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798A21F182D8000183FA /* UCFMineIntoCoinPageApi.m */; };
+		E30C798E21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798D21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m */; };
 		E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */ = {isa = PBXBuildFile; fileRef = E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */; };
 		E31141611D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib in Resources */ = {isa = PBXBuildFile; fileRef = E311415F1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib */; };
 		E311A6631D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m in Sources */ = {isa = PBXBuildFile; fileRef = E311A6611D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m */; };
@@ -1038,6 +1044,10 @@
 		E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */; };
 		E37086C81D61E3030041D293 /* UCFOldUserGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */; };
 		E3A6A4B31CC71D03003A3FED /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A6A4B21CC71D03003A3FED /* NSString+URL.m */; };
+		E3A71E1521F063230062D7FC /* UCFMineMyReceiptApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A71E1421F063230062D7FC /* UCFMineMyReceiptApi.m */; };
+		E3A71E1821F0644E0062D7FC /* UCFMineMyReceiptModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A71E1721F0644E0062D7FC /* UCFMineMyReceiptModel.m */; };
+		E3A71E1B21F069200062D7FC /* UCFMineMySimpleInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A71E1A21F069200062D7FC /* UCFMineMySimpleInfoModel.m */; };
+		E3A71E1E21F0694E0062D7FC /* UCFMineMySimpleInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A71E1D21F0694E0062D7FC /* UCFMineMySimpleInfoApi.m */; };
 		E3A96B091CBF837C00E8884F /* UCFWorkPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A96B071CBF837C00E8884F /* UCFWorkPointsViewController.m */; };
 		E3A96B0A1CBF837C00E8884F /* UCFWorkPointsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3A96B081CBF837C00E8884F /* UCFWorkPointsViewController.xib */; };
 		E3A96B0E1CBF83CE00E8884F /* UCFWorkPointsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A96B0C1CBF83CE00E8884F /* UCFWorkPointsTableViewCell.m */; };
@@ -2728,6 +2738,18 @@
 		AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFixedTelNumView.h; sourceTree = "<group>"; };
 		AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeFixedTelNumView.m; sourceTree = "<group>"; };
 		B0A8AA400A6B5149CBB4A656 /* Pods-JRGC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.release.xcconfig"; path = "Target Support Files/Pods-JRGC/Pods-JRGC.release.xcconfig"; sourceTree = "<group>"; };
+		E30C797D21F17E6A000183FA /* UCFMineNewSignModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineNewSignModel.h; sourceTree = "<group>"; };
+		E30C797E21F17E6A000183FA /* UCFMineNewSignModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineNewSignModel.m; sourceTree = "<group>"; };
+		E30C798021F17E8D000183FA /* UCFMineNewSignApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineNewSignApi.h; sourceTree = "<group>"; };
+		E30C798121F17E8D000183FA /* UCFMineNewSignApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineNewSignApi.m; sourceTree = "<group>"; };
+		E30C798321F1828E000183FA /* UCFMineIntoCoinPageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineIntoCoinPageModel.h; sourceTree = "<group>"; };
+		E30C798421F1828E000183FA /* UCFMineIntoCoinPageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineIntoCoinPageModel.m; sourceTree = "<group>"; };
+		E30C798621F182B5000183FA /* UCFMineIntoCoinPageVipModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineIntoCoinPageVipModel.h; sourceTree = "<group>"; };
+		E30C798721F182B5000183FA /* UCFMineIntoCoinPageVipModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineIntoCoinPageVipModel.m; sourceTree = "<group>"; };
+		E30C798921F182D8000183FA /* UCFMineIntoCoinPageApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineIntoCoinPageApi.h; sourceTree = "<group>"; };
+		E30C798A21F182D8000183FA /* UCFMineIntoCoinPageApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineIntoCoinPageApi.m; sourceTree = "<group>"; };
+		E30C798C21F182EA000183FA /* UCFMineIntoCoinPageVipApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineIntoCoinPageVipApi.h; sourceTree = "<group>"; };
+		E30C798D21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineIntoCoinPageVipApi.m; sourceTree = "<group>"; };
 		E311415D1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWebViewJavascriptBridgeBBS.h; sourceTree = "<group>"; };
 		E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWebViewJavascriptBridgeBBS.m; sourceTree = "<group>"; };
 		E311415F1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWebViewJavascriptBridgeBBS.xib; sourceTree = "<group>"; };
@@ -2910,6 +2932,14 @@
 		E38039641DE5682100C031FF /* JRGC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JRGC-Bridging-Header.h"; sourceTree = "<group>"; };
 		E3A6A4B11CC71D03003A3FED /* NSString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URL.h"; sourceTree = "<group>"; };
 		E3A6A4B21CC71D03003A3FED /* NSString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URL.m"; sourceTree = "<group>"; };
+		E3A71E1321F063230062D7FC /* UCFMineMyReceiptApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineMyReceiptApi.h; sourceTree = "<group>"; };
+		E3A71E1421F063230062D7FC /* UCFMineMyReceiptApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineMyReceiptApi.m; sourceTree = "<group>"; };
+		E3A71E1621F0644E0062D7FC /* UCFMineMyReceiptModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineMyReceiptModel.h; sourceTree = "<group>"; };
+		E3A71E1721F0644E0062D7FC /* UCFMineMyReceiptModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineMyReceiptModel.m; sourceTree = "<group>"; };
+		E3A71E1921F069200062D7FC /* UCFMineMySimpleInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineMySimpleInfoModel.h; sourceTree = "<group>"; };
+		E3A71E1A21F069200062D7FC /* UCFMineMySimpleInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineMySimpleInfoModel.m; sourceTree = "<group>"; };
+		E3A71E1C21F0694E0062D7FC /* UCFMineMySimpleInfoApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineMySimpleInfoApi.h; sourceTree = "<group>"; };
+		E3A71E1D21F0694E0062D7FC /* UCFMineMySimpleInfoApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineMySimpleInfoApi.m; sourceTree = "<group>"; };
 		E3A96B061CBF837C00E8884F /* UCFWorkPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWorkPointsViewController.h; sourceTree = "<group>"; };
 		E3A96B071CBF837C00E8884F /* UCFWorkPointsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWorkPointsViewController.m; sourceTree = "<group>"; };
 		E3A96B081CBF837C00E8884F /* UCFWorkPointsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWorkPointsViewController.xib; sourceTree = "<group>"; };
@@ -7453,6 +7483,16 @@
 		E3B76E7021EC6E89009C9021 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E3A71E1621F0644E0062D7FC /* UCFMineMyReceiptModel.h */,
+				E3A71E1721F0644E0062D7FC /* UCFMineMyReceiptModel.m */,
+				E3A71E1921F069200062D7FC /* UCFMineMySimpleInfoModel.h */,
+				E3A71E1A21F069200062D7FC /* UCFMineMySimpleInfoModel.m */,
+				E30C797D21F17E6A000183FA /* UCFMineNewSignModel.h */,
+				E30C797E21F17E6A000183FA /* UCFMineNewSignModel.m */,
+				E30C798321F1828E000183FA /* UCFMineIntoCoinPageModel.h */,
+				E30C798421F1828E000183FA /* UCFMineIntoCoinPageModel.m */,
+				E30C798621F182B5000183FA /* UCFMineIntoCoinPageVipModel.h */,
+				E30C798721F182B5000183FA /* UCFMineIntoCoinPageVipModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -7473,6 +7513,16 @@
 		E3B76E7221EC6E89009C9021 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				E3A71E1321F063230062D7FC /* UCFMineMyReceiptApi.h */,
+				E3A71E1421F063230062D7FC /* UCFMineMyReceiptApi.m */,
+				E3A71E1C21F0694E0062D7FC /* UCFMineMySimpleInfoApi.h */,
+				E3A71E1D21F0694E0062D7FC /* UCFMineMySimpleInfoApi.m */,
+				E30C798021F17E8D000183FA /* UCFMineNewSignApi.h */,
+				E30C798121F17E8D000183FA /* UCFMineNewSignApi.m */,
+				E30C798921F182D8000183FA /* UCFMineIntoCoinPageApi.h */,
+				E30C798A21F182D8000183FA /* UCFMineIntoCoinPageApi.m */,
+				E30C798C21F182EA000183FA /* UCFMineIntoCoinPageVipApi.h */,
+				E30C798D21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -8556,6 +8606,7 @@
 				7456EEB51ECAA336002EC5EF /* UCFProjectLabel.m in Sources */,
 				7BA6E4BC1AD6731900FE8C37 /* SDWebImageDecoder.m in Sources */,
 				7BCE02241AC902FD0084C15C /* SharedSingleton.m in Sources */,
+				E30C798521F1828E000183FA /* UCFMineIntoCoinPageModel.m in Sources */,
 				EDEAB70C1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m in Sources */,
 				A828D6B31F1F30C200662266 /* UCFExtractGoldViewController.m in Sources */,
 				E3A96B0E1CBF83CE00E8884F /* UCFWorkPointsTableViewCell.m in Sources */,
@@ -8575,6 +8626,7 @@
 				E352FDC821E4B08D00617AB7 /* YTKBatchRequestAgent.m in Sources */,
 				749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */,
 				A8E02DAD1F0DDC5000FC2260 /* GoldAccountFirstCell.m in Sources */,
+				E30C798221F17E8D000183FA /* UCFMineNewSignApi.m in Sources */,
 				4A0DA1551B26D8C4004E84F6 /* UCFPurchaseBidViewController.m in Sources */,
 				741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */,
 				FB7EDE3F1D6BFCD700C3E924 /* UCFBaseViewController.m in Sources */,
@@ -8592,6 +8644,7 @@
 				838EDD731F6B7915008E60EC /* UCFCustomPieChartModel.m in Sources */,
 				745D37D51F3AE98800897F1A /* UCFGoldChargeSecCell.m in Sources */,
 				74BDA9981F09F6F10054403F /* UCFCalendarHeaderView.m in Sources */,
+				E3A71E1821F0644E0062D7FC /* UCFMineMyReceiptModel.m in Sources */,
 				74D9B8531FD793650076F733 /* KTAlertController.m in Sources */,
 				74270D1E1EC595ED00F9419B /* UCFRebateCell.m in Sources */,
 				74EB306F1B0E004900D27BA9 /* UCFBankModel.m in Sources */,
@@ -8636,6 +8689,7 @@
 				835B88891E8222CC00C8F0AB /* UCFP2POrHornerTabHeaderView.m in Sources */,
 				E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */,
 				8366BFB91E151745008D027F /* UCFCashRecordCell.m in Sources */,
+				E30C798821F182B5000183FA /* UCFMineIntoCoinPageVipModel.m in Sources */,
 				83DFC9461FB0102A002999CA /* UCFDrawGoldViewController.m in Sources */,
 				7BCE02141AC9025A0084C15C /* Common.m in Sources */,
 				7482A5911F4C0622006A9964 /* UCFGoldIncreTransListModel.m in Sources */,
@@ -8644,6 +8698,7 @@
 				7BC789091B04555F00D50494 /* UCFXieYiViewController.m in Sources */,
 				74931A2D1B1326FE00143424 /* CoreTextUtils.m in Sources */,
 				E352FD4D21E4AF0B00617AB7 /* UCFInvestmentCouponModel.m in Sources */,
+				E3A71E1521F063230062D7FC /* UCFMineMyReceiptApi.m in Sources */,
 				833345721F1F82BF00A0F30D /* UCFGoldInvestmentCell.m in Sources */,
 				74F2910A1AE0DB82003E0E86 /* UCFCouponViewController.m in Sources */,
 				33793F4521EC674D001065D9 /* UCFPromotionCell.m in Sources */,
@@ -8667,6 +8722,7 @@
 				E352FDC721E4B08D00617AB7 /* YTKChainRequestAgent.m in Sources */,
 				74F291221AE0DBFC003E0E86 /* UCFCashViewController.m in Sources */,
 				74FD355B1ADF58710083D52C /* UCFSettingMainCell.m in Sources */,
+				E3A71E1E21F0694E0062D7FC /* UCFMineMySimpleInfoApi.m in Sources */,
 				FB88C90D1AF9F92E00D2EE93 /* YcArray.m in Sources */,
 				7BA6E4C61AD6731900FE8C37 /* UIImageView+WebCache.m in Sources */,
 				7BD35A981AD61E4200389D6B /* LLLockPassword.m in Sources */,
@@ -8745,6 +8801,7 @@
 				74B763DF1F20E08E00E12E51 /* UCFAssetTipView.m in Sources */,
 				FBE5A0531AE8BEDD0095B2ED /* UCFMyInvestViewCell.m in Sources */,
 				7BA6E4B91AD6731900FE8C37 /* NSData+ImageContentType.m in Sources */,
+				E30C798B21F182D8000183FA /* UCFMineIntoCoinPageApi.m in Sources */,
 				7BCE01F91AC8FC260084C15C /* ASIFormDataRequest.m in Sources */,
 				83DD084E1FB971C600B0688F /* UCFDrawGoldRechangAlertView.m in Sources */,
 				7BC304841ACBC22D007767F1 /* UIImage+Misc.m in Sources */,
@@ -8763,6 +8820,7 @@
 				741EB1861D596EF2006C885F /* UCFTableCellOne.m in Sources */,
 				A860F2601F5E3EFE0017495F /* UCFGoldMyRebateViewController.m in Sources */,
 				7BC304821ACBC22D007767F1 /* UIButton+Misc.m in Sources */,
+				E30C797F21F17E6A000183FA /* UCFMineNewSignModel.m in Sources */,
 				E352FD9621E4AFD800617AB7 /* DDLogDetailedMessage.m in Sources */,
 				3328796B21EECE7600832CE8 /* UCFHomeListRequest.m in Sources */,
 				A8BF2E5C1F739DCB003ABDE7 /* UCFLoginBaseView.m in Sources */,
@@ -8870,6 +8928,7 @@
 				7BCE02261AC902FD0084C15C /* UCFToolsMehod.m in Sources */,
 				7BCE01FB1AC8FC260084C15C /* ASIInputStream.m in Sources */,
 				74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */,
+				E30C798E21F182EA000183FA /* UCFMineIntoCoinPageVipApi.m in Sources */,
 				7BA6E4BD1AD6731900FE8C37 /* SDWebImageDownloader.m in Sources */,
 				7BDD8FC81AE0DD67007A5CE8 /* MDRadialProgressTheme.m in Sources */,
 				25F445C31D66E276006813BB /* UCFChoseBankViewController.m in Sources */,
@@ -8922,6 +8981,7 @@
 				832C3C111F443AD200ECAA4A /* UCFGoldCouponReturn.m in Sources */,
 				83D64F631F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.m in Sources */,
 				748ED7A51CC74F3200690215 /* SettingMainButton.m in Sources */,
+				E3A71E1B21F069200062D7FC /* UCFMineMySimpleInfoModel.m in Sources */,
 				74DBAC791D5864C200F6F6B1 /* UCFHuiShangBankViewController.m in Sources */,
 				83FCCA701F171ED8002921C5 /* UCFMyGoldInvestInfoCell.m in Sources */,
 				E3E05C5C1DD07D710066B65C /* UCFCouponExchangeToFriends.m in Sources */,
