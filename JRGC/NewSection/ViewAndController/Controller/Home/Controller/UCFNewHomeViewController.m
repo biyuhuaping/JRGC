@@ -41,8 +41,6 @@
     homefootView.myHorzMargin = 0;
     [homefootView createSubviews];
     self.showTableView.tableFooterView = homefootView;
-    
-
 }
 - (void)viewDidLayoutSubviews
 {

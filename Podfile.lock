@@ -28,6 +28,9 @@ PODS:
     - RealReachability/Ping (= 1.3.0)
   - RealReachability/Connection (1.3.0)
   - RealReachability/Ping (1.3.0)
+  - RTRootNavigationController (0.7.1):
+    - RTRootNavigationController/Core (= 0.7.1)
+  - RTRootNavigationController/Core (0.7.1)
   - YYModel (1.0.4)
   - YYText (1.0.7)
 
@@ -38,6 +41,7 @@ DEPENDENCIES:
   - KVOController
   - MyLayout
   - RealReachability
+  - RTRootNavigationController (~> 0.7.1)
   - YYModel
   - YYText
 
@@ -49,6 +53,7 @@ SPEC REPOS:
     - KVOController
     - MyLayout
     - RealReachability
+    - RTRootNavigationController
     - YYModel
     - YYText
 
@@ -59,9 +64,10 @@ SPEC CHECKSUMS:
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   MyLayout: 833c4b24a69a1e3fd33abe827eeb2fdf19193408
   RealReachability: eae9c58d2db52fadd8e1cba4b5d4c028454fbc47
+  RTRootNavigationController: afa6913402be26f8326f7f37fc1550aa67baddcc
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: b50c7fba42d08e5b8c3f03f8d7cc6adf1adaa9c9
+PODFILE CHECKSUM: eb065292b9526d4e79c30367730a3065054feac0
 
 COCOAPODS: 1.6.0.beta.2

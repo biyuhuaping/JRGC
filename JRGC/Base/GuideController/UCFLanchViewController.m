@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:YES];
     //本地存储的广告地址 为空或者不存在 则不显示广告
     NSString *imagUrl = [[NSUserDefaults standardUserDefaults] valueForKey:@"adversementImageUrl"];
     SDImageCache *cache = [[SDImageCache alloc] init];

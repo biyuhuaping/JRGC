@@ -48,15 +48,17 @@
 #import "YTKNetworkConfig.h"
 #import "RequestUrlArgumentsFilter.h"
 #import "BaseRequest.h"
-@interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate>
+#import "GuideViewController.h"
+@interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate,GuideViewContlerDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
 @property (assign, nonatomic) NSInteger backTime;
 @property (assign, nonatomic) BOOL isComePushNotification;
 @property (assign, nonatomic) BOOL isFirstStart;
 @property (assign, nonatomic) BOOL isComeForceUpdate;
-//@property (assign, nonatomic) BOOL isShowAdversement;
 @property (assign, nonatomic) BOOL isAfter;//是否延时（只在3DTouch启动时使用）
+@property (strong, nonatomic) RTRootNavigationController *rootNavigationController;
+
 @end
 
 @implementation AppDelegate
@@ -74,7 +76,12 @@
     
     UCFLanchViewController *lanchVC = [[UCFLanchViewController alloc] initWithNibName:@"UCFLanchViewController" bundle:nil];
     lanchVC.delegate = self;
-    self.window.rootViewController = lanchVC;
+    RTRootNavigationController *nav = [[RTRootNavigationController alloc] initWithRootViewController:lanchVC];
+    self.rootNavigationController = nav;
+    [GlobalView sharedManager].rootNavController = nav;
+
+    self.window.rootViewController = nav;
+    
     
 //    今天测试软件的时候，发现在iOS12.1系统上push控制器后，点击返回键或者滑动返回时，底部tabbar出现了偏移，经过排查发现为定义了 self.navigationItem.leftBarButtonItem
 //    后经过网络搜索，当 UITabBar 设置为透明，且 push viewController 为 hidesBottomBarWhenPushed = YES 返回的时候就会触发。
@@ -124,23 +131,29 @@
 #pragma mark LanchViewControllerrDelegate
 - (void)switchRootView
 {
-    //初始化广告view
     BOOL islaunch= [GuideViewController isShow];
     if (islaunch) {
-        [self showGuidePageController];
+        GuideViewController *guideViewController = [[GuideViewController alloc] init];
+        guideViewController.delegate = self;
+        self.window.rootViewController = guideViewController;
+
         NSString *strParameters = nil;
         strParameters = [NSString stringWithFormat:@"equipment=%@&remark=%@&serialNumber=%@&sourceType=%@",[Common platformString],@"1",[Common getKeychain],@"1"];
         //统计用户数量
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
     } else {
-        [self showTabbarController];
         NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+        [self showTabbarController];
         //使用手势密码 显示
         if (useLockView == 1) {
             [self showGCode];
-        } else {
         }
     }
+}
+- (void)changeRootView:(GuideViewController *)controller
+{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"islaunch"];
+    [self showTabbarController];
 }
 
 #pragma ------
@@ -492,23 +505,16 @@
 - (void)showTabbarController
 {
     self.tabBarController = [[UCFMainTabBarController alloc] init];
-    self.window.rootViewController = self.tabBarController;
+    RTRootNavigationController *nav = [[RTRootNavigationController alloc] initWithRootViewController:self.tabBarController];
+    [GlobalView sharedManager].tabBarController = self.tabBarController;
+    [GlobalView sharedManager].rootNavController = nav;
+    self.window.rootViewController = nav;
 }
-
-// 展示引导页
-- (void)showGuidePageController
-{
-    GuideViewController *guideViewController = [[GuideViewController alloc] init];
-    guideViewController.delegate = self;
-    self.window.rootViewController = guideViewController;
-}
-
 //显示手势密码
 - (void)showGCode
 {
     NSString* pswd = [LLLockPassword loadLockPassword];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        [Touch3DSingle sharedTouch3DSingle].isShowLock = YES;
         if (pswd) {
             [self showLLLockViewController:LLLockViewTypeCheck];
         } else {
@@ -527,11 +533,11 @@
             self.lockVc = nil;
         }
         self.lockVc = [[UCFLockHandleViewController alloc] init];
-        
+
         self.lockVc.nLockViewType = type;
-        
+
         self.lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        
+
         [self.window.rootViewController presentViewController:self.lockVc animated:NO completion:^{
         }];
         LLLog(@"创建了一个pop=%@", self.lockVc);
@@ -566,13 +572,7 @@
 //    [_loadingBaseView addSubview:textLab];
 //    [view1 startAnimating];
 //}
-- (void)changeRootView
-{
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"islaunch"];
-    [self showTabbarController];
-//    [self addLoadingBaseView];
-    //[self showGCode];
-}
+
     
 - (void)checkIsShowHornor
 {

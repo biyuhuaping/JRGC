@@ -7,7 +7,7 @@
 //
 
 #import "GuideViewController.h"
-
+#import "UCFMainTabBarController.h"
 @interface GuideViewController ()<UIScrollViewDelegate>
 {
     UIScrollView *guideScrollView;
@@ -21,13 +21,25 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-    guideScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+
+    self.view.backgroundColor = [UIColor blueColor];
+    self.navigationController.navigationBarHidden = YES;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.navigationController.navigationBar.translucent = NO;
+    
+    
+    guideScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     guideScrollView.showsHorizontalScrollIndicator = NO;
     guideScrollView.showsVerticalScrollIndicator = NO;
     guideScrollView.pagingEnabled = YES;
@@ -35,14 +47,12 @@
     guideScrollView.bounces = NO;
     [self.view addSubview:guideScrollView];
     
-
-    
+    adjustsScrollViewInsets(guideScrollView);
     int version = 7;
     if(ScreenHeight == 480){
         version = 6;
     } else if (ScreenHeight == 812) {
         version = 8;  //iphonex
-
     }
     for (int i = 0; i < 1; i++) {
         UIImageView *adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * i, 0, ScreenWidth,ScreenHeight)];
@@ -70,9 +80,19 @@
 
 - (void)skipToMainWorkView
 {
-    if (delegate && [delegate respondsToSelector:@selector(changeRootView)])  {
-        [delegate changeRootView];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(changeRootView:)]) {
+        [self.delegate changeRootView:self];
     }
+//    [self showTabbarController];
+}
+
+- (void)showTabbarController
+{
+    UCFMainTabBarController *tabBarController = [[UCFMainTabBarController alloc] init];
+    [GlobalView sharedManager].tabBarController = tabBarController;
+    [self.rt_navigationController pushViewController:tabBarController animated:NO complete:^(BOOL finished) {
+        [self.rt_navigationController removeViewController:self];
+    }];
 }
 + (BOOL)isShow
 {
