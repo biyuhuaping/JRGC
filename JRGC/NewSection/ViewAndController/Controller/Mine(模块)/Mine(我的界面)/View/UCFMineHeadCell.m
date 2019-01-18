@@ -195,7 +195,7 @@
         _payBtn.rightPos.equalTo(@20);
         _payBtn.widthSize.equalTo(@90);
         _payBtn.heightSize.equalTo(@30 );
-        [_payBtn setTitle:@" 充值" forState:UIControlStateNormal];
+        [_payBtn setTitle:@"充值" forState:UIControlStateNormal];
         _payBtn.titleLabel.font= [Color gc_Font:14.0];
         [_payBtn setTitleColor:[Color color:PGColorOptionTitleOrange] forState:UIControlStateNormal];
         _payBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
