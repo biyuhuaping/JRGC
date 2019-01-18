@@ -25,8 +25,8 @@
 {
     AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     BaseNavigationViewController *nav = [delegate.tabBarController.viewControllers objectAtIndex:0];
-    UCFHomeViewController *hc = [nav.viewControllers firstObject];
-    [hc homeCouponPopup];
+//    UCFHomeViewController *hc = [nav.viewControllers firstObject];
+//    [hc homeCouponPopup];
 
 }
 - (void)request
