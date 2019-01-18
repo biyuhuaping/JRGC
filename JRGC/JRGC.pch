@@ -64,7 +64,7 @@
 #import "Color.h"
 
 #import "AFNetworking.h"
-
+#import "NSObject+FBKVOController.h"
 
 #define XPOS 15
 #define YPOS 25

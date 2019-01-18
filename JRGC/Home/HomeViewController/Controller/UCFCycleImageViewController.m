@@ -41,7 +41,7 @@ static NSString *cellId = @"iconCell";
     self.downView.backgroundColor = UIColorWithRGB(0xebebee);
     self.iconBackViewHeight.constant = 0;
     
-    NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
+//    NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
 //    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
 //        cycleScrollView.delegate = self;
 //    cycleScrollView.autoScrollTimeInterval = 7.0;

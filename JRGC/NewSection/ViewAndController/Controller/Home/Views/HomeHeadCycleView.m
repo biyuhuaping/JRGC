@@ -9,31 +9,47 @@
 #import "HomeHeadCycleView.h"
 
 @interface HomeHeadCycleView()<SDCycleScrollViewDelegate>
-
+@property(nonatomic, weak)UCFBannerViewModel *VM;
 @end
 
 @implementation HomeHeadCycleView
 
-- (void)showView:(UCFHomeViewModel *)viewModel
+- (void)showView:(UCFBannerViewModel *)viewModel
 {
-    
+    self.VM = viewModel;
+    @PGWeakObj(self);
+    [self.KVOController observe:viewModel keyPaths:@[@"imagesArr"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"imagesArr"]) {
+            NSArray *imgArr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            if (imgArr.count > 0) {
+                selfWeak.adCycleScrollView.imageURLStringsGroup = imgArr;
+            }
+        }
+    }];
 }
 - (void)createSubviews
 {
     SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, Screen_Width, ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16)) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
     //    adCycleScrollView.backgroundColor = [UIColor blueColor];
     adCycleScrollView.zoomType = YES;  // 是否使用缩放效果
+    adCycleScrollView.delegate = self;
     adCycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
     adCycleScrollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     adCycleScrollView.currentPageDotColor = [UIColor whiteColor];
     adCycleScrollView.pageDotColor = [UIColor colorWithWhite:1 alpha:0.5];
     adCycleScrollView.pageControlDotSize = CGSizeMake(20, 6);  // pageControl小点的大小
-    adCycleScrollView.imageURLStringsGroup = @[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg",@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"];
+//    adCycleScrollView.imageURLStringsGroup = @[];
     [self addSubview:adCycleScrollView];
     self.adCycleScrollView = adCycleScrollView;
     //    adCycleScrollView.localizationImageNamesGroup = @[@"img1", @"img2", @"img3", @"img4"];  // 本地图片
 }
-
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    if (self.VM) {
+        [self.VM cycleViewSelectIndex:index];
+    }
+}
 
 
 @end

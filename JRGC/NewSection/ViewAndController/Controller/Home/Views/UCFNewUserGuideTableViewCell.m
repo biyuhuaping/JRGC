@@ -78,45 +78,50 @@
     vLine.centerXPos.equalTo(superView.centerXPos);
     [superView addSubview:vLine];
     
-    
     self.leftTopbutton.heightSize.equalTo(@65);
     self.leftTopbutton.topPos.equalTo(@0);
     self.leftTopbutton.leftPos.equalTo(@0);
     [superView addSubview:self.leftTopbutton];
     
     self.leftTopbutton.titleLabel.font = [Color gc_Font:17];
-    [self.leftTopbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [self.leftTopbutton setImage:[UIImage imageNamed:@"regist_coupon_icon"] forState:UIControlStateNormal];
+    [self.leftTopbutton setImage:[UIImage imageNamed:@"home_icon_sign_finish"] forState:UIControlStateSelected];
     [self.leftTopbutton setTitle:@"注册领券" forState:UIControlStateNormal];
+    [self.leftTopbutton setTitle:@"已注册" forState:UIControlStateSelected];
+    [self.leftTopbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
+    [self.leftTopbutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateSelected];
     [self.leftTopbutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
 
-
-    
     self.rightTopbutton.heightSize.equalTo(@65);
     self.rightTopbutton.topPos.equalTo(@0);
     self.rightTopbutton.leftPos.equalTo(self.leftTopbutton.rightPos);
     [superView addSubview:self.rightTopbutton];
-//    [self.rightTopbutton setBackgroundColor:[UIColor blueColor]];
     [self.rightTopbutton setImage:[UIImage imageNamed:@"hs_account_icon"] forState:UIControlStateNormal];
+    [self.rightTopbutton setImage:[UIImage imageNamed:@"home_icon_account_finish"] forState:UIControlStateSelected];
     [self.rightTopbutton setTitle:@"存管开户" forState:UIControlStateNormal];
+    [self.rightTopbutton setTitle:@"已开户" forState:UIControlStateSelected];
     [self.rightTopbutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
     self.rightTopbutton.titleLabel.font = [Color gc_Font:17];
     [self.rightTopbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
-    
+    [self.rightTopbutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateSelected];
+
     self.leftTopbutton.widthSize.equalTo(@[self.rightTopbutton.widthSize]);
     
     self.leftBottombutton.heightSize.equalTo(@65);
     self.leftBottombutton.topPos.equalTo(self.leftTopbutton.bottomPos);
     self.leftBottombutton.leftPos.equalTo(@0);
-//    [self.leftBottombutton setBackgroundColor:[UIColor purpleColor]];
     [self.leftBottombutton setImage:[UIImage imageNamed:@"risk_test_icon"] forState:UIControlStateNormal];
+    [self.leftBottombutton setImage:[UIImage imageNamed:@"home_risk_account"] forState:UIControlStateSelected];
+
     [self.leftBottombutton setTitle:@"风险评测" forState:UIControlStateNormal];
+    [self.leftBottombutton setTitle:@"已评测" forState:UIControlStateSelected];
+    [self.leftBottombutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
+    [self.leftBottombutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateSelected];
+    
     [self.leftBottombutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
     self.leftBottombutton.titleLabel.font = [Color gc_Font:17];
-    [self.leftBottombutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [superView addSubview:self.leftBottombutton];
 
-    
     self.rightBottombutton.heightSize.equalTo(@65);
     self.rightBottombutton.topPos.equalTo(self.leftTopbutton.bottomPos);
     self.rightBottombutton.leftPos.equalTo(self.leftBottombutton.rightPos);
@@ -127,7 +132,6 @@
     [self.rightBottombutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [superView addSubview:self.rightBottombutton];
     self.rightBottombutton.widthSize.equalTo(@[self.leftBottombutton.widthSize]);
-
 }
 
 - (UIButton *)leftTopbutton
@@ -165,7 +169,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
+    if ([UserInfoSingle sharedManager].p2pAuthorization) {
+        
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

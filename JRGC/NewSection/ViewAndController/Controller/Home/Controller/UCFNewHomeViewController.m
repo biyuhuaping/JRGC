@@ -12,8 +12,11 @@
 #import "CellConfig.h"
 #import "HomeFootView.h"
 #import "UCFHomeListRequest.h"
-@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate>
+#import "UCFBannerViewModel.h"
+@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
+@property(nonatomic, strong)UCFBannerViewModel*bannerViewModel;
+
 @property(nonatomic, strong)BaseTableView     *showTableView;
 @property(nonatomic, strong)NSMutableArray    *dataArray;
 @end
@@ -28,7 +31,9 @@
     homeHeadView.myHeight = ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
     homeHeadView.myHorzMargin = 0;
     [homeHeadView createSubviews];
+    homeHeadView.delegate = self;
     self.homeHeadView = homeHeadView;
+    
 
     self.showTableView.myVertMargin = 0;
     self.showTableView.myHorzMargin = 0;
@@ -49,11 +54,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self fetchData];
-    
+    [self blindVM];
     UCFHomeListRequest *request = [[UCFHomeListRequest alloc] init];
     request.delegate = self;
     [request start];
     
+}
+- (void)blindVM
+{
+    self.bannerViewModel = [UCFBannerViewModel new];
+    self.bannerViewModel.rootViewController = self;
+    [self.homeHeadView showView:_bannerViewModel];
+    [self.bannerViewModel fetchNetData];
 }
 - (void)requestFinished:(YTKBaseRequest *)request {
     NSLog(@"succeed");
@@ -155,9 +167,13 @@
     NSArray *sectionArr = self.dataArray[indexPath.section];
     CellConfig *config = sectionArr[indexPath.row];
     return [config cellOfCellConfigWithTableView:tableView dataModel:config];
-    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+#pragma mark HomeHeadCycleViewDelegate
+- (void)homeHeadCycleView:(HomeHeadCycleView *)cycleView didSelectIndex:(NSInteger)index
 {
     
 }

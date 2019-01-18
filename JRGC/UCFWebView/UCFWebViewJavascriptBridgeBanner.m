@@ -27,9 +27,9 @@
     if (![UserInfoSingle sharedManager].isSubmitTime) {
         [self subShar];          //添加导航右侧按钮的分享，目前只有banner图有
     }
-    if (![UserInfoSingle sharedManager].isSubmitTime) {
-        ((UCFHomeViewController *)self.rootVc).desVCStr = nil;
-    }
+//    if (![UserInfoSingle sharedManager].isSubmitTime) {
+//        ((UCFHomeViewController *)self.rootVc).desVCStr = nil;
+//    }
     [self gotoURL:self.url];
     
     
