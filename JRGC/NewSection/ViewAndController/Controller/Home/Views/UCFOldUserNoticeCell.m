@@ -57,9 +57,9 @@
         [whitBaseView addSubview:shopList];
         
         UIView *lineView = [[UIView alloc] init];
-        lineView.frame = CGRectMake(0, 125, ScreenWidth - 30, 1);
+        lineView.frame = CGRectMake(0, 75, ScreenWidth - 30, 1);
         lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
-        [self addSubview:lineView];
+        [whitBaseView addSubview:lineView];
         
         
         UCFSiteNoticeView *notiView = [[UCFSiteNoticeView alloc] init];
