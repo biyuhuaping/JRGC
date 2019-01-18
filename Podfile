@@ -20,4 +20,6 @@ pod 'KVOController'
 
 pod 'CocoaLumberjack'
 
+pod 'RTRootNavigationController', '~> 0.7.1'
+
 end

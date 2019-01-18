@@ -681,9 +681,6 @@
     [delegate.tabBarController presentViewController:loginNaviController animated:NO completion:^{
         
     }];
-//    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-//    delegate.window.rootViewController = loginNaviController;
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
 }
 /**

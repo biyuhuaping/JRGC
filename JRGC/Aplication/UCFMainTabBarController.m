@@ -11,22 +11,20 @@
 #import "UCFHomeViewController.h"
 #import "UCFMoreViewController.h"
 #import "AppDelegate.h"
-//#import "P2PWalletHelper.h"
 #import "BaseNavigationViewController.h"
 #import "UITabBar+TabBarBadge.h"
 #import "Touch3DSingle.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFOldUserGuideViewController.h"
 #import "UCFProjectListController.h"
-//#import "UCFLoanViewController.h"
 #import "UCFDiscoveryViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
-//#import "P2PWalletHelper.h"
 #import "BlockUIAlertView.h"
 #import "UCFInvestViewController.h"
 #import "UCFMineViewController.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFNewHomeViewController.h"
+
 @interface UCFMainTabBarController ()
 
 
@@ -36,21 +34,25 @@
 @end
 
 @implementation UCFMainTabBarController
+- (UIBarButtonItem *)rt_customBackItemWithTarget:(id)target action:(SEL)action
+{
+    return nil;
+}
 
 - (void)viewDidLoad
 {   
     [super viewDidLoad];
+    
+    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redbag_toLend:) name:@"UCFRedBagViewController_to_lend" object:nil];
-    
     [self initAllTabbarItems];
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
     [tapGestureRecognizer addTarget:self action:@selector(gestureRecognizerHandle:)];
     [tapGestureRecognizer setNumberOfTapsRequired:2];
     [tapGestureRecognizer setNumberOfTouchesRequired:1];
     [self.tabBar addGestureRecognizer:tapGestureRecognizer];
-    
-    
+
     UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
     UIImageView *imaview = [[UIImageView alloc]initWithFrame:CGRectMake(0, -10, ScreenWidth, 10)];
     //imaview.backgroundColor = [UIColor redColor];
@@ -58,6 +60,8 @@
     self.tabBar.clipsToBounds = NO;
     [self.tabBar addSubview:imaview];
     [[UITabBar appearance] setShadowImage:tabImag];
+
+
 }
 
 - (void)redbag_toLend:(NSNotification *)noty {
@@ -148,7 +152,7 @@
                 break;
         }
         if (controller) {
-            [vcArray addObject:[[BaseNavigationViewController alloc] initWithRootViewController:controller]];
+            [vcArray addObject:[[RTRootNavigationController alloc] initWithRootViewController:controller]];
             UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:tabbarTitleArray[i] image:[[UIImage imageNamed:tabbarNormalArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:tabbarHighlightArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
             item.tag = i;
             controller.tabBarItem = item;

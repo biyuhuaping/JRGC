@@ -80,7 +80,7 @@
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
     else {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.rt_navigationController popViewControllerAnimated:YES];
     }
     [UCFCouponPopup startQueryCouponPopup];//去调取首页优惠券弹框
 }

@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GuideViewController.h"
+
 #import "UCFMainTabBarController.h"
 #import "UCFLockHandleViewController.h"
 #import "NetworkModule.h"
 #import "FMDeviceManager.h"
 
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate,GuideViewContlerDelegate,NetworkModuleDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate,NetworkModuleDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic,strong)  UCFMainTabBarController *tabBarController;

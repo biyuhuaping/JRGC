@@ -46,6 +46,10 @@
 
 
 #import "DDLogDetailedMessage.h"
+
+#import "RTRootNavigationController.h"
+
+#import "GlobalView.h"
 //导航
 //#import "UINavigationController+FDFullscreenPopGesture.h"
 //#import "RTRootNavigationController.h"

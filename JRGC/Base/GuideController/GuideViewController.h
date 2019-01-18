@@ -8,7 +8,7 @@
 @class GuideViewController;
 @protocol GuideViewContlerDelegate <NSObject>
 
-- (void)changeRootView;
+- (void)changeRootView:(GuideViewController *)controller;
 
 @end
 #import <UIKit/UIKit.h>
