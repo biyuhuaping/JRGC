@@ -13,6 +13,8 @@
 #import "HomeFootView.h"
 #import "UCFHomeListRequest.h"
 #import "UCFBannerViewModel.h"
+#import "BaseTableViewCell.h"
+#import "UCFOldUserNoticeCell.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFBannerViewModel*bannerViewModel;
@@ -34,7 +36,8 @@
     homeHeadView.delegate = self;
     self.homeHeadView = homeHeadView;
     
-
+    
+    
     self.showTableView.myVertMargin = 0;
     self.showTableView.myHorzMargin = 0;
     [self.rootLayout addSubview:self.showTableView];
@@ -77,10 +80,21 @@
 - (void)fetchData
 {
     self.dataArray = [NSMutableArray arrayWithCapacity:10];
-    CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:185];
+    CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"新手入门" showInfoMethod:nil heightOfCell:140];
     NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
     [section1 addObject:data1];
     [self.dataArray addObject:section1];
+    
+    if ([UserInfoSingle sharedManager].openStatus == 4 && [UserInfoSingle sharedManager].isRisk) {
+       
+    } else {
+//        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:185];
+//        NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
+//        [section1 addObject:data1];
+//        [self.dataArray addObject:section1];
+    }
+    
+
 
     
     CellConfig *data2_0 = [CellConfig cellConfigWithClassName:@"UCFNewUserBidCell" title:@"新手专享" showInfoMethod:nil heightOfCell:150];
@@ -166,7 +180,9 @@
 {
     NSArray *sectionArr = self.dataArray[indexPath.section];
     CellConfig *config = sectionArr[indexPath.row];
-    return [config cellOfCellConfigWithTableView:tableView dataModel:config];
+    BaseTableViewCell *cell = (BaseTableViewCell *)[config cellOfCellConfigWithTableView:tableView dataModel:config];
+    cell.bc = self;
+    return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -177,5 +193,19 @@
 {
     
 }
-
+- (void)userGuideCellClickButton:(UIButton *)button
+{
+    NSString *title = [button titleForState:UIControlStateNormal];
+    if ([title isEqualToString:@"注册领券"]) {
+        
+    } else if ([title isEqualToString:@"存管开户"]) {
+        
+    } else if ([title isEqualToString:@"风险评测"]) {
+        
+    } else if ([title isEqualToString:@"新人专享"]) {
+        
+    } else {
+        
+    }
+}
 @end
