@@ -49,6 +49,8 @@
     homefootView.myHorzMargin = 0;
     [homefootView createSubviews];
     self.showTableView.tableFooterView = homefootView;
+    [self addLeftButtonTitle:@"首页"];
+    [self addrightButtonWithImageArray:[NSArray arrayWithObjects:@"home_icon_gift",@"home_icon_news", nil]];
 }
 - (void)viewDidLayoutSubviews
 {
@@ -80,27 +82,24 @@
 - (void)fetchData
 {
     self.dataArray = [NSMutableArray arrayWithCapacity:10];
-    CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"新手入门" showInfoMethod:nil heightOfCell:140];
-    NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
-    [section1 addObject:data1];
-    [self.dataArray addObject:section1];
-    
-    if ([UserInfoSingle sharedManager].openStatus == 4 && [UserInfoSingle sharedManager].isRisk) {
-       
+    if ([UserInfoSingle sharedManager].openStatus >= 4 && [UserInfoSingle sharedManager].isRisk) {
+        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"新手入门" showInfoMethod:nil heightOfCell:140];
+        NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
+        [section1 addObject:data1];
+        [self.dataArray addObject:section1];
     } else {
-//        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:185];
-//        NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
-//        [section1 addObject:data1];
-//        [self.dataArray addObject:section1];
+        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:185];
+        NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
+        [section1 addObject:data1];
+        [self.dataArray addObject:section1];
     }
-    
-
-
-    
     CellConfig *data2_0 = [CellConfig cellConfigWithClassName:@"UCFNewUserBidCell" title:@"新手专享" showInfoMethod:nil heightOfCell:150];
     CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:@selector(reflectDataModel:) heightOfCell:((Screen_Width - 30) * 6 /23 + 15)];
     NSMutableArray *section2 = [NSMutableArray arrayWithCapacity:1];
     [section2 addObject:data2_0];
+    [section2 addObject:data2_0];
+    [section2 addObject:data2_0];
+
     [section2 addObject:data2_1];
     [self.dataArray addObject:section2];
     

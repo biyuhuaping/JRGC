@@ -301,7 +301,6 @@
 		744BE8591F6BE01D00107FAA /* UCFHomeIconCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744BE8571F6BE01D00107FAA /* UCFHomeIconCollectionCell.m */; };
 		744BE85A1F6BE01D00107FAA /* UCFHomeIconCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744BE8581F6BE01D00107FAA /* UCFHomeIconCollectionCell.xib */; };
 		744EB7EE1EE7DD15003C57C4 /* UCFInvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744EB7EC1EE7DD15003C57C4 /* UCFInvestViewController.m */; };
-		744EB7EF1EE7DD15003C57C4 /* UCFInvestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744EB7ED1EE7DD15003C57C4 /* UCFInvestViewController.xib */; };
 		744EB7F31EE7E836003C57C4 /* UCFHonorInvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744EB7F11EE7E836003C57C4 /* UCFHonorInvestViewController.m */; };
 		744EB7F41EE7E836003C57C4 /* UCFHonorInvestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744EB7F21EE7E836003C57C4 /* UCFHonorInvestViewController.xib */; };
 		744EB7F81EE7E858003C57C4 /* UCFMicroMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744EB7F61EE7E858003C57C4 /* UCFMicroMoneyViewController.m */; };
@@ -1686,7 +1685,6 @@
 		744BE8581F6BE01D00107FAA /* UCFHomeIconCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFHomeIconCollectionCell.xib; sourceTree = "<group>"; };
 		744EB7EB1EE7DD15003C57C4 /* UCFInvestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestViewController.h; sourceTree = "<group>"; };
 		744EB7EC1EE7DD15003C57C4 /* UCFInvestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestViewController.m; sourceTree = "<group>"; };
-		744EB7ED1EE7DD15003C57C4 /* UCFInvestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFInvestViewController.xib; sourceTree = "<group>"; };
 		744EB7F01EE7E836003C57C4 /* UCFHonorInvestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHonorInvestViewController.h; sourceTree = "<group>"; };
 		744EB7F11EE7E836003C57C4 /* UCFHonorInvestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHonorInvestViewController.m; sourceTree = "<group>"; };
 		744EB7F21EE7E836003C57C4 /* UCFHonorInvestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFHonorInvestViewController.xib; sourceTree = "<group>"; };
@@ -4208,7 +4206,6 @@
 			children = (
 				744EB7EB1EE7DD15003C57C4 /* UCFInvestViewController.h */,
 				744EB7EC1EE7DD15003C57C4 /* UCFInvestViewController.m */,
-				744EB7ED1EE7DD15003C57C4 /* UCFInvestViewController.xib */,
 				744EB7F01EE7E836003C57C4 /* UCFHonorInvestViewController.h */,
 				744EB7F11EE7E836003C57C4 /* UCFHonorInvestViewController.m */,
 				744EB7F21EE7E836003C57C4 /* UCFHonorInvestViewController.xib */,
@@ -8192,7 +8189,6 @@
 				4A2484B421A3AD37001B0703 /* UCFQuickRechargeViewController.xib in Resources */,
 				833CC9FA1FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.xib in Resources */,
 				744EB7FE1EE7E871003C57C4 /* UCFInvestTransferViewController.xib in Resources */,
-				744EB7EF1EE7DD15003C57C4 /* UCFInvestViewController.xib in Resources */,
 				740586D71F41B16800E2DE01 /* UCFGoldRaiseSectionHeaderView.xib in Resources */,
 				835B888B1E8222F600C8F0AB /* UCFP2POrHornerTabHeaderView.xib in Resources */,
 				83CD842D1F13A50800227704 /* UCFHonerViewController.xib in Resources */,

@@ -38,11 +38,16 @@
 {
     return nil;
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+//    [self.rt_navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES];
 
+}
 - (void)viewDidLoad
 {   
     [super viewDidLoad];
-    
     
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redbag_toLend:) name:@"UCFRedBagViewController_to_lend" object:nil];
@@ -120,7 +125,7 @@
             }
                 break;
             case 1:{
-                UCFInvestViewController *invest = [[UCFInvestViewController alloc] initWithNibName:@"UCFInvestViewController" bundle:nil];
+                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
                 controller = invest;
                 _AssignmentView = invest;
             }
@@ -152,7 +157,7 @@
                 break;
         }
         if (controller) {
-            [vcArray addObject:[[RTRootNavigationController alloc] initWithRootViewController:controller]];
+            [vcArray addObject:[[BaseNavigationViewController alloc] initWithRootViewController:controller]];
             UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:tabbarTitleArray[i] image:[[UIImage imageNamed:tabbarNormalArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:tabbarHighlightArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
             item.tag = i;
             controller.tabBarItem = item;

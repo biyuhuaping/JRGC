@@ -20,7 +20,7 @@
 #import "UCFOldUserGuideViewController.h"
 #import "HSHelper.h"
 #import "RiskAssessmentViewController.h"
-#import "UCFHonorHeaderView.h"
+//#import "UCFHonorHeaderView.h"
 #import "UCFHomeListCell.h"
 #import "NewPurchaseBidController.h"
 @interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate,UCFHomeListCellHonorDelegate>
@@ -37,7 +37,7 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 
-@property (strong, nonatomic) UCFHonorHeaderView *ordinaryHeaderView;
+//@property (strong, nonatomic) UCFHonorHeaderView *ordinaryHeaderView;
 @end
 
 @implementation UCFOrdinaryBidController
@@ -56,16 +56,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self addLeftButton];
+//    [self addLeftButton];
     baseTitleLabel.text = @"微金项目";
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
     
-    UCFHonorHeaderView *honorHeaderView = (UCFHonorHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHonorHeaderView" owner:self options:nil] lastObject];
-    honorHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+10);
-    self.ordinaryHeaderView = honorHeaderView;
-    self.tableview.tableHeaderView = honorHeaderView;
+//    UCFHonorHeaderView *honorHeaderView = (UCFHonorHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHonorHeaderView" owner:self options:nil] lastObject];
+//    honorHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+10);
+//    self.ordinaryHeaderView = honorHeaderView;
+//    self.tableview.tableHeaderView = honorHeaderView;
 
     
     //=========  下拉刷新、上拉加载更多  =========

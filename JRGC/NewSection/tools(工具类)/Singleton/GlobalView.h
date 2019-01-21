@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GlobalView : NSObject
 + (GlobalView *)sharedManager;
 @property(nonatomic,weak)UITabBarController *tabBarController;
-@property(nonatomic,weak)UINavigationController *rootNavController;
+@property(nonatomic,strong)UINavigationController *rootNavController;
 @end
 
 NS_ASSUME_NONNULL_END

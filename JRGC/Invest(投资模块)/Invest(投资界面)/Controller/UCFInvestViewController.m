@@ -33,24 +33,13 @@
 
 @implementation UCFInvestViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultView) name:@"setDefaultViewData" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshSuperviseView" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadHonerPlanData" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadP2PTransferData" object:nil];
-    }
-    return self;
-}
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-
-    self.navigationController.navigationBarHidden = YES;
+//    [self.rt_navigationController  setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,7 +47,7 @@
     //设置UI
     [self newCreateUI];
 }
-    
+
 - (void)refreshUI:(NSNotification *)noti
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -131,11 +120,6 @@
             [self.honorInvest.tableview.header beginRefreshing];
         }
     }
-//    else if ([baseVc isEqual:self.golden]) {
-//        if (![self.golden.tableview.header isRefreshing]) {
-//            [self.golden.tableview.header beginRefreshing];
-//        }
-//    }
     else if ([baseVc isEqual:self.investTransfer]) {
         if (![self.investTransfer.tableview.header isRefreshing]) {
             [self.investTransfer.tableview.header beginRefreshing];
@@ -205,19 +189,10 @@
 
 - (void)newCreateUI
 {
+//    [GlobalView sharedManager].rootNavController.navigationBar.tintColor = [UIColor blueColor];
+//    [[GlobalView sharedManager].rootNavController setNavigationBarHidden:NO];
     NSMutableArray *titleArray = [[NSMutableArray alloc] init];
-//    if ([UserInfoSingle sharedManager].wjIsShow) {
-//        [titleArray addObject:@"微金"];
-//    }
-//    if ([UserInfoSingle sharedManager].zxIsShow) {
-//        [titleArray addObject:@"尊享"];
-//    }
-//    if ([UserInfoSingle sharedManager].goldIsShow) {
-//        [titleArray addObject:@"黄金"];
-//    }
-//    if ([UserInfoSingle sharedManager].transferIsShow) {
-//        [titleArray addObject:@"债转"];
-//    }
+
      [titleArray addObject:@"优质债权"];
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
@@ -238,6 +213,7 @@
     
     [self.view addSubview:_pagerView];
     [self changeView];
+//    self.view.backgroundColor = [UIColor yellowColor];
 }
 - (void)changeView {
     if ([self.selectedType isEqualToString:@"IntelligentLoan"]) {//智能出借

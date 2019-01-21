@@ -27,6 +27,69 @@
 }
 
 
+
+- (void)addWhiteLeftButton
+{
+    [self addLeftbuttonImageName:@"btn_whiteback.png"];
+}
+- (void)addBlueLeftButton
+{
+    [self addLeftbuttonImageName:@"icon_back.png"];
+}
+- (void)addLeftbuttonImageName:(NSString *)name
+{
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [leftButton setBackgroundColor:[UIColor clearColor]];
+    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
+    [leftButton setImage:[UIImage imageNamed:name]forState:UIControlStateNormal];
+//    [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateHighlighted];
+//    [leftButton setImage:[UIImage imageNamed:@"icon_back.png"]forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(leftBar1Clicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = leftItem;
+}
+- (void)addLeftButtonTitle:(NSString *)title
+{
+    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn1 addTarget:self action:@selector(leftBar1Clicked) forControlEvents:UIControlEventTouchUpInside];
+    [btn1 setTitle:title forState:UIControlStateNormal];
+    [btn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn1 sizeToFit];
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithCustomView:btn1];
+    self.navigationItem.leftBarButtonItem = item1;
+}
+- (void)leftBar1Clicked
+{
+    
+}
+
+
+
+- (void)addrightButtonWithImageArray:(NSArray *)imageArray
+{
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setBackgroundColor:[UIColor clearColor]];
+    [rightButton setImage:[UIImage imageNamed:imageArray[0]]forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(rightBarClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton sizeToFit];
+    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
+    UIButton *rightButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton1 setBackgroundColor:[UIColor clearColor]];
+    [rightButton1 setImage:[UIImage imageNamed:imageArray[1]]forState:UIControlStateNormal];
+    [rightButton1 addTarget:self action:@selector(rightBarClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton1 sizeToFit];
+    UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithCustomView:rightButton1];
+    
+    self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
+}
+- (void)rightBarClicked:(UIButton *)button
+{
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
