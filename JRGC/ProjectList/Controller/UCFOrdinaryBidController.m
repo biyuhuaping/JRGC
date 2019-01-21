@@ -23,6 +23,7 @@
 //#import "UCFHonorHeaderView.h"
 #import "UCFHomeListCell.h"
 #import "NewPurchaseBidController.h"
+#import "UCFInvestTableViewCell.h"
 @interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate,UCFHomeListCellHonorDelegate>
 {
     UCFMicroMoneyModel *_microMoneyModel;
@@ -55,8 +56,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-//    [self addLeftButton];
+
     baseTitleLabel.text = @"微金项目";
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
@@ -97,23 +97,23 @@
 
     
     static NSString *cellId = @"homeListCell";
-    UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    UCFInvestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
-        cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+        cell =  [[UCFInvestTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
         
     }
-    cell.tableView = tableView;
-    cell.indexPath = indexPath;
-    cell.honorDelegate = self;
-    
-    UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    cell.microMoneyModel = model;
+//    cell.tableView = tableView;
+//    cell.indexPath = indexPath;
+//    cell.honorDelegate = self;
+//
+//    UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
+//    cell.microMoneyModel = model;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 135;
 }
 -(void)reloadP2PData{
     [self.tableview.header beginRefreshing];

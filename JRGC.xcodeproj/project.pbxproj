@@ -76,6 +76,7 @@
 		339930A821A29BBF00C72F54 /* UCFTransferTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */; };
 		339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */; };
 		339930AD21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */; };
+		33AF83A521F5C2060035ED53 /* UCFInvestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF83A421F5C2060035ED53 /* UCFInvestTableViewCell.m */; };
 		33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B17642215A14F4007D1F91 /* LMJScrollTextView.m */; };
 		33B66151215C7FB70027325F /* UCFZiZHIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */; };
 		33B66152215C7FB70027325F /* UCFZiZHIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33B6614F215C7FB60027325F /* UCFZiZHIViewController.xib */; };
@@ -1318,6 +1319,8 @@
 		339930A921A2B0E000C72F54 /* BankTraIntroduceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTraIntroduceTableViewCell.h; sourceTree = "<group>"; };
 		339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankTraIntroduceTableViewCell.m; sourceTree = "<group>"; };
 		339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankTraIntroduceTableViewCell.xib; sourceTree = "<group>"; };
+		33AF83A321F5C2060035ED53 /* UCFInvestTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestTableViewCell.h; sourceTree = "<group>"; };
+		33AF83A421F5C2060035ED53 /* UCFInvestTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestTableViewCell.m; sourceTree = "<group>"; };
 		33B17642215A14F4007D1F91 /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
 		33B17643215A14F4007D1F91 /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
 		33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFZiZHIViewController.m; sourceTree = "<group>"; };
@@ -3496,6 +3499,15 @@
 				3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */,
 			);
 			path = BankTransferView;
+			sourceTree = "<group>";
+		};
+		33AF83A221F5BB4E0035ED53 /* Invest */ = {
+			isa = PBXGroup;
+			children = (
+				33AF83A321F5C2060035ED53 /* UCFInvestTableViewCell.h */,
+				33AF83A421F5C2060035ED53 /* UCFInvestTableViewCell.m */,
+			);
+			path = Invest;
 			sourceTree = "<group>";
 		};
 		33B17641215A14F4007D1F91 /* LMJScrollTextView */ = {
@@ -7082,6 +7094,7 @@
 		E352FCED21E4AF0A00617AB7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				33AF83A221F5BB4E0035ED53 /* Invest */,
 				E3B76E6D21EC6E89009C9021 /* Mine(模块) */,
 				33480A2121E6E1F0007C8AAA /* Home */,
 				E352FCEE21E4AF0A00617AB7 /* CouponPopup(优惠券弹窗) */,
@@ -8643,6 +8656,7 @@
 				E352FD5421E4AF0B00617AB7 /* UCFRemindFlowView.m in Sources */,
 				7482A5941F4C07AF006A9964 /* UCFGoldIncreContractModel.m in Sources */,
 				3307E22421A3B147009FFF6D /* QuickRechargeHeadView.m in Sources */,
+				33AF83A521F5C2060035ED53 /* UCFInvestTableViewCell.m in Sources */,
 				7BA6E4BB1AD6731900FE8C37 /* SDWebImageCompat.m in Sources */,
 				E30C799121F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.m in Sources */,
 				FBB685881AE4A76800F222B6 /* MJRefreshLegendHeader.m in Sources */,

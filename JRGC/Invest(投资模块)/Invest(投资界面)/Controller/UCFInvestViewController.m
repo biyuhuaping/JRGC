@@ -213,7 +213,6 @@
     
     [self.view addSubview:_pagerView];
     [self changeView];
-//    self.view.backgroundColor = [UIColor yellowColor];
 }
 - (void)changeView {
     if ([self.selectedType isEqualToString:@"IntelligentLoan"]) {//智能出借
