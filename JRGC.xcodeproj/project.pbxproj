@@ -104,6 +104,7 @@
 		339930A821A29BBF00C72F54 /* UCFTransferTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */; };
 		339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */; };
 		339930AD21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */; };
+		33AF83DC21F726F10035ED53 /* UCFTelAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF83DB21F726F10035ED53 /* UCFTelAlertView.m */; };
 		33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B17642215A14F4007D1F91 /* LMJScrollTextView.m */; };
 		33B4563B21D747F500699C63 /* IQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B4561A21D747F400699C63 /* IQTextView.m */; };
 		33B4563C21D747F500699C63 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B4561E21D747F400699C63 /* IQToolbar.m */; };
@@ -1393,6 +1394,8 @@
 		339930A921A2B0E000C72F54 /* BankTraIntroduceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTraIntroduceTableViewCell.h; sourceTree = "<group>"; };
 		339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankTraIntroduceTableViewCell.m; sourceTree = "<group>"; };
 		339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankTraIntroduceTableViewCell.xib; sourceTree = "<group>"; };
+		33AF83DA21F726F10035ED53 /* UCFTelAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTelAlertView.h; sourceTree = "<group>"; };
+		33AF83DB21F726F10035ED53 /* UCFTelAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTelAlertView.m; sourceTree = "<group>"; };
 		33B17642215A14F4007D1F91 /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
 		33B17643215A14F4007D1F91 /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
 		33B4561A21D747F400699C63 /* IQTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTextView.m; sourceTree = "<group>"; };
@@ -3594,6 +3597,15 @@
 				3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */,
 			);
 			path = BankTransferView;
+			sourceTree = "<group>";
+		};
+		33AF83CB21F6FECD0035ED53 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				33AF83DA21F726F10035ED53 /* UCFTelAlertView.h */,
+				33AF83DB21F726F10035ED53 /* UCFTelAlertView.m */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		33B17641215A14F4007D1F91 /* LMJScrollTextView */ = {
@@ -7158,6 +7170,7 @@
 		E31BD50521C0BFD500D3651F /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				33AF83CB21F6FECD0035ED53 /* Alert */,
 				33FE65FF21CBC2270000DD03 /* PageControlView */,
 				E37FC7ED21C25BD30019C01D /* TransitionModel(转成model的方法) */,
 				E31BD54521C0C91400D3651F /* View */,
@@ -8507,6 +8520,7 @@
 				83DAEFB31F16112000D7948F /* UCFGoldCalculatorView.m in Sources */,
 				A8E02DA91F0DD4BB00FC2260 /* UCFCellStyleModel.m in Sources */,
 				74270CF81EC5943200F9419B /* UCFInvitationRebateViewController.m in Sources */,
+				33AF83DC21F726F10035ED53 /* UCFTelAlertView.m in Sources */,
 				74270C971EC58F6800F9419B /* UCFHomeListCellPresenter.m in Sources */,
 				7412323C1F14BB150061408A /* UCFPickView.m in Sources */,
 				333B8FB521D20871009F7FCB /* YYTextDebugOption.m in Sources */,
