@@ -155,6 +155,7 @@
     [self.rateLab setFont:[UIFont systemFontOfSize:16] string:@"%"];
     [self.rateLab sizeToFit];
     self.timeLimitLab.text = [NSString stringWithFormat:@"%@", microModel.repayPeriodtext];
+    [self.timeLimitLab setFont:[UIFont systemFontOfSize:16] string:@"天"];
     [self.timeLimitLab sizeToFit];
     self.titleLab.text = microModel.prdName;
     NSUInteger type = [microModel.type integerValue];
@@ -164,13 +165,11 @@
         NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
         UIImage *image = [self.investButton imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
         self.iconView.backgroundColor = UIColorWithRGB(0xFF4133);
-//        UIImage *image = [self.investButton buttonImageFromColors:colorArray ByGradientType:leftToRight];
         [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
         
     } else {
         NSArray *colorArray = [NSArray arrayWithObjects:[Color color:PGColorOptionTitleGray],[Color color:PGColorOptionTitleGray], nil];
         UIImage *image = [self.investButton imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
-//        UIImage *image = [self.investButton buttonImageFromColors:colorArray ByGradientType:leftToRight];
         [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
         self.rateLab.textColor = [Color color:PGColorOptionTitleGray];
         self.timeLimitLab.textColor = [Color color:PGColorOptionTitleGray];
@@ -232,6 +231,8 @@
             self.tiplabel.hidden = NO;
             self.tiplabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
             [self.titleLab sizeToFit];
+            CGSize size = [Common getStrWitdth:projectLabel.labelName Font:11];
+            self.tiplabel.myWidth = size.width + 10;
         }
         else {
             self.tiplabel.hidden = YES;
