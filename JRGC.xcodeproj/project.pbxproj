@@ -77,6 +77,7 @@
 		339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */; };
 		339930AD21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */; };
 		33AF83A521F5C2060035ED53 /* UCFInvestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF83A421F5C2060035ED53 /* UCFInvestTableViewCell.m */; };
+		33AF83CA21F6C9650035ED53 /* UCFNewAITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF83C921F6C9650035ED53 /* UCFNewAITableViewCell.m */; };
 		33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B17642215A14F4007D1F91 /* LMJScrollTextView.m */; };
 		33B66151215C7FB70027325F /* UCFZiZHIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */; };
 		33B66152215C7FB70027325F /* UCFZiZHIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33B6614F215C7FB60027325F /* UCFZiZHIViewController.xib */; };
@@ -1321,6 +1322,8 @@
 		339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankTraIntroduceTableViewCell.xib; sourceTree = "<group>"; };
 		33AF83A321F5C2060035ED53 /* UCFInvestTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestTableViewCell.h; sourceTree = "<group>"; };
 		33AF83A421F5C2060035ED53 /* UCFInvestTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestTableViewCell.m; sourceTree = "<group>"; };
+		33AF83C821F6C9650035ED53 /* UCFNewAITableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewAITableViewCell.h; sourceTree = "<group>"; };
+		33AF83C921F6C9650035ED53 /* UCFNewAITableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewAITableViewCell.m; sourceTree = "<group>"; };
 		33B17642215A14F4007D1F91 /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
 		33B17643215A14F4007D1F91 /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
 		33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFZiZHIViewController.m; sourceTree = "<group>"; };
@@ -3506,6 +3509,8 @@
 			children = (
 				33AF83A321F5C2060035ED53 /* UCFInvestTableViewCell.h */,
 				33AF83A421F5C2060035ED53 /* UCFInvestTableViewCell.m */,
+				33AF83C821F6C9650035ED53 /* UCFNewAITableViewCell.h */,
+				33AF83C921F6C9650035ED53 /* UCFNewAITableViewCell.m */,
 			);
 			path = Invest;
 			sourceTree = "<group>";
@@ -8838,6 +8843,7 @@
 				83382C1A1FD52EFD001BBF90 /* UCFAssetProofListModel.m in Sources */,
 				83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */,
 				FB7EDE3E1D6BFCD700C3E924 /* AppDelegate.mm in Sources */,
+				33AF83CA21F6C9650035ED53 /* UCFNewAITableViewCell.m in Sources */,
 				7443C7371F1F3E64009669C0 /* UCFGoldRechargeRecordCell.m in Sources */,
 				25A9CC191D5213EB00209142 /* UCFTipCell.m in Sources */,
 				7BA6E46B1AD6691F00FE8C37 /* UCFLockHandleViewController.m in Sources */,

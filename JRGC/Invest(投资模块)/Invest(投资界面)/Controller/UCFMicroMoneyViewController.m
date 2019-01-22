@@ -35,6 +35,7 @@
 #import "UCFRegisterStepOneViewController.h"
 #import "UCFMicroMoneyCell.h"
 #import "NewPurchaseBidController.h"
+#import "UCFNewAITableViewCell.h"
 @interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate,UCFInvestMicroMoneyCellDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
@@ -70,10 +71,10 @@
 #pragma mark - 设置界面
 - (void)createUI {
     self.accoutType = SelectAccoutTypeP2P;
-    UCFMicroMoneyHeaderView *microMoneyHeaderView = (UCFMicroMoneyHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMicroMoneyHeaderView" owner:self options:nil] lastObject];
-    microMoneyHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5);
-    self.tableview.tableHeaderView = microMoneyHeaderView;
-    self.microMoneyHeaderView = microMoneyHeaderView;
+//    UCFMicroMoneyHeaderView *microMoneyHeaderView = (UCFMicroMoneyHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMicroMoneyHeaderView" owner:self options:nil] lastObject];
+//    microMoneyHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5);
+//    self.tableview.tableHeaderView = microMoneyHeaderView;
+//    self.microMoneyHeaderView = microMoneyHeaderView;
     
     self.tableview.tableFooterView = [self createFootView];
     
@@ -235,42 +236,14 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
-//    UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
-//    if (group.type.intValue == 13) {
-//        static NSString *cellId = @"newusercell";
-//        UCFNewUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-//        if (nil == cell) {
-//            cell = (UCFNewUserCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNewUserCell" owner:self options:nil] lastObject];
-//            cell.delegate = self;
-//            cell.tableview = tableView;
-//        }
-//        cell.microMoneyModel = model;
-//        cell.indexPath = indexPath;
-//        return cell;
-//    }
-//    else if (group.type.intValue == 16) {
-//        static NSString *cellId1 = @"homeListInvestCell";
-//        UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId1];
-//        if (nil == cell) {
-//            cell = (UCFHomeInvestCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeInvestCell" owner:self options:nil] lastObject];
-//            cell.delegate = self;
-//        }
-//        cell.microModel = model;
-//        return cell;
-//    }
-//    else {
-        static NSString *cellId2 = @"MicroMoneyCell";
-        UCFMicroMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId2];
-        if (nil == cell) {
-            cell = (UCFMicroMoneyCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMicroMoneyCell" owner:self options:nil] lastObject];
-            cell.selectionStyle = UITableViewCellSeparatorStyleNone;
-            cell.delegate = self;
-        }
-       UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
-       cell.microModel = model;
-    
-        return cell;
+    static NSString *cellId = @"homeListCell";
+    UCFNewAITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (nil == cell) {
+        cell = [[UCFNewAITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+    }
+    UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.microModel = model;
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -284,7 +257,7 @@
 //    }
 //    return 100;
     
-    return 188;
+    return 135;
 }
 - (UIView *)createFootView
 {

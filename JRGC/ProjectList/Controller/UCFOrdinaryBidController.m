@@ -94,20 +94,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    
     static NSString *cellId = @"homeListCell";
     UCFInvestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
-        cell =  [[UCFInvestTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        
+        cell = [[UCFInvestTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
 //    cell.tableView = tableView;
 //    cell.indexPath = indexPath;
 //    cell.honorDelegate = self;
 //
-//    UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
-//    cell.microMoneyModel = model;
+    UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.microMoneyModel = model;
     return cell;
 }
 

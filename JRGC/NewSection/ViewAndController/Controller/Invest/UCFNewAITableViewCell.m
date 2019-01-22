@@ -1,16 +1,17 @@
 //
-//  UCFInvestTableViewCell.m
+//  UCFNewAITableViewCell.m
 //  JRGC
 //
-//  Created by zrc on 2019/1/21.
+//  Created by zrc on 2019/1/22.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "UCFInvestTableViewCell.h"
-#import "ZZCircleProgress.h"
+#import "UCFNewAITableViewCell.h"
 #import "UCFProjectLabel.h"
-@interface UCFInvestTableViewCell()
-
+//#import "UIButton+Gradient.h"
+#import "UILabel+Misc.h"
+#import "NSObject+Compression.h"
+@interface UCFNewAITableViewCell()
 /**
  标题
  */
@@ -21,19 +22,16 @@
 @property(strong, nonatomic)UIImageView *imageView4;
 @property(strong, nonatomic)UILabel    *tiplabel;
 
-@property(nonatomic, strong) ZZCircleProgress  *progressView;
+@property(nonatomic, strong) UIButton  *investButton;
 @property(nonatomic, strong) UILabel *rateLab;              //利率
 @property(nonatomic, strong) UILabel *rateTipLab;           //利率提示标签
 @property(nonatomic, strong) UILabel *timeLimitLab;         //期限
 @property(nonatomic, strong) UILabel *timeLimitTipLab;      //期限提示标签
+
+@property(nonatomic, strong)UIImageView *iconView;
 @end
+@implementation UCFNewAITableViewCell
 
-@implementation UCFInvestTableViewCell
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -58,6 +56,7 @@
         iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         iconView.clipsToBounds = YES;
         iconView.layer.cornerRadius = 2;
+        self.iconView = iconView;
         [whitBaseView addSubview:iconView];
         
         UILabel *label = [[UILabel alloc] init];
@@ -78,21 +77,21 @@
         self.imageView2.leftPos.equalTo(self.imageView1.rightPos);
         self.imageView2.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView2];
-
+        
         self.imageView2.myVisibility = MyVisibility_Gone;
         
         self.imageView3.centerYPos.equalTo(iconView.centerYPos);
         self.imageView3.leftPos.equalTo(self.imageView2.rightPos);
         self.imageView3.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView3];
-
+        
         self.imageView3.myVisibility = MyVisibility_Gone;
         
         self.imageView4.centerYPos.equalTo(iconView.centerYPos);
         self.imageView4.leftPos.equalTo(self.imageView3.rightPos);
         self.imageView4.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView4];
-
+        
         self.imageView4.myVisibility = MyVisibility_Gone;
         
         UILabel *tiplab = [[UILabel alloc] init];
@@ -115,72 +114,124 @@
         }];
         self.tiplabel = tiplab;
         
-        self.progressView.mySize = CGSizeMake(65, 65);
-        self.progressView.bottomPos.equalTo(@15);
-        self.progressView.rightPos.equalTo(whitBaseView.rightPos).offset(25);
-        [whitBaseView addSubview:self.progressView];
-
+        self.investButton.mySize = CGSizeMake(90, 35);
+        self.investButton.bottomPos.equalTo(@23);
+        self.investButton.rightPos.equalTo(whitBaseView.rightPos).offset(20);
+        [whitBaseView addSubview:self.investButton];
+        [self.investButton setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
+            v.clipsToBounds = YES;
+            v.layer.cornerRadius = CGRectGetHeight(v.frame)/2;
+//            NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
+//            UIImage *image = [(UIButton *)v buttonImageFromColors:colorArray ByGradientType:leftToRight];
+//            [(UIButton *)v setBackgroundImage:image forState:UIControlStateNormal];
+        }];
+        
         
         self.rateLab.leftPos.equalTo(self.titleLab.leftPos);
-        self.rateLab.centerYPos.equalTo(self.progressView.centerYPos);
+        self.rateLab.topPos.equalTo(self.investButton.topPos).offset(-15);
         [whitBaseView addSubview:self.rateLab];
         
         self.rateTipLab.leftPos.equalTo(self.rateLab.leftPos);
-        self.rateTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(15);
+        self.rateTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(20);
         [whitBaseView addSubview:self.rateTipLab];
         
         
         self.timeLimitLab.centerXPos.equalTo(whitBaseView.centerXPos);
         self.timeLimitLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(5);
         [whitBaseView addSubview:self.timeLimitLab];
-
+        
         self.timeLimitTipLab.leftPos.equalTo(self.timeLimitLab.leftPos);
-        self.timeLimitTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(15);
+        self.timeLimitTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(20);
         [whitBaseView addSubview:self.timeLimitTipLab];
         
         
     }
     return self;
 }
-
-- (void)setMicroMoneyModel:(UCFMicroMoneyModel *)microMoneyModel
+- (void)setMicroModel:(UCFMicroMoneyModel *)microModel
 {
-    _microMoneyModel = microMoneyModel;
-    self.titleLab.text = microMoneyModel.prdName;
-    [self.titleLab sizeToFit];
-    [self.tiplabel sizeToFit];
-    self.rateLab.text = [NSString stringWithFormat:@"%@%%", microMoneyModel.annualRate];
+    _microModel = microModel;
+    self.rateLab.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
+    [self.rateLab setFont:[UIFont systemFontOfSize:16] string:@"%"];
     [self.rateLab sizeToFit];
-    if (microMoneyModel.holdTime.length > 0) {
-        self.timeLimitLab.text = [NSString stringWithFormat:@"%@~%@", microMoneyModel.holdTime, microMoneyModel.repayPeriodtext];
-    }
-    else {
-        self.timeLimitLab.text = [NSString stringWithFormat:@"%@", microMoneyModel.repayPeriodtext];
-    }
+    self.timeLimitLab.text = [NSString stringWithFormat:@"%@", microModel.repayPeriodtext];
     [self.timeLimitLab sizeToFit];
-    
-    NSInteger status = [microMoneyModel.status integerValue];
-    NSString *showStr = @"出借";
-    NSArray *statusArr = @[@"未审核",@"等待确认",showStr,@"流标",@"满标",@"回款中",@"已回款"];
-    if (status>2) {
-        self.progressView.progressText = @"已售罄";
-        self.progressView.textColor = UIColorWithRGB(0x909dae);
+    self.titleLab.text = microModel.prdName;
+    NSUInteger type = [microModel.type integerValue];
+    if (type == 2) {
+        self.rateLab.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
+        self.timeLimitLab.textColor = [Color color:PGColorOptionTitleBlackGray];
+        NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
+        UIImage *image = [self.investButton imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
+        self.iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+//        UIImage *image = [self.investButton buttonImageFromColors:colorArray ByGradientType:leftToRight];
+        [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
+        
+    } else {
+        NSArray *colorArray = [NSArray arrayWithObjects:[Color color:PGColorOptionTitleGray],[Color color:PGColorOptionTitleGray], nil];
+        UIImage *image = [self.investButton imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
+//        UIImage *image = [self.investButton buttonImageFromColors:colorArray ByGradientType:leftToRight];
+        [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
+        self.rateLab.textColor = [Color color:PGColorOptionTitleGray];
+        self.timeLimitLab.textColor = [Color color:PGColorOptionTitleGray];
+        self.iconView.backgroundColor = [Color color:PGColorOptionTitleGray];;
+
     }
-    else {
-        self.progressView.textColor = UIColorWithRGB(0x555555);
-        if (microMoneyModel.modelType == UCFMicroMoneyModelTypeBatchBid && status == 2) {
-            self.progressView.progressText = @"批量出借";
+    switch (type) {
+        case 0://预约
+        {
+            _microModel.modelType = UCFMicroMoneyModelTypeReserve;
+            if([microModel.status intValue] == 2)
+            {
+                [self.investButton setTitle:@"立即预约" forState:UIControlStateNormal];
+                self.investButton.userInteractionEnabled = YES;
+
+            }else{
+                self.investButton.userInteractionEnabled = NO;
+                [self.investButton setTitle:@"预约已满" forState:UIControlStateNormal];
+            }
+            
         }
-        else {
-            self.progressView.progressText = [statusArr objectAtIndex:status];
+            break;
+        case 3://智存宝用3
+        {
+            _microModel.modelType = UCFMicroMoneyModelTypeIntelligent;
+            if([microModel.status intValue] == 2)
+            {
+                self.investButton.userInteractionEnabled = YES;
+                NSString *buttonStr = @"立即出借";
+                [self.investButton setTitle:buttonStr forState:UIControlStateNormal];
+                
+            }else{
+                self.investButton.userInteractionEnabled = NO;
+                [self.investButton setTitle:@"已售罄" forState:UIControlStateNormal];
+                
+            }
         }
+            break;
+        case 14://批量出借
+        {
+            _microModel.modelType = UCFMicroMoneyModelTypeBatchBid;
+            if([microModel.status intValue] == 2)
+            {
+                NSString *buttonStr = @"一键出借";
+                [self.investButton setTitle:buttonStr forState:UIControlStateNormal];
+                self.investButton.userInteractionEnabled = YES;
+            }else{
+                self.investButton.userInteractionEnabled = NO;
+                [self.investButton setTitle:@"已售罄" forState:UIControlStateNormal];
+            }
+        }
+            break;
+        default:
+            break;
     }
-    if (microMoneyModel.prdLabelsList.count > 0) {
-        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
+    if (microModel.prdLabelsList.count > 0) {
+        UCFProjectLabel *projectLabel = [microModel.prdLabelsList firstObject];
         if ([projectLabel.labelPriority integerValue] == 1) {
             self.tiplabel.hidden = NO;
             self.tiplabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-            [self.tiplabel sizeToFit];
+            [self.titleLab sizeToFit];
         }
         else {
             self.tiplabel.hidden = YES;
@@ -189,49 +240,48 @@
     else {
         self.tiplabel.hidden = YES;
     }
-    if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
+    if (microModel.platformSubsidyExpense.length > 0) {//贴
         self.imageView1.myVisibility = MyVisibility_Visible;
     }
     else {
         self.imageView1.myVisibility = MyVisibility_Gone;
     }
-    if (microMoneyModel.guaranteeCompany.length > 0) {//贴
+    if (microModel.guaranteeCompany.length > 0) {//贴
         self.imageView2.myVisibility = MyVisibility_Visible;
     }
     else {
         self.imageView2.myVisibility = MyVisibility_Gone;
     }
-    if (microMoneyModel.fixedDate.length > 0) {//贴
+    if (microModel.fixedDate.length > 0) {//贴
         self.imageView3.myVisibility = MyVisibility_Visible;
-
+        
     }
     else {
         self.imageView3.myVisibility = MyVisibility_Gone;
     }
-    if (microMoneyModel.holdTime.length > 0) {//贴
+    if (microModel.holdTime.length > 0) {//贴
         self.imageView4.myVisibility = MyVisibility_Visible;
     }
     else {
         self.imageView4.myVisibility = MyVisibility_Gone;
     }
-    
-    float progress = [microMoneyModel.completeLoan floatValue]/[microMoneyModel.borrowAmount floatValue];
-    if (progress < 0 || progress > 1) {
-        progress = 1;
-    }
-    else {
-        self.progressView.progress = progress;
-    }
-    //控制进度视图显示
-    if (status < 3) {
-        self.progressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
-    }else{
-        self.progressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
-    }
+//    if ([microModel.platformSubsidyExpense floatValue] > 0.00) {
+//        self.addedRateLabel.text = [NSString stringWithFormat:@"+%@%%",microModel.platformSubsidyExpense];
+//        self.addedRateLabel.hidden = NO;
+//    }
+//    else {
+//        self.addedRateLabel.text = @"";
+//        self.addedRateLabel.hidden = YES;
+//    }
+}
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 - (UIImageView *)imageView1{
@@ -239,7 +289,7 @@
         _imageView1 = [[UIImageView alloc] init];
         _imageView1.backgroundColor = [UIColor clearColor];
         _imageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
-
+        
     }
     return _imageView1;
 }
@@ -272,22 +322,23 @@
     if (!_rateLab) {
         _rateLab = [[UILabel alloc] init];
         _rateLab.textColor = UIColorWithRGB(0xfd4d4c);
-//        _rateLab.font = [UIFont boldSystemFontOfSize:16.0f];
+        //        _rateLab.font = [UIFont boldSystemFontOfSize:16.0f];
         _rateLab.text = @"9.5%";
         _rateLab.font = [Color gc_ANC_font:32.0f];
         [_rateLab sizeToFit];
     }
     return _rateLab;
 }
-- (ZZCircleProgress *)progressView
+- (UIButton *)investButton
 {
-    if (!_progressView) {
-        _progressView = [[ZZCircleProgress alloc] initWithFrame:CGRectMake(0, 0, 65, 65)];
-//        _progressView.backgroundColor = [UIColor yellowColor];
-        _progressView.strokeWidth = 3.0f;
-        _progressView.showPoint = NO;
+    if (!_investButton) {
+        _investButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        //        _progressView.backgroundColor = [UIColor yellowColor];
+        _investButton.titleLabel.font  = [Color gc_Font:14];
+        [_investButton setTitleColor:[Color color:PGColorOptionThemeWhite] forState:UIControlStateNormal];
+
     }
-    return _progressView;
+    return _investButton;
 }
 - (UILabel *)rateTipLab
 {
@@ -322,4 +373,11 @@
     }
     return _timeLimitTipLab;
 }
+//
+//- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+//    [super setSelected:selected animated:animated];
+//
+//    // Configure the view for the selected state
+//}
+
 @end

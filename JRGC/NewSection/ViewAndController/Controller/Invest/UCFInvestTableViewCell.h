@@ -7,10 +7,12 @@
 //
 
 #import "BaseTableViewCell.h"
-
+#import "UCFMicroMoneyModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFInvestTableViewCell : BaseTableViewCell
+@property (strong, nonatomic) UCFMicroMoneyModel *microMoneyModel;
+
 
 @end
 

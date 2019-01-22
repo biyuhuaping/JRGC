@@ -19,8 +19,8 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
     PGColorOptionCellSeparatorGray,        //Cell分割线颜色--灰色 0xE3E5EA
     PGColorOptionCellContentBlue,          //Cell内容文字颜色--蓝色色 0x91ACFB
     PGColorOpttonTextRedColor,            //红色字体颜色
-    
-    
+    PGColorOpttonBtnBackgroundColor,            //按钮灰色背景颜色CACBD9
+    PGColorOpttonRateNoramlTextColor,         //利率字体正常FF4133
 };
 
 
