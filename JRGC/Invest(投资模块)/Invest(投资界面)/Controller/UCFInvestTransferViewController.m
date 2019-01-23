@@ -16,11 +16,12 @@
 #import "RiskAssessmentViewController.h"
 #import "UCFLoginViewController.h"
 #import "UCFProjectDetailViewController.h"
+#import "UCFNewTransCell.h"
 @interface UCFInvestTransferViewController () <UITableViewDelegate, UITableViewDataSource, UCFTransferHeaderViewDelegate>
 {
     NSInteger currentPage;
 }
-//@property (strong, nonatomic) UCFTransferHeaderView *transferHeaderView;
+@property (strong, nonatomic) UCFTransferHeaderView *transferHeaderView;
 
 @property (strong, nonatomic) NSMutableArray    *dataArray;
 @property (copy, nonatomic) NSString *sortType;
@@ -41,12 +42,12 @@
 
 #pragma mark - 设置界面
 - (void)createUI {
-//    UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
-//    transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth /16*5 + 45);
-//    self.tableview.tableHeaderView = transferHeaderView;
-//    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
-//    transferHeaderView.delegate = self;
-//    self.transferHeaderView = transferHeaderView;
+    UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
+    transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 40);
+    self.tableview.tableHeaderView = transferHeaderView;
+    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
+    transferHeaderView.delegate = self;
+    self.transferHeaderView = transferHeaderView;
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     __weak typeof(self) weakSelf = self;
     [self.tableview addLegendFooterWithRefreshingBlock:^{
@@ -69,7 +70,7 @@
 #pragma mark - tableview 数据源
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    return 75.0;
+    return 110.0;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -79,9 +80,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellId = @"homeListCell";
-    UCFTransfeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (nil == cell) {
-        cell = (UCFTransfeTableViewCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransfeTableViewCell" owner:self options:nil] lastObject];
+    
+    UCFNewTransCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[UCFNewTransCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     cell.model = [self.dataArray objectAtIndex:indexPath.row];
     return cell;
@@ -250,8 +252,7 @@
     currentPage = 1;
     if ([self.tableview.header isRefreshing]) {
         [self initData];
-//        [_transferHeaderView initData];
-//        [_transferHeaderView getNormalBannerData];
+        [_transferHeaderView initData];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self loadNetData];

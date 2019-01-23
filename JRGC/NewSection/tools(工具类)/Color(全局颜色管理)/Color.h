@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, PGColorOptions) {
-    
-
     PGColorOptionGrayBackgroundColor = 0, //背景颜色-- 灰色 0xebebee
     PGColorOptionThemeWhite,              //主题色--白色 0xFFFFFF
     PGColorOptionTitleOrange,              //文字颜色--橘色 0xFF4E11

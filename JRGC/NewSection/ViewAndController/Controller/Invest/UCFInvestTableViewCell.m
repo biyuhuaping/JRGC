@@ -9,6 +9,7 @@
 #import "UCFInvestTableViewCell.h"
 #import "ZZCircleProgress.h"
 #import "UCFProjectLabel.h"
+#import "UILabel+Misc.h"
 @interface UCFInvestTableViewCell()
 
 /**
@@ -163,6 +164,7 @@
     [self.titleLab sizeToFit];
     [self.tiplabel sizeToFit];
     self.rateLab.text = [NSString stringWithFormat:@"%@%%", microMoneyModel.annualRate];
+    [self.rateLab setFont:[Color gc_Font:16] string:@"%"];
     [self.rateLab sizeToFit];
     if (microMoneyModel.holdTime.length > 0) {
         self.timeLimitLab.text = [NSString stringWithFormat:@"%@~%@", microMoneyModel.holdTime, microMoneyModel.repayPeriodtext];
@@ -170,6 +172,9 @@
     else {
         self.timeLimitLab.text = [NSString stringWithFormat:@"%@", microMoneyModel.repayPeriodtext];
     }
+    [self.timeLimitLab setFont:[Color gc_Font:16] string:@"天"];
+    [self.timeLimitLab setFont:[Color gc_Font:16] string:@"个月"];
+
     [self.timeLimitLab sizeToFit];
     
     NSInteger status = [microMoneyModel.status integerValue];
