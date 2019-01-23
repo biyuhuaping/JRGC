@@ -119,6 +119,14 @@
         self.progressView.bottomPos.equalTo(@15);
         self.progressView.rightPos.equalTo(whitBaseView.rightPos).offset(25);
         [whitBaseView addSubview:self.progressView];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.mySize = CGSizeMake(65, 65);
+        button.bottomPos.equalTo(@15);
+        button.rightPos.equalTo(whitBaseView.rightPos).offset(25);
+//        button.backgroundColor = [UIColor yellowColor];
+        [button addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+        [whitBaseView addSubview:button];
 
         
         self.rateLab.leftPos.equalTo(self.titleLab.leftPos);
@@ -142,7 +150,12 @@
     }
     return self;
 }
-
+- (void)click:(UIButton *)button
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(investCell:didClickedProgressViewAtIndexPath:)]) {
+        [self.delegate investCell:self didClickedProgressViewAtIndexPath:self.indexPath];
+    }
+}
 - (void)setMicroMoneyModel:(UCFMicroMoneyModel *)microMoneyModel
 {
     _microMoneyModel = microMoneyModel;

@@ -21,10 +21,10 @@
 #import "HSHelper.h"
 #import "RiskAssessmentViewController.h"
 //#import "UCFHonorHeaderView.h"
-#import "UCFHomeListCell.h"
+//#import "UCFHomeListCell.h"
 #import "NewPurchaseBidController.h"
 #import "UCFInvestTableViewCell.h"
-@interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate,UCFHomeListCellHonorDelegate>
+@interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate,UCFInvestTableViewCellDelegate>
 {
     UCFMicroMoneyModel *_microMoneyModel;
 }
@@ -98,12 +98,13 @@
     UCFInvestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
         cell = [[UCFInvestTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell.delegate = self;
     }
 //    cell.tableView = tableView;
-//    cell.indexPath = indexPath;
 //    cell.honorDelegate = self;
 //
     UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.indexPath = indexPath;
     cell.microMoneyModel = model;
     return cell;
 }
@@ -297,11 +298,7 @@
         }
     }
 }
--(void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
-//{
-
-//}
-//- (void)cell:(UCFProjectListCell *)cell clickInvestBtn:(UIButton *)button withModel:(UCFProjectListModel *)model
+- (void)investCell:(UCFInvestTableViewCell *)investCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
 {
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
@@ -322,12 +319,6 @@
             }
         }
         if ([self checkUserCanInvestIsDetail:NO]) {
-            
-//            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//            NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-//            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _microMoneyModel.Id,userid];
-//            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagP2PPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
-            
             NSDictionary *paraDict = @{
                                        @"id":_microMoneyModel.Id,
                                        @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],

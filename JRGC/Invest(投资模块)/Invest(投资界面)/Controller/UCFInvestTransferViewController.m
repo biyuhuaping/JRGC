@@ -20,7 +20,7 @@
 {
     NSInteger currentPage;
 }
-@property (strong, nonatomic) UCFTransferHeaderView *transferHeaderView;
+//@property (strong, nonatomic) UCFTransferHeaderView *transferHeaderView;
 
 @property (strong, nonatomic) NSMutableArray    *dataArray;
 @property (copy, nonatomic) NSString *sortType;
@@ -41,12 +41,12 @@
 
 #pragma mark - 设置界面
 - (void)createUI {
-    UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
-    transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth /16*5 + 45);
-    self.tableview.tableHeaderView = transferHeaderView;
-    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
-    transferHeaderView.delegate = self;
-    self.transferHeaderView = transferHeaderView;
+//    UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
+//    transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth /16*5 + 45);
+//    self.tableview.tableHeaderView = transferHeaderView;
+//    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
+//    transferHeaderView.delegate = self;
+//    self.transferHeaderView = transferHeaderView;
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     __weak typeof(self) weakSelf = self;
     [self.tableview addLegendFooterWithRefreshingBlock:^{
@@ -250,8 +250,8 @@
     currentPage = 1;
     if ([self.tableview.header isRefreshing]) {
         [self initData];
-        [_transferHeaderView initData];
-        [_transferHeaderView getNormalBannerData];
+//        [_transferHeaderView initData];
+//        [_transferHeaderView getNormalBannerData];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self loadNetData];

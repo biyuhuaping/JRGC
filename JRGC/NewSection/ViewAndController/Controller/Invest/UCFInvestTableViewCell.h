@@ -9,10 +9,19 @@
 #import "BaseTableViewCell.h"
 #import "UCFMicroMoneyModel.h"
 NS_ASSUME_NONNULL_BEGIN
+@class UCFInvestTableViewCell;
+@protocol UCFInvestTableViewCellDelegate <NSObject>
+
+- (void)investCell:(UCFInvestTableViewCell *)investCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
 
 @interface UCFInvestTableViewCell : BaseTableViewCell
 @property (strong, nonatomic) UCFMicroMoneyModel *microMoneyModel;
 
+@property (weak, nonatomic)id<UCFInvestTableViewCellDelegate>delegate;
+
+@property (weak, nonatomic)NSIndexPath *indexPath;
 
 @end
 

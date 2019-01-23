@@ -33,10 +33,10 @@
 #import "UCFGoldDetailViewController.h"
 #import "UCFNewUserCell.h"
 #import "UCFRegisterStepOneViewController.h"
-#import "UCFMicroMoneyCell.h"
+//#import "UCFMicroMoneyCell.h"
 #import "NewPurchaseBidController.h"
 #import "UCFNewAITableViewCell.h"
-@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate,UCFInvestMicroMoneyCellDelegate>
+@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate,UCFInvestMicroMoneyCellDelegate,UCFNewAITableViewCellDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
@@ -240,6 +240,7 @@
     UCFNewAITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
         cell = [[UCFNewAITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell.delegate = self;
     }
     UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
     cell.microModel = model;
@@ -312,7 +313,7 @@
 //    facReservedWeb.url = [NSString stringWithFormat:@"%@", url];
 //    [self.navigationController pushViewController:facReservedWeb animated:YES];
 //}
--(void)microMoneyListCell:(UCFHomeInvestCell *)microMoneyCell didClickedInvestButtonWithModel:(UCFMicroMoneyModel *)model
+- (void)aiTableViewCell:(UCFNewAITableViewCell *)aiTableViewCell didClickedInvestButtonWithModel:(UCFMicroMoneyModel *)model
 {
     [self gotoReservedVCOrIntelligentBaoVC:model isDetail:NO];
 }

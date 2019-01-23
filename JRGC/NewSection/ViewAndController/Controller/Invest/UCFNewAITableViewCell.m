@@ -117,6 +117,7 @@
         self.investButton.mySize = CGSizeMake(90, 35);
         self.investButton.bottomPos.equalTo(@23);
         self.investButton.rightPos.equalTo(whitBaseView.rightPos).offset(20);
+        [self.investButton addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         [whitBaseView addSubview:self.investButton];
         [self.investButton setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
             v.clipsToBounds = YES;
@@ -147,6 +148,12 @@
         
     }
     return self;
+}
+- (void)click:(UIButton *)button
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(aiTableViewCell:didClickedInvestButtonWithModel:)]) {
+        [self.delegate aiTableViewCell:self didClickedInvestButtonWithModel:_microModel];
+    }
 }
 - (void)setMicroModel:(UCFMicroMoneyModel *)microModel
 {
