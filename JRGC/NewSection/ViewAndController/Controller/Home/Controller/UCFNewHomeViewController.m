@@ -83,7 +83,7 @@
 {
     self.dataArray = [NSMutableArray arrayWithCapacity:10];
     if ([UserInfoSingle sharedManager].openStatus >= 4 && [UserInfoSingle sharedManager].isRisk) {
-        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"新手入门" showInfoMethod:nil heightOfCell:140];
+        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"" showInfoMethod:nil heightOfCell:140];
         NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
         [section1 addObject:data1];
         [self.dataArray addObject:section1];
@@ -144,17 +144,31 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 54;
+    NSArray *sectionArr = self.dataArray[section];
+    CellConfig *data = sectionArr[0];
+    if (data.title.length > 0) {
+        return 54;
+    } else {
+        return 0.001;
+
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UCFNewHomeSectionView *sectionView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 54)];
     NSArray *sectionArr = self.dataArray[section];
     CellConfig *data = sectionArr[0];
-    if (data) {
-        sectionView.titleLab.text = data.title;
+    if (data.title.length > 0) {
+        UCFNewHomeSectionView *sectionView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 54)];
+        NSArray *sectionArr = self.dataArray[section];
+        CellConfig *data = sectionArr[0];
+        if (data) {
+            sectionView.titleLab.text = data.title;
+        }
+        return sectionView;
+    } else {
+        return nil;
     }
-    return sectionView;
+
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
