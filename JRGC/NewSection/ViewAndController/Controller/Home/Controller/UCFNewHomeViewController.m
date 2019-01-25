@@ -15,6 +15,7 @@
 #import "UCFBannerViewModel.h"
 #import "BaseTableViewCell.h"
 #import "UCFOldUserNoticeCell.h"
+#import "UCFNewProjectDetailViewController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFBannerViewModel*bannerViewModel;
@@ -199,7 +200,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    UCFNewProjectDetailViewController *view = [[UCFNewProjectDetailViewController alloc] init];
+    [self.rt_navigationController pushViewController:view animated:YES complete:nil];
 }
 #pragma mark HomeHeadCycleViewDelegate
 - (void)homeHeadCycleView:(HomeHeadCycleView *)cycleView didSelectIndex:(NSInteger)index

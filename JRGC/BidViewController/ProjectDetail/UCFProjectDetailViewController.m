@@ -25,6 +25,7 @@
 #import "UCFProjectSafetyGuaranteeViewController.h"
 #import "UCFProjectInvestmentRecordViewController.h"
 #import "NewPurchaseBidController.h"
+#import "NSObject+Compression.h"
 @interface UCFProjectDetailViewController ()
 {
     UCFNormalNewMarkView *_normalMarkView;// 普通标
@@ -79,7 +80,7 @@
     UILabel *baseChildTitleLabel1 = [[UILabel alloc] init];
     baseChildTitleLabel1.textAlignment = NSTextAlignmentCenter;
     [baseChildTitleLabel1 setTextColor:[UIColor whiteColor]];
-    [baseChildTitleLabel1 setBackgroundColor:UIColorWithRGB(0x28335c)];
+    [baseChildTitleLabel1 setBackgroundColor:[UIColor whiteColor]];
     baseChildTitleLabel1.layer.borderColor = [UIColor whiteColor].CGColor;
     baseChildTitleLabel1.layer.borderWidth = 1.0;
     baseChildTitleLabel1.layer.cornerRadius = 2.0;
@@ -144,7 +145,8 @@
     }
     
     _navigationStyleBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, [[UIApplication sharedApplication] statusBarFrame].size.height + 44)];
-    _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
+    _navigationStyleBar.image = [UIImage gc_styleImageSize:_navigationStyleBar.frame.size];
+//    _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"]; 删除这张图片
     [self.view addSubview:_navigationStyleBar];
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -160,16 +162,9 @@
     _navigationStyleBar.userInteractionEnabled = YES;
 }
 
-- (void) getBack
+- (void)getBack
 {
-    if (kIS_IOS7) {
-        [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-        self.navigationController.navigationBar.translucent = NO;
-    } else {
-        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    }
     [self.navigationController popViewControllerAnimated:YES];
-    self.navigationController.navigationBarHidden = NO;
 }
 - (void)viewDidLayoutSubviews
 {
@@ -328,40 +323,40 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    CGFloat scaleFlot = 1;
-    if (ScreenWidth == 375.0f && ScreenHeight == 667.0f) {
-        scaleFlot = 1.171875;
-    } else if (ScreenWidth == 414.0f && ScreenHeight == 736.0f) {
-        scaleFlot =  1.29375;
-    }
-    if (_detailType == PROJECTDETAILTYPENORMAL) {
-        [_normalMarkView cretateInvestmentView];
-        UIScrollView *tempView = (UIScrollView*)[_normalMarkView viewWithTag:1001];
-        if (tempView) {
-            if (tempView.frame.origin.y == 0) {
-                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
-            }
-        }
-        
-    } else if (_detailType == PROJECTDETAILTYPERIGHTINTEREST) {
-        [_normalMarkOfRightsInterestView cretateInvestmentView];
-        UIScrollView *tempView = (UIScrollView*)[_normalMarkOfRightsInterestView viewWithTag:1001];
-        if (tempView) {
-            if (tempView.frame.origin.y == 0) {
-                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
-            }
-        }
-    } else {
-        [_markOfBondsRransferView cretateInvestmentView];
-        UIScrollView *tempView = (UIScrollView*)[_markOfBondsRransferView viewWithTag:1001];
-        if (tempView) {
-            if (tempView.frame.origin.y == 0) {
-                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
-            }
-        }
-    }
-    //自定义Nav 放到最上面
-    [self.view bringSubviewToFront:_navigationStyleBar];
+//    CGFloat scaleFlot = 1;
+//    if (ScreenWidth == 375.0f && ScreenHeight == 667.0f) {
+//        scaleFlot = 1.171875;
+//    } else if (ScreenWidth == 414.0f && ScreenHeight == 736.0f) {
+//        scaleFlot =  1.29375;
+//    }
+//    if (_detailType == PROJECTDETAILTYPENORMAL) {
+//        [_normalMarkView cretateInvestmentView];
+//        UIScrollView *tempView = (UIScrollView*)[_normalMarkView viewWithTag:1001];
+//        if (tempView) {
+//            if (tempView.frame.origin.y == 0) {
+//                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
+//            }
+//        }
+//        
+//    } else if (_detailType == PROJECTDETAILTYPERIGHTINTEREST) {
+//        [_normalMarkOfRightsInterestView cretateInvestmentView];
+//        UIScrollView *tempView = (UIScrollView*)[_normalMarkOfRightsInterestView viewWithTag:1001];
+//        if (tempView) {
+//            if (tempView.frame.origin.y == 0) {
+//                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
+//            }
+//        }
+//    } else {
+//        [_markOfBondsRransferView cretateInvestmentView];
+//        UIScrollView *tempView = (UIScrollView*)[_markOfBondsRransferView viewWithTag:1001];
+//        if (tempView) {
+//            if (tempView.frame.origin.y == 0) {
+//                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
+//            }
+//        }
+//    }
+//    //自定义Nav 放到最上面
+//    [self.view bringSubviewToFront:_navigationStyleBar];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

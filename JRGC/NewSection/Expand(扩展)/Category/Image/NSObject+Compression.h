@@ -32,5 +32,14 @@ typedef enum  {
  @return 图片
  */
 - (UIImage *)imageGradientByColorArray:(NSArray *)colors ImageSize:(CGSize)size gradientType:(GradientType)gradientType;
+
+
+/**
+ 工场的渐变颜色主体
+
+ @param size 获取渐变图片的大小
+ @return 渐变图片
+ */
+- (UIImage *)gc_styleImageSize:(CGSize)size;
     
 @end

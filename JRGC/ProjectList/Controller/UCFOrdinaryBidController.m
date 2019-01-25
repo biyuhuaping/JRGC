@@ -24,6 +24,8 @@
 //#import "UCFHomeListCell.h"
 #import "NewPurchaseBidController.h"
 #import "UCFInvestTableViewCell.h"
+#import "UCFNewProjectDetailViewController.h"
+//#import "UCFBidDetailModel.h"
 @interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate,UCFInvestTableViewCellDelegate>
 {
     UCFMicroMoneyModel *_microMoneyModel;
@@ -190,6 +192,17 @@
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
     }else if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail){
+        UCFBidDetailModel *model = [UCFBidDetailModel yy_modelWithJSON:result];
+        NSString *message = model.message;
+        
+        if (model.ret) {
+            UCFNewProjectDetailViewController *vc = [[UCFNewProjectDetailViewController alloc] init];
+            vc.model = model;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            [AuxiliaryFunc showAlertViewWithMessage:message];
+        }
+        return;
         NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];

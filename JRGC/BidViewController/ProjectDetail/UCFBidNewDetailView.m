@@ -20,6 +20,7 @@
 #import "SecurityCell.h"
 #import "UCFSettingArrowItem.h"
 #import "UCFSettingGroup.h"
+#import "NSObject+Compression.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 
@@ -114,15 +115,10 @@
 //**********************************topView***************************//
 - (void)drawTopView
 {
-    _headBkView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight])];
-    CGFloat scaleFlot = 1;
-    if (ScreenWidth == 375.0f && ScreenHeight == 667.0f) {
-        scaleFlot = 1.171875;
-    } else if (ScreenWidth == 414.0f && ScreenHeight == 736.0f) {
-        scaleFlot =  1.29375;
-    }
-    _headBkView.image = [UIImage imageNamed:@"particular_bg_2"];
+    _headBkView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 155)];
+    _headBkView.image = [UIImage gc_styleImageSize:_headBkView.frame.size];
     [self addSubview:_headBkView];
+
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
         _p2pOrHonerType = [[_dic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
     } else {
@@ -670,35 +666,7 @@
     self.dataArray = [NSMutableArray arrayWithObjects:basicBetailItem,safetyGuaranteeItem,investmentecordItem, nil];
      [self addSubview:_twoTableview];
     [_twoTableview reloadData];
-//    UIView *pullingBkView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42)];
-//    [self addSubview:pullingBkView];
-//    pullingBkView.backgroundColor = [UIColor clearColor];
-//
-//    UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-//    buyCueDesTipLabel.textColor = UIColorWithRGB(0x999999);
-//    buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
-//    buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
-//    buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
-//    NSString *buyCueDesStr =[_dic objectSafeForKey: @"buyCueDes"];
-//    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P && ![buyCueDesStr isEqualToString:@""] ) {
-//        pullingBkView.frame = CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42 + 20);
-//        buyCueDesTipLabel.text = buyCueDesStr;
-//        [pullingBkView addSubview:buyCueDesTipLabel];
-//    }else{
-//        buyCueDesTipLabel.frame = CGRectZero;
-//    }
-//    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 15) / 2, CGRectGetMaxY(buyCueDesTipLabel.frame)+10, 15, 15)];
-//    iconView.image = [UIImage imageNamed:@"particular_icon_up.png"];
-//    [pullingBkView addSubview:iconView];
-//
-//    UILabel *pullingLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(iconView.frame) + 5, ScreenWidth, 12) text:@"向上滑动，查看详情" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
-//    [pullingBkView addSubview:pullingLabel];
-//
-//    UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [bottomBtn addTarget:self action:@selector(bottomBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    bottomBtn.frame = CGRectMake(0, 0, ScreenWidth, 42);
-//    [pullingBkView addSubview:bottomBtn];
-//    [pullingBkView setUserInteractionEnabled:YES];
+
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

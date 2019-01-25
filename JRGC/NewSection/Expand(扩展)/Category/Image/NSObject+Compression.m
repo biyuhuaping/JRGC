@@ -101,4 +101,9 @@
     UIGraphicsEndImageContext();
     return image;
 }
+
+- (UIImage *)gc_styleImageSize:(CGSize)size {
+    NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
+    return [self imageGradientByColorArray:colorArray ImageSize:size gradientType:leftToRight];
+}
 @end

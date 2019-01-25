@@ -8,6 +8,7 @@
 
 #import "MinuteCountDownView.h"
 #import "HWWeakTimer.h"
+
 @interface MinuteCountDownView (){
   NSInteger _passTime;
 }
@@ -141,6 +142,36 @@
     }
     return str;
 }
- 
+
+- (void)blindVM:(UVFBidDetailViewModel *)vm
+{
+    @PGWeakObj(self);
+   UCFBidDetailModel *model = [vm getDataModel];
+    [self.KVOController observe:vm keyPaths:@[@"stopStatus"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"stopStatus"]) {
+            NSString *stopStatus = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if ([stopStatus intValue] == 0) {
+                selfWeak.timeInterval = model.data.intervalMilli;
+                [selfWeak startTimer];
+                selfWeak.tipLabel.text = @"剩余时间";//
+            } else {
+//                NSString *startTimeStr = [_dic objectSafeForKey:@"startTime"];
+//                NSString *endTimeStr = [_dic objectSafeForKey:@"fullTime"];
+//                if (_type == PROJECTDETAILTYPEBONDSRRANSFER){//债权转让
+//                    startTimeStr = [_dic objectSafeForKey:@"putawaytime"];
+//                    endTimeStr = [_dic objectSafeForKey:@"soldOutTime"];
+//                    _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"转让期: %@ 至 %@",startTimeStr,endTimeStr];
+//                }else{
+//                    _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"筹标期: %@ 至 %@",startTimeStr,endTimeStr];
+//                }
+            }
+        }
+    }];
+}
+- (void)dealloc
+{
+    
+}
 @end
 

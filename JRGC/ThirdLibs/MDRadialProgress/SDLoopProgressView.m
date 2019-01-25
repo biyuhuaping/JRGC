@@ -21,7 +21,13 @@
     }else{
         [UIColorWithRGB(0xfd4d4c) set];
     }
-    CGContextSetLineWidth(ctx, 6);
+    if (self.completedLineWidth > 0.01) {
+        CGContextSetLineWidth(ctx, self.completedLineWidth);
+
+    } else {
+        CGContextSetLineWidth(ctx, 6);
+
+    }
     CGContextSetLineCap(ctx, kCGLineCapRound);
     CGFloat to = - M_PI * 0.5 + self.progress * M_PI * 2;
     CGFloat radius = MIN(rect.size.width, rect.size.height) * 0.5 - 5.0;
