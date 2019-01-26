@@ -49,6 +49,7 @@
 		3328796721EEC75500832CE8 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796621EEC75500832CE8 /* NSString+MD5.m */; };
 		3328796B21EECE7600832CE8 /* UCFHomeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */; };
 		3328796F21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */; };
+		333B42C821FC31AB00741A47 /* UCFBidDetailTopBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */; };
 		33459CEF21F07C920048443C /* GlobalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33459CEE21F07C920048443C /* GlobalView.m */; };
 		334654B6215E08270046A057 /* LOGO微金.png in Resources */ = {isa = PBXBuildFile; fileRef = 334654B5215E08270046A057 /* LOGO微金.png */; };
 		334790C221E82E2B005131A5 /* HomeHeadCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334790C121E82E2B005131A5 /* HomeHeadCycleView.m */; };
@@ -1280,6 +1281,8 @@
 		3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListRequest.m; sourceTree = "<group>"; };
 		3328796D21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		333B42C621FC31AB00741A47 /* UCFBidDetailTopBoardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBidDetailTopBoardCell.h; sourceTree = "<group>"; };
+		333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBidDetailTopBoardCell.m; sourceTree = "<group>"; };
 		33459CED21F07C920048443C /* GlobalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalView.h; sourceTree = "<group>"; };
 		33459CEE21F07C920048443C /* GlobalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalView.m; sourceTree = "<group>"; };
 		334654B5215E08270046A057 /* LOGO微金.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOGO微金.png"; sourceTree = "<group>"; };
@@ -3517,6 +3520,8 @@
 				33614B1E21F998F300569989 /* UCFBidDetailNavView.m */,
 				334C713D21FAAA49006AE8F7 /* UCFNewBidDetaiInfoView.h */,
 				334C713E21FAAA49006AE8F7 /* UCFNewBidDetaiInfoView.m */,
+				333B42C621FC31AB00741A47 /* UCFBidDetailTopBoardCell.h */,
+				333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -8753,6 +8758,7 @@
 				3307E22421A3B147009FFF6D /* QuickRechargeHeadView.m in Sources */,
 				33AF83A521F5C2060035ED53 /* UCFInvestTableViewCell.m in Sources */,
 				7BA6E4BB1AD6731900FE8C37 /* SDWebImageCompat.m in Sources */,
+				333B42C821FC31AB00741A47 /* UCFBidDetailTopBoardCell.m in Sources */,
 				E30C799121F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.m in Sources */,
 				FBB685881AE4A76800F222B6 /* MJRefreshLegendHeader.m in Sources */,
 				74270C9F1EC58F6800F9419B /* UCFHomeListHeaderSectionView.m in Sources */,

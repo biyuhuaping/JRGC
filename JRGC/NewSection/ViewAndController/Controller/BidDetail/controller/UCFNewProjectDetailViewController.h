@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewProjectDetailViewController : UCFNewBaseViewController
 @property(nonatomic, strong)UCFBidDetailModel *model;
-
+@property(nonatomic,assign) PROJECTDETAILTYPE detailType;
 @end
 
 NS_ASSUME_NONNULL_END

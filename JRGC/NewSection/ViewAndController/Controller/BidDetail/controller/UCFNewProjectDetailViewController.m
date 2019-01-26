@@ -12,7 +12,11 @@
 #import "UCFNewBidDetaiInfoView.h"
 #import "UCFRemindFlowView.h"
 #import "MinuteCountDownView.h"
-@interface UCFNewProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "UCFSettingArrowItem.h"
+#import "UCFProjectInvestmentRecordViewController.h"
+#import "UCFProjectSafetyGuaranteeViewController.h"
+#import "UCFProjectBasicDetailViewController.h"
+@interface UCFNewProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate>
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
 @property(nonatomic, strong)UCFNewBidDetaiInfoView *bidinfoView;
@@ -42,7 +46,7 @@
     self.showTableView.topPos.equalTo(self.navView.bottomPos);
     self.showTableView.bottomPos.equalTo(@57);
     self.showTableView.myHorzMargin = 0;
-//    self.showTableView.backgroundColor = [UIColor redColor];
+    self.showTableView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
     [self.rootLayout addSubview:self.showTableView];
     
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
@@ -67,8 +71,8 @@
     UCFRemindFlowView *remind = [UCFRemindFlowView new];
     remind.myTop = 0;
     remind.myHorzMargin = 0;
-    remind.heightSize.equalTo(@45);
-    remind.backgroundColor = UIColorWithRGB(0xebebee);
+    remind.heightSize.equalTo(@40);
+    remind.backgroundColor = [UIColor clearColor];
     remind.subviewVSpace = 5;
     remind.subviewHSpace = 5;
     [self.contentLayout addSubview:remind];
@@ -116,7 +120,10 @@
 - (void)blindData
 {
     [self.VM blindModel:self.model];
+    [self.dataArray addObject:[self.VM getTableViewData]];
+    [self.dataArray addObject:[self.VM getTableViewData1]];
 
+    [self.showTableView reloadData];
 }
 - (UVFBidDetailViewModel *)VM
 {
@@ -134,27 +141,192 @@
         _showTableView.delegate = self;
         _showTableView.dataSource = self;
         _showTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _showTableView.separatorColor = [Color color:PGColorOptionCellSeparatorGray];
+//        _showTableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
         _showTableView.enableRefreshFooter = NO;
         _showTableView.enableRefreshHeader = NO;
     }
     return _showTableView;
 }
+- (NSMutableArray *)dataArray
+{
+    if (!_dataArray) {
+        return _dataArray = [NSMutableArray arrayWithCapacity:2];
+    }
+    return _dataArray;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return 30;
+    } else {
+        return 50;
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 10;
+    } else {
+        return 0.001;
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 10;
+    } else {
+        return 10;
+    }
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        footView.backgroundColor = [UIColor whiteColor];
+        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:footView isTop:NO];
+        return footView;
+    } else {
+        return nil;
+    }
+
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        headView.backgroundColor = [UIColor whiteColor];
+        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:headView isTop:YES];
+        return headView;
+    } else {
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        headView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+        return nil;
+    }
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.dataArray.count;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.VM getTableViewData] count];
+    return [self.dataArray[section] count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellID = @"cellID";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
+    if (indexPath.section == 0) {
+        static NSString *cellID = @"cellID";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
+            cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0f];
+            cell.detailTextLabel.textColor = [Color color:PGColorOptionTitleBlack];
+        }
+        
+        NSArray *arr =  self.dataArray[indexPath.section];
+        NSDictionary *dict = arr[indexPath.row];
+        cell.textLabel.text = dict[@"title"];
+        cell.detailTextLabel.text = dict[@"value"];
+        return cell;
+    } else {
+        static NSString *cellID = @"cellID2";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            UIView *bottomLineView = [[UIView alloc] initWithFrame:CGRectMake(15, 49.5, ScreenWidth -15, 0.5)];
+            bottomLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+            bottomLineView.tag = 1000;
+            [cell addSubview:bottomLineView];
+        }
+
+        NSArray *arr =  self.dataArray[indexPath.section];
+        UIView *bottomLineView = [cell viewWithTag:1000];
+        if (indexPath.row == arr.count - 1) {
+            bottomLineView.hidden = YES;
+        } else {
+            bottomLineView.hidden = NO;
+        }
+        
+        UCFSettingArrowItem *model = arr[indexPath.row];
+        cell.imageView.image = [UIImage imageNamed:model.icon];
+        cell.textLabel.text = model.title;
+        return cell;
     }
-    NSArray *arr = [self.VM getTableViewData];
-    NSDictionary *dict = arr[indexPath.row];
-    cell.textLabel.text = dict[@"title"];
-    cell.detailTextLabel.text = dict[@"value"];
-    return cell;
+    return nil;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            
+            NSString *userid = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+            NSString *prdClaimsIdStr = self.model.data.ID;
+            NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
+            [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdDetailMess owner:self signature:YES Type:self.accoutType];
+            
+        } else if (indexPath.row == 1) {
+            UCFProjectSafetyGuaranteeViewController *basicDetailVC = [[UCFProjectSafetyGuaranteeViewController alloc]initWithNibName:@"UCFProjectSafetyGuaranteeViewController" bundle:nil];
+            NSMutableArray *dictArr = [NSMutableArray arrayWithCapacity:1];
+            for (DetailSafetysecuritylist *safeModel in self.model.data.safetySecurityList) {
+                NSDictionary *dict = @{@"title":safeModel.title,@"content":safeModel.content};
+                [dictArr addObject:dict];
+            }
+            basicDetailVC.dataArray = dictArr;
+            self.accoutType = SelectAccoutTypeP2P;
+            basicDetailVC.accoutType = self.accoutType;
+            [self.navigationController  pushViewController:basicDetailVC animated:YES];
+        } else {
+            UCFProjectInvestmentRecordViewController *investmentRecordVC = [[UCFProjectInvestmentRecordViewController alloc]initWithNibName:@"UCFProjectInvestmentRecordViewController" bundle:nil];
+            self.accoutType = SelectAccoutTypeP2P;
+            investmentRecordVC.accoutType = self.accoutType;
+            if ([self.model.data.busType isEqualToString:@"1"]) {
+                _detailType = PROJECTDETAILTYPERIGHTINTEREST;
+            } else {
+                _detailType = PROJECTDETAILTYPENORMAL;
+            }
+            investmentRecordVC.detailType = _detailType;
+            investmentRecordVC.prdClaimsId = self.model.data.ID;
+            [self.navigationController  pushViewController:investmentRecordVC animated:YES];
+        }
+    }
+}
+-(void)beginPost:(kSXTag)tag
+{
+    
+}
+-(void)endPost:(id)result tag:(NSNumber*)tag
+{
+    if(tag.intValue == kSXTagPrdClaimsGetPrdDetailMess) {
+        NSDictionary * dic = [(NSString *)result objectFromJSONString];
+        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode boolValue])
+        {
+            UCFProjectBasicDetailViewController *basicDetailVC = [[UCFProjectBasicDetailViewController alloc]initWithNibName:@"UCFProjectBasicDetailViewController" bundle:nil];
+            basicDetailVC.dataDic = dataDic;
+            basicDetailVC.detailType = _detailType;
+            basicDetailVC.accoutType = self.accoutType;
+            basicDetailVC.projectId = [NSString stringWithFormat:@"%@",self.model.data.ID];
+            basicDetailVC.tradeMark = self.model.data.tradeMark;
+            basicDetailVC.prdDesType= [self.model.data.prdDesType boolValue];
+            [self.navigationController  pushViewController:basicDetailVC animated:YES];
+        }else{
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
+    }
+}
+-(void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    
 }
 - (void)dealloc
 {

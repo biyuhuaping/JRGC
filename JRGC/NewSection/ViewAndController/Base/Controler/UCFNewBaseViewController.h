@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewBaseViewController : UIViewController
 @property(nonatomic, strong)MyRelativeLayout *rootLayout;
-
+@property(assign,nonatomic) SelectAccoutType accoutType;
 
 /**
  导航栏左侧按钮为文字

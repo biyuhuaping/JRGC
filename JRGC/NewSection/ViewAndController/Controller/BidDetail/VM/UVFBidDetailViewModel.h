@@ -65,6 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)PROJECTDETAILTYPE type;
 @property(nonatomic, assign)BOOL isP2P;
 - (NSArray *)getTableViewData;
+- (NSArray *)getTableViewData1;
 @end
 
 NS_ASSUME_NONNULL_END

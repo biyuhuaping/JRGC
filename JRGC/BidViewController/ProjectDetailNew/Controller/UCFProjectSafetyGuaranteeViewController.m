@@ -39,7 +39,7 @@
         NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:section] objectSafeForKey:@"title"]];
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    float titlelableWidth = ScreenWidth -30;
+        float titlelableWidth = ScreenWidth -30;
         UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,8 , titlelableWidth, [self secondHeaderHeight:section])];
         placehoderLabel.font = [UIFont systemFontOfSize:14];
         placehoderLabel.textColor = UIColorWithRGB(0x333333);
