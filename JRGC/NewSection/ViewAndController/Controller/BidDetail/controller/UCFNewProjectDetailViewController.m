@@ -16,6 +16,7 @@
 #import "UCFProjectInvestmentRecordViewController.h"
 #import "UCFProjectSafetyGuaranteeViewController.h"
 #import "UCFProjectBasicDetailViewController.h"
+#import "UCFNewInvestBtnView.h"
 @interface UCFNewProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate>
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
@@ -26,6 +27,7 @@
 
 @property(nonatomic, strong)MyLinearLayout *contentLayout;
 @property(nonatomic, strong)MinuteCountDownView *minuteCountDownView;
+@property(nonatomic, strong)UCFNewInvestBtnView *investView;
 @end
 
 @implementation UCFNewProjectDetailViewController
@@ -48,6 +50,15 @@
     self.showTableView.myHorzMargin = 0;
     self.showTableView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
     [self.rootLayout addSubview:self.showTableView];
+    
+    
+    UCFNewInvestBtnView *investView = [[UCFNewInvestBtnView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 57)];
+    investView.topPos.equalTo(self.showTableView.bottomPos);
+    investView.myHorzMargin = 0;
+    investView.rightPos.equalTo(@0);
+    investView.bottomPos.equalTo(@0);
+    [self.rootLayout addSubview:investView];
+    self.investView = investView;
     
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     contentLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -115,6 +126,8 @@
     [self.remind blindVM:self.VM];
     
     [self.minuteCountDownView blindVM:self.VM];
+    
+    [self.investView blindVM:self.VM];
     
 }
 - (void)blindData

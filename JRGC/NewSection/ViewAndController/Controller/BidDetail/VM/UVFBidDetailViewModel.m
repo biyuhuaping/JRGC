@@ -28,6 +28,8 @@
     [self dealMarkInfo];
     //处理倒计时
     [self dealMinuteCountDownData];
+    //处理投标按钮状态
+    [self invetsButtonState];
 }
 - (UCFBidDetailModel *)getDataModel
 {
@@ -137,7 +139,74 @@
     NSString *stopStatusStr = self.model.data.stopStatus;// 0投标中,1满标
     self.stopStatus = stopStatusStr;
 }
+- (void)invetsButtonState
+{
+    NSString *statue = self.model.data.status;
+//    if ([statue isEqualToString:@"2"] || [statue isEqualToString:@"11"]) {
 
+        self.bidInvestText = @"立即出借";
+//    }
+/*
+    if ([_investmentState isEqualToString:@"2"] || [_investmentState isEqualToString:@"11"]) {
+        if ([_sourceVc isEqualToString:@"investmentDetail"]) {
+            [investmentButton setTitle:@"招标中" forState:UIControlStateNormal];
+        } else {
+            
+            if ([_sourceVc isEqualToString:@"transiBid"]) {
+                
+                NSString *buttonTitle = isP2P ?[UserInfoSingle sharedManager].isSubmitTime ? @"立即购买": @"立即出借":@"立即购买";
+                AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                if (app.isSubmitAppStoreTestTime)
+                {
+                    buttonTitle = @"立即购买";
+                }
+                [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
+            }else {
+                NSString *buttonTitle = isP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"立即购买": @"立即出借":@"立即认购";
+                AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                if (app.isSubmitAppStoreTestTime)
+                {
+                    buttonTitle = isP2P ? @"立即购买":@"立即认购";
+                }
+                [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
+            }
+            investmentButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
+            [investmentButton setUserInteractionEnabled:YES];
+        }
+    } else if ([_investmentState isEqualToString:@"5"]) {
+        [investmentButton setTitle:@"回款中" forState:UIControlStateNormal];
+        
+    } else if ([_investmentState isEqualToString:@"6"]) {
+        [investmentButton setTitle:@"已回款" forState:UIControlStateNormal];
+        
+    } else if ([_investmentState isEqualToString:@"0"]) {
+        [investmentButton setTitle:@"待回款" forState:UIControlStateNormal];
+        
+    } else if ([_investmentState isEqualToString:@"1"]) {
+        [investmentButton setTitle:@"等待确认" forState:UIControlStateNormal];
+        
+    } else if ([_investmentState isEqualToString:@"3"]) {
+        [investmentButton setTitle:@"流标" forState:UIControlStateNormal];
+        
+    } else if ([_investmentState isEqualToString:@"4"]) {
+        [investmentButton setTitle:@"满标" forState:UIControlStateNormal];
+        
+    } else {
+        if ([_sourceVc isEqualToString:@"transiBid"]) {
+            NSString *buttonTitle = isP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"立即购买": @"立即出借":@"立即购买";
+            [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
+        }else {
+            NSString *buttonTitle = isP2P ? @"立即出借":@"立即认购";
+            AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            if (app.isSubmitAppStoreTestTime)
+            {
+                buttonTitle = isP2P ? @"立即购买":@"立即认购";
+            }
+            [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
+        }
+    }
+    */
+}
 
 
 
