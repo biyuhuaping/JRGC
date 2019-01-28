@@ -25,7 +25,7 @@
 @property(nonatomic, strong)UCFBidDetailNavView *navView;
 @property(nonatomic, strong)UVFBidDetailViewModel *VM;
 
-@property(nonatomic, strong)MyLinearLayout *contentLayout;
+@property(nonatomic, strong)MyRelativeLayout *contentLayout;
 @property(nonatomic, strong)MinuteCountDownView *minuteCountDownView;
 @property(nonatomic, strong)UCFNewInvestBtnView *investView;
 @end
@@ -44,6 +44,41 @@
     self.navView = navView;
     [self.rootLayout addSubview:navView];
     
+    MyRelativeLayout *contentLayout = [MyRelativeLayout new];
+    contentLayout.myHorzMargin = 0; //同时指定左右边距为0表示宽度和父视图一样宽
+    self.contentLayout = contentLayout;
+    
+    
+    UCFNewBidDetaiInfoView *bidinfoView = [[UCFNewBidDetaiInfoView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight1, ScreenWidth, 155)];
+    self.bidinfoView = bidinfoView;
+    [self.contentLayout addSubview:bidinfoView];
+    
+    
+    UCFRemindFlowView *remind = [UCFRemindFlowView new];
+    remind.topPos.equalTo(bidinfoView.bottomPos);
+    remind.myHorzMargin = 0;
+    remind.heightSize.equalTo(@40);
+    remind.backgroundColor = [UIColor clearColor];
+    remind.subviewVSpace = 5;
+    remind.subviewHSpace = 5;
+    self.remind = remind;
+    [self.contentLayout addSubview:remind];
+   
+
+    //是P2p 并且不是
+//    if(_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER){
+    _minuteCountDownView = [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
+
+    _minuteCountDownView.topPos.equalTo(remind.bottomPos);
+    _minuteCountDownView.myHorzMargin = 0;
+    _minuteCountDownView.heightSize.equalTo(@45);
+    _minuteCountDownView.isStopStatus = @"0";
+    [_minuteCountDownView startTimer];
+    _minuteCountDownView.sourceVC = @"UCFProjectDetailVC";//投资页面
+    [self.contentLayout addSubview:self.minuteCountDownView];
+
+//    }
+    contentLayout.heightSize.equalTo(@(155 + 40 + 45));
 
     self.showTableView.topPos.equalTo(self.navView.bottomPos);
     self.showTableView.bottomPos.equalTo(@57);
@@ -51,6 +86,7 @@
     self.showTableView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
     [self.rootLayout addSubview:self.showTableView];
     
+    self.showTableView.tableHeaderView = contentLayout;
     
     UCFNewInvestBtnView *investView = [[UCFNewInvestBtnView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 57)];
     investView.topPos.equalTo(self.showTableView.bottomPos);
@@ -60,59 +96,19 @@
     [self.rootLayout addSubview:investView];
     self.investView = investView;
     
-    MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
-    contentLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
-    contentLayout.myHorzMargin = 0;                       //同时指定左右边距为0表示宽度和父视图一样宽
-    self.contentLayout = contentLayout;
-    [self.rootLayout addSubview:contentLayout];
-    
-//    [contentLayout setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
-//
-//    }];
-//    @PGWeakObj(self);
-//    [self.contentLayout setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
-//        selfWeak.showTableView.tableHeaderView = v;
-//    }];
-    
-    UCFNewBidDetaiInfoView *bidinfoView = [[UCFNewBidDetaiInfoView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight1, ScreenWidth, 155)];
-    self.bidinfoView = bidinfoView;
-    [self.contentLayout addSubview:bidinfoView];
-    
-    
-    UCFRemindFlowView *remind = [UCFRemindFlowView new];
-    remind.myTop = 0;
-    remind.myHorzMargin = 0;
-    remind.heightSize.equalTo(@40);
-    remind.backgroundColor = [UIColor clearColor];
-    remind.subviewVSpace = 5;
-    remind.subviewHSpace = 5;
-    [self.contentLayout addSubview:remind];
-    self.remind = remind;
 
-    //是P2p 并且不是
-//    if(_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER){
-    _minuteCountDownView = [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
-
-    _minuteCountDownView.topPos.equalTo(@0);
-    _minuteCountDownView.myHorzMargin = 0;
-    _minuteCountDownView.heightSize.equalTo(@45);
-    _minuteCountDownView.isStopStatus = @"0";
-    [_minuteCountDownView startTimer];
-    _minuteCountDownView.sourceVC = @"UCFProjectDetailVC";//投资页面
-    [self.contentLayout addSubview:self.minuteCountDownView];
-    self.showTableView.tableHeaderView = self.contentLayout;
-
-//    }
+    
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.showTableView.tableHeaderView = self.contentLayout;
+
 }
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//
-//}
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+//    self.showTableView.tableHeaderView = self.contentLayout;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
