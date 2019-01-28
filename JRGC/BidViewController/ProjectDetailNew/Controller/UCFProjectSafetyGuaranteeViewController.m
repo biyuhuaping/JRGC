@@ -40,6 +40,7 @@
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         float titlelableWidth = ScreenWidth -30;
+    
         UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,8 , titlelableWidth, [self secondHeaderHeight:section])];
         placehoderLabel.font = [UIFont systemFontOfSize:14];
         placehoderLabel.textColor = UIColorWithRGB(0x333333);
@@ -50,6 +51,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, CGRectGetHeight(placehoderLabel.frame) + 8*2)];
         view.backgroundColor = UIColorWithRGB(0xf9f9f9);
         [view addSubview:placehoderLabel];
+    
         UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(view.frame)+10)];
         headView.backgroundColor = UIColorWithRGB(0xebebee);
         [headView addSubview:view];
@@ -109,7 +111,7 @@
         
         NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
         NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:[indexPath section]] objectSafeForKey:@"content"]];
-                lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
+        lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
     return cell;
 }
 

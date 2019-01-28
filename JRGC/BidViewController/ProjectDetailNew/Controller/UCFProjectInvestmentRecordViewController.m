@@ -69,12 +69,13 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    headView.backgroundColor = UIColorWithRGB(0xf9f9f9);
-    [self viewAddLine:headView Up:NO];
-    UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS,9 , ScreenWidth - XPOS * 2, 12)];
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 45)];
+    headView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+//    [self viewAddLine:headView Up:NO];
+    
+    UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS,20, ScreenWidth - XPOS * 2, 12)];
     placehoderLabel.font = [UIFont boldSystemFontOfSize:12];
-    placehoderLabel.textColor = UIColorWithRGB(0x333333);
+    placehoderLabel.textColor = [Color color:PGColorOptionTitleGray];
     placehoderLabel.textAlignment = NSTextAlignmentLeft;
     placehoderLabel.backgroundColor = [UIColor clearColor];
     NSString *str = baseTitleLabel.text;
@@ -84,7 +85,7 @@
     {
        placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count],str];
     }else{
-        placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",_totalCount,str];
+        placehoderLabel.text = [NSString stringWithFormat:@"共%d笔%@",_totalCount,str];
     }
     [headView addSubview:placehoderLabel];
     return headView;
@@ -103,7 +104,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    return 45;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

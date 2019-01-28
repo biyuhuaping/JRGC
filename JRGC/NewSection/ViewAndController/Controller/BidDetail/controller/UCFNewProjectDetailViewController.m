@@ -289,12 +289,11 @@
                 [dictArr addObject:dict];
             }
             basicDetailVC.dataArray = dictArr;
-            self.accoutType = SelectAccoutTypeP2P;
+            basicDetailVC.accoutType = self.accoutType;
             basicDetailVC.accoutType = self.accoutType;
             [self.navigationController  pushViewController:basicDetailVC animated:YES];
         } else {
             UCFProjectInvestmentRecordViewController *investmentRecordVC = [[UCFProjectInvestmentRecordViewController alloc]initWithNibName:@"UCFProjectInvestmentRecordViewController" bundle:nil];
-            self.accoutType = SelectAccoutTypeP2P;
             investmentRecordVC.accoutType = self.accoutType;
             if ([self.model.data.busType isEqualToString:@"1"]) {
                 _detailType = PROJECTDETAILTYPERIGHTINTEREST;

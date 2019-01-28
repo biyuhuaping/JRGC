@@ -198,6 +198,7 @@
         if (model.ret) {
             UCFNewProjectDetailViewController *vc = [[UCFNewProjectDetailViewController alloc] init];
             vc.model = model;
+            vc.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             [AuxiliaryFunc showAlertViewWithMessage:message];
