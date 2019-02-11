@@ -215,7 +215,7 @@
     InvestPageInfoApi *api = [[InvestPageInfoApi alloc] initWithProjectId:self.model.data.ID type:SelectAccoutTypeP2P];
     api.delegate = self;
     api.animatingView = _view;
-    [api start];
+    [api start];    
 }
 - (void)requestFinished:(YTKBaseRequest *)request {
     DDLogDebug(@"succeed");
