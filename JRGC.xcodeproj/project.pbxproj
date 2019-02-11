@@ -86,12 +86,8 @@
 		339930A821A29BBF00C72F54 /* UCFTransferTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */; };
 		339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */; };
 		339930AD21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */; };
-
 		33AF83A521F5C2060035ED53 /* UCFInvestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF83A421F5C2060035ED53 /* UCFInvestTableViewCell.m */; };
 		33AF83CA21F6C9650035ED53 /* UCFNewAITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF83C921F6C9650035ED53 /* UCFNewAITableViewCell.m */; };
-
-		33AF83DC21F726F10035ED53 /* UCFTelAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF83DB21F726F10035ED53 /* UCFTelAlertView.m */; };
-
 		33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B17642215A14F4007D1F91 /* LMJScrollTextView.m */; };
 		33B66151215C7FB70027325F /* UCFZiZHIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */; };
 		33B66152215C7FB70027325F /* UCFZiZHIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33B6614F215C7FB60027325F /* UCFZiZHIViewController.xib */; };
@@ -1358,8 +1354,6 @@
 		33AF83A421F5C2060035ED53 /* UCFInvestTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestTableViewCell.m; sourceTree = "<group>"; };
 		33AF83C821F6C9650035ED53 /* UCFNewAITableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewAITableViewCell.h; sourceTree = "<group>"; };
 		33AF83C921F6C9650035ED53 /* UCFNewAITableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewAITableViewCell.m; sourceTree = "<group>"; };
-		33AF83DA21F726F10035ED53 /* UCFTelAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTelAlertView.h; sourceTree = "<group>"; };
-		33AF83DB21F726F10035ED53 /* UCFTelAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTelAlertView.m; sourceTree = "<group>"; };
 		33B17642215A14F4007D1F91 /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
 		33B17643215A14F4007D1F91 /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
 		33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFZiZHIViewController.m; sourceTree = "<group>"; };
@@ -3513,20 +3507,7 @@
 			path = BidDetail;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
 		33614B1C21F9964F00569989 /* controller */ = {
-=======
-		33AF83CB21F6FECD0035ED53 /* Alert */ = {
-			isa = PBXGroup;
-			children = (
-				33AF83DA21F726F10035ED53 /* UCFTelAlertView.h */,
-				33AF83DB21F726F10035ED53 /* UCFTelAlertView.m */,
-			);
-			path = Alert;
-			sourceTree = "<group>";
-		};
-		33B17641215A14F4007D1F91 /* LMJScrollTextView */ = {
->>>>>>> developer-branch
 			isa = PBXGroup;
 			children = (
 				33614B1921F9964400569989 /* UCFNewProjectDetailViewController.h */,
@@ -7078,17 +7059,8 @@
 		C67838E87BE226A85BF3CDFB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				503AC35E381A55F9BCE67C57 /* Pods-JRGC.debug.xcconfig */,
 				B0A8AA400A6B5149CBB4A656 /* Pods-JRGC.release.xcconfig */,
-=======
-				33AF83CB21F6FECD0035ED53 /* Alert */,
-				33FE65FF21CBC2270000DD03 /* PageControlView */,
-				E37FC7ED21C25BD30019C01D /* TransitionModel(转成model的方法) */,
-				E31BD54521C0C91400D3651F /* View */,
-				E31BD53D21C0C71500D3651F /* TableView */,
-				E31BD50621C0BFD500D3651F /* BaseModel */,
->>>>>>> developer-branch
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -8759,7 +8731,6 @@
 				A8E02DA91F0DD4BB00FC2260 /* UCFCellStyleModel.m in Sources */,
 				E30C799A21F1C2A7000183FA /* UCFMineGetWithdrawInfoApi.m in Sources */,
 				74270CF81EC5943200F9419B /* UCFInvitationRebateViewController.m in Sources */,
-				33AF83DC21F726F10035ED53 /* UCFTelAlertView.m in Sources */,
 				74270C971EC58F6800F9419B /* UCFHomeListCellPresenter.m in Sources */,
 				7412323C1F14BB150061408A /* UCFPickView.m in Sources */,
 				E352FD6221E4AF0B00617AB7 /* WeChatStylePlaceHolder.m in Sources */,
