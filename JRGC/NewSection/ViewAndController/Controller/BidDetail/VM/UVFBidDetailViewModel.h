@@ -75,6 +75,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)UCFBidModel *bidInfoModel;
 
+@property(nonatomic, weak)UIView *view;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -170,7 +170,8 @@
 - (UVFBidDetailViewModel *)VM
 {
     if (!_VM) {
-        self.VM = [UVFBidDetailViewModel new];
+        _VM = [UVFBidDetailViewModel new];
+        _VM.view = self.view;
     }
     return _VM;
 }

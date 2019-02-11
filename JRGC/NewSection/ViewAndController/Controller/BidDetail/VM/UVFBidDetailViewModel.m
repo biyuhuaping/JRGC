@@ -214,10 +214,11 @@
 {
     InvestPageInfoApi *api = [[InvestPageInfoApi alloc] initWithProjectId:self.model.data.ID type:SelectAccoutTypeP2P];
     api.delegate = self;
+    api.animatingView = _view;
     [api start];
 }
 - (void)requestFinished:(YTKBaseRequest *)request {
-    NSLog(@"succeed");
+    DDLogDebug(@"succeed");
     UCFBidModel *model = request.responseJSONModel;
     if (model) {
         self.bidInfoModel = model;
@@ -225,7 +226,7 @@
 }
 
 - (void)requestFailed:(YTKBaseRequest *)request {
-    NSLog(@"failed");
+    DDLogDebug(@"failed");
 }
 
 

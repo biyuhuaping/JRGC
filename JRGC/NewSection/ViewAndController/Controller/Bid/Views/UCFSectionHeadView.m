@@ -9,8 +9,8 @@
 #import "UCFSectionHeadView.h"
 
 @interface UCFSectionHeadView ()
-
-@property(strong ,nonatomic)UILabel *titleLab;
+@property(strong, nonatomic)UIImageView *iconView;
+@property(strong, nonatomic)UILabel *titleLab;
 @property(strong, nonatomic)UIImageView *imageView1;
 @property(strong, nonatomic)UIImageView *imageView2;
 @property(strong, nonatomic)UIImageView *imageView3;
@@ -22,6 +22,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
+        [self addSubview:self.iconView];
         [self addSubview:self.titleLab];
         [self addSubview:self.imageView1];
         [self addSubview:self.imageView2];
@@ -34,7 +35,13 @@
 
 - (void)layoutSubviewFrame
 {
-    self.titleLab.leadingPos.equalTo(@15);
+    
+//    self.iconView.myHeight = 16;
+//    self.iconView.myWidth = 3;
+//    self.iconView.leftPos.equalTo(@15);
+//    self.iconView.myTop = 15;
+    
+    self.titleLab.leadingPos.equalTo(self.iconView.rightPos).offset(5);
     self.titleLab.topPos.equalTo(@0);
     self.titleLab.bottomPos.equalTo(@0);
     
@@ -96,7 +103,14 @@
     }];
 }
 
-
+//- (UIImageView *)dd
+//{
+//    UIImageView *iconView = [[UIImageView alloc] init];
+//    iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+//    iconView.clipsToBounds = YES;
+//    iconView.layer.cornerRadius = 2;
+//    self.iconView = iconView;
+//}
 - (UILabel *)titleLab
 {
     if (!_titleLab) {
