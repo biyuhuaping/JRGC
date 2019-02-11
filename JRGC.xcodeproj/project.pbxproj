@@ -49,6 +49,7 @@
 		3328796721EEC75500832CE8 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796621EEC75500832CE8 /* NSString+MD5.m */; };
 		3328796B21EECE7600832CE8 /* UCFHomeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */; };
 		3328796F21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */; };
+		333548BD221153D100DE0BB8 /* InvestPageInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 333548BC221153D100DE0BB8 /* InvestPageInfoApi.m */; };
 		333B42C821FC31AB00741A47 /* UCFBidDetailTopBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */; };
 		333B42CE21FC4E6B00741A47 /* UCFNewInvestBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B42CD21FC4E6B00741A47 /* UCFNewInvestBtnView.m */; };
 		33459CEF21F07C920048443C /* GlobalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33459CEE21F07C920048443C /* GlobalView.m */; };
@@ -1282,6 +1283,8 @@
 		3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListRequest.m; sourceTree = "<group>"; };
 		3328796D21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		333548BB221153D100DE0BB8 /* InvestPageInfoApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvestPageInfoApi.h; sourceTree = "<group>"; };
+		333548BC221153D100DE0BB8 /* InvestPageInfoApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvestPageInfoApi.m; sourceTree = "<group>"; };
 		333B42C621FC31AB00741A47 /* UCFBidDetailTopBoardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBidDetailTopBoardCell.h; sourceTree = "<group>"; };
 		333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBidDetailTopBoardCell.m; sourceTree = "<group>"; };
 		333B42CC21FC4E6B00741A47 /* UCFNewInvestBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewInvestBtnView.h; sourceTree = "<group>"; };
@@ -3388,6 +3391,15 @@
 			path = FDFullscreenPopGesture;
 			sourceTree = "<group>";
 		};
+		333548BA2211535400DE0BB8 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				333548BB221153D100DE0BB8 /* InvestPageInfoApi.h */,
+				333548BC221153D100DE0BB8 /* InvestPageInfoApi.m */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		33459CEC21F07C330048443C /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -3499,6 +3511,7 @@
 		33614B1821F995FD00569989 /* BidDetail */ = {
 			isa = PBXGroup;
 			children = (
+				333548BA2211535400DE0BB8 /* Api */,
 				33614B2521F9BEE000569989 /* VM */,
 				33614B2121F9BABF00569989 /* models */,
 				33614B2021F9B38600569989 /* views */,
@@ -9279,6 +9292,7 @@
 				FBEDF1DF1CB5171500116E12 /* MyViewController.m in Sources */,
 				E31BD53921C0C10100D3651F /* TYAlertDropDownAnimation.m in Sources */,
 				3382D21F21A286F200104CCD /* BankLogoSectionTableViewCell.m in Sources */,
+				333548BD221153D100DE0BB8 /* InvestPageInfoApi.m in Sources */,
 				FBC234731B31678800C783A8 /* UCFBackMoneyCell1.m in Sources */,
 				4A8D5F741B0C1DCF0053F045 /* RechargeListViewController.m in Sources */,
 				7BE45C911ADF9C4C00B955A6 /* HMSegmentedControl.m in Sources */,

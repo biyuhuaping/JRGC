@@ -79,7 +79,9 @@
 }
 - (void)click:(UIButton *)button
 {
-    
+    if (self.delegate) {
+        [self.delegate topLeftButtonClick:button];
+    }
 }
 - (void)blindVM:(UVFBidDetailViewModel *)vm
 {

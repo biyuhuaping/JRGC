@@ -17,7 +17,7 @@
 #import "UCFProjectSafetyGuaranteeViewController.h"
 #import "UCFProjectBasicDetailViewController.h"
 #import "UCFNewInvestBtnView.h"
-@interface UCFNewProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate>
+@interface UCFNewProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate,UCFBidDetailNavViewDelegate>
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
 @property(nonatomic, strong)UCFNewBidDetaiInfoView *bidinfoView;
@@ -42,17 +42,16 @@
     
     UCFBidDetailNavView *navView = [[UCFBidDetailNavView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NavigationBarHeight1)];
     self.navView = navView;
+    navView.delegate = self;
     [self.rootLayout addSubview:navView];
     
     MyRelativeLayout *contentLayout = [MyRelativeLayout new];
     contentLayout.myHorzMargin = 0; //同时指定左右边距为0表示宽度和父视图一样宽
     self.contentLayout = contentLayout;
     
-    
     UCFNewBidDetaiInfoView *bidinfoView = [[UCFNewBidDetaiInfoView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight1, ScreenWidth, 155)];
     self.bidinfoView = bidinfoView;
     [self.contentLayout addSubview:bidinfoView];
-    
     
     UCFRemindFlowView *remind = [UCFRemindFlowView new];
     remind.topPos.equalTo(bidinfoView.bottomPos);
@@ -64,7 +63,6 @@
     self.remind = remind;
     [self.contentLayout addSubview:remind];
    
-
     //是P2p 并且不是
 //    if(_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER){
     _minuteCountDownView = [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
@@ -95,19 +93,10 @@
     investView.bottomPos.equalTo(@0);
     [self.rootLayout addSubview:investView];
     self.investView = investView;
-    
-
-    
 }
-- (void)viewDidAppear:(BOOL)animated
+- (void)topLeftButtonClick:(UIButton *)button
 {
-    [super viewDidAppear:animated];
-
-}
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-//    self.showTableView.tableHeaderView = self.contentLayout;
+    [self.rt_navigationController popViewControllerAnimated:YES complete:nil];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -125,6 +114,50 @@
     
     [self.investView blindVM:self.VM];
     
+    [self blindVM:self.VM];
+    
+}
+- (void)blindVM:(UVFBidDetailViewModel *)vm
+{
+    @PGWeakObj(self);
+    [self.KVOController observe:vm keyPaths:@[@"bidInfoModel"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"bidInfoModel"]) {
+            id model = [change objectForKey:NSKeyValueChangeNewKey];
+            if([model isKindOfClass:[UCFBidModel class]]) {
+                [selfWeak dealInvestInfoData:model];
+            }
+        }
+    }];
+}
+- (void)dealInvestInfoData:(UCFBidModel *)model
+{
+    NSInteger code = model.code;
+    NSString *message = model.message;
+    if (model.ret) {
+        NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
+        vc.bidDetaiModel = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (code == 21 || code == 22){
+//        [self checkUserCanInvest];
+    } else if (code == 15) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    } else if (code == 19) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
+        alert.tag =7000;
+        [alert show];
+    } else if (code == 30) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+        alert.tag = 9000;
+        [alert show];
+    }else if (code == 40) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
+        alert.tag = 9001;
+        [alert show];
+    } else {
+        [MBProgressHUD displayHudError:model.message withShowTimes:3];
+    }
 }
 - (void)blindData
 {
@@ -150,8 +183,6 @@
         _showTableView.delegate = self;
         _showTableView.dataSource = self;
         _showTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        _showTableView.separatorColor = [Color color:PGColorOptionCellSeparatorGray];
-//        _showTableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
         _showTableView.enableRefreshFooter = NO;
         _showTableView.enableRefreshHeader = NO;
     }

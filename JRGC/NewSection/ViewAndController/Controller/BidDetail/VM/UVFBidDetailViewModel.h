@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UCFBidDetailModel.h"
+#import "UCFBidModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UVFBidDetailViewModel : NSObject
@@ -69,6 +70,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property(nonatomic,copy)NSString *bidInvestText;
+
+- (void)dealClickAction:(NSString *)title;
+
+@property(nonatomic, strong)UCFBidModel *bidInfoModel;
 
 @end
 

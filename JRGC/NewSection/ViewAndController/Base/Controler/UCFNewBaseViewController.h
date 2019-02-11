@@ -35,6 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
  @param button 点击的button
  */
 - (void)rightBarClicked:(UIButton *)button;
+
+/**
+ 返回按钮
+ */
+- (void)addWhiteLeftButton;
 @end
 
 NS_ASSUME_NONNULL_END

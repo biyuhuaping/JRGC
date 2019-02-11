@@ -10,6 +10,7 @@
 #import "NSObject+Compression.h"
 @interface UCFNewInvestBtnView()
 @property(nonatomic, strong)UIButton    *investButtom;
+@property(nonatomic, strong)UVFBidDetailViewModel   *vm;
 @end
 
 
@@ -35,6 +36,7 @@
 }
 - (void)blindVM:(UVFBidDetailViewModel *)vm
 {
+    self.vm = vm;
     @PGWeakObj(self);
     [self.KVOController observe:vm keyPaths:@[@"bidInvestText"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
@@ -49,7 +51,8 @@
 }
 - (void)click:(UIButton *)button
 {
-    
+    NSString *title = [button titleForState:UIControlStateNormal];
+    [self.vm dealClickAction:title];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

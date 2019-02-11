@@ -10,7 +10,10 @@
 #import "NSString+Tool.h"
 #import "NSDateManager.h"
 #import "UCFSettingArrowItem.h"
-@interface UVFBidDetailViewModel()
+#import "InvestPageInfoApi.h"
+
+
+@interface UVFBidDetailViewModel()<YTKRequestDelegate>
 @property(nonatomic, weak)UCFBidDetailModel *model;
 @end
 @implementation UVFBidDetailViewModel
@@ -142,10 +145,10 @@
 - (void)invetsButtonState
 {
     NSString *statue = self.model.data.status;
-//    if ([statue isEqualToString:@"2"] || [statue isEqualToString:@"11"]) {
+    if ([statue isEqualToString:@"2"] || [statue isEqualToString:@"11"]) {
 
         self.bidInvestText = @"立即出借";
-//    }
+    }
 /*
     if ([_investmentState isEqualToString:@"2"] || [_investmentState isEqualToString:@"11"]) {
         if ([_sourceVc isEqualToString:@"investmentDetail"]) {
@@ -207,8 +210,23 @@
     }
     */
 }
+- (void)dealClickAction:(NSString *)title
+{
+    InvestPageInfoApi *api = [[InvestPageInfoApi alloc] initWithProjectId:self.model.data.ID type:SelectAccoutTypeP2P];
+    api.delegate = self;
+    [api start];
+}
+- (void)requestFinished:(YTKBaseRequest *)request {
+    NSLog(@"succeed");
+    UCFBidModel *model = request.responseJSONModel;
+    if (model) {
+        self.bidInfoModel = model;
+    }
+}
 
-
+- (void)requestFailed:(YTKBaseRequest *)request {
+    NSLog(@"failed");
+}
 
 
 

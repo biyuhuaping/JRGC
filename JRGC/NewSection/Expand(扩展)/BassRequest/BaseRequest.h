@@ -16,6 +16,11 @@ typedef NS_ENUM(NSUInteger, RequestState) {
 @interface BaseRequest : YTKRequest
 
 /**
+接口类型 p2p 或者 尊享
+ */
+@property(nonatomic, assign)SelectAccoutType apiType;
+
+/**
  *  初始化成功/失败回调block
  *
  *  @param success 网络成功block
