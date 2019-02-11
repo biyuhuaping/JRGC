@@ -24,6 +24,7 @@
 @property (nonatomic, copy) NSString *unReadMsgCount;
 @property (nonatomic, copy) NSString *userCenterTicket;
 @property (nonatomic, copy) NSString *realName;
+@property (nonatomic, copy) NSString *outBoundMess;
 
 + (instancetype)userBenefitWithDict:(NSDictionary *)dict;
 @end

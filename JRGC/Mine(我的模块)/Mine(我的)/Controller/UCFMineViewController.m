@@ -44,6 +44,7 @@
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "NSString+Misc.h"
 #import "UCFNewRechargeViewController.h"
+#import "UCFTelAlertView.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncViewDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -742,6 +743,7 @@
     else if (alertView.tag == 9000) {
         if (buttonIndex == 1) {
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+            
             if ([UserInfoSingle sharedManager].superviseSwitch) {
                 if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew) {
                     str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
@@ -842,21 +844,13 @@
         }
     }
     else  if ([title isEqualToString:@"联系我们"]){//邀请返利
-        NSString *teleNo = @"呼叫400-0322-988";
-//        if ([UserInfoSingle sharedManager].superviseSwitch) {
-//            if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew) {
-//                teleNo = @"呼叫400-6766-988";
-//            }
-//            else {
-//                teleNo = @"呼叫400-0322-988";
-//            }
-//        }
-//        else {
-//            teleNo = @"呼叫400-0322-988";
-//        }
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:teleNo delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
-        alert.tag = 9000;
-        [alert show];
+//        NSString *teleNo = @"呼叫400-0322-988";
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:teleNo delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
+//        alert.tag = 9000;
+//        [alert show];
+        
+        UCFTelAlertView *view = [[UCFTelAlertView alloc] initWithNotiMessage:self.benefitModel.outBoundMess];
+        [view show];
     }
     else  if ([title isEqualToString:@"资产证明"]){//资产证明
         if (!self.assetProofCanClick) {
@@ -878,6 +872,8 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
+#pragma mark UCFAlertTemplateDelegate
+
 -(void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedUserIntoGoCoinPageResult:(id)result withTag:(NSUInteger)tag
 {
      NSDictionary *dataDict = (NSDictionary *)result;
