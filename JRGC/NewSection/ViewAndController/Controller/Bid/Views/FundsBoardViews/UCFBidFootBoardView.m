@@ -34,9 +34,11 @@
             NSString *limitAmountMess = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (limitAmountMess.length > 0) {
                 NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:limitAmountMess];
-                text.yy_color = UIColorWithRGB(0x999999);
-                selfWeak.limitAmountMessLabel.text = limitAmountMess;
-                [selfWeak.limitAmountMessLabel sizeToFit];
+                text.yy_color = [Color color:PGColorOptionTitleGray];
+                text.yy_font = [Color gc_Font:14];
+//                selfWeak.limitAmountMessLabel.font =
+//                selfWeak.limitAmountMessLabel.text = limitAmountMess;
+//                [selfWeak.limitAmountMessLabel sizeToFit];
                 selfWeak.limitAmountMessLabel.attributedText = text;
                 selfWeak.firstSectionView.myVisibility = MyVisibility_Visible;
             } else {
@@ -47,8 +49,10 @@
             if (limitAmountNum.length > 0) {
                 NSString *string = [selfWeak.limitAmountMessLabel.attributedText string];
                 NSMutableAttributedString *attri_str = [[NSMutableAttributedString alloc] initWithString:string];
-                attri_str.yy_color = UIColorWithRGB(0x999999);
+                attri_str.yy_color = [Color color:PGColorOptionTitleGray];
+                attri_str.yy_font = [Color gc_Font:14];
                 [attri_str yy_setColor:UIColorWithRGB(0xf3ab47) range:[selfWeak.limitAmountMessLabel.text rangeOfString:limitAmountNum]];
+                selfWeak.limitAmountMessLabel.font = [Color gc_Font:14];
                 selfWeak.limitAmountMessLabel.attributedText = attri_str;
                 [selfWeak.limitAmountMessLabel sizeToFit];
             }
@@ -120,10 +124,11 @@
     [self.firstSectionView addSubview:imageView];
     
     YYLabel *limitAmountMessLabel = [[YYLabel alloc] init];
-    limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
+//    limitAmountMessLabel.backgroundColor = [UIColor redColor];
+    limitAmountMessLabel.font = [Color gc_Font:14.0f];
     limitAmountMessLabel.numberOfLines = 0;
     //不要删除，需要占位，要不数据反射回来 这个lab的frame 会变成0
-//    limitAmountMessLabel.text = @"经过风险评估，您本次出借金额上限为1000万";
+    limitAmountMessLabel.text = @"经过风险评估，您本次出借金额上限为1000万";
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
     [self.firstSectionView addSubview:limitAmountMessLabel];
@@ -150,14 +155,14 @@
     NSString *showStr = @"本人阅读并同意《CFCA数字证书服务协议》";
     
     NZLabel *limitAmountMessLabel = [[NZLabel alloc] init];
-    limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
+    limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
     limitAmountMessLabel.numberOfLines = 0;
     limitAmountMessLabel.text = showStr;
     [limitAmountMessLabel sizeToFit];
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
-    limitAmountMessLabel.textColor = UIColorWithRGB(0x999999);
+    limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
     [self.secondSectionView addSubview:limitAmountMessLabel];
     
     limitAmountMessLabel.userInteractionEnabled = YES;
@@ -168,18 +173,7 @@
         NSLog(@"111");
         [weakSelf totalString:linkModel.linkString];
     }];
-    
-    
-//    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:showStr];
-//    text.yy_color = UIColorWithRGB(0x999999);
-//    __weak typeof(self) weakSelf = self;
-//    [text yy_setTextHighlightRange:[showStr rangeOfString:@"《CFCA数字证书服务协议》"]
-//                             color:UIColorWithRGB(0x4aa1f9)
-//                   backgroundColor:[UIColor lightGrayColor]
-//                         tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
-//                             [weakSelf totalString:text andRange:range];
-//                         }];
-//    limitAmountMessLabel.attributedText = text;
+
 }
 - (void)createSectionThree
 {
@@ -201,13 +195,13 @@
     NSString *showStr = @"本人阅读并悉知《网络借贷出借风险及禁止性行为提示》中风险";;
 
     NZLabel *limitAmountMessLabel = [[NZLabel alloc] init];
-    limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
+    limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
     limitAmountMessLabel.numberOfLines = 0;
     limitAmountMessLabel.text = showStr;
     limitAmountMessLabel.topPos.equalTo(@5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
-    limitAmountMessLabel.textColor = UIColorWithRGB(0x999999);
+    limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
     limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
     limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
     [limitAmountMessLabel sizeToFit];
@@ -255,14 +249,14 @@
     NSString *showStr = @"本人已阅读并同意签署";;
     
     NZLabel *limitAmountMessLabel = [[NZLabel alloc] init];
-    limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
+    limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
     limitAmountMessLabel.numberOfLines = 0;
     limitAmountMessLabel.text = showStr;
     limitAmountMessLabel.topPos.equalTo(@5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
     limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
-    limitAmountMessLabel.textColor = UIColorWithRGB(0x999999);
+    limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
     limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
     limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
     [limitAmountMessLabel sizeToFit];
@@ -292,14 +286,14 @@
     NSString *showStr = @"同意并认可";;
     
     NZLabel *limitAmountMessLabel = [[NZLabel alloc] init];
-    limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
+    limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
     limitAmountMessLabel.numberOfLines = 0;
     limitAmountMessLabel.text = showStr;
     limitAmountMessLabel.topPos.equalTo(@5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
     limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
-    limitAmountMessLabel.textColor = UIColorWithRGB(0x999999);
+    limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
     limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
     limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
     [limitAmountMessLabel sizeToFit];
@@ -327,11 +321,11 @@
     [self.sixSectionView addSubview:imageView];
     
     YYLabel *limitAmountMessLabel = [[YYLabel alloc] init];
-    limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
+    limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
     limitAmountMessLabel.numberOfLines = 0;
     //不要删除，需要占位，要不数据反射回来 这个lab的frame 会变成0
     limitAmountMessLabel.text = @"本人接受筹标期内资金不计利息，出借意向不可撤销";
-    limitAmountMessLabel.textColor = UIColorWithRGB(0x999999);
+    limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
     [self.sixSectionView addSubview:limitAmountMessLabel];

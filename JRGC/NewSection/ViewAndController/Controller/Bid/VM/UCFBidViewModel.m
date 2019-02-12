@@ -109,6 +109,9 @@
         }
         self.markList = tmpArr;
     }
+    NSMutableArray *tmpArr1 = [NSMutableArray array];
+    [tmpArr1 addObject:@"七夕奖励100工豆"];
+    self.markList = tmpArr1;
 }
 
 /**
@@ -157,9 +160,9 @@
 
  @param switchView 工豆开关
  */
-- (void)dealMyfundsNumWithBeansSwitch:(UISwitch *)switchView
+- (void)dealMyfundsNumWithBeansSwitch:(UIButton *)switchView
 {
-    beansSwitch = switchView.on;
+    beansSwitch = switchView.selected;
     if (beansSwitch) {
         NSString *totalMoney =[UCFToolsMehod AddComma: [NSString stringWithFormat:@"%.2f",self.model.data.accountAmount + self.model.data.beanAmount/100.0f]];
         self.totalFunds = [NSString stringWithFormat:@"¥%@",totalMoney];

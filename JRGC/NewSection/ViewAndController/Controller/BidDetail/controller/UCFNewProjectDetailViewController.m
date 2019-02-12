@@ -164,7 +164,6 @@
     [self.VM blindModel:self.model];
     [self.dataArray addObject:[self.VM getTableViewData]];
     [self.dataArray addObject:[self.VM getTableViewData1]];
-
     [self.showTableView reloadData];
 }
 - (UVFBidDetailViewModel *)VM

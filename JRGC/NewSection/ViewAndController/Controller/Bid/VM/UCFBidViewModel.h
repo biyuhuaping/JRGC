@@ -153,7 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy)NSString          *allMoneyInputNum;
 
-- (void)dealMyfundsNumWithBeansSwitch:(UISwitch *)switchView;
+- (void)dealMyfundsNumWithBeansSwitch:(UIButton *)switchView;
 - (void)calculate:(NSString *)investMoney;
 - (void)calculateTotalMoney;
 

@@ -7,7 +7,7 @@
 //
 
 #import "UCFBidInfoView.h"
-
+#import "UILabel+Misc.h"
 @interface UCFBidInfoView ()
 @property(nonatomic, strong) UIView *topLine;
 @property(nonatomic, strong) UILabel *rateLab;              //利率
@@ -25,7 +25,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        [self addSubview:self.topLine];
+//        [self addSubview:self.topLine];
         [self addSubview:self.rateLab];
         [self addSubview:self.rateTipLab];
         [self addSubview:self.timeLimitLab];
@@ -43,10 +43,18 @@
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"annualRate"]) {
             selfWeak.rateLab.text =  [change objectSafeForKey:NSKeyValueChangeNewKey];
+            [selfWeak.rateLab setFont:[Color gc_Font:16] string:@"%"];
+            [selfWeak.rateLab sizeToFit];
         } else if ([keyPath isEqualToString:@"timeLimitText"]) {
             NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (markStr.length > 0) {
-                selfWeak.timeLimitLab.text = [change objectSafeForKey:NSKeyValueChangeNewKey];
+                selfWeak.timeLimitLab.text = markStr;
+                if ([markStr containsString:@"天"]) {
+                    [selfWeak.timeLimitLab setFont:[Color gc_Font:14] string:@"天"];
+                } else {
+                    [selfWeak.timeLimitLab setFont:[Color gc_Font:14] string:@"个月"];
+                }
+                [selfWeak.timeLimitLab sizeToFit];
             }
         } else if ([keyPath isEqualToString:@"remainingMoney"]) {
             NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -59,34 +67,29 @@
 }
 - (void)bidLayoutSubViewsFrame
 {
-    self.topLine.myHeight = 1;
-    self.topLine.myTop = 0;
-    self.topLine.myHorzMargin = 0;
+//    self.topLine.myHeight = 1;
+//    self.topLine.myTop = 0;
+//    self.topLine.myHorzMargin = 0;
     
     self.rateLab.myLeading = 15;
-    self.rateLab.myTop = 10;
-    self.rateLab.myHeight = 20;
+    self.rateLab.myTop = 5;
     
     self.timeLimitLab.leadingPos.equalTo(self.rateLab.trailingPos);
-    self.timeLimitLab.myHeight = 15;
-    self.timeLimitLab.bottomPos.equalTo(self.rateLab.bottomPos);
+    self.timeLimitLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(10);
     
     self.moneyAmountLab.leadingPos.equalTo(self.timeLimitLab.trailingPos);
-    self.moneyAmountLab.right = 15;
-    self.moneyAmountLab.bottomPos.equalTo(self.rateLab.bottomPos);
+    self.moneyAmountLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(10);
     
     self.rateLab.widthSize.equalTo(@[self.timeLimitLab.widthSize, self.moneyAmountLab.widthSize]).add(-30);
-        
+    
+    
     self.rateTipLab.myLeading = 15;
-    self.rateTipLab.topPos.equalTo(self.rateLab.bottomPos).offset(8);
-    self.rateTipLab.myHeight = 15;
+    self.rateTipLab.topPos.equalTo(self.rateLab.bottomPos).offset(-4);
     
     self.timeLimitTipLab.leadingPos.equalTo(self.rateTipLab.trailingPos);
-    self.timeLimitTipLab.myHeight = 15;
     self.timeLimitTipLab.bottomPos.equalTo(self.rateTipLab.bottomPos);
     
     self.moneyAmountTipLab.leadingPos.equalTo(self.timeLimitTipLab.trailingPos);
-    self.moneyAmountTipLab.right = 15;
     self.moneyAmountTipLab.bottomPos.equalTo(self.rateTipLab.bottomPos);
     
     self.rateTipLab.widthSize.equalTo(@[self.timeLimitTipLab.widthSize, self.moneyAmountTipLab.widthSize]).add(-30);
@@ -118,9 +121,8 @@
     if (!_rateLab) {
         _rateLab = [[UILabel alloc] init];
         _rateLab.textColor = UIColorWithRGB(0xfd4d4c);
-        _rateLab.font = [UIFont boldSystemFontOfSize:16.0f];
+        _rateLab.font = [Color gc_ANC_font:32.0f];
         _rateLab.text = @"0%";
-        [_rateLab sizeToFit];
     }
     return _rateLab;
 }
@@ -128,8 +130,8 @@
 {
     if (!_rateTipLab) {
         _rateTipLab = [[UILabel alloc] init];
-        _rateTipLab.textColor = UIColorWithRGB(0x777777);
-        _rateTipLab.font = [UIFont systemFontOfSize:12.0f];
+        _rateTipLab.textColor = [Color color:PGColorOptionTitleGray];
+        _rateTipLab.font = [UIFont systemFontOfSize:11.0f];
         _rateTipLab.text = @"预期年化利率";
         [_rateTipLab sizeToFit];
     }
@@ -139,10 +141,10 @@
 {
     if (!_timeLimitLab) {
         _timeLimitLab = [[UILabel alloc] init];
-        _timeLimitLab.textColor = UIColorWithRGB(0x333333);
-        _timeLimitLab.font = [UIFont systemFontOfSize:12.0f];
-        _timeLimitLab.text = @"30天";
-        [_timeLimitLab sizeToFit];
+        _timeLimitLab.textColor = [Color color:PGColorOptionTitleBlack];
+        _timeLimitLab.font = [Color gc_ANC_font:18.0f];
+//        _timeLimitLab.text = @"30天";
+//        [_timeLimitLab sizeToFit];
     }
     return _timeLimitLab;
 }
@@ -150,8 +152,8 @@
 {
     if (!_timeLimitTipLab) {
         _timeLimitTipLab = [[UILabel alloc] init];
-        _timeLimitTipLab.textColor = UIColorWithRGB(0x777777);
-        _timeLimitTipLab.font = [UIFont systemFontOfSize:12.0f];
+        _timeLimitTipLab.textColor = [Color color:PGColorOptionTitleGray];
+        _timeLimitTipLab.font = [UIFont systemFontOfSize:11.0f];
         _timeLimitTipLab.text = @"出借期限";
         [_timeLimitTipLab sizeToFit];
     }
@@ -161,8 +163,8 @@
 {
     if (!_moneyAmountLab) {
         _moneyAmountLab = [[UILabel alloc] init];
-        _moneyAmountLab.textColor = UIColorWithRGB(0x333333);
-        _moneyAmountLab.font = [UIFont systemFontOfSize:12.0f];
+        _moneyAmountLab.textColor = [Color color:PGColorOptionTitleBlack];
+        _moneyAmountLab.font = [Color gc_ANC_font:18.0f];
         _moneyAmountLab.text = @"¥1,000,000";
         [_moneyAmountLab sizeToFit];
     }
@@ -172,8 +174,8 @@
 {
     if (!_moneyAmountTipLab) {
         _moneyAmountTipLab = [[UILabel alloc] init];
-        _moneyAmountTipLab.textColor = UIColorWithRGB(0x777777);
-        _moneyAmountTipLab.font = [UIFont systemFontOfSize:12.0f];
+        _moneyAmountTipLab.textColor = [Color color:PGColorOptionTitleGray];
+        _moneyAmountTipLab.font = [UIFont systemFontOfSize:11.0f];
         _moneyAmountTipLab.text = @"可投金额";
         [_moneyAmountTipLab sizeToFit];
     }

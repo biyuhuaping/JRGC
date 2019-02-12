@@ -131,28 +131,40 @@
 - (void)addheadView
 {
     UIView *view = [MyRelativeLayout new];
-    view.myHeight = 37;
+    view.myHeight = 50;
     view.myHorzMargin = 0;
-    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    view.backgroundColor = [Color color:PGColorOptionThemeWhite];
     [self addSubview:view];
 //    self.headView = view;
     
-    UIView *topLineView = [[UIView alloc] init];
-    topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    topLineView.myTop = 0;
-    topLineView.myHorzMargin = 0;
-    topLineView.heightSize.equalTo(@0.5);
-    [view addSubview:topLineView];
+//    UIView *topLineView = [[UIView alloc] init];
+//    topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//    topLineView.myTop = 0;
+//    topLineView.myHorzMargin = 0;
+//    topLineView.heightSize.equalTo(@0.5);
+//    [view addSubview:topLineView];
+    
+    
+    UIImageView *iconView = [[UIImageView alloc] init];
+    iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+    iconView.clipsToBounds = YES;
+    iconView.layer.cornerRadius = 2;
+    [view addSubview:iconView];
+    
+    iconView.myHeight = 16;
+    iconView.myWidth = 3;
+    iconView.leftPos.equalTo(@15);
+    iconView.centerYPos.equalTo(view.centerYPos);
     
     UILabel  *titleLab = [UILabel new];
-    titleLab.font = [UIFont systemFontOfSize:14.0f];
+    titleLab.font = [Color gc_Font:16.0f];
     titleLab.textAlignment = NSTextAlignmentLeft;
     titleLab.adjustsFontSizeToFitWidth = YES;
     titleLab.text = @"使用优惠券";
-    titleLab.textColor = UIColorWithRGB(0x333333);
+    titleLab.textColor = [Color color:PGColorOptionTitleBlack];
     titleLab.backgroundColor =  [UIColor clearColor];
     [titleLab sizeToFit];
-    titleLab.myLeft = 15;
+    titleLab.leftPos.equalTo(iconView.rightPos).offset(5);
     titleLab.centerYPos.equalTo(view.centerYPos);
     [view addSubview:titleLab];
     
@@ -169,18 +181,18 @@
 {
     UIView *cashCoupleView = [MyRelativeLayout new];
     cashCoupleView.myTop = 0;
-    cashCoupleView.myHeight = 44;
+    cashCoupleView.myHeight = 50;
     cashCoupleView.myHorzMargin = 0;
     cashCoupleView.backgroundColor = [UIColor whiteColor];
     [self addSubview:cashCoupleView];
     self.cashView = cashCoupleView;
     
     UILabel  *titleLab = [UILabel new];
-    titleLab.font = [UIFont systemFontOfSize:14.0f];
+    titleLab.font = [UIFont systemFontOfSize:15.0f];
     titleLab.textAlignment = NSTextAlignmentLeft;
     titleLab.adjustsFontSizeToFitWidth = YES;
     titleLab.text = @"返现券";
-    titleLab.textColor = UIColorWithRGB(0x555555);
+    titleLab.textColor = [Color color:PGColorOptionTitleBlack];
     titleLab.backgroundColor =  [UIColor clearColor];
     [titleLab sizeToFit];
     titleLab.myLeft = 15;
@@ -230,18 +242,18 @@
 {
     UIView *cashCoupleView = [MyRelativeLayout new];
     cashCoupleView.myTop = 0;
-    cashCoupleView.myHeight = 44;
+    cashCoupleView.myHeight = 50;
     cashCoupleView.myHorzMargin = 0;
     cashCoupleView.backgroundColor = [UIColor whiteColor];
     [self addSubview:cashCoupleView];
     self.coupleView = cashCoupleView;
 
     UILabel  *titleLab = [UILabel new];
-    titleLab.font = [UIFont systemFontOfSize:14.0f];
+    titleLab.font = [UIFont systemFontOfSize:15.0f];
     titleLab.textAlignment = NSTextAlignmentLeft;
     titleLab.adjustsFontSizeToFitWidth = YES;
     titleLab.text = @"返息券";
-    titleLab.textColor = UIColorWithRGB(0x555555);
+    titleLab.textColor = [Color color:PGColorOptionTitleBlack];
     titleLab.backgroundColor =  [UIColor clearColor];
     [titleLab sizeToFit];
     titleLab.myLeft = 15;

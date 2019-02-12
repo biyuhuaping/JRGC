@@ -67,7 +67,7 @@
             NSArray *markList = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (markList.count > 0) {
                 [selfWeak  reloadViewContentWithTextArr:markList];
-                selfWeak.heightSize.equalTo(@36);
+                selfWeak.heightSize.equalTo(@40);
                 selfWeak.myVisibility = MyVisibility_Visible;
             } else {
                 selfWeak.myVisibility = MyVisibility_Visible;
