@@ -11,6 +11,8 @@
 #import "NetworkModule.h"
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
+#import "UCFCheckCouponApi.h"
+#import "UCFInvestmentCouponModel.h"
 @interface UCFBidViewModel()<NetworkModuleDelegate>
 {
     BOOL beansSwitch;
@@ -20,6 +22,10 @@
 @property (nonatomic, strong)UCFContractTypleModel *contractTmpModel;
 @property (nonatomic, strong)NSString       *investMoeny;
 @property (nonatomic, strong)NSString       *recommendCode;
+
+@property (nonatomic, strong)NSArray        *cashCouponArray;
+@property (nonatomic, strong)NSArray        *interestCouponArray;
+
 @end
 
 @implementation UCFBidViewModel
@@ -30,9 +36,12 @@
 }
 - (instancetype)init
 {
-    if (self = [super init]) {
+    self = [super init];
+    if (self) {
         [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(reloadVMData) name:@"UPDATEINVESTDATA" object:nil];
+//        [self requestCoupnData];
     }
+
     return self;
 }
 
@@ -61,6 +70,8 @@
     [self dealMyRecommend];
     //我的合同
     [self dealMyContract];
+    
+    [self requestCoupnData];
 }
 - (NSString *)getDataModelBidID
 {
@@ -109,9 +120,6 @@
         }
         self.markList = tmpArr;
     }
-    NSMutableArray *tmpArr1 = [NSMutableArray array];
-    [tmpArr1 addObject:@"七夕奖励100工豆"];
-    self.markList = tmpArr1;
 }
 
 /**
@@ -196,6 +204,9 @@
         
     }
     self.expectedInterestNum = [NSString stringWithFormat:@"¥%.2f",totalIntersate < 0.01 ? 0.00 : totalIntersate];
+    self.investMoneyIsChange = YES;
+    [self dealCouponData:investMoney];
+    
 }
 
 /**
@@ -254,14 +265,14 @@
 - (void)dealMycoupon
 {
     if ([self.model.data.cashNum integerValue] > 0) {
-        NSString *cashNum = [NSString stringWithFormat:@"%@张可用",self.model.data.cashNum];
+        NSString *cashNum = [NSString stringWithFormat:@"%@张",self.model.data.cashNum];
         self.cashNum = cashNum;
     } else {
         self.cashIsHide = YES;
     }
     
     if ([self.model.data.couponNum integerValue] > 0) {
-        NSString *couponNum = [NSString stringWithFormat:@"%@张可用",self.model.data.couponNum];
+        NSString *couponNum = [NSString stringWithFormat:@"%@张",self.model.data.couponNum];
         self.couponNum = couponNum;
     } else {
         self.couponIsHide = YES;
@@ -299,6 +310,75 @@
     NSString *couponSum = [NSString stringWithFormat:@"%.2f",round(money1 * 100)/100.0f];
     return couponSum;
 }
+- (void)requestCoupnData
+{
+    //获取返现券数据
+    UCFCheckCouponApi *api = [[UCFCheckCouponApi alloc] initWithPrdclaimid:self.model.data.prdClaim.ID investAmt:@"1" couponType:@"0" type:SelectAccoutTypeP2P];
+    [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        UCFInvestmentCouponModel *cashModel = request.responseJSONModel;
+        self.cashCouponArray = cashModel.data.couponList;
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        self.cashCouponArray = nil;
+    }];
+
+    //获取返息券数据
+    UCFCheckCouponApi *api1 = [[UCFCheckCouponApi alloc] initWithPrdclaimid:self.model.data.prdClaim.ID investAmt:@"1" couponType:@"1" type:SelectAccoutTypeP2P];
+    [api1 startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        UCFInvestmentCouponModel *couponModel = request.responseJSONModel;
+        self.interestCouponArray = couponModel.data.couponList;
+
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        self.interestCouponArray = nil;
+    }];
+}
+
+- (void)dealCouponData:(NSString *)investMoeny
+{
+//    if (self.cashSelectCount == 0) {
+        int a = 0;
+        for (InvestmentCouponCouponlist *model in self.cashCouponArray) {
+            if (model.investMultip <= [investMoeny doubleValue]) {
+                a++;
+            }
+        }
+//        NSString *tmpCash = self.availableCashNum;
+//        if ([tmpCash containsString:@"张可用"]) {
+//            NSString *tmpStr = [tmpCash stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
+//            if ([tmpStr intValue] != a) {
+//                self.availableCashNum = [NSString stringWithFormat:@"%d张可用",a];
+//            }
+//        } else {
+            self.availableCashNum = [NSString stringWithFormat:@"%d张可用",a];
+//        }
+//    } else {0
+//
+//    }
+    
+//    if (self.couponSelectCount == 0) {
+        int b = 0;
+        for (InvestmentCouponCouponlist *model in self.interestCouponArray) {
+            if (model.investMultip <= [investMoeny doubleValue]) {
+                b++;
+            }
+        }
+//        NSString *tmpCoupon = self.availableCouponNum;
+//        if ([tmpCoupon containsString:@"张可用"]) {
+//            NSString *tmpStr = [tmpCoupon stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
+//            if ([tmpStr intValue] != b) {
+//                self.availableCouponNum = [NSString stringWithFormat:@"%d张可用",b];
+//            }
+//        } else {
+            self.availableCouponNum = [NSString stringWithFormat:@"%d张可用",b];
+//        }
+//    }
+
+
+
+}
+
+
+#pragma mark ------------------------
+
 - (void)dealMyRecommend
 {
     BOOL isLimit = self.model.data.isLimit;

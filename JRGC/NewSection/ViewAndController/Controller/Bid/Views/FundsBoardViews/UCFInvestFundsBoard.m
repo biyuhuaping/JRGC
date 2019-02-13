@@ -175,7 +175,8 @@
     _KeYongMoneyLabel.text = @"¥10000";
     _KeYongMoneyLabel.font = [Color gc_ANC_font:20];
     _KeYongMoneyLabel.leftPos.equalTo(_keYongTipLabel.rightPos).offset(10);
-    _KeYongMoneyLabel.myCenterY = _keYongTipLabel.myCenterY;
+    _KeYongMoneyLabel.centerYPos.equalTo(_keYongTipLabel.centerYPos);
+//    _KeYongMoneyLabel.myCenterY = _keYongTipLabel.myCenterY;
     [_KeYongMoneyLabel sizeToFit];
     [_totalMoneyBoard addSubview:_KeYongMoneyLabel];
     
@@ -185,7 +186,8 @@
     _totalKeYongTipLabel.text = [UserInfoSingle sharedManager].isShowCouple ? @"(我的余额+我的工豆)"  : @"";
     [_totalKeYongTipLabel sizeToFit];
     _totalKeYongTipLabel.leadingPos.equalTo(_KeYongMoneyLabel.rightPos).offset(10);
-    _totalKeYongTipLabel.myCenterY = _KeYongMoneyLabel.myCenterY + 2.5;
+    _totalKeYongTipLabel.centerYPos.equalTo(_KeYongMoneyLabel.centerYPos).offset(2.5);
+//    _totalKeYongTipLabel.myCenterY = _KeYongMoneyLabel.myCenterY + 2.5;
     _totalKeYongTipLabel.backgroundColor = [UIColor clearColor];
     [_totalMoneyBoard addSubview:_totalKeYongTipLabel];
     
@@ -292,9 +294,9 @@
     _beanSwitch.myBottom = 0;
     _beanSwitch.myWidth = 60;
     [_beanSwitch setImage:[UIImage imageNamed:@"invest_btn_unselected"] forState:UIControlStateNormal];
-    [_beanSwitch setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateSelected];
+    [_beanSwitch setImage:[UIImage imageNamed:@"invest_btn_selected_slices"] forState:UIControlStateSelected];
 //    [_beanSwitch setBackgroundColor:[UIColor blueColor]];
-    [_beanSwitch addTarget:self action:@selector(changeSwitchStatue:) forControlEvents:UIControlEventTouchUpInside];
+    [_beanSwitch addTarget:self action:@selector(changeBtnStatue:) forControlEvents:UIControlEventTouchUpInside];
     [_beansBoard addSubview:_beanSwitch];
     _beanSwitch.imageEdgeInsets = UIEdgeInsetsMake(-14, 0, 0, -37);
     
@@ -307,9 +309,13 @@
     endLineView.heightSize.equalTo(@0.5);
     [_beansBoard addSubview:endLineView];
 }
+- (void)changeBtnStatue:(UIButton *)button
+{
+    button.selected = !button.selected;
+    [self changeSwitchStatue:button];
+}
 - (void)changeSwitchStatue:(UIButton *)switchView
 {
-    switchView.selected = !switchView.selected;
     [self.myVM dealMyfundsNumWithBeansSwitch:switchView];
 }
 #pragma mark view five

@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return 金额
  */
 - (NSString *)getTextFeildInputMoeny;
+
 @property(nonatomic, weak) UIView    *superView;
 @property(nonatomic, strong)NSString *prdName;
 @property(nonatomic, strong)NSArray  *prdLabelsList;
@@ -88,12 +89,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL            isCompanyAgent;
 //******************************************************
 
-
+/**
+ 输入金额是否有变动,如果有变动会在controller里把先前选中的优惠券信息清空
+ */
+@property(nonatomic, assign)BOOL            investMoneyIsChange;
 
 /**
  返息券可用张数
  */
 @property(nonatomic, copy)NSString          *couponNum;
+/**
+ 当前输入金额下的可用张数
+ */
+@property(nonatomic, copy)NSString          *availableCouponNum;
 
 @property(nonatomic, assign)BOOL            couponIsHide;
 /**
@@ -120,6 +128,12 @@ NS_ASSUME_NONNULL_BEGIN
 返现券可用张数
  */
 @property(nonatomic, copy)NSString          *cashNum;
+
+/**
+ 当前输入金额下的可用张数
+ */
+@property(nonatomic, copy)NSString          *availableCashNum;
+
 @property(nonatomic, assign)BOOL            cashIsHide;
 /**
  返现券返钱总额

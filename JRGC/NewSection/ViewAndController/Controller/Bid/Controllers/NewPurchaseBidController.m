@@ -23,6 +23,7 @@
 #import "UCFBidViewModel.h"
 #import "UCFInvestmentCouponModel.h"
 #import "IQKeyboardManager.h"
+
 @interface NewPurchaseBidController ()<UCFCouponBoardDelegate,UCFInvestFundsBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -40,7 +41,6 @@
 @property(nonatomic, copy) NSString *rechargeMoneyStr;
 @property(nonatomic, strong)NSArray *cashArray;
 @property(nonatomic, strong)NSArray *couponArray;
-@property(nonatomic, copy) NSString *preMoney; //上次输入金额
 @end
 
 @implementation NewPurchaseBidController
@@ -188,16 +188,14 @@
     [self bindData:vm];
 //
     self.viewModel = vm;
+    
+
 }
 
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
     NSString *prdclaimid = [self.viewModel getDataModelBidID];
     NSString *investAmt = [self.viewModel getTextFeildInputMoeny];
-    if (![self.preMoney isEqualToString:investAmt]) {
-        self.cashArray = [NSArray array];
-        self.couponArray = [NSArray array];
-    }
     if (prdclaimid == nil || [prdclaimid isEqualToString:@""] || investAmt == nil || [investAmt isEqualToString:@""]) {
         return;
     }
@@ -208,7 +206,6 @@
 //    uc.barSelectIndex = 1;
     uc.cashSelectArr = [NSMutableArray arrayWithArray:self.cashArray];
     uc.couponSelectArr = [NSMutableArray arrayWithArray:self.couponArray];
-    self.preMoney = investAmt;
     [self.navigationController pushViewController:uc animated:YES];
     
     [self bindCoupleView:uc];
@@ -252,7 +249,7 @@
                 weakSelf.viewModel.repayCash = @"0";
                 weakSelf.viewModel.cashTotalcouponAmount = @"0";
                 weakSelf.viewModel.cashTotalIDStr = @"";
-                self.cashArray = [NSArray array];
+                weakSelf.cashArray = [NSArray array];
             }
         }
     }];
@@ -279,7 +276,7 @@
                 weakSelf.viewModel.repayCoupon = @"0";
                 weakSelf.viewModel.couponTotalcouponAmount = @"0";
                 weakSelf.viewModel.couponIDStr = @"";
-                self.couponArray = [NSArray array];
+                weakSelf.couponArray = [NSArray array];
             }
         }
     }];
@@ -290,7 +287,7 @@
 {
     vm.superView = self.view;
     __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict",@"rechargeStr"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict",@"rechargeStr",@"investMoneyIsChange"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"contractTypeModel"]) {
             id funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -327,6 +324,22 @@
             NSString *str = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (str.length > 0) {
                 weakSelf.rechargeMoneyStr = str;
+            }
+        } else if ([keyPath isEqualToString:@"investMoneyIsChange"]) {
+           BOOL isChange = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+            if (isChange) {
+                
+                weakSelf.viewModel.cashSelectCount = 0;
+                weakSelf.viewModel.repayCash = @"0";
+                weakSelf.viewModel.cashTotalcouponAmount = @"0";
+                weakSelf.viewModel.cashTotalIDStr = @"";
+                weakSelf.cashArray = [NSArray array];
+                
+                weakSelf.viewModel.couponSelectCount = 0;
+                weakSelf.viewModel.repayCoupon = @"0";
+                weakSelf.viewModel.couponTotalcouponAmount = @"0";
+                weakSelf.viewModel.couponIDStr = @"";
+                weakSelf.couponArray = [NSArray array];
             }
         }
     }];
