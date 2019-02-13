@@ -351,12 +351,14 @@
     _investMoneyTextfield.centerYPos.equalTo(RMBtipLab.centerYPos);
     _investMoneyTextfield.rightPos.equalTo(_inputMoenyBoard.rightPos).offset(100);
     _investMoneyTextfield.myHeight = 30;
-    _investMoneyTextfield.font = [UIFont systemFontOfSize:18.0f];
+    _investMoneyTextfield.font = [Color gc_Font:30.0f];
     _investMoneyTextfield.keyboardType = UIKeyboardTypeDecimalPad;
     [_investMoneyTextfield addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     _investMoneyTextfield.textColor = [Color color:PGColorOptionTitleBlack];
     _investMoneyTextfield.placeholder = @"100元起投";
     [_inputMoenyBoard addSubview:_investMoneyTextfield];
+    [_investMoneyTextfield setValue:[Color color:PGColorOptionTitleGray] forKeyPath:@"_placeholderLabel.textColor"];
+    [_investMoneyTextfield setValue:[Color gc_Font:19] forKeyPath:@"_placeholderLabel.font"];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"全投" forState:UIControlStateNormal];

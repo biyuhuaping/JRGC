@@ -72,17 +72,10 @@
                 NSString *allText = [NSString stringWithFormat:@"返息%@工豆，满¥%@可用",repayCouponStr,selfWeak.myVM.couponTotalcouponAmount];
                 selfWeak.couponLab.text = allText;
                 selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:repayCouponStr WithTotalString:allText];
+                
                 [selfWeak.couponLab sizeToFit];
             } else {
-//                NSString *couponNum = selfWeak.myVM.couponNum;
-//                if (couponNum.length > 0) {
-//                    selfWeak.couponLab.text = couponNum;
-//                    if ([couponNum containsString:@"张可用"]) {
-//                        NSString *tmpStr = [couponNum stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-//                        selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:couponNum];
-//                    }
-//                    [selfWeak.couponLab sizeToFit];
-//                }
+
             }
         } else if ([keyPath isEqualToString:@"repayCash"]) {
             //返现券返的金额
@@ -94,15 +87,7 @@
                 selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:cashStr WithTotalString:allText];
                 [selfWeak.cashLab sizeToFit];
             } else {
-//                NSString *cashStr = selfWeak.myVM.cashNum;
-//                if (cashStr.length > 0) {
-//                    selfWeak.cashLab.text = cashStr;
-//                    if ([cashStr containsString:@"张可用"]) {
-//                        NSString *tmpStr = [cashStr stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-//                        selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:cashStr];
-//                    }
-//                    [selfWeak.cashLab sizeToFit];
-//                }
+
             }
         } else if ([keyPath isEqualToString:@"availableCouponNum"]) {
             NSString *availableCouponNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
