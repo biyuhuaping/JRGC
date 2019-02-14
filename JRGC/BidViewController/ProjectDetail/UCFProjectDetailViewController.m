@@ -25,7 +25,6 @@
 #import "UCFProjectSafetyGuaranteeViewController.h"
 #import "UCFProjectInvestmentRecordViewController.h"
 #import "NewPurchaseBidController.h"
-#import "NSObject+Compression.h"
 @interface UCFProjectDetailViewController ()
 {
     UCFNormalNewMarkView *_normalMarkView;// 普通标
@@ -80,7 +79,7 @@
     UILabel *baseChildTitleLabel1 = [[UILabel alloc] init];
     baseChildTitleLabel1.textAlignment = NSTextAlignmentCenter;
     [baseChildTitleLabel1 setTextColor:[UIColor whiteColor]];
-    [baseChildTitleLabel1 setBackgroundColor:[UIColor whiteColor]];
+    [baseChildTitleLabel1 setBackgroundColor:UIColorWithRGB(0x28335c)];
     baseChildTitleLabel1.layer.borderColor = [UIColor whiteColor].CGColor;
     baseChildTitleLabel1.layer.borderWidth = 1.0;
     baseChildTitleLabel1.layer.cornerRadius = 2.0;
@@ -145,8 +144,7 @@
     }
     
     _navigationStyleBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, [[UIApplication sharedApplication] statusBarFrame].size.height + 44)];
-    _navigationStyleBar.image = [UIImage gc_styleImageSize:_navigationStyleBar.frame.size];
-//    _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"]; 删除这张图片
+    _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
     [self.view addSubview:_navigationStyleBar];
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -162,9 +160,16 @@
     _navigationStyleBar.userInteractionEnabled = YES;
 }
 
-- (void)getBack
+- (void) getBack
 {
+    if (kIS_IOS7) {
+        [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+        self.navigationController.navigationBar.translucent = NO;
+    } else {
+        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    }
     [self.navigationController popViewControllerAnimated:YES];
+    self.navigationController.navigationBarHidden = NO;
 }
 - (void)viewDidLayoutSubviews
 {
@@ -181,12 +186,12 @@
             case PROJECTDETAILTYPERIGHTINTEREST://RightInterestNewView 权益表详情
                 _normalMarkOfRightsInterestView.frame = CGRectMake(0, orginY, ScreenWidth, ScreenHeight - orginY - ede.bottom);
                 [_normalMarkOfRightsInterestView updateInvestViewFrame];
-
+                
                 break;
             case PROJECTDETAILTYPEBONDSRRANSFER://债转标详情  tansType 债权转让原标类型 1 普通标 2 权益标
                 _markOfBondsRransferView.frame = CGRectMake(0, orginY, ScreenWidth, ScreenHeight - orginY - ede.bottom);
                 [_markOfBondsRransferView updateInvestViewFrame];
-
+                
                 break;
             default:
                 break;
@@ -196,10 +201,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//        self.navigationController.navigationBarHidden = YES;
+    //        self.navigationController.navigationBarHidden = YES;
     
     self.navigationController.fd_prefersNavigationBarHidden = YES;
-
+    
     if (_isTransfer) { //如果是债转的标
         _detailType = PROJECTDETAILTYPEBONDSRRANSFER;
         NSString *type = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
@@ -212,24 +217,24 @@
             _detailType = PROJECTDETAILTYPENORMAL;
         }
         NSString *type = [_dataDic objectSafeForKey:@"type"];
-       _isP2P = [type isEqualToString:@"1"] ? YES : NO; //  Yes为 p2p标
+        _isP2P = [type isEqualToString:@"1"] ? YES : NO; //  Yes为 p2p标
     }
     self.accoutType = _isP2P ? SelectAccoutTypeP2P :SelectAccoutTypeHoner;
     [self addnavigationBar];
     [self setNavTitleView];
-
+    
     NSString *tansType = @"1";
     switch (_detailType) {
         case PROJECTDETAILTYPENORMAL://普通标详情
-//            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"1"];
+            //            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"1"];
             [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
             _normalMarkView = [[UCFNormalNewMarkView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight, ScreenWidth, ScreenHeight - NavigationBarHeight) withDic:_dataDic prdList:_prdLabelsList contractMsg:_contractMsgArray souceVc:_sourceVc isP2P:_isP2P];
             _normalMarkView.delegate = self;
             [self.view addSubview:_normalMarkView];
             break;
         case PROJECTDETAILTYPERIGHTINTEREST://RightInterestNewView 权益表详情
-//            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"2"];
-             [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
+            //            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"2"];
+            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
             _normalMarkOfRightsInterestView = [[UCFRightInterestNewView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - NavigationBarHeight) withDic:_dataDic prdList:_prdLabelsList contractMsg:_contractMsgArray souceVc:_sourceVc isP2P:_isP2P];
             _normalMarkOfRightsInterestView.delegate = self;
             [self.view addSubview:_normalMarkOfRightsInterestView];
@@ -311,7 +316,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     if ([_sourceVc isEqualToString:@"collection"]) {
         [self.navigationController setNavigationBarHidden:YES animated:NO];
-
+        
     } else {
         [self.navigationController setNavigationBarHidden:YES animated:animated];
     }
@@ -323,40 +328,40 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    CGFloat scaleFlot = 1;
-//    if (ScreenWidth == 375.0f && ScreenHeight == 667.0f) {
-//        scaleFlot = 1.171875;
-//    } else if (ScreenWidth == 414.0f && ScreenHeight == 736.0f) {
-//        scaleFlot =  1.29375;
-//    }
-//    if (_detailType == PROJECTDETAILTYPENORMAL) {
-//        [_normalMarkView cretateInvestmentView];
-//        UIScrollView *tempView = (UIScrollView*)[_normalMarkView viewWithTag:1001];
-//        if (tempView) {
-//            if (tempView.frame.origin.y == 0) {
-//                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
-//            }
-//        }
-//        
-//    } else if (_detailType == PROJECTDETAILTYPERIGHTINTEREST) {
-//        [_normalMarkOfRightsInterestView cretateInvestmentView];
-//        UIScrollView *tempView = (UIScrollView*)[_normalMarkOfRightsInterestView viewWithTag:1001];
-//        if (tempView) {
-//            if (tempView.frame.origin.y == 0) {
-//                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
-//            }
-//        }
-//    } else {
-//        [_markOfBondsRransferView cretateInvestmentView];
-//        UIScrollView *tempView = (UIScrollView*)[_markOfBondsRransferView viewWithTag:1001];
-//        if (tempView) {
-//            if (tempView.frame.origin.y == 0) {
-//                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
-//            }
-//        }
-//    }
-//    //自定义Nav 放到最上面
-//    [self.view bringSubviewToFront:_navigationStyleBar];
+    CGFloat scaleFlot = 1;
+    if (ScreenWidth == 375.0f && ScreenHeight == 667.0f) {
+        scaleFlot = 1.171875;
+    } else if (ScreenWidth == 414.0f && ScreenHeight == 736.0f) {
+        scaleFlot =  1.29375;
+    }
+    if (_detailType == PROJECTDETAILTYPENORMAL) {
+        [_normalMarkView cretateInvestmentView];
+        UIScrollView *tempView = (UIScrollView*)[_normalMarkView viewWithTag:1001];
+        if (tempView) {
+            if (tempView.frame.origin.y == 0) {
+                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
+            }
+        }
+        
+    } else if (_detailType == PROJECTDETAILTYPERIGHTINTEREST) {
+        [_normalMarkOfRightsInterestView cretateInvestmentView];
+        UIScrollView *tempView = (UIScrollView*)[_normalMarkOfRightsInterestView viewWithTag:1001];
+        if (tempView) {
+            if (tempView.frame.origin.y == 0) {
+                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
+            }
+        }
+    } else {
+        [_markOfBondsRransferView cretateInvestmentView];
+        UIScrollView *tempView = (UIScrollView*)[_markOfBondsRransferView viewWithTag:1001];
+        if (tempView) {
+            if (tempView.frame.origin.y == 0) {
+                _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
+            }
+        }
+    }
+    //自定义Nav 放到最上面
+    [self.view bringSubviewToFront:_navigationStyleBar];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -418,7 +423,7 @@
 
 - (void)makeContractMsg:(NSDictionary*)msg tp:(NSString*)tp
 {
-    DDLogDebug(@"%@",msg);
+//    B(@"%@",msg);
     NSMutableArray *returnArray = [NSMutableArray arrayWithCapacity:3];
     if ([tp isEqualToString:@"1"] || [tp isEqualToString:@"2"]) {
         if ([UCFToolsMehod isNullOrNilWithString:[msg valueForKey:@"borrowContractName"]]) {
@@ -504,7 +509,7 @@
 #pragma mark -UMSocoalDelegate
 //- (void)didFinishGetUMSocialDataResponse:(UMSocialResponseEntity *)response
 //{
-//    
+//
 //}
 - (void)showHTAlertdidFinishGetUMSocialDataResponse
 {
@@ -514,9 +519,9 @@
 #pragma mark -viewDelegate
 - (void)tableView:(UITableView *)tableView didSelectNormalMarkRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//        if ([indexPath section] == 1) {
-//            [self getContractMsgHttpRequest:indexPath.row];
-//        }
+    //        if ([indexPath section] == 1) {
+    //            [self getContractMsgHttpRequest:indexPath.row];
+    //        }
     [self gotoProjectDetailNewVC:indexPath];
 }
 
@@ -600,39 +605,39 @@
         //转让标
         NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
         strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];//101943
-       
+        
     } else {
         //普通标
         NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
         strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
     }
-     [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
+    [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectNormalMarkOfRightRowAtIndexPath:(NSIndexPath *)indexPat
 {
-//    if ([indexPat section] == 1) {
-//        if ([[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"]) {
-//            NSString *title = [[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"title"];
-//            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:[[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"] title:title];
-//            controller.baseTitleType = @"detail_heTong";
-//            [self.navigationController pushViewController:controller animated:YES];
-//        } else {
-//            [self showHTAlertdidFinishGetUMSocialDataResponse];
-//        }
-//        [self getContractMsgHttpRequest:indexPat.row];
-//    }
+    //    if ([indexPat section] == 1) {
+    //        if ([[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"]) {
+    //            NSString *title = [[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"title"];
+    //            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:[[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"] title:title];
+    //            controller.baseTitleType = @"detail_heTong";
+    //            [self.navigationController pushViewController:controller animated:YES];
+    //        } else {
+    //            [self showHTAlertdidFinishGetUMSocialDataResponse];
+    //        }
+    //        [self getContractMsgHttpRequest:indexPat.row];
+    //    }
     [self gotoProjectDetailNewVC:indexPat];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectMarkOfBondsRransferViewRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if ([indexPath section] == 1) {
-//          [self getContractMsgHttpRequest:indexPath.row];
-//    }
+    //    if ([indexPath section] == 1) {
+    //          [self getContractMsgHttpRequest:indexPath.row];
+    //    }
     
-     [self gotoProjectDetailNewVC:indexPath];
+    [self gotoProjectDetailNewVC:indexPath];
 }
 
 #pragma mark MarkOfBondsRransferViewDelegate
@@ -667,7 +672,7 @@
                     strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
                 }
-
+                
             }
         }
     }
@@ -691,9 +696,9 @@
             break;
         case 5://特殊用户
         {
-//            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:[NSString stringWithFormat:@"%@staticRe/remind/withdraw.jsp",SERVER_IP] title:@""];
-//            webController.baseTitleType = @"specialUser";
-//            [self.navigationController pushViewController:webController animated:YES];
+            //            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:[NSString stringWithFormat:@"%@staticRe/remind/withdraw.jsp",SERVER_IP] title:@""];
+            //            webController.baseTitleType = @"specialUser";
+            //            [self.navigationController pushViewController:webController animated:YES];
             return YES;
         }
             break;
@@ -723,21 +728,21 @@
         NSDictionary * dic = [Data objectFromJSONString];
         if([[dic objectForKey:@"status"] integerValue] == 1)
         {
-         
-       
-                UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-                purchaseViewController.dataDict = dic;
-                purchaseViewController.bidType = 0;
-                self.sourceVc = @"";
-                purchaseViewController.accoutType = self.accoutType;
-                purchaseViewController.rootVc = self.rootVc;
-                [self.navigationController pushViewController:purchaseViewController animated:YES];
             
-
+            
+            UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
+            purchaseViewController.dataDict = dic;
+            purchaseViewController.bidType = 0;
+            self.sourceVc = @"";
+            purchaseViewController.accoutType = self.accoutType;
+            purchaseViewController.rootVc = self.rootVc;
+            [self.navigationController pushViewController:purchaseViewController animated:YES];
+            
+            
             
         }else if ([[dic objectForKey:@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
             [self checkUserCanInvest];
-
+            
         } else {
             if ([[dic objectForKey:@"status"] integerValue] == 15) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -800,7 +805,7 @@
         NSDictionary *dictionary =  [dic objectSafeDictionaryForKey:@"contractMess"];
         NSString *status = [dic objectSafeForKey:@"status"];
         if ([status intValue] == 1) {
-          NSString *contractMessStr = [dictionary objectSafeForKey:@"contractMess"];
+            NSString *contractMessStr = [dictionary objectSafeForKey:@"contractMess"];
             FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractMessStr title:_contractTitle];
             controller.baseTitleType = @"detail_heTong";
             [self.navigationController pushViewController:controller animated:YES];
@@ -823,7 +828,7 @@
             basicDetailVC.prdDesType= [[_dataDic objectSafeForKey: @"prdDesType"] boolValue];
             [self.navigationController  pushViewController:basicDetailVC animated:YES];
         }else{
-           [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     } else if (tag.intValue == kSXTagP2PPrdClaimsDealBid) {
         UCFBidModel *model = [UCFBidModel yy_modelWithJSON:result];
@@ -836,20 +841,20 @@
         } else if (code == 21 || code == 22){
             [self checkUserCanInvest];
         } else if (code == 15) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alert show];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
         } else if (code == 19) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
-                alert.tag =7000;
-                [alert show];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
+            alert.tag =7000;
+            [alert show];
         } else if (code == 30) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
-                alert.tag = 9000;
-                [alert show];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+            alert.tag = 9000;
+            [alert show];
         }else if (code == 40) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
-                alert.tag = 9001;
-                [alert show];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
+            alert.tag = 9001;
+            [alert show];
         } else {
             [MBProgressHUD displayHudError:model.message withShowTimes:3];
         }
@@ -864,11 +869,11 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 7000) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
         [self getToBack];
     }
     if (alertView.tag == 7001) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
         [self getToBack];
     }
     if (alertView.tag == 8000) {
@@ -876,7 +881,7 @@
             HSHelper *helper = [HSHelper new];
             NSInteger step = _isP2P == YES ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
             SelectAccoutType type = _isP2P == YES ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
-            [helper pushOpenHSType:type Step:step nav:self.navigationController];            
+            [helper pushOpenHSType:type Step:step nav:self.navigationController];
         }
     } else if (alertView.tag == 9000) {
         if(buttonIndex == 1){
@@ -890,7 +895,7 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
         }
     }
-
+    
 }
 
 #pragma mark -normalviewrun

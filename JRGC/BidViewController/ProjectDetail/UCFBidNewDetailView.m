@@ -20,7 +20,6 @@
 #import "SecurityCell.h"
 #import "UCFSettingArrowItem.h"
 #import "UCFSettingGroup.h"
-#import "NSObject+Compression.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 
@@ -51,7 +50,7 @@
     UILabel *_annualEarningsLabel;//年化收益
     UILabel *_markTimeLabel;//标时长
     
-     UILabel *_nextGetMoneyLabel;//下一回款日
+    UILabel *_nextGetMoneyLabel;//下一回款日
     
     UILabel *_fixedUpDateLabel;//固定起息日
     UILabel *_markTypeLabel;//类型
@@ -94,7 +93,7 @@
         }
         else
         {
-           _status =[[dic  objectSafeForKey:@"status"] intValue];
+            _status =[[dic  objectSafeForKey:@"status"] intValue];
         }
         [self initViews];
     }
@@ -115,10 +114,15 @@
 //**********************************topView***************************//
 - (void)drawTopView
 {
-    _headBkView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 155)];
-    _headBkView.image = [UIImage gc_styleImageSize:_headBkView.frame.size];
+    _headBkView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight])];
+    CGFloat scaleFlot = 1;
+    if (ScreenWidth == 375.0f && ScreenHeight == 667.0f) {
+        scaleFlot = 1.171875;
+    } else if (ScreenWidth == 414.0f && ScreenHeight == 736.0f) {
+        scaleFlot =  1.29375;
+    }
+    _headBkView.image = [UIImage imageNamed:@"particular_bg_2"];
     [self addSubview:_headBkView];
-
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
         _p2pOrHonerType = [[_dic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
     } else {
@@ -213,7 +217,7 @@
         totalLabel.frame = totalLabelFrame;
     }
     [_headBkView addSubview:totalLabel];
-   
+    
     
     _totalMoneyLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(totalLabel.frame) + 10,totalLabel.frame.origin.y - 1,150,14) text:@"" textColor:UIColorWithRGB(0x7e96c4) font:[UIFont systemFontOfSize:14]];
     [_headBkView addSubview:_totalMoneyLabel];
@@ -312,7 +316,7 @@
     titleBkView.frame = bkFrame;
     baseTitleLabel.text = titleStr;
     baseChildTitleLabel.text = childLabelStr;
-
+    
 }
 
 
@@ -335,35 +339,35 @@
             }
         }
     }
-//    if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
-//        UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight], ScreenWidth, 10)];
-//        [self addSubview:markBg];
-//        bottomViewYPos = 10;
-//    } else{
-        if ([labelPriorityArr count] == 0) {
-            UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight], ScreenWidth, 10)];
-            [self addSubview:markBg];
-            bottomViewYPos = 10;
-        } else {
-            bottomViewYPos = 30;
-           [self drawMarkView];
-        }
-//    }
+    //    if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
+    //        UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight], ScreenWidth, 10)];
+    //        [self addSubview:markBg];
+    //        bottomViewYPos = 10;
+    //    } else{
+    if ([labelPriorityArr count] == 0) {
+        UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight], ScreenWidth, 10)];
+        [self addSubview:markBg];
+        bottomViewYPos = 10;
+    } else {
+        bottomViewYPos = 30;
+        [self drawMarkView];
+    }
+    //    }
     [[NSUserDefaults standardUserDefaults]synchronize];
     
     NSString *fixUpdate = @"";
     NSString *guaranteeCompanyNameStr  = @"";
-
+    
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) { //债转不添加 担保机构
-      guaranteeCompanyNameStr  = @"";
-      fixUpdate = [[_dic objectForKey:@"prdClaims"] objectForKey:@"fixedDate"];
+        guaranteeCompanyNameStr  = @"";
+        fixUpdate = [[_dic objectForKey:@"prdClaims"] objectForKey:@"fixedDate"];
     }else{
-       guaranteeCompanyNameStr = [_dic  objectSafeForKey:@"guaranteeCompanyName"];
-       fixUpdate = [_dic objectForKey:@"fixedDate"];
+        guaranteeCompanyNameStr = [_dic  objectSafeForKey:@"guaranteeCompanyName"];
+        fixUpdate = [_dic objectForKey:@"fixedDate"];
     }
     if(_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER){
-
-       [self drawMinuteCountDownView];//创建倒计时view
+        
+        [self drawMinuteCountDownView];//创建倒计时view
     }
     //如果没有固定起息日
     if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
@@ -376,28 +380,28 @@
 -(void)drawMinuteCountDownView{
     
     float y_pos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
-   _minuteCountDownView = [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
+    _minuteCountDownView = [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
     _minuteCountDownView.frame = CGRectMake(0, y_pos, ScreenWidth, MinuteDownViewHeight);
     _minuteCountDownView.sourceVC = @"UCFProjectDetailVC";//标详情页面
     
-//    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_minuteCountDownView isTop:YES];
-//    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:_minuteCountDownView isTop:NO];
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    
-//    [formatter setDateStyle:NSDateFormatterMediumStyle];
-//    
-//    [formatter setTimeStyle:NSDateFormatterShortStyle];
-//    
-//    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
-//    
-//    NSDate* date = [formatter dateFromString:@"1970-01-01 08:11:00.000"];
-//    //将日期转换成时间戳
-//    NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue]*1000;
+    //    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_minuteCountDownView isTop:YES];
+    //    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:_minuteCountDownView isTop:NO];
+    //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    //
+    //    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    //
+    //    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    //
+    //    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+    //
+    //    NSDate* date = [formatter dateFromString:@"1970-01-01 08:11:00.000"];
+    //    //将日期转换成时间戳
+    //    NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue]*1000;
     NSString *stopStatusStr = [_dic objectSafeForKey:@"stopStatus"];// 0投标中,1满标
     _minuteCountDownView.isStopStatus = stopStatusStr;
     if ([stopStatusStr intValue] == 0) {
         _minuteCountDownView.timeInterval= [[_dic objectSafeForKey:@"intervalMilli"]  integerValue];
-//        _minuteCountDownView.timeInterval= timeSp;
+        //        _minuteCountDownView.timeInterval= timeSp;
         [_minuteCountDownView startTimer];
         _minuteCountDownView.tipLabel.text = @"距结束";//
     }else{
@@ -424,7 +428,7 @@
     }
     float view_y = 0;
     if (_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER) {
-       view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
+        view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
     }else{
         view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
     }
@@ -437,15 +441,15 @@
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-//    if (!_isP2P) {
-//        [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
-//    }
-//    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
+    //    if (!_isP2P) {
+    //        [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+    //    }
+    //    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
     
-//    //固定起息日
-//    UIImageView *guImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos, IconYPos, 22, 22)];
-//    guImageV.image = [UIImage imageNamed:@"invest_icon_redgu"];
-//    [bottomBkView addSubview:guImageV];
+    //    //固定起息日
+    //    UIImageView *guImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos, IconYPos, 22, 22)];
+    //    guImageV.image = [UIImage imageNamed:@"invest_icon_redgu"];
+    //    [bottomBkView addSubview:guImageV];
     
     UILabel *guLabel = [UILabel labelWithFrame:CGRectMake(15, 12 + 5, 100, 16) text:@"固定起息日" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
     guLabel.textAlignment = NSTextAlignmentLeft;
@@ -466,16 +470,16 @@
     _fixedUpDateLabel.text = guTitle;
     
     
-//    //****************分隔线**************
-//    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(15, 26, ScreenWidth - 15, 0.5)];
-//    line1.backgroundColor = UIColorWithRGB(0xe3e5ea);
-//    [bottomBkView addSubview:line1];
-//    //****************分隔线**************
+    //    //****************分隔线**************
+    //    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(15, 26, ScreenWidth - 15, 0.5)];
+    //    line1.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    //    [bottomBkView addSubview:line1];
+    //    //****************分隔线**************
     
-//    //还款方式
-//    UIImageView *huankuanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44 + IconYPos, 22, 22)];
-//    huankuanImageV.image = [UIImage imageNamed:@"particular_icon_repayment.png"];
-//    [bottomBkView addSubview:huankuanImageV];
+    //    //还款方式
+    //    UIImageView *huankuanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44 + IconYPos, 22, 22)];
+    //    huankuanImageV.image = [UIImage imageNamed:@"particular_icon_repayment.png"];
+    //    [bottomBkView addSubview:huankuanImageV];
     
     UILabel *huankuanLabel = [UILabel labelWithFrame:CGRectMake(15,26 + 12 + 5, 100, 16) text:@"还款方式" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
     huankuanLabel.textAlignment = NSTextAlignmentLeft;
@@ -485,17 +489,17 @@
     _markTypeLabel.textAlignment = NSTextAlignmentRight;
     [bottomBkView addSubview:_markTypeLabel];
     
-//    //****************分隔线**************
-//    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44 * 2, ScreenWidth - 15, 0.5)];
-//    line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
-//    [bottomBkView addSubview:line2];
-//    //****************分隔线**************
+    //    //****************分隔线**************
+    //    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44 * 2, ScreenWidth - 15, 0.5)];
+    //    line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    //    [bottomBkView addSubview:line2];
+    //    //****************分隔线**************
     //为了隐藏尊享起投  尊尊享标已售罄的状态
     if (_type != PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P  && _status !=  2){
         if (row == 3) {
-//            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
-//            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
-//            [bottomBkView addSubview:qitouImageV];
+            //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
+            //            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
+            //            [bottomBkView addSubview:qitouImageV];
             UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(15, 26*2 +  12  + 5    , 100 , 16) text:@"担保方" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
             qitouLabel.textAlignment = NSTextAlignmentLeft;
             [bottomBkView addSubview:qitouLabel];
@@ -506,9 +510,9 @@
         
     }else{
         //起投金额
-//        UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
-//        qitouImageV.image = [UIImage imageNamed:@"particular_icon_money.png"];
-//        [bottomBkView addSubview:qitouImageV];
+        //        UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
+        //        qitouImageV.image = [UIImage imageNamed:@"particular_icon_money.png"];
+        //        [bottomBkView addSubview:qitouImageV];
         
         UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(15, 26*2 + 12 + 5, 100, 16) text:@"起投金额" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
         qitouLabel.textAlignment = NSTextAlignmentLeft;
@@ -518,14 +522,14 @@
         _investmentAmountLabel.textAlignment = NSTextAlignmentRight;
         [bottomBkView addSubview:_investmentAmountLabel];
         if (row == 4) {
-//            //****************分隔线**************
-//            UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44*3, ScreenWidth - 15, 0.5)];
-//            line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
-//            [bottomBkView addSubview:line2];
+            //            //****************分隔线**************
+            //            UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44*3, ScreenWidth - 15, 0.5)];
+            //            line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
+            //            [bottomBkView addSubview:line2];
             //****************分隔线**************
-//            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*3 + IconYPos, 22, 22)];
-//            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
-//            [bottomBkView addSubview:qitouImageV];
+            //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*3 + IconYPos, 22, 22)];
+            //            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
+            //            [bottomBkView addSubview:qitouImageV];
             UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(15, 26*3 + 12 + 5, 100 , 16) text:@"担保方" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
             qitouLabel.textAlignment = NSTextAlignmentLeft;
             [bottomBkView addSubview:qitouLabel];
@@ -544,7 +548,7 @@
     if (![insName isEqualToString:@""]) {
         row = 3;
     }
-     CGFloat bottomBeginYPos;
+    CGFloat bottomBeginYPos;
     if (_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER) {
         bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
     }else{
@@ -558,15 +562,15 @@
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-//    if (!_isP2P) {
-//       [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
-//    }
-//    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
+    //    if (!_isP2P) {
+    //       [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+    //    }
+    //    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
     
-//    //还款方式
-//    UIImageView *huankuanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,IconYPos, 22, 22)];
-//    huankuanImageV.image = [UIImage imageNamed:@"particular_icon_repayment.png"];
-//    [bottomBkView addSubview:huankuanImageV];
+    //    //还款方式
+    //    UIImageView *huankuanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,IconYPos, 22, 22)];
+    //    huankuanImageV.image = [UIImage imageNamed:@"particular_icon_repayment.png"];
+    //    [bottomBkView addSubview:huankuanImageV];
     
     UILabel *huankuanLabel = [UILabel labelWithFrame:CGRectMake(XPOS,12 +  5, 100, 16) text:@"还款方式" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
     huankuanLabel.textAlignment = NSTextAlignmentLeft;
@@ -576,19 +580,19 @@
     _markTypeLabel.textAlignment = NSTextAlignmentRight;
     [bottomBkView addSubview:_markTypeLabel];
     
-//    //****************分隔线**************
-//    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44, ScreenWidth - 15, 0.5)];
-//    line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
-//    [bottomBkView addSubview:line2];
-//    //****************分隔线*************
+    //    //****************分隔线**************
+    //    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44, ScreenWidth - 15, 0.5)];
+    //    line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    //    [bottomBkView addSubview:line2];
+    //    //****************分隔线*************
     //为了隐藏尊享起投  尊尊享标已售罄的状态 1000起一栏
     if (_type != PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P  && _status !=  2)
     {
         if (row == 2) {
-//            //起投金额
-//            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,26*1 + IconYPos, 22, 16)];
-//            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
-//            [bottomBkView addSubview:qitouImageV];
+            //            //起投金额
+            //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,26*1 + IconYPos, 22, 16)];
+            //            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
+            //            [bottomBkView addSubview:qitouImageV];
             UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(XPOS, 26*1 + 12 + 5, 100 , 22) text:@"担保方" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
             qitouLabel.textAlignment = NSTextAlignmentLeft;
             [bottomBkView addSubview:qitouLabel];
@@ -600,10 +604,10 @@
         
         
     }else{
-//        //起投金额
-//        UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,26 + 5, 22, 22)];
-//        qitouImageV.image = [UIImage imageNamed:@"particular_icon_money.png"];
-//        [bottomBkView addSubview:qitouImageV];
+        //        //起投金额
+        //        UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,26 + 5, 22, 22)];
+        //        qitouImageV.image = [UIImage imageNamed:@"particular_icon_money.png"];
+        //        [bottomBkView addSubview:qitouImageV];
         
         UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(XPOS, 26 + 12 + 5, 100, 16) text:@"起投金额" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
         qitouLabel.textAlignment = NSTextAlignmentLeft;
@@ -613,16 +617,16 @@
         _investmentAmountLabel.textAlignment = NSTextAlignmentRight;
         [bottomBkView addSubview:_investmentAmountLabel];
         if (row == 3) {
-//            //****************分隔线**************
-//            UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 26*2, ScreenWidth - 15, 0.5)];
-//            line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
-//            [bottomBkView addSubview:line2];
+            //            //****************分隔线**************
+            //            UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 26*2, ScreenWidth - 15, 0.5)];
+            //            line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
+            //            [bottomBkView addSubview:line2];
             //****************分隔线**************
             
-//            //起投金额
-//            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
-//            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
-//            [bottomBkView addSubview:qitouImageV];
+            //            //起投金额
+            //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
+            //            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
+            //            [bottomBkView addSubview:qitouImageV];
             UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(XPOS, 26*2 +12 + 5, 100 , 16) text:@"担保方" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
             qitouLabel.textAlignment = NSTextAlignmentLeft;
             [bottomBkView addSubview:qitouLabel];
@@ -658,15 +662,43 @@
     {
         basicBetailItem.title = @"原标详情";
         investmentecordItem.title  = @"转让记录";
-     }
-     else //普通标
+    }
+    else //普通标
     {
         investmentecordItem.title  = _isP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"购买记录": @"出借记录" :@"认购记录";
-     }
+    }
     self.dataArray = [NSMutableArray arrayWithObjects:basicBetailItem,safetyGuaranteeItem,investmentecordItem, nil];
-     [self addSubview:_twoTableview];
+    [self addSubview:_twoTableview];
     [_twoTableview reloadData];
-
+    //    UIView *pullingBkView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42)];
+    //    [self addSubview:pullingBkView];
+    //    pullingBkView.backgroundColor = [UIColor clearColor];
+    //
+    //    UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectZero];
+    //    buyCueDesTipLabel.textColor = UIColorWithRGB(0x999999);
+    //    buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
+    //    buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
+    //    buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
+    //    NSString *buyCueDesStr =[_dic objectSafeForKey: @"buyCueDes"];
+    //    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P && ![buyCueDesStr isEqualToString:@""] ) {
+    //        pullingBkView.frame = CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42 + 20);
+    //        buyCueDesTipLabel.text = buyCueDesStr;
+    //        [pullingBkView addSubview:buyCueDesTipLabel];
+    //    }else{
+    //        buyCueDesTipLabel.frame = CGRectZero;
+    //    }
+    //    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 15) / 2, CGRectGetMaxY(buyCueDesTipLabel.frame)+10, 15, 15)];
+    //    iconView.image = [UIImage imageNamed:@"particular_icon_up.png"];
+    //    [pullingBkView addSubview:iconView];
+    //
+    //    UILabel *pullingLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(iconView.frame) + 5, ScreenWidth, 12) text:@"向上滑动，查看详情" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
+    //    [pullingBkView addSubview:pullingLabel];
+    //
+    //    UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    [bottomBtn addTarget:self action:@selector(bottomBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    //    bottomBtn.frame = CGRectMake(0, 0, ScreenWidth, 42);
+    //    [pullingBkView addSubview:bottomBtn];
+    //    [pullingBkView setUserInteractionEnabled:YES];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -856,7 +888,7 @@
     double dbreCount = borrowAmount - completeLoan;
     
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
-//        _totalMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:dic[@"putawaytime"]]];//起息日期
+        //        _totalMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:dic[@"putawaytime"]]];//起息日期
         _remainMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod dealmoneyFormartForDetailView:[NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:dic[@"cantranMoney"]]]]];//可投额度
     } else {
         _remainMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod dealmoneyFormartForDetailView:[NSString stringWithFormat:@"%.2f",dbreCount]]];//剩多少标
@@ -916,7 +948,7 @@
     subinterFrame.origin.x = CGRectGetMaxX(_annualEarningsLabel.frame);
     _subsidizedInterestLabel.frame = subinterFrame;
     _subsidizedInterestLabel.text = butieTitle;
-
+    
     //进度条中间的百分比label
     if (curProgress > 0 && curProgress < 0.01) {
         completeRate = 1;
@@ -939,7 +971,7 @@
     rateLabel.frame = bkFrame;
     
     //设置还款方式和起投金额的内容
-//    NSArray *repayModeArr = @[@"按季等额",@"按月等额",@"一次结清",@"月息到期还本",@"一次结清"];
+    //    NSArray *repayModeArr = @[@"按季等额",@"按月等额",@"一次结清",@"月息到期还本",@"一次结清"];
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
         NSString *markTimeStr1 = [NSString stringWithFormat:@"%d天",[dic[@"lastDays"] intValue]];
         NSString *bidDate = [[NSUserDefaults standardUserDefaults] valueForKey:@"bidDate"];
@@ -949,8 +981,8 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         _investmentAmountLabel.text = [NSString stringWithFormat:@"%@元起",dic[@"investAmt"]];
-//        _investmentAmountLabel.text = [NSString stringWithFormat:@"%@元起",@"126641.84"];
-          _markTypeLabel.text =  [dic objectSafeForKey:@"repayModeText"];//还款方式取服务端的值
+        //        _investmentAmountLabel.text = [NSString stringWithFormat:@"%@元起",@"126641.84"];
+        _markTypeLabel.text =  [dic objectSafeForKey:@"repayModeText"];//还款方式取服务端的值
         
     } else {
         _investmentAmountLabel.text = [NSString stringWithFormat:@"%d元起",[dic[@"minInvest"] intValue]];
