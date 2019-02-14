@@ -10,7 +10,7 @@
 
 @interface BaseTableViewCell : UITableViewCell
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
-@property (nonatomic, assign) id bc;
+@property (nonatomic, weak) id bc;
 - (void)refreshCellData:(id)data;
 
 - (void)getBassController:(id)bassController;

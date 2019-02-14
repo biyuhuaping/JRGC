@@ -7,11 +7,15 @@
 //
 
 #import "UCFCouponBoard.h"
-
+#import "NSObject+Compression.h"
 @interface UCFCouponBoard ()
 @property(nonatomic, weak)UCFBidViewModel *myVM;
 @property(nonatomic, strong) UILabel        *couponLab;
 @property(nonatomic, strong) UILabel        *cashLab;
+
+@property(nonatomic, strong) UIButton        *couponBtn;
+@property(nonatomic, strong) UIButton        *cashBtn;
+
 
 @property(nonatomic, strong) UIView         *coupleView;
 @property(nonatomic, strong) UIView         *cashView;
@@ -24,27 +28,17 @@
 {
     self.myVM = viewModel;
     @PGWeakObj(self);
-    [self.KVOController observe:viewModel keyPaths:@[@"headherIsHide",@"couponIsHide",@"cashIsHide",@"couponNum",@"repayCoupon",@"cashNum",@"repayCash"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:viewModel keyPaths:@[@"headherIsHide",@"couponIsHide",@"cashIsHide",@"couponNum",@"repayCoupon",@"cashNum",@"repayCash",@"availableCouponNum",@"availableCashNum"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"couponNum"]) {
             NSString *couponStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (couponStr.length > 0) {
-                selfWeak.couponLab.text = couponStr;
-                if ([couponStr containsString:@"张可用"]) {
-                    NSString *tmpStr = [couponStr stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-                 selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:couponStr];
-                }
-                [selfWeak.couponLab sizeToFit];
+                [selfWeak.couponBtn setTitle:couponStr forState:UIControlStateNormal];
             }
         } else if ([keyPath isEqualToString:@"cashNum"]) {
             NSString *cashNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (cashNum.length > 0) {
-                selfWeak.cashLab.text = cashNum;
-                if ([cashNum containsString:@"张可用"]) {
-                    NSString *tmpStr = [cashNum stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-                    selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:cashNum];
-                }
-                [selfWeak.cashLab sizeToFit];
+                [selfWeak.cashBtn setTitle:cashNum forState:UIControlStateNormal];
             }
         } else if ([keyPath isEqualToString:@"couponIsHide"]) {
             BOOL ishide = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
@@ -78,17 +72,10 @@
                 NSString *allText = [NSString stringWithFormat:@"返息%@工豆，满¥%@可用",repayCouponStr,selfWeak.myVM.couponTotalcouponAmount];
                 selfWeak.couponLab.text = allText;
                 selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:repayCouponStr WithTotalString:allText];
+                
                 [selfWeak.couponLab sizeToFit];
             } else {
-                NSString *couponNum = selfWeak.myVM.couponNum;
-                if (couponNum.length > 0) {
-                    selfWeak.couponLab.text = couponNum;
-                    if ([couponNum containsString:@"张可用"]) {
-                        NSString *tmpStr = [couponNum stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-                        selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:couponNum];
-                    }
-                    [selfWeak.couponLab sizeToFit];
-                }
+
             }
         } else if ([keyPath isEqualToString:@"repayCash"]) {
             //返现券返的金额
@@ -100,16 +87,27 @@
                 selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:cashStr WithTotalString:allText];
                 [selfWeak.cashLab sizeToFit];
             } else {
-                NSString *cashStr = selfWeak.myVM.cashNum;
-                if (cashStr.length > 0) {
-                    selfWeak.cashLab.text = cashStr;
-                    if ([cashStr containsString:@"张可用"]) {
-                        NSString *tmpStr = [cashStr stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-                        selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:tmpStr WithTotalString:cashStr];
-                    }
-                    [selfWeak.cashLab sizeToFit];
-                }
+
             }
+        } else if ([keyPath isEqualToString:@"availableCouponNum"]) {
+            NSString *availableCouponNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (availableCouponNum.length > 0) {
+                selfWeak.couponLab.text = availableCouponNum;
+            } else {
+                selfWeak.couponLab.text = @"0张可用";
+            }
+            [selfWeak.couponLab sizeToFit];
+
+
+        } else if ([keyPath isEqualToString:@"availableCashNum"]) {
+            NSString *availableCashNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (availableCashNum.length > 0) {
+                selfWeak.cashLab.text = availableCashNum;
+            } else {
+                selfWeak.cashLab.text = @"0张可用";
+            }
+            [selfWeak.cashLab sizeToFit];
+
         }
     }];
     
@@ -131,28 +129,40 @@
 - (void)addheadView
 {
     UIView *view = [MyRelativeLayout new];
-    view.myHeight = 37;
+    view.myHeight = 50;
     view.myHorzMargin = 0;
-    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    view.backgroundColor = [Color color:PGColorOptionThemeWhite];
     [self addSubview:view];
 //    self.headView = view;
     
-    UIView *topLineView = [[UIView alloc] init];
-    topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    topLineView.myTop = 0;
-    topLineView.myHorzMargin = 0;
-    topLineView.heightSize.equalTo(@0.5);
-    [view addSubview:topLineView];
+//    UIView *topLineView = [[UIView alloc] init];
+//    topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//    topLineView.myTop = 0;
+//    topLineView.myHorzMargin = 0;
+//    topLineView.heightSize.equalTo(@0.5);
+//    [view addSubview:topLineView];
+    
+    
+    UIImageView *iconView = [[UIImageView alloc] init];
+    iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+    iconView.clipsToBounds = YES;
+    iconView.layer.cornerRadius = 2;
+    [view addSubview:iconView];
+    
+    iconView.myHeight = 16;
+    iconView.myWidth = 3;
+    iconView.leftPos.equalTo(@15);
+    iconView.centerYPos.equalTo(view.centerYPos);
     
     UILabel  *titleLab = [UILabel new];
-    titleLab.font = [UIFont systemFontOfSize:14.0f];
+    titleLab.font = [Color gc_Font:16.0f];
     titleLab.textAlignment = NSTextAlignmentLeft;
     titleLab.adjustsFontSizeToFitWidth = YES;
     titleLab.text = @"使用优惠券";
-    titleLab.textColor = UIColorWithRGB(0x333333);
+    titleLab.textColor = [Color color:PGColorOptionTitleBlack];
     titleLab.backgroundColor =  [UIColor clearColor];
     [titleLab sizeToFit];
-    titleLab.myLeft = 15;
+    titleLab.leftPos.equalTo(iconView.rightPos).offset(5);
     titleLab.centerYPos.equalTo(view.centerYPos);
     [view addSubview:titleLab];
     
@@ -169,23 +179,36 @@
 {
     UIView *cashCoupleView = [MyRelativeLayout new];
     cashCoupleView.myTop = 0;
-    cashCoupleView.myHeight = 44;
+    cashCoupleView.myHeight = 50;
     cashCoupleView.myHorzMargin = 0;
     cashCoupleView.backgroundColor = [UIColor whiteColor];
     [self addSubview:cashCoupleView];
     self.cashView = cashCoupleView;
     
     UILabel  *titleLab = [UILabel new];
-    titleLab.font = [UIFont systemFontOfSize:14.0f];
+    titleLab.font = [UIFont systemFontOfSize:16.0f];
     titleLab.textAlignment = NSTextAlignmentLeft;
     titleLab.adjustsFontSizeToFitWidth = YES;
     titleLab.text = @"返现券";
-    titleLab.textColor = UIColorWithRGB(0x555555);
+    titleLab.textColor = [Color color:PGColorOptionTitleBlack];
     titleLab.backgroundColor =  [UIColor clearColor];
     [titleLab sizeToFit];
     titleLab.myLeft = 15;
     titleLab.centerYPos.equalTo(cashCoupleView.centerYPos);
     [cashCoupleView addSubview:titleLab];
+    
+    UIButton *totalCashBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    totalCashBtn.leftPos.equalTo(titleLab.rightPos).offset(10);
+    totalCashBtn.heightSize.equalTo(@22);
+    totalCashBtn.widthSize.equalTo(@40);
+    totalCashBtn.titleLabel.font = [Color gc_Font:13];
+    UIImage *image = [UIImage gc_styleImageSize:CGSizeMake(40, 22)];
+    [totalCashBtn setBackgroundImage:image forState:UIControlStateNormal];
+    totalCashBtn.centerYPos.equalTo(titleLab.centerYPos);
+    totalCashBtn.clipsToBounds = YES;
+    totalCashBtn.layer.cornerRadius = 11;
+    [cashCoupleView addSubview:totalCashBtn];
+    self.cashBtn = totalCashBtn;
     
     UIImageView *arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list_icon_arrow"]];
     arrowImageView.myWidth = 8;
@@ -230,23 +253,36 @@
 {
     UIView *cashCoupleView = [MyRelativeLayout new];
     cashCoupleView.myTop = 0;
-    cashCoupleView.myHeight = 44;
+    cashCoupleView.myHeight = 50;
     cashCoupleView.myHorzMargin = 0;
     cashCoupleView.backgroundColor = [UIColor whiteColor];
     [self addSubview:cashCoupleView];
     self.coupleView = cashCoupleView;
 
     UILabel  *titleLab = [UILabel new];
-    titleLab.font = [UIFont systemFontOfSize:14.0f];
+    titleLab.font = [UIFont systemFontOfSize:16.0f];
     titleLab.textAlignment = NSTextAlignmentLeft;
     titleLab.adjustsFontSizeToFitWidth = YES;
     titleLab.text = @"返息券";
-    titleLab.textColor = UIColorWithRGB(0x555555);
+    titleLab.textColor = [Color color:PGColorOptionTitleBlack];
     titleLab.backgroundColor =  [UIColor clearColor];
     [titleLab sizeToFit];
     titleLab.myLeft = 15;
     titleLab.centerYPos.equalTo(cashCoupleView.centerYPos);
     [cashCoupleView addSubview:titleLab];
+    
+    UIButton *totalCashBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    totalCashBtn.leftPos.equalTo(titleLab.rightPos).offset(10);
+    totalCashBtn.heightSize.equalTo(@22);
+    totalCashBtn.widthSize.equalTo(@40);
+    totalCashBtn.clipsToBounds = YES;
+    totalCashBtn.layer.cornerRadius = 11;
+    totalCashBtn.titleLabel.font = [Color gc_Font:13];
+    UIImage *image = [UIImage gc_styleImageSize:CGSizeMake(40, 22)];
+    [totalCashBtn setBackgroundImage:image forState:UIControlStateNormal];
+    totalCashBtn.centerYPos.equalTo(titleLab.centerYPos);
+    [cashCoupleView addSubview:totalCashBtn];
+    self.couponBtn = totalCashBtn;
     
     UIImageView *arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list_icon_arrow"]];
     arrowImageView.myWidth = 8;

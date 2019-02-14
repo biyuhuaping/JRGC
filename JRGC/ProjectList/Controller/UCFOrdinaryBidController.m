@@ -20,10 +20,14 @@
 #import "UCFOldUserGuideViewController.h"
 #import "HSHelper.h"
 #import "RiskAssessmentViewController.h"
-#import "UCFHonorHeaderView.h"
-#import "UCFHomeListCell.h"
+//#import "UCFHonorHeaderView.h"
+//#import "UCFHomeListCell.h"
 #import "NewPurchaseBidController.h"
-@interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate,UCFHomeListCellHonorDelegate>
+#import "UCFInvestTableViewCell.h"
+#import "UCFNewProjectDetailViewController.h"
+#import "InvestPageInfoApi.h"
+//#import "UCFBidDetailModel.h"
+@interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate,UCFInvestTableViewCellDelegate,YTKRequestDelegate>
 {
     UCFMicroMoneyModel *_microMoneyModel;
 }
@@ -37,7 +41,7 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 
-@property (strong, nonatomic) UCFHonorHeaderView *ordinaryHeaderView;
+//@property (strong, nonatomic) UCFHonorHeaderView *ordinaryHeaderView;
 @end
 
 @implementation UCFOrdinaryBidController
@@ -55,17 +59,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    [self addLeftButton];
+
     baseTitleLabel.text = @"微金项目";
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
     
-    UCFHonorHeaderView *honorHeaderView = (UCFHonorHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHonorHeaderView" owner:self options:nil] lastObject];
-    honorHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+10);
-    self.ordinaryHeaderView = honorHeaderView;
-    self.tableview.tableHeaderView = honorHeaderView;
+//    UCFHonorHeaderView *honorHeaderView = (UCFHonorHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHonorHeaderView" owner:self options:nil] lastObject];
+//    honorHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+10);
+//    self.ordinaryHeaderView = honorHeaderView;
+//    self.tableview.tableHeaderView = honorHeaderView;
 
     
     //=========  下拉刷新、上拉加载更多  =========
@@ -94,26 +97,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    
     static NSString *cellId = @"homeListCell";
-    UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    UCFInvestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
-        cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
-        
+        cell = [[UCFInvestTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell.delegate = self;
     }
-    cell.tableView = tableView;
-    cell.indexPath = indexPath;
-    cell.honorDelegate = self;
-    
+//    cell.tableView = tableView;
+//    cell.honorDelegate = self;
+//
     UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.indexPath = indexPath;
     cell.microMoneyModel = model;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 135;
 }
 -(void)reloadP2PData{
     [self.tableview.header beginRefreshing];
@@ -145,7 +146,43 @@
 {
     //    [GiFHUD show];
 }
+- (void)requestFinished:(__kindof YTKBaseRequest *)request
+{
+    UCFBidModel *model = request.responseJSONModel;
+    NSInteger code= model.code;
+    NSString *message = model.message;
+    if (model.ret) {
+        NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
+        vc.bidDetaiModel = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (code == 21 || code == 22){
+        [self checkUserCanInvestIsDetail:NO];
+    } else {
+        if (code== 15) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        } else if (code == 19) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            alert.tag =7000;
+            [alert show];
+        }else if (code == 30) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+            alert.tag = 9000;
+            [alert show];
+        }else if (code == 40) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
+            alert.tag = 9001;
+            [alert show];
+        } else {
+            [MBProgressHUD displayHudError:model.message withShowTimes:3];
+        }
+    }
+}
 
+- (void)requestFailed:(__kindof YTKBaseRequest *)request
+{
+    
+}
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
@@ -192,20 +229,32 @@
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
     }else if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail){
-        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
-        NSString *rstcode = dic[@"ret"];
-        NSString *rsttext = dic[@"message"];
-        if ([rstcode intValue] == 1) {
-            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_microMoneyModel.prdLabelsList];
-            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
-            CGFloat platformSubsidyExpense = [_microMoneyModel.platformSubsidyExpense floatValue];
-            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-            controller.rootVc = self.rootVc;
-            controller.accoutType = SelectAccoutTypeP2P;
-            [self.navigationController pushViewController:controller animated:YES];
-        }else {
-            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        UCFBidDetailModel *model = [UCFBidDetailModel yy_modelWithJSON:result];
+        NSString *message = model.message;
+        
+        if (model.ret) {
+            UCFNewProjectDetailViewController *vc = [[UCFNewProjectDetailViewController alloc] init];
+            vc.model = model;
+            vc.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            [AuxiliaryFunc showAlertViewWithMessage:message];
         }
+        return;
+//        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+//        NSString *rstcode = dic[@"ret"];
+//        NSString *rsttext = dic[@"message"];
+//        if ([rstcode intValue] == 1) {
+//            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_microMoneyModel.prdLabelsList];
+//            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
+//            CGFloat platformSubsidyExpense = [_microMoneyModel.platformSubsidyExpense floatValue];
+//            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+//            controller.rootVc = self.rootVc;
+//            controller.accoutType = SelectAccoutTypeP2P;
+//            [self.navigationController pushViewController:controller animated:YES];
+//        }else {
+//            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+//        }
     }
     else if (tag.intValue == kSXTagP2PPrdClaimsDealBid){
         UCFBidModel *model = [UCFBidModel yy_modelWithJSON:result];
@@ -300,11 +349,7 @@
         }
     }
 }
--(void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
-//{
-
-//}
-//- (void)cell:(UCFProjectListCell *)cell clickInvestBtn:(UIButton *)button withModel:(UCFProjectListModel *)model
+- (void)investCell:(UCFInvestTableViewCell *)investCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
 {
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
@@ -325,20 +370,20 @@
             }
         }
         if ([self checkUserCanInvestIsDetail:NO]) {
-            
-//            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//            NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-//            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _microMoneyModel.Id,userid];
-//            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagP2PPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
-            
-            NSDictionary *paraDict = @{
-                                       @"id":_microMoneyModel.Id,
-                                       @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
-                                       };
-            [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutTypeP2P];
+            InvestPageInfoApi *api = [[InvestPageInfoApi alloc] initWithProjectId:_microMoneyModel.Id type:SelectAccoutTypeP2P];
+            api.delegate = self;
+            api.animatingView = self.view;
+            [api start];
+//            NSDictionary *paraDict = @{
+//                                       @"id":_microMoneyModel.Id,
+//                                       @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
+//                                       };
+//            [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutTypeP2P];
         }
     }
 }
+
+
 - (void)showLoginView
 {
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];

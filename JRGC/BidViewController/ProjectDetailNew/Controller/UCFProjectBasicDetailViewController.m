@@ -10,6 +10,7 @@
 #import "UCFToolsMehod.h"
 #import "UILabel+Misc.h"
 #import "FullWebViewController.h"
+#import "UCFNewHomeSectionView.h"
 @interface UCFProjectBasicDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate>
 {
     UIView *_headerView;
@@ -408,13 +409,17 @@
         {//
             return [self createTableViewHeaderView:@"审核记录"];;
         } else {
-            if (section != 0)
+            if (section == 0)
             {
+                UCFNewHomeSectionView *headView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 45)];
+                headView.titleLab.text = @"产品介绍";
+                headView.backgroundColor = [Color color:PGColorOptionThemeWhite];
+                return headView;
+            } else {
                 UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
                 headView.backgroundColor = UIColorWithRGB(0xebebee);
                 return headView;
             }
-            return nil;
         }
     }
     else if (_detailType == PROJECTDETAILTYPERIGHTINTEREST){
@@ -432,10 +437,6 @@
         } else {
             UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
             headView.backgroundColor = UIColorWithRGB(0xebebee);
-//            //[self viewAddLine:headView Up:YES];
-//            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height - 0.5, ScreenWidth, 0.5)];
-//            lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-//            [headView addSubview:lineView];
             return headView;
         }
     }
@@ -443,21 +444,14 @@
 }
 -(UIView *)createTableViewHeaderView:(NSString *)titleStr
 {
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 42)];
-    headView.backgroundColor = UIColorWithRGB(0xebebee);
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 32)];
-    view.backgroundColor = UIColorWithRGB(0xf7f7f7);
-    UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 9, ScreenWidth/2, 16)];
-    labelTitle.text = titleStr;
-    labelTitle.textColor = UIColorWithRGB(0x333333);
-    labelTitle.backgroundColor = [UIColor clearColor];
-    labelTitle.font = [UIFont systemFontOfSize:13];
-    [view addSubview:labelTitle];
-    [headView addSubview:view];
-//    [self viewAddLine:headView Up:YES];
-//    [self viewAddLine:headView Up:NO];
-//    [self viewAddLine:view Up:YES];
-    return headView;
+    UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 55)];
+    baseView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+    
+    UCFNewHomeSectionView *headView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 45)];
+    headView.titleLab.text = titleStr;
+    headView.backgroundColor = [Color color:PGColorOptionThemeWhite];
+    [baseView addSubview:headView];
+    return baseView;
 }
 - (void)viewAddLine:(UIView *)view Up:(BOOL)up
 {
@@ -479,14 +473,14 @@
             return 10;
         }
         else if(section == 0) {
-            return 0;
+            return 45;
         }
-        else if(_isHideBorrowerInformation)
-        {
-                return section == 3 ? 10 :42;
-            }else{
-                return section == 4 ? 10 :42;
-            }
+        else if(_isHideBorrowerInformation) {
+            return section == 3 ? 10 :55;
+        }
+        else {
+            return section == 4 ? 10 :55;
+        }
     }
     else if(_detailType == PROJECTDETAILTYPERIGHTINTEREST)
     {

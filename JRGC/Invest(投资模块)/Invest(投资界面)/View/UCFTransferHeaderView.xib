@@ -1,114 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="zxU-Ns-PEz" customClass="UCFTransferHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="465" height="155"/>
+            <rect key="frame" x="0.0" y="0.0" width="465" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5L1-es-j3k">
-                    <rect key="frame" x="0.0" y="120" width="465" height="35"/>
+                    <rect key="frame" x="0.0" y="0.0" width="465" height="40"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHC-QI-SrQ">
-                            <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
-                            <subviews>
-                                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="He4-L6-7yL">
-                                    <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <state key="normal" title="利率" image="transfer_screen_icon_normal">
-                                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <state key="selected" image="transfer_screen_icon_dnow"/>
-                                    <state key="highlighted" image="transfer_screen_icon_up"/>
-                                    <connections>
-                                        <action selector="rateOrder:" destination="zxU-Ns-PEz" eventType="touchUpInside" id="h4U-rK-aKX"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="He4-L6-7yL" secondAttribute="trailing" id="Sj3-Bp-NQN"/>
-                                <constraint firstItem="He4-L6-7yL" firstAttribute="top" secondItem="IHC-QI-SrQ" secondAttribute="top" id="mNw-2e-w5M"/>
-                                <constraint firstItem="He4-L6-7yL" firstAttribute="leading" secondItem="IHC-QI-SrQ" secondAttribute="leading" id="nkm-S5-FYs"/>
-                                <constraint firstAttribute="bottom" secondItem="He4-L6-7yL" secondAttribute="bottom" id="ws1-YT-KWe"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrT-Kc-8FX">
-                            <rect key="frame" x="155" y="0.0" width="155" height="35"/>
-                            <subviews>
-                                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqv-VD-rSw">
-                                    <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <state key="normal" title="期限" image="transfer_screen_icon_normal">
-                                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <state key="selected" image="transfer_screen_icon_dnow"/>
-                                    <state key="highlighted" image="transfer_screen_icon_up"/>
-                                    <connections>
-                                        <action selector="limitOrder:" destination="zxU-Ns-PEz" eventType="touchUpInside" id="cwW-0l-gbJ"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="nqv-VD-rSw" firstAttribute="leading" secondItem="rrT-Kc-8FX" secondAttribute="leading" id="MLy-8L-ZbJ"/>
-                                <constraint firstAttribute="trailing" secondItem="nqv-VD-rSw" secondAttribute="trailing" id="Qxe-rU-gyY"/>
-                                <constraint firstAttribute="bottom" secondItem="nqv-VD-rSw" secondAttribute="bottom" id="fWV-Gf-szh"/>
-                                <constraint firstItem="nqv-VD-rSw" firstAttribute="top" secondItem="rrT-Kc-8FX" secondAttribute="top" id="rzQ-B9-e6U"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mak-Xo-Mh8">
-                            <rect key="frame" x="310" y="0.0" width="155" height="35"/>
-                            <subviews>
-                                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAV-7X-JUP">
-                                    <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <state key="normal" title="金额" image="transfer_screen_icon_normal">
-                                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <state key="selected" image="transfer_screen_icon_dnow"/>
-                                    <state key="highlighted" image="transfer_screen_icon_up"/>
-                                    <connections>
-                                        <action selector="sumOrder:" destination="zxU-Ns-PEz" eventType="touchUpInside" id="qwK-fN-Idx"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="OAV-7X-JUP" firstAttribute="top" secondItem="Mak-Xo-Mh8" secondAttribute="top" id="901-N9-zGm"/>
-                                <constraint firstAttribute="trailing" secondItem="OAV-7X-JUP" secondAttribute="trailing" id="PX7-X7-DXY"/>
-                                <constraint firstAttribute="bottom" secondItem="OAV-7X-JUP" secondAttribute="bottom" id="Ywe-KY-cF0"/>
-                                <constraint firstItem="OAV-7X-JUP" firstAttribute="leading" secondItem="Mak-Xo-Mh8" secondAttribute="leading" id="aPa-mV-6xe"/>
-                            </constraints>
-                        </view>
+                        <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqL-o7-FL7">
+                            <rect key="frame" x="0.0" y="0.0" width="155" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="年化利率" image="transfer_screen_icon_normal">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="rateOrder:" destination="zxU-Ns-PEz" eventType="touchUpInside" id="W9R-o4-7wS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jt4-sE-dPS">
+                            <rect key="frame" x="310" y="0.0" width="155" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="可投金额" image="transfer_screen_icon_normal">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="sumOrder:" destination="zxU-Ns-PEz" eventType="touchUpInside" id="K7n-Jw-BDr"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsb-e8-H7D">
+                            <rect key="frame" x="155" y="5" width="155" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="剩余期限" image="transfer_screen_icon_normal">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="limitOrder:" destination="zxU-Ns-PEz" eventType="touchUpInside" id="cd4-gg-pM8"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="IHC-QI-SrQ" secondAttribute="bottom" id="6Jv-Xb-oz0"/>
-                        <constraint firstItem="IHC-QI-SrQ" firstAttribute="leading" secondItem="5L1-es-j3k" secondAttribute="leading" id="A9s-Dp-U3l"/>
-                        <constraint firstItem="Mak-Xo-Mh8" firstAttribute="top" secondItem="5L1-es-j3k" secondAttribute="top" id="BpK-eq-xFf"/>
-                        <constraint firstAttribute="trailing" secondItem="Mak-Xo-Mh8" secondAttribute="trailing" id="EIz-MK-iaP"/>
-                        <constraint firstItem="IHC-QI-SrQ" firstAttribute="top" secondItem="5L1-es-j3k" secondAttribute="top" id="Ng6-dt-W2V"/>
-                        <constraint firstAttribute="height" constant="35" id="OEZ-EH-OBb"/>
-                        <constraint firstItem="rrT-Kc-8FX" firstAttribute="width" secondItem="IHC-QI-SrQ" secondAttribute="width" id="QiO-RC-OAg"/>
-                        <constraint firstItem="Mak-Xo-Mh8" firstAttribute="leading" secondItem="rrT-Kc-8FX" secondAttribute="trailing" id="XTA-nX-hEU"/>
-                        <constraint firstItem="rrT-Kc-8FX" firstAttribute="top" secondItem="5L1-es-j3k" secondAttribute="top" id="XXV-XV-Ehs"/>
-                        <constraint firstItem="rrT-Kc-8FX" firstAttribute="leading" secondItem="IHC-QI-SrQ" secondAttribute="trailing" id="hPH-lO-sAM"/>
-                        <constraint firstAttribute="bottom" secondItem="Mak-Xo-Mh8" secondAttribute="bottom" id="rel-vd-o9Y"/>
-                        <constraint firstItem="Mak-Xo-Mh8" firstAttribute="width" secondItem="IHC-QI-SrQ" secondAttribute="width" id="z5c-rJ-hId"/>
-                        <constraint firstAttribute="bottom" secondItem="rrT-Kc-8FX" secondAttribute="bottom" id="zDD-Lf-lkt"/>
+                        <constraint firstItem="JqL-o7-FL7" firstAttribute="leading" secondItem="5L1-es-j3k" secondAttribute="leading" id="4Nw-ck-9gE"/>
+                        <constraint firstAttribute="bottom" secondItem="JqL-o7-FL7" secondAttribute="bottom" id="ELp-LZ-r3X"/>
+                        <constraint firstItem="vsb-e8-H7D" firstAttribute="top" secondItem="5L1-es-j3k" secondAttribute="top" constant="5" id="GaZ-kZ-64B"/>
+                        <constraint firstItem="jt4-sE-dPS" firstAttribute="leading" secondItem="vsb-e8-H7D" secondAttribute="trailing" id="I7h-cy-5Om"/>
+                        <constraint firstAttribute="height" constant="40" id="OEZ-EH-OBb"/>
+                        <constraint firstAttribute="bottom" secondItem="jt4-sE-dPS" secondAttribute="bottom" id="Ov7-Mf-lCc"/>
+                        <constraint firstAttribute="trailing" secondItem="jt4-sE-dPS" secondAttribute="trailing" id="QG5-gJ-1Yp"/>
+                        <constraint firstAttribute="bottom" secondItem="vsb-e8-H7D" secondAttribute="bottom" constant="5" id="QpY-En-HMP"/>
+                        <constraint firstItem="JqL-o7-FL7" firstAttribute="top" secondItem="5L1-es-j3k" secondAttribute="top" id="Rjc-4i-J6d"/>
+                        <constraint firstItem="jt4-sE-dPS" firstAttribute="leading" secondItem="vsb-e8-H7D" secondAttribute="trailing" id="ac4-pL-4dM"/>
+                        <constraint firstItem="jt4-sE-dPS" firstAttribute="width" secondItem="JqL-o7-FL7" secondAttribute="width" id="eAr-9K-TMr"/>
+                        <constraint firstItem="vsb-e8-H7D" firstAttribute="leading" secondItem="JqL-o7-FL7" secondAttribute="trailing" id="ekn-Xw-kpS"/>
+                        <constraint firstItem="jt4-sE-dPS" firstAttribute="top" secondItem="5L1-es-j3k" secondAttribute="top" id="k7F-Wc-N2e"/>
+                        <constraint firstItem="vsb-e8-H7D" firstAttribute="leading" secondItem="JqL-o7-FL7" secondAttribute="trailing" id="pfb-6d-fNm"/>
+                        <constraint firstItem="vsb-e8-H7D" firstAttribute="width" secondItem="JqL-o7-FL7" secondAttribute="width" id="rbP-vg-Bp3"/>
                     </constraints>
                 </view>
             </subviews>
@@ -122,16 +79,14 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bottomBaseView" destination="5L1-es-j3k" id="hTZ-MP-r2o"/>
-                <outlet property="limitOrderButton" destination="nqv-VD-rSw" id="PhO-gh-1bI"/>
-                <outlet property="rateOrderButton" destination="He4-L6-7yL" id="sCS-bl-vze"/>
-                <outlet property="sumOrderButton" destination="OAV-7X-JUP" id="pyr-M2-atQ"/>
+                <outlet property="limitOrderButton" destination="vsb-e8-H7D" id="zLU-oE-Heh"/>
+                <outlet property="rateOrderButton" destination="JqL-o7-FL7" id="fIC-c5-rI6"/>
+                <outlet property="sumOrderButton" destination="jt4-sE-dPS" id="PyG-F8-xtk"/>
             </connections>
-            <point key="canvasLocation" x="-414" y="-214"/>
+            <point key="canvasLocation" x="-695.20000000000005" y="-253.67316341829087"/>
         </view>
     </objects>
     <resources>
-        <image name="transfer_screen_icon_dnow" width="7" height="9"/>
         <image name="transfer_screen_icon_normal" width="7" height="9"/>
-        <image name="transfer_screen_icon_up" width="7" height="9"/>
     </resources>
 </document>

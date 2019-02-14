@@ -31,6 +31,11 @@
         {0xca,0xcb,0xd9},    //按钮背景颜色--灰色CACBD9
         {0x85,0x97,0xcd},              //光标背景颜色--灰色8597CD
         {0xff,0x1e,0x2e},              //登录标题颜色--红色FF1E2E
+        {0xFF,0x17,0x1C},          //红色字体颜色 0xFF171C
+        {0xCA,0xCB,0xD9},          //按钮背景灰色 CACBD9
+        {0xFF,0x41,0x33},           //利率字体正常FF4133
+        {0xFF,0xCF,0xB2},            //#FFCFB2
+        {0xFF,0x7F,0x5B},         //分割线 #FF7F5B
 };
     
     return [UIColor colorWithRed:colors[colorOptions][0]/255.0 green:colors[colorOptions][1]/255.0 blue:colors[colorOptions][2]/255.0 alpha:1];

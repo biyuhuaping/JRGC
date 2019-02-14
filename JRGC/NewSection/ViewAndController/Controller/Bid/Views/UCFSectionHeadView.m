@@ -9,8 +9,8 @@
 #import "UCFSectionHeadView.h"
 
 @interface UCFSectionHeadView ()
-
-@property(strong ,nonatomic)UILabel *titleLab;
+@property(strong, nonatomic)UIImageView *iconView;
+@property(strong, nonatomic)UILabel *titleLab;
 @property(strong, nonatomic)UIImageView *imageView1;
 @property(strong, nonatomic)UIImageView *imageView2;
 @property(strong, nonatomic)UIImageView *imageView3;
@@ -22,19 +22,26 @@
 - (instancetype)init
 {
     if (self = [super init]) {
+        [self addSubview:self.iconView];
         [self addSubview:self.titleLab];
         [self addSubview:self.imageView1];
         [self addSubview:self.imageView2];
         [self addSubview:self.imageView3];
         [self addSubview:self.imageView4];
-        self.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0];
+        self.backgroundColor = [Color color:PGColorOptionThemeWhite];
     }
     return self;
 }
 
 - (void)layoutSubviewFrame
 {
-    self.titleLab.leadingPos.equalTo(@15);
+    
+    self.iconView.myHeight = 16;
+    self.iconView.myWidth = 3;
+    self.iconView.leftPos.equalTo(@15);
+    self.iconView.myTop = 14;
+    
+    self.titleLab.leadingPos.equalTo(self.iconView.rightPos).offset(5);
     self.titleLab.topPos.equalTo(@0);
     self.titleLab.bottomPos.equalTo(@0);
     
@@ -96,15 +103,24 @@
     }];
 }
 
-
+- (UIImageView *)iconView
+{
+    if (!_iconView) {
+        _iconView = [[UIImageView alloc] init];
+        _iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+        _iconView.clipsToBounds = YES;
+        _iconView.layer.cornerRadius = 2;
+    }
+    return _iconView;
+}
 - (UILabel *)titleLab
 {
     if (!_titleLab) {
         _titleLab = [UILabel new];
-        _titleLab.font = [UIFont systemFontOfSize:14.0f];
+        _titleLab.font = [Color gc_Font:15.0f];
         _titleLab.textAlignment = NSTextAlignmentLeft;
         _titleLab.adjustsFontSizeToFitWidth = YES;
-        _titleLab.textColor = UIColorWithRGB(0x333333);
+        _titleLab.textColor = [Color color:PGColorOptionTitleBlack];
         _titleLab.backgroundColor =  [UIColor clearColor];
         _titleLab.text = @"";
         [_titleLab sizeToFit];

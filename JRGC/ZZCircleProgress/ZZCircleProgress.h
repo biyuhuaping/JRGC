@@ -40,6 +40,11 @@ typedef NS_ENUM(NSInteger, CircleIncreaseModel) {
 //进度
 @property (nonatomic, assign) CGFloat progress;/**<进度 0-1 */
 
+////zrc 添加
+//@property (nonatomic, strong)CAShapeLayer *progressLayer;
+//@property (nonatomic, strong) CALayer *gradientLayer;
+
+
 //初始化 坐标 线条背景色 填充色 起始角度 线宽
 - (instancetype)initWithFrame:(CGRect)frame
                 pathBackColor:(UIColor *)pathBackColor

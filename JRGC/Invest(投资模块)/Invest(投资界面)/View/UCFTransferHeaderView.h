@@ -19,5 +19,5 @@
 
 @property (weak, nonatomic) id<UCFTransferHeaderViewDelegate> delegate;
 - (void)initData;
-- (void)getNormalBannerData;
+//- (void)getNormalBannerData;
 @end

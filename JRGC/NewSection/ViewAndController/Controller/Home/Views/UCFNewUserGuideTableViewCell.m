@@ -10,6 +10,9 @@
 
 #import "UIButton+Gradient.h"
 #import "UIButton+MLSpace.h"
+
+#import "UCFNewHomeViewController.h"
+
 @interface UCFNewUserGuideTableViewCell()
 @property(nonatomic, strong)UIButton    *leftTopbutton;
 @property(nonatomic, strong)UIButton    *rightTopbutton;
@@ -53,6 +56,7 @@
         [self.rootLayout addSubview:button];
         [button setTitle:@"注册领优惠券" forState:UIControlStateNormal];
         button.titleLabel.font = [Color gc_Font:16];
+        [button addTarget:self action:@selector(buttonclick:) forControlEvents:UIControlEventTouchUpInside];
         [button setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
             v.layer.cornerRadius = CGRectGetHeight(v.frame)/2;
             NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
@@ -85,11 +89,12 @@
     
     self.leftTopbutton.titleLabel.font = [Color gc_Font:17];
     [self.leftTopbutton setImage:[UIImage imageNamed:@"regist_coupon_icon"] forState:UIControlStateNormal];
-    [self.leftTopbutton setImage:[UIImage imageNamed:@"home_icon_sign_finish"] forState:UIControlStateSelected];
+    [self.leftTopbutton setImage:[UIImage imageNamed:@"home_icon_sign_finish"] forState:UIControlStateDisabled];
     [self.leftTopbutton setTitle:@"注册领券" forState:UIControlStateNormal];
-    [self.leftTopbutton setTitle:@"已注册" forState:UIControlStateSelected];
+    [self.leftTopbutton setTitle:@"已注册" forState:UIControlStateDisabled];
+    [self.leftTopbutton addTarget:self action:@selector(buttonclick:) forControlEvents:UIControlEventTouchUpInside];
     [self.leftTopbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
-    [self.leftTopbutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateSelected];
+    [self.leftTopbutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateDisabled];
     [self.leftTopbutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
 
     self.rightTopbutton.heightSize.equalTo(@65);
@@ -97,13 +102,15 @@
     self.rightTopbutton.leftPos.equalTo(self.leftTopbutton.rightPos);
     [superView addSubview:self.rightTopbutton];
     [self.rightTopbutton setImage:[UIImage imageNamed:@"hs_account_icon"] forState:UIControlStateNormal];
-    [self.rightTopbutton setImage:[UIImage imageNamed:@"home_icon_account_finish"] forState:UIControlStateSelected];
+    [self.rightTopbutton setImage:[UIImage imageNamed:@"home_icon_account_finish"] forState:UIControlStateDisabled];
     [self.rightTopbutton setTitle:@"存管开户" forState:UIControlStateNormal];
-    [self.rightTopbutton setTitle:@"已开户" forState:UIControlStateSelected];
+    [self.rightTopbutton setTitle:@"已开户" forState:UIControlStateDisabled];
     [self.rightTopbutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
     self.rightTopbutton.titleLabel.font = [Color gc_Font:17];
     [self.rightTopbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
-    [self.rightTopbutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateSelected];
+    [self.rightTopbutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateDisabled];
+    [self.rightTopbutton addTarget:self action:@selector(buttonclick:) forControlEvents:UIControlEventTouchUpInside];
+
 
     self.leftTopbutton.widthSize.equalTo(@[self.rightTopbutton.widthSize]);
     
@@ -111,16 +118,18 @@
     self.leftBottombutton.topPos.equalTo(self.leftTopbutton.bottomPos);
     self.leftBottombutton.leftPos.equalTo(@0);
     [self.leftBottombutton setImage:[UIImage imageNamed:@"risk_test_icon"] forState:UIControlStateNormal];
-    [self.leftBottombutton setImage:[UIImage imageNamed:@"home_risk_account"] forState:UIControlStateSelected];
+    [self.leftBottombutton setImage:[UIImage imageNamed:@"home_risk_account"] forState:UIControlStateDisabled];
 
     [self.leftBottombutton setTitle:@"风险评测" forState:UIControlStateNormal];
-    [self.leftBottombutton setTitle:@"已评测" forState:UIControlStateSelected];
+    [self.leftBottombutton setTitle:@"已评测" forState:UIControlStateDisabled];
     [self.leftBottombutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
-    [self.leftBottombutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateSelected];
+    [self.leftBottombutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateDisabled];
     
     [self.leftBottombutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
     self.leftBottombutton.titleLabel.font = [Color gc_Font:17];
     [superView addSubview:self.leftBottombutton];
+    [self.leftBottombutton addTarget:self action:@selector(buttonclick:) forControlEvents:UIControlEventTouchUpInside];
+
 
     self.rightBottombutton.heightSize.equalTo(@65);
     self.rightBottombutton.topPos.equalTo(self.leftTopbutton.bottomPos);
@@ -131,6 +140,8 @@
     self.rightBottombutton.titleLabel.font = [Color gc_Font:17];
     [self.rightBottombutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [superView addSubview:self.rightBottombutton];
+    [self.rightBottombutton addTarget:self action:@selector(buttonclick:) forControlEvents:UIControlEventTouchUpInside];
+
     self.rightBottombutton.widthSize.equalTo(@[self.leftBottombutton.widthSize]);
 }
 
@@ -169,11 +180,44 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if ([UserInfoSingle sharedManager].p2pAuthorization) {
-        
+    if ([UserInfoSingle sharedManager].userId.length > 0) {
+        //用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+        switch ([UserInfoSingle sharedManager].openStatus) {
+            case 1:
+                self.leftTopbutton.enabled = NO;
+                self.rightTopbutton.enabled = YES;
+                self.leftBottombutton.enabled = YES;
+                self.rightBottombutton.enabled = YES;
+                break;
+            case 2:
+            case 3:
+            case 4:
+                self.leftTopbutton.enabled = NO;
+                self.rightTopbutton.enabled = NO;
+                self.leftBottombutton.enabled = YES;
+                self.rightBottombutton.enabled = YES;
+                break;
+            default:
+                break;
+        }
+        if ([UserInfoSingle sharedManager].isRisk) {
+            self.leftBottombutton.enabled = NO;
+        } else {
+            self.leftBottombutton.enabled = YES;
+        }
+    } else {
+        self.leftTopbutton.enabled = YES;
+        self.rightTopbutton.enabled = YES;
+        self.leftBottombutton.enabled = YES;
+        self.rightBottombutton.enabled = YES;
     }
-}
 
+    
+}
+- (void)buttonclick:(UIButton *)button
+{
+    [(UCFNewHomeViewController *)self.bc userGuideCellClickButton:button];
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:NO animated:animated];
 

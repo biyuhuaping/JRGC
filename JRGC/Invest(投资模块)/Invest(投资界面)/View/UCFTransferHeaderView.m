@@ -11,9 +11,8 @@
 #import "UCFCycleModel.h"
 #import "JSONKit.h"
 #import "UIImageView+WebCache.h"
-
+#import "UIButton+MLSpace.h"
 @interface UCFTransferHeaderView ()
-@property (weak, nonatomic) SDCycleScrollView *cycleView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView1;
 @property (weak, nonatomic) IBOutlet UIButton *rateOrderButton;
 @property (weak, nonatomic) IBOutlet UIButton *limitOrderButton;
@@ -41,44 +40,39 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
-//    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
-//    //    cycleScrollView.delegate = self;
-//    cycleScrollView.autoScrollTimeInterval = 7.0;
-//    [self addSubview:cycleScrollView];
-//    self.cycleView = cycleScrollView;
-    
+
     self.backgroundColor = UIColorWithRGB(0xebebee);
-    
-//    self.index = 3;
     self.rateState = YES;
     self.limitState = YES;
     self.sumState = YES;
     self.backgroundColor = UIColorWithRGB(0xebebee);
-    self.bottomBaseView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    self.bottomBaseView.backgroundColor =  [Color color:PGColorOptionThemeWhite];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:self.buttonBaseView isTop:NO];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:self.bottomBaseView isTop:YES];
     [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:self.bottomBaseView isTop:NO];
-    [_rateOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
-    [_limitOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
-    [_sumOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     
-    [self.rateOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
-    [self.rateOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, 50, 0, 0)];
+    [_rateOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
+    [_limitOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
+    [_sumOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
+
+
+    [_rateOrderButton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleRight imageTitleSpace:5];
+    [_limitOrderButton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleRight imageTitleSpace:5];
+    [_sumOrderButton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleRight imageTitleSpace:5];
     
-    [self.limitOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 120.0f )/320.0f - ScreenWidth / 3.0 - 7, 0, 0)];
-    [self.limitOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 120.0f )/320.0f - ScreenWidth / 3.0 -7 + 43, 0, 0)];
-    
-    [self.sumOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7, 0, 0)];
-    [self.sumOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7 + 43, 0, 0)];
-    
-    [self getNormalBannerData];
+//    [self.rateOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
+//    [self.rateOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, 50, 0, 0)];
+//    
+//    [self.limitOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 120.0f )/320.0f - ScreenWidth / 3.0 - 7, 0, 0)];
+//    [self.limitOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 120.0f )/320.0f - ScreenWidth / 3.0 -7 + 43, 0, 0)];
+//    
+//    [self.sumOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7, 0, 0)];
+//    [self.sumOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7 + 43, 0, 0)];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.cycleView.frame = CGRectMake(0, 0, ScreenWidth, self.height - 45);
     if (self.iconArray.count>0) {
         for (UIView *view in self.buttonBaseView.subviews) {
             NSInteger index = view.tag - 100;
@@ -101,7 +95,6 @@
 }
 - (void)initData
 {
-//    [self rateOrder:_rateOrderButton];
     [self calcueAllStateButton];
     [_rateOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     [_limitOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
@@ -185,55 +178,7 @@
     [self.sumOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_normal"] forState:UIControlStateNormal];
 }
 
-#pragma mark - 获取正式环境的banner图
-- (void)getNormalBannerData
-{
-    
-    UCFCycleModel *model = [[UCFCycleModel alloc] init];
-    model.thumb = @"https://app.9888.cn/api/staticResource/img/tranInvestClaim.jpg";
-//    self.cycleView.imagesGroup = @[model];
-//    [self.cycleView refreshImage];
-    
-//    __weak typeof(self) weakSelf = self;
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner_obj.php?key=0ca175b9c0f726a831d895e&bid=51&iid=50"];
-//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//        [request setURL:[NSURL URLWithString:URL]];
-//        [request setHTTPMethod:@"GET"];
-//        NSHTTPURLResponse *urlResponse = nil;
-//        NSError *error = nil;
-//        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            if (!recervedData) {
-//                return ;
-//            }
-//            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:recervedData
-//                                                                options:NSJSONReadingMutableContainers
-//                                                                  error:nil];
-//            if (nil == dic) {
-//                return;
-//            }
-//            self.contentMode = UIViewContentModeScaleToFill;
-//
-//            NSArray *bannerArr = [dic objectForKey:@"banner"];
-//            NSMutableArray *tempBanner = [NSMutableArray array];
-//            for (NSDictionary *dic in bannerArr) {
-//                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dic];
-//                [tempBanner addObject:model];
-//            }
-//            weakSelf.cycleView.imagesGroup = tempBanner;
-//            [weakSelf.cycleView refreshImage];
-//
-//            [weakSelf.iconArray removeAllObjects];
-//            NSArray *iconArr = [dic objectForKey:@"icon"];
-//            for (NSDictionary *dict in iconArr) {
-//                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dict];
-//                [weakSelf.iconArray addObject:model];
-//            }
-//
-//        });
-//    });
-}
+
 
 
 @end

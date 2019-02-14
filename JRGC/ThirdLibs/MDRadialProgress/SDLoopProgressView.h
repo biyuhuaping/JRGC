@@ -11,4 +11,6 @@
 @interface SDLoopProgressView : SDBaseProgressView
 // Color of the completed steps.
 @property (strong, nonatomic) UIColor *completedColor;
+
+@property (assign, nonatomic) CGFloat completedLineWidth;
 @end

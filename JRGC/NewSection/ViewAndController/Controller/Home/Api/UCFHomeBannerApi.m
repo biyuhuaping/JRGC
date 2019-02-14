@@ -19,6 +19,5 @@
 - (NSString *)modelClass
 {
     return NSStringFromClass([UCFNewBannerModel class]);
-//    return [UCFBannerViewModel class];
 }
 @end

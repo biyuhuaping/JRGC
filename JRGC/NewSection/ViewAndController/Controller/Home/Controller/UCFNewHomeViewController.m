@@ -13,6 +13,9 @@
 #import "HomeFootView.h"
 #import "UCFHomeListRequest.h"
 #import "UCFBannerViewModel.h"
+#import "BaseTableViewCell.h"
+#import "UCFOldUserNoticeCell.h"
+#import "UCFNewProjectDetailViewController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFBannerViewModel*bannerViewModel;
@@ -34,7 +37,8 @@
     homeHeadView.delegate = self;
     self.homeHeadView = homeHeadView;
     
-
+    
+    
     self.showTableView.myVertMargin = 0;
     self.showTableView.myHorzMargin = 0;
     [self.rootLayout addSubview:self.showTableView];
@@ -46,6 +50,8 @@
     homefootView.myHorzMargin = 0;
     [homefootView createSubviews];
     self.showTableView.tableFooterView = homefootView;
+    [self addLeftButtonTitle:@"首页"];
+    [self addrightButtonWithImageArray:[NSArray arrayWithObjects:@"home_icon_gift",@"home_icon_news", nil]];
 }
 - (void)viewDidLayoutSubviews
 {
@@ -77,16 +83,24 @@
 - (void)fetchData
 {
     self.dataArray = [NSMutableArray arrayWithCapacity:10];
-    CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:185];
-    NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
-    [section1 addObject:data1];
-    [self.dataArray addObject:section1];
-
-    
+    if ([UserInfoSingle sharedManager].openStatus >= 4 && [UserInfoSingle sharedManager].isRisk) {
+        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"" showInfoMethod:nil heightOfCell:140];
+        NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
+        [section1 addObject:data1];
+        [self.dataArray addObject:section1];
+    } else {
+        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:185];
+        NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
+        [section1 addObject:data1];
+        [self.dataArray addObject:section1];
+    }
     CellConfig *data2_0 = [CellConfig cellConfigWithClassName:@"UCFNewUserBidCell" title:@"新手专享" showInfoMethod:nil heightOfCell:150];
     CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:@selector(reflectDataModel:) heightOfCell:((Screen_Width - 30) * 6 /23 + 15)];
     NSMutableArray *section2 = [NSMutableArray arrayWithCapacity:1];
     [section2 addObject:data2_0];
+    [section2 addObject:data2_0];
+    [section2 addObject:data2_0];
+
     [section2 addObject:data2_1];
     [self.dataArray addObject:section2];
     
@@ -131,17 +145,31 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 54;
+    NSArray *sectionArr = self.dataArray[section];
+    CellConfig *data = sectionArr[0];
+    if (data.title.length > 0) {
+        return 54;
+    } else {
+        return 0.001;
+
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UCFNewHomeSectionView *sectionView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 54)];
     NSArray *sectionArr = self.dataArray[section];
     CellConfig *data = sectionArr[0];
-    if (data) {
-        sectionView.titleLab.text = data.title;
+    if (data.title.length > 0) {
+        UCFNewHomeSectionView *sectionView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 54)];
+        NSArray *sectionArr = self.dataArray[section];
+        CellConfig *data = sectionArr[0];
+        if (data) {
+            sectionView.titleLab.text = data.title;
+        }
+        return sectionView;
+    } else {
+        return nil;
     }
-    return sectionView;
+
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
@@ -166,16 +194,33 @@
 {
     NSArray *sectionArr = self.dataArray[indexPath.section];
     CellConfig *config = sectionArr[indexPath.row];
-    return [config cellOfCellConfigWithTableView:tableView dataModel:config];
+    BaseTableViewCell *cell = (BaseTableViewCell *)[config cellOfCellConfigWithTableView:tableView dataModel:config];
+    cell.bc = self;
+    return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    UCFNewProjectDetailViewController *view = [[UCFNewProjectDetailViewController alloc] init];
+    [self.rt_navigationController pushViewController:view animated:YES complete:nil];
 }
 #pragma mark HomeHeadCycleViewDelegate
 - (void)homeHeadCycleView:(HomeHeadCycleView *)cycleView didSelectIndex:(NSInteger)index
 {
     
 }
-
+- (void)userGuideCellClickButton:(UIButton *)button
+{
+    NSString *title = [button titleForState:UIControlStateNormal];
+    if ([title isEqualToString:@"注册领券"]) {
+        
+    } else if ([title isEqualToString:@"存管开户"]) {
+        
+    } else if ([title isEqualToString:@"风险评测"]) {
+        
+    } else if ([title isEqualToString:@"新人专享"]) {
+        
+    } else {
+        
+    }
+}
 @end

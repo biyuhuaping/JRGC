@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NZLabel.h"
+#import "UVFBidDetailViewModel.h"
 @interface MinuteCountDownView : UIView
 @property(nonatomic, strong) IBOutlet UILabel *tipLabel;
 @property(nonatomic, assign) NSInteger timeInterval;
@@ -17,4 +18,5 @@
 @property(nonatomic, strong)NSString *sourceVC ; //那个页面进来的
 -(void)stopTimer;
 -(void)startTimer;
+- (void)blindVM:(UVFBidDetailViewModel *)vm;
 @end

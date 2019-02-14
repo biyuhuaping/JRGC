@@ -20,6 +20,7 @@
     //设置title颜色
 //    NSDictionary *dict = @{NSForegroundColorAttributeName: [UIColor blackColor]};
 //    self.navigationBar.titleTextAttributes = dict;
+//    [self setNavigationBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

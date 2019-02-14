@@ -23,6 +23,7 @@
 #import "UCFBidViewModel.h"
 #import "UCFInvestmentCouponModel.h"
 #import "IQKeyboardManager.h"
+
 @interface NewPurchaseBidController ()<UCFCouponBoardDelegate,UCFInvestFundsBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -40,7 +41,6 @@
 @property(nonatomic, copy) NSString *rechargeMoneyStr;
 @property(nonatomic, strong)NSArray *cashArray;
 @property(nonatomic, strong)NSArray *couponArray;
-@property(nonatomic, copy) NSString *preMoney; //上次输入金额
 @end
 
 @implementation NewPurchaseBidController
@@ -65,7 +65,7 @@
     self.scrollView = scrollView;
     
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
-    contentLayout.padding = UIEdgeInsetsMake(10, 0, 0, 0);
+    contentLayout.padding = UIEdgeInsetsMake(15, 0, 0, 0);
     contentLayout.myHorzMargin = 0;                          //同时指定左右边距为0表示宽度和父视图一样宽
     contentLayout.heightSize.lBound(scrollView.heightSize, 10, 1); //高度虽然是wrapContentHeight的。但是最小的高度不能低于父视图的高度加10.
     [scrollView addSubview:contentLayout];
@@ -74,7 +74,7 @@
     _bidHeadView = [UCFSectionHeadView new];
     _bidHeadView.myTop = 0;
     _bidHeadView.myHorzMargin = 0;
-    _bidHeadView.myHeight = 27;
+    _bidHeadView.myHeight = 43;
     [self.contentLayout addSubview:_bidHeadView];
     self.bidInfoHeadSectionView = _bidHeadView;
     [_bidHeadView layoutSubviewFrame];
@@ -82,7 +82,7 @@
     UCFBidInfoView *bidInfo = [UCFBidInfoView new];
     bidInfo.myTop = 0;
     bidInfo.myHorzMargin = 0;
-    bidInfo.myHeight = 61;
+    bidInfo.myHeight = 80;
     bidInfo.backgroundColor = [UIColor whiteColor];
     [self.contentLayout addSubview:bidInfo];
     [bidInfo bidLayoutSubViewsFrame];
@@ -91,8 +91,8 @@
     UCFRemindFlowView *remind = [UCFRemindFlowView new];
     remind.myTop = 0;
     remind.myHorzMargin = 0;
-    remind.heightSize.equalTo(@36);
-    remind.backgroundColor = UIColorWithRGB(0xebebee);
+    remind.heightSize.equalTo(@40);
+    remind.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
     remind.subviewVSpace = 5;
     remind.subviewHSpace = 5;
     [self.contentLayout addSubview:remind];
@@ -146,8 +146,10 @@
 }
 - (void)viewDidLoad {
 //    [super viewDidLoad];
+//    [self addLeftButton];
+    [super viewDidLoad];
+    
     [self addLeftButton];
-
     UILabel *baseTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth - 200)/2.0f, 0, 200, 30)];
     baseTitleLabel.textAlignment = NSTextAlignmentCenter;
     [baseTitleLabel setTextColor:UIColorWithRGB(0x333333)];
@@ -186,16 +188,14 @@
     [self bindData:vm];
 //
     self.viewModel = vm;
+    
+
 }
 
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
     NSString *prdclaimid = [self.viewModel getDataModelBidID];
     NSString *investAmt = [self.viewModel getTextFeildInputMoeny];
-    if (![self.preMoney isEqualToString:investAmt]) {
-        self.cashArray = [NSArray array];
-        self.couponArray = [NSArray array];
-    }
     if (prdclaimid == nil || [prdclaimid isEqualToString:@""] || investAmt == nil || [investAmt isEqualToString:@""]) {
         return;
     }
@@ -206,7 +206,6 @@
 //    uc.barSelectIndex = 1;
     uc.cashSelectArr = [NSMutableArray arrayWithArray:self.cashArray];
     uc.couponSelectArr = [NSMutableArray arrayWithArray:self.couponArray];
-    self.preMoney = investAmt;
     [self.navigationController pushViewController:uc animated:YES];
     
     [self bindCoupleView:uc];
@@ -250,7 +249,7 @@
                 weakSelf.viewModel.repayCash = @"0";
                 weakSelf.viewModel.cashTotalcouponAmount = @"0";
                 weakSelf.viewModel.cashTotalIDStr = @"";
-                self.cashArray = [NSArray array];
+                weakSelf.cashArray = [NSArray array];
             }
         }
     }];
@@ -277,7 +276,7 @@
                 weakSelf.viewModel.repayCoupon = @"0";
                 weakSelf.viewModel.couponTotalcouponAmount = @"0";
                 weakSelf.viewModel.couponIDStr = @"";
-                self.couponArray = [NSArray array];
+                weakSelf.couponArray = [NSArray array];
             }
         }
     }];
@@ -288,7 +287,7 @@
 {
     vm.superView = self.view;
     __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict",@"rechargeStr"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict",@"rechargeStr",@"investMoneyIsChange"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"contractTypeModel"]) {
             id funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -325,6 +324,22 @@
             NSString *str = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (str.length > 0) {
                 weakSelf.rechargeMoneyStr = str;
+            }
+        } else if ([keyPath isEqualToString:@"investMoneyIsChange"]) {
+           BOOL isChange = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+            if (isChange) {
+                
+                weakSelf.viewModel.cashSelectCount = 0;
+                weakSelf.viewModel.repayCash = @"0";
+                weakSelf.viewModel.cashTotalcouponAmount = @"0";
+                weakSelf.viewModel.cashTotalIDStr = @"";
+                weakSelf.cashArray = [NSArray array];
+                
+                weakSelf.viewModel.couponSelectCount = 0;
+                weakSelf.viewModel.repayCoupon = @"0";
+                weakSelf.viewModel.couponTotalcouponAmount = @"0";
+                weakSelf.viewModel.couponIDStr = @"";
+                weakSelf.couponArray = [NSArray array];
             }
         }
     }];

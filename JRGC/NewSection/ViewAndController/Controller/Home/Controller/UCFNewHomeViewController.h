@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewHomeViewController : UCFNewBaseViewController
-
+- (void)userGuideCellClickButton:(UIButton *)button;
 @end
 
 NS_ASSUME_NONNULL_END

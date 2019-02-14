@@ -62,7 +62,7 @@
 - (void)initialization {
     self.backgroundColor = [UIColor clearColor];
     _pathBackColor = CircleRGB(204, 204, 204);
-    _pathFillColor = CircleRGB(219, 184, 102);
+    _pathFillColor = CircleRGB(255, 65, 51);
     _strokeWidth = 10;//线宽默认为10
     _startAngle = -CircleDegreeToRadian(90);//圆起点位置
     _reduceValue = CircleDegreeToRadian(0);//整个圆缺少的角度
@@ -140,9 +140,9 @@
 
 //画背景线、填充线、小圆点、文字
 - (void)drawRect:(CGRect)rect {
+//    [_progressLayer removeFromSuperlayer];
+//    [_gradientLayer removeFromSuperlayer];
     [super drawRect:rect];
-    
-    
     //获取图形上下文
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
@@ -165,9 +165,56 @@
     CGContextAddPath(ctx, basePath.CGPath);
     //渲染背景线
     CGContextStrokePath(ctx);
+   
     
+    /*
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(0 , 0, self.frame.size.width, self.frame.size.height);
+    layer.backgroundColor = [UIColor grayColor].CGColor;
+    [self.layer addSublayer:layer];
+    
+    UIBezierPath *basePath =[UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:_startAngle endAngle:endA clockwise:YES];
+    
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.fillColor = [UIColor clearColor].CGColor;
+    shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
+    shapeLayer.lineWidth = 5.0f;
+    shapeLayer.strokeStart = 0;
+    shapeLayer.strokeEnd = 0.999;
+    shapeLayer.lineCap = kCALineCapRound;
+    shapeLayer.lineDashPhase = 0.8;
+    shapeLayer.path = basePath.CGPath;
+    [layer setMask:shapeLayer];
+     */
+ 
     //路径线
     UIBezierPath *valuePath = [UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:_startAngle endAngle:valueEndA clockwise:YES];
+    /*
+    //获取环形路径（画一个圆形，填充色透明，设置线框宽度为10，这样就获得了一个环形）
+    _progressLayer = [CAShapeLayer layer];//创建一个track shape layer
+    _progressLayer.frame = self.bounds;
+    _progressLayer.fillColor = [[UIColor clearColor] CGColor];  //填充色为无色
+    _progressLayer.strokeColor = [[UIColor redColor] CGColor]; //指定path的渲染颜色,这里可以设置任意不透明颜色
+    _progressLayer.opacity = 1; //背景颜色的透明度
+    _progressLayer.lineCap = kCALineCapRound;//指定线的边缘是圆的
+    _progressLayer.lineWidth = _strokeWidth;//线的宽度
+    
+    _progressLayer.path =[valuePath CGPath]; //把path传递給layer，然后layer会处理相应的渲染，整个逻辑和CoreGraph是一致的。
+    
+    _gradientLayer = [CALayer layer];
+    CAGradientLayer *gl = [CAGradientLayer layer];
+    gl.frame = CGRectMake(0,0,self.frame.size.width,self.frame.size.height);
+    gl.startPoint = CGPointMake(0, 0);
+    gl.endPoint = CGPointMake(1, 1);
+    gl.colors = @[(__bridge id)[UIColor colorWithRed:255/255.0 green:65/255.0 blue:51/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:255/255.0 green:127/255.0 blue:64/255.0 alpha:1.0].CGColor];
+    gl.locations = @[@(0.0),@(1.0)];
+    [_gradientLayer addSublayer:gl];
+
+    [self.layer setMask:_progressLayer]; //用progressLayer来截取渐变层
+    [self.layer addSublayer:_gradientLayer];
+    */
+    
+    
     //设置线条顶端
     CGContextSetLineCap(ctx, kCGLineCapRound);
     //线条颜色
@@ -176,6 +223,7 @@
     CGContextAddPath(ctx, valuePath.CGPath);
     //渲染数值线
     CGContextStrokePath(ctx);
+    
     
     //画小圆点
     if (_showPoint) {
