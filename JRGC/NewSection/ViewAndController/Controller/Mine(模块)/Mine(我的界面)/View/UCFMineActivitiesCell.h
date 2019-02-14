@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFMineActivitiesCell : BaseTableViewCell
-
+- (void)showInfo:(id)model;
 @end
 
 NS_ASSUME_NONNULL_END

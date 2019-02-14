@@ -25,9 +25,12 @@
         {0xB1,0xB5,0xC2},                //文字颜色--灰色 0xB1B5C2
         {0xe3,0xe5,0xea},                //Cell分割线颜色--灰色 0xE3E5EA
         {0x91,0xac,0xfb},          //Cell内容文字颜色--蓝色色 0x91ACFB
-        {0xFF,0x17,0x1C},          //红色字体颜色
-       
-    
+        {0xFF,0x17,0x1C},          //红色字体颜色FF171C
+        {0xFF,0x41,0x33},           //文字颜色--红色 FF4133
+        {0xB1,0xB5,0xC2},    //输入框默认文字颜色--灰色B1B5C2
+        {0xca,0xcb,0xd9},    //按钮背景颜色--灰色CACBD9
+        {0x85,0x97,0xcd},              //光标背景颜色--灰色8597CD
+        {0xff,0x1e,0x2e},              //登录标题颜色--红色FF1E2E
 };
     
     return [UIColor colorWithRed:colors[colorOptions][0]/255.0 green:colors[colorOptions][1]/255.0 blue:colors[colorOptions][2]/255.0 alpha:1];

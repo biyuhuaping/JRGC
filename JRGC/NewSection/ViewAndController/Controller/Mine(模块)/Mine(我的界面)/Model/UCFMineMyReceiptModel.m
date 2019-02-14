@@ -11,7 +11,7 @@
 @implementation UCFMineMyReceiptModel
 
 @end
-@implementation MyReceiptData
+@implementation UCFMineMyReceiptData
 
 
 @end

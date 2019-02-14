@@ -24,13 +24,15 @@
 #import "UCFMineViewController.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFNewHomeViewController.h"
+#import "UCFNewMineViewController.h"
+#import "UCFNewLoginViewController.h"
 
 @interface UCFMainTabBarController ()
 
 
-@property (strong, nonatomic) UCFNewHomeViewController *LatestView;
+@property (strong, nonatomic) UCFNewLoginViewController *LatestView;
 @property (strong, nonatomic) UCFInvestViewController *AssignmentView;
-@property (strong, nonatomic) UCFMineViewController *mineView;
+@property (strong, nonatomic) UCFNewMineViewController *mineView;
 @end
 
 @implementation UCFMainTabBarController
@@ -115,7 +117,7 @@
     for (int i=0; i<5; i++) {
         switch (i) {
             case 0:{
-                _LatestView = [[UCFNewHomeViewController alloc] init];
+                _LatestView = [[UCFNewLoginViewController alloc] init];
                 controller = _LatestView;
             }
                 break;
@@ -142,7 +144,7 @@
             }
                 break;
             case 4:{
-                UCFMineViewController *mine = [[UCFMineViewController alloc] initWithNibName:@"UCFMineViewController" bundle:nil];
+                UCFNewMineViewController *mine = [[UCFNewMineViewController alloc] init];
                 controller = mine;
                 _mineView = mine;
             }
