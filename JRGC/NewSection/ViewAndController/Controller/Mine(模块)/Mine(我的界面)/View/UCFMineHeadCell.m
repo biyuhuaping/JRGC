@@ -331,7 +331,7 @@
         self.totalAssetsMoneyLabel.text = @"";//总资产
         self.expectedInterestMoneyLabel.text = @"";//总待收利息
         self.accountBalanceMoneyLabel.text = @"";//余额
-        [self.messageImageBtn setBackgroundImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
     }
     else
     {
@@ -339,11 +339,11 @@
         self.expectedInterestMoneyLabel.text = myModel.data.totalDueIn;//总待收利息
         self.accountBalanceMoneyLabel.text = myModel.data.cashBalance;//余额
         if (myModel.data.unReadMsgCount > 0) {
-            [self.messageImageBtn setBackgroundImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
+            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
         }
         else
         {
-            [self.messageImageBtn setBackgroundImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
         }
     }
     [self.totalAssetsMoneyLabel sizeToFit];

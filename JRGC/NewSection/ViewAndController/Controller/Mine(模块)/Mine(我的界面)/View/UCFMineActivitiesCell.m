@@ -390,7 +390,7 @@
 - (void)showInfo:(id)model
 {
     UCFMineMySimpleInfoModel *myModel = model;
-    if (model == nil || ![model isKindOfClass:[UCFMineMySimpleInfoModel class]]) {
+    if (myModel != nil && [myModel isKindOfClass:[UCFMineMySimpleInfoModel class]] && myModel.ret) {
         
         
         self.cowryContentLabel.text = [NSString stringWithFormat:@"%zd",myModel.data.coinNum];//工贝
