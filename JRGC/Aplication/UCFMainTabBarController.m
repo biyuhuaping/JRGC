@@ -122,7 +122,7 @@
             }
                 break;
             case 1:{
-                UCFInvestViewController *invest = [[UCFInvestViewController alloc] initWithNibName:@"UCFInvestViewController" bundle:nil];
+                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
                 controller = invest;
                 _AssignmentView = invest;
             }
