@@ -161,7 +161,6 @@
                 selfWeak.totalMoneyLab.text = borrowAmount;
                 [selfWeak.totalMoneyLab sizeToFit];
                 selfWeak.totalMoneyLab.centerY = selfWeak.totalMoneyLab.superview.size.height/2;
-
             }
         } else if ([keyPath isEqualToString:@"remainMoney"]) {
             NSString *remainMoney = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -203,6 +202,59 @@
             if (platformSubsidyExpense.length > 0) {
                 
             }
+        }
+    }];
+}
+
+
+- (void)blindTransVM:(UCFTransBidDetailViewModel *)vm
+{
+    @PGWeakObj(self);
+    [self.KVOController observe:vm keyPaths:@[@"borrowAmount",@"remainMoney",@"annualRate",@"markTimeStr",@"percentage"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"borrowAmount"]) {
+            NSString *borrowAmount = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (borrowAmount.length > 0) {
+                selfWeak.totalMoneyLab.text = borrowAmount;
+                [selfWeak.totalMoneyLab sizeToFit];
+                selfWeak.totalMoneyLab.centerY = selfWeak.totalMoneyLab.superview.size.height/2;
+                
+            }
+        } else if ([keyPath isEqualToString:@"remainMoney"]) {
+            NSString *remainMoney = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (remainMoney.length > 0) {
+                selfWeak.availableMoneyLab.text = remainMoney;
+                [selfWeak.availableMoneyLab sizeToFit];
+                selfWeak.availableMoneyLab.centerY = selfWeak.totalMoneyLab.superview.size.height/2;
+            }
+        } else if ([keyPath isEqualToString:@"annualRate"]) {
+            NSString *annualRate = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (annualRate.length > 0) {
+                selfWeak.rateLab.text = annualRate;
+                [selfWeak.rateLab sizeToFit];
+                [selfWeak.rateLab setFont:[Color gc_Font:16] string:@"%"];
+            }
+            
+        } else if ([keyPath isEqualToString:@"markTimeStr"]) {
+            NSString *markTimeStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (markTimeStr.length > 0) {
+                selfWeak.timeLimitLab.text = markTimeStr;
+                [selfWeak.timeLimitLab sizeToFit];
+                if ([markTimeStr containsString:@"天"]) {
+                    [selfWeak.timeLimitLab setFont:[Color gc_Font:16] string:@"天"];
+                } else if ([markTimeStr containsString:@"个月"]) {
+                    [selfWeak.timeLimitLab setFont:[Color gc_Font:16] string:@"个月"];
+                }
+            }
+            
+        }else if ([keyPath isEqualToString:@"percentage"]) {
+            NSString *percentage = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (percentage.length > 0) {
+                selfWeak.circleProgress.label.text = [NSString stringWithFormat:@"%@%%",percentage];
+                selfWeak.proressView.progress = [percentage floatValue]/100;
+                
+            }
+            
         }
     }];
 }

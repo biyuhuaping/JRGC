@@ -78,6 +78,10 @@
 		33793F4E21ECB3D6001065D9 /* UCFCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F4D21ECB3D6001065D9 /* UCFCommodityView.m */; };
 		33793F5121ECC95D001065D9 /* UCFBoutiqueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F5021ECC95D001065D9 /* UCFBoutiqueCell.m */; };
 		33793F5421ECD004001065D9 /* HomeFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F5321ECD004001065D9 /* HomeFootView.m */; };
+		337BB2E422154A21001ACDE6 /* UCFNewTransProjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2E322154A21001ACDE6 /* UCFNewTransProjectDetailViewController.m */; };
+		337BB2E722154C8A001ACDE6 /* UCFTransBidInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2E622154C8A001ACDE6 /* UCFTransBidInfoModel.m */; };
+		337BB2EA22154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2E922154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m */; };
+		337BB2ED22155D71001ACDE6 /* UCFTransBidDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2EC22155D71001ACDE6 /* UCFTransBidDetailViewModel.m */; };
 		3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D20B21A25BD900104CCD /* UCFTransferTableView.m */; };
 		3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */; };
 		3382D21621A267CE00104CCD /* BankTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21421A267CE00104CCD /* BankTransferTableViewCell.xib */; };
@@ -1364,6 +1368,14 @@
 		33793F5021ECC95D001065D9 /* UCFBoutiqueCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBoutiqueCell.m; sourceTree = "<group>"; };
 		33793F5221ECD004001065D9 /* HomeFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFootView.h; sourceTree = "<group>"; };
 		33793F5321ECD004001065D9 /* HomeFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeFootView.m; sourceTree = "<group>"; };
+		337BB2E222154A21001ACDE6 /* UCFNewTransProjectDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewTransProjectDetailViewController.h; sourceTree = "<group>"; };
+		337BB2E322154A21001ACDE6 /* UCFNewTransProjectDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewTransProjectDetailViewController.m; sourceTree = "<group>"; };
+		337BB2E522154C8A001ACDE6 /* UCFTransBidInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransBidInfoModel.h; sourceTree = "<group>"; };
+		337BB2E622154C8A001ACDE6 /* UCFTransBidInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransBidInfoModel.m; sourceTree = "<group>"; };
+		337BB2E822154DE0001ACDE6 /* UCFTransInvestPageInfoApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransInvestPageInfoApi.h; sourceTree = "<group>"; };
+		337BB2E922154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransInvestPageInfoApi.m; sourceTree = "<group>"; };
+		337BB2EB22155D71001ACDE6 /* UCFTransBidDetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransBidDetailViewModel.h; sourceTree = "<group>"; };
+		337BB2EC22155D71001ACDE6 /* UCFTransBidDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransBidDetailViewModel.m; sourceTree = "<group>"; };
 		3382D20A21A25BD900104CCD /* UCFTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransferTableView.h; sourceTree = "<group>"; };
 		3382D20B21A25BD900104CCD /* UCFTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransferTableView.m; sourceTree = "<group>"; };
 		3382D21221A267CE00104CCD /* BankTransferTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTransferTableViewCell.h; sourceTree = "<group>"; };
@@ -3477,6 +3489,8 @@
 			children = (
 				333548BB221153D100DE0BB8 /* InvestPageInfoApi.h */,
 				333548BC221153D100DE0BB8 /* InvestPageInfoApi.m */,
+				337BB2E822154DE0001ACDE6 /* UCFTransInvestPageInfoApi.h */,
+				337BB2E922154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -3606,6 +3620,8 @@
 			children = (
 				33614B1921F9964400569989 /* UCFNewProjectDetailViewController.h */,
 				33614B1A21F9964400569989 /* UCFNewProjectDetailViewController.m */,
+				337BB2E222154A21001ACDE6 /* UCFNewTransProjectDetailViewController.h */,
+				337BB2E322154A21001ACDE6 /* UCFNewTransProjectDetailViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3630,6 +3646,8 @@
 			children = (
 				33614B2221F9BAE700569989 /* UCFBidDetailModel.h */,
 				33614B2321F9BAE700569989 /* UCFBidDetailModel.m */,
+				337BB2E522154C8A001ACDE6 /* UCFTransBidInfoModel.h */,
+				337BB2E622154C8A001ACDE6 /* UCFTransBidInfoModel.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -3639,6 +3657,8 @@
 			children = (
 				33614B2621F9BF0600569989 /* UVFBidDetailViewModel.h */,
 				33614B2721F9BF0600569989 /* UVFBidDetailViewModel.m */,
+				337BB2EB22155D71001ACDE6 /* UCFTransBidDetailViewModel.h */,
+				337BB2EC22155D71001ACDE6 /* UCFTransBidDetailViewModel.m */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -8983,6 +9003,7 @@
 				74F649311F46EA0400328235 /* UCFCashGoldHeader.m in Sources */,
 				E3041D3221F6F8D9007B09B6 /* UCFRegistVerificationMobileModel.m in Sources */,
 				74F2911C1AE0DBE4003E0E86 /* UCFSecurityCenterViewController.m in Sources */,
+				337BB2E422154A21001ACDE6 /* UCFNewTransProjectDetailViewController.m in Sources */,
 				FB88C90E1AF9F92E00D2EE93 /* YcMutableArray.m in Sources */,
 				74BDA98A1F09F6C60054403F /* FSCalendarCollectionViewLayout.m in Sources */,
 				7BCBF1291ADB618100C874FC /* UCFRegisterTwoView.m in Sources */,
@@ -9352,6 +9373,7 @@
 				E311A66D1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.m in Sources */,
 				74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */,
 				83CD843C1F13A50800227704 /* UCFTransferModel.m in Sources */,
+				337BB2ED22155D71001ACDE6 /* UCFTransBidDetailViewModel.m in Sources */,
 				7485EFD01B0492CE0044DE48 /* UCFRedEnvelopeModel.m in Sources */,
 				83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */,
 				83D42A8C1FCE6175004C96EF /* UCFShareBaseView.m in Sources */,
@@ -9395,6 +9417,7 @@
 				740DAEC11E56E2D100CD7C8F /* UCFBatchProjectController.m in Sources */,
 				4A87CBAB1E8A48CA00D21AC2 /* HSHelper.m in Sources */,
 				331089D921E74EB80073F71B /* TAAnimatedDotView.m in Sources */,
+				337BB2E722154C8A001ACDE6 /* UCFTransBidInfoModel.m in Sources */,
 				833A6EB71E554B8700C8A494 /* UCFCollectionDetailCell.m in Sources */,
 				7BCE02261AC902FD0084C15C /* UCFToolsMehod.m in Sources */,
 				7BCE01FB1AC8FC260084C15C /* ASIInputStream.m in Sources */,
@@ -9578,6 +9601,7 @@
 				7BC7C0B81ADCEDB6003799B0 /* JSONKit.m in Sources */,
 				74BDA9861F09F6C60054403F /* FSCalendarAppearance.m in Sources */,
 				74E535ED1AE5FD6400DAABFC /* UCFAboutUsViewController.m in Sources */,
+				337BB2EA22154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m in Sources */,
 				E352FD6021E4AF0B00617AB7 /* MJLogoHeader.m in Sources */,
 				A81F40061F4E86F80018B673 /* UCFRebateGoldCell.m in Sources */,
 				A830DE801F8DC91A003855B9 /* UCFCalendarModularHeaderView.m in Sources */,

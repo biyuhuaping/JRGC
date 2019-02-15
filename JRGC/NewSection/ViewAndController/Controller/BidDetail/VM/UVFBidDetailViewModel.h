@@ -6,12 +6,12 @@
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BaseViewModel.h"
 #import "UCFBidDetailModel.h"
 #import "UCFBidModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UVFBidDetailViewModel : NSObject
+@interface UVFBidDetailViewModel : BaseViewModel
 #pragma mark 标题
 @property(nonatomic, copy)NSString  *prdName;
 @property(nonatomic, copy)NSString  *childName;
