@@ -18,20 +18,23 @@
 #import "UCFMineIntoCoinPageApi.h"
 
 #import "UCFMineHeadCell.h"
+#import "UCFMineTableViewHead.h"
 #import "UCFMineActivitiesCell.h"
 #import "UCFMineItemCell.h"
 #import "UCFMineCellAccountModel.h"
 #import "CellConfig.h"
 
+#import "UCFNewLoginViewController.h"
+
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
+@property (nonatomic, strong) UCFMineTableViewHead *tableHead;
+
 @property (nonatomic, strong) NSMutableArray *arryData;
 
 @property (nonatomic, strong) NSMutableArray *cellConfigData;
-
-@property (nonatomic, assign) NSInteger unReadMsgCount;//未读消息数量
 
 @property (nonatomic, strong) UCFMineMyReceiptModel *myReceiptModel;
 
@@ -66,6 +69,7 @@
         _tableView.delegate = self;
         _tableView.dataSource =self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableHeaderView = self.tableHead;
         _tableView.tableRefreshDelegate= self;
         _tableView.enableRefreshFooter = NO;
         _tableView.topPos.equalTo(@0);
@@ -75,6 +79,18 @@
         
     }
     return _tableView;
+}
+- (UCFMineTableViewHead *)tableHead
+{
+    if (nil == _tableHead) {
+        _tableHead = [[UCFMineTableViewHead alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 285)];
+        @PGWeakObj(self);
+        _tableHead.callBack = ^(UIButton *btn){
+            DDLogInfo(@"text is %@",btn);
+            [selfWeak headCellButtonClick:btn];
+        };
+    }
+    return _tableHead;
 }
 #pragma mark ---tableviewdelegate
 
@@ -101,7 +117,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CellConfig *cellConfig = self.cellConfigData[indexPath.section][indexPath.row];
-    if (indexPath.section == 2) {
+    if (indexPath.section == 1) {
         if ([cellConfig.title isEqualToString:@"回款日历"])
         {
             
@@ -127,7 +143,7 @@
             
         }
     }
-    if (indexPath.section == 3) {
+    if (indexPath.section == 2) {
         if ([cellConfig.title isEqualToString:@"服务中心"])
         {
             
@@ -164,6 +180,12 @@
 */
 - (void)headCellButtonClick:(UIButton *)btn
 {
+    
+    
+    
+    UCFNewLoginViewController *uc = [[UCFNewLoginViewController alloc] init];
+    
+    [SingShare.rootNavController pushViewController:uc animated:YES];
     if (btn.tag == 10001) {
         //个人账户信息
     }
@@ -192,6 +214,8 @@
         DDLogDebug(@"---------%@",model);
         if (self.myReceiptModel.ret == YES) {
             
+            //赋值
+            [self.tableHead showMyReceipt:model];
         }
         else{
             ShowMessage(model.message);
@@ -213,7 +237,11 @@
         UCFMineMySimpleInfoModel *model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",self.myReceiptModel);
         if (model.ret == YES) {
+            
+            [self.tableHead showMySimple:model];
+            
             [self setTableViewArrayWithData: model];
+            
         }
         else{
             ShowMessage(self.myReceiptModel.message);
@@ -228,26 +256,26 @@
 {
      @synchronized(self) {
          
-         if ([model isKindOfClass:[UCFMineMyReceiptModel class]]) {
-             
-             UCFMineMyReceiptModel  *ucModel = model;
-             //查询账户信息
-             [self getAccountCellConfig:ucModel];
-             ucModel.data.unReadMsgCount = self.unReadMsgCount;
-             [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:ucModel.data, nil]];
-         }
-         if ([model isKindOfClass:[UCFMineMySimpleInfoModel class]]) {
-             //查询工豆优惠券信息
-             UCFMineMySimpleInfoModel *ucModel = model;
-             
-             UCFMineMyReceiptModel *newModel = [[self.arryData firstObject] firstObject];
-             newModel.data.unReadMsgCount = ucModel.data.unReadMsgCount;
-             
-             self.unReadMsgCount = ucModel.data.unReadMsgCount;
-             
-             [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:ucModel.data, nil]];
-             [self.arryData replaceObjectAtIndex:1 withObject:[NSArray arrayWithObjects:ucModel.data, nil]];
-         }
+//         if ([model isKindOfClass:[UCFMineMyReceiptModel class]]) {
+//             
+//             UCFMineMyReceiptModel  *ucModel = model;
+//             //查询账户信息
+//             [self getAccountCellConfig:ucModel];
+//             ucModel.data.unReadMsgCount = self.unReadMsgCount;
+//             [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:ucModel.data, nil]];
+//         }
+//         if ([model isKindOfClass:[UCFMineMySimpleInfoModel class]]) {
+//             //查询工豆优惠券信息
+//             UCFMineMySimpleInfoModel *ucModel = model;
+//             
+//             UCFMineMyReceiptModel *newModel = [[self.arryData firstObject] firstObject];
+//             newModel.data.unReadMsgCount = ucModel.data.unReadMsgCount;
+//             
+//             self.unReadMsgCount = ucModel.data.unReadMsgCount;
+//             
+//             [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:ucModel.data, nil]];
+//             [self.arryData replaceObjectAtIndex:1 withObject:[NSArray arrayWithObjects:ucModel.data, nil]];
+//         }
      }
     
     [self.tableView cyl_reloadData];

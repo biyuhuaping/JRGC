@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "UCFLoginModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GlobalView : NSObject
 + (GlobalView *)sharedManager;
-@property(nonatomic,weak)UITabBarController *tabBarController;
-@property(nonatomic,strong)UINavigationController *rootNavController;
+@property(nonatomic,weak) UITabBarController *tabBarController;
+@property(nonatomic,strong) RTRootNavigationController *rootNavController;
+@property(nonatomic,strong) UCFLoginData *loginData;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,16 +1,18 @@
 //
-//  UCFMineHeadCell.m
+//  UCFMineTableViewHead.m
 //  JRGC
 //
-//  Created by kuangzhanzhidian on 2019/1/14.
+//  Created by kuangzhanzhidian on 2019/2/15.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "UCFMineHeadCell.h"
+#import "UCFMineTableViewHead.h"
 #import "NZLabel.h"
 #import "UCFNewMineViewController.h"
 #import "UCFMineMyReceiptModel.h"
-@interface UCFMineHeadCell()
+#import "UCFMineMySimpleInfoModel.h"
+
+@interface UCFMineTableViewHead ()
 @property (nonatomic, strong) MyRelativeLayout *userMesageLayout;// 用户信息
 
 @property (nonatomic, strong) UIButton *headImageBtn;//头像
@@ -42,22 +44,13 @@
 @property (nonatomic, strong) UIButton    *arrowBtn;//点击按钮
 
 @end
-@implementation UCFMineHeadCell
+@implementation UCFMineTableViewHead
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithFrame:frame];
     if (self) {
+        
         // 初始化视图对象
         self.rootLayout.backgroundColor = [UIColor clearColor];
         [self.rootLayout addSubview:self.userMesageLayout];
@@ -76,11 +69,9 @@
         [self.topUpWithdrawalLayout addSubview:self.topUpWithdrawalLabel];
         [self.topUpWithdrawalLayout addSubview:self.arrowImageView];
         [self.topUpWithdrawalLayout addSubview:self.arrowBtn];
-        
     }
     return self;
 }
-
 - (MyRelativeLayout *)topUpWithdrawalLayout
 {
     if (nil == _topUpWithdrawalLayout) {
@@ -200,7 +191,7 @@
         _payBtn.titleLabel.font= [Color gc_Font:14.0];
         [_payBtn setTitleColor:[Color color:PGColorOptionTitleOrange] forState:UIControlStateNormal];
         [_payBtn setBackgroundColor:[Color color:PGColorOptionThemeWhite]];
-
+        
         _payBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
             //设置圆角的半径
@@ -317,17 +308,13 @@
 
 - (void)buttonClick:(UIButton *)btn
 {
-    if ([self.bc isKindOfClass:[UCFNewMineViewController class]]) {
-        [(UCFNewMineViewController *)self.bc headCellButtonClick:btn];
-    }
-    
+    self.callBack(btn); //1
 }
 
 #pragma mark - 数据重新加载
-- (void)showInfo:(id)model
+- (void)showMyReceipt:(UCFMineMyReceiptModel *)myModel
 {
-    UCFMineMyReceiptModel *myModel = model;
-    if (model == nil || ![model isKindOfClass:[UCFMineMyReceiptModel class]]) {
+    if (myModel == nil || ![myModel isKindOfClass:[UCFMineMyReceiptModel class]]) {
         self.totalAssetsMoneyLabel.text = @"";//总资产
         self.expectedInterestMoneyLabel.text = @"";//总待收利息
         self.accountBalanceMoneyLabel.text = @"";//余额
@@ -338,17 +325,23 @@
         self.totalAssetsMoneyLabel.text = myModel.data.total;//总资产
         self.expectedInterestMoneyLabel.text = myModel.data.totalDueIn;//总待收利息
         self.accountBalanceMoneyLabel.text = myModel.data.cashBalance;//余额
-//        if (myModel.data.unReadMsgCount > 0) {
-//            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
-//        }
-//        else
-//        {
-//            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
-//        }
+        
     }
     [self.totalAssetsMoneyLabel sizeToFit];
     [self.expectedInterestMoneyLabel sizeToFit];
     [self.accountBalanceMoneyLabel sizeToFit];
     
+}
+- (void)showMySimple:(UCFMineMySimpleInfoModel *)myModel
+{
+    if (myModel == nil || ![myModel isKindOfClass:[UCFMineMyReceiptModel class]] || myModel.data.unReadMsgCount > 0)
+    {
+         [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+        
+    }else
+    {
+        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+     
+    }
 }
 @end

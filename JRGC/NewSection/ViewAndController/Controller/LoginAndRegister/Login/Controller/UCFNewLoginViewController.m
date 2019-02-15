@@ -11,6 +11,7 @@
 #import "UCFNewLoginInputView.h"
 #import "UCFLoginApi.h"
 #import "UCFLoginModel.h"
+#import "UCFRegisterInputPhoneNumViewController.h"
 
 @interface UCFNewLoginViewController ()<UITextFieldDelegate>
 
@@ -38,6 +39,59 @@
     [self.rootLayout addSubview:self.loginInputView];
     [self.rootLayout addSubview:self.forgetBtn];
     
+    [self addLeftButtons];
+    [self addRightButton];
+}
+- (void)addRightButton
+{
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.frame = CGRectMake(0, 0, 44, 44);
+    rightbutton.backgroundColor = [UIColor whiteColor];
+    [rightbutton setTitle:@"注册" forState:UIControlStateNormal];
+    rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+    [rightbutton setTitleColor:[Color color:PGColorOpttonTextRedColor] forState:UIControlStateNormal];
+    [rightbutton setTitleColor:[Color color:PGColorOpttonTextRedColor] forState:UIControlStateHighlighted];
+    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    
+//    UIButton *cancleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [cancleButton setTitle:@"注册" forState:UIControlStateNormal];
+//    [cancleButton setTitleColor:[Color color:PGColorOpttonTextRedColor] forState:UIControlStateNormal];
+//    [cancleButton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+//
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:cancleButton];
+////    rightItem.imageEdgeInsets = UIEdgeInsetsMake(0, -15,0, 0);//设置向左偏移
+//    self.navigationItem.rightBarButtonItem = rightItem;
+}
+- (void)clickRightBtn
+{
+    UCFRegisterInputPhoneNumViewController *uc = [[UCFRegisterInputPhoneNumViewController alloc] init];
+    [SingShare.rootNavController pushViewController:uc animated:YES complete:^(BOOL finished) {
+        [SingShare.rootNavController removeViewController:self];
+    }];
+}
+- (void)addLeftButtons
+{
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [leftButton setBackgroundColor:[UIColor clearColor]];
+    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
+    [leftButton setImage:[UIImage imageNamed:@"calculator_gray_close.png"]forState:UIControlStateNormal];
+    //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
+    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+
+    self.navigationItem.leftBarButtonItem = leftItem;
+}
+- (void)getToBack
+{
+    [SingShare.rootNavController popViewControllerAnimated:YES];
 }
 - (NZLabel *)loginLabel
 {
@@ -102,6 +156,7 @@
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
             [UCFUserOperation setUserData:model.data];
+            [SingShare.rootNavController popToRootViewControllerAnimated:YES];
         }
         else{
             ShowMessage(model.message);

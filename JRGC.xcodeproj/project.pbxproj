@@ -1009,6 +1009,7 @@
 		E32020151CC4BCEF0065579C /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020141CC4BCEF0065579C /* WKWebViewJavascriptBridge.m */; };
 		E32B8F4E1E85188D00B7871F /* UCFRegisterFinshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E32B8F4C1E85188D00B7871F /* UCFRegisterFinshViewController.m */; };
 		E32B8F4F1E85188D00B7871F /* UCFRegisterFinshViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */; };
+		E337444C2216616700003FEF /* UCFMineTableViewHead.m in Sources */ = {isa = PBXBuildFile; fileRef = E337444B2216616700003FEF /* UCFMineTableViewHead.m */; };
 		E343360D22140C3E00343E78 /* UCFMineCellAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E343360C22140C3E00343E78 /* UCFMineCellAccountModel.m */; };
 		E352FD4321E4AF0B00617AB7 /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCE721E4AF0A00617AB7 /* Toast.m */; };
 		E352FD4421E4AF0B00617AB7 /* HUDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCE821E4AF0A00617AB7 /* HUDManager.m */; };
@@ -2904,6 +2905,8 @@
 		E32B8F4B1E85188D00B7871F /* UCFRegisterFinshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRegisterFinshViewController.h; sourceTree = "<group>"; };
 		E32B8F4C1E85188D00B7871F /* UCFRegisterFinshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterFinshViewController.m; sourceTree = "<group>"; };
 		E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRegisterFinshViewController.xib; sourceTree = "<group>"; };
+		E337444A2216616700003FEF /* UCFMineTableViewHead.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineTableViewHead.h; sourceTree = "<group>"; };
+		E337444B2216616700003FEF /* UCFMineTableViewHead.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineTableViewHead.m; sourceTree = "<group>"; };
 		E343360B22140C3E00343E78 /* UCFMineCellAccountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineCellAccountModel.h; sourceTree = "<group>"; };
 		E343360C22140C3E00343E78 /* UCFMineCellAccountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineCellAccountModel.m; sourceTree = "<group>"; };
 		E352FC9021E4ABA300617AB7 /* Macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
@@ -7823,6 +7826,8 @@
 				E3C1EF2321EDC50D0014658E /* UCFMineActivitiesCell.m */,
 				E3C1EF2521EDE2200014658E /* UCFMineItemCell.h */,
 				E3C1EF2621EDE2200014658E /* UCFMineItemCell.m */,
+				E337444A2216616700003FEF /* UCFMineTableViewHead.h */,
+				E337444B2216616700003FEF /* UCFMineTableViewHead.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -9319,6 +9324,7 @@
 				7BC304901ACBC26D007767F1 /* EGORefreshTableFooterView.m in Sources */,
 				83CD84281F13A50800227704 /* UCFBatchBidController.m in Sources */,
 				33793F4E21ECB3D6001065D9 /* UCFCommodityView.m in Sources */,
+				E337444C2216616700003FEF /* UCFMineTableViewHead.m in Sources */,
 				74E140441F1C573000B17A96 /* UCFGoldRechargeHistoryController.m in Sources */,
 				E352FDC621E4B08D00617AB7 /* YTKNetworkAgent.m in Sources */,
 				33793F4821ECA955001065D9 /* UCFShopPromotionCell.m in Sources */,

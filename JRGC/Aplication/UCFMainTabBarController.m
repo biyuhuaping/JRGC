@@ -30,7 +30,7 @@
 @interface UCFMainTabBarController ()
 
 
-@property (strong, nonatomic) UCFNewLoginViewController *LatestView;
+@property (strong, nonatomic) UCFNewHomeViewController *LatestView;
 @property (strong, nonatomic) UCFInvestViewController *AssignmentView;
 @property (strong, nonatomic) UCFNewMineViewController *mineView;
 @end
@@ -117,7 +117,7 @@
     for (int i=0; i<5; i++) {
         switch (i) {
             case 0:{
-                _LatestView = [[UCFNewLoginViewController alloc] init];
+                _LatestView = [[UCFNewHomeViewController alloc] init];
                 controller = _LatestView;
             }
                 break;
