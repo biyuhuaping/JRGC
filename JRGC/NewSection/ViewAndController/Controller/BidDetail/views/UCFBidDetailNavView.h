@@ -22,7 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFBidDetailNavView : BaseView
 @property(nonatomic, weak)id<UCFBidDetailNavViewDelegate>delegate;
-- (void)blindVM:(UVFBidDetailViewModel *)vm;
+- (void)blindVM:(BaseViewModel *)vm;
+
+- (void)blindTransVM:(BaseViewModel *)vm;
 
 @end
 

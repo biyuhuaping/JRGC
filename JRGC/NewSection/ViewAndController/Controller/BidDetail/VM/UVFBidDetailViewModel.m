@@ -224,18 +224,9 @@
         self.bidInfoModel = model;
     }
 }
-
 - (void)requestFailed:(YTKBaseRequest *)request {
     DDLogDebug(@"failed");
 }
-
-
-
-
-
-
-
-
 
 #pragma mark ListView
 - (NSArray *)getTableViewData

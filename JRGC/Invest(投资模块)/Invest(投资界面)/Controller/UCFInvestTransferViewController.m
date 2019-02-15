@@ -17,6 +17,8 @@
 #import "UCFLoginViewController.h"
 #import "UCFProjectDetailViewController.h"
 #import "UCFNewTransCell.h"
+#import "UCFNewTransProjectDetailViewController.h"
+#import "UCFTransBidInfoModel.h"
 @interface UCFInvestTransferViewController () <UITableViewDelegate, UITableViewDataSource, UCFTransferHeaderViewDelegate>
 {
     NSInteger currentPage;
@@ -317,6 +319,22 @@
         }
     
     }else if (tag.intValue == kSXTagPrdTransferDetail) {
+        
+        UCFTransBidInfoModel *model = [UCFTransBidInfoModel yy_modelWithJSON:result];
+        NSString *rsttext = model.statusdes;
+
+        if (model.status == 1) {
+            UCFNewTransProjectDetailViewController *vc = [[UCFNewTransProjectDetailViewController alloc] init];
+            vc.model = model;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            if (![rsttext isEqualToString:@""] && rsttext) {
+                [AuxiliaryFunc showToastMessage:model.statusdes withView:self.view];
+            }
+        }
+        
+        return;
+        /*
         NSString *data = (NSString *)result;
         NSMutableDictionary *dic = [data objectFromJSONString];
         NSString *rstcode = dic[@"status"];
@@ -331,6 +349,7 @@
                 [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             }
         }
+         */
     }
     if ([self.tableview.header isRefreshing]) {
         [self.tableview.header endRefreshing];
