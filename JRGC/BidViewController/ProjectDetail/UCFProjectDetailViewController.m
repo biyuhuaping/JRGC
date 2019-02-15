@@ -679,7 +679,7 @@
 }
 - (BOOL)checkUserCanInvest
 {
-    NSInteger step = _isP2P == YES ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger step = _isP2P == YES ? SingleUserInfo.loginData.userInfo.openStatus : [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     switch (step)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
@@ -778,7 +778,7 @@
         }else if ([[dic objectForKey:@"status"] integerValue] == 21){
             
             HSHelper *helper = [HSHelper new];
-            NSInteger step = _isP2P == YES ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
+            NSInteger step = _isP2P == YES ? SingleUserInfo.loginData.userInfo.openStatus : [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
             SelectAccoutType type = _isP2P == YES ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
             [helper pushOpenHSType:type Step:step nav:self.navigationController];
             
@@ -879,7 +879,7 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            NSInteger step = _isP2P == YES ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
+            NSInteger step = _isP2P == YES ? SingleUserInfo.loginData.userInfo.openStatus : [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
             SelectAccoutType type = _isP2P == YES ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
             [helper pushOpenHSType:type Step:step nav:self.navigationController];
         }

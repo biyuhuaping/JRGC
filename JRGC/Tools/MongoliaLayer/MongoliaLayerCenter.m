@@ -157,7 +157,7 @@
         if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {
             [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:nav];
         } else {
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:nav];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:nav];
         }
     }
 }

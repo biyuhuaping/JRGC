@@ -83,7 +83,7 @@
 - (void)fetchData
 {
     self.dataArray = [NSMutableArray arrayWithCapacity:10];
-    if ([UserInfoSingle sharedManager].openStatus >= 4 && [UserInfoSingle sharedManager].isRisk) {
+    if (SingleUserInfo.loginData.userInfo.openStatus >= 4 && SingleUserInfo.loginData.userInfo.isRisk) {
         CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"" showInfoMethod:nil heightOfCell:140];
         NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
         [section1 addObject:data1];

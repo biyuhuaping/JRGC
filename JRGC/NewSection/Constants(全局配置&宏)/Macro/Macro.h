@@ -85,5 +85,5 @@ _Pragma("clang diagnostic pop")\
 #define COUNTDOWNRESMS  @"registeredSMS" //注册短信的倒计时
 #define COUNTDOWNREVMS  @"registeredVMS" //注册语音的倒计时
 
-#define  SingShare [GlobalView sharedManager]
+#define  SingleUserInfo [UserInfoSingle sharedManager]
 #endif /* Macro_h */

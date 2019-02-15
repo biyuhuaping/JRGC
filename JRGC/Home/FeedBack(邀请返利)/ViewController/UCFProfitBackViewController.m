@@ -29,7 +29,7 @@
 - (void)createUI {
     
     [self addLeftButton];
-    if([UserInfoSingle sharedManager].superviseSwitch   && [UserInfoSingle sharedManager].zxIsNew)
+    if([UserInfoSingle sharedManager].superviseSwitch   && SingleUserInfo.loginData.userInfo.zxIsNew)
     {
         baseTitleLabel.text = @"微金返利";
     }

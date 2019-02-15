@@ -103,7 +103,7 @@
         baseTitleLabel.text = @"微金邀请返利";
         _gold_secondView.hidden = YES;
         
-        if ([UserInfoSingle sharedManager].superviseSwitch  && [UserInfoSingle sharedManager].zxIsNew)
+        if ([UserInfoSingle sharedManager].superviseSwitch  && SingleUserInfo.loginData.userInfo.zxIsNew)
         {
             self.zxInviteFriendsCountLab.hidden  = YES;
             self.p2pListArrow.hidden = YES;

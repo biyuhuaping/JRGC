@@ -72,12 +72,12 @@
 - (void)bottomButton:(UIButton *)button ClickedWithModel:(UCFExtractGoldModel *)extractGoldModel
 {
     if ([button.titleLabel.text isEqualToString:@"提交订单"]) {
-        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         NSDictionary *param = @{@"orderId": extractGoldModel.takeRecordOrderId, @"userId": userId};
         [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
     }
     else if ([button.titleLabel.text isEqualToString:@"查看物流"]) {
-        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         NSDictionary *param = @{@"takeRecordOrderId": extractGoldModel.takeRecordOrderId, @"userId": userId};
         [[NetworkModule sharedNetworkModule] newPostReq:param tag:ksXTagLogisticsInfo owner:self signature:YES Type:SelectAccoutTypeGold];
     }
@@ -87,7 +87,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UCFExtractGoldFrameModel *frameModel = [self.dataArray objectAtIndex:indexPath.row];
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if ([frameModel.item.status isEqualToString:@"00"]) {
         NSDictionary *param = @{@"orderId": frameModel.item.takeRecordOrderId, @"userId": userId};
         [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
@@ -110,7 +110,7 @@
         self.currentPage = 1;
     }
     NSString *pageNo = [NSString stringWithFormat:@"%ld", (long)self.currentPage];
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObjectsAndKeys:userId, @"userId", pageNo, @"pageNo", @"1", @"status", @"20", @"pageSize", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractGoldList owner:self signature:YES Type:SelectAccoutTypeGold];
 }

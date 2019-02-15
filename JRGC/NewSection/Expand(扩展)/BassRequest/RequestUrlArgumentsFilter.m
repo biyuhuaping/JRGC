@@ -73,8 +73,8 @@
     NSMutableDictionary *tempParametersDic = [NSMutableDictionary dictionary];
     [tempParametersDic addEntriesFromDictionary:originParameters];
     [tempParametersDic addEntriesFromDictionary:parameters];
-    if ([UserInfoSingle sharedManager].userId) {
-        [tempParametersDic setValue:[UserInfoSingle sharedManager].userId forKey:@"userId"];
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        [tempParametersDic setValue:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
     }
     NSDictionary *parametersDic = [Encryption getSinaturDictWithOrginalDict:tempParametersDic];
     NSString *encryptParam  = [Encryption AESWithKey:AES_TESTKEY WithDic:parametersDic];

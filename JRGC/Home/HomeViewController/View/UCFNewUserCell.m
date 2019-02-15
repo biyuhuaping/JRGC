@@ -125,7 +125,7 @@
 {
     [super layoutSubviews];
     
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (userId) {
         [self.okButton setTitle:@"新手享利息" forState:UIControlStateNormal];
     }

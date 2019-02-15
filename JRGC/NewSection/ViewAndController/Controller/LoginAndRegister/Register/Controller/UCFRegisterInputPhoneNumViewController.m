@@ -82,9 +82,9 @@
 - (void)clickRightBtn
 {
     UCFNewLoginViewController *uc = [[UCFNewLoginViewController alloc] init];
-    [SingShare.rootNavController pushViewController:uc animated:YES complete:^(BOOL finished) {
-        [SingShare.rootNavController removeViewController:self];
-    }];
+//    [SingShare.rootNavController pushViewController:uc animated:YES complete:^(BOOL finished) {
+//        [SingShare.rootNavController removeViewController:self];
+//    }];
 }
 - (void)addLeftButtons
 {
@@ -103,7 +103,7 @@
 }
 - (void)getToBack
 {
-    [SingShare.rootNavController popViewControllerAnimated:YES];
+//    [SingShare.rootNavController popViewControllerAnimated:YES];
 }
 - (UIButton *)closeBtn
 {

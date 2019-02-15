@@ -264,7 +264,7 @@
     } else {
         UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
         UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
-        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if (nil == userId) {
             UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
             UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
@@ -352,7 +352,7 @@
 //    if (!self.presenter.canReservedClicked) {
 //        return;
 //    }
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (nil == userId) {
         UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
         UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
@@ -370,7 +370,7 @@
 
 - (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button withModel:(UCFHomeListCellModel *)model
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (nil == userId) {
         UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
         registerControler.sourceVC = @"fromHomeView";

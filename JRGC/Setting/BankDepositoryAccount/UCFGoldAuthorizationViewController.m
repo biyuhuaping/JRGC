@@ -65,9 +65,9 @@
         BOOL ret  = [[dic objectSafeDictionaryForKey:@"ret"] boolValue];
         if(ret){//授权成功
             
-            [UserInfoSingle sharedManager].goldAuthorization = YES;
-            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:GOldAUTHORIZATION];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            SingleUserInfo.loginData.userInfo.goldAuthorization = YES;
+            
+            [SingleUserInfo setUserData:SingleUserInfo.loginData];
             if ([_sourceVc isEqualToString:@"GoldPurchaseVC"] || [_sourceVc isEqualToString:@"MinViewController"])
             {
                 [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];

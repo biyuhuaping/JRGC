@@ -23,7 +23,7 @@
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     if ([UserInfoSingle sharedManager].superviseSwitch) {
-        if ([UserInfoSingle sharedManager].zxIsNew) {
+        if (SingleUserInfo.loginData.userInfo.zxIsNew) {
             _showLabel.text = @"徽商银行存管账户";
         } else {
            _showLabel.text = @"微金徽商存管账户";

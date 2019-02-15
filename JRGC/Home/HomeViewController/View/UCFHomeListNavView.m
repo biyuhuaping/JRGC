@@ -84,7 +84,7 @@
     self.loginAndRegisterButton.clipsToBounds = YES;
     
     self.giftButton.frame = CGRectMake(ScreenWidth - 45, [[UIApplication sharedApplication] statusBarFrame].size.height + 7, 30, 30);
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (userId) {
         if ([UserInfoSingle sharedManager].isSubmitTime) {
             self.giftButton.alpha = 0;
@@ -149,7 +149,7 @@
     }
     
     if (offset <= 0) {
-        if ([UserInfoSingle sharedManager].userId) {
+        if (SingleUserInfo.loginData.userInfo.userId) {
             self.hidden = NO;
         }
         else {

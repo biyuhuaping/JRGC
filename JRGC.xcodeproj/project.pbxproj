@@ -1077,7 +1077,6 @@
 		E36EB87321F8158F0093915D /* LineOfSendVerifyCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB87121F8158F0093915D /* LineOfSendVerifyCodeView.m */; };
 		E36EB87621F84CCB0093915D /* UCFRegisterSendCodeApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB87521F84CCB0093915D /* UCFRegisterSendCodeApi.m */; };
 		E36EB87921F84CF20093915D /* UCFRegisterSendCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB87821F84CF20093915D /* UCFRegisterSendCodeModel.m */; };
-		E36EB87D21F85DE00093915D /* UCFUserOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB87C21F85DE00093915D /* UCFUserOperation.m */; };
 		E37086B51D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B31D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m */; };
 		E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086B41D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib */; };
 		E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B81D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m */; };
@@ -3050,8 +3049,6 @@
 		E36EB87521F84CCB0093915D /* UCFRegisterSendCodeApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterSendCodeApi.m; sourceTree = "<group>"; };
 		E36EB87721F84CF20093915D /* UCFRegisterSendCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFRegisterSendCodeModel.h; sourceTree = "<group>"; };
 		E36EB87821F84CF20093915D /* UCFRegisterSendCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterSendCodeModel.m; sourceTree = "<group>"; };
-		E36EB87B21F85DE00093915D /* UCFUserOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFUserOperation.h; sourceTree = "<group>"; };
-		E36EB87C21F85DE00093915D /* UCFUserOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFUserOperation.m; sourceTree = "<group>"; };
 		E37086B21D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFHuiShangChooseBankViewController.h; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.h; sourceTree = "<group>"; };
 		E37086B31D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFHuiShangChooseBankViewController.m; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.m; sourceTree = "<group>"; };
 		E37086B41D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFHuiShangChooseBankViewController.xib; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.xib; sourceTree = "<group>"; };
@@ -7725,8 +7722,6 @@
 		E36EB87A21F85D9F0093915D /* UserOperation */ = {
 			isa = PBXGroup;
 			children = (
-				E36EB87B21F85DE00093915D /* UCFUserOperation.h */,
-				E36EB87C21F85DE00093915D /* UCFUserOperation.m */,
 			);
 			path = UserOperation;
 			sourceTree = "<group>";
@@ -9377,7 +9372,6 @@
 				7485EFD01B0492CE0044DE48 /* UCFRedEnvelopeModel.m in Sources */,
 				83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */,
 				83D42A8C1FCE6175004C96EF /* UCFShareBaseView.m in Sources */,
-				E36EB87D21F85DE00093915D /* UCFUserOperation.m in Sources */,
 				74877CBA1FB2A95200F32428 /* PageView.m in Sources */,
 				74931A331B1326FE00143424 /* OHTouchesGestureRecognizer.m in Sources */,
 				74270C991EC58F6800F9419B /* UCFHomeListPresenter.m in Sources */,

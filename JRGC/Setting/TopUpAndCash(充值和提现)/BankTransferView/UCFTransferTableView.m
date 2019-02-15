@@ -49,7 +49,7 @@
             cell =  [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([BankTransferTableViewCell class]) owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        [cell setSecondLabelText:[NSString stringWithFormat:@"请务必使用您 %@ 储蓄卡，转账到以下账户，转账成功后，您可在金融工场账户余额中查看并进行出借",[UserInfoSingle sharedManager].bankNumTip]];
+        [cell setSecondLabelText:[NSString stringWithFormat:@"请务必使用您 %@ 储蓄卡，转账到以下账户，转账成功后，您可在金融工场账户余额中查看并进行出借",SingleUserInfo.bankNumTip]];
         
         return cell;
     }  else if (indexPath.row == 1) {

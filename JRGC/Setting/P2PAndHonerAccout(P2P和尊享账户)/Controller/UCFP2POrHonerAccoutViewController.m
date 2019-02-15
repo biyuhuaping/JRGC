@@ -177,7 +177,7 @@
               riskAssessment= [UCFSettingArrowItem itemWithIcon:nil title:@"尊享风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }else{
             myInVest.title  = [UserInfoSingle sharedManager].isSubmitTime ? @"我的购买": @"我的出借";
-            if ([UserInfoSingle sharedManager].openStatus == 4) {
+            if (SingleUserInfo.loginData.userInfo.openStatus == 4) {
                 setChangePassword.title = @"修改交易密码";
             }else{
                 setChangePassword.title = @"设置交易密码";
@@ -505,12 +505,12 @@
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
-    if (alertview.tag == 1002 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+    if (alertview.tag == 1002 && [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3) {
         HSHelper *helper = [HSHelper new];
         if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {
             [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
         } else {
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
         }
     } else {
         [self clickCashBtn:nil];
@@ -546,7 +546,7 @@
     
     if( [self checkIDAAndBankBlindState:self.accoutType]){ //判断是否设置交易密码
         [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-        NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
+        NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)SingleUserInfo.loginData.userInfo.openStatus];
         NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
         [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
     }

@@ -98,7 +98,7 @@
         UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
         
-        if ([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2) {
+        if (SingleUserInfo.superviseSwitch && [SingleUserInfo.loginData.userLevel integerValue] < 2) {
             group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode]];//qyy
         }
         else {
@@ -178,7 +178,7 @@
     
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
     _userLevelImage = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth - 63, 9, 25, 25)];
-    if ([UserInfoSingle sharedManager].openStatus == 4) {
+    if (SingleUserInfo.loginData.userInfo.openStatus == 4) {
         _setChangePassword.title = @"修改交易密码";
     } else {
         _setChangePassword.title = @"设置交易密码";
@@ -208,7 +208,7 @@
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
             
 //            [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
-            [[UserInfoSingle sharedManager] removeUserInfo];
+            [SingleUserInfo deleteUserData];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -231,7 +231,7 @@
     }else if(alertView.tag == 10005){
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
         }
     }else if(alertView.tag == 10003){
         if (buttonIndex == 1) {
@@ -327,7 +327,7 @@
 //                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
 //            }
             
-            if ([UserInfoSingle sharedManager].openStatus == 4) {
+            if (SingleUserInfo.loginData.userInfo.openStatus == 4) {
                 _setChangePassword.title = @"修改交易密码";
             }else{
                 _setChangePassword.title = @"设置交易密码";
@@ -749,7 +749,7 @@
     UCFSettingGroup *group = self.itemsData[indexPath.section];
     UCFSettingItem *item = group.items[indexPath.row];
     
-    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
+    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus;
 
     if (item.option) { // block有值(点击这个cell,.有特定的操作需要执行)
         item.option();
@@ -809,7 +809,7 @@
             }
                 break;
             case 2:{
-                if ([UserInfoSingle sharedManager].level < 2 && [UserInfoSingle sharedManager].superviseSwitch) {
+                if ([SingleUserInfo.loginData.userLevel integerValue] < 2 && SingleUserInfo.superviseSwitch) {
                     UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
                     subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE],self.sex];
                     vc = subVC;
@@ -820,13 +820,13 @@
 //                    ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
 //                    ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
                     
-                    if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+                    if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
                     {//吐司：此活动暂时未对企业用户开放
                         [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
                     }
                     else{
                         
-                        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
+                        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus;
                         if(openStatus < 3){
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                             alert.tag = 10005;
@@ -883,7 +883,7 @@
     }
 }
 - (BOOL) checkHSIsLegitimate {
-    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
+    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus;
     if(openStatus < 3){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 10005;

@@ -169,8 +169,7 @@
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"重新登录" otherButtonTitles:nil, nil];
             alertView.tag = 10001;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
-            [[NSUserDefaults standardUserDefaults]setValue:nil forKey:UUID];
-            [[UserInfoSingle sharedManager] removeUserInfo];
+            [SingleUserInfo deleteUserData];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults]synchronize];
             [alertView show];

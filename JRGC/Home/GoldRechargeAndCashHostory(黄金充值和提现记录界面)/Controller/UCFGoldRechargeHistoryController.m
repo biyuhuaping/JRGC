@@ -100,7 +100,7 @@
 
 - (void)getDataFromNet
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }

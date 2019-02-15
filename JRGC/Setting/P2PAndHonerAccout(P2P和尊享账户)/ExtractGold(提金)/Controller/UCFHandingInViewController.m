@@ -71,7 +71,7 @@
 
 - (void)bottomButton:(UIButton *)button ClickedWithModel:(UCFExtractGoldModel *)extractGoldModel
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *param = @{@"orderId": extractGoldModel.takeRecordOrderId, @"userId": userId};
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
 }
@@ -85,7 +85,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     UCFExtractGoldFrameModel *frameModel = [self.dataArray objectAtIndex:indexPath.row];
     NSDictionary *param = @{@"orderId": frameModel.item.takeRecordOrderId, @"userId": userId};
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
@@ -97,7 +97,7 @@
         self.currentPage = 1;
     }
     NSString *pageNo = [NSString stringWithFormat:@"%ld", (long)self.currentPage];
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObjectsAndKeys:userId, @"userId", pageNo, @"pageNo", @"2", @"status", @"20", @"pageSize", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractGoldList owner:self signature:YES Type:SelectAccoutTypeGold];
 }

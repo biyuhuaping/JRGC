@@ -311,7 +311,7 @@
 
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {
-    switch ([UserInfoSingle sharedManager].enjoyOpenStatus)
+    switch ([SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue])
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
@@ -349,7 +349,7 @@
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
         }
     }else if (alertView.tag == 9000){
         if(buttonIndex == 1){

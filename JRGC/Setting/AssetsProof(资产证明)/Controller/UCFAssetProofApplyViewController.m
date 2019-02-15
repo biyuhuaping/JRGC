@@ -67,7 +67,7 @@
         }
         self.idNumberField =  cell.userIdNumberTextField;
        
-        cell.userNameLabel.text = [self changeUserName:[UserInfoSingle sharedManager].realName];
+        cell.userNameLabel.text = [self changeUserName:SingleUserInfo.loginData.userInfo.realName];
         return cell;
     }else{
         NSString *cellindifier = @"UCFAssetProofApplyCodeCell";
@@ -79,7 +79,7 @@
         }
         self.codeTextField = cell.messageCodeTextField;
         self.sendCodeBtn = cell.MessageCodeBtn;
-        cell.mobileNumberLabel.text = [UserInfoSingle sharedManager].mobile;
+        cell.mobileNumberLabel.text = SingleUserInfo.loginData.userInfo.mobile;
         [cell.MessageCodeBtn addTarget:self action:@selector(getMeassgeCode:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }

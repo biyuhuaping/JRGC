@@ -74,7 +74,7 @@
         if (_isFromeBankCardInfo) {
             self.tableViewHight.constant = 44*5;
         } else {
-            if ([UserInfoSingle sharedManager].openStatus == 2) {
+            if (SingleUserInfo.loginData.userInfo.openStatus == 2) {
                 self.tableViewHight.constant = 44*5;
             } else {
                 self.tableViewHight.constant = 44*3;
@@ -174,7 +174,7 @@
     _textField2.font = [UIFont systemFontOfSize:14];
     _textField2.textColor = UIColorWithRGB(0x555555);
     [_textField2 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    _textField2.placeholder = [UserInfoSingle sharedManager].companyAgent ? @"社会信用代码/组织机构代码": @"请输入身份证号";
+    _textField2.placeholder = SingleUserInfo.loginData.userInfo.isCompanyAgent ? @"社会信用代码/组织机构代码": @"请输入身份证号";
     
     _textField3 = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, ScreenWidth-40-6, 44)];
     _textField3.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -388,7 +388,7 @@
         
         return  5;
     }else{
-        if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].openStatus == 2) {
+        if (self.accoutType == SelectAccoutTypeP2P && SingleUserInfo.loginData.userInfo.openStatus == 2) {
             return 5;
         } else {
             return 3;
@@ -429,7 +429,7 @@
                     [cell addSubview:imgView];
                     [cell.contentView addSubview:_textField3];
                 }else{
-                    if ([UserInfoSingle sharedManager].openStatus == 2) {
+                    if (SingleUserInfo.loginData.userInfo.openStatus == 2) {
                         //银行卡
                         UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12, 20, 20)];
                         imgView.image = [UIImage imageNamed:@"safecenter_icon_bankcard"];
@@ -510,7 +510,7 @@
         }
     }else{
 
-        if((self.accoutType == SelectAccoutTypeP2P &&  indexPath.row == 2) || ([UserInfoSingle sharedManager].openStatus == 2 && indexPath.row == 3))
+        if((self.accoutType == SelectAccoutTypeP2P &&  indexPath.row == 2) || (SingleUserInfo.loginData.userInfo.openStatus == 2 && indexPath.row == 3))
         {
             isGotoChooseBankVC = YES;
         }
@@ -628,7 +628,7 @@
             return;
         }
     }else{
-        if ([UserInfoSingle sharedManager].openStatus == 2) {
+        if (SingleUserInfo.loginData.userInfo.openStatus == 2) {
             if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0 || _textField4.text.length == 0) {
                 [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
                 return;
@@ -659,7 +659,7 @@
     //升级存管账户接口
     else{
         NSMutableDictionary *encryptParamDic = nil;
-        if (([UserInfoSingle sharedManager].openStatus == 2 && self.accoutType == SelectAccoutTypeP2P) || self.accoutType == SelectAccoutTypeHoner) {
+        if ((SingleUserInfo.loginData.userInfo.openStatus == 2 && self.accoutType == SelectAccoutTypeP2P) || self.accoutType == SelectAccoutTypeHoner) {
             encryptParamDic =[[NSMutableDictionary alloc]initWithDictionary: @{@"realName":realName,             //真实姓名
                                                                                @"idCardNo":idCardNo,             //身份证号
                                                                                @"bankCardNo":bankCard,           //银行卡号
@@ -683,7 +683,7 @@
         }
         else
         {
-            if ([UserInfoSingle sharedManager].openStatus == 2) {
+            if (SingleUserInfo.loginData.userInfo.openStatus == 2) {
                 [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
             } else {
                 [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
@@ -731,9 +731,9 @@
             NSDictionary *userInfoDic = dic[@"data"][@"userInfo"];
             _openStatus = dic[@"data"][@"openStatus"];
             if (self.accoutType == SelectAccoutTypeP2P) {
-                [UserInfoSingle sharedManager].openStatus = [_openStatus integerValue];
+                SingleUserInfo.loginData.userInfo.openStatus = [_openStatus integerValue];
             } else {
-                [UserInfoSingle sharedManager].enjoyOpenStatus = [_openStatus integerValue];
+                SingleUserInfo.loginData.userInfo.zxOpenStatus = _openStatus;
             }
             _bankId = [NSString stringWithFormat:@"%@",userInfoDic[@"bankId"]];//[userInfoDic objectSafeForKey:@"bankId"];//
             NSString *realName = [userInfoDic objectSafeForKey:@"realName"];
@@ -746,7 +746,7 @@
             
             if (realName.length > 0) {
                 
-                if ([UserInfoSingle sharedManager].openStatus != 1)
+                if (SingleUserInfo.loginData.userInfo.openStatus != 1)
                 {
                     _textField1.userInteractionEnabled = NO;
                     _textField1.placeholder = realName;
@@ -755,7 +755,8 @@
                 {
                     _textField1.text = realName;
                 }
-                [UserInfoSingle sharedManager].realName = realName;
+                SingleUserInfo.loginData.userInfo.realName = realName;
+                [SingleUserInfo setUserData:SingleUserInfo.loginData];
             }
             if (idCardNo.length > 0){
                 self.idCardNo = idCardNo;//此处是为了回传到总控制器，通过总控制器传到下级页面。
@@ -763,7 +764,7 @@
                 //打码
                 NSString *asteriskIdCardNo = [self replaceStringWithAsterisk:idCardNo startLocation:3 lenght:idCardNo.length -7];
                 NSString *asteriskMobile = [self replaceStringWithAsterisk:self.phoneNum startLocation:3 lenght:self.phoneNum.length -7];
-                if ([UserInfoSingle sharedManager].openStatus != 1)
+                if (SingleUserInfo.loginData.userInfo.openStatus != 1)
                 {
                     _textField2.userInteractionEnabled = NO;
                     _textField2.placeholder = asteriskIdCardNo;
@@ -772,7 +773,8 @@
                 {
                     _textField2.text = self.idCardNo;
                 }
-                [UserInfoSingle sharedManager].mobile = asteriskMobile;
+                SingleUserInfo.loginData.userInfo.mobile = asteriskMobile;
+                [SingleUserInfo setUserData:SingleUserInfo.loginData];
             }
             
             if (bankCard.length > 0 && !_isFromeBankCardInfo) {
@@ -833,7 +835,7 @@
             _timer = [HWWeakTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
             _counter = 59;
             
-            _customLabel1.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",[UserInfoSingle sharedManager].mobile];
+            _customLabel1.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",SingleUserInfo.loginData.userInfo.mobile];
             [_customLabel1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
             _customLabel1.hidden = NO;
             _customLabel1.userInteractionEnabled = YES;
@@ -852,10 +854,11 @@
         if ([ret boolValue]) {
             DDLogDebug(@"%@",dic[@"data"]);
             if (self.accoutType == SelectAccoutTypeP2P) {
-                [UserInfoSingle sharedManager].openStatus = 3;
+                SingleUserInfo.loginData.userInfo.openStatus = 3;
             } else {
-                [UserInfoSingle sharedManager].enjoyOpenStatus = 3;
+                SingleUserInfo.loginData.userInfo.zxOpenStatus = @"3";
             }
+           
             NSString *realName = _textField1.text;//姓名
             NSString *idCardNo = _textField2.text;//身份证号
             if (realName.length == 0) {
@@ -864,7 +867,7 @@
             if (idCardNo.length > 0) {
                 self.idCardNo = idCardNo;
             }
-            [UserInfoSingle sharedManager].realName = realName;
+            SingleUserInfo.loginData.userInfo.realName = realName;
             
             //提交信息成功之后，显示开户成功页面
             AccountSuccessVC *acVC = [[AccountSuccessVC alloc]initWithNibName:@"AccountSuccessVC" bundle:nil];
@@ -877,6 +880,7 @@
             self.db.isOpenAccount = YES;
             [self.view addSubview:acVC.view];
             [self addChildViewController:acVC];
+             [SingleUserInfo setUserData:SingleUserInfo.loginData];
         }else {
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
@@ -896,7 +900,8 @@
     else if (tag.intValue == kSXTagOpenAccuntIntoBank) {
         if ([ret boolValue])
         {
-            [UserInfoSingle sharedManager].realName = _textField1.text;
+            SingleUserInfo.loginData.userInfo.realName = _textField1.text;
+            [SingleUserInfo setUserData:SingleUserInfo.loginData];
             _counter = 0;
             AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
             webView.title = @"即将跳转";

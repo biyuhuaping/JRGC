@@ -185,7 +185,7 @@
     
     UCFNewLoginViewController *uc = [[UCFNewLoginViewController alloc] init];
     
-    [SingShare.rootNavController pushViewController:uc animated:YES];
+//    [SingShare.rootNavController pushViewController:uc animated:YES];
     if (btn.tag == 10001) {
         //个人账户信息
     }

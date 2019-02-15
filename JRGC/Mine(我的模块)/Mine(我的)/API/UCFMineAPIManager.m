@@ -27,7 +27,7 @@
 @implementation UCFMineAPIManager
 - (void)getAssetFromNet
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId =  SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }
@@ -36,7 +36,7 @@
 
 - (void)getBenefitFromNet
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId =  SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }
@@ -45,7 +45,7 @@
 //提现请求
 - (void)getCashAccoutBalanceNet
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId =  SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }
@@ -54,7 +54,7 @@
 //充值请求
 - (void)getRecharngeBindingBankCardNet
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId =  SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }
@@ -63,17 +63,17 @@
 //微金P2P提现请求
 - (void)getP2PAccoutCashRuqestHTTP
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId =  SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }
-    NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
+    NSString *userSatues = [NSString stringWithFormat:@"%@",SingleUserInfo.loginData.userInfo.openStatus];
     NSDictionary *parametersDict =  @{@"userId":userId,@"userSatues":userSatues};
     [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:SelectAccoutTypeP2P];
 }
 - (void)signWithToken:(NSString *)token
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId =  SingleUserInfo.loginData.userInfo.userId;
     if (!userId || !token) {
         return;
     }
@@ -117,13 +117,14 @@
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 NSString *oepnState =  [resultData objectSafeForKey:@"openStatus"];
-                [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
+                 SingleUserInfo.loginData.userInfo.openStatus = [oepnState integerValue];
                 NSString *zxOpenState = [resultData objectSafeForKey:@"zxOpenStatus"];
-                [UserInfoSingle sharedManager].enjoyOpenStatus = [zxOpenState integerValue];
+                 SingleUserInfo.loginData.userInfo.zxOpenStatus = zxOpenState;
                 NSString *nmGoldAuthorization = [resultData objectSafeForKey:@"nmGoldAuthorization"];
-                [UserInfoSingle sharedManager].goldAuthorization = [nmGoldAuthorization integerValue];
+                SingleUserInfo.loginData.userInfo.goldAuthorization = [nmGoldAuthorization integerValue];
                 BOOL isCompanyAgent = [[resultData objectSafeForKey:@"isCompanyAgent"] boolValue];
-                [UserInfoSingle sharedManager].companyAgent = isCompanyAgent;
+                SingleUserInfo.loginData.userInfo.isCompanyAgent = isCompanyAgent;
+                [SingleUserInfo setUserData:SingleUserInfo.loginData];
             }
             
             UCFUserAssetModel *userAsset = [UCFUserAssetModel userAssetWithDict:resultData];

@@ -271,9 +271,9 @@ static NetworkModule *gInstance = NULL;
     NSString *par = [strArray objectAtIndex:1];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         if (data.length > 0) {
-            data = [data stringByAppendingString:[NSString stringWithFormat:@"&jg_nyscclnjsygjr=%@",[UserInfoSingle sharedManager].jg_ckie]];
+            data = [data stringByAppendingString:[NSString stringWithFormat:@"&jg_nyscclnjsygjr=%@",SingleUserInfo.loginData.userInfo.jg_ckie]];
         } else {
-            data = [data stringByAppendingString:[NSString stringWithFormat:@"jg_nyscclnjsygjr=%@",[UserInfoSingle sharedManager].jg_ckie]];
+            data = [data stringByAppendingString:[NSString stringWithFormat:@"jg_nyscclnjsygjr=%@",SingleUserInfo.loginData.userInfo.jg_ckie]];
         }
     }
     if([array containsObject:par])
@@ -1393,7 +1393,7 @@ static NetworkModule *gInstance = NULL;
             break;
     }
     if([[NSUserDefaults standardUserDefaults] valueForKey:UUID]){
-        [dict setValue:[UserInfoSingle sharedManager].jg_ckie forKey:@"jg_nyscclnjsygjr"];
+        [dict setValue:SingleUserInfo.loginData.userInfo.jg_ckie forKey:@"jg_nyscclnjsygjr"];
     }
     DDLogDebug(@"%@类新接口请求参数%@",owner,dict);
     if(isSignature) //是否需要验签

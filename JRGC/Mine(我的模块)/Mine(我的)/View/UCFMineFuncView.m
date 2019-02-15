@@ -42,7 +42,7 @@
     }
     //邀请返利
     UCFSettingItem *profitInvest = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_rebate" title:@"邀请返利" destVcClass:nil];
-    profitInvest.subtitle = [UserInfoSingle sharedManager].gcm_code.length > 0 ? [NSString stringWithFormat:@"工场码%@", [UserInfoSingle sharedManager].gcm_code] : @"";
+    profitInvest.subtitle = SingleUserInfo.loginData.userInfo.promotionCode.length > 0 ? [NSString stringWithFormat:@"工场码%@", SingleUserInfo.loginData.userInfo.promotionCode] : @"";
     
     
     //优惠券

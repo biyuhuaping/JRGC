@@ -248,14 +248,14 @@
     
     NSString *nmProClaimIdStr = [self.dataDict objectSafeForKey:@"nmPrdClaimId"];
     
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldPrdClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
 }
 -(void)getGoldInvestmentDetailDataHTTPRequst
 {
     
     
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[UserInfoSingle sharedManager].userId, @"orderId":self.orderId, } tag:kSXTagGetGoldTradeDetail owner:self signature:YES Type:self.accoutType];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId, @"orderId":self.orderId, } tag:kSXTagGetGoldTradeDetail owner:self signature:YES Type:self.accoutType];
 }
 //开始请求
 - (void)beginPost:(kSXTag)tag

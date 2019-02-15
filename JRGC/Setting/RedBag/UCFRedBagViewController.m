@@ -566,7 +566,7 @@
 }
 #pragma mark - 从网络获取红包
 - (void)getRedBagFromNet {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (userId) {
         NSDictionary *param = @{@"userId": userId};
         [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGetRedBagContent owner:self signature:YES Type:SelectAccoutDefault];
@@ -575,7 +575,7 @@
 #pragma mark - 从网络获取推荐标数据
 - (void)getRecommendPrdClaimFromNet
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (userId) {
         NSDictionary *param = @{@"userId": userId};
         [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagRecommendPrdClaim owner:self signature:YES Type:SelectAccoutDefault];

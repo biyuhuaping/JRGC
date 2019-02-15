@@ -66,7 +66,8 @@
             
             if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 NSString *oepnState =  [resultData objectSafeForKey:@"openStatus"];
-                [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
+                SingleUserInfo.loginData.userInfo.openStatus = [oepnState integerValue];
+                [SingleUserInfo setUserData:SingleUserInfo.loginData];
             }
             
             NSMutableArray *temp = [[NSMutableArray alloc] init];

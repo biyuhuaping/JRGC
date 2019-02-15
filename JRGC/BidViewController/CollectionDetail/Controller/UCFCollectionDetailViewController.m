@@ -842,7 +842,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
         }
     }else if (alertView.tag == 9000) {
         if(buttonIndex == 1){ //测试

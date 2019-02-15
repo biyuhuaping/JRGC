@@ -121,7 +121,8 @@
             if([[dataDict objectSafeForKey:@"status"] intValue] == 1){//授权成功
                 
                 [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
-                [UserInfoSingle sharedManager].zxAuthorization = YES;
+                 SingleUserInfo.loginData.userInfo.zxAuthorization = @"true";
+                [SingleUserInfo setUserData: SingleUserInfo.loginData];
                 [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
                 
 //                UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
@@ -140,7 +141,7 @@
         {
             if([dic[@"ret"] boolValue] == 1){//授权成功
                 [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
-                 [UserInfoSingle sharedManager].p2pAuthorization = YES;
+                  SingleUserInfo.loginData.userInfo.p2pAuthorization = YES;
                 [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
                
        

@@ -46,7 +46,7 @@
     } else {
         [LLLockPassword saveLockPassword:nil];
 //        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
-        [[UserInfoSingle sharedManager] removeUserInfo];
+//        [[UserInfoSingle sharedManager] removeUserInfo];
     }
     _loginView = [[UCFLoginView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight)];
     _loginView.delegate = self;
@@ -68,7 +68,7 @@
     }
     
     if ([_sourceVC isEqualToString:@"errorNum"]) {
-        [[UserInfoSingle sharedManager] removeUserInfo];
+//        [[UserInfoSingle sharedManager] removeUserInfo];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:GCODE];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -232,23 +232,23 @@
             [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:0] forKey:WRANGGCODENUMBER];
 
             [LLLockPassword saveLockPassword:nil];
-            [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:5] forKey:@"nRetryTimesRemain"];
-            [[NSUserDefaults standardUserDefaults] setObject:[Common deleteStrHeadAndTailSpace:_loginView.userNameFieldText] forKey:@"lastLoginName"];
-            NSString *md5Str = _loginView.passwordFieldText.length > 0 ? [UCFToolsMehod md5:[MD5Util MD5Pwd:_loginView.passwordFieldText]] :[UCFToolsMehod md5:@""];
-            NSString *yanQian = [NSString stringWithFormat:@"%@%@%@",_loginView.userNameFieldText,md5Str,dic[@"data"][@"userInfo"][@"time"]];
-            NSString *gcmCode = [(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"promotionCode"];
-            BOOL isCompanyAgent = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isCompanyAgent"] boolValue];
-            
-            [UserInfoSingle sharedManager].goldAuthorization = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"nmAuthorization"] boolValue];
-            [UserInfoSingle sharedManager].zxAuthorization = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"zxAuthorization"] boolValue];
-            
-            [UserInfoSingle sharedManager].isSpecial = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isSpecial"] boolValue];
-            NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
-            [[NSUserDefaults standardUserDefaults] setObject:signatureStr forKey:SIGNATUREAPP];
-            [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:GCMCODE];
-            [[NSUserDefaults standardUserDefaults] setBool:isCompanyAgent forKey:@"isCompanyAgentType" ];
-            [[NSUserDefaults standardUserDefaults] setInteger:self.selectTag forKey:@"selectTag"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:5] forKey:@"nRetryTimesRemain"];
+//            [[NSUserDefaults standardUserDefaults] setObject:[Common deleteStrHeadAndTailSpace:_loginView.userNameFieldText] forKey:@"lastLoginName"];
+//            NSString *md5Str = _loginView.passwordFieldText.length > 0 ? [UCFToolsMehod md5:[MD5Util MD5Pwd:_loginView.passwordFieldText]] :[UCFToolsMehod md5:@""];
+//            NSString *yanQian = [NSString stringWithFormat:@"%@%@%@",_loginView.userNameFieldText,md5Str,dic[@"data"][@"userInfo"][@"time"]];
+//            NSString *gcmCode = [(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"promotionCode"];
+//            BOOL isCompanyAgent = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isCompanyAgent"] boolValue];
+//
+//            SingleUserInfo.loginData.userInfo.goldAuthorization = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"nmAuthorization"] boolValue];
+//            SingleUserInfo.loginData.userInfo.zxAuthorization = [(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"zxAuthorization"];
+//
+//            SingleUserInfo.loginData.userInfo.isSpecial = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isSpecial"] boolValue];
+//            NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
+//            [[NSUserDefaults standardUserDefaults] setObject:signatureStr forKey:SIGNATUREAPP];
+//            [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:GCMCODE];
+//            [[NSUserDefaults standardUserDefaults] setBool:isCompanyAgent forKey:@"isCompanyAgentType" ];
+//            [[NSUserDefaults standardUserDefaults] setInteger:self.selectTag forKey:@"selectTag"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
             
             
     

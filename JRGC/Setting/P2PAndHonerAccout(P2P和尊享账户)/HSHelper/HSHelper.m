@@ -22,11 +22,11 @@
    
       if (accoutType == SelectAccoutTypeHoner) {
         
-        if([UserInfoSingle sharedManager].enjoyOpenStatus < 3){
+        if([SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3){
           messageStr =@"请先登录金融工场网站开通尊享徽商存管账户";
         }
       }else{
-        if([UserInfoSingle sharedManager].openStatus < 3){
+        if(SingleUserInfo.loginData.userInfo.openStatus < 3){
         messageStr =@"请先登录金融工场网站开通微金徽商存管账户";
         }
       }
@@ -37,7 +37,7 @@
 -(BOOL)checkP2POrWJIsAuthorization:(SelectAccoutType)accoutType{
     
     if (accoutType == SelectAccoutTypeHoner) {
-        return [UserInfoSingle sharedManager].zxAuthorization;
+        return SingleUserInfo.loginData.userInfo.zxAuthorization;
     }else{
         return YES;
 //          return [UserInfoSingle sharedManager].p2pAuthorization;
@@ -113,7 +113,7 @@
                 
                 if (![dic[@"data"][@"zxIsAuthorization"] boolValue]) {
                     UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
+                    bankDepositoryAccountVC.openStatus = SingleUserInfo.loginData.userInfo.openStatus;
                     bankDepositoryAccountVC.accoutType = _accoutType;
                     [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
                 } else {
@@ -134,7 +134,7 @@
                 
                 if (![dic[@"data"][@"p2pIsAuthorization"] boolValue]) {//未授权
                     UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
+                    bankDepositoryAccountVC.openStatus = SingleUserInfo.loginData.userInfo.openStatus;
                      bankDepositoryAccountVC.accoutType = _accoutType;
                     [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
                 } else { //已经授权

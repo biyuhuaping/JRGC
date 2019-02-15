@@ -359,7 +359,7 @@
     
 //    [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
-    [[UserInfoSingle sharedManager] removeUserInfo];
+    [SingleUserInfo deleteUserData];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     //退出时清cookis
@@ -578,7 +578,7 @@
 {
 //    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (nil==userId) {
         return;
     }
@@ -675,10 +675,11 @@
             
             [self novicecheck:dic];
             [self zxSwitchCheck:dic];
-            [UserInfoSingle sharedManager].goldIsShow = [[dic objectSafeForKey:@"goldIsShow"] boolValue];
-            [UserInfoSingle sharedManager].transferIsShow = [[dic objectSafeForKey:@"transferIsShow"] boolValue];
-            [UserInfoSingle sharedManager].wjIsShow = [[dic objectSafeForKey:@"wjIsShow"] boolValue];
-            [UserInfoSingle sharedManager].zxIsShow = [[dic objectSafeForKey:@"zxIsShow"] boolValue];
+            SingleUserInfo.loginData.userInfo.goldIsShow = [[dic objectSafeForKey:@"goldIsShow"] boolValue];
+            SingleUserInfo.loginData.userInfo.transferIsShow = [[dic objectSafeForKey:@"transferIsShow"] boolValue];
+            SingleUserInfo.loginData.userInfo.wjIsShow = [[dic objectSafeForKey:@"wjIsShow"] boolValue];
+            SingleUserInfo.loginData.userInfo.zxIsShow = [[dic objectSafeForKey:@"zxIsShow"] boolValue];
+            [SingleUserInfo setUserData:SingleUserInfo.loginData];
             NSString *superviseStr = [dic objectForKey:@"compliance"];
             //监管开关
             if ([superviseStr isEqualToString:@"1"]) {
@@ -787,17 +788,17 @@
             selectedType = @"Gold";
             [self msgSkipToView:selectedType];
         } else if ([urlStr rangeOfString:@"view=coupon"].location != NSNotFound) {
-            if ([UserInfoSingle sharedManager].userId) {
+            if (SingleUserInfo.loginData.userInfo.userId) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"msgSkipToNativeAPP" object:@{@"type":@"coupon"}];
             }
         } else if ([urlStr rangeOfString:@"view=web&url="].location != NSNotFound) {
-            if ([UserInfoSingle sharedManager].userId) {
+            if (SingleUserInfo.loginData.userInfo.userId) {
                 NSString *url1 = [Common paramValueOfUrl:urlStr withParam:@"url"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"msgSkipToNativeAPP" object:
                  @{@"type":@"webUrl",@"value":url1}];
             }
         }else if ([urlStr rangeOfString:@"view=reserve&id="].location != NSNotFound) {
-            if ([UserInfoSingle sharedManager].userId) {
+            if (SingleUserInfo.loginData.userInfo.userId) {
                 NSString *bidID = [Common paramValueOfUrl:urlStr withParam:@"id"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"msgSkipToNativeAPP" object: @{@"type":@"bidID",@"value":bidID}];
             }

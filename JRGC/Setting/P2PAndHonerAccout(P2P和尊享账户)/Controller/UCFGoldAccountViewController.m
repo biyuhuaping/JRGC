@@ -318,20 +318,20 @@
         return;
     } else if ([title isEqualToString:@"变现"]) {
 //        showStr = @"暂时没有可变现的黄金";
-        if ([UserInfoSingle sharedManager].isSpecial || [UserInfoSingle sharedManager].companyAgent) {
+        if (SingleUserInfo.loginData.userInfo.isSpecial || SingleUserInfo.loginData.userInfo.isCompanyAgent) {
             UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户充值" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [alerView show];
             return;
         }
         NSString *tipStr1 = ZXTIP1;
-        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
-        NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+        NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
         if ( enjoyOpenStatus < 3  && openStatus < 3) {//去开户页面
             [self showHSAlert:tipStr1];
             return;
         }
         else{
-            if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
+            if(!SingleUserInfo.loginData.userInfo.goldAuthorization){//去授权页面
                 HSHelper *helper = [HSHelper new];
                 [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
                 return;
@@ -359,20 +359,20 @@
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
 {
-    if ([UserInfoSingle sharedManager].isSpecial || [UserInfoSingle sharedManager].companyAgent) {
+    if (SingleUserInfo.loginData.userInfo.isSpecial || SingleUserInfo.loginData.userInfo.isCompanyAgent) {
         UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户充值" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alerView show];
         return;
     }
     NSString *tipStr1 = ZXTIP1;
-    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
-    NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+    NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     if ( enjoyOpenStatus < 3 && openStatus < 3) {//去开户页面
         [self showHSAlert:tipStr1];
         return;
     }
     else{
-        if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
+        if(!SingleUserInfo.loginData.userInfo.goldAuthorization){//去授权页面
             HSHelper *helper = [HSHelper new];
             [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
             return;
@@ -397,7 +397,7 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
         }
     } else if (alertView.tag == 7000) {
         if (buttonIndex == 1) {

@@ -151,8 +151,8 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
-        NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+        NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
         if (  enjoyOpenStatus < 3  && openStatus < 3) {
             [self showHSAlert:tipStr1];
             return;
@@ -303,8 +303,8 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
-        NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+        NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
         if (  enjoyOpenStatus < 3 && openStatus < 3) {
             [self showHSAlert:tipStr1];
             return;
@@ -335,8 +335,8 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
-        NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+        NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
         if (enjoyOpenStatus < 3 && openStatus < 3) {//去开户页面
             [self showHSAlert:tipStr1];
             return;
@@ -397,7 +397,7 @@
      if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
         }
     }
 }
@@ -414,7 +414,7 @@
 
 - (void)getGoldProFromNetWithPage:(NSString *)page
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary * param;
     if (nil == userId) {
         param = [NSDictionary dictionaryWithObjectsAndKeys:@"20", @"pageSize", page, @"pageNo", nil];

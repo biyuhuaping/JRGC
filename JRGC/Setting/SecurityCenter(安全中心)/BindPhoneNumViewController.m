@@ -249,7 +249,7 @@
 {
     NSString* phoneNumberStr = [self.moddifyPhoneTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    NSString *isCompanyStr  = [NSString stringWithFormat:@"%d",[UserInfoSingle sharedManager].companyAgent];
+    NSString *isCompanyStr  = [NSString stringWithFormat:@"%d",SingleUserInfo.loginData.userInfo.isCompanyAgent];
     NSDictionary *param = @{@"username": phoneNumberStr, @"pwd": [MD5Util MD5Pwd:self.loginPwdTextField.text],@"isCompany":isCompanyStr};
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagValidBindedPhone owner:self signature:YES Type:SelectAccoutTypeP2P ];
 }

@@ -77,7 +77,7 @@
 
 - (void)getTipInfoFromNet
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (userId == nil)
     {
         return;

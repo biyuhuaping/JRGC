@@ -66,9 +66,10 @@
 }
     
 - (void)setDefaultView {
-    [UserInfoSingle sharedManager].level = 1;
-    [UserInfoSingle sharedManager].goldIsNew = YES;
-    [UserInfoSingle sharedManager].zxIsNew = YES;
+    SingleUserInfo.loginData.userLevel = @"1";
+    SingleUserInfo.loginData.userInfo.goldIsNew = YES;
+    SingleUserInfo.loginData.userInfo.zxIsNew = YES;
+    [SingleUserInfo setUserData:SingleUserInfo.loginData];
     for (UIViewController *vc in self.childViewControllers) {
         [vc removeFromParentViewController];
     }

@@ -180,9 +180,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if ([UserInfoSingle sharedManager].userId.length > 0) {
+    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
         //用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
-        switch ([UserInfoSingle sharedManager].openStatus) {
+        switch (SingleUserInfo.loginData.userInfo.openStatus) {
             case 1:
                 self.leftTopbutton.enabled = NO;
                 self.rightTopbutton.enabled = YES;
@@ -200,7 +200,7 @@
             default:
                 break;
         }
-        if ([UserInfoSingle sharedManager].isRisk) {
+        if (SingleUserInfo.loginData.userInfo.isRisk) {
             self.leftBottombutton.enabled = NO;
         } else {
             self.leftBottombutton.enabled = YES;

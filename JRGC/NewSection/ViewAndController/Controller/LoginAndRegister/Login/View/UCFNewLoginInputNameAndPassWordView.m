@@ -94,16 +94,16 @@
         }
         
         // 读取上次登录的账号
-        NSDictionary *dic = [UCFUserOperation getLoginPhoneNum];
+//        NSDictionary *dic = [UCFUserOperation getLoginPhoneNum];
        
-        if (dic != nil && dic.count > 0) {
-            if ([[dic objectForKey:@"userType"] isEqualToString:self.userType]) {
-                NSString *phoneNum = [dic objectForKey:@"phoneNum"];
-                if (phoneNum != nil &&  phoneNum.length > 0) {
-                    _userField.text = phoneNum;
-                }
-            }
-        }
+//        if (dic != nil && dic.count > 0) {
+//            if ([[dic objectForKey:@"userType"] isEqualToString:self.userType]) {
+//                NSString *phoneNum = [dic objectForKey:@"phoneNum"];
+//                if (phoneNum != nil &&  phoneNum.length > 0) {
+//                    _userField.text = phoneNum;
+//                }
+//            }
+//        }
 
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];

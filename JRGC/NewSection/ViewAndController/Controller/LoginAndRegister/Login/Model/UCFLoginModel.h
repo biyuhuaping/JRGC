@@ -31,8 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface UCFLoginUserinfo : BaseModel
-
-@property (nonatomic, assign) BOOL openStatus;
+////用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+@property(nonatomic, assign) NSInteger  openStatus;
 
 @property (nonatomic, assign) BOOL isCompanyAgent;
 
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *jg_ckie;
 
-@property (nonatomic, assign) NSInteger promotionCode;
+@property (nonatomic, copy) NSString *promotionCode;
 
 @property (nonatomic, copy) NSString *userId;
 
@@ -64,6 +64,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL nmAuthorization;
 
+@property(nonatomic, assign) BOOL isRisk;       //是否风险评估
+
+@property(nonatomic, assign) BOOL isAutoBid;    //是否自动投标
+
+@property(nonatomic, assign) BOOL goldAuthorization;//黄金授权标识
+
+@property(nonatomic, assign) BOOL goldIsNew; //是否黄金新手
+
+@property(nonatomic, assign) BOOL zxIsNew; //是否尊享新手
+
+@property(nonatomic, assign)BOOL goldIsShow;
+
+@property(nonatomic, assign)BOOL transferIsShow;
+
+@property(nonatomic, assign)BOOL wjIsShow;
+
+@property(nonatomic, assign)BOOL zxIsShow;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -201,7 +201,7 @@
 }
 
 - (void)checkTapMineNum {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if(nil != userId) {
         NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
         if (index <= 5) {
@@ -251,7 +251,7 @@
     }
 
     if ([self.viewControllers indexOfObject:viewController] == 3) {
-        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if(nil == userId) {
             
 

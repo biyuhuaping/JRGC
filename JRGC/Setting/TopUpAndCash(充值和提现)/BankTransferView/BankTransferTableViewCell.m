@@ -32,7 +32,7 @@
 {
     _secondLab.text = str;
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:str];
-    NSRange range = [str rangeOfString:[UserInfoSingle sharedManager].bankNumTip];
+    NSRange range = [str rangeOfString:SingleUserInfo.bankNumTip];
     [text addAttribute:NSForegroundColorAttributeName value:UIColorWithRGB(0x4aa1f9) range:range];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.lineSpacing = 3;

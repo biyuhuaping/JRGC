@@ -408,7 +408,7 @@
     }else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:self.accoutType Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:self.accoutType Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
         }
     }else {
         if (buttonIndex == 1) {
@@ -565,7 +565,7 @@
 //判断订单状态，提交充值表单
 - (IBAction)gotoPay:(id)sender {
     
-    if ( self.accoutType == SelectAccoutTypeP2P &&  [UserInfoSingle sharedManager].openStatus == 3 && [self checkOrderIsLegitimate]) {
+    if ( self.accoutType == SelectAccoutTypeP2P &&  SingleUserInfo.loginData.userInfo.openStatus == 3 && [self checkOrderIsLegitimate]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP2 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag =  8000;
         [alert show];
@@ -909,7 +909,7 @@
                 _bankNameLabel.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"bankName"]];
             }
             _accountNameLabel.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"realName"]];
-            [UserInfoSingle sharedManager].realName = [coreDict objectSafeForKey: @"realName"];
+            SingleUserInfo.loginData.userInfo.realName = [coreDict objectSafeForKey: @"realName"];
             _cardCodeLabel.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"bankCardNo"]];
             if ([coreDict[@"supportQPass"] boolValue]) {
                 _fastPayImageView.hidden = NO;
@@ -922,10 +922,11 @@
             fee = [NSString stringWithFormat:@"%@",dic[@"data"][@"fee"]];
             if (self.accoutType == SelectAccoutTypeP2P)
             {
-                [UserInfoSingle sharedManager].openStatus = [[coreDict objectSafeForKey:@"openStatus"] integerValue];
+                SingleUserInfo.loginData.userInfo.openStatus = [[coreDict objectSafeForKey:@"openStatus"] integerValue];
             }
             NSString *bankPhone =  [dic[@"data"][@"bankInfo"] objectSafeForKey:@"bankPhone"];
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
+            [SingleUserInfo setUserData:SingleUserInfo.loginData];
           BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];
             if (isSpecial || isCompanyAgent) {
 

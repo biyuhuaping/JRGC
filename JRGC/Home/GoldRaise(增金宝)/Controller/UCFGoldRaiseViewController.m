@@ -155,13 +155,13 @@
 }
 
 - (void)getGoldIncreaseAccount {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", @"20", @"pageSize", [NSString stringWithFormat:@"%d", self.currentPage], @"pageNo", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldIncrease owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 - (void)getGoldIncreaseList {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }

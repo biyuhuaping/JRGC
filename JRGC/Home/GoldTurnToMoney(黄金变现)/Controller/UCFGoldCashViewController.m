@@ -88,7 +88,7 @@
 
 - (void)getViewDataFromNet
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }
@@ -432,7 +432,7 @@
 }
 
 - (void)cashGold {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (!self.isGoOn && self.goldAveragePrice != nil) {
         self.goldAveragePrice = nil;
     }

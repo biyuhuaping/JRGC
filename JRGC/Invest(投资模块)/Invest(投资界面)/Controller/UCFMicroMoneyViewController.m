@@ -193,7 +193,7 @@
         [self.navigationController pushViewController:batchBidVc animated:YES];
     }
     else if ([homeListHeader.headerTitleLabel.text isEqualToString:@"预约宝"]) {
-        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if (nil == userId) {
             UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
             UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
@@ -206,14 +206,14 @@
         if (!b) {
             return;
         }
-        if (![UserInfoSingle sharedManager].isRisk) {
+        if (!SingleUserInfo.loginData.userInfo.isRisk) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             self.accoutType = SelectAccoutTypeP2P;
             alert.tag =  9000;
             [alert show];
             return;
         }
-        if (![UserInfoSingle sharedManager].isAutoBid) {
+        if (!SingleUserInfo.loginData.userInfo.isAutoBid) {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.isStep = 1;
             batchInvestment.accoutType = SelectAccoutTypeP2P;
@@ -325,7 +325,7 @@
     }
     else  {//预约宝和智存宝
         
-        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if (nil == userId) {
             [self showLoginView];
             return;
@@ -335,14 +335,14 @@
         if (!b) {
             return;
         }
-        if (![UserInfoSingle sharedManager].isRisk) {
+        if (! SingleUserInfo.loginData.userInfo.isRisk) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             self.accoutType = SelectAccoutTypeP2P;
             alert.tag =  9000;
             [alert show];
             return;
         }
-        if (![UserInfoSingle sharedManager].isAutoBid) {
+        if (! SingleUserInfo.loginData.userInfo.isAutoBid) {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.isStep = 1;
             batchInvestment.accoutType = SelectAccoutTypeP2P;
@@ -495,7 +495,7 @@
     NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
     NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
     
-    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ?  SingleUserInfo.loginData.userInfo.openStatus : [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
@@ -535,7 +535,7 @@
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step: SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
         }
     }else if (alertView.tag == 9000) {
         if(buttonIndex == 1){ //测试
@@ -725,7 +725,7 @@
 
 - (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button withModel:(UCFHomeListCellModel *)model
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId =  SingleUserInfo.loginData.userInfo.userId;
     if (nil == userId) {
         UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
         registerControler.sourceVC = @"fromHomeView";
@@ -741,14 +741,14 @@
         if (!b) {
             return;
         }
-        if (![UserInfoSingle sharedManager].isRisk) {
+        if (! SingleUserInfo.loginData.userInfo.isRisk) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             self.accoutType = SelectAccoutTypeP2P;
             alert.tag =  9000;
             [alert show];
             return;
         }
-        if (![UserInfoSingle sharedManager].isAutoBid) {
+        if (! SingleUserInfo.loginData.userInfo.isAutoBid) {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.isStep = 1;
             batchInvestment.accoutType = SelectAccoutTypeP2P;

@@ -131,14 +131,14 @@
     if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
     {
         
-            if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            if (SingleUserInfo.loginData.userInfo.zxIsNew && SingleUserInfo.loginData.userInfo.goldIsNew)
             { // 该情况已处理
            
-            }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            }else if(!SingleUserInfo.loginData.userInfo.zxIsNew && SingleUserInfo.loginData.userInfo.goldIsNew)
             {
                 [rechargeAccoutArray addObject:_honerAccoutCardView];
                 [rechargeAccoutArray addObject:_p2PAccoutCardView];
-            }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
+            }else if(SingleUserInfo.loginData.userInfo.zxIsNew && !SingleUserInfo.loginData.userInfo.goldIsNew)
             {
                 [rechargeAccoutArray addObject:_goldAccoutCardView];
                 [rechargeAccoutArray addObject:_p2PAccoutCardView];
@@ -190,7 +190,7 @@
     p2pCardModel.cardLogoImageName = [_dataDict objectSafeForKey:@"p2pCardLogoUrl"];
     p2pCardModel.cardBgImageName =[_dataDict objectSafeForKey:@"p2pCardBgColor"];
     p2pCardModel.accoutBalanceStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"p2pBalance"]]];
-    if ([UserInfoSingle sharedManager].openStatus == 3)  {
+    if (SingleUserInfo.loginData.userInfo.openStatus == 3)  {
         p2pCardModel.cardDetialStr = @"未设置交易密码";
         p2pCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"p2pCardNum"];;
         p2pCardModel.cardStateStr = @"去设置";
@@ -206,7 +206,7 @@
     honerCardModel.cardLogoImageName = [_dataDict objectSafeForKey:@"zxCardLogoUrl"];// @"card_logo_zx";
     honerCardModel.cardBgImageName =[_dataDict objectSafeForKey:@"zxCardBgColor"]; // @"card_bg_red";
     honerCardModel.accoutBalanceStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"zxBalance"]]];
-    if ([UserInfoSingle sharedManager].enjoyOpenStatus == 3)  {
+    if ([SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] == 3)  {
         honerCardModel.cardDetialStr = @"未设置交易密码";
         honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];;
         honerCardModel.cardStateStr = @"去设置";
@@ -239,16 +239,16 @@
      */
     
     NSMutableArray *cashAccoutArray = [NSMutableArray new];
-    if([UserInfoSingle sharedManager].openStatus < 3)//微金未开通账户
+    if(SingleUserInfo.loginData.userInfo.openStatus < 3)//微金未开通账户
     {
-        if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) { //尊享未开通账户
-            if ([UserInfoSingle sharedManager].goldAuthorization) {//黄金已开通账户***
+        if ([SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3) { //尊享未开通账户
+            if (SingleUserInfo.loginData.userInfo.goldAuthorization) {//黄金已开通账户***
                 [cashAccoutArray addObject:_goldAccoutCardView];
             }else{//黄金未开通账户
                 //                _goldAccoutCardView.accoutCardModel = honerCardModel;//
             }
         }else{//黄金
-            if ([UserInfoSingle sharedManager].goldAuthorization) {//黄金已开通账户
+            if (SingleUserInfo.loginData.userInfo.goldAuthorization) {//黄金已开通账户
                 [cashAccoutArray addObject:_goldAccoutCardView];
                 [cashAccoutArray addObject:_honerAccoutCardView];
                 
@@ -258,15 +258,15 @@
         }
     }
     else {
-        if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) { //尊享未开通账户
-            if ([UserInfoSingle sharedManager].goldAuthorization) {//黄金已开通账户***
+        if ([SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3) { //尊享未开通账户
+            if (SingleUserInfo.loginData.userInfo.goldAuthorization) {//黄金已开通账户***
                 [cashAccoutArray addObject:_goldAccoutCardView];
                 [cashAccoutArray addObject:_p2PAccoutCardView];
             }else{
                 [cashAccoutArray addObject:_p2PAccoutCardView];
             }
         }else{//黄金开通账户
-            if ([UserInfoSingle sharedManager].goldAuthorization) {//黄金已开通账户***
+            if (SingleUserInfo.loginData.userInfo.goldAuthorization) {//黄金已开通账户***
                 [cashAccoutArray addObject:_goldAccoutCardView];
                 [cashAccoutArray addObject:_honerAccoutCardView];
                 [cashAccoutArray addObject:_p2PAccoutCardView];
@@ -279,23 +279,23 @@
     if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
     {
 
-            if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            if (SingleUserInfo.loginData.userInfo.zxIsNew && SingleUserInfo.loginData.userInfo.goldIsNew)
             { // 该情况已经处理了
                 
-            }else if( ![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            }else if( !SingleUserInfo.loginData.userInfo.zxIsNew && SingleUserInfo.loginData.userInfo.goldIsNew)
             {
                 [cashAccoutArray removeAllObjects];
                 
                 [cashAccoutArray addObject:_honerAccoutCardView];
-                if ([UserInfoSingle sharedManager].openStatus > 3)//微金开户添加到数组里
+                if (SingleUserInfo.loginData.userInfo.openStatus > 3)//微金开户添加到数组里
                 {
                        [cashAccoutArray addObject:_p2PAccoutCardView];
                 }
-            }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
+            }else if(SingleUserInfo.loginData.userInfo.zxIsNew && !SingleUserInfo.loginData.userInfo.goldIsNew)
             {
                 [cashAccoutArray removeAllObjects];
                 [cashAccoutArray addObject:_goldAccoutCardView];
-                if ([UserInfoSingle sharedManager].openStatus > 3)//微金开户添加到数组里
+                if (SingleUserInfo.loginData.userInfo.openStatus > 3)//微金开户添加到数组里
                 {
                     [cashAccoutArray addObject:_p2PAccoutCardView];
                 }
@@ -378,7 +378,7 @@
            self.accoutType = SelectAccoutTypeP2P;
            if( [self checkUserCanInvestIsDetail:NO type:self.accoutType]){ //判断是否设置交易密码
 //               [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-               NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
+               NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)SingleUserInfo.loginData.userInfo.openStatus];
                NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
                [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
            }
@@ -388,7 +388,7 @@
            self.accoutType = SelectAccoutTypeHoner;
            if( [self checkUserCanInvestIsDetail:NO type:self.accoutType]){ //判断是否设置交易密码
 //               [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-               NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
+               NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)SingleUserInfo.loginData.userInfo.openStatus];
                NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
                [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
            }
@@ -408,7 +408,7 @@
                if([cardModel.cardDetialStr  hasSuffix:@"开户"] || [cardModel.cardStateStr hasSuffix:@"开户"]  || [cardModel.cardDetialStr hasSuffix:@"绑卡"] || [cardModel.cardStateStr hasSuffix:@"绑卡"])
                {
                    HSHelper *helper = [HSHelper new];
-                   [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController isPresentView:YES];
+                   [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController isPresentView:YES];
                }
                else
                {
@@ -438,7 +438,7 @@
                else if([cardModel.cardDetialStr  hasSuffix:@"开户"] || [cardModel.cardStateStr hasSuffix:@"开户"]  || [cardModel.cardDetialStr hasSuffix:@"绑卡"] || [cardModel.cardStateStr hasSuffix:@"绑卡"])
                {
                    HSHelper *helper = [HSHelper new];
-                   [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController isPresentView:YES];
+                   [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController isPresentView:YES];
                }
                else
                {
@@ -456,11 +456,11 @@
                if([cardModel.cardDetialStr  hasSuffix:@"开户"] || [cardModel.cardStateStr hasSuffix:@"开户"]  )//去尊享开户
                {
                    HSHelper *helper = [HSHelper new];
-                   [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController isPresentView:YES];
+                   [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController isPresentView:YES];
                }
                else if([cardModel.cardDetialStr  hasSuffix:@"授权"] || [cardModel.cardStateStr hasSuffix:@"授权"])//去黄金授权页面
                {
-                   if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
+                   if (SingleUserInfo.loginData.userInfo.openStatus < 3 && [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3 )
                    {
                       [[HSHelper new] pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
                    }
@@ -525,7 +525,7 @@
     NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
     NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
     
-    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus :[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
@@ -563,12 +563,12 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController isPresentView:YES];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController isPresentView:YES];
         }
     }else if (alertView.tag == 8010) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController isPresentView:YES];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController isPresentView:YES];
         }
     }
 }

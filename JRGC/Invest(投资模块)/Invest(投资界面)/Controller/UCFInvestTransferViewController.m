@@ -152,7 +152,7 @@
     NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
     NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
     
-    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus :[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
@@ -190,13 +190,13 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
         }
     }
     if (alertView.tag == 8010) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
         }
     }
 }
@@ -288,8 +288,9 @@
             if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
                 NSString *enjoyOpenStatus =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"zxOpenStatus"];
-                [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
-                [UserInfoSingle sharedManager].enjoyOpenStatus = [enjoyOpenStatus integerValue];
+                SingleUserInfo.loginData.userInfo.openStatus = [oepnState integerValue];
+                SingleUserInfo.loginData.userInfo.zxOpenStatus = enjoyOpenStatus ;
+                [SingleUserInfo setUserData:SingleUserInfo.loginData];
             }
             if (currentPage == 1) {
                 [self.dataArray removeAllObjects];

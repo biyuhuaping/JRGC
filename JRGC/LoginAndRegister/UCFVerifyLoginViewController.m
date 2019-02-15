@@ -152,8 +152,8 @@
     
     
     NSString* phoneNumberStr = [_passWordTfd.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *isCompanyStr  = [NSString stringWithFormat:@"%d",[UserInfoSingle sharedManager].companyAgent];
-    NSDictionary *param = @{@"username": [[NSUserDefaults standardUserDefaults] objectForKey:LOGINNAME], @"pwd": [MD5Util MD5Pwd:phoneNumberStr],@"isCompany":isCompanyStr};
+    NSString *isCompanyStr  = [NSString stringWithFormat:@"%d",SingleUserInfo.loginData.userInfo.isCompanyAgent];
+    NSDictionary *param = @{@"username":SingleUserInfo.loginData.userInfo.loginName, @"pwd": [MD5Util MD5Pwd:phoneNumberStr],@"isCompany":isCompanyStr};
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagValidBindedPhone owner:self signature:YES Type:SelectAccoutTypeP2P ];
 }
 

@@ -58,7 +58,7 @@
     _phoneNumberTextField.leftView = view1;
     _phoneNumberTextField.leftViewMode = UITextFieldViewModeAlways;
     _phoneNumberTextField.backgroundColor = UIColorWithRGB(0xf4f4f4);
-    _phoneNumberTextField.text = [UserInfoSingle sharedManager].mobile;
+    _phoneNumberTextField.text = SingleUserInfo.loginData.userInfo.mobile;
     _phoneNumberTextField.textColor = UIColorWithRGB(0x999999);
     _phoneNumberTextField.userInteractionEnabled = NO;
     [self.phoneNumberTextField addTarget:self action:@selector(formatPhoneNumber:) forControlEvents:UIControlEventEditingChanged];
@@ -184,17 +184,17 @@
 -(void)getVerificationCodeNetworkRequest:(BOOL)isFirst  isVmsType:(NSString *)vmsType{
     _isfirstSendCode = isFirst;
     if (isFirst) {
-        NSDictionary *dataDic =@{@"destPhoneNo":@"",@"isVms":vmsType ,@"userId":[UserInfoSingle sharedManager].userId,@"type":@"10"};
+        NSDictionary *dataDic =@{@"destPhoneNo":@"",@"isVms":vmsType ,@"userId":SingleUserInfo.loginData.userInfo.userId,@"type":@"10"};
         [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
     }else{
         NSString* str = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-        NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:str],@"isVms":vmsType,@"type":@"9",@"userId":[UserInfoSingle sharedManager].userId};
+        NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:str],@"isVms":vmsType,@"type":@"9",@"userId":SingleUserInfo.loginData.userInfo.userId};
         [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
     }
 }
 #pragma mark -验证注册手机号验证码网络请求
 -(void)verifyRigisterPhoneNunmberHttpRequst{
-    NSDictionary *dataDic =@{@"userId":[UserInfoSingle sharedManager].userId,@"validateCode":_codeTextField.text};
+    NSDictionary *dataDic =@{@"userId":SingleUserInfo.loginData.userInfo.userId,@"validateCode":_codeTextField.text};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagValidateOldPhoneNo owner:self signature:YES Type:self.accoutType];
 }
 #pragma mark -修改银行预留手机号网络请求

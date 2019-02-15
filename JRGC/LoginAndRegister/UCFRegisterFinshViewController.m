@@ -88,7 +88,7 @@
 #pragma mark - 请求网络及回调
 //获取注册成功活动反的数据
 - (void)getRegistResultData{
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
 //    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",userId];//5644  931407
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId", nil];
     

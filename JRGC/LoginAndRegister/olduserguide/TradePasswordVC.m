@@ -189,7 +189,7 @@
         [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
         return;
     }else if (textField == _textField2){
-        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
+        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus;
         
         //机构用户
         if (_isCompanyAgent && ![Common isEnglishAndNumbers:textField.text]) {
@@ -244,7 +244,7 @@
                     _textField1.delegate = self;
                     _textField1.font = [UIFont systemFontOfSize:14];
                     _textField1.textColor = UIColorWithRGB(0x555555);
-                    _textField1.placeholder = [UserInfoSingle sharedManager].realName;
+                    _textField1.placeholder = SingleUserInfo.loginData.userInfo.realName;
                     _textField1.userInteractionEnabled = NO;
                     [cell.contentView addSubview:_textField1];
                 }
@@ -275,7 +275,7 @@
                     _textField3.clearButtonMode = UITextFieldViewModeWhileEditing;
                     _textField3.keyboardType = UIKeyboardTypeNumberPad;
 //                    _textField3.delegate = self;
-                    _textField3.placeholder = [UserInfoSingle sharedManager].mobile;
+                    _textField3.placeholder = SingleUserInfo.loginData.userInfo.mobile;
                     _textField3.userInteractionEnabled = NO;
                     _textField3.font = [UIFont systemFontOfSize:14];
                     _textField3.textColor = UIColorWithRGB(0x555555);
@@ -325,7 +325,7 @@
                     _textField3.clearButtonMode = UITextFieldViewModeWhileEditing;
                     _textField3.keyboardType = UIKeyboardTypeNumberPad;
                     //                _textField3.delegate = self;
-                    _textField3.placeholder = [UserInfoSingle sharedManager].mobile;
+                    _textField3.placeholder = SingleUserInfo.loginData.userInfo.mobile;
                     _textField3.userInteractionEnabled = NO;
                     _textField3.font = [UIFont systemFontOfSize:14];
                     _textField3.textColor = UIColorWithRGB(0x555555);
@@ -421,7 +421,7 @@
             _timer = [HWWeakTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
             _counter = 59;
 //             [AuxiliaryFunc showToastMessage:@"已发送,请等待接收，60秒后可再次获取" withView:self.view];
-            _label.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",[UserInfoSingle sharedManager].mobile];
+            _label.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",SingleUserInfo.loginData.userInfo.mobile];
             [_label setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
             _label.hidden = NO;
             self.label.userInteractionEnabled = YES;

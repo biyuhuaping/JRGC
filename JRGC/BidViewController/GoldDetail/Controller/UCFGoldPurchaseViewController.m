@@ -864,13 +864,13 @@
 #pragma mark -黄金充值
 -(void)gotoGoldRechargeVC
 {
-    if ([UserInfoSingle sharedManager].isSpecial  ||[UserInfoSingle sharedManager].companyAgent) {
+    if (SingleUserInfo.loginData.userInfo.isSpecial  ||SingleUserInfo.loginData.userInfo.isCompanyAgent) {
         UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户充值" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         //        alerView.tag = 1002;
         [alerView show];
         return;
     }
-    if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
+    if(!SingleUserInfo.loginData.userInfo.goldAuthorization){//去授权页面
         HSHelper *helper = [HSHelper new];
         [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:_needToRechareStr];
         return;
@@ -899,7 +899,7 @@
         {
             if (buttonIndex == 1) {
                 HSHelper *helper = [HSHelper new];
-                [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+                [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
             }
 
         }
@@ -1027,7 +1027,7 @@
      
      */
 
-    if ([UserInfoSingle sharedManager].isSpecial ||[UserInfoSingle sharedManager].companyAgent) {
+    if (SingleUserInfo.loginData.userInfo.isSpecial ||SingleUserInfo.loginData.userInfo.isCompanyAgent) {
         UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
 //        alerView.tag = 1002;
         [alerView show];
@@ -1035,7 +1035,7 @@
     }
     
     
-    if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
+    if(!SingleUserInfo.loginData.userInfo.goldAuthorization){//去授权页面
         HSHelper *helper = [HSHelper new];
         [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"GoldPurchaseVC"];
         return;

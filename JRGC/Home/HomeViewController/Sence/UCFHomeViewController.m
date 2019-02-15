@@ -269,12 +269,12 @@
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
 
-    if (![UserInfoSingle sharedManager].userId)
+    if (!SingleUserInfo.loginData.userInfo.userId)
     {
         [self showLoginView];
     }
     else{
-        if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+        if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
         {//吐司：此活动暂时未对企业用户开放
            [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
         }
@@ -282,7 +282,7 @@
 //            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])
 //            {
                 __weak typeof(self) weakSelf = self;
-                NSDictionary *parameter = @{@"Id": @"", @"userId": [UserInfoSingle sharedManager].userId, @"proType": @"",@"type":@"11",@"status":@""};
+                NSDictionary *parameter = @{@"Id": @"", @"userId": SingleUserInfo.loginData.userInfo.userId, @"proType": @"",@"type":@"11",@"status":@""};
                 [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                     
                     NSDictionary *dic = (NSDictionary *)result;
@@ -330,7 +330,7 @@
         UINavigationController *nav = app.tabBarController.selectedViewController;
         [nav pushViewController:web animated:YES];
     } else if ([dic[@"type"] isEqualToString:@"bidID"]){
-        if ([UserInfoSingle sharedManager].openStatus > 3) {
+        if (SingleUserInfo.loginData.userInfo.openStatus > 3) {
             UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
 //            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, dic[@"value"]];
             facReservedWeb.navTitle = @"工场预约";
@@ -372,7 +372,7 @@
     CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];
     self.cycleImageVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, cycleImageViewHeight);
     self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (userId) {
         self.navView.giftButton.hidden = NO;
         self.navView.giftButton.alpha = 0.7;
@@ -490,7 +490,7 @@
                 else{
                     
                     if([self.cycleImageVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户,需要重新梳理
-                                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3",@"status":model.status};
+                                NSDictionary *parameter = @{@"Id": model.Id, @"userId": SingleUserInfo.loginData.userInfo.userId, @"proType": model.type,@"type":@"3",@"status":model.status};
                                 [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                     
                                     NSDictionary *dic = (NSDictionary *)result;
@@ -532,14 +532,14 @@
             if (!b) {
                 return;
             }
-            if (![UserInfoSingle sharedManager].isAutoBid) {
+            if (!SingleUserInfo.loginData.userInfo.isAutoBid) {
                 UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
                 batchInvestment.isStep = 1;
                 batchInvestment.accoutType = SelectAccoutTypeP2P;
                 [self.navigationController pushViewController:batchInvestment animated:YES];
                 return;
             }
-            if (![UserInfoSingle sharedManager].isRisk) {
+            if (!SingleUserInfo.loginData.userInfo.isRisk) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
                 self.accoutType = SelectAccoutTypeP2P;
                 alert.tag =  9000;
@@ -588,7 +588,7 @@
                 
                 if ([self checkUserCanInvestIsDetail:YES type:self.accoutType])
                 {
-                    NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"9"};
+                    NSDictionary *parameter = @{@"Id": model.Id, @"userId": SingleUserInfo.loginData.userInfo.userId, @"proType": model.type,@"type":@"9"};
                     [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result)
                     {
                         [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
@@ -643,7 +643,7 @@
                     }
                     if([self checkUserCanInvestIsDetail:NO type:self.accoutType]){//
                         
-                        NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4",@"status":model.status};
+                        NSDictionary *parameter = @{@"Id": model.Id, @"userId": SingleUserInfo.loginData.userInfo.userId, @"proType": model.type,@"type":@"4",@"status":model.status};
                         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                             
                             if ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"0"]) {
@@ -710,14 +710,14 @@
             if (!b) {
                 return;
             }
-            if (![UserInfoSingle sharedManager].isRisk) {
+            if (!SingleUserInfo.loginData.userInfo.isRisk) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
                 self.accoutType = SelectAccoutTypeP2P;
                 alert.tag =  9000;
                 [alert show];
                 return;
             }
-            if (![UserInfoSingle sharedManager].isAutoBid) {
+            if (!SingleUserInfo.loginData.userInfo.isAutoBid) {
                 UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
                 batchInvestment.isStep = 1;
                 batchInvestment.accoutType = SelectAccoutTypeP2P;
@@ -760,7 +760,7 @@
                     }
                     if([self checkUserCanInvestIsDetail:NO type:self.accoutType]){//
                             
-                            NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"10"};
+                            NSDictionary *parameter = @{@"Id": model.Id, @"userId": SingleUserInfo.loginData.userInfo.userId, @"proType": model.type,@"type":@"10"};
                             [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                 NSString *rstcode = [result objectForKey:@"status"];
                                 [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
@@ -870,14 +870,14 @@
         if (!b) {
             return;
         }
-        if (![UserInfoSingle sharedManager].isAutoBid) {
+        if (!SingleUserInfo.loginData.userInfo.isAutoBid) {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.isStep = 1;
             batchInvestment.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:batchInvestment animated:YES];
             return;
         }
-        if (![UserInfoSingle sharedManager].isRisk) {
+        if (!SingleUserInfo.loginData.userInfo.isRisk) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             self.accoutType = SelectAccoutTypeP2P;
             alert.tag =  9000;
@@ -903,8 +903,8 @@
 -(void)gotoGoldInvestVC:(UCFHomeListCellModel *)model{
     
     NSString *tipStr1 = ZXTIP1;
-    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
-    NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+    NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     if ( enjoyOpenStatus < 3  && openStatus < 3) {
         [self showHSAlert:tipStr1];
         return;
@@ -962,8 +962,8 @@
 -(void)gotoGoldDetailVC:(UCFHomeListCellModel *)model{
     
     NSString *tipStr1 = ZXTIP1;
-    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
-    NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+    NSInteger enjoyOpenStatus = SingleUserInfo.loginData.userInfo.zxOpenStatus;
     if ( enjoyOpenStatus < 3  && openStatus < 3) {
         [self showHSAlert:tipStr1];
         return;
@@ -1101,7 +1101,7 @@
 - (void)refreshUI:(NSNotification *)noty
 {
     __weak typeof(self) weakSelf = self;
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (userId) {
         self.navView.giftButton.hidden = NO;
         self.navView.giftButton.alpha = 0.7;
@@ -1121,7 +1121,7 @@
 {
     __weak typeof(self) weakSelf = self;
 
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (userId) {
         self.navView.giftButton.hidden = NO;
         self.navView.giftButton.alpha = 0.7;
@@ -1213,7 +1213,7 @@
             break;
             
         case 6: {
-            NSString *userId = [UserInfoSingle sharedManager].userId;
+            NSString *userId = SingleUserInfo.loginData.userInfo.userId;
             if (nil == userId) {
                 UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
                 UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
@@ -1226,14 +1226,14 @@
             if (!b) {
                 return;
             }
-            if (![UserInfoSingle sharedManager].isRisk) {
+            if (!SingleUserInfo.loginData.userInfo.isRisk) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
                 self.accoutType = SelectAccoutTypeP2P;
                 alert.tag =  9000;
                 [alert show];
                 return;
             }
-            if (![UserInfoSingle sharedManager].isAutoBid) {
+            if (!SingleUserInfo.loginData.userInfo.isAutoBid) {
                 UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
                 batchInvestment.isStep = 1;
                 batchInvestment.accoutType = SelectAccoutTypeP2P;
@@ -1273,7 +1273,7 @@
     NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
     NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
     
-    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus :[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
@@ -1317,12 +1317,12 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
         }
     }else if (alertView.tag == 8010) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
         }
     }
     else if (alertView.tag == 9000) {
@@ -1344,12 +1344,12 @@
     } else if (alertView.tag == 8000) {
         if (index == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
         }
     }else if (alertView.tag == 8010) {
         if (index == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
         }
     }
     else if (alertView.tag == 9000) {

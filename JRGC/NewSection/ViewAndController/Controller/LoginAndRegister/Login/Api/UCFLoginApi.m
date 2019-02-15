@@ -44,7 +44,7 @@
  *  @return 封装好的参数
  */
 - (id)requestArgument {
-    NSString *token_id = [UCFUserOperation didReceiveDeviceBlackBox];
+    NSString *token_id = [UserInfoSingle didReceiveDeviceBlackBox];
     NSString *isCompanyBool;
     
     if ([_isCompany isEqualToString:@"个人"]) {

@@ -70,9 +70,9 @@
 - (void)clickRightBtn
 {
     UCFRegisterInputPhoneNumViewController *uc = [[UCFRegisterInputPhoneNumViewController alloc] init];
-    [SingShare.rootNavController pushViewController:uc animated:YES complete:^(BOOL finished) {
-        [SingShare.rootNavController removeViewController:self];
-    }];
+//    [SingShare.rootNavController pushViewController:uc animated:YES complete:^(BOOL finished) {
+//        [SingShare.rootNavController removeViewController:self];
+//    }];
 }
 - (void)addLeftButtons
 {
@@ -91,7 +91,7 @@
 }
 - (void)getToBack
 {
-    [SingShare.rootNavController popViewControllerAnimated:YES];
+//    [SingShare.rootNavController popViewControllerAnimated:YES];
 }
 - (NZLabel *)loginLabel
 {
@@ -155,8 +155,8 @@
         UCFLoginModel *model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
-            [UCFUserOperation setUserData:model.data];
-            [SingShare.rootNavController popToRootViewControllerAnimated:YES];
+//            [UserInfo setUserData:model.data withPassWord:pwd];
+//            [SingShare.rootNavController popToRootViewControllerAnimated:YES];
         }
         else{
             ShowMessage(model.message);

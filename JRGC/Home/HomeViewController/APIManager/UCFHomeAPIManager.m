@@ -220,14 +220,15 @@
             }
             [tempResult setObject:tempArray forKey:@"homelistContent"];
             
-            [UserInfoSingle sharedManager].companyAgent = [[result objectSafeForKey:@"isCompanyAgent"] boolValue];
-            [UserInfoSingle sharedManager].isRisk = [[result objectSafeForKey:@"isRisk"] boolValue];
-            [UserInfoSingle sharedManager].isAutoBid = [[result objectSafeForKey:@"isAutoBid"] boolValue];
-            [UserInfoSingle sharedManager].p2pAuthorization = [[result objectSafeForKey:@"p2pAuthorization"] boolValue];
-            [UserInfoSingle sharedManager].zxAuthorization = [[result objectSafeForKey:@"zxAuthorization"] boolValue];
-            [UserInfoSingle sharedManager].goldAuthorization = [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
-            [UserInfoSingle sharedManager].openStatus = [[result objectSafeForKey:@"openStatus"] integerValue];
-            [UserInfoSingle sharedManager].enjoyOpenStatus = [[result objectSafeForKey:@"zxOpenStatus"] integerValue];
+            SingleUserInfo.loginData.userInfo.isCompanyAgent = [[result objectSafeForKey:@"isCompanyAgent"] boolValue];
+            SingleUserInfo.loginData.userInfo.isRisk = [[result objectSafeForKey:@"isRisk"] boolValue];
+            SingleUserInfo.loginData.userInfo.isAutoBid = [[result objectSafeForKey:@"isAutoBid"] boolValue];
+            SingleUserInfo.loginData.userInfo.p2pAuthorization = [[result objectSafeForKey:@"p2pAuthorization"] boolValue];
+            SingleUserInfo.loginData.userInfo.zxAuthorization = [result objectSafeForKey:@"zxAuthorization"];
+            SingleUserInfo.loginData.userInfo.goldAuthorization = [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
+            SingleUserInfo.loginData.userInfo.openStatus = [[result objectSafeForKey:@"openStatus"] integerValue];
+            SingleUserInfo.loginData.userInfo.zxOpenStatus  = [result objectSafeForKey:@"zxOpenStatus"] ;
+            [SingleUserInfo setUserData:SingleUserInfo.loginData];
             
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             [tempResult setObject:homelistModel forKey:@"listInfo"];

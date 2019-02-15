@@ -121,23 +121,23 @@
                 [pieChatModel2.pieChartTitleArray  removeObjectAtIndex:1];
                 [pieChatModel2.pieChartTitleArray  removeObject:@"已用工豆(元)"];
             }
-            if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
+            if(SingleUserInfo.superviseSwitch)//监管开关打开
             {
     
-                if([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+                if(SingleUserInfo.loginData.userInfo.zxIsNew && SingleUserInfo.loginData.userInfo.goldIsNew)
                 {
                     [pieChatModel2.pieChartDataArray removeLastObject];
                     [pieChatModel2.pieChartTitleArray  removeLastObject];
              
                     self.dataArray = @[pieChatModel,pieChatModel2];
-                }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew){
+                }else if(!SingleUserInfo.loginData.userInfo.zxIsNew && SingleUserInfo.loginData.userInfo.goldIsNew){
                     
                     [pieChatModel1.pieChartDataArray removeLastObject];
                     [pieChatModel1.pieChartTitleArray  removeLastObject];
                     [pieChatModel2.pieChartDataArray removeLastObject];
                     [pieChatModel2.pieChartTitleArray  removeLastObject];
                     self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
-                }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew){
+                }else if(SingleUserInfo.loginData.userInfo.zxIsNew && !SingleUserInfo.loginData.userInfo.goldIsNew){
                     [pieChatModel1.pieChartDataArray removeObjectAtIndex:1];
                     [pieChatModel1.pieChartTitleArray  removeObjectAtIndex:1];
                     self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];

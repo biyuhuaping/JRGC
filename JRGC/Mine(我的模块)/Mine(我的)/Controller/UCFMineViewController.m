@@ -107,7 +107,7 @@
     switch (type) {
         case 0:{//工场码
             UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE], [[UserInfoSingle sharedManager].gender intValue]];
+            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%ld&sex=%d",(long)SingleUserInfo.loginData.userInfo.promotionCode , [SingleUserInfo.loginData.userInfo.gender intValue]];
             [self.navigationController pushViewController:subVC animated:YES];
         }
             break;
@@ -132,7 +132,7 @@
 //    self.navigationController.navigationBarHidden = YES;
      [self.navigationController setNavigationBarHidden:YES animated:YES];
     NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
-    if (index == 0 && [UserInfoSingle sharedManager].userId != nil) {
+    if (index == 0 && SingleUserInfo.loginData.userInfo.userId != nil) {
         index += 1;
         [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"tapMineNum"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -300,7 +300,8 @@
     [self.tableView.header endRefreshing];
     if ([result isKindOfClass:[UCFUserBenefitModel class]]) {
         self.benefitModel = result;
-        [UserInfoSingle sharedManager].gcm_code = self.benefitModel.promotionCode;
+        SingleUserInfo.loginData.userInfo.promotionCode = self.benefitModel.promotionCode;
+        [SingleUserInfo setUserData:SingleUserInfo.loginData];
         self.mineFooterView.benefit = result;
         self.mineHeaderView.userBenefitModel = result;
         
@@ -336,18 +337,18 @@
 {
     switch (section) {
         case 0: {
-            if ([UserInfoSingle sharedManager].userId) {
+            if (SingleUserInfo.loginData.userInfo.userId) {
                 if ([UserInfoSingle sharedManager].superviseSwitch) {
-                        if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                        if (SingleUserInfo.loginData.userInfo.goldIsNew && SingleUserInfo.loginData.userInfo.zxIsNew) {
                             return 1;
                         }
-                        else if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                        else if (SingleUserInfo.loginData.userInfo.goldIsNew && !SingleUserInfo.loginData.userInfo.zxIsNew) {
                             return 2;
                         }
-                        else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                        else if (!SingleUserInfo.loginData.userInfo.goldIsNew && SingleUserInfo.loginData.userInfo.zxIsNew) {
                             return 2;
                         }
-                        else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                        else if (!SingleUserInfo.loginData.userInfo.goldIsNew && !SingleUserInfo.loginData.userInfo.zxIsNew) {
                             return 3;
                         }
                 }
@@ -384,7 +385,7 @@
         if (indexPath.row == 0) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_wj"];
             cell.titleDesLabel.text = @"微金账户";
-            if ([UserInfoSingle sharedManager].openStatus > 2) {
+            if (SingleUserInfo.loginData.userInfo.openStatus > 2) {
                 cell.valueLabel.text = self.assetModel.p2pCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.p2pCashBalance] : [NSString stringWithFormat:@"¥0.00"];
                 cell.describeLabel.text = self.benefitModel.repayPerDateWJ.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateWJ] : @"最近无回款";
                 cell.descriLabel.hidden = NO;
@@ -397,10 +398,10 @@
         }
         else if (indexPath.row == 1) {
             if ([UserInfoSingle sharedManager].superviseSwitch) {
-                if (![UserInfoSingle sharedManager].zxIsNew) {
+                if (!SingleUserInfo.loginData.userInfo.zxIsNew) {
                     cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
                     cell.titleDesLabel.text = @"尊享账户";
-                    if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
+                    if ([SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] > 2) {
                         cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
                         cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
                         cell.descriLabel.hidden = NO;
@@ -415,7 +416,7 @@
                     cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
                     cell.valueLabel.textColor = UIColorWithRGB(0xffa811);
                     cell.titleDesLabel.text = @"黄金账户";
-                    if ([UserInfoSingle sharedManager].goldAuthorization)
+                    if (SingleUserInfo.loginData.userInfo.goldAuthorization)
                     {
                         cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
                         cell.describeLabel.text = self.benefitModel.repayPerDateNM;
@@ -430,7 +431,7 @@
             else {
                 cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
                 cell.titleDesLabel.text = @"尊享账户";
-                if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
+                if ([SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] > 2) {
                     cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
                     cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
                     cell.descriLabel.hidden = NO;
@@ -446,7 +447,7 @@
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
             cell.valueLabel.textColor = UIColorWithRGB(0xffa811);
             cell.titleDesLabel.text = @"黄金账户";
-            if ([UserInfoSingle sharedManager].goldAuthorization)
+            if (SingleUserInfo.loginData.userInfo.goldAuthorization)
             {
                 cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
                 cell.describeLabel.text = self.benefitModel.repayPerDateNM;
@@ -496,7 +497,7 @@
         }
         else if([cell.titleDesLabel.text hasPrefix:@"黄金"]){
             
-            if([UserInfoSingle sharedManager].goldAuthorization)
+            if(SingleUserInfo.loginData.userInfo.goldAuthorization)
             {
                 UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
                 subVC.homeView = weakSelf;
@@ -505,14 +506,14 @@
             else
             {
                     HSHelper *helper = [HSHelper new];
-                    if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
+                    if (SingleUserInfo.loginData.userInfo.openStatus < 3 && [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3 )
                     {
                        
                         if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {//先授权
                             [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
                             return;
                         }
-                        [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+                        [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
                     }
                     else
                     {
@@ -615,10 +616,10 @@
    
     
     //监管开关 打开时 等级不足VIP1 且未投资过尊享且未投资过黄金项目的用户 直接进入充值页面
-    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+    if(SingleUserInfo.superviseSwitch && SingleUserInfo.loginData.userInfo.zxIsNew && SingleUserInfo.loginData.userInfo.goldIsNew)
     {
         self.mineHeaderView.cashButton.enabled = YES;
-        if([UserInfoSingle sharedManager].openStatus < 3 )//微金未开通账户
+        if(SingleUserInfo.loginData.userInfo.openStatus < 3 )//微金未开通账户
         {
             [AuxiliaryFunc showToastMessage:@"没有可提现的账户" withView:self.view];
             return;
@@ -643,7 +644,7 @@
         }
     }
     else{
-        if([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 && ![UserInfoSingle sharedManager].goldAuthorization)//微金未开通账户
+        if(SingleUserInfo.loginData.userInfo.openStatus < 3 && [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3 && !SingleUserInfo.loginData.userInfo.goldAuthorization)//微金未开通账户
         {
             [AuxiliaryFunc showToastMessage:@"没有可提现的账户" withView:self.view];
             self.mineHeaderView.cashButton.enabled = YES;
@@ -670,7 +671,7 @@
 //    vc.navTitle = @"会员等级";
 //    [self.navigationController pushViewController:vc animated:YES];
 //
-    if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+    if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
     {//吐司：此活动暂时未对企业用户开放
         [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
     }
@@ -693,7 +694,7 @@
     NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
     NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
     
-    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus :[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
@@ -731,19 +732,19 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
         }
     }else if (alertView.tag == 8010) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
         }
     }
     else if (alertView.tag == 9000) {
         if (buttonIndex == 1) {
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
             if ([UserInfoSingle sharedManager].superviseSwitch) {
-                if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew) {
+                if (SingleUserInfo.loginData.userInfo.zxIsNew && SingleUserInfo.loginData.userInfo.goldIsNew) {
                     str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
                 }
                 else {
@@ -763,7 +764,7 @@
 - (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedCalendarButton:(UIButton *)button
 {
     if ([UserInfoSingle sharedManager].superviseSwitch) {
-        if (![UserInfoSingle sharedManager].zxIsNew) {
+        if (!SingleUserInfo.loginData.userInfo.zxIsNew) {
             UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
             //        backMoneyDetailVC.superViewController = self;
             //    backMoneyCalendarVC.accoutType = self.accoutType;
@@ -805,7 +806,7 @@
     }
     else if ([title isEqualToString:@"我的工贝"]){
         
-        if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+        if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
         {//吐司：此活动暂时未对企业用户开放
             [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
         }
@@ -829,7 +830,7 @@
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }
     else   if ([title isEqualToString:@"签到"]){
-        if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+        if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
         {//吐司：此活动暂时未对企业用户开放
             [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
         }
@@ -862,7 +863,7 @@
         if (!self.assetProofCanClick) {
             return;
         }
-        if ([UserInfoSingle sharedManager].companyAgent) {
+        if (SingleUserInfo.loginData.userInfo.isCompanyAgent) {
             [AuxiliaryFunc showToastMessage:@"企业用户暂不支持开通资产证明，请在个人账户查看" withView:self.view];
             return;
         }

@@ -53,7 +53,6 @@
 
 #import "Image.h"
 
-#import "UCFUserOperation.h"
 //导航
 //#import "UINavigationController+FDFullscreenPopGesture.h"
 //#import "RTRootNavigationController.h"
@@ -235,6 +234,8 @@ return shared##className; \
 #define CURRENT_GOLD_PRICE @"cuurentGoldPrice" //当前黄金价格
 #define BEHIN_GET_GOLD_PRICE @"getCurrentGoldPrice" //获取黄金家价格发起的动作
 #define REGIST_JPUSH    @"regist_jpush"
+#define AWP  @"aawwpp"
+#define LOGINDATA  @"loginData"
 #define CHECK_GOOD_COMMENT          @"checkGoodCommentAlert"
 #define CHECK_UPDATE_ALERT  @"UPDATE_ALERT"
 #define CHECK_ISSHOW_MASKVIEW @"maskViewisShow"

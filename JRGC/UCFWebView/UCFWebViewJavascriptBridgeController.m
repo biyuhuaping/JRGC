@@ -588,8 +588,8 @@
 }
 - (void)getTokenId
 {
-    NSString *jg_ckie = [UserInfoSingle sharedManager].jg_ckie;
-    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSString *jg_ckie = SingleUserInfo.loginData.userInfo.jg_ckie;
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (nil == jg_ckie || nil == userId) {
         return;
     }
@@ -886,7 +886,7 @@
         DDLogDebug(@"这个字符串中有\n");
         TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
         tradePasswordVC.title = @"修改交易密码";
-        tradePasswordVC.isCompanyAgent = [UserInfoSingle sharedManager].companyAgent;
+        tradePasswordVC.isCompanyAgent = SingleUserInfo.loginData.userInfo.isCompanyAgent;
 //        tradePasswordVC.site = [NSString stringWithFormat:@"%ld",self.accoutType];
         tradePasswordVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:tradePasswordVC  animated:YES];
@@ -1516,7 +1516,7 @@
     [dict setValue:[Common getIOSVersion] forKey:@"version"];
     
     if([[NSUserDefaults standardUserDefaults] valueForKey:UUID]){
-        [dict setValue:[UserInfoSingle sharedManager].jg_ckie forKey:@"jg_nyscclnjsygjr"];
+        [dict setValue:SingleUserInfo.loginData.userInfo.jg_ckie forKey:@"jg_nyscclnjsygjr"];
     }
     
 //    是否需要验签

@@ -109,7 +109,7 @@
     [self.passWordVC.view endEditing:YES];
     
     NSString *messege = @"确定返回？";
-    NSInteger step = self.accoutType == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger step = self.accoutType == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus : [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     switch (step) {
         case 1://未开户-->>>新用户开户
         case 2:{//已开户 --->>>老用户(白名单)开户

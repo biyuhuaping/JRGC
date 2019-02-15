@@ -105,7 +105,7 @@
     [fundsBoard addSubSectionViews];
     self.fundsBoardView = fundsBoard;
     
-    if ([UserInfoSingle sharedManager].isShowCouple) {
+    if (SingleUserInfo.isShowCouple) {
         UCFCouponBoard *couponBoard = [UCFCouponBoard linearLayoutWithOrientation:MyOrientation_Vert];
         couponBoard.myHorzMargin = 0;
         couponBoard.myTop = 10;

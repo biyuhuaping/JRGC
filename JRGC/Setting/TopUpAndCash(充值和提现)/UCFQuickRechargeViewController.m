@@ -58,7 +58,7 @@
 }
 - (void)fetchData
 {
-    [UserInfoSingle sharedManager].bankNumTip = @"88888";
+    SingleUserInfo.bankNumTip = @"88888";
     self.dataArr = [NSMutableArray arrayWithCapacity:7];
     [self.dataArr addObject:@"温馨提示"];
     [self.dataArr addObject:@"● 使用快捷支付充值最低金额应大于等于1元；"];
@@ -84,7 +84,7 @@
 - (void)quickRechargeHeadView:(QuickRechargeHeadView *)view rechargeButtonClick:(UIButton *)button
 {
 //    fff
-    if ( self.accoutType == SelectAccoutTypeP2P &&  [UserInfoSingle sharedManager].openStatus == 3 && [self checkOrderIsLegitimate]) {
+    if ( self.accoutType == SelectAccoutTypeP2P &&  SingleUserInfo.loginData.userInfo.openStatus == 3 && [self checkOrderIsLegitimate]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP2 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag =  8000;
         [alert show];
@@ -176,9 +176,9 @@
             if (![coreDict[@"bankName"] isEqual:[NSNull null]]) {
                 _showHeadView.bankName.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"bankName"]];
             }
-            [UserInfoSingle sharedManager].realName = [coreDict objectSafeForKey: @"realName"];
+            SingleUserInfo.loginData.userInfo.realName = [coreDict objectSafeForKey: @"realName"];
             _showHeadView.bankName.text = [NSString stringWithFormat:@"%@(尾号%@)",_showHeadView.bankName.text,[UCFToolsMehod isNullOrNilWithString:coreDict[@"bankBehindFour"]]];
-            [UserInfoSingle sharedManager].bankNumTip = [NSString stringWithFormat:@"尾号(%@)的%@",[UCFToolsMehod isNullOrNilWithString:coreDict[@"bankBehindFour"]],[UCFToolsMehod isNullOrNilWithString:coreDict[@"bankName"]]];
+            SingleUserInfo.bankNumTip = [NSString stringWithFormat:@"尾号(%@)的%@",[UCFToolsMehod isNullOrNilWithString:coreDict[@"bankBehindFour"]],[UCFToolsMehod isNullOrNilWithString:coreDict[@"bankName"]]];
             
             _showHeadView.bankRechargeLimitLab.text = coreDict[@"limitMess"];
             
@@ -187,7 +187,7 @@
             fee = [NSString stringWithFormat:@"%@",dic[@"data"][@"fee"]];
             if (self.accoutType == SelectAccoutTypeP2P)
             {
-                [UserInfoSingle sharedManager].openStatus = [[coreDict objectSafeForKey:@"openStatus"] integerValue];
+                SingleUserInfo.loginData.userInfo.openStatus = [[coreDict objectSafeForKey:@"openStatus"] integerValue];
             }
             NSString *bankPhone =  [dic[@"data"][@"bankInfo"] objectSafeForKey:@"bankPhone"];
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
@@ -279,7 +279,7 @@
     }else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:self.accoutType Step:[UserInfoSingle sharedManager].openStatus nav: ((UIViewController *)self.rootVc).navigationController];
+            [helper pushOpenHSType:self.accoutType Step:SingleUserInfo.loginData.userInfo.openStatus nav: ((UIViewController *)self.rootVc).navigationController];
         }
     }else {
         if (buttonIndex == 1) {
