@@ -40,7 +40,11 @@
 {
     return nil;
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
 - (void)viewDidLoad
 {   
     [super viewDidLoad];

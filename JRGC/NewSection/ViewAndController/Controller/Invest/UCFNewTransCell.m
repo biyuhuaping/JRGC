@@ -120,6 +120,7 @@
     if (!_rateLab) {
         _rateLab = [[UILabel alloc] init];
         _rateLab.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
+        _rateLab.textColor = UIColorWithRGB(0xFF4133);
         _rateLab.text = @"9.5%";
         _rateLab.font = [Color gc_ANC_font:32.0f];
         [_rateLab sizeToFit];
