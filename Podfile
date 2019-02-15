@@ -22,4 +22,6 @@ pod 'CocoaLumberjack'
 
 pod 'RTRootNavigationController', '~> 0.7.1'
 
+pod 'MSWeakTimer', '~> 1.1.0'
+
 end

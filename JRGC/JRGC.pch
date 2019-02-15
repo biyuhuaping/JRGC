@@ -50,6 +50,10 @@
 #import "RTRootNavigationController.h"
 
 #import "GlobalView.h"
+
+#import "Image.h"
+
+#import "UCFUserOperation.h"
 //导航
 //#import "UINavigationController+FDFullscreenPopGesture.h"
 //#import "RTRootNavigationController.h"

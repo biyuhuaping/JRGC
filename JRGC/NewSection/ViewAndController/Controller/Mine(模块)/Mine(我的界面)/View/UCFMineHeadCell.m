@@ -9,6 +9,7 @@
 #import "UCFMineHeadCell.h"
 #import "NZLabel.h"
 #import "UCFNewMineViewController.h"
+#import "UCFMineMyReceiptModel.h"
 @interface UCFMineHeadCell()
 @property (nonatomic, strong) MyRelativeLayout *userMesageLayout;// 用户信息
 
@@ -84,11 +85,11 @@
 {
     if (nil == _topUpWithdrawalLayout) {
         _topUpWithdrawalLayout = [MyRelativeLayout new];
-        _topUpWithdrawalLayout.backgroundColor = [UIColor whiteColor];
+        _topUpWithdrawalLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
         _topUpWithdrawalLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
-        _topUpWithdrawalLayout.myHeight = 235;
+        _topUpWithdrawalLayout.myHeight = 50;
         _topUpWithdrawalLayout.widthSize.equalTo(self.rootLayout.widthSize);
-        _topUpWithdrawalLayout.topPos.equalTo(self.rootLayout.topPos);
+        _topUpWithdrawalLayout.bottomPos.equalTo(self.rootLayout.bottomPos);
         _topUpWithdrawalLayout.myLeft = 0;
     }
     return _topUpWithdrawalLayout;
@@ -97,11 +98,11 @@
 {
     if (nil == _userMesageLayout) {
         _userMesageLayout = [MyRelativeLayout new];
-        _userMesageLayout.backgroundColor = [UIColor whiteColor];
+        _userMesageLayout.backgroundColor = [UIColor redColor];
         _userMesageLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
-        _userMesageLayout.myHeight = 50;
+        _userMesageLayout.myHeight = 235;
         _userMesageLayout.widthSize.equalTo(self.rootLayout.widthSize);
-        _userMesageLayout.bottomPos.equalTo(self.rootLayout.bottomPos);
+        _userMesageLayout.topPos.equalTo(self.rootLayout.topPos);
         _userMesageLayout.myLeft = 0;
         
         
@@ -112,10 +113,10 @@
 {
     if (nil == _headImageBtn) {
         _headImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _headImageBtn.topPos.equalTo(@30);
+        _headImageBtn.topPos.equalTo(self.userMesageLayout.topPos).offset(30);//(@30);
         _headImageBtn.leftPos.equalTo(@15);
         _headImageBtn.myHeight = 40;
-        _headImageBtn.myHeight = 40;
+        _headImageBtn.myWidth = 40;
         _headImageBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [_headImageBtn setImage:[UIImage imageNamed:@"MineUserHead.png"] forState:UIControlStateNormal];
         _headImageBtn.tag = 10001;
@@ -129,8 +130,8 @@
         _messageImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _messageImageBtn.centerYPos.equalTo(self.headImageBtn.centerYPos);
         _messageImageBtn.rightPos.equalTo(@15);
-        _messageImageBtn.myHeight = self.headImageBtn.myHeight;
-        _messageImageBtn.myWidth = self.headImageBtn.myWidth;
+        _messageImageBtn.heightSize.equalTo(self.headImageBtn.heightSize);
+        _messageImageBtn.widthSize.equalTo(self.headImageBtn.widthSize);
         _messageImageBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [_messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon.png"] forState:UIControlStateNormal];
         _messageImageBtn.tag = 10002;
@@ -198,6 +199,8 @@
         [_payBtn setTitle:@"充值" forState:UIControlStateNormal];
         _payBtn.titleLabel.font= [Color gc_Font:14.0];
         [_payBtn setTitleColor:[Color color:PGColorOptionTitleOrange] forState:UIControlStateNormal];
+        [_payBtn setBackgroundColor:[Color color:PGColorOptionThemeWhite]];
+
         _payBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
             //设置圆角的半径
@@ -263,7 +266,7 @@
         _accountBalanceMoneyLabel.rightPos.equalTo(self.topUpWithdrawalLabel.leftPos);
         _accountBalanceMoneyLabel.textAlignment = NSTextAlignmentLeft;
         _accountBalanceMoneyLabel.font = [Color gc_Font:15.0];
-        _accountBalanceMoneyLabel.textColor = [Color color:PGColorOptionTitleOrange];
+        _accountBalanceMoneyLabel.textColor = [Color color:PGColorOptionTitleGray];
         //        [_titleLabel sizeToFit];
     }
     return _accountBalanceMoneyLabel;
@@ -319,9 +322,33 @@
     }
     
 }
-- (void)refreshCellData:(id)data
+
+#pragma mark - 数据重新加载
+- (void)showInfo:(id)model
 {
-    [super refreshCellData:data];
+    UCFMineMyReceiptModel *myModel = model;
+    if (model == nil || ![model isKindOfClass:[UCFMineMyReceiptModel class]]) {
+        self.totalAssetsMoneyLabel.text = @"";//总资产
+        self.expectedInterestMoneyLabel.text = @"";//总待收利息
+        self.accountBalanceMoneyLabel.text = @"";//余额
+        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        self.totalAssetsMoneyLabel.text = myModel.data.total;//总资产
+        self.expectedInterestMoneyLabel.text = myModel.data.totalDueIn;//总待收利息
+        self.accountBalanceMoneyLabel.text = myModel.data.cashBalance;//余额
+        if (myModel.data.unReadMsgCount > 0) {
+            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+        }
+    }
+    [self.totalAssetsMoneyLabel sizeToFit];
+    [self.expectedInterestMoneyLabel sizeToFit];
+    [self.accountBalanceMoneyLabel sizeToFit];
     
 }
 @end

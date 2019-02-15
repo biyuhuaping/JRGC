@@ -24,13 +24,15 @@
 #import "UCFMineViewController.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFNewHomeViewController.h"
+#import "UCFNewMineViewController.h"
+#import "UCFNewLoginViewController.h"
 
 @interface UCFMainTabBarController ()
 
 
-@property (strong, nonatomic) UCFNewHomeViewController *LatestView;
+@property (strong, nonatomic) UCFNewLoginViewController *LatestView;
 @property (strong, nonatomic) UCFInvestViewController *AssignmentView;
-@property (strong, nonatomic) UCFMineViewController *mineView;
+@property (strong, nonatomic) UCFNewMineViewController *mineView;
 @end
 
 @implementation UCFMainTabBarController
@@ -38,16 +40,11 @@
 {
     return nil;
 }
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-//    [self.rt_navigationController setNavigationBarHidden:YES];
-    [self.navigationController setNavigationBarHidden:YES];
 
-}
 - (void)viewDidLoad
 {   
     [super viewDidLoad];
+    
     
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redbag_toLend:) name:@"UCFRedBagViewController_to_lend" object:nil];
@@ -120,12 +117,12 @@
     for (int i=0; i<5; i++) {
         switch (i) {
             case 0:{
-                _LatestView = [[UCFNewHomeViewController alloc] init];
+                _LatestView = [[UCFNewLoginViewController alloc] init];
                 controller = _LatestView;
             }
                 break;
             case 1:{
-                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
+                UCFInvestViewController *invest = [[UCFInvestViewController alloc] initWithNibName:@"UCFInvestViewController" bundle:nil];
                 controller = invest;
                 _AssignmentView = invest;
             }
@@ -147,7 +144,7 @@
             }
                 break;
             case 4:{
-                UCFMineViewController *mine = [[UCFMineViewController alloc] initWithNibName:@"UCFMineViewController" bundle:nil];
+                UCFNewMineViewController *mine = [[UCFNewMineViewController alloc] init];
                 controller = mine;
                 _mineView = mine;
             }
@@ -157,7 +154,7 @@
                 break;
         }
         if (controller) {
-            [vcArray addObject:[[BaseNavigationViewController alloc] initWithRootViewController:controller]];
+            [vcArray addObject:[[RTRootNavigationController alloc] initWithRootViewController:controller]];
             UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:tabbarTitleArray[i] image:[[UIImage imageNamed:tabbarNormalArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:tabbarHighlightArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
             item.tag = i;
             controller.tabBarItem = item;

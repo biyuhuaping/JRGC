@@ -11,48 +11,45 @@
 NS_ASSUME_NONNULL_BEGIN
 @class UCFMineMySimpleInfoData;
 @interface UCFMineMySimpleInfoModel : BaseModel
-@property (nonatomic, assign) CGFloat code;
 
-@property (nonatomic, strong) UCFMineMySimpleInfoData *data;
+@property (nonatomic, assign) NSInteger code;
 
 @property (nonatomic, copy) NSString *message;
 
-@property (nonatomic, assign) CGFloat ver;
+@property (nonatomic, assign) NSInteger ver;
+
+@property (nonatomic, strong) UCFMineMySimpleInfoData *data;
 
 @property (nonatomic, assign) BOOL ret;
-@end
 
+@end
 @interface UCFMineMySimpleInfoData : BaseModel
 
-@property (nonatomic, copy) NSString *realName;
+@property (nonatomic, copy) NSString *memberLever;//用户等级
 
-@property (nonatomic, assign) CGFloat repayPerDateWJ;
+@property (nonatomic, assign) NSInteger coinNum;//可用工贝数
 
-@property (nonatomic, assign) CGFloat couponNumber;
+@property (nonatomic, copy) NSString *realName; //用户称呼
 
-@property (nonatomic, assign) CGFloat repayPerDateNM;
+@property (nonatomic, copy) NSString *promotionCode;//工场码
 
-@property (nonatomic, assign) CGFloat repayPerDateZX;
+@property (nonatomic, copy) NSString *beanExpiring;//即将过期工豆数
 
-@property (nonatomic, copy) NSString *beanAmount;
+@property (nonatomic, copy) NSString *userCenterTicket;//签到用token
 
-@property (nonatomic, assign) CGFloat unReadMsgCount;
+@property (nonatomic, assign) NSInteger couponExpringNum; //即将过期券数量
 
-@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, assign) NSInteger couponNumber;//可用券数量
 
-@property (nonatomic, copy) NSString *hurl;
+@property (nonatomic, copy) NSString *beanAmount;//可用工豆金额
 
-@property (nonatomic, copy) NSString *promotionCode;
+@property (nonatomic, assign) NSInteger unReadMsgCount;//未读消息数量
 
-@property (nonatomic, assign) CGFloat couponExpringNum;
+@property (nonatomic, copy) NSString *sex;//性别
 
-@property (nonatomic, copy) NSString *memberLever;
 
-@property (nonatomic, copy) NSString *score;
-
-@property (nonatomic, copy) NSString *beanExpiring;
-
-@property (nonatomic, copy) NSString *userCenterTicket;
 
 @end
+
+
 NS_ASSUME_NONNULL_END

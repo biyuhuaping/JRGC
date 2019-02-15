@@ -8,6 +8,7 @@
 
 #import "UCFMineActivitiesCell.h"
 #import "NZLabel.h"
+#import "UCFMineMySimpleInfoModel.h"
 @interface UCFMineActivitiesCell()
 @property (nonatomic, strong) MyRelativeLayout *signInLayout;// 签到
 
@@ -78,7 +79,7 @@
         // 初始化视图对象
         
         self.titleTop = 10;
-        self.contentTop = 8;
+        self.contentTop = 3;
         self.imageTop = 5;
         self.rootLayout.backgroundColor = [UIColor clearColor];
      
@@ -131,7 +132,7 @@
         _signInImageView.myTop = self.imageTop;
         _signInImageView.myWidth = 30;
         _signInImageView.myHeight = 30;
-        _signInImageView.image = [UIImage imageNamed:@"list_icon_arrow.png"];
+        _signInImageView.image = [UIImage imageNamed:@"mine_icon_sign.png"];
     }
     return _signInImageView;
 }
@@ -188,7 +189,7 @@
         _cowryImageView.myTop = self.imageTop;
         _cowryImageView.heightSize.equalTo(self.signInImageView.heightSize);
         _cowryImageView.widthSize.equalTo(self.signInImageView.widthSize);
-        _cowryImageView.image = [UIImage imageNamed:@"list_icon_arrow.png"];
+        _cowryImageView.image = [UIImage imageNamed:@"mine_icon_shell.png"];
     }
     return _cowryImageView;
 }
@@ -242,7 +243,7 @@
         _beanImageView.myTop = self.imageTop;
         _beanImageView.heightSize.equalTo(self.signInImageView.heightSize);
         _beanImageView.widthSize.equalTo(self.signInImageView.widthSize);
-        _beanImageView.image = [UIImage imageNamed:@"list_icon_arrow.png"];
+        _beanImageView.image = [UIImage imageNamed:@"mine_icon_been.png"];
     }
     return _beanImageView;
 }
@@ -298,7 +299,7 @@
         _couponImageView.myTop = self.imageTop;
         _couponImageView.heightSize.equalTo(self.signInImageView.heightSize);
         _couponImageView.widthSize.equalTo(self.signInImageView.widthSize);
-        _couponImageView.image = [UIImage imageNamed:@"list_icon_arrow.png"];
+        _couponImageView.image = [UIImage imageNamed:@"mine_icon_coupon.png"];
     }
     return _couponImageView;
 }
@@ -354,7 +355,7 @@
         _inviteImageView.myTop = self.imageTop;
         _inviteImageView.heightSize.equalTo(self.signInImageView.heightSize);
         _inviteImageView.widthSize.equalTo(self.signInImageView.widthSize);
-        _inviteImageView.image = [UIImage imageNamed:@"list_icon_arrow.png"];
+        _inviteImageView.image = [UIImage imageNamed:@"mine_icon_rebate.png"];
     }
     return _inviteImageView;
 }
@@ -385,5 +386,28 @@
     }
     return _inviteContentLabel;
 }
-
+#pragma mark - 数据重新加载
+- (void)showInfo:(id)model
+{
+    UCFMineMySimpleInfoModel *myModel = model;
+    if (myModel != nil && [myModel isKindOfClass:[UCFMineMySimpleInfoModel class]] && myModel.ret) {
+        
+        
+        self.cowryContentLabel.text = [NSString stringWithFormat:@"%zd",myModel.data.coinNum];//工贝
+        self.beanContentLabel.text = myModel.data.beanAmount;// 工豆
+        self.couponContentLabel.text = [NSString stringWithFormat:@"%zd",myModel.data.couponNumber];// 优惠券
+        self.inviteContentLabel.text = myModel.data.promotionCode; // 邀请返利
+    }
+    else
+    {
+        self.cowryContentLabel.text = @"0";//工贝
+        self.beanContentLabel.text = @"0";// 工豆
+        self.couponContentLabel.text = @"0";// 优惠券
+        self.inviteContentLabel.text = @""; // 邀请返利
+    }
+    [self.cowryContentLabel sizeToFit];
+    [self.beanContentLabel sizeToFit];
+    [self.couponContentLabel sizeToFit];
+    [self.inviteContentLabel sizeToFit];
+}
 @end

@@ -7,10 +7,12 @@
 //
 
 #import "UCFBaseViewController.h"
-
+#import "BaseTableView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewMineViewController : UCFBaseViewController
+
+@property (nonatomic, strong) BaseTableView *tableView;
 
 - (void)headCellButtonClick:(UIButton *)btn;
 @end

@@ -17,12 +17,15 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
     PGColorOptionCellSeparatorGray,        //Cell分割线颜色--灰色 0xE3E5EA
     PGColorOptionCellContentBlue,          //Cell内容文字颜色--蓝色色 0x91ACFB
     PGColorOpttonTextRedColor,            //红色字体颜色
+    PGColorOptionTitlerRead,               //文字颜色--红色 FF4133
+    PGColorOptionInputDefaultBlackGray,    //输入框默认文字颜色--灰色B1B5C2
+    PGColorOptionButtonBackgroundColorGray,    //按钮背景颜色--灰色CACBD9
+    PGColorOptionCursorPurple,              //光标背景颜色--灰色8597CD
+    PGColorOptionTitleLoginRead,              //登录标题颜色--红色FF1E2E
     PGColorOpttonBtnBackgroundColor,            //按钮灰色背景颜色CACBD9
     PGColorOpttonRateNoramlTextColor,         //利率字体正常FF4133
     PGColorOpttonRateRedTextColor,          //利率字体提醒 #FFCFB2
     PGColorOpttonSeprateLineColor,          //分割线 #FF7F5B
-
-    
 };
 
 

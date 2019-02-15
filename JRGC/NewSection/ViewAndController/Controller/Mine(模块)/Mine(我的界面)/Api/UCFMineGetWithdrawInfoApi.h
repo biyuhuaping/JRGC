@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFMineGetWithdrawInfoApi : BaseRequest
-
+- (id)initWithPageType:(SelectAccoutType )accoutType;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -82,4 +82,6 @@ _Pragma("clang diagnostic pop")\
 #define PGWeakObj(o) try{}@finally{} __weak typeof(o) o##Weak = o;
 #define PGStrongObj(o) try{}@finally{} __strong typeof(o) o = o##Weak;
 
+#define COUNTDOWNRESMS  @"registeredSMS" //注册短信的倒计时
+#define COUNTDOWNREVMS  @"registeredVMS" //注册语音的倒计时
 #endif /* Macro_h */

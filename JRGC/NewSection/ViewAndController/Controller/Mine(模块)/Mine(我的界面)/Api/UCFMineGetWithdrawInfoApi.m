@@ -9,6 +9,19 @@
 #import "UCFMineGetWithdrawInfoApi.h"
 
 @implementation UCFMineGetWithdrawInfoApi
+{
+    SelectAccoutType _accoutType;
+}
+
+- (id)initWithPageType:(SelectAccoutType )accoutType
+{
+    self = [super init];
+    if (self) {
+
+        _accoutType= accoutType;
+    }
+    return self;
+}
 /**
  *  @author KZ, 17-09-11 20:09:12
  *
@@ -27,8 +40,10 @@
  *  @return 封装好的参数
  */
 - (id)requestArgument {
-    
-    return @{};
+    return @{
+             @"fromSite":[NSString stringWithFormat:@"%zd",_accoutType]
+             };
+//    return [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%zd",_accoutType],@"fromSite", nil];
 }
 
 - (NSString *)modelClass
