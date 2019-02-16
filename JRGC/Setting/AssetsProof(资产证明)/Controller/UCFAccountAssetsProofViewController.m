@@ -162,7 +162,7 @@
         {
             NSString *applyNoStr =   [NSString stringWithFormat:@"%@", assetProofModel.applyNo];;
             
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&applyNo=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],applyNoStr];
+            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&applyNo=%@",SingleUserInfo.loginData.userInfo.userId,applyNoStr];
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDownloadAssertProof owner:self Type:SelectAccoutTypeHoner];//
         }
     }
@@ -175,7 +175,7 @@
 
 -(void)assetProofListHttpRequset
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *dic = @{@"userId":userId,
                           @"page":@"1",
                           @"pageSize":@"6"

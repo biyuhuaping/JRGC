@@ -200,7 +200,7 @@
 #pragma mark -修改银行预留手机号网络请求
 -(void)modifyBankReservePhoneNunmberHttpRequst{
     NSString* str = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:str],@"validateCode":_codeTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"updatePhoneNoTicket":_updatePhoneNoTicketStr};
+    NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:str],@"validateCode":_codeTextField.text,@"userId":SingleUserInfo.loginData.userInfo.userId,@"updatePhoneNoTicket":_updatePhoneNoTicketStr};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES Type:self.accoutType];
 }
 - (void)beginPost:(kSXTag)tag

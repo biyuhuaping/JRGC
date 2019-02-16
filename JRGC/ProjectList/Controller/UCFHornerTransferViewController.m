@@ -114,7 +114,7 @@
 // 选中某cell时。
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
@@ -134,7 +134,7 @@
           
 
 //            NSInteger status = [_transferModel.status integerValue];
-            NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",_transferModel.Id,[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
+            NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",_transferModel.Id,[UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId]];
 //            if (status == 0 && [_transferModel.stopStatus intValue] != 0) {
 //                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对投资人开放"];
 //                [self.navigationController pushViewController:controller animated:YES];
@@ -289,7 +289,7 @@
     if ([model.stopStatus intValue] != 0) {
         return;
     }
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
         UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         [self presentViewController:loginNaviController animated:YES completion:nil];
@@ -303,7 +303,7 @@
         if ([self checkUserCanInvestIsDetail:NO]) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             _transferModel = model  ;          //普通表
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_transferModel.Id];
+            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",SingleUserInfo.loginData.userInfo.userId,_transferModel.Id];
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutTypeHoner];
             }
         }

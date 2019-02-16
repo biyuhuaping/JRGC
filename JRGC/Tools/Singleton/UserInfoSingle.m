@@ -218,7 +218,7 @@
 ////程序启动的时候 获取用户对象数据
 //- (void)getUserData
 //{
-//    self.userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+//    self.userId = SingleUserInfo.loginData.userInfo.userId;
 //    self.time = [[[NSUserDefaults standardUserDefaults] valueForKey:TIME] integerValue];
 //    self.jg_ckie = [[NSUserDefaults standardUserDefaults] valueForKey:DOPA];
 //    self.loginName = [[NSUserDefaults standardUserDefaults] valueForKey:LOGINNAME];

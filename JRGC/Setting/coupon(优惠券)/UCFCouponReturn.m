@@ -156,7 +156,7 @@
 // 上拉加载更多
 - (void)getCouponDataList{
     //status：0未使用 1已过期 2已使用
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     NSDictionary *dic = @{@"couponType":@"1",//1:返现 2：返息
                           @"page":[NSString stringWithFormat:@"%ld",_currentPage],
                           @"pageSize":@"20",

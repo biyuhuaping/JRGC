@@ -243,7 +243,7 @@
         [self showContractWebViewUrl:_cfcaContractUrl withTitle:_cfcaContractName];
         return;
     }
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",_contractType, @"contractType",nil];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",_contractType, @"contractType",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagHonerRechangeShowContract owner:self signature:YES Type:SelectAccoutTypeHoner];
 }
 
@@ -549,7 +549,7 @@
         [paraDict setValue:self.smsSerialNo forKey:@"validateNo"];
         [paraDict setValue:_verificationCodeField.text forKey:@"smsCode"];
     }
-    [paraDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:UUID] forKey:@"userId"];
+    [paraDict setValue:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
     [paraDict setValue:blackBox forKey:@"token_id"];
 //    [paraDict setValue:wanip forKey:@"ip"];
     [paraDict setValue:_RechargeTokenStr forKey:@"rechargeToken"];
@@ -604,7 +604,7 @@
         [MBProgressHUD displayHudError:@"请输入验证码"];
         return;
     }
-    NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:telTextField.text],@"validateCode":codeTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+    NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:telTextField.text],@"validateCode":codeTextField.text,@"userId":SingleUserInfo.loginData.userInfo.userId};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES Type:self.accoutType];
 }
 
@@ -614,7 +614,7 @@
         [MBProgressHUD displayHudError:@"请输入正确的手机号"];
         return;
     }
-    NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:telTextField.text],@"isVms":@"SMS",@"type":@"4",@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+    NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:telTextField.text],@"isVms":@"SMS",@"type":@"4",@"userId":SingleUserInfo.loginData.userInfo.userId};
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
 
 }
@@ -841,7 +841,7 @@
  */
 - (void)getMyBindCardMessage
 {
-    NSString *uuid = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     if(uuid == nil)
     {
         return;

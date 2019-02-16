@@ -94,7 +94,7 @@
 {
 
     UCFTransferModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
@@ -128,7 +128,7 @@
             
             
             //            NSInteger status = [_transferModel.status integerValue];
-            NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",model.Id,[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
+            NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",model.Id,[UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId]];
             //            if (status == 0 && [_transferModel.stopStatus intValue] != 0) {
             //                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对投资人开放"];
             //                [self.navigationController pushViewController:controller animated:YES];
@@ -285,7 +285,7 @@
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
-            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            if (SingleUserInfo.loginData.userInfo.userId) {
                 NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
                 NSString *enjoyOpenStatus =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"zxOpenStatus"];
                 SingleUserInfo.loginData.userInfo.openStatus = [oepnState integerValue];

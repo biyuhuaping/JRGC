@@ -51,7 +51,7 @@
 - (void)getHeaderInfoRequest
 {
     
-    NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+    NSDictionary *dataDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagTotalEarningsOverview owner:self signature:YES Type:SelectAccoutDefault];
 }
 -(void)beginPost:(kSXTag)tag

@@ -98,7 +98,7 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 - (void)openFeedbackViewController {
     //  初始化方式,或者参考下方的`- (YWFeedbackKit *)feedbackKit`方法。
 //    self.feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kAppKey];
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     userId = userId?userId:@"";
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
     NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];

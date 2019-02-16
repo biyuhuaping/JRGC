@@ -76,7 +76,7 @@
     
         AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
         [del.tabBarController setSelectedIndex:0];
-//        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+//        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",SingleUserInfo.loginData.userInfo.userId];
 //        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
     }
     //从切换用户和输错5次跳转过来
@@ -309,7 +309,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
-        if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        if (SingleUserInfo.loginData.userInfo.userId) {
             AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
             [del.tabBarController setSelectedIndex:4];
         }

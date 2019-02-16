@@ -148,7 +148,7 @@
         for (UCFGoldCouponModel *model in self.dataArray) {
            model.isSelectedStatus = YES;
         }
-        NSDictionary *paramDict = @{@"nmPrdClaimId": _nmPrdClaimIdStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+        NSDictionary *paramDict = @{@"nmPrdClaimId": _nmPrdClaimIdStr,@"userId":SingleUserInfo.loginData.userInfo.userId};
         [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGelectALLGoldCoupon owner:self signature:YES Type:SelectAccoutTypeGold];
         [self.tableView reloadData];
     }else{
@@ -174,7 +174,7 @@
     }
 
     NSString *pageNoStr = [NSString stringWithFormat:@"%d",self.pageNo];
-    NSDictionary *paramDict = @{@"nmPrdClaimId": _nmPrdClaimIdStr,@"pageNo":pageNoStr,@"pageSize": @"20",@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
+    NSDictionary *paramDict = @{@"nmPrdClaimId": _nmPrdClaimIdStr,@"pageNo":pageNoStr,@"pageSize": @"20",@"userId":SingleUserInfo.loginData.userInfo.userId,@"workshopCode":@""};
     
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetGoldCouponList owner:self signature:YES Type:SelectAccoutTypeGold];
 }

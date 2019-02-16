@@ -374,7 +374,7 @@
     
     return;
     
-//    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+//    if (!SingleUserInfo.loginData.userInfo.userId) {
 //        //如果未登录，展示登录页面
 //        [self showLoginView];
 //        return;
@@ -432,7 +432,7 @@
 //                }
 //
 //                if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
-//                    NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+//                    NSString *userid = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
 ////                    NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",model.Id,userid];
 //                    NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",model.Id];
 //                    NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
@@ -571,7 +571,7 @@
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
     
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
         return;
@@ -605,7 +605,7 @@
             if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
                 
                 [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+                NSString *userid = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
                 NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", model.Id,userid];
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
             }

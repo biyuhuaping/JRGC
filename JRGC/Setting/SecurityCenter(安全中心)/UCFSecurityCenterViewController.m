@@ -203,7 +203,7 @@
 {
     if (alertView.tag == 10000) {
         if (buttonIndex == 1) {
-            NSString *useridstr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+            NSString *useridstr = [NSString stringWithFormat:@"%@",SingleUserInfo.loginData.userInfo.userId];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:useridstr,@"userId",nil];
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
             

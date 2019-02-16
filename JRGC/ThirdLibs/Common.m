@@ -95,7 +95,7 @@
 + (void)addTestCookies
 {
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//     && [[[NSUserDefaults standardUserDefaults] valueForKey:UUID] isEqualToString:@"108027"]
+//     && [SingleUserInfo.loginData.userInfo.userId isEqualToString:@"108027"]
     if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime ))
     {
         NSDictionary * cookieInfo =  [NSDictionary dictionaryWithObject:@"1" forKey:@"jrgc_umark"];

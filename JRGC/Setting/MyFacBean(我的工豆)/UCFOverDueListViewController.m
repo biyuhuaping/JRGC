@@ -111,7 +111,7 @@
 // 请求过期工豆网络数据
 - (void)getBeanNetworkDataWithPageNo:(NSUInteger)currentPageNo
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)currentPageNo, PAGESIZE];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%lu&rows=%@", SingleUserInfo.loginData.userInfo.userId, (unsigned long)currentPageNo, PAGESIZE];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagGongDouOverDue owner:self Type:SelectAccoutDefault];
 }
 

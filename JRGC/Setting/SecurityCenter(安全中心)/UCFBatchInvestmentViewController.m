@@ -98,7 +98,7 @@
     if (self.isStep == 1) {
         [self initFirstSectionView];
     } else if (self.isStep == 2) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES Type:self.accoutType];
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId} tag:kSXTagBatchNumList owner:self signature:YES Type:self.accoutType];
     }
     
     
@@ -180,7 +180,7 @@
 }
 - (void)showHeTong
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&contractType=107&prdType=2",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&contractType=107&prdType=2",SingleUserInfo.loginData.userInfo.userId];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutTypeP2P];
 }
 - (void)initSecondSectionView
@@ -572,12 +572,12 @@
 {
     NSString *title = [investmentButton titleForState:UIControlStateNormal];
     if ([title isEqualToString:@"申请开通"]) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES Type:self.accoutType];
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId} tag:kSXTagBatchNumList owner:self signature:YES Type:self.accoutType];
     } else if ([title isEqualToString:@"提交"]) {
 
         if (selectButton) {
             
-            NSDictionary *dict = @{@"investLimitId":[NSString stringWithFormat:@"%ld",selectButton.tag - 1000],@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+            NSDictionary *dict = @{@"investLimitId":[NSString stringWithFormat:@"%ld",selectButton.tag - 1000],@"userId":SingleUserInfo.loginData.userInfo.userId};
             [[NetworkModule sharedNetworkModule] newPostReq:dict tag:kSXTagSetBatchNum owner:self signature:YES Type:self.accoutType];
 
         } else {

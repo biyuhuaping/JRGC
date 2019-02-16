@@ -510,7 +510,7 @@
 {
     NSArray *arr = [value componentsSeparatedByString:@","];
     if (arr.count == 2) {
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[arr objectAtIndex:1],[arr objectAtIndex:0]];
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",SingleUserInfo.loginData.userInfo.userId,[arr objectAtIndex:1],[arr objectAtIndex:0]];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:self.accoutType];
     }
     
@@ -991,7 +991,7 @@
 {
     BOOL islogin = [dic[@"need_login"] boolValue];
     //判断首页是否需要登录,只有需要登录并且未登录才调登录
-    if (islogin && (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]))
+    if (islogin && (!SingleUserInfo.loginData.userInfo.userId))
     {
         //没有登录去调登录
         [self jumpLogin];
@@ -1102,7 +1102,7 @@
     
     if (!(![controllerName isEqualToString:@"app_upgrade_strategy"] ||![controllerName isEqualToString:@"app_register"] ||![controllerName isEqualToString:@"app_invest_immediately"] || ![controllerName isEqualToString:@"app_invite_interest"]|| ![controllerName isEqualToString:@"app_contribute_detail"])) //这个页面不需要登录所以需要判断，如果是进这个页面，直接去加载，不再调登录
     {
-        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID])
+        if (!SingleUserInfo.loginData.userInfo.userId)
         {
             //直接调登录
             [self jumpLogin];
@@ -1515,7 +1515,7 @@
     [dict setValue:[Common getKeychain] forKey:@"imei"];
     [dict setValue:[Common getIOSVersion] forKey:@"version"];
     
-    if([[NSUserDefaults standardUserDefaults] valueForKey:UUID]){
+    if(SingleUserInfo.loginData.userInfo.userId){
         [dict setValue:SingleUserInfo.loginData.userInfo.jg_ckie forKey:@"jg_nyscclnjsygjr"];
     }
     

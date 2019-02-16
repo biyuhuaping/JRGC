@@ -163,7 +163,7 @@
         [MBProgressHUD displayHudError:@"请输入购入克重"];
         return;
     }
-    NSDictionary *paramDict = @{@"nmTypeId": self.nmTypeIdStr,@"purchaseGoldAmount":self.goldMoneyTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+    NSDictionary *paramDict = @{@"nmTypeId": self.nmTypeIdStr,@"purchaseGoldAmount":self.goldMoneyTextField.text,@"userId":SingleUserInfo.loginData.userInfo.userId};
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGoldCalculateAmount owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 -(void)beginPost:(kSXTag)tag

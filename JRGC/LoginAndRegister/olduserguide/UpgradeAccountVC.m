@@ -531,7 +531,7 @@
 #pragma mark - 请求网络及回调
 //获取用户信息
 - (void)getHSAccountInfo{
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetOpenAccountInfo owner:self signature:YES Type:self.accoutType];
 }
@@ -585,7 +585,7 @@
         return;
     }
     
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"destPhoneNo":_phoneNum,@"isVms":isVms,@"type":_isFromeBankCardInfo?@"3":@"6",@"userId":userId};
     self.currentMSGRoute = isVms;
@@ -642,7 +642,7 @@
         
     }
     
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     bankCard = [bankCard stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     //修改绑定银行卡接口

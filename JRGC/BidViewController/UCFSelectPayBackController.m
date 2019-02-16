@@ -250,7 +250,7 @@
 //        }
         btn.selected = !btn.selected;
         if (btn.selected) {
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdclaimid=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_prdclaimid];
+            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdclaimid=%@",SingleUserInfo.loginData.userInfo.userId,_prdclaimid];
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagHuoQuAllYOUHuiQuan owner:self Type:self.accoutType];
         } else {
             self.couponSum = 0.0f;
@@ -432,8 +432,8 @@
 //}
 - (void)reloadView
 {
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",SingleUserInfo.loginData.userInfo.userId];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCheckMyMoney owner:self Type:self.accoutType];
     }
 }
@@ -584,11 +584,11 @@
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (_listType == 0) {
         pageNum = 1;
-        NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10&investAmt=%.2f",self.prdclaimid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID],pageNum,self.touZiMoney];
+        NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10&investAmt=%.2f",self.prdclaimid,SingleUserInfo.loginData.userInfo.userId,pageNum,self.touZiMoney];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeanRecord owner:self Type:self.accoutType];
     } else if (_listType == 1) {
         beansPageNum = 1;
-        NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10",self.prdclaimid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID],beansPageNum];
+        NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10",self.prdclaimid,SingleUserInfo.loginData.userInfo.userId,beansPageNum];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeansInterest owner:self Type:self.accoutType];
     }
 
@@ -596,10 +596,10 @@
 - (void)loadMoreData
 {
     if (_listType == 0) {
-        NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10&investAmt=%.2f",self.prdclaimid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID],pageNum,self.touZiMoney];
+        NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10&investAmt=%.2f",self.prdclaimid,SingleUserInfo.loginData.userInfo.userId,pageNum,self.touZiMoney];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeanRecord owner:self Type:self.accoutType];
     } else if (_listType == 1) {
-        NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10",self.prdclaimid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID],beansPageNum];
+        NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10",self.prdclaimid,SingleUserInfo.loginData.userInfo.userId,beansPageNum];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeansInterest owner:self Type:self.accoutType];
     }
 }

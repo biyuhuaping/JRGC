@@ -71,7 +71,7 @@
 }
 - (void)getNetData
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%d&&rows=10",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],pageNum];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%d&&rows=10",SingleUserInfo.loginData.userInfo.userId,pageNum];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:ksxTagPayRecord owner:self Type:self.accoutType];
 }
 -(void)endPost:(id)result tag:(NSNumber *)tag

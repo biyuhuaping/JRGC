@@ -781,7 +781,7 @@
         if([rstcode intValue] == 1)
         {
 //    原提现验证码网络请求。
-//            NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",@"",@"destPhoneNo", _type,@"isVms",@"1",@"type",nil];
+//            NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId,@"userId",@"",@"destPhoneNo", _type,@"isVms",@"1",@"type",nil];
 //            [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagIdentifyCode owner:self signature:YES];
             //同盾
             // 获取设备管理器实例
@@ -1004,7 +1004,7 @@
     }else{
         bankNoStr = _cashBankNo;
     }
-    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",bankNoStr,@"bankNo",nil];
+    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId,@"userId",_crachTextField.text,@"reflectAmount",bankNoStr,@"bankNo",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawMoneyValidate owner:self signature:YES Type:self.accoutType];
 }
 -(BOOL)isWorkTimeCash{

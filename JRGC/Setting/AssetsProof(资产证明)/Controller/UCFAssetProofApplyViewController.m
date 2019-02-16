@@ -105,7 +105,7 @@
 - (void)checkUserIdNumberHttpRequset
 {
     UCFAssetProofApplyIdCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"idNo":cell.userIdNumberTextField.text} tag:kSXTagAssetProofCheckIdno owner:self signature:YES Type:self.accoutType];
 }
 
@@ -140,7 +140,7 @@
 }
 -(void)sendMessageCodeHttpRequset:(NSString *)codeType
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"isVms":codeType,@"type":@"11",@"userId":userId};
 //    self.currentMSGRoute = isVms;
@@ -150,7 +150,7 @@
 -(void)applyAssetProofCheckCodeHttpRequset
 {
     UCFAssetProofApplyCodeCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *dic = @{@"validateCode":cell.messageCodeTextField.text,@"userId":userId,@"checkToken":self.checkToken};
     //    self.currentMSGRoute = isVms;
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagApplyAssetProof owner:self signature:YES Type:self.accoutType];

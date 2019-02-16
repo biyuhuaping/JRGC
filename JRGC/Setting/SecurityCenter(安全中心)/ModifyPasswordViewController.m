@@ -110,7 +110,7 @@
         [alert show];
         return;
     }
-    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userName = SingleUserInfo.loginData.userInfo.userId;
     NSMutableDictionary *parDic = [NSMutableDictionary dictionary];
     [parDic setValue:userName forKey:@"userId"];
     [parDic setValue:[MD5Util MD5Pwd:_oldPasswordTextField.text] forKey:@"oldPwd"];

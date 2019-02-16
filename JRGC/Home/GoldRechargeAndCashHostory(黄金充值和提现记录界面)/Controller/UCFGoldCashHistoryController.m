@@ -101,7 +101,7 @@
 
 - (void)getDataFromNet
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }

@@ -60,7 +60,7 @@
 
 - (void)getHuiBuinessListDataFromNetWithPage:(NSInteger)page;
 {
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     NSString *pageStr = [NSString stringWithFormat:@"%ld",(long)page];
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"page":pageStr, @"pageSize":@"20"} tag:kSXTagGetHSAccountList owner:self signature:YES Type:self.accoutType];
 }

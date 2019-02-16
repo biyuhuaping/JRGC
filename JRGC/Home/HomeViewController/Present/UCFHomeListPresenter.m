@@ -225,8 +225,8 @@
 }
 - (void)getUserStateData
 {
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagGetUserAllState owner:self signature:YES Type:SelectAccoutDefault];
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId} tag:kSXTagGetUserAllState owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
 

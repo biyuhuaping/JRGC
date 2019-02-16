@@ -115,7 +115,7 @@
         if ([rstcode intValue] == 1) {
             
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
-            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            if (SingleUserInfo.loginData.userInfo.userId) {
                 NSString *oepnState =  [resultData objectSafeForKey:@"openStatus"];
                  SingleUserInfo.loginData.userInfo.openStatus = [oepnState integerValue];
                 NSString *zxOpenState = [resultData objectSafeForKey:@"zxOpenStatus"];

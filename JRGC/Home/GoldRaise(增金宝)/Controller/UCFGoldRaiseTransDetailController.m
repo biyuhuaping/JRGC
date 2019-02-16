@@ -107,14 +107,14 @@
 #pragma mark - 合同的代理方法
 - (void)goldIncreTransListCellDidClickedConstractWithModel:(UCFGoldIncreContractModel *)model
 {
-//    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", model.contractType], @"contractType", [NSString stringWithFormat:@"%@", model.orderId], @"orderId", nil];
+//    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId", [NSString stringWithFormat:@"%@", model.contractType], @"contractType", [NSString stringWithFormat:@"%@", model.orderId], @"orderId", nil];
 //    
 //    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGlixedGoldConstract owner:self signature:YES Type:SelectAccoutTypeGold];
     
     NSString *prdOrderIdStr = [NSString stringWithFormat:@"%@", model.orderId];;
     NSString *contractTypeStr = [NSString stringWithFormat:@"%@", model.contractType];
     
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=2",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],prdOrderIdStr,contractTypeStr];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=2",SingleUserInfo.loginData.userInfo.userId,prdOrderIdStr,contractTypeStr];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:SelectAccoutTypeHoner];//**加载PDF格式合同 和尊享合同 共用一个链接
 }
 

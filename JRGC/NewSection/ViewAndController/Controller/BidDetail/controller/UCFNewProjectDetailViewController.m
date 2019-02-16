@@ -299,6 +299,7 @@
         cell.imageView.image = [UIImage imageNamed:model.icon];
         cell.textLabel.text = model.title;
         return cell;
+        
     }
     return nil;
 }
@@ -307,7 +308,7 @@
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             
-            NSString *userid = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+            NSString *userid = SingleUserInfo.loginData.userInfo.userId;
             NSString *prdClaimsIdStr = self.model.data.ID;
             NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
             [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdDetailMess owner:self signature:YES Type:self.accoutType];

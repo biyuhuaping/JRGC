@@ -379,7 +379,7 @@
            if( [self checkUserCanInvestIsDetail:NO type:self.accoutType]){ //判断是否设置交易密码
 //               [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)SingleUserInfo.loginData.userInfo.openStatus];
-               NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
+               NSDictionary *parametersDict =  @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"userSatues":userSatues};
                [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
            }
        }
@@ -389,7 +389,7 @@
            if( [self checkUserCanInvestIsDetail:NO type:self.accoutType]){ //判断是否设置交易密码
 //               [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)SingleUserInfo.loginData.userInfo.openStatus];
-               NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
+               NSDictionary *parametersDict =  @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"userSatues":userSatues};
                [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
            }
        }

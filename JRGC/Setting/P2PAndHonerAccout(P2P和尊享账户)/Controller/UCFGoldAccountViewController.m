@@ -67,7 +67,7 @@
 #pragma mark NetData
 - (void)getNetData
 {
-    NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+    NSDictionary *parametersDict =  @{@"userId":SingleUserInfo.loginData.userInfo.userId};
     self.accoutType = SelectAccoutDefault;
     [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagGoldAccount owner:self signature:YES Type:self.accoutType];
 }

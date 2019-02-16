@@ -288,12 +288,12 @@
         
         if ([constract.contractDownUrl isEqualToString:@""] || constract.contractDownUrl ==nil ) {//如果合同url不存在的情况
             if ([constract.signStatus boolValue]) {
-                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",SingleUserInfo.loginData.userInfo.userId,self.billId,constract.contractType];
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:self.accoutType];
                 return;
             }else{
                 _contractTitle = constract.contracttitle;
-                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",SingleUserInfo.loginData.userInfo.userId,self.billId,constract.contractType];
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
             }
@@ -309,12 +309,12 @@
             return;
         }
         _contractTitle = constract.contracttitle;
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",SingleUserInfo.loginData.userInfo.userId,self.billId,constract.contractType];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:self.accoutType];
         return;
         
 //        _contractTitle = constract.contracttitle;
-//        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+//        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",SingleUserInfo.loginData.userInfo.userId,self.billId,constract.contractType];
 //        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 //        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
         
@@ -339,10 +339,10 @@
     if ([_detailType isEqualToString:@"1"])
     {
         NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",uuid];
-        NSDictionary *praramDic = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"prdClaimsId":prdClaimsIdStr};
+        NSDictionary *praramDic = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"prdClaimsId":prdClaimsIdStr};
                 [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:self.accoutType];
     } else {
-        NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",uuid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+        NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",uuid,SingleUserInfo.loginData.userInfo.userId];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:self.accoutType];
     }
 }

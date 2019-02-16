@@ -540,7 +540,7 @@
                 [self.navigationController  pushViewController:basicDetailVC animated:YES];
             }else
             {
-                NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+                NSString *userid = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
                 NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",[_dataDic objectSafeForKey:@"id"]];
                 NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
                 [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdDetailMess owner:self signature:YES Type:self.accoutType];
@@ -604,12 +604,12 @@
     if (_isTransfer) {
         //转让标
         NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
-        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];//101943
+        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",SingleUserInfo.loginData.userInfo.userId,projectId,contractTypeStr];//101943
         
     } else {
         //普通标
         NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
-        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",SingleUserInfo.loginData.userInfo.userId,projectId,contractTypeStr];
     }
     [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
@@ -644,7 +644,7 @@
 - (void)investButtonClick:(id)sender
 {
     // 获取购买接口
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
         UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         [self presentViewController:loginNaviController animated:YES completion:nil];
@@ -655,21 +655,21 @@
             if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
                 //债券转让
                 NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
-                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
+                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",SingleUserInfo.loginData.userInfo.userId,projectId];//101943
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:self.accoutType];
             } else {
                 NSString *projectId = [_dataDic  objectSafeForKey:@"id"];
                 if (self.accoutType == SelectAccoutTypeP2P) {
                     NSDictionary *paraDict = @{
                                                @"id":projectId,
-                                               @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
+                                               @"userId":SingleUserInfo.loginData.userInfo.userId,
                                                };
                     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutTypeP2P];
                 } else {
                     //普通表
                     [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                     NSString *strParameters = nil;
-                    strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
+                    strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",SingleUserInfo.loginData.userInfo.userId,projectId];//101943
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
                 }
                 

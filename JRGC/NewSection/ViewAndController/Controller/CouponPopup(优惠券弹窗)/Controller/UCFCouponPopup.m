@@ -34,7 +34,7 @@
 //    [self startRequest];
 //    return;
     @synchronized(self) {
-        NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if (![userId isEqualToString:@""] && userId != nil) {
             //当前是否有用户登录
             if ([[NSUserDefaults standardUserDefaults] valueForKey:TIMESTAMP]!=nil && ![[[NSUserDefaults standardUserDefaults] valueForKey:TIMESTAMP] isEqualToString:@""]) //判断是否有时间戳,如果没有,说明是新登录的用户,如果有,说明是已登录的用户
@@ -58,7 +58,7 @@
 }
 - (void)startRequest
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (![userId isEqualToString:@""] && userId != nil) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagShowCouponTips owner:self signature:YES Type:SelectAccoutDefault];
         

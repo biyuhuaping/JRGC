@@ -269,7 +269,7 @@ static NetworkModule *gInstance = NULL;
 
     NSArray * strArray = [parameter componentsSeparatedByString:serverIP];
     NSString *par = [strArray objectAtIndex:1];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (SingleUserInfo.loginData.userInfo.userId) {
         if (data.length > 0) {
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&jg_nyscclnjsygjr=%@",SingleUserInfo.loginData.userInfo.jg_ckie]];
         } else {
@@ -297,12 +297,12 @@ static NetworkModule *gInstance = NULL;
             data = [NSString stringWithFormat:@"encryptParam=%@",encryptParam1];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
             data = [data stringByAppendingString:@"&source_type=1"];
-            data = [data stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
+            data = [data stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",SingleUserInfo.loginData.userInfo.userId]];
             NSString *signature = [self getSinatureWithPar:[self getParStr:data]];
             data = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
             data = [data stringByAppendingString:@"&source_type=1"];
-            data = [data stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
+            data = [data stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",SingleUserInfo.loginData.userInfo.userId]];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&signature=%@",signature]];
         }
         else {
@@ -736,12 +736,12 @@ static NetworkModule *gInstance = NULL;
             dataStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam1];
             dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
             dataStr = [dataStr stringByAppendingString:@"&source_type=1"];
-            dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
+            dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",SingleUserInfo.loginData.userInfo.userId]];
             NSString *signature = [self getSinatureWithPar:[self getParStr:dataStr]];
             dataStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
             dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
             dataStr = [dataStr stringByAppendingString:@"&source_type=1"];
-            dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
+            dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",SingleUserInfo.loginData.userInfo.userId]];
             dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&signature=%@",signature]];
         }
         [self postData:dataStr tag:tag owner:owner url:parameter];
@@ -1392,7 +1392,7 @@ static NetworkModule *gInstance = NULL;
         default:
             break;
     }
-    if([[NSUserDefaults standardUserDefaults] valueForKey:UUID]){
+    if(SingleUserInfo.loginData.userInfo.userId){
         [dict setValue:SingleUserInfo.loginData.userInfo.jg_ckie forKey:@"jg_nyscclnjsygjr"];
     }
     DDLogDebug(@"%@类新接口请求参数%@",owner,dict);

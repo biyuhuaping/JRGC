@@ -440,7 +440,7 @@
                     model.type = @"3";
                     model.title = tmpModel.contractName;
                     self.contractTmpModel = model;
-                    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+                    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",SingleUserInfo.loginData.userInfo.userId,projectId,contractTypeStr];
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutTypeP2P];
                 }
                 break;
@@ -524,7 +524,7 @@
 {
     NSDictionary *paraDict = @{
                                @"id":self.model.data.prdClaim.ID,
-                               @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
+                               @"userId":SingleUserInfo.loginData.userInfo.userId,
                                };
     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutTypeP2P];
 }

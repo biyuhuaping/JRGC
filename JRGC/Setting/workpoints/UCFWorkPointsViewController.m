@@ -147,10 +147,10 @@
 //    [self.dataSource removeAllObjects];
        self.currentPage = 1;
    
-//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)self.currentPage, PAGESIZE];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&&page=%lu&rows=%@", SingleUserInfo.loginData.userInfo.userId, (unsigned long)self.currentPage, PAGESIZE];
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetWorkPoint owner:self];
     
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"page":[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage],@"rows":@"20",@"userId":userId};
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagGetWorkPoint owner:self signature:YES Type:SelectAccoutDefault];
@@ -160,7 +160,7 @@
 // 网络请求-列表下拉
 - (void)getDataRequsetWithPageNo:(NSUInteger)currentPageNo{
     
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"page":[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage],@"rows":@"20",@"userId":userId};
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagGetWorkPoint owner:self signature:YES Type:SelectAccoutDefault];
