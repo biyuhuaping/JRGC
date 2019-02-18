@@ -83,7 +83,7 @@
 
 - (void)getHuiBuinessDataFromNet
 {
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetHSAccountInfo owner:self signature:YES Type:self.accoutType];
 }
 //开始请求

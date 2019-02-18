@@ -346,7 +346,7 @@ static NSString *const cellId = @"cellId";
     self.calendar.pagingEnabled = NO;
     self.calendar.scrollEnabled = NO;
     self.calendar.userInteractionEnabled = NO;
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", month, @"month", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCalendarInfo owner:self signature:YES Type:self.accoutType];
 }

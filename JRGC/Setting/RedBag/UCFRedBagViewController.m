@@ -546,7 +546,7 @@
         }
     }
     
-    NSString *userid =[[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userid =SingleUserInfo.loginData.userInfo.userId;
     
     NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",model.Id];
     NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};

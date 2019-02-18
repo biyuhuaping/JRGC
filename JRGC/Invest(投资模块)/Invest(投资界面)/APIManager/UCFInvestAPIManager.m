@@ -64,7 +64,7 @@
             NSArray *resultArr = [resultData objectSafeArrayForKey:@"group"];
             
             
-            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            if (SingleUserInfo.loginData.userInfo.userId) {
                 NSString *oepnState =  [resultData objectSafeForKey:@"openStatus"];
                 SingleUserInfo.loginData.userInfo.openStatus = [oepnState integerValue];
                 [SingleUserInfo setUserData:SingleUserInfo.loginData];
@@ -99,7 +99,7 @@
             NSArray *resultArr = [resultData objectSafeArrayForKey:@"prdClaimModels"];
             
             
-//            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+//            if (SingleUserInfo.loginData.userInfo.userId) {
 //                NSString *oepnState =  [resultData objectSafeForKey:@"openStatus"];
 //                [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
 //            }

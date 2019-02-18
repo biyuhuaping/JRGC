@@ -1018,7 +1018,7 @@
 //        userId	用户ID	string
         NSString *contractTemplateIdStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"id"]];
         NSString *nmProClaimIdStr = self.goldModel.nmPrdClaimId;
-        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",contractTemplateIdStr,@"contractTemplateId",nil];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",nmProClaimIdStr, @"nmPrdClaimId",contractTemplateIdStr,@"contractTemplateId",nil];
         
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
     }
@@ -1171,7 +1171,7 @@
 - (IBAction)gotoGoldInvestmentVC:(id)sender {
 
     NSString *nmProClaimIdStr = self.goldModel.nmPrdClaimId;
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
     
     
     if(self.isGoldCurrentAccout){

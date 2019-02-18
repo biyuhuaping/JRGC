@@ -311,7 +311,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
@@ -322,7 +322,7 @@
         }
         
         _microMoneyModel = [self.dataArray objectAtIndex:indexPath.row];
-        NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+        NSString *userid = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
 //        NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
         NSInteger isOrder = [_microMoneyModel.isOrder integerValue];
         NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",_microMoneyModel.Id];
@@ -352,7 +352,7 @@
 }
 - (void)investCell:(UCFInvestTableViewCell *)investCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
@@ -377,7 +377,7 @@
             [api start];
 //            NSDictionary *paraDict = @{
 //                                       @"id":_microMoneyModel.Id,
-//                                       @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
+//                                       @"userId":SingleUserInfo.loginData.userInfo.userId,
 //                                       };
 //            [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutTypeP2P];
         }

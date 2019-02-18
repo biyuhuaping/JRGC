@@ -1131,14 +1131,14 @@
 //    if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
 //        //转让标
 //        NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
-//        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];//101943
+//        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",SingleUserInfo.loginData.userInfo.userId,projectId,contractTypeStr];//101943
 //
 //    } else {
 //        //普通标
 //        NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
-//        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+//        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",SingleUserInfo.loginData.userInfo.userId,projectId,contractTypeStr];
 //    }
-     strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_projectId,contractTypeStr,_prdType];
+     strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=%@",SingleUserInfo.loginData.userInfo.userId,_projectId,contractTypeStr,_prdType];
     [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
 }

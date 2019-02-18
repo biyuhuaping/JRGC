@@ -308,7 +308,7 @@
         return;
     }
     
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }
@@ -332,7 +332,7 @@
 }
 - (void)goldRechargeSecCell:(UCFGoldChargeSecCell *)goldRechargeSecCell didClickedConstractWithId:(NSString *)constractId
 {
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", constractId], @"contractTemplateId", nil];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId", [NSString stringWithFormat:@"%@", constractId], @"contractTemplateId", nil];
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
 }

@@ -899,7 +899,7 @@
         }
         
         NSString *applyUname = [UCFToolsMehod isNullOrNilWithString:[[prdOrders objectAtIndex:path]objectForKey:@"applyUname"]];
-        NSString *personId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+        NSString *personId = SingleUserInfo.loginData.userInfo.userId;
         if ([personId isEqualToString:applyUname]) {
             titleLabel.textColor = UIColorWithRGB(0xfd4d4c);
             titleLabel.font = [UIFont boldSystemFontOfSize:14];

@@ -61,7 +61,7 @@
             SingleUserInfo.loginData.userInfo.openStatus = 3;
         }
         NSDictionary *encryptParamDic = @{
-                                          @"userId": [[NSUserDefaults standardUserDefaults] valueForKey:UUID]                 //用户id
+                                          @"userId": SingleUserInfo.loginData.userInfo.userId                 //用户id
                                           };
         [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagAccountSetHsPwdIntoBank owner:self signature:YES Type:self.accoutType];
     }

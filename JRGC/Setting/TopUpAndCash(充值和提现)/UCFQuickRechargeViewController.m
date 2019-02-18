@@ -107,7 +107,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:inputMoney forKey:@"payAmount"];
     [paraDict setValue:_showHeadView.mobileTextField.text forKey:@"phoneNo"];
-    [paraDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:UUID] forKey:@"userId"];
+    [paraDict setValue:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
     [paraDict setValue:blackBox forKey:@"token_id"];
     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PAccountrechargeNew owner:self signature:YES Type:self.accoutType];
     
@@ -147,7 +147,7 @@
  */
 - (void)getMyBindCardMessage
 {
-    NSString *uuid = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     if(uuid == nil)
     {
         return;

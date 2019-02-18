@@ -162,7 +162,7 @@
 #pragma mark - 网络请求
 - (void)getCanlendarHeaderInfoFromNet
 {
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCalendarHeader owner:self signature:YES Type:self.accoutType];
 }
@@ -247,7 +247,7 @@
 {
     if (day.length > 0) {
         self.currentDay = day;
-        NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+        NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
         NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", day, @"day", @"40", @"rows", @"1", @"page",  nil];
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCurrentDayInfo owner:self signature:YES Type:self.accoutType];
     }

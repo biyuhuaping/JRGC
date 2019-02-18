@@ -609,7 +609,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         NSInteger status = [[dataDict objectSafeForKey:@"status"] integerValue];
         NSString *idStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"childPrdClaimId"]];
     
-        NSDictionary *praramDic = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"prdClaimsId":idStr};
+        NSDictionary *praramDic = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"prdClaimsId":idStr};
 
         
         if (status != 2) {
@@ -825,7 +825,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     if ([sender.currentTitle  isEqualToString:titleStr]) {
         
          [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-         NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
+         NSDictionary *dataDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"tenderId":_colPrdClaimId};
          [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES Type:self.accoutType];
     }else{
         NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"colOrderId":_batchOrderIdStr};

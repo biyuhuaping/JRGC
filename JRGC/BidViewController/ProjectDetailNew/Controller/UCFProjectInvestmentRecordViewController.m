@@ -55,7 +55,7 @@
         self.currentPage = 1;
         [self.tableView.footer resetNoMoreData];
     }
-    NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *userid = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
     NSString *currentPageStr = [NSString stringWithFormat:@"%d",_currentPage];
     NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":_prdClaimsId,@"page":currentPageStr,@"pageSize":@"20"};
     [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetInvestOrderRecord owner:self signature:YES Type:self.accoutType];
@@ -210,7 +210,7 @@
         }
         
         NSString *applyUname = [UCFToolsMehod isNullOrNilWithString:[[[_dataDic objectForKey:@"prdOrders"] objectAtIndex:[indexPath row]]objectForKey:@"orderUserIdStr"]];
-        NSString *personId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+        NSString *personId = SingleUserInfo.loginData.userInfo.userId;
         if ([personId isEqualToString:applyUname]) {
             titleLabel.textColor = UIColorWithRGB(0xfd4d4c);
             titleLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -239,7 +239,7 @@
         }
         
         NSString *applyUname = [UCFToolsMehod isNullOrNilWithString:[[prdOrders objectAtIndex:path]objectForKey:@"applyUname"]];
-        NSString *personId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+        NSString *personId = SingleUserInfo.loginData.userInfo.userId;
         if ([personId isEqualToString:applyUname]) {
             titleLabel.textColor = UIColorWithRGB(0xfd4d4c);
             titleLabel.font = [UIFont boldSystemFontOfSize:14];

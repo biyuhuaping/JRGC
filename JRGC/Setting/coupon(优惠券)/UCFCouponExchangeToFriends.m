@@ -106,7 +106,7 @@
                               @"couponType":self.couponType,
                               @"page":[NSString stringWithFormat:@"%d", self.page],
                               @"pageSize":@"20",
-                              @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
+                              @"userId":SingleUserInfo.loginData.userInfo.userId,
                               @"keyword":keyword
                               };
     [[NetworkModule sharedNetworkModule] newPostReq:dicData tag:kSXTagPresentFriend owner:self signature:YES Type:self.accoutType];
@@ -115,7 +115,7 @@
 //赠送好友券
 - (void)requestComplimentary {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObjectsAndKeys:self.quanData.couponId ,@"couponId",self.couponType,@"couponType",self.targetUserId,@"targetUserId",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId", nil] tag:kSXTagPresentCoupon owner:self signature:YES Type:self.accoutType];
+    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObjectsAndKeys:self.quanData.couponId ,@"couponId",self.couponType,@"couponType",self.targetUserId,@"targetUserId",SingleUserInfo.loginData.userInfo.userId,@"userId", nil] tag:kSXTagPresentCoupon owner:self signature:YES Type:self.accoutType];
 }
 
 //开始请求

@@ -183,7 +183,7 @@
 
 - (void)getHeaderInfoRequest
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",SingleUserInfo.loginData.userInfo.userId];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:self.accoutType];
 }
 

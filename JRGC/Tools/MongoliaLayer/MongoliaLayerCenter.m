@@ -59,7 +59,7 @@
     }
     if ([nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
         //下面是需要登录后查看的
-        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        if (!SingleUserInfo.loginData.userInfo.userId) {
             return;
         }
         
@@ -109,7 +109,7 @@
         }
     }
     //下面是需要登录后查看的
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         return;
     }
 
@@ -149,7 +149,7 @@
         webView.sourceVc = @"UCFLatestProjectViewController";
         [nav pushViewController:webView animated:YES];
     }else if (alertview.tag == 1001) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
         [self showLogic];
     } else if (alertview.tag == 1002 && index == 1) {
         

@@ -309,7 +309,7 @@
     
     // react to shortcut item selections
     DDLogDebug(@"title:%@,type:%@,userInfo:%@",shortcutItem.localizedTitle,shortcutItem.type,shortcutItem.userInfo);
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (SingleUserInfo.loginData.userInfo.userId) {
         
         [Touch3DSingle sharedTouch3DSingle].isLoad = YES;
         [Touch3DSingle sharedTouch3DSingle].type = shortcutItem.type;
@@ -353,7 +353,7 @@
 }
 - (void)saveLoginOut
 {
-    NSString *useridstr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *useridstr = [NSString stringWithFormat:@"%@",SingleUserInfo.loginData.userInfo.userId];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:useridstr,@"userId",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
     
@@ -514,7 +514,7 @@
 - (void)showGCode
 {
     NSString* pswd = [LLLockPassword loadLockPassword];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (SingleUserInfo.loginData.userInfo.userId) {
         if (pswd) {
             [self showLLLockViewController:LLLockViewTypeCheck];
         } else {
@@ -1046,8 +1046,8 @@
 //检测是否有tab红点
 - (void)checkPersonCenterRedPoint
 {
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        NSDictionary *paraDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId};
         [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagCheckPersonRedPoint owner:self signature:YES Type:SelectAccoutDefault];
     }
 }

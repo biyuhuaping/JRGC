@@ -547,7 +547,7 @@
     if( [self checkIDAAndBankBlindState:self.accoutType]){ //判断是否设置交易密码
         [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
         NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)SingleUserInfo.loginData.userInfo.openStatus];
-        NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
+        NSDictionary *parametersDict =  @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"userSatues":userSatues};
         [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
     }
 }
@@ -596,7 +596,7 @@
 #pragma mark  网络请求
 -(void)getP2POrHonerAccoutHttpRequest{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if(userId){
        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagUserAccountInfo owner:self signature:YES Type:self.accoutType];
     }

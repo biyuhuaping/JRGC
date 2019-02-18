@@ -65,7 +65,7 @@
 //获取数据
 - (void)getData
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",SingleUserInfo.loginData.userInfo.userId];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagWorkshopCode owner:self Type:SelectAccoutDefault];
 }
 

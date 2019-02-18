@@ -485,7 +485,7 @@
 //    parmStr = [parmStr stringByAppendingString:[NSString stringWithFormat:@"&apptzticket=%@",[ToolSingleTon sharedManager].apptzticket]];
 //      [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagSaveTransferDeals owner:self];
     NSString *investTranTicketStr = [self.dataDict objectSafeForKey:@"apptzticket"];
-    NSDictionary *dataDic = @{@"userId": [[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"prdTransferId":prdTransferId,@"investAmt":investMoney,@"investBeans":investBeans,@"investTranTicket":investTranTicketStr};
+    NSDictionary *dataDic = @{@"userId": SingleUserInfo.loginData.userInfo.userId,@"prdTransferId":prdTransferId,@"investAmt":investMoney,@"investBeans":investBeans,@"investTranTicket":investTranTicketStr};
      [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagTraClaimsSubmit owner:self signature:YES Type:self.accoutType];
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
@@ -761,7 +761,7 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSString *contractTypeStr = [self valueIndex:linkModel];
         NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",SingleUserInfo.loginData.userInfo.userId,projectId,contractTypeStr];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
     }
 }
@@ -779,7 +779,7 @@
 - (void)reloadMainView
 {
     NSString *strParameters = nil;
-    strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[[_dataDict objectForKey:@"data"] objectForKey:@"id"]];//101943
+    strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",SingleUserInfo.loginData.userInfo.userId,[[_dataDict objectForKey:@"data"] objectForKey:@"id"]];//101943
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:self.accoutType];
 }
 - (void)viewWillAppear:(BOOL)animated

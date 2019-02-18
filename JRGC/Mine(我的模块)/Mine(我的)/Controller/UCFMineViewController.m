@@ -162,7 +162,7 @@
 
         }];
     }
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (SingleUserInfo.loginData.userInfo.userId) {
         if (_loginView) {
             [_loginView removeFromSuperview];
             _loginView = nil;

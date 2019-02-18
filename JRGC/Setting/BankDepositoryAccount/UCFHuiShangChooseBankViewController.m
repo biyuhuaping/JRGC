@@ -93,7 +93,7 @@
 #pragma mark - 请求处理
 - (void)request
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
 
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagChooseBankList owner:self signature:YES Type:self.accoutType];
     [self beginRefresh];

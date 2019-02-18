@@ -1418,7 +1418,7 @@
 //    NSString *contractTypeStr = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:@"contractType"];
 //    
 //    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
-//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",SingleUserInfo.loginData.userInfo.userId,projectId,contractTypeStr];
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutTypeP2P];
     
     NSString *contractStr = linkModel.linkString;
@@ -1457,10 +1457,10 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 //    NSString *strParameters = nil;
 //    NSString *projectId = [[_dataDict objectForKey:@"data"] objectForKey:@"id"];
-//    strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
+//    strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",SingleUserInfo.loginData.userInfo.userId,projectId];//101943
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self];
     
-    NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
+    NSDictionary *dataDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"tenderId":_colPrdClaimId};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES Type:self.accoutType];
 
 }

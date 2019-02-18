@@ -147,7 +147,7 @@
         [_passWordTfd becomeFirstResponder];
         return;
     }
-//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&username=%@&pwd=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[[NSUserDefaults standardUserDefaults] objectForKey:LOGINNAME],_passWordTfd.text];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&username=%@&pwd=%@",SingleUserInfo.loginData.userInfo.userId,[[NSUserDefaults standardUserDefaults] objectForKey:LOGINNAME],_passWordTfd.text];
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagValidLogin owner:self Type:SelectAccoutDefault];
     
     
@@ -193,7 +193,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 //    if (buttonIndex == 0) {
-//        if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+//        if (SingleUserInfo.loginData.userInfo.userId) {
 //            AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
 //            [del.tabBarController setSelectedIndex:3];
 //        }

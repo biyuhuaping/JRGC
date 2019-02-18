@@ -138,7 +138,7 @@
 // 获取资金总览的网络数据
 - (void)getAccountOverallNetData
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@", SingleUserInfo.loginData.userInfo.userId];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMoneyOverview owner:self Type:self.accoutType];
 }
 
@@ -150,7 +150,7 @@
     }else if (self.fundsTableView.footer.isRefreshing){
         self.page ++;
     }
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%@&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], [NSString stringWithFormat:@"%lu", (unsigned long)self.page], NUMOFPAGE];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%@&rows=%@", SingleUserInfo.loginData.userInfo.userId, [NSString stringWithFormat:@"%lu", (unsigned long)self.page], NUMOFPAGE];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFundsDetail owner:self Type:self.accoutType];
 }
 

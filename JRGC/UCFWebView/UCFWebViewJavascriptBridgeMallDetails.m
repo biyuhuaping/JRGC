@@ -126,7 +126,7 @@
 //{
 //   
 //        NSDictionary *encryptParamDic = @{
-//                                          @"userId": [[NSUserDefaults standardUserDefaults] valueForKey:UUID]                 //用户id
+//                                          @"userId": SingleUserInfo.loginData.userInfo.userId                 //用户id
 //                                          };
 //        [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutTypeP2P];
 //}

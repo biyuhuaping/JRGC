@@ -234,11 +234,11 @@
         NSString *prdOrderIdStr = [NSString stringWithFormat:@"%@",[self.dataDict objectSafeForKey:@"orderId"]];
         NSString *contractTypeStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"contractType"]];
         _contractnameStr = [dataDict objectSafeForKey:@"contractName"];
-//        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",@"1", @"purchaseType",contractTemplateIdStr,@"contractTemplateId",nil];
+//        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",@"1", @"purchaseType",contractTemplateIdStr,@"contractTemplateId",nil];
         
 //        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
         
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],prdOrderIdStr,contractTypeStr];
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=1",SingleUserInfo.loginData.userInfo.userId,prdOrderIdStr,contractTypeStr];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:SelectAccoutTypeHoner];//**加载PDF格式合同 和尊享合同 共用一个链接
     }
 }

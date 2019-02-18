@@ -142,7 +142,7 @@
 }
 -(void)gotoCollectionDetailVC:(UCFBatchBidModel *)model{
     
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {

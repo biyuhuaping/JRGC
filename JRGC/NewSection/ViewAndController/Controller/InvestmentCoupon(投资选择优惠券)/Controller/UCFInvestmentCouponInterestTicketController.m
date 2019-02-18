@@ -57,7 +57,7 @@
 - (void)request
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (![userId isEqualToString:@""] && userId != nil) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,
                                                           @"prdclaimid":self.db.prdclaimid,

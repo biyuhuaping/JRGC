@@ -55,7 +55,7 @@
 #pragma mark 获取提现页面数据
 -(void)getGoldCashInfo
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *param =@{ @"userId" : userId };
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldCashPageInfo owner:self signature:YES Type:SelectAccoutDefault];
 }
@@ -246,7 +246,7 @@
 
 -(void)gotoGoldCash
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (!userId) {
         return;
     }

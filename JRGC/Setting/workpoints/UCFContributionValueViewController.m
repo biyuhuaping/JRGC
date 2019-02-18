@@ -251,12 +251,12 @@
             break;
     }
     
-//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&type=%lu&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID],(long)_currentSelectedState,(long)pageNum,@"20"];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&type=%lu&page=%lu&rows=%@", SingleUserInfo.loginData.userInfo.userId,(long)_currentSelectedState,(long)pageNum,@"20"];
     
     NSString *typeStr = [NSString stringWithFormat:@"%ld",_currentSelectedState];
     NSString *pageStr = [NSString stringWithFormat:@"%ld",pageNum];
     
-    NSDictionary *paramerDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"type":typeStr,@"page":pageStr,@"rows":@"20"};
+    NSDictionary *paramerDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"type":typeStr,@"page":pageStr,@"rows":@"20"};
     [[NetworkModule sharedNetworkModule] newPostReq:paramerDict tag:kSXTagContributionValueInvot owner:self signature:YES Type:SelectAccoutDefault];
     
    

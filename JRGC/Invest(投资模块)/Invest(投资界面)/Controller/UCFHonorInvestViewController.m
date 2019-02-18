@@ -223,7 +223,7 @@
 #pragma mark - tableview 代理
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else  {
@@ -256,7 +256,7 @@
         
         if ([self checkUserCanInvestIsDetail:YES])
         {
-            NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+            NSString *userid = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
 //            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", model.Id,userid];
             
             
@@ -287,7 +287,7 @@
     if ([model.status integerValue]!=2) {
         return;
     }
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else  {
@@ -314,7 +314,7 @@
         if ([self checkUserCanInvestIsDetail:NO]) {
             [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
             self.honerListModel= model;
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],model.Id];//101943
+            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",SingleUserInfo.loginData.userInfo.userId,model.Id];//101943
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
         }
     }
@@ -399,7 +399,7 @@
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
             BOOL isShowNew = [dataDict isExistenceforKey:@"newPrdClaim"];
-            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            if (SingleUserInfo.loginData.userInfo.userId) {
                 //此时openStatus为尊享的开户状态
                 NSString *oepnState =  [dataDict objectSafeForKey:@"openStatus"];
                 SingleUserInfo.loginData.userInfo.zxOpenStatus = oepnState;

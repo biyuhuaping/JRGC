@@ -290,7 +290,7 @@
 #pragma mark -活期详情页面数据请求
 -(void)getGoldGoodsInfoHttpRequest
 {
-    NSDictionary *strParameters  = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID] };
+    NSDictionary *strParameters  = @{@"userId":SingleUserInfo.loginData.userInfo.userId };
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetNmDrawGoldGoodsInfo owner:self signature:YES Type:SelectAccoutTypeGold];
     
 }
@@ -433,7 +433,7 @@
             }
         }
     }
-    NSDictionary *strParameters  = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"goodsAmount":goodsAmountStr,@"goodsId":goodsIdsArryStr,@"goodsNum":goodsNumsArryStr};
+    NSDictionary *strParameters  = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"goodsAmount":goodsAmountStr,@"goodsId":goodsIdsArryStr,@"goodsNum":goodsNumsArryStr};
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagDrawGoldGoodsInfoSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index;

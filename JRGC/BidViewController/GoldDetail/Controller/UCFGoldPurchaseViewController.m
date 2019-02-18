@@ -157,7 +157,7 @@
 -(void)reloatGoldPurchaseData
 {
     NSString *nmProClaimIdStr = self.goldModel.nmPrdClaimId;
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
     
     if (self.isGoldCurrentAccout) {
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
@@ -821,7 +821,7 @@
         }
     }
     NSString *nmProClaimIdStr = self.goldModel.nmPrdClaimId;
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",contractTemplateIdStr,@"contractTemplateId",nil];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",nmProClaimIdStr, @"nmPrdClaimId",contractTemplateIdStr,@"contractTemplateId",nil];
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
 }
@@ -1117,7 +1117,7 @@
     
     NSString *goldRecordidsStr  = self.goldCouponDataDict ? [self.goldCouponDataDict objectSafeForKey:@"goldRecordids"]: @"";
     
-    self.paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": self.goldModel.nmPrdClaimId,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":gcMaStr,@"goldRecordids":goldRecordidsStr};
+    self.paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": self.goldModel.nmPrdClaimId,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":SingleUserInfo.loginData.userInfo.userId,@"workshopCode":gcMaStr,@"goldRecordids":goldRecordidsStr};
     
     if (_isHaveGoldCouponNum) {//如果有返金券的话
         //返金券

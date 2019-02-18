@@ -23,6 +23,22 @@
         if ([keyPath isEqualToString:@"imagesArr"]) {
             NSArray *imgArr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (imgArr.count > 0) {
+                if (imgArr.count == 1) {
+                    [selfWeak.adCycleScrollView removeFromSuperview];
+                    selfWeak.adCycleScrollView = nil;
+                    SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(15, 0, Screen_Width - 30, ((([[UIScreen mainScreen] bounds].size.width - 30) * 9)/16)) delegate:selfWeak placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
+                    adCycleScrollView.zoomType = NO;  // 是否使用缩放效果
+                    adCycleScrollView.hidesForSinglePage = YES;
+                    adCycleScrollView.autoScroll = NO;
+                    adCycleScrollView.infiniteLoop = NO;
+                    adCycleScrollView.isHideImageCorner = NO;
+                    adCycleScrollView.imageURLStringsGroup = imgArr;
+                    selfWeak.adCycleScrollView = adCycleScrollView;
+                    [selfWeak addSubview:adCycleScrollView];
+                    selfWeak.useFrame = YES;
+                } else {
+                    
+                }
                 selfWeak.adCycleScrollView.imageURLStringsGroup = imgArr;
             }
         }

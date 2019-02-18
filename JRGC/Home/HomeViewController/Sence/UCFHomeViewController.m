@@ -403,7 +403,7 @@
 // 活期详情
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedGoldIncreaseWithModel:(UCFHomeListCellModel *)model
 {
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
@@ -423,7 +423,7 @@
 #pragma mark - 黄金活期 购买点击事件
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedBuyGoldWithModel:(UCFHomeListCellModel *)model
 {
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
@@ -458,7 +458,7 @@
     if (type == UCFHomeListTypeDetail) {
         if (model.moedelType == UCFHomeListCellModelTypeBatch || model.moedelType == UCFHomeListCellModelTypeDefault || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"14"]))) {
         
-            if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            if (!SingleUserInfo.loginData.userInfo.userId) {
                 //如果未登录，展示登录页面
                 [self showLoginView];
             } else {
@@ -560,7 +560,7 @@
         }
         else if (model.moedelType == UCFHomeListCellModelTypeDebtsTransfer)
         {
-            if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            if (!SingleUserInfo.loginData.userInfo.userId) {
                 //如果未登录，展示登录页面
                 [self showLoginView];
             } else {
@@ -610,7 +610,7 @@
     }
     else if (type == UCFHomeListTypeInvest) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault  || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"14"]))) {
-            if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            if (!SingleUserInfo.loginData.userInfo.userId) {
                 //如果未登录，展示登录页面
                 [self showLoginView];
             } else {
@@ -737,7 +737,7 @@
         }
         else if (model.moedelType == UCFHomeListCellModelTypeDebtsTransfer)
         {
-            if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            if (!SingleUserInfo.loginData.userInfo.userId) {
                 //如果未登录，展示登录页面
                 [self showLoginView];
             } else {
@@ -914,7 +914,7 @@
     
     if ([model.type intValue] == 6) {
         NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
-        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"8",@"type",nil];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"8",@"type",nil];
         
         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
@@ -939,7 +939,7 @@
             return;
         }
         NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
-        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"6",@"type",nil];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"6",@"type",nil];
         
         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
@@ -978,7 +978,7 @@
     
     if ([typeStr intValue] == 6) {//黄金活期标
         NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
-        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"7",@"type",nil];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"7",@"type",nil];
         
         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
@@ -1009,7 +1009,7 @@
         
     }else{
         NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
-        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"5",@"type",nil];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"5",@"type",nil];
         
         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;

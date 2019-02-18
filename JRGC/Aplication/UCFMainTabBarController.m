@@ -40,7 +40,11 @@
 {
     return nil;
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
 - (void)viewDidLoad
 {   
     [super viewDidLoad];
@@ -122,7 +126,7 @@
             }
                 break;
             case 1:{
-                UCFInvestViewController *invest = [[UCFInvestViewController alloc] initWithNibName:@"UCFInvestViewController" bundle:nil];
+                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
                 controller = invest;
                 _AssignmentView = invest;
             }

@@ -155,7 +155,7 @@
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
-            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            if (SingleUserInfo.loginData.userInfo.userId) {
                 NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
                 SingleUserInfo.loginData.userInfo.zxOpenStatus = oepnState ;
                 [SingleUserInfo setUserData:SingleUserInfo.loginData];
@@ -258,7 +258,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else  {
@@ -282,7 +282,7 @@
         if ([self checkUserCanInvestIsDetail:YES])
         {
             _projectListModel = [self.dataArray objectAtIndex:indexPath.row];
-            NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+            NSString *userid = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
             NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
             if ([_projectListModel.status intValue ] != 2) {
                 NSInteger isOrder = [_projectListModel.isOrder integerValue];
@@ -307,7 +307,7 @@
     if ([model.status integerValue]!=2) {
         return;
     }
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+    if (!SingleUserInfo.loginData.userInfo.userId) {
         //如果未登录，展示登录页面
         [self showLoginView];
      } else  {
@@ -326,7 +326,7 @@
          if ([self checkUserCanInvestIsDetail:NO]) {
              [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              _projectListModel = model;
-             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_projectListModel.Id];//101943
+             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",SingleUserInfo.loginData.userInfo.userId,_projectListModel.Id];//101943
              [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
          }
          
