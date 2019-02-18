@@ -601,7 +601,7 @@ static NetworkModule *gInstance = NULL;
     //退出时清cookis
     
     [Common deleteCookies];
-    [[UserInfoSingle sharedManager] removeUserInfo];
+    [[UserInfoSingle sharedManager] deleteUserData];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:TIME];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:IDCARD_STATE];
@@ -680,7 +680,7 @@ static NetworkModule *gInstance = NULL;
 }
 -(NSString *) getSinatureWithPar:(NSString *) par
 {
-    NSString *lastStr = [NSString stringWithFormat:@"%@%@",par,[[NSUserDefaults standardUserDefaults] valueForKey:SIGNATUREAPP]];
+    NSString *lastStr = [NSString stringWithFormat:@"%@%@",par,SingleUserInfo.signatureStr];
 //    NSString *stttt  = [[NSUserDefaults standardUserDefaults] valueForKey:SIGNATUREAPP];
     //遍历字符串中的每一个字符
     NSMutableArray *array = [NSMutableArray array];

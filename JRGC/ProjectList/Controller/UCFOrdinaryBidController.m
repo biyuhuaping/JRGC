@@ -14,7 +14,7 @@
 #import "UCFMicroMoneyModel.h"
 #import "UCFNoPermissionViewController.h"
 #import "UCFProjectDetailViewController.h"
-#import "UCFLoginViewController.h"
+//#import "UCFLoginViewController.h"
 #import "UCFPurchaseBidViewController.h"
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
@@ -311,7 +311,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (!SingleUserInfo.loginData.userInfo.userId) {
+    NSLog(@"%@",SingleUserInfo.loginData.userInfo.userId);
+    if (!(SingleUserInfo.loginData.userInfo.userId.length > 0)) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
@@ -387,9 +388,10 @@
 
 - (void)showLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+//    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+//    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+//    [self presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {

@@ -190,7 +190,7 @@ return shared##className; \
 #define YeeBayPersonalSwitch @"yeepayflag_A"
 #define	APP_RATING_URL	@"https://itunes.apple.com/us/app/jin-rong-gong-chang/id939125881?mt=8&uo=4"
 #define APP_UPDATE_URL  @"https://itunes.apple.com/lookup?id=939125881"
-#define SIGNATUREAPP       @"signature"
+//#define SIGNATUREAPP       @"signature"
 #define EnjoyState      @"enjoyState"
 #define JSPATCH_RSA_PUBLICKEY @"-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCgdJNm85BAVjIiSXRziumME/Ss\nhTmTyxhB6wjyDrxFXw/nx0zMd3RWU6Z2PrbJrJsAI6QMjdc/YmDae/V6tEnzf6zW\n2hP2SVRUECml1sZ02vBucrHZsMRr+6cYinXdJy4dAyWfY/YC04svuDBS83rY3Q/k\nAm84Fsm2MsLVoFkOQQIDAQAB\n-----END PUBLIC KEY-----"
 #define JSPATCH_APPKEY      @"83b808e7b173b6c0"                                 //JSPatch key

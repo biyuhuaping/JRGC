@@ -27,26 +27,38 @@
     });
     return sharedAccountManagerInstance;
 }
-- (void)setUserData:(UCFLoginData *) loginData withPassWord:(NSString *)passWord{
+- (void)setUserData:(UCFLoginData *)loginData withPassWord:(NSString *)passWord andInputAccountText:(NSString *)account{
     
     //注册成功后，先清cookies，把老账户的清除掉，然后再用新账户的信息
     [Common deleteCookies];
     //登录成功保存用户的资料
+    [self setUserData:loginData];
     [Common setHTMLCookies:loginData.userInfo.jg_ckie];//html免登录的cookies
     [[NSUserDefaults standardUserDefaults] setValue:[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]] forKey:AWP];
-    self.signatureStr = [self getSignatureStr];
+    [self saveLoginAccount:account];
+
     //注册通知
     [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
-    [self setUserData:loginData];
 }
 
 - (void)setUserData:(UCFLoginData *) loginData
 {
+    if (!_loginData) {
+        _loginData = [loginData copy];
+    }
     [[NSUserDefaults standardUserDefaults] setValue:[loginData yy_modelToJSONString] forKey:LOGINDATA];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-
+- (UCFLoginData *)getUserData
+{
+    if (!_loginData) {
+        NSString *userData = [[NSUserDefaults standardUserDefaults] valueForKey:LOGINDATA];
+        UCFLoginData *data = [UCFLoginData yy_modelWithJSON:userData];
+        _loginData = [data copy];
+    }
+    return _loginData;
+}
 
 
 //+ (void)saveInfoDic:(NSDictionary *)dict
@@ -77,13 +89,13 @@
 //    }
 //}
 
-+ (void)saveLoginPhoneNum:(NSDictionary *)dic
+- (void)saveLoginAccount:(NSString *)account;
 {
-    //    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:@"",@"userType",@"",@"phoneNum", nil];
-    [[NSUserDefaults standardUserDefaults] setValue:dic forKey:@"lastLoginName"];
+    [[NSUserDefaults standardUserDefaults] setValue:account forKey:@"lastLoginName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (NSDictionary *)getLoginPhoneNum
+- (NSString *)getLoginAccount
 {
     return  [[NSUserDefaults standardUserDefaults] valueForKey:@"lastLoginName"];
 }
@@ -101,24 +113,26 @@
 }
 
 
-- (UCFLoginData *)getUserData
-{
-    NSString *UserData = [[NSUserDefaults standardUserDefaults] valueForKey:LOGINDATA];
-    UCFLoginData *data = [UCFLoginData yy_modelWithJSON:UserData];
-    return data;
-}
+
 
 - (void)deleteUserData{
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LOGINDATA];
+    self.signatureStr = @"";
 }
 
 
-- (NSString *)getSignatureStr
+- (NSString *)signatureStr
 {
-    //更新验签串
-    NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",self.loginData.userInfo.loginName,[self getAwp],self.loginData.userInfo.time];
-    NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
-    return signatureStr;
+    if (self.loginData.userInfo.userId.length > 0) {
+        if (!_signatureStr) {
+            //更新验签串
+            NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getLoginAccount],[self getAwp],self.loginData.userInfo.time];
+            NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
+            _signatureStr = signatureStr;
+        }
+        return _signatureStr;
+    }
+    return @"";
 }
 
 - (NSString *)getAwp
