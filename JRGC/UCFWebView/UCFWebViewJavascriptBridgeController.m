@@ -1544,7 +1544,7 @@
 //***新增函数-qyy-003
 -(NSString *) getSinatureWithPar:(NSString *) par
 {
-    NSString *lastStr = [NSString stringWithFormat:@"%@%@",par,[[NSUserDefaults standardUserDefaults] valueForKey:SIGNATUREAPP]];
+    NSString *lastStr = [NSString stringWithFormat:@"%@%@",par,SingleUserInfo.signatureStr];
     //    NSString *stttt  = [[NSUserDefaults standardUserDefaults] valueForKey:SIGNATUREAPP];
     //遍历字符串中的每一个字符
     NSMutableArray *array = [NSMutableArray array];

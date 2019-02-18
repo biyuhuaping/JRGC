@@ -155,7 +155,9 @@
         UCFLoginModel *model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
-            [SingleUserInfo setUserData:model.data withPassWord:pwd];
+            
+            [SingleUserInfo setUserData:model.data withPassWord:pwd andInputAccountText:username];
+            
             [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES];
         }
         else{

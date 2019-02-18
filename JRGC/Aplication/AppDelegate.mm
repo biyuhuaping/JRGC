@@ -290,11 +290,14 @@
 
 - (void)checkConponCenter
 {
-    NSDictionary *parmDic = nil;
     if (SingleUserInfo.loginData.userInfo.userId) {
-        parmDic = [NSDictionary dictionaryWithObject:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
+        NSDictionary *parmDic = nil;
+        if (SingleUserInfo.loginData.userInfo.userId) {
+            parmDic = [NSDictionary dictionaryWithObject:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
+        }
+        [[NetworkModule sharedNetworkModule] newPostReq:parmDic tag:kSXTagCheckConponCenter owner:self signature:YES Type:SelectAccoutDefault];
     }
-    [[NetworkModule sharedNetworkModule] newPostReq:parmDic tag:kSXTagCheckConponCenter owner:self signature:YES Type:SelectAccoutDefault];
+
 }
 //- (void) createItem {
 //    //自定义icon 的初始化方法
