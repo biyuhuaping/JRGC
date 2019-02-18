@@ -85,15 +85,15 @@
 {
     if (_itemsData == nil) {
         
-        UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_id" title:@"身份认证" destVcClass:[UCFModifyIdAuthViewController class]];
-        UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"login_icon_phone" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
-        UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_code" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
+        UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"idcard_icon" title:@"身份认证" destVcClass:[UCFModifyIdAuthViewController class]];
+        UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"bind_phone_icon" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
+        UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"gongchang_code_icon" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
        
-        self.userLevel = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_vip" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
+        self.userLevel = [UCFSettingArrowItem itemWithIcon:@"membership_level_icon" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
         self.userLevel.isShowOrHide = YES;//不显示
 
-        UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_gesture" title:@"启用手势密码"];
-        UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"login_icon_password" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
+        UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"gesture_account_icon" title:@"启用手势密码"];
+        UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"password_account_icon" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
 
         UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
@@ -105,16 +105,22 @@
             group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
         }
 
+        UCFSettingItem *weijinAccount  = [UCFSettingArrowItem itemWithIcon:@"vjin_account_icon" title:@"微金存管账户" destVcClass:[BindPhoneNumViewController class]];
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
+        group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount]];
+        
+        
+        
+        UCFSettingGroup *group3 = [[UCFSettingGroup alloc] init];//账户安全
         
         if ([self checkTouchIdIsOpen]) {
-            UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_touch" title:@"启用指纹解锁" withSwitchType:1];
-             group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith,modifyPassword,moreVc]];
+            UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"fingerprint_account_icon" title:@"启用指纹解锁" withSwitchType:1];
+             group3.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith,modifyPassword,moreVc]];
         } else {
-             group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,modifyPassword,moreVc]];
+             group3.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,modifyPassword,moreVc]];
 
         }
-        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
+        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,group3,nil];
     }
     return _itemsData;
 }
@@ -147,11 +153,11 @@
 //    [self addRightButtonWithName:@"每日签到"];
 
     baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";
-    self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+    self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
-    self.tableview.separatorInset = UIEdgeInsetsMake(0,15, 0, 0);
+    self.tableview.separatorInset = UIEdgeInsetsMake(0,45, 0, 0);
     self.tableview.backgroundColor = [UIColor clearColor];
-    UIView *footerview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
+    UIView *footerview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 70)];
     self.tableview.tableFooterView = footerview;
     [footerview setBackgroundColor:UIColorWithRGB(0xebebee)];
     
@@ -163,14 +169,15 @@
     [footerview addSubview:logOutButton];
 
     // 添加约束
-    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[logOutButton]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
-    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[logOutButton]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
+    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[logOutButton]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
+    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[logOutButton]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
     [footerview addConstraints:constraints1H];
     [footerview addConstraints:constraints1V];
     
-    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
-    
+//    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
+//    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
+    [logOutButton setBackgroundColor:[Color color:PGColorOptionThemeWhite]];
+    [logOutButton setTitleColor:[Color color:PGColorOptionTitleOrange] forState:UIControlStateNormal];
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     
     // 获取网络数据
@@ -451,17 +458,17 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    return 45;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
-    UIView * headerView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    UIView * headerView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 45)];
+    headerView.backgroundColor =[Color color:PGColorOpttonTabeleViewBackgroundColor];
 
-    UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 8, 80, 15)];
+    UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 20, 80, 15)];
     titleLab.font = [UIFont systemFontOfSize:13];
-    titleLab.textColor = UIColorWithRGB(0x333333);
+    titleLab.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
     if (section == 0) {
         titleLab.text = @"我的信息";
     }else{
@@ -472,11 +479,11 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 44.0f;
+    return 50.0f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 10;
+    return 0.0001;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -490,12 +497,12 @@
     SecurityCell *cell = [SecurityCell cellWithTableView:tableView];
     UCFSettingGroup *group = self.itemsData[indexPath.section];
     if(indexPath.row == 0) {
-        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(45, 0, ScreenWidth, 0.5)];
         topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
         [cell addSubview:topLine];
     }
     if (indexPath.row == group.items.count-1) {
-        UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0,43.5, ScreenWidth, 0.5)];
+        UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(45,49.5, ScreenWidth, 0.5)];
           bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
         [cell.contentView addSubview:bottomLine];
     }
