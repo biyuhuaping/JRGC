@@ -15,8 +15,18 @@
 #import "UCFToolsMehod.h"
 #import "FMDeviceManager.h"
 #import "MD5Util.h"
+#import "UCFNewLoginViewController.h"
 @implementation UserInfoSingle
 
++ (UserInfoSingle *)sharedManager
+{
+    static UserInfoSingle *sharedAccountManagerInstance = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        sharedAccountManagerInstance = [[self alloc] init];
+    });
+    return sharedAccountManagerInstance;
+}
 - (void)setUserData:(UCFLoginData *) loginData withPassWord:(NSString *)passWord{
     
     //注册成功后，先清cookies，把老账户的清除掉，然后再用新账户的信息
@@ -136,20 +146,16 @@
 
 
 
-
-
-
-
-
-+ (UserInfoSingle *)sharedManager
+- (void)loadLoginViewController
 {
-    static UserInfoSingle *sharedAccountManagerInstance = nil;
-    static dispatch_once_t predicate;
-    dispatch_once(&predicate, ^{
-        sharedAccountManagerInstance = [[self alloc] init];
-    });
-    return sharedAccountManagerInstance;
+    UCFNewLoginViewController *vc = [[UCFNewLoginViewController alloc]init];
+    [SingGlobalView.rootNavController pushViewController:vc animated:YES];
 }
+
+
+
+
+
 //
 //#pragma mark - set
 //- (void)setOpenStatus:(NSInteger)states {
