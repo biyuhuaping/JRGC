@@ -214,7 +214,7 @@
         _loginBtn.heightSize.equalTo(@40);
         [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
         _loginBtn.titleLabel.font= [Color gc_Font:15.0];
-        self.loginBtn.userInteractionEnabled = NO;
+        self.loginBtn.userInteractionEnabled = YES;
         [self.loginBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _loginBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
