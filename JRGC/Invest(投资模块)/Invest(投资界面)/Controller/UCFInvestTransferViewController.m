@@ -327,6 +327,7 @@
         if (model.status == 1) {
             UCFNewTransProjectDetailViewController *vc = [[UCFNewTransProjectDetailViewController alloc] init];
             vc.model = model;
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             if (![rsttext isEqualToString:@""] && rsttext) {
