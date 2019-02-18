@@ -52,7 +52,6 @@
     if (self) {
         
         // 初始化视图对象
-        self.rootLayout.backgroundColor = [UIColor clearColor];
         [self.rootLayout addSubview:self.userMesageLayout];
         [self.userMesageLayout addSubview:self.headImageBtn];
         [self.userMesageLayout addSubview:self.messageImageBtn];
@@ -270,7 +269,7 @@
         _topUpWithdrawalLabel.rightPos.equalTo(self.arrowImageView.leftPos).offset(6);
         _topUpWithdrawalLabel.textAlignment = NSTextAlignmentLeft;
         _topUpWithdrawalLabel.font = [Color gc_Font:12.0];
-        _topUpWithdrawalLabel.textColor = [Color color:PGColorOptionTitleBlackGray];
+        _topUpWithdrawalLabel.textColor = [Color color:PGColorOptionTitleGray];
         _topUpWithdrawalLabel.text = @"充值与提现";
         [_topUpWithdrawalLabel sizeToFit];
         

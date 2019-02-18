@@ -9,6 +9,8 @@
 #import "UCFMineActivitiesCell.h"
 #import "NZLabel.h"
 #import "UCFMineMySimpleInfoModel.h"
+#import "UCFNewMineViewController.h"
+
 @interface UCFMineActivitiesCell()
 @property (nonatomic, strong) MyRelativeLayout *signInLayout;// 签到
 
@@ -81,7 +83,7 @@
         self.titleTop = 10;
         self.contentTop = 3;
         self.imageTop = 5;
-        self.rootLayout.backgroundColor = [UIColor clearColor];
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
      
         [self.rootLayout addSubview:self.signInLayout];// 签到
         [self.signInLayout addSubview:self.signInImageView];
@@ -119,8 +121,11 @@
         _signInLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
         _signInLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _signInLayout.myHeight = 85;
-        _signInLayout.myTop = 0;
+        _signInLayout.myTop = 10;
         _signInLayout.myLeft = 0;
+        _signInLayout.tag = 1001;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_signInLayout addGestureRecognizer:tapGesturRecognizer];
     }
     return _signInLayout;
 }
@@ -177,6 +182,9 @@
         _cowryLayout.heightSize.equalTo(self.signInLayout.heightSize);
         _cowryLayout.topPos.equalTo(self.signInLayout.topPos);
         _cowryLayout.leftPos.equalTo(self.signInLayout.rightPos);
+        _cowryLayout.tag = 1002;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_cowryLayout addGestureRecognizer:tapGesturRecognizer];
     }
     return _cowryLayout;
 }
@@ -232,6 +240,9 @@
         _beanLayout.heightSize.equalTo(self.signInLayout.heightSize);
         _beanLayout.topPos.equalTo(self.signInLayout.topPos);
         _beanLayout.leftPos.equalTo(self.cowryLayout.rightPos);
+        _beanLayout.tag = 1003;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_beanLayout addGestureRecognizer:tapGesturRecognizer];
     }
     return _beanLayout;
 }
@@ -286,7 +297,9 @@
         _couponLayout.heightSize.equalTo(self.signInLayout.heightSize);
         _couponLayout.topPos.equalTo(self.signInLayout.topPos);
         _couponLayout.leftPos.equalTo(self.beanLayout.rightPos);
-        
+        _couponLayout.tag = 1004;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_couponLayout addGestureRecognizer:tapGesturRecognizer];
         
     }
     return _couponLayout;
@@ -342,7 +355,9 @@
         _inviteLayout.heightSize.equalTo(self.signInLayout.heightSize);
         _inviteLayout.topPos.equalTo(self.signInLayout.topPos);
         _inviteLayout.leftPos.equalTo(self.couponLayout.rightPos);
-        
+        _inviteLayout.tag = 1005;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_inviteLayout addGestureRecognizer:tapGesturRecognizer];
         
     }
     return _inviteLayout;
@@ -409,5 +424,11 @@
     [self.beanContentLabel sizeToFit];
     [self.couponContentLabel sizeToFit];
     [self.inviteContentLabel sizeToFit];
+}
+-(void)layoutClick:(UIGestureRecognizer *)sender
+{
+    if ([self.bc isKindOfClass:[UCFNewMineViewController class]]) {
+        [(UCFNewMineViewController *)self.bc signInButtonClick:sender.view.tag];
+    }
 }
 @end

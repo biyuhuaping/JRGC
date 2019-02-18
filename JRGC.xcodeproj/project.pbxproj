@@ -1103,7 +1103,6 @@
 		E3B57DB61DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B57DB41DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.m */; };
 		E3B57DB71DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B57DB51DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib */; };
 		E3B76E7521EC6ECC009C9021 /* UCFNewMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B76E7421EC6ECC009C9021 /* UCFNewMineViewController.m */; };
-		E3B76E7821EC91D2009C9021 /* UCFMineHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B76E7721EC91D2009C9021 /* UCFMineHeadCell.m */; };
 		E3C1179A1D40CFCC0053A052 /* UCFContributionValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C117921D40CFCC0053A052 /* UCFContributionValueCell.m */; };
 		E3C1179B1D40CFCC0053A052 /* UCFContributionValueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C117931D40CFCC0053A052 /* UCFContributionValueCell.xib */; };
 		E3C1179C1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C117951D40CFCC0053A052 /* UCFContributionValueTypeTowCell.m */; };
@@ -3096,8 +3095,6 @@
 		E3B57DB51DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCouponExchangeToFriendTableViewCell.xib; sourceTree = "<group>"; };
 		E3B76E7321EC6ECC009C9021 /* UCFNewMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewMineViewController.h; sourceTree = "<group>"; };
 		E3B76E7421EC6ECC009C9021 /* UCFNewMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewMineViewController.m; sourceTree = "<group>"; };
-		E3B76E7621EC91D2009C9021 /* UCFMineHeadCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineHeadCell.h; sourceTree = "<group>"; };
-		E3B76E7721EC91D2009C9021 /* UCFMineHeadCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineHeadCell.m; sourceTree = "<group>"; };
 		E3C117911D40CFCC0053A052 /* UCFContributionValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFContributionValueCell.h; sourceTree = "<group>"; };
 		E3C117921D40CFCC0053A052 /* UCFContributionValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFContributionValueCell.m; sourceTree = "<group>"; };
 		E3C117931D40CFCC0053A052 /* UCFContributionValueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFContributionValueCell.xib; sourceTree = "<group>"; };
@@ -7835,8 +7832,6 @@
 		E3B76E7121EC6E89009C9021 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E3B76E7621EC91D2009C9021 /* UCFMineHeadCell.h */,
-				E3B76E7721EC91D2009C9021 /* UCFMineHeadCell.m */,
 				E3C1EF2221EDC50D0014658E /* UCFMineActivitiesCell.h */,
 				E3C1EF2321EDC50D0014658E /* UCFMineActivitiesCell.m */,
 				E3C1EF2521EDE2200014658E /* UCFMineItemCell.h */,
@@ -9506,7 +9501,6 @@
 				7BA6E4BA1AD6731900FE8C37 /* SDImageCache.m in Sources */,
 				744B9EDA1F0B8E9A00440FBA /* UCFCalendarDayCell.m in Sources */,
 				7BDD8FD81AE1043C007A5CE8 /* SDBaseProgressView.m in Sources */,
-				E3B76E7821EC91D2009C9021 /* UCFMineHeadCell.m in Sources */,
 				7B2E56971ADBBEAB008B0F9E /* UCFRetrievePasswordStepTwoView.m in Sources */,
 				E352FD9121E4AFD800617AB7 /* NSMutableDictionary+HXNilSafe.m in Sources */,
 				742A632D1CB7A1A500CE2553 /* UCFAccountCell.m in Sources */,

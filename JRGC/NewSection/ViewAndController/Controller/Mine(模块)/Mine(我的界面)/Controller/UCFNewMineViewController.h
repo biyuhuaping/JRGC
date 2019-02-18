@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BaseTableView *tableView;
 
-- (void)headCellButtonClick:(UIButton *)btn;
+- (void)signInButtonClick:(NSInteger )tag;
 @end
 
 NS_ASSUME_NONNULL_END

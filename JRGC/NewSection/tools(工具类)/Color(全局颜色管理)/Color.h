@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, PGColorOptions) {
+    
     PGColorOptionGrayBackgroundColor = 0, //背景颜色-- 灰色 0xebebee
     PGColorOptionThemeWhite,              //主题色--白色 0xFFFFFF
     PGColorOptionTitleOrange,              //文字颜色--橘色 0xFF4E11
@@ -16,16 +17,18 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
     PGColorOptionTitleGray,                //文字颜色--灰色 0xB1B5C2
     PGColorOptionCellSeparatorGray,        //Cell分割线颜色--灰色 0xE3E5EA
     PGColorOptionCellContentBlue,          //Cell内容文字颜色--蓝色色 0x91ACFB
-    PGColorOpttonTextRedColor,            //红色字体颜色
+    PGColorOpttonTextRedColor,             //红色字体颜色FF171C
     PGColorOptionTitlerRead,               //文字颜色--红色 FF4133
     PGColorOptionInputDefaultBlackGray,    //输入框默认文字颜色--灰色B1B5C2
-    PGColorOptionButtonBackgroundColorGray,    //按钮背景颜色--灰色CACBD9
-    PGColorOptionCursorPurple,              //光标背景颜色--灰色8597CD
-    PGColorOptionTitleLoginRead,              //登录标题颜色--红色FF1E2E
-    PGColorOpttonBtnBackgroundColor,            //按钮灰色背景颜色CACBD9
-    PGColorOpttonRateNoramlTextColor,         //利率字体正常FF4133
-    PGColorOpttonRateRedTextColor,          //利率字体提醒 #FFCFB2
-    PGColorOpttonSeprateLineColor,          //分割线 #FF7F5B
+    PGColorOptionButtonBackgroundColorGray,//按钮背景颜色--灰色CACBD9
+    PGColorOptionCursorPurple,             //光标背景颜色--灰色8597CD
+    PGColorOptionTitleLoginRead,           //登录标题颜色--红色FF1E2E
+    PGColorOpttonBtnBackgroundColor,       //按钮灰色背景颜色CACBD9
+    PGColorOpttonRateNoramlTextColor,      //利率字体正常FF4133
+    PGColorOpttonRateRedTextColor,         //利率字体提醒 #FFCFB2
+    PGColorOpttonSeprateLineColor,         //分割线 #FF7F5B
+    PGColorOpttonTabeleViewBackgroundColor,//tavleviewh背景色 #F5F5F5
+    
 };
 
 
