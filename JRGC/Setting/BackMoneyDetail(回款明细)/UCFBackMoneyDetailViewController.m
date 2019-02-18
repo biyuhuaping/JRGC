@@ -327,7 +327,7 @@
         }
             break;
     }
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&status=%ld&page=%ld&rows=20",userId, (long)_index, (long)pageNum];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderRefundLsit owner:self Type:self.accoutType];
 }

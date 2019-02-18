@@ -20,7 +20,7 @@
 
 - (NSString *)userId
 {
-    NSString *userId1 = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId1 = SingleUserInfo.loginData.userInfo.userId;
     _userId = userId1.length > 0 ? userId1 : @"";
     return _userId;
 }

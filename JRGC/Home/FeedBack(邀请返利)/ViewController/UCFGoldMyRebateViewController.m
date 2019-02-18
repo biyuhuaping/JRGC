@@ -536,7 +536,7 @@
 //获取我的投资列表
 - (void)getDataList
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     switch (_index) {
         case 0://（邀请返利-邀请投资明细）
         {

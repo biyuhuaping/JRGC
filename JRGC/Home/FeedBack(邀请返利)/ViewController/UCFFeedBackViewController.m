@@ -285,7 +285,7 @@
 //获取我的投资列表
 - (void)getMyInvestDataList
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
     if (self.accoutType == SelectAccoutTypeGold) {

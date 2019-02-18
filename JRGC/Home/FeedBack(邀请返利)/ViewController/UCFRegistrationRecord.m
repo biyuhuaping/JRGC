@@ -135,7 +135,7 @@
 //（邀请返利-邀请注册记录）
 - (void)getDataList
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (_tableView.header.isRefreshing) {
         _pageNum = 1;
     }else if (_tableView.footer.isRefreshing){

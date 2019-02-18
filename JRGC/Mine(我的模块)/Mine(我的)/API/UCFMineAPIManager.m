@@ -77,16 +77,16 @@
     if (!userId || !token) {
         return;
     }
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID], @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId, @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
 }
 //进入工贝页面的请求
 - (void)getUserIntoGoCoinPageHTTP:(BOOL)isCoinPage
 {
     coinPageFlag = isCoinPage;
     if (isCoinPage) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID]} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
     } else {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"pageType":@"vip"} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId,@"pageType":@"vip"} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
 

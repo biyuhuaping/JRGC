@@ -66,7 +66,7 @@
 }
 - (void)getNetDataFromNet
 {
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *strParameters;
     if ([self.baseTableView.header isRefreshing]) {
         self.currentPage = 1;

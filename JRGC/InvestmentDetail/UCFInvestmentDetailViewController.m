@@ -95,7 +95,7 @@
 // 获取网络数据
 - (void)getInvestNetworkData
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSString *strParameters;
     if ([_detailType isEqualToString:@"1"]) {
         strParameters = [NSString stringWithFormat:@"userId=%@&id=%@", userId, self.billId];

@@ -652,7 +652,7 @@
     NSIndexPath *indexPath = [_tableView1 indexPathForRowAtPoint:[sender locationInView:_tableView1]];
     DDLogDebug(@"响应手势:%@",_dataArr1[indexPath.section][indexPath.row]);
     
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId =SingleUserInfo.loginData.userInfo.userId;
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&odrclaimsid=%@",userId,_dataArr1[indexPath.section][indexPath.row][@"id"]];//5644
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kAppQueryByManyList owner:self Type:self.accoutType];
 }
@@ -661,7 +661,7 @@
 //获取我的投资列表
 - (void)getDataList
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     switch (_index) {
         case 0://（邀请返利-邀请投资明细）
         {

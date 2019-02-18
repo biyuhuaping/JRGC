@@ -262,7 +262,7 @@
 }
 - (void)loadNetData
 {
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     NSMutableDictionary *strParameters = [NSMutableDictionary dictionary];
     if (!uuid) {
         [strParameters setValue:@"" forKey:@"userId"];

@@ -153,7 +153,7 @@
 
 - (void)getDataStaticFromNetWithTime:(NSString *)time
 {
-    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID], @"userId", time, @"monthStr",nil];
+    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId, @"userId", time, @"monthStr",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagDataStatics owner:self signature:YES Type:self.accoutType];
 }
 

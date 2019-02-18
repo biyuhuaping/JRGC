@@ -489,7 +489,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     NSMutableDictionary *paramDict = [NSMutableDictionary dictionaryWithCapacity:1];
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userID = SingleUserInfo.loginData.userInfo.userId;
     NSString *prdClaimsId = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"id"]] ;
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString *investAmt = [UCFToolsMehod isNullOrNilWithString:cell.inputMoneyTextFieldLable.text];
@@ -602,7 +602,7 @@
             }
             [orderIdsArryStr appendString:@"]"];
             
-            NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"applyAmount":applyAmount,@"investAmount":investAmount,@"orderIds":orderIdsArryStr};
+            NSDictionary *reqDict =  @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"applyAmount":applyAmount,@"investAmount":investAmount,@"orderIds":orderIdsArryStr};
             
             NSString *urlStr =[NSString stringWithFormat:@"%@%@",SERVER_IP,BATCHINVESTSTATUS];
             UCFBatchBidWebViewController *webView = [[UCFBatchBidWebViewController alloc]initWithNibName:@"UCFBatchBidWebViewController" bundle:nil];

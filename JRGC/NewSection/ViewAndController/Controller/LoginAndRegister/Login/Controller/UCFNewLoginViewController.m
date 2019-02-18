@@ -58,7 +58,7 @@
     self.navigationItem.rightBarButtonItem = rightItem;
     
     
-//    UIButton *cancleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    UIButton *cancleButton = [UIButton buttonWithType:UIButtonTypeSystem];UU
 //    [cancleButton setTitle:@"注册" forState:UIControlStateNormal];
 //    [cancleButton setTitleColor:[Color color:PGColorOpttonTextRedColor] forState:UIControlStateNormal];
 //    [cancleButton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];

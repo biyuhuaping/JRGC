@@ -78,7 +78,7 @@
         return;
     }
     [self.view endEditing:YES];
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&ownRate=%@&friendRate=%@",userId, _ownRateTF.text, _friendRateTF.text];//5644
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFactoryCodeSaveRate owner:self Type:SelectAccoutDefault];
 }

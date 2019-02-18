@@ -464,7 +464,7 @@
 }
 #pragma mark - 去批量投资集合详情
 -(void)gotoCollectionDetailViewContoller:(UCFMicroMoneyModel *)model{
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     self.accoutType = SelectAccoutTypeP2P;
     //检查企业老用户是否开户
     NSString *messageStr =  [[HSHelper new] checkCompanyIsOpen:self.accoutType];

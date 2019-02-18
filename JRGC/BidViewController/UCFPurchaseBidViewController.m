@@ -643,7 +643,7 @@
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSMutableDictionary *paramDict = [NSMutableDictionary dictionaryWithCapacity:1];
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userID = SingleUserInfo.loginData.userInfo.userId;
     NSString *prdClaimsId = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"data"] objectForKey:@"id"]] ;
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString *investAmt = [UCFToolsMehod isNullOrNilWithString:cell.inputMoneyTextFieldLable.text];

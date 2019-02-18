@@ -159,7 +159,7 @@ shared##className = [[self alloc] init]; \
 return shared##className; \
 }
 
-#define UUID            @"userId"
+//#define UUID            @"userId"
 #define TIME            @"time"
 #define DOPA            @"dopa"
 #define DATADIC         @"dataDic" //数字字典

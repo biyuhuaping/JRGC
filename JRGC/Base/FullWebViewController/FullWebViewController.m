@@ -225,7 +225,7 @@
 
 //获取分享各种信息
 - (void)getAppSetting{
-    NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *uuid =SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *dataDict = @{};
     if (uuid != nil ) {
         dataDict = @{@"userId":uuid};

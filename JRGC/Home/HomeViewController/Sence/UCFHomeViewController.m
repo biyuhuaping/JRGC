@@ -1046,7 +1046,7 @@
 }
 #pragma mark - 去批量投资集合详情
 -(void)gotoCollectionDetailViewContoller:(UCFHomeListCellModel *)model{
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     self.accoutType = SelectAccoutTypeP2P;
     __weak typeof(self) weakSelf = self;
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {

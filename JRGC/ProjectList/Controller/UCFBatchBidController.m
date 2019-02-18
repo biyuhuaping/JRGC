@@ -161,7 +161,7 @@
         }
         if ([self checkUserCanInvestIsDetail:YES]) {
             
-            NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+            NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
             NSDictionary *strParameters;
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.batchBidId];
             strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
@@ -173,7 +173,7 @@
 #pragma mark - net request
 - (void)getNetDataFromNet
 {
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid =SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *strParameters;
     if ([self.tableview.header isRefreshing]) {
         self.currentPage = 1;

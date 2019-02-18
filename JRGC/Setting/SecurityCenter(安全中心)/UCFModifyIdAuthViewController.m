@@ -122,7 +122,7 @@
 // 获取身份证信息
 - (void)getIdInfoFromNet
 {
-    NSString *struserId = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
+    NSString *struserId = [NSString stringWithFormat:@"%@", SingleUserInfo.loginData.userInfo.userId];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:struserId,@"userId",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagIdentifyCard owner:self signature:YES Type:SelectAccoutDefault];
 }

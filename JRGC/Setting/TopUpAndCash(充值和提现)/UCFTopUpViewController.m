@@ -766,7 +766,7 @@
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     [dict setValue:_phoneTextField.text forKey:@"phoneNo"];
-    [dict setValue:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] forKey:@"userId"];
+    [dict setValue:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
     [[NetworkModule sharedNetworkModule] newPostReq:dict tag:kSXTagWithdrawalsSendPhone owner:self signature:YES Type:self.accoutType];
 //    [[NetworkModule sharedNetworkModule] postReq:[NSString stringWithFormat:@"userId=%@&isVms=%@",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],type] tag:kSXTagActWithdrawSendPhoneVerifyCode owner:self];
 }

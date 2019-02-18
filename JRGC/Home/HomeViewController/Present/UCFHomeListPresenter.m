@@ -31,7 +31,7 @@
 
 - (NSString *)userId
 {
-    NSString *userId1 = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId1 = SingleUserInfo.loginData.userInfo.userId;
     _userId = userId1.length > 0 ? userId1 : @"";
     return _userId;
 }
@@ -397,7 +397,7 @@
         }
         if ([sectionDict[@"type"] intValue] == 0) { //新手专区
             NSDictionary *parmDict = nil;
-            NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+            NSString *userId = SingleUserInfo.loginData.userInfo.userId;
             if (userId) {
                 parmDict = @{@"userId":userId};
             }

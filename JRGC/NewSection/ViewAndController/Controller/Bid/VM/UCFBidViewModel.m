@@ -799,7 +799,7 @@
 - (void)sendBuyDataToService
 {
     NSMutableDictionary *paramDict = [NSMutableDictionary dictionaryWithCapacity:1];
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userID = SingleUserInfo.loginData.userInfo.userId;
     NSString *prdClaimsId = self.model.data.prdClaim.ID;
     NSString *investAmt = self.investMoeny;
     

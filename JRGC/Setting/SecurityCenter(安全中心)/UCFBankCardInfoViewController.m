@@ -380,7 +380,7 @@
 - (void)getBankCardInfoFromNet
 {
 
-    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",nil];
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:SingleUserInfo.loginData.userInfo.userId,@"userId",nil];
     [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagBankInfoNew owner:self signature:YES Type:self.accoutType];
  
 }
@@ -682,7 +682,7 @@
 {
     
     NSDictionary * dic = _dicBranchBank;
-    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys: [[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",[dic objectForKey:@"bankNo"] ,@"relevBankCard",nil];
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys: SingleUserInfo.loginData.userInfo.userId,@"userId",[dic objectForKey:@"bankNo"] ,@"relevBankCard",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChosenBranchBank owner:self signature:YES Type:self.accoutType];
    
 

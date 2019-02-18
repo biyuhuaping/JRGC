@@ -233,7 +233,7 @@
         [self.tableView setHidden:YES];
     }else{
     NSString *keywordStr = [NSString stringWithFormat:@"%@%@",self.textField_searchBar.text,self.bankName]; ////***hqy添加
-    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",self.currentPC],@"index",keywordStr,@"keyword",PAGESIZE,@"size",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",nil];
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",self.currentPC],@"index",keywordStr,@"keyword",PAGESIZE,@"size",SingleUserInfo.loginData.userInfo.userId,@"userId",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChoseBranchBank owner:self signature:YES Type:self.accoutType];
     }
     //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -243,7 +243,7 @@
 // 网络请求-列表下拉
 - (void)getDataRequsetWithPageNo:(NSUInteger)currentPageNo{
     NSString *keywordStr = [NSString stringWithFormat:@"%@%@",self.textField_searchBar.text,self.bankName]; ////***hqy添加  
-    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",self.currentPC],@"index",keywordStr,@"keyword",PAGESIZE,@"size",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",nil];
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",self.currentPC],@"index",keywordStr,@"keyword",PAGESIZE,@"size",SingleUserInfo.loginData.userInfo.userId,@"userId",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChoseBranchBank owner:self signature:YES Type:self.accoutType];
 
     //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];

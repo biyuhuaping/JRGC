@@ -362,7 +362,7 @@
     }
 //    NSArray *tempArr = @[@"",@"0",@"1"];
     NSArray *tempArr1 = @[@"",@"5",@"6"];
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSString *strParameters = [NSString stringWithFormat:@"page=%ld&rows=20&userId=%@&orderUserId=%@&typeFlag=3&callStatus=%@", (long)pageNum,userId,userId,tempArr1[_index]];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagTransfersOrder owner:self Type:self.accoutType];
 }

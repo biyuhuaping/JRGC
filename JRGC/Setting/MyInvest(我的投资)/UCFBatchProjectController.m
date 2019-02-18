@@ -101,7 +101,7 @@
     if([model.status intValue] == 1){ //等于1 匹配成功
         _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.colId];
         _batchOrderIdStr = [NSString stringWithFormat:@"%@",model.Id ];
-        NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+        NSString *uuid =SingleUserInfo.loginData.userInfo.userId;
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId",_colPrdClaimIdStr, @"colPrdClaimsId", _batchOrderIdStr, @"batchOrderId",@"1",@"page", @"20", @"pageSize",nil];
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyBatchInvestDetail owner:self signature:YES Type:self.accoutType];
     }
@@ -116,7 +116,7 @@
         _pageNum ++;
     }
     
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *strParameters;
     if ([self.tableView.header isRefreshing]) {
         self.pageNum = 1;

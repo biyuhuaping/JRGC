@@ -339,7 +339,7 @@
      userId	用户ID	string
      */
     
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSString *pageNoStr = [NSString stringWithFormat:@"%d",pageNum];
     NSString *orderStatusCodeStr = [NSString stringWithFormat:@"%d",_selectIndex];
     NSDictionary *strParameters  = @{@"userId":userId,@"pageNo":pageNoStr,@"pageSize":@"20",@"orderStatusCode":orderStatusCodeStr};

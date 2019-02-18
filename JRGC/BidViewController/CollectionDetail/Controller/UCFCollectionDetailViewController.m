@@ -633,7 +633,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 #pragma mark
 #pragma mark 网络请求
 -(void)getCollectionDetailHttpRequest{
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     if (uuid == nil || [uuid isEqualToString:@""]) { //如果为空 去登录页面
         [self showLoginView];
         [self.listTableView.header endRefreshing];
@@ -828,7 +828,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
          NSDictionary *dataDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"tenderId":_colPrdClaimId};
          [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES Type:self.accoutType];
     }else{
-        NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"colOrderId":_batchOrderIdStr};
+        NSDictionary *reqDict =  @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"colOrderId":_batchOrderIdStr};
         NSString *urlStr =[NSString stringWithFormat:@"%@%@",SERVER_IP,GETBACHINVESTAWARD];
         UCFBatchBidWebViewController *webView = [[UCFBatchBidWebViewController alloc]initWithNibName:@"UCFBatchBidWebViewController" bundle:nil];
         webView.url =  urlStr;

@@ -48,7 +48,7 @@
 }
 - (IBAction)clickGoldAuthorizationBtn:(id)sender {
     
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userID =SingleUserInfo.loginData.userInfo.userId;
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userID} tag:kSXTagGoldAuthorizedOpenAccount owner:self signature:YES Type:SelectAccoutDefault];
     self.goldAuthorizationBtn.userInteractionEnabled = NO;
     

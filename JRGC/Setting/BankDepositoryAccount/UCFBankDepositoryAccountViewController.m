@@ -95,10 +95,10 @@
     
     
     if (self.accoutType == SelectAccoutTypeHoner) {
-        NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+        NSString *userID = SingleUserInfo.loginData.userInfo.userId;
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userID} tag:kSXTagGetUserAgree owner:self signature:YES Type:SelectAccoutTypeHoner];;
     }else{
-        NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+        NSString *userID = SingleUserInfo.loginData.userInfo.userId;
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userID} tag:KSXTagP2pAuthorization owner:self signature:YES Type:SelectAccoutTypeP2P];;
     }
     

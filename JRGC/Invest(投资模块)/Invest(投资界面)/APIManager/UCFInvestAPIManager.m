@@ -22,7 +22,7 @@
 
 - (void)getMicroMoneyFromNet
 {
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *strParameters;
     if (!uuid) {
         strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:@"", @"userId", nil];
@@ -34,7 +34,7 @@
 }
 - (void)getNewMicroMoneyFromNet
 {
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid =SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *strParameters;
     if (!uuid) {
         strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:@"", @"userId", nil];

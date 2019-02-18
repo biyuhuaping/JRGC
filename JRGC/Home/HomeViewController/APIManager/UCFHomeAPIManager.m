@@ -72,7 +72,7 @@
 
 - (void)fetchSignInfo:(NSString *)userId token:(NSString *)token completionHandler:(NetworkCompletionHandler)completionHandler
 {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+    if (SingleUserInfo.loginData.userInfo.userId) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
         [self.requestDict setObject:completionHandler forKey:SIGN];
     }
@@ -81,7 +81,7 @@
 #pragma mark - 获取标的详情
 - (void)fetchProDetailInfoWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHandler
 {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+    if (SingleUserInfo.loginData.userInfo.userId) {
         NSString *userId = [parameter objectSafeForKey:@"userId"];
         NSString *Id = [parameter objectSafeForKey:@"Id"];
         NSString *proType = [parameter objectSafeForKey:@"proType"];
@@ -91,7 +91,7 @@
         switch ([type intValue]) {
             case 3://微金和尊享标详情请求
             {
-                NSDictionary *praramDic = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"prdClaimsId":Id,@"status":statue};
+                NSDictionary *praramDic = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"prdClaimsId":Id,@"status":statue};
                 
                 if ([proType isEqualToString:@"1"]) {
                    [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];

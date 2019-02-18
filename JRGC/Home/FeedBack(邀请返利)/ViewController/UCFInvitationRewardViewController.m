@@ -53,7 +53,7 @@
 #pragma mark - 请求网络及回调
 - (void)getMyInvestDataList
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
     //*******qinyy

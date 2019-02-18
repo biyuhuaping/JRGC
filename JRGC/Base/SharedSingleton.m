@@ -71,7 +71,7 @@ static SharedSingleton *_sharedObj = nil;
 {
     viewContoller1 = vc1;
 
-    if ([[NSUserDefaults standardUserDefaults]valueForKey:UUID]) {
+    if (SingleUserInfo.loginData.userInfo.userId) {
         [vc1 pushViewController:vc2 animated:YES];
         viewContoller1 = nil;
         [vc2 release];
@@ -87,7 +87,7 @@ static SharedSingleton *_sharedObj = nil;
 
 - (void)canDelegete:(UIViewController *)target doAction:(SEL)selector{
     
-    if ([[NSUserDefaults standardUserDefaults]valueForKey:UUID]) {
+    if (SingleUserInfo.loginData.userInfo.userId) {
         [target performSelector:selector withObject:nil];
         
     }else{

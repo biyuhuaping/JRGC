@@ -193,8 +193,8 @@
 }
 - (void)clickRightBtn
 {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID], @"apptzticket":self.userCenterTicket} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId, @"apptzticket":self.userCenterTicket} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
 #pragma mark alertViewDelegate
@@ -259,7 +259,7 @@
 {
 //    NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
     
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSString *userId =SingleUserInfo.loginData.userInfo.userId;
     if (nil == userId) {
         return;
     }
@@ -272,7 +272,7 @@
 #pragma -- 进入工贝页面的请求
 - (void)getUserIntoGoCoinPageHTTP
 {
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"pageType":@"vip"} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId,@"pageType":@"vip"} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 

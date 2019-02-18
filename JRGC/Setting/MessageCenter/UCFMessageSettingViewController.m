@@ -47,12 +47,12 @@
 }
 #pragma mark -查询用户是否开启短信通知请求
 -(void)userDisPermissionIsOpenRequest{
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",SingleUserInfo.loginData.userInfo.userId];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserDisPermissionIsOpen owner:self Type:SelectAccoutDefault];
 }
 #pragma mark -更新用户是否开启短信通知请求
 -(void)userUpdatePermissionIsOpenRequest:(BOOL)messageSwith{
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&isOpen=%d",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],messageSwith];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&isOpen=%d",SingleUserInfo.loginData.userInfo.userId,messageSwith];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUpdateUserDisPermission owner:self Type:SelectAccoutDefault];
 }
 - (void)didReceiveMemoryWarning {

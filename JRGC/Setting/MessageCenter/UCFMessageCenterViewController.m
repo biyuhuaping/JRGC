@@ -521,7 +521,7 @@
 #pragma mark 全部设置已读的网络请求
 -(void)setAllMessageReadedHttpRequest{
   
-    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID]};
+    NSDictionary *paraDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId};
     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:KSXTagMsgListSignAllRead owner:self signature:YES Type:SelectAccoutDefault];
     
     
@@ -529,12 +529,12 @@
 #pragma mark 单个数据设置为已读的网络请求
 -(void)setSignMessageReadedHttpRequest:(NSString *)messageId{
     
-    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"id":messageId};
+    NSDictionary *paraDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"id":messageId};
     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:KSXTagMsgListSignRead owner:self signature:YES Type:SelectAccoutDefault];
 }
 #pragma mark 量批删除消息的网络请求
 -(void)mutableDeleteMessageHttpRequest:(NSString *)messageIdStr{
-    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"tMsgIds":messageIdStr};
+    NSDictionary *paraDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"tMsgIds":messageIdStr};
     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:KSXTagMsgListRemoveTMsg owner:self signature:YES Type:SelectAccoutDefault];
 }
 #pragma mark 消息中心网络数据请求
@@ -543,7 +543,7 @@
       _pageNumber = 1;
     }
     NSString *pageStr = [NSString stringWithFormat:@"%d",_pageNumber];
-    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"page":pageStr,@"rows":@"10"};
+    NSDictionary *paraDict = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"page":pageStr,@"rows":@"10"};
     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagGetMSGCenter owner:self signature:YES Type:SelectAccoutDefault];
 }
 #pragma mark - 开始请求

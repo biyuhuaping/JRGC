@@ -131,7 +131,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [self.navigationController pushViewController:controller animated:YES];
 }
 -(void)getCollectionListHttpRequest{
-     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+     NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     if ([self.listTableView.header isRefreshing]) {
         self.currentPage = 1;
         [self.listTableView.footer resetNoMoreData];

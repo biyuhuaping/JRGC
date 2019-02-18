@@ -228,7 +228,7 @@
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
     [JPUSHService setupWithOption:launchOptions appKey:JPUSHKEY channel:nil apsForProduction:YES];
-    [JPUSHService setAlias:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    [JPUSHService setAlias:SingleUserInfo.loginData.userInfo.userId callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     [JPUSHService setBadge:0];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registJush) name:REGIST_JPUSH object:nil];
@@ -272,8 +272,8 @@
 - (void)registJush
 {
    //fixes IOS-3537
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
-        [JPUSHService setAlias:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        [JPUSHService setAlias:SingleUserInfo.loginData.userInfo.userId callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     } else {
         [JPUSHService setBadge:0];
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -291,8 +291,8 @@
 - (void)checkConponCenter
 {
     NSDictionary *parmDic = nil;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
-        parmDic = [NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] forKey:@"userId"];
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        parmDic = [NSDictionary dictionaryWithObject:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
     }
     [[NetworkModule sharedNetworkModule] newPostReq:parmDic tag:kSXTagCheckConponCenter owner:self signature:YES Type:SelectAccoutDefault];
 }

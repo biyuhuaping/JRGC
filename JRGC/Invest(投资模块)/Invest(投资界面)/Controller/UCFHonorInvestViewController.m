@@ -75,7 +75,7 @@
 
 }
 - (void)getHonerInvestHTTPRequst{
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
     NSDictionary *strParameters;
     if ([self.tableView.header isRefreshing]) {
         self.currentPage = 1;
