@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (GlobalView *)sharedManager;
 @property(nonatomic,weak) UITabBarController *tabBarController;
 @property(nonatomic,strong) RTRootNavigationController *rootNavController;
-@property(nonatomic,strong) UCFLoginData *loginData;
 @end
 
 NS_ASSUME_NONNULL_END

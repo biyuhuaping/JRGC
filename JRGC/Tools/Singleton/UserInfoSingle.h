@@ -103,4 +103,6 @@
 - (void)setUserData:(UCFLoginData *) loginData;
 - (void)deleteUserData;
 - (UCFLoginData *)getUserData;
+
+- (void)loadLoginViewController;
 @end
