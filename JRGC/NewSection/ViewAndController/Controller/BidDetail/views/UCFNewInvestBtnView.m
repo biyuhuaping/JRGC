@@ -10,7 +10,7 @@
 #import "NSObject+Compression.h"
 @interface UCFNewInvestBtnView()
 @property(nonatomic, strong)UIButton    *investButtom;
-@property(nonatomic, strong)UVFBidDetailViewModel   *vm;
+@property(nonatomic, strong)BaseViewModel   *vm;
 @end
 
 
@@ -47,12 +47,30 @@
             }
         }
     }];
-    
 }
+- (void)blindTransVM:(UCFTransBidDetailViewModel *)vm
+{
+    self.vm = vm;
+    @PGWeakObj(self);
+    [self.KVOController observe:vm keyPaths:@[@"bidInvestText"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"bidInvestText"]) {
+            NSString *bidInvestText = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (bidInvestText.length > 0) {
+                [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
+            }
+        }
+    }];
+}
+
 - (void)click:(UIButton *)button
 {
     NSString *title = [button titleForState:UIControlStateNormal];
-    [self.vm dealClickAction:title];
+    if ([self.vm isKindOfClass:[UVFBidDetailViewModel class]]) {
+        [(UVFBidDetailViewModel *)self.vm dealClickAction:title];
+    } else if ([self.vm isKindOfClass:[UCFTransBidDetailViewModel class]]){
+        [(UCFTransBidDetailViewModel *)self.vm dealClickAction:title];
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.

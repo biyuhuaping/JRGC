@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewTransProjectDetailViewController : UCFNewBaseViewController
 @property(nonatomic, strong)UCFTransBidInfoModel *model;
-
+@property(nonatomic,assign) PROJECTDETAILTYPE detailType;
 @end
 
 NS_ASSUME_NONNULL_END

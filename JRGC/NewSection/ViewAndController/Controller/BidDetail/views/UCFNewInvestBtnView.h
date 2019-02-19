@@ -8,10 +8,12 @@
 
 #import "BaseView.h"
 #import "UVFBidDetailViewModel.h"
+#import "UCFTransBidDetailViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewInvestBtnView : BaseView
 - (void)blindVM:(UVFBidDetailViewModel *)vm;
+- (void)blindTransVM:(UCFTransBidDetailViewModel *)vm;
 @end
 
 NS_ASSUME_NONNULL_END

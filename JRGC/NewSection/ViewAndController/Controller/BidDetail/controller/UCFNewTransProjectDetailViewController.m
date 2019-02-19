@@ -93,13 +93,12 @@
     [self.navView blindTransVM:self.VM];
     
     [self.bidinfoView blindTransVM:self.VM];
-//
-//    [self.remind blindVM:self.VM];
-//
-//    [self.investView blindVM:self.VM];
+
+    [self.remind blindTransVM:self.VM];
+
+    [self.investView blindTransVM:self.VM];
 //
 //    [self blindVM:self.VM];
-    
 }
 - (void)blindVM:(UVFBidDetailViewModel *)vm
 {
@@ -146,8 +145,10 @@
 - (void)blindData
 {
     [self.VM blindModel:self.model];
-//    [self.dataArray addObject:[self.VM getTableViewData]];
-//    [self.dataArray addObject:[self.VM getTableViewData1]];
+    [self.dataArray addObject:[self.VM getTableViewData]];
+    [self.dataArray addObject:[self.VM getTableViewData1]];
+    self.accoutType =  [self.model.prdTransferFore.type isEqualToString:@"1"] ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
+    _detailType = PROJECTDETAILTYPEBONDSRRANSFER;
     [self.showTableView reloadData];
 }
 - (UCFTransBidDetailViewModel *)VM
@@ -288,40 +289,33 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             
-            NSString *userid = SingleUserInfo.loginData.userInfo.userId;
-            NSString *prdClaimsIdStr = self.model.data.ID;
-            NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
-            [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdDetailMess owner:self signature:YES Type:self.accoutType];
+            UCFProjectBasicDetailViewController *basicDetailVC = [[UCFProjectBasicDetailViewController alloc]initWithNibName:@"UCFProjectBasicDetailViewController" bundle:nil];
+            basicDetailVC.dataDic = [self.model yy_modelToJSONObject];
+            basicDetailVC.detailType = _detailType;
+            basicDetailVC.accoutType = self.accoutType;
+            [self.navigationController  pushViewController:basicDetailVC animated:YES];
             
         } else if (indexPath.row == 1) {
             UCFProjectSafetyGuaranteeViewController *basicDetailVC = [[UCFProjectSafetyGuaranteeViewController alloc]initWithNibName:@"UCFProjectSafetyGuaranteeViewController" bundle:nil];
             NSMutableArray *dictArr = [NSMutableArray arrayWithCapacity:1];
-            for (DetailSafetysecuritylist *safeModel in self.model.data.safetySecurityList) {
+            for (UCFTransSafetysecuritylist *safeModel in self.model.prdClaimsReveal.safetySecurityList) {
                 NSDictionary *dict = @{@"title":safeModel.title,@"content":safeModel.content};
                 [dictArr addObject:dict];
             }
             basicDetailVC.dataArray = dictArr;
             basicDetailVC.accoutType = self.accoutType;
-            basicDetailVC.accoutType = self.accoutType;
             [self.navigationController  pushViewController:basicDetailVC animated:YES];
         } else {
             UCFProjectInvestmentRecordViewController *investmentRecordVC = [[UCFProjectInvestmentRecordViewController alloc]initWithNibName:@"UCFProjectInvestmentRecordViewController" bundle:nil];
+            investmentRecordVC.dataDic = [self.model yy_modelToJSONObject];
             investmentRecordVC.accoutType = self.accoutType;
-            if ([self.model.data.busType isEqualToString:@"1"]) {
-                _detailType = PROJECTDETAILTYPERIGHTINTEREST;
-            } else {
-                _detailType = PROJECTDETAILTYPENORMAL;
-            }
             investmentRecordVC.detailType = _detailType;
-            investmentRecordVC.prdClaimsId = self.model.data.ID;
             [self.navigationController  pushViewController:investmentRecordVC animated:YES];
         }
     }
-     */
 }
 -(void)beginPost:(kSXTag)tag
 {
@@ -336,16 +330,15 @@
         NSString *rsttext = dic[@"message"];
         if ([rstcode boolValue])
         {
-            /*
             UCFProjectBasicDetailViewController *basicDetailVC = [[UCFProjectBasicDetailViewController alloc]initWithNibName:@"UCFProjectBasicDetailViewController" bundle:nil];
             basicDetailVC.dataDic = dataDic;
             basicDetailVC.detailType = _detailType;
             basicDetailVC.accoutType = self.accoutType;
-            basicDetailVC.projectId = [NSString stringWithFormat:@"%@",self.model.data.ID];
-            basicDetailVC.tradeMark = self.model.data.tradeMark;
-            basicDetailVC.prdDesType= [self.model.data.prdDesType boolValue];
+            basicDetailVC.projectId = [NSString stringWithFormat:@"%@",self.model.prdTransferFore.ID];
+            basicDetailVC.tradeMark = self.model.prdTransferFore.tradeMark;
+            basicDetailVC.prdDesType= [self.model.prdDesType boolValue];
             [self.navigationController  pushViewController:basicDetailVC animated:YES];
-             */
+            
         }else{
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
