@@ -43,6 +43,8 @@
 #import "UCFSignView.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "NSString+Misc.h"
+#import "UCFMineMyReceiptApi.h"
+#import "UCFMineMyReceiptModel.h"
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -124,7 +126,29 @@
     }
     return _itemsData;
 }
-
+- (void)requestMyReceipt//请求总资产信息
+{
+    UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
+    
+    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
+        DDLogDebug(@"---------%@",model);
+        if (model.ret == YES) {
+            
+            
+        }
+        else{
+            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
+    
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

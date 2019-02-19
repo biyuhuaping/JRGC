@@ -55,7 +55,7 @@
             // TODO: hide loading
 //            [YTKAlertUtils hideLoadingAlertView:_animatingView];
             HideHUD(_animatingView);
-            NSLog(@" loading finished");
+            DDLogInfo(@" loading finished");
         });
     }
 }

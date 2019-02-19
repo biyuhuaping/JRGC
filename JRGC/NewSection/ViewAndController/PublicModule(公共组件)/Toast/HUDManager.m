@@ -71,8 +71,8 @@
             self.hud = [MBProgressHUD showHUDAddedTo:view.window animated:YES];
         }
 //        self.hud = [MBProgressHUD showHUDAddedTo:[self topUseableWindow] animated:YES];
-        self.hud.mode = MBProgressHUDModeCustomView;
-        UIImageView *cusImageV = [[UIImageView alloc] init];
+//        self.hud.mode = MBProgressHUDModeCustomView;
+//        UIImageView *cusImageV = [[UIImageView alloc] init];
         
 //        NSMutableArray * arrOrigin = [NSMutableArray array];
 //        for (int i = 1; i<= 35; i++) {
@@ -200,7 +200,7 @@
 {
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.05 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        [self.hud hideAnimated:YES];
+        [self.hud hide:YES];
         self.hud = nil;
   });
     
