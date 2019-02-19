@@ -17,7 +17,10 @@
 #import "UCFProjectSafetyGuaranteeViewController.h"
 #import "UCFProjectBasicDetailViewController.h"
 #import "UCFNewInvestBtnView.h"
-@interface UCFNewTransProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate,UCFBidDetailNavViewDelegate>
+#import "UCFNewPureTransBidViewController.h"
+#import "UCFPureTransBidRootModel.h"
+#import "UCFNewPureTransBidViewController.h"
+@interface UCFNewTransProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate,UCFBidDetailNavViewDelegate,UCFNewInvestBtnViewDelegate>
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
 @property(nonatomic, strong)UCFNewBidDetaiInfoView *bidinfoView;
@@ -77,6 +80,7 @@
     investView.topPos.equalTo(self.showTableView.bottomPos);
     investView.myHorzMargin = 0;
     investView.rightPos.equalTo(@0);
+    investView.delegate = self;
     investView.bottomPos.equalTo(@0);
     [self.rootLayout addSubview:investView];
     self.investView = investView;
@@ -317,30 +321,31 @@
         }
     }
 }
+- (void)newInvestBtnView:(UCFNewInvestBtnView *)view clickButton:(UIButton *)button
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //债券转让
+    NSString *projectId = self.model.prdTransferFore.ID;
+    SelectAccoutType type = [self.model.prdTransferFore.type isEqualToString:@"1"] ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",SingleUserInfo.loginData.userInfo.userId,projectId];//101943
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type: type];
+}
 -(void)beginPost:(kSXTag)tag
 {
     
 }
 -(void)endPost:(id)result tag:(NSNumber*)tag
 {
-    if(tag.intValue == kSXTagPrdClaimsGetPrdDetailMess) {
-        NSDictionary * dic = [(NSString *)result objectFromJSONString];
-        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
-        NSString *rstcode = dic[@"ret"];
-        NSString *rsttext = dic[@"message"];
-        if ([rstcode boolValue])
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if(tag.intValue == kSXTagDealTransferBid) {
+        UCFPureTransBidRootModel *model = [UCFPureTransBidRootModel yy_modelWithJSON:(NSString *)result];
+        if ([model.status boolValue])
         {
-            UCFProjectBasicDetailViewController *basicDetailVC = [[UCFProjectBasicDetailViewController alloc]initWithNibName:@"UCFProjectBasicDetailViewController" bundle:nil];
-            basicDetailVC.dataDic = dataDic;
-            basicDetailVC.detailType = _detailType;
-            basicDetailVC.accoutType = self.accoutType;
-            basicDetailVC.projectId = [NSString stringWithFormat:@"%@",self.model.prdTransferFore.ID];
-            basicDetailVC.tradeMark = self.model.prdTransferFore.tradeMark;
-            basicDetailVC.prdDesType= [self.model.prdDesType boolValue];
-            [self.navigationController  pushViewController:basicDetailVC animated:YES];
-            
-        }else{
-            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            UCFNewPureTransBidViewController *view = [[UCFNewPureTransBidViewController alloc] init];
+            view.model = model;
+            [self.navigationController pushViewController:view animated:YES];
+        } else {
+//            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
 }

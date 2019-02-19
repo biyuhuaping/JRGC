@@ -40,6 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
  返回按钮
  */
 - (void)addWhiteLeftButton;
+
+- (void)addBlueLeftButton;
+/**
+ 设置标题
+
+ @param text 标题文案
+ */
+- (void)setTitleViewText:(NSString *)text;
 @end
 
 NS_ASSUME_NONNULL_END

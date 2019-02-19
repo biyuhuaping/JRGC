@@ -69,7 +69,10 @@
     if ([self.vm isKindOfClass:[UVFBidDetailViewModel class]]) {
         [(UVFBidDetailViewModel *)self.vm dealClickAction:title];
     } else if ([self.vm isKindOfClass:[UCFTransBidDetailViewModel class]]){
-        [(UCFTransBidDetailViewModel *)self.vm dealClickAction:title];
+//        [(UCFTransBidDetailViewModel *)self.vm dealClickAction:title];
+        if (self.delegate) {
+            [self.delegate newInvestBtnView:self clickButton:button];
+        }
     }
 }
 /*

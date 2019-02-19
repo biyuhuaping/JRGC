@@ -106,11 +106,9 @@
             if (isCompanyAgent) {
                 selfWeak.beansBoard.myVisibility = MyVisibility_Gone;
                 selfWeak.totalKeYongTipLabel.text = @"";
- 
             } else {
                 selfWeak.beansBoard.myVisibility = MyVisibility_Visible;
             }
-
         }
     }];
 }

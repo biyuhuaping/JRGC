@@ -76,7 +76,6 @@
     _bidHeadView.myHorzMargin = 0;
     _bidHeadView.myHeight = 43;
     [self.contentLayout addSubview:_bidHeadView];
-    self.bidInfoHeadSectionView = _bidHeadView;
     [_bidHeadView layoutSubviewFrame];
     
     UCFBidInfoView *bidInfo = [UCFBidInfoView new];

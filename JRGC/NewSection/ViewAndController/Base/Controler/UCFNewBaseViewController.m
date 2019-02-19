@@ -25,7 +25,16 @@
     self.rootLayout = rootLayout;
     self.view = rootLayout;
 }
-
+- (void)setTitleViewText:(NSString *)text
+{
+    UILabel *baseTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth - 200)/2.0f, 0, 200, 30)];
+    baseTitleLabel.textAlignment = NSTextAlignmentCenter;
+    [baseTitleLabel setTextColor:UIColorWithRGB(0x333333)];
+    [baseTitleLabel setBackgroundColor:[UIColor clearColor]];
+    baseTitleLabel.font = [UIFont systemFontOfSize:18];
+    baseTitleLabel.text = text;
+    self.navigationItem.titleView = baseTitleLabel;
+}
 
 
 - (void)addWhiteLeftButton

@@ -9,7 +9,9 @@
 #import "UCFTransBidDetailViewModel.h"
 #import "NSString+Tool.h"
 #import "UCFSettingArrowItem.h"
-@interface UCFTransBidDetailViewModel()
+#import "UCFTransInvestPageInfoApi.h"
+#import "NetworkModule.h"
+@interface UCFTransBidDetailViewModel()<NetworkModuleDelegate>
 @property(nonatomic, strong)UCFTransBidInfoModel *model;
 @end
 
@@ -113,7 +115,7 @@
 
 - (void)dealClickAction:(NSString *)title
 {
-    
+
 }
 
 
@@ -150,5 +152,19 @@
     [sectionArr addObject:safetyGuaranteeItem];
     [sectionArr addObject:investmentecordItem];
     return sectionArr;
+}
+
+#pragma NetworkModuleDelegate
+-(void)beginPost:(kSXTag)tag
+{
+    
+}
+-(void)endPost:(id)result tag:(NSNumber*)tag
+{
+    
+}
+-(void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    
 }
 @end
