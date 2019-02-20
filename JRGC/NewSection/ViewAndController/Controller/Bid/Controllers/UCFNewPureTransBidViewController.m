@@ -11,12 +11,19 @@
 #import "UCFBidInfoView.h"
 #import "UCFRemindFlowView.h"
 #import "UCFPureTransPageViewModel.h"
-@interface UCFNewPureTransBidViewController ()
+#import "UCFTransMoneyBoardView.h"
+#import "UCFNewRechargeViewController.h"
+#import "UCFBidFootBoardView.h"
+#import "FullWebViewController.h"
+@interface UCFNewPureTransBidViewController ()<UCFTransMoneyBoardViewDelegate>
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidHeadView;
 @property(nonatomic, strong) UCFBidInfoView     *bidInfoDetailView;
 @property(nonatomic, strong) UCFRemindFlowView *remind;
+@property(nonatomic, strong) UCFTransMoneyBoardView *fundsBoardView;
+@property(nonatomic, strong) UCFBidFootBoardView *footView;
+
 @property(nonatomic, strong) UCFPureTransPageViewModel *VM;
 
 @end
@@ -75,7 +82,22 @@
     [self.contentLayout addSubview:remind];
     self.remind = remind;
     
+    UCFTransMoneyBoardView *fundsBoard = [UCFTransMoneyBoardView linearLayoutWithOrientation:MyOrientation_Vert];
+    fundsBoard.myHorzMargin = 0;
+    fundsBoard.delegate = self;
+    [self.contentLayout addSubview:fundsBoard];
+    [fundsBoard addSubSectionViews];
+    self.fundsBoardView = fundsBoard;
     
+    
+    UCFBidFootBoardView *footView = [UCFBidFootBoardView linearLayoutWithOrientation:MyOrientation_Vert];
+    footView.myVertMargin = 10;
+    footView.myHorzMargin = 0;
+    footView.backgroundColor = UIColorWithRGB(0xebebee);
+    footView.userInteractionEnabled = YES;
+    [self.contentLayout addSubview:footView];
+    self.footView = footView;
+    [footView createTransShowView];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -87,15 +109,85 @@
 {
     UCFPureTransPageViewModel *vm = [UCFPureTransPageViewModel new];
     
-    [vm setDataModel:self.model];
     
     [self.bidHeadView showTransView:vm];
     
-//    [self.bidInfoDetailView showView:vm];
-//    
-//    [self.remind showView:vm];
+    [self.bidInfoDetailView showTransView:vm];
     
+    [self.remind blindTransVM:vm];
     
+    [self.fundsBoardView showTransView:vm];
+    
+    [self.footView showTransView:vm];
+    
+    [self blindVM:vm];
+    
+    [vm setDataModel:self.model];
+    
+
+    
+}
+- (void)blindVM:(UCFPureTransPageViewModel *)vm
+{
+    vm.superView = self.view;
+    __weak typeof(self) weakSelf = self;
+    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"contractTypeModel"]) {
+            id funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if ([funds isKindOfClass:[UCFContractTypleModel class]]) {
+                UCFContractTypleModel *model = (UCFContractTypleModel *)funds;
+                if ([model.type isEqualToString:@"1"]) {
+                    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:model.url title:model.title];
+                    controller.baseTitleType = @"detail_heTong";
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                } else if ([model.type isEqualToString:@"3"]) {
+                    FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:model.htmlContent title:model.title];
+                    controller.baseTitleType = @"detail_heTong";
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                }
+            }
+            NSLog(@"%@",funds);
+        }
+//        else if ([keyPath isEqualToString:@"hsbidInfoDict"]) {
+//            NSDictionary *dic = [change objectSafeDictionaryForKey:NSKeyValueChangeNewKey];
+//            if ([[dic allKeys] count] > 0) {
+//                NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
+//                NSString *urlStr = dic[@"data"][@"url"];
+//                UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
+//                webView.url = urlStr;
+//                webView.rootVc = weakSelf.rootVc;
+//                webView.webDataDic =dataDict;
+//                webView.navTitle = @"即将跳转";
+//                webView.accoutType = SelectAccoutTypeP2P;
+//                [weakSelf.navigationController pushViewController:webView animated:YES];
+//                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:weakSelf.navigationController.viewControllers];
+//                [navVCArray removeObjectAtIndex:navVCArray.count-2];
+//                [weakSelf.navigationController setViewControllers:navVCArray animated:NO];
+//            }
+//        } else if ([keyPath isEqualToString:@"rechargeStr"]) {
+//            NSString *str = [change objectSafeForKey:NSKeyValueChangeNewKey];
+//            if (str.length > 0) {
+//                weakSelf.rechargeMoneyStr = str;
+//            }
+//        } else if ([keyPath isEqualToString:@"investMoneyIsChange"]) {
+//            BOOL isChange = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+//            if (isChange) {
+//
+//                weakSelf.viewModel.cashSelectCount = 0;
+//                weakSelf.viewModel.repayCash = @"0";
+//                weakSelf.viewModel.cashTotalcouponAmount = @"0";
+//                weakSelf.viewModel.cashTotalIDStr = @"";
+//                weakSelf.cashArray = [NSArray array];
+//
+//                weakSelf.viewModel.couponSelectCount = 0;
+//                weakSelf.viewModel.repayCoupon = @"0";
+//                weakSelf.viewModel.couponTotalcouponAmount = @"0";
+//                weakSelf.viewModel.couponIDStr = @"";
+//                weakSelf.couponArray = [NSArray array];
+//            }
+//        }
+    }];
 }
 - (UCFPureTransPageViewModel *)VM
 {
@@ -103,6 +195,13 @@
         _VM = [UCFPureTransPageViewModel new];
     }
     return _VM;
+}
+- (void)investTransFundsBoard:(UCFTransMoneyBoardView *)board withRechargeButtonClick:(UIButton *)button
+{
+    UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+    vc.accoutType = [self.model.data.type isEqualToString:@"1"] ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
+    vc.uperViewController = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 /*
 #pragma mark - Navigation

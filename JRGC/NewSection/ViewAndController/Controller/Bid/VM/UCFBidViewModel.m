@@ -421,7 +421,7 @@
         model.url = PROTOCOLRISKPROMPT;
         model.title = @"网络借贷出借风险及禁止性行为提示";
         self.contractTypeModel = model;
-    }else if ([contractName isEqualToString:@"《CFCA数字证书服务协议》"]) {
+    }else if ([contractName isEqualToString:@"CFCA数字证书服务协议"]) {
         model.type = @"1";
         model.url = self.model.data.cfcaContractUrl;
         model.title = self.model.data.cfcaContractName;

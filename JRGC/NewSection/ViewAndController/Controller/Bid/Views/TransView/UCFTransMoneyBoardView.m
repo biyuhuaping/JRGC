@@ -7,7 +7,11 @@
 //
 
 #import "UCFTransMoneyBoardView.h"
+#import "UCFPureTransPageViewModel.h"
 @interface UCFTransMoneyBoardView()
+
+@property(nonatomic, weak)UCFPureTransPageViewModel *myVM;
+
 @property(nonatomic, strong)MyRelativeLayout *totalMoneyBoard;
 @property(nonatomic, strong)UILabel          *keYongTipLabel;
 @property(nonatomic, strong)UILabel          *KeYongMoneyLabel;
@@ -20,9 +24,86 @@
 
 
 @implementation UCFTransMoneyBoardView
+
+- (void)showTransView:(BaseViewModel *)viewModel
+{
+    self.myVM = (UCFPureTransPageViewModel *)viewModel;
+    @PGWeakObj(self);
+    [self.KVOController observe:viewModel keyPaths:@[@"myMoneyNum",@"inputViewPlaceStr",@"expectedInterestStr",@"allMoneyInputNum"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"myMoneyNum"]) {
+            NSString *funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (funds.length > 0) {
+                selfWeak.KeYongMoneyLabel.text = funds;
+                [selfWeak.KeYongMoneyLabel sizeToFit];
+            }
+        }
+        else if ([keyPath isEqualToString:@"inputViewPlaceStr"]) {
+            NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (inputViewPlaceStr.length > 0) {
+                selfWeak.investMoneyTextfield.placeholder = inputViewPlaceStr;
+                [selfWeak.investMoneyTextfield sizeToFit];
+            }
+        }
+        else if ([keyPath isEqualToString:@"expectedInterestStr"]) {
+            NSString *expectedInterestStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (expectedInterestStr.length > 0) {
+                selfWeak.interestNumLab.text = expectedInterestStr;
+                [selfWeak.interestNumLab sizeToFit];
+            }
+        }
+        else if ([keyPath isEqualToString:@"allMoneyInputNum"]) {
+            NSString *allMoneyInputNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (allMoneyInputNum.length > 0) {
+                selfWeak.investMoneyTextfield.text = allMoneyInputNum;
+            }
+        }
+        
+//        } else if ([keyPath isEqualToString:@"myBeansNum"]) {
+//            NSString *myBeansNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
+//            selfWeak.beanNumLab.text = myBeansNum;
+//            [selfWeak.beanNumLab sizeToFit];
+//            NSString *num = [myBeansNum stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+//            if ([num doubleValue] >= 0.01) {
+//                selfWeak.beanSwitch.selected = YES;
+//                selfWeak.beanSwitch.userInteractionEnabled = YES;
+//            } else {
+//                selfWeak.beanSwitch.selected = NO;
+//                selfWeak.beanSwitch.userInteractionEnabled = NO;
+//            }
+//            [selfWeak changeSwitchStatue:selfWeak.beanSwitch];
+//        } else if ([keyPath isEqualToString:@"inputViewPlaceStr"]) {
+//            NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+//            selfWeak.investMoneyTextfield.placeholder = inputViewPlaceStr;
+//            [selfWeak.investMoneyTextfield sizeToFit];
+//        } else if ([keyPath isEqualToString:@"expectedInterestNum"]) {
+//            NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+//            selfWeak.interestNumLab.text = [inputViewPlaceStr isEqualToString:@""] ? @"¥0.00" : inputViewPlaceStr;
+//            [selfWeak.interestNumLab sizeToFit];
+//        } else if ([keyPath isEqualToString:@"allMoneyInputNum"]) {
+//            NSString *allMoneyInputNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
+//            if (allMoneyInputNum.length > 0) {
+//                selfWeak.investMoneyTextfield.text = allMoneyInputNum;
+//                [selfWeak textfieldLength:selfWeak.investMoneyTextfield];
+//            }
+//        } else if ([keyPath isEqualToString:@"isCompanyAgent"]) {
+//            BOOL isCompanyAgent = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+//            if (isCompanyAgent) {
+//                selfWeak.beansBoard.myVisibility = MyVisibility_Gone;
+//                selfWeak.totalKeYongTipLabel.text = @"";
+//            } else {
+//                selfWeak.beansBoard.myVisibility = MyVisibility_Visible;
+//            }
+//        }
+    }];
+}
+
+
+
 - (void)addSubSectionViews
 {
-//    [self]
+    [self addMoneyBoardSection1];
+    [self addMoneyBoardSection2];
 }
 - (void)addMoneyBoardSection1
 {
@@ -60,6 +141,18 @@
     //    _KeYongMoneyLabel.myCenterY = _keYongTipLabel.myCenterY;
     [_KeYongMoneyLabel sizeToFit];
     [_totalMoneyBoard addSubview:_KeYongMoneyLabel];
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"充值" forState:UIControlStateNormal];
+    [button setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+    button.rightPos.equalTo(_totalMoneyBoard.rightPos).offset(15);
+    button.myWidth = 60;
+    button.myHeight = 60;
+    button.centerYPos.equalTo(_keYongTipLabel.centerYPos);
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -33)];
+    [button addTarget:self action:@selector(goToRecharge:) forControlEvents:UIControlEventTouchUpInside];
+   [_totalMoneyBoard addSubview: button];
 
     
     UIView *endLineView = [[UIView alloc] init];
@@ -106,7 +199,7 @@
     _investMoneyTextfield.keyboardType = UIKeyboardTypeDecimalPad;
     [_investMoneyTextfield addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     _investMoneyTextfield.textColor = [Color color:PGColorOptionTitleBlack];
-    _investMoneyTextfield.placeholder = @"100元起投";
+    _investMoneyTextfield.placeholder = @"";
     [_inputMoenyBoard addSubview:_investMoneyTextfield];
     [_investMoneyTextfield setValue:[Color color:PGColorOptionTitleGray] forKeyPath:@"_placeholderLabel.textColor"];
     [_investMoneyTextfield setValue:[Color gc_Font:19] forKeyPath:@"_placeholderLabel.font"];
@@ -154,15 +247,20 @@
     [_inputMoenyBoard addSubview:endLineView];
     
 }
-
+- (void)goToRecharge:(UIButton *)button
+{
+    if (self.delegate) {
+        [self.delegate investTransFundsBoard:self withRechargeButtonClick:button];
+    }
+}
 - (void)textfieldLength:(UITextField *)textField
 {
-//    NSString *currentInputText = textField.text;
-//    [self.myVM calculate:currentInputText];
+    NSString *currentInputText = textField.text;
+    [self.myVM calculate:currentInputText];
 }
 - (void)allInvestClick:(UIButton *)button
 {
-//    [self.myVM calculateTotalMoney];
+    [self.myVM calculateTotalMoney];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
