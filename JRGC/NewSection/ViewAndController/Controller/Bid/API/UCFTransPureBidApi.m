@@ -34,6 +34,6 @@
 - (NSString *)modelClass
 {
 //    添加新model
-//    return @"UCFBidModel";
+    return @"UCFBidModel";
 }
 @end
