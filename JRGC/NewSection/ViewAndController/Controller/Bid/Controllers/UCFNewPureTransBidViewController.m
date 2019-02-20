@@ -15,6 +15,7 @@
 #import "UCFNewRechargeViewController.h"
 #import "UCFBidFootBoardView.h"
 #import "FullWebViewController.h"
+#import "UCFFundsInvestButton.h"
 @interface UCFNewPureTransBidViewController ()<UCFTransMoneyBoardViewDelegate>
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
@@ -23,6 +24,7 @@
 @property(nonatomic, strong) UCFRemindFlowView *remind;
 @property(nonatomic, strong) UCFTransMoneyBoardView *fundsBoardView;
 @property(nonatomic, strong) UCFBidFootBoardView *footView;
+@property(nonatomic, strong) UCFFundsInvestButton *investButton;
 
 @property(nonatomic, strong) UCFPureTransPageViewModel *VM;
 
@@ -98,6 +100,16 @@
     [self.contentLayout addSubview:footView];
     self.footView = footView;
     [footView createTransShowView];
+    
+    
+    UCFFundsInvestButton *investButton = [UCFFundsInvestButton new];
+    investButton.myHorzMargin = 0;
+    investButton.bottomPos.equalTo(@0);
+    investButton.myHeight = 50;
+    investButton.backgroundColor = [UIColor whiteColor];
+    [rootLayout addSubview:investButton];
+    [investButton createSubviews];
+    self.investButton = investButton;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -120,7 +132,11 @@
     
     [self.footView showTransView:vm];
     
+    [self.investButton showTransView:vm];
+    
     [self blindVM:vm];
+    
+    
     
     [vm setDataModel:self.model];
     

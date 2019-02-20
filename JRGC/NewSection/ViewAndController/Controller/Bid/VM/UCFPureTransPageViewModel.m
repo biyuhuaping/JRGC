@@ -11,9 +11,18 @@
 #import "NetworkModule.h"
 #import "MBProgressHUD.h"
 #import "JSONKit.h"
+
+@interface UCFPureTransPageViewModel ()
+{
+    double  needToRechare;
+}
+
+@end
+
 @interface UCFPureTransPageViewModel ()<NetworkModuleDelegate>
 @property(nonatomic, strong)UCFPureTransBidRootModel *model;
 @property (nonatomic, strong)UCFContractTypleModel *contractTmpModel;
+@property (nonatomic, strong)NSString       *investMoeny;
 @end
 
 @implementation UCFPureTransPageViewModel
@@ -91,6 +100,7 @@
     } else {
         allMoneyInputNum = [self getP2PDefaultText];
     }
+    self.investMoeny = allMoneyInputNum;
     self.allMoneyInputNum = allMoneyInputNum;
     
 }
@@ -128,6 +138,7 @@
 }
 - (void)calculate:(NSString *)currentText
 {
+    self.investMoeny = currentText;
     NSString *annualRate = self.model.data.transfereeYearRate;
     NSString *timeLimitText = self.model.data.lastDays;
     double value  = ([annualRate doubleValue]/100.0f) * ([timeLimitText integerValue]/360.0) * [currentText doubleValue];
@@ -167,7 +178,71 @@
         self.isShowHonerTip = NO;
     }
 }
+- (void)dealInvestLogic
+{
+    [self checkIsCanInvest];
+}
+- (void)checkIsCanInvest
+{
 
+    NSString *zxOrP2pStr = [self.model.data.type isEqualToString:@"2"] ? @"购买" : @"出借";
+    if ([Common isPureNumandCharacters:self.investMoeny]) {
+        [MBProgressHUD displayHudError:@"请输入正确金额"];
+        return;
+    }
+    self.investMoeny = [NSString stringWithFormat:@"%.2f",[self.investMoeny doubleValue]];
+    if ([Common stringA:@"0.01" ComparedStringB:self.investMoeny] == 1) {
+        [MBProgressHUD displayHudError:[NSString stringWithFormat:@"请输入%@金额",zxOrP2pStr]];
+        return;
+    }
+    //剩余比例
+    NSString *keTouJinE = self.model.data.cantranMoney;
+    NSString *minInVestNum = self.model.data.investAmt;
+    if([Common stringA:minInVestNum ComparedStringB:self.investMoeny] == 1){
+        NSString *messageStr = [NSString stringWithFormat:@"%@金额不可低于起投金额",zxOrP2pStr];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        alert.tag = 1000;
+        [alert show];
+        return;
+    }
+    double inputMoney = [self.investMoeny doubleValue];
+    if([Common stringA:[NSString stringWithFormat:@"%.2f",inputMoney] ComparedStringB:keTouJinE] == 1)
+    {
+        NSString *messageStr = [NSString stringWithFormat:@"不可以这么任性哟，%@金额已超过剩余可投金额了",zxOrP2pStr];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        alert.tag = 1000;
+        [alert show];
+        return;
+    }
+    if ([keTouJinE doubleValue] - [self.investMoeny doubleValue] < [minInVestNum doubleValue] && [Common stringA:keTouJinE ComparedStringB:self.investMoeny] != 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"标剩余的金额已不足起投额，不差这一点了亲，全投了吧！" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        alert.tag = 1000;
+        [alert show];
+        return;
+    }
+    double availableBala= [self.model.data.actBalance doubleValue];
+    NSString *availableBalance = [NSString stringWithFormat:@"%.2f",availableBala];
+    
+    if([Common stringA:self.investMoeny ComparedStringB:availableBalance] == 1)
+    {
+        NSString *keyongMoney = availableBalance;
+        needToRechare = inputMoney - [keyongMoney doubleValue];
+        NSString *showStr = [NSString stringWithFormat:@"总计%@金额¥%@\n可用金额%@\n另需充值金额¥%.2f",zxOrP2pStr,self.investMoeny,availableBalance,needToRechare];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"可用金额不足" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即充值", nil];
+        alert.tag = 2000;
+        [alert show];
+        return;
+    }
+    int compare = [Common stringA:self.investMoeny ComparedStringB:@"1000"];
+    if (compare == 1 || compare == 0 ) {
+        NSString *buttontitleStr = [NSString stringWithFormat:@"立即%@",zxOrP2pStr];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"本次%@金额¥%@,确认%@吗？",zxOrP2pStr,[NSString AddComma:self.investMoeny],zxOrP2pStr] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:buttontitleStr, nil];
+        alert.tag = 3000;
+        [alert show];
+    } else {
+//        [self getNormalBidNetData];
+    }
+}
 /**
  合同点击
  

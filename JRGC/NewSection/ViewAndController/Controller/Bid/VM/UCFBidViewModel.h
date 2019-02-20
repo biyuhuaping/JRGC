@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BaseViewModel.h"
 #import "UCFBidModel.h"
 #import "FBKVOController.h"
 #import "NSObject+FBKVOController.h"

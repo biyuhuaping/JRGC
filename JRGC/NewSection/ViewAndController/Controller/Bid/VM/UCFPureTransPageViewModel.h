@@ -100,6 +100,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UCFContractTypleModel *contractTypeModel;
 
 @property(nonatomic, weak) UIView    *superView;
+
+- (void)dealInvestLogic;
+
 @end
 
 NS_ASSUME_NONNULL_END

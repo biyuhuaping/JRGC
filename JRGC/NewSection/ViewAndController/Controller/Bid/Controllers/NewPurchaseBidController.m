@@ -133,7 +133,7 @@
     UCFFundsInvestButton *investButton = [UCFFundsInvestButton new];
     investButton.myHorzMargin = 0;
     investButton.bottomPos.equalTo(@0);
-    investButton.myHeight = 57;
+    investButton.myHeight = 50;
     investButton.backgroundColor = [UIColor whiteColor];
     [rootLayout addSubview:investButton];
     [investButton createSubviews];
