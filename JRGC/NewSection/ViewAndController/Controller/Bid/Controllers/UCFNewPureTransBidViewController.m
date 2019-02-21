@@ -16,6 +16,7 @@
 #import "UCFBidFootBoardView.h"
 #import "FullWebViewController.h"
 #import "UCFFundsInvestButton.h"
+#import "UCFPrdTransferBIdWebView.h"
 @interface UCFNewPureTransBidViewController ()<UCFTransMoneyBoardViewDelegate>
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
@@ -111,6 +112,10 @@
     [investButton createSubviews];
     self.investButton = investButton;
 }
+- (void)leftBar1Clicked
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addBlueLeftButton];
@@ -147,7 +152,7 @@
 {
     vm.superView = self.view;
     __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"contractTypeModel"]) {
             id funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -164,45 +169,25 @@
                 }
             }
             NSLog(@"%@",funds);
+        }else if ([keyPath isEqualToString:@"hsbidInfoDict"]) {
+            NSDictionary *dic = [change objectSafeDictionaryForKey:NSKeyValueChangeNewKey];
+            if ([[dic allKeys] count] > 0) {
+                NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
+                NSString *urlStr = dic[@"data"][@"url"];
+                UCFPrdTransferBIdWebView *webView = [[UCFPrdTransferBIdWebView alloc]initWithNibName:@"UCFPrdTransferBIdWebView" bundle:nil];
+                webView.rootVc = weakSelf;
+                webView.url = urlStr;
+                webView.webDataDic = dataDict;
+                webView.navTitle = @"即将跳转";
+                webView.accoutType = weakSelf.accoutType;
+                [weakSelf.navigationController pushViewController:webView animated:YES];
+                
+                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:weakSelf.navigationController.viewControllers];
+                [navVCArray removeObjectAtIndex:navVCArray.count-2];
+                [weakSelf.navigationController setViewControllers:navVCArray animated:NO];
+            }
         }
-//        else if ([keyPath isEqualToString:@"hsbidInfoDict"]) {
-//            NSDictionary *dic = [change objectSafeDictionaryForKey:NSKeyValueChangeNewKey];
-//            if ([[dic allKeys] count] > 0) {
-//                NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
-//                NSString *urlStr = dic[@"data"][@"url"];
-//                UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
-//                webView.url = urlStr;
-//                webView.rootVc = weakSelf.rootVc;
-//                webView.webDataDic =dataDict;
-//                webView.navTitle = @"即将跳转";
-//                webView.accoutType = SelectAccoutTypeP2P;
-//                [weakSelf.navigationController pushViewController:webView animated:YES];
-//                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:weakSelf.navigationController.viewControllers];
-//                [navVCArray removeObjectAtIndex:navVCArray.count-2];
-//                [weakSelf.navigationController setViewControllers:navVCArray animated:NO];
-//            }
-//        } else if ([keyPath isEqualToString:@"rechargeStr"]) {
-//            NSString *str = [change objectSafeForKey:NSKeyValueChangeNewKey];
-//            if (str.length > 0) {
-//                weakSelf.rechargeMoneyStr = str;
-//            }
-//        } else if ([keyPath isEqualToString:@"investMoneyIsChange"]) {
-//            BOOL isChange = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-//            if (isChange) {
-//
-//                weakSelf.viewModel.cashSelectCount = 0;
-//                weakSelf.viewModel.repayCash = @"0";
-//                weakSelf.viewModel.cashTotalcouponAmount = @"0";
-//                weakSelf.viewModel.cashTotalIDStr = @"";
-//                weakSelf.cashArray = [NSArray array];
-//
-//                weakSelf.viewModel.couponSelectCount = 0;
-//                weakSelf.viewModel.repayCoupon = @"0";
-//                weakSelf.viewModel.couponTotalcouponAmount = @"0";
-//                weakSelf.viewModel.couponIDStr = @"";
-//                weakSelf.couponArray = [NSArray array];
-//            }
-//        }
+
     }];
 }
 - (UCFPureTransPageViewModel *)VM

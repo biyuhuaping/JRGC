@@ -47,6 +47,8 @@
 }
 - (void)addLeftbuttonImageName:(NSString *)name
 {
+
+    
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton setFrame:CGRectMake(0, 0, 25, 25)];
     [leftButton setBackgroundColor:[UIColor clearColor]];
@@ -101,7 +103,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationController.navigationBar.translucent = NO;
+
 }
 
 @end

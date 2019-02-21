@@ -103,6 +103,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)dealInvestLogic;
 
+@property(nonatomic, strong)NSDictionary    *hsbidInfoDict;
+
 @end
 
 NS_ASSUME_NONNULL_END

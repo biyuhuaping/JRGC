@@ -240,8 +240,15 @@
         alert.tag = 3000;
         [alert show];
     } else {
-//        [self getNormalBidNetData];
+        [self getNormalBidNetData];
     }
+}
+- (void)getNormalBidNetData
+{
+    NSString *investTranTicketStr = self.model.apptzticket;
+    SelectAccoutType type = [self.model.data.type isEqualToString:@"2"] ? SelectAccoutTypeHoner : SelectAccoutTypeP2P;
+    NSDictionary *dataDic = @{@"userId": SingleUserInfo.loginData.userInfo.userId,@"prdTransferId":self.model.data.ID,@"investAmt":self.investMoeny,@"investBeans":@"0",@"investTranTicket":investTranTicketStr};
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagTraClaimsSubmit owner:self signature:YES Type:type];
 }
 /**
  合同点击
@@ -301,7 +308,7 @@
             
         }
     }  else if (tag.intValue == kSXTagInvestSubmit){
-        /*
+        
         NSString *data = (NSString *)result;
         NSMutableDictionary *dic = [data objectFromJSONString];
         BOOL rstcode = [dic[@"ret"] boolValue];
@@ -317,27 +324,10 @@
                 alert.tag = 10023;
                 [alert show];
             } else {
-                [self reloadVMData];
+    //            [self reloadVMData];
                 [MBProgressHUD displayHudError:[dic objectSafeForKey:@"message"]];
             }
         }
-    } else if (tag.intValue == kSXTagP2PPrdClaimsDealBid) {
-        NSString *data = (NSString *)result;
-        NSMutableDictionary *dic = [data objectFromJSONString];
-        if ([dic[@"ret"] boolValue]) {
-            UCFBidModel *tmpModel = [UCFBidModel yy_modelWithJSON:result];
-            [self setDataModel:tmpModel];
-            //            self.model = tmpModel;
-            //            //我的资金
-            //            [self dealMyFunds];
-            
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
-            alert.tag = 10023;
-            [alert show];
-        }
-         */
-        
     }
 }
 
