@@ -7,10 +7,11 @@
 //
 
 #import "UCFShopPromotionCell.h"
-#import "SDCycleScrollView.h"
+//#import "SDCycleScrollView.h"
+#import "RCFFlowView.h"
 #import "UCFShopHListView.h"
 #import "UCFCommodityView.h"
-@interface UCFShopPromotionCell()<SDCycleScrollViewDelegate,UCFShopHListViewDataSource,UCFShopHListViewDelegate>
+@interface UCFShopPromotionCell()<RCFFlowViewDelegate,UCFShopHListViewDataSource,UCFShopHListViewDelegate>
 
 @end
 @implementation UCFShopPromotionCell
@@ -23,20 +24,27 @@
         self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
         
         UIView *whitBaseView = [UIView new];
-        whitBaseView.frame = CGRectMake(15, 0,  Screen_Width - 30, (Screen_Width - 30) * 6 /23 + 160);
+        whitBaseView.frame = CGRectMake(15, 0,  ScreenWidth - 30, (ScreenWidth - 30) * 6 /23 + 160);
         whitBaseView.layer.cornerRadius = 5.0f;
         whitBaseView.clipsToBounds = YES;
         whitBaseView.backgroundColor = [UIColor whiteColor];
         [self.rootLayout addSubview:whitBaseView];
         
-        SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, Screen_Width - 30, (Screen_Width - 30) * 6 /23) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
-        adCycleScrollView.zoomType = NO;  // 是否使用缩放效果
-        adCycleScrollView.hidesForSinglePage = YES;
-        adCycleScrollView.autoScroll = NO;
-        adCycleScrollView.infiniteLoop = NO;
+//        SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, Screen_Width - 30, (Screen_Width - 30) * 6 /23) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
+//        adCycleScrollView.zoomType = NO;  // 是否使用缩放效果
+//        adCycleScrollView.hidesForSinglePage = YES;
+//        adCycleScrollView.autoScroll = NO;
+//        adCycleScrollView.infiniteLoop = NO;
+//        adCycleScrollView.isHideImageCorner = YES;
+//        adCycleScrollView.imageURLStringsGroup = @[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"];
+//        [whitBaseView addSubview:adCycleScrollView];
+        RCFFlowView *adCycleScrollView = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 30,([UIScreen mainScreen].bounds.size.width - 30) * 6 /23)];
+        adCycleScrollView.delegate = self;
         adCycleScrollView.isHideImageCorner = YES;
-        adCycleScrollView.imageURLStringsGroup = @[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"];
+        adCycleScrollView.advArray = [NSMutableArray arrayWithArray:@[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"]];
         [whitBaseView addSubview:adCycleScrollView];
+        [adCycleScrollView reloadCycleView];
+        
         self.rootLayout.useFrame = YES;
     
         UCFShopHListView *shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(adCycleScrollView.frame), CGRectGetWidth(whitBaseView.frame), 160)];
@@ -46,6 +54,10 @@
         [whitBaseView addSubview:shopList];        
     }
     return self;
+}
+- (CGSize)sizeForPageFlowView:(RCFFlowView *)viwe
+{
+    return CGSizeMake([UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.width - 30) * 6 /23);
 }
 - (NSInteger)numberOfListView:(UCFShopHListView *)shopListView
 {

@@ -9,6 +9,7 @@
 #import "RCFFlowView.h"
 #import "HQFlowView.h"
 #import "HQImagePageControl.h"
+#import "UIImageView+WebCache.h"
 #define JkScreenHeight [UIScreen mainScreen].bounds.size.height
 #define JkScreenWidth [UIScreen mainScreen].bounds.size.width
 @interface RCFFlowView ()<HQFlowViewDelegate,HQFlowViewDataSource>
@@ -120,14 +121,16 @@
     HQIndexBannerSubview *bannerView = (HQIndexBannerSubview *)[flowView dequeueReusableCell];
     if (!bannerView) {
         bannerView = [[HQIndexBannerSubview alloc] initWithFrame:CGRectMake(0, 0, self.pageFlowView.frame.size.width, self.pageFlowView.frame.size.height)];
-        bannerView.layer.cornerRadius = 5;
-        bannerView.layer.masksToBounds = YES;
+        if (!_isHideImageCorner) {
+            bannerView.layer.cornerRadius = 5;
+            bannerView.layer.masksToBounds = YES;
+        }
         bannerView.coverView.backgroundColor = [UIColor darkGrayColor];
     }
     //在这里下载网络图片
-    //    [bannerView.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.advArray[index]] placeholderImage:nil];
+        [bannerView.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.advArray[index]] placeholderImage:nil];
     //加载本地图片
-    bannerView.mainImageView.image = [UIImage imageNamed:self.advArray[index]];
+//    bannerView.mainImageView.image = [UIImage imageNamed:self.advArray[index]];
     return bannerView;
 }
 

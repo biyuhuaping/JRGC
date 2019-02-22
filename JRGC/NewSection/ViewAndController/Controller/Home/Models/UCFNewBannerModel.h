@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class Data,Sitenoticemap,Giftbanner,Banner;
+@class Data,Sitenoticemap,Giftbanner,Banner,RecommendBanner;
 @interface UCFNewBannerModel : BaseModel
 
 @property (nonatomic, assign) NSInteger code;
@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *banner;
 
 @property (nonatomic, strong) Sitenoticemap *siteNoticeMap;
+
+@property (nonatomic, strong) RecommendBanner *recommendBanner;
 
 @end
 
@@ -57,6 +59,20 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface Banner : BaseModel
+
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, copy) NSString *thumb;
+
+@property (nonatomic, copy) NSString *url;
+
+@property (nonatomic, copy) NSString *activityType;
+
+@property (nonatomic, copy) NSString *switchFlag;
+
+@end
+
+@interface RecommendBanner : BaseModel
 
 @property (nonatomic, copy) NSString *title;
 

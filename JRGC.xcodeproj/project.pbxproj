@@ -3499,14 +3499,14 @@
 		332B6056221F9558008893EF /* HQFlowView */ = {
 			isa = PBXGroup;
 			children = (
-				332B6057221F9558008893EF /* RCFFlowView.m */,
-				332B6058221F9558008893EF /* HQFlowView.m */,
-				332B6059221F9558008893EF /* HQIndexBannerSubview.m */,
-				332B605A221F9558008893EF /* HQImagePageControl.m */,
 				332B605B221F9558008893EF /* RCFFlowView.h */,
+				332B6057221F9558008893EF /* RCFFlowView.m */,
 				332B605C221F9558008893EF /* HQFlowView.h */,
+				332B6058221F9558008893EF /* HQFlowView.m */,
 				332B605D221F9558008893EF /* HQImagePageControl.h */,
+				332B605A221F9558008893EF /* HQImagePageControl.m */,
 				332B605E221F9558008893EF /* HQIndexBannerSubview.h */,
+				332B6059221F9558008893EF /* HQIndexBannerSubview.m */,
 			);
 			path = HQFlowView;
 			sourceTree = "<group>";

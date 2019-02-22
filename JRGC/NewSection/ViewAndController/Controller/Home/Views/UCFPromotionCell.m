@@ -7,11 +7,12 @@
 //
 
 #import "UCFPromotionCell.h"
-#import "SDCycleScrollView.h"
+//#import "SDCycleScrollView.h"
+#import "RCFFlowView.h"
 #import "CellConfig.h"
-@interface UCFPromotionCell()<SDCycleScrollViewDelegate>
+@interface UCFPromotionCell()<RCFFlowViewDelegate>
 
-@property(nonatomic, strong)SDCycleScrollView *adCycleScrollView;
+@property(nonatomic, strong)RCFFlowView *adCycleScrollView;
 @end
 @implementation UCFPromotionCell
 
@@ -22,23 +23,27 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
         self.rootLayout.useFrame = YES;
-        SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(15, 15, Screen_Width - 30, (Screen_Width - 30) * 6 /23) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
-        adCycleScrollView.zoomType = NO;  // 是否使用缩放效果
-        adCycleScrollView.hidesForSinglePage = YES;
-        adCycleScrollView.autoScroll = NO;
-        adCycleScrollView.infiniteLoop = NO;
+//        SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(15, 15, Screen_Width - 30, (Screen_Width - 30) * 6 /23) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
+//        adCycleScrollView.zoomType = NO;  // 是否使用缩放效果
+//        adCycleScrollView.hidesForSinglePage = YES;
+//        adCycleScrollView.autoScroll = NO;
+//        adCycleScrollView.infiniteLoop = NO;
+//
         
-//        adCycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
-//        adCycleScrollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-//        adCycleScrollView.currentPageDotColor = [UIColor whiteColor];
-//        adCycleScrollView.pageDotColor = [UIColor colorWithWhite:1 alpha:0.5];
-//        adCycleScrollView.pageControlDotSize = CGSizeMake(20, 6);  // pageControl小点的大小
-        adCycleScrollView.imageURLStringsGroup = @[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"];
-        [self.rootLayout addSubview:adCycleScrollView];
-        self.adCycleScrollView = adCycleScrollView;
-        
+//        [self.rootLayout addSubview:adCycleScrollView];
+//        self.adCycleScrollView = adCycleScrollView;
+        RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(15, 0, [UIScreen mainScreen].bounds.size.width - 30,([UIScreen mainScreen].bounds.size.width - 30) * 6 /23)];
+        view.delegate = self;
+        self.adCycleScrollView = view;
+        view.advArray = [NSMutableArray arrayWithArray:@[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"]];
+        [self addSubview:view];
+        [view reloadCycleView];
     }
     return self;
+}
+- (CGSize)sizeForPageFlowView:(RCFFlowView *)viwe
+{
+    return CGSizeMake([UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.width - 30) * 6 /23);
 }
 - (void)reflectDataModel:(id)model
 {
@@ -65,7 +70,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.adCycleScrollView.frame = CGRectMake(_hLeftSpace, _vTopSpace, Screen_Width - _hLeftSpace - _hRightSpace, (Screen_Width - _hLeftSpace - _hRightSpace) * 6 /23);
+//    self.adCycleScrollView.frame = CGRectMake(_hLeftSpace, _vTopSpace, Screen_Width - _hLeftSpace - _hRightSpace, (Screen_Width - _hLeftSpace - _hRightSpace) * 6 /23);
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

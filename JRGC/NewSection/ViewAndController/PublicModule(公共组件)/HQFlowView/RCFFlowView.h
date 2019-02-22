@@ -30,6 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong) NSMutableArray *advArray;
 
+
+@property (nonatomic, assign) BOOL isHideImageCorner;
+
 - (void)reloadCycleView;
 
 @end

@@ -56,7 +56,6 @@
 - (UIImageView *)iconImage {
     
     if (_iconImage == nil) {
-        //        _iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(-JKWIDTH(2), -JKHEIGHT(2), self.JK_width+JKWIDTH(4), self.JK_height+JKHEIGHT(4))];//图片阴影原来设置
         _iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         _iconImage.contentMode = UIViewContentModeScaleAspectFit;
     }
