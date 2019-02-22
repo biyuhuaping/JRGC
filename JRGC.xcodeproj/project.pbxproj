@@ -49,6 +49,10 @@
 		3328796721EEC75500832CE8 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796621EEC75500832CE8 /* NSString+MD5.m */; };
 		3328796B21EECE7600832CE8 /* UCFHomeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */; };
 		3328796F21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */; };
+		332B605F221F9558008893EF /* RCFFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6057221F9558008893EF /* RCFFlowView.m */; };
+		332B6060221F9558008893EF /* HQFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6058221F9558008893EF /* HQFlowView.m */; };
+		332B6061221F9558008893EF /* HQIndexBannerSubview.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6059221F9558008893EF /* HQIndexBannerSubview.m */; };
+		332B6062221F9558008893EF /* HQImagePageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B605A221F9558008893EF /* HQImagePageControl.m */; };
 		3332C8A32213BA15009956BB /* UCFCheckCouponApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3332C8A22213BA15009956BB /* UCFCheckCouponApi.m */; };
 		333548BD221153D100DE0BB8 /* InvestPageInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 333548BC221153D100DE0BB8 /* InvestPageInfoApi.m */; };
 		333B42C821FC31AB00741A47 /* UCFBidDetailTopBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */; };
@@ -1314,6 +1318,14 @@
 		3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListRequest.m; sourceTree = "<group>"; };
 		3328796D21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		332B6057221F9558008893EF /* RCFFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCFFlowView.m; sourceTree = "<group>"; };
+		332B6058221F9558008893EF /* HQFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQFlowView.m; sourceTree = "<group>"; };
+		332B6059221F9558008893EF /* HQIndexBannerSubview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQIndexBannerSubview.m; sourceTree = "<group>"; };
+		332B605A221F9558008893EF /* HQImagePageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQImagePageControl.m; sourceTree = "<group>"; };
+		332B605B221F9558008893EF /* RCFFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCFFlowView.h; sourceTree = "<group>"; };
+		332B605C221F9558008893EF /* HQFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQFlowView.h; sourceTree = "<group>"; };
+		332B605D221F9558008893EF /* HQImagePageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQImagePageControl.h; sourceTree = "<group>"; };
+		332B605E221F9558008893EF /* HQIndexBannerSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQIndexBannerSubview.h; sourceTree = "<group>"; };
 		3332C8A12213BA15009956BB /* UCFCheckCouponApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCheckCouponApi.h; sourceTree = "<group>"; };
 		3332C8A22213BA15009956BB /* UCFCheckCouponApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCheckCouponApi.m; sourceTree = "<group>"; };
 		333548BB221153D100DE0BB8 /* InvestPageInfoApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvestPageInfoApi.h; sourceTree = "<group>"; };
@@ -3482,6 +3494,21 @@
 				3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */,
 			);
 			path = FDFullscreenPopGesture;
+			sourceTree = "<group>";
+		};
+		332B6056221F9558008893EF /* HQFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				332B6057221F9558008893EF /* RCFFlowView.m */,
+				332B6058221F9558008893EF /* HQFlowView.m */,
+				332B6059221F9558008893EF /* HQIndexBannerSubview.m */,
+				332B605A221F9558008893EF /* HQImagePageControl.m */,
+				332B605B221F9558008893EF /* RCFFlowView.h */,
+				332B605C221F9558008893EF /* HQFlowView.h */,
+				332B605D221F9558008893EF /* HQImagePageControl.h */,
+				332B605E221F9558008893EF /* HQIndexBannerSubview.h */,
+			);
+			path = HQFlowView;
 			sourceTree = "<group>";
 		};
 		3332C89D2213B953009956BB /* Api */ = {
@@ -7307,6 +7334,7 @@
 		E352FCE421E4AF0A00617AB7 /* PublicModule(公共组件) */ = {
 			isa = PBXGroup;
 			children = (
+				332B6056221F9558008893EF /* HQFlowView */,
 				E36EB86D21F815420093915D /* CQCountDownButton */,
 				334790D021E85275005131A5 /* CustomStyleButton */,
 				331089C421E74EB80073F71B /* SDCycleScrollView */,
@@ -8927,6 +8955,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A830DE851F8DDB0D003855B9 /* UCFCalendarModularDayCell.xib in Sources */,
+				332B6062221F9558008893EF /* HQImagePageControl.m in Sources */,
 				A830DE841F8DDAF1003855B9 /* UCFCalendarModularDetailHeaderView.xib in Sources */,
 				A830DE831F8DDA6A003855B9 /* UCFCalendarModularHeaderView.xib in Sources */,
 				74877CC81FB2AB8900F32428 /* UCFHandingInViewController.m in Sources */,
@@ -8937,6 +8966,7 @@
 				7470C8481E5E7CDE007D52F4 /* UCFCollectionBidModel.m in Sources */,
 				74270C9D1EC58F6800F9419B /* UCFHomeListCell.m in Sources */,
 				74270CA41EC58F6800F9419B /* UCFSignView.m in Sources */,
+				332B6061221F9558008893EF /* HQIndexBannerSubview.m in Sources */,
 				E3ED83E122018913000F8F50 /* Image.m in Sources */,
 				339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */,
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
@@ -9367,7 +9397,9 @@
 				7443C7311F1F3881009669C0 /* UCFGoldRecordHeaderFooterView.m in Sources */,
 				EDEE0D411C5F42D200021CCC /* BJGridItem.m in Sources */,
 				4AD6F6901AF07EF500F1B490 /* MoneyBoardCell.m in Sources */,
+				332B6060221F9558008893EF /* HQFlowView.m in Sources */,
 				4A675E3E1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m in Sources */,
+				332B605F221F9558008893EF /* RCFFlowView.m in Sources */,
 				74B98C9F1F7111D100CB6A9F /* UCFMineFuncCell.m in Sources */,
 				745D37D01F3AE95900897F1A /* UCFGoldChargeOneCell.m in Sources */,
 				2509C3BE1D6590C400D9F9B5 /* PulsingHaloLayer.m in Sources */,
