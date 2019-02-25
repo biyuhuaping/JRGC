@@ -154,6 +154,7 @@
     if (model.ret) {
         NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
         vc.bidDetaiModel = model;
+        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     } else if (code == 21 || code == 22){
         [self checkUserCanInvestIsDetail:NO];
@@ -237,6 +238,7 @@
             UCFNewProjectDetailViewController *vc = [[UCFNewProjectDetailViewController alloc] init];
             vc.model = model;
             vc.accoutType = SelectAccoutTypeP2P;
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             [AuxiliaryFunc showAlertViewWithMessage:message];

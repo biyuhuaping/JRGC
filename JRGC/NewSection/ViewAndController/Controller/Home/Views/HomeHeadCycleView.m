@@ -8,7 +8,7 @@
 
 #import "HomeHeadCycleView.h"
 
-@interface HomeHeadCycleView()<SDCycleScrollViewDelegate>
+@interface HomeHeadCycleView()<RCFFlowViewDelegate>
 @property(nonatomic, weak)UCFBannerViewModel *VM;
 @end
 
@@ -23,47 +23,26 @@
         if ([keyPath isEqualToString:@"imagesArr"]) {
             NSArray *imgArr = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (imgArr.count > 0) {
-                if (imgArr.count == 1) {
-                    [selfWeak.adCycleScrollView removeFromSuperview];
-                    selfWeak.adCycleScrollView = nil;
-                    SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(15, 0, Screen_Width - 30, ((([[UIScreen mainScreen] bounds].size.width - 30) * 9)/16)) delegate:selfWeak placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
-                    adCycleScrollView.zoomType = NO;  // 是否使用缩放效果
-                    adCycleScrollView.hidesForSinglePage = YES;
-                    adCycleScrollView.autoScroll = NO;
-                    adCycleScrollView.infiniteLoop = NO;
-                    adCycleScrollView.isHideImageCorner = NO;
-                    adCycleScrollView.imageURLStringsGroup = imgArr;
-                    selfWeak.adCycleScrollView = adCycleScrollView;
-                    [selfWeak addSubview:adCycleScrollView];
-                    selfWeak.useFrame = YES;
-                } else {
-                    
-                }
-                selfWeak.adCycleScrollView.imageURLStringsGroup = imgArr;
+                selfWeak.adCycleScrollView.advArray = [NSMutableArray arrayWithArray:imgArr];
+                [selfWeak.adCycleScrollView reloadCycleView];
             }
         }
     }];
 }
 - (void)createSubviews
 {
-    SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, Screen_Width, ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16)) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
-    //    adCycleScrollView.backgroundColor = [UIColor blueColor];
-    adCycleScrollView.zoomType = YES;  // 是否使用缩放效果
-    adCycleScrollView.delegate = self;
-    adCycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
-    adCycleScrollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    adCycleScrollView.currentPageDotColor = [UIColor whiteColor];
-    adCycleScrollView.pageDotColor = [UIColor colorWithWhite:1 alpha:0.5];
-    adCycleScrollView.pageControlDotSize = CGSizeMake(20, 6);  // pageControl小点的大小
-//    adCycleScrollView.imageURLStringsGroup = @[];
-    [self addSubview:adCycleScrollView];
-    self.adCycleScrollView = adCycleScrollView;
-    //    adCycleScrollView.localizationImageNamesGroup = @[@"img1", @"img2", @"img3", @"img4"];  // 本地图片
+    
+    RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 180)];
+    view.delegate = self;
+    self.adCycleScrollView = view;
+    [self addSubview:view];
+    
+
 }
-- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+- (void)didSelectRCCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex
 {
     if (self.VM) {
-        [self.VM cycleViewSelectIndex:index];
+        [self.VM cycleViewSelectIndex:subIndex];
     }
 }
 

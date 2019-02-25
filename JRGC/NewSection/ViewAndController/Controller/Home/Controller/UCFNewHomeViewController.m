@@ -29,6 +29,8 @@
 {
     [super loadView];
 
+    self.rootLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
+    
     HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
     homeHeadView.myTop = 0;
     homeHeadView.myHeight = ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
@@ -36,8 +38,6 @@
     [homeHeadView createSubviews];
     homeHeadView.delegate = self;
     self.homeHeadView = homeHeadView;
-    
-    
     
     self.showTableView.myVertMargin = 0;
     self.showTableView.myHorzMargin = 0;
@@ -95,7 +95,9 @@
         [self.dataArray addObject:section1];
     }
     CellConfig *data2_0 = [CellConfig cellConfigWithClassName:@"UCFNewUserBidCell" title:@"新手专享" showInfoMethod:nil heightOfCell:150];
-    CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:@selector(reflectDataModel:) heightOfCell:((Screen_Width - 30) * 6 /23 + 15)];
+    
+    
+    CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:@selector(reflectDataModel:) heightOfCell:((ScreenWidth - 30) * 6 /23 + 15)];
     NSMutableArray *section2 = [NSMutableArray arrayWithCapacity:1];
     [section2 addObject:data2_0];
     [section2 addObject:data2_0];
@@ -104,7 +106,7 @@
     [section2 addObject:data2_1];
     [self.dataArray addObject:section2];
     
-    CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:nil heightOfCell:(Screen_Width - 30) * 6 /23 + 160];
+    CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:nil heightOfCell:(ScreenWidth - 30) * 6 /23 + 160];
     NSMutableArray *section3 = [NSMutableArray arrayWithCapacity:1];
     [section3 addObject:data3_0];
     [self.dataArray addObject:section3];
@@ -114,7 +116,7 @@
     [section4 addObject:data4_0];
     [self.dataArray addObject:section4];
     
-    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"推荐内容" showInfoMethod:@selector(reflectDataModel:) heightOfCell:((Screen_Width - 30) * 6 /23)];
+    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"推荐内容" showInfoMethod:@selector(reflectDataModel:) heightOfCell:((ScreenWidth - 30) * 6 /23)];
     NSMutableArray *section5 = [NSMutableArray arrayWithCapacity:1];
     [section5 addObject:data5_0];
     [self.dataArray addObject:section5];

@@ -242,7 +242,7 @@
     if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
 
         NSMutableDictionary *parmDict1 = [NSMutableDictionary dictionaryWithCapacity:1];
-        [parmDict1 setValue:@"一次还清" forKey:@"value"];
+        [parmDict1 setValue:self.model.data.repayModeText forKey:@"value"];
         [parmDict1 setValue:@"还款方式" forKey:@"title"];
         [dataArr addObject:parmDict1];
         if (!_isP2P  && [self.model.data.status intValue] !=  2) {
@@ -253,7 +253,7 @@
 
         } else {
             NSMutableDictionary *parmDict3 = [NSMutableDictionary dictionaryWithCapacity:1];
-            [parmDict3 setValue:@"100元起" forKey:@"value"];
+            [parmDict3 setValue:[NSString stringWithFormat:@"%ld",self.model.data.minInvest] forKey:@"value"];
             [parmDict3 setValue:@"起投金额" forKey:@"title"];
             [dataArr addObject:parmDict3];
 
@@ -275,7 +275,7 @@
         [dataArr addObject:parmDict1];
         
         NSMutableDictionary *parmDict2 = [NSMutableDictionary dictionaryWithCapacity:1];
-        [parmDict2 setValue:@"一次还清" forKey:@"value"];
+        [parmDict2 setValue:self.model.data.repayModeText forKey:@"value"];
         [parmDict2 setValue:@"还款方式" forKey:@"title"];
         [dataArr addObject:parmDict2];
         
@@ -286,7 +286,7 @@
             [dataArr addObject:parmDict3];
         } else {
             NSMutableDictionary *parmDict4 = [NSMutableDictionary dictionaryWithCapacity:1];
-            [parmDict4 setValue:@"100元起" forKey:@"value"];
+            [parmDict4 setValue:[NSString stringWithFormat:@"%ld",self.model.data.minInvest] forKey:@"value"];
             [parmDict4 setValue:@"起投金额" forKey:@"title"];
             [dataArr addObject:parmDict4];
             

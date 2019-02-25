@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFTransInvestPageInfoApi : BaseRequest
+- (id)initWithProjectId:(NSString *)projectId type:(SelectAccoutType)type;
 
 @end
 

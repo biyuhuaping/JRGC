@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UCFBidViewModel.h"
+#import "UCFPureTransPageViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFBidInfoView : MyRelativeLayout
@@ -15,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)showView:(UCFBidViewModel *)viewModel;
+
+- (void)showTransView:(UCFPureTransPageViewModel *)viewModel;
 @end
 
 NS_ASSUME_NONNULL_END

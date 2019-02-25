@@ -25,7 +25,16 @@
     self.rootLayout = rootLayout;
     self.view = rootLayout;
 }
-
+- (void)setTitleViewText:(NSString *)text
+{
+    UILabel *baseTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth - 200)/2.0f, 0, 200, 30)];
+    baseTitleLabel.textAlignment = NSTextAlignmentCenter;
+    [baseTitleLabel setTextColor:UIColorWithRGB(0x333333)];
+    [baseTitleLabel setBackgroundColor:[UIColor clearColor]];
+    baseTitleLabel.font = [UIFont systemFontOfSize:18];
+    baseTitleLabel.text = text;
+    self.navigationItem.titleView = baseTitleLabel;
+}
 
 
 - (void)addWhiteLeftButton
@@ -45,8 +54,7 @@
     [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
     [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
     [leftButton setImage:[UIImage imageNamed:name]forState:UIControlStateNormal];
-//    [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateHighlighted];
-//    [leftButton setImage:[UIImage imageNamed:@"icon_back.png"]forState:UIControlStateNormal];
+
     [leftButton addTarget:self action:@selector(leftBar1Clicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = leftItem;
@@ -92,7 +100,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationController.navigationBar.translucent = NO;
+
 }
 
 @end

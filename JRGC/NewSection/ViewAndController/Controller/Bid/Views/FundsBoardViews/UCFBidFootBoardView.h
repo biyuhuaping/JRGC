@@ -8,11 +8,14 @@
 
 #import "MyLinearLayout.h"
 #import "UCFBidViewModel.h"
+#import "UCFPureTransPageViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFBidFootBoardView : MyLinearLayout
 - (void)showView:(UCFBidViewModel *)viewModel;
 - (void)createAllShowView;
+- (void)createTransShowView;
+- (void)showTransView:(UCFPureTransPageViewModel *)viewModel;
 @end
 
 NS_ASSUME_NONNULL_END

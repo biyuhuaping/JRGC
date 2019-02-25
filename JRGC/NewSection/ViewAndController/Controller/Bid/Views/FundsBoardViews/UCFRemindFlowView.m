@@ -97,4 +97,25 @@
         }
     }];
 }
+- (void)blindTransVM:(BaseViewModel *)vm
+{
+    @PGWeakObj(self);
+    
+    [self.KVOController observe:vm keyPaths:@[@"markList"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"markList"]) {
+            NSArray *markList = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            if (markList.count > 0) {
+                [selfWeak  reloadViewContentWithTextArr:markList];
+                selfWeak.heightSize.equalTo(@40);
+                selfWeak.myVisibility = MyVisibility_Visible;
+            } else {
+                selfWeak.myVisibility = MyVisibility_Visible;
+                selfWeak.heightSize.equalTo(@10);
+                
+            }
+        }
+    }];
+}
+
 @end

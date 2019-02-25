@@ -15,12 +15,11 @@
 
 #import "MyRelativeLayout.h"
 #import "UCFBannerViewModel.h"
-#import "SDCycleScrollView.h"
-
+#import "RCFFlowView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeHeadCycleView : MyRelativeLayout
-@property(nonatomic, strong)SDCycleScrollView *adCycleScrollView;
+@property(nonatomic, strong)RCFFlowView *adCycleScrollView;
 @property(nonatomic, weak)id<HomeHeadCycleViewDelegate> delegate;
 - (void)showView:(UCFBannerViewModel *)viewModel;
 - (void)createSubviews;

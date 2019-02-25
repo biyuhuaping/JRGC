@@ -46,6 +46,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)NSArray     *markList;
 
 @property(nonatomic, weak)UIView *view;
+
+@property(nonatomic,copy)NSString *bidInvestText;
+- (void)dealClickAction:(NSString *)title;
+
+- (NSArray *)getTableViewData;
+- (NSArray *)getTableViewData1;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

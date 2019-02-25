@@ -49,6 +49,10 @@
 		3328796721EEC75500832CE8 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796621EEC75500832CE8 /* NSString+MD5.m */; };
 		3328796B21EECE7600832CE8 /* UCFHomeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */; };
 		3328796F21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */; };
+		332B605F221F9558008893EF /* RCFFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6057221F9558008893EF /* RCFFlowView.m */; };
+		332B6060221F9558008893EF /* HQFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6058221F9558008893EF /* HQFlowView.m */; };
+		332B6061221F9558008893EF /* HQIndexBannerSubview.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6059221F9558008893EF /* HQIndexBannerSubview.m */; };
+		332B6062221F9558008893EF /* HQImagePageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B605A221F9558008893EF /* HQImagePageControl.m */; };
 		3332C8A32213BA15009956BB /* UCFCheckCouponApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3332C8A22213BA15009956BB /* UCFCheckCouponApi.m */; };
 		333548BD221153D100DE0BB8 /* InvestPageInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 333548BC221153D100DE0BB8 /* InvestPageInfoApi.m */; };
 		333B42C821FC31AB00741A47 /* UCFBidDetailTopBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */; };
@@ -66,10 +70,15 @@
 		3349B4E921F86A55002C1ADA /* UIView+RoundingCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 3349B4E821F86A55002C1ADA /* UIView+RoundingCorners.m */; };
 		334C713F21FAAA49006AE8F7 /* UCFNewBidDetaiInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334C713E21FAAA49006AE8F7 /* UCFNewBidDetaiInfoView.m */; };
 		334C714221FAF58B006AE8F7 /* NSString+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 334C714121FAF58B006AE8F7 /* NSString+Tool.m */; };
+		335BAC93221BEF2200F026BB /* UCFNewPureTransBidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC92221BEF2200F026BB /* UCFNewPureTransBidViewController.m */; };
+		335BAC97221BF33C00F026BB /* UCFTransMoneyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC96221BF33C00F026BB /* UCFTransMoneyBoardView.m */; };
+		335BAC9A221BFDA900F026BB /* UCFPureTransBidRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC99221BFDA900F026BB /* UCFPureTransBidRootModel.m */; };
+		335BAC9D221C0F9600F026BB /* UCFPureTransPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC9C221C0F9600F026BB /* UCFPureTransPageViewModel.m */; };
 		33614B1B21F9964400569989 /* UCFNewProjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33614B1A21F9964400569989 /* UCFNewProjectDetailViewController.m */; };
 		33614B1F21F998F300569989 /* UCFBidDetailNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33614B1E21F998F300569989 /* UCFBidDetailNavView.m */; };
 		33614B2421F9BAE700569989 /* UCFBidDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33614B2321F9BAE700569989 /* UCFBidDetailModel.m */; };
 		33614B2821F9BF0600569989 /* UVFBidDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33614B2721F9BF0600569989 /* UVFBidDetailViewModel.m */; };
+		336AA93A221D61CA00F14236 /* UCFTransPureBidApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 336AA939221D61CA00F14236 /* UCFTransPureBidApi.m */; };
 		33793F3C21EC2AA3001065D9 /* UIButton+MLSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F3B21EC2AA3001065D9 /* UIButton+MLSpace.m */; };
 		33793F3F21EC392F001065D9 /* UCFNewUserBidCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F3E21EC392F001065D9 /* UCFNewUserBidCell.m */; };
 		33793F4521EC674D001065D9 /* UCFPromotionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F4421EC674D001065D9 /* UCFPromotionCell.m */; };
@@ -1316,6 +1325,14 @@
 		3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListRequest.m; sourceTree = "<group>"; };
 		3328796D21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		332B6057221F9558008893EF /* RCFFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCFFlowView.m; sourceTree = "<group>"; };
+		332B6058221F9558008893EF /* HQFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQFlowView.m; sourceTree = "<group>"; };
+		332B6059221F9558008893EF /* HQIndexBannerSubview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQIndexBannerSubview.m; sourceTree = "<group>"; };
+		332B605A221F9558008893EF /* HQImagePageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQImagePageControl.m; sourceTree = "<group>"; };
+		332B605B221F9558008893EF /* RCFFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCFFlowView.h; sourceTree = "<group>"; };
+		332B605C221F9558008893EF /* HQFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQFlowView.h; sourceTree = "<group>"; };
+		332B605D221F9558008893EF /* HQImagePageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQImagePageControl.h; sourceTree = "<group>"; };
+		332B605E221F9558008893EF /* HQIndexBannerSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQIndexBannerSubview.h; sourceTree = "<group>"; };
 		3332C8A12213BA15009956BB /* UCFCheckCouponApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCheckCouponApi.h; sourceTree = "<group>"; };
 		3332C8A22213BA15009956BB /* UCFCheckCouponApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCheckCouponApi.m; sourceTree = "<group>"; };
 		333548BB221153D100DE0BB8 /* InvestPageInfoApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvestPageInfoApi.h; sourceTree = "<group>"; };
@@ -1349,6 +1366,14 @@
 		334C713E21FAAA49006AE8F7 /* UCFNewBidDetaiInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBidDetaiInfoView.m; sourceTree = "<group>"; };
 		334C714021FAF58B006AE8F7 /* NSString+Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Tool.h"; sourceTree = "<group>"; };
 		334C714121FAF58B006AE8F7 /* NSString+Tool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Tool.m"; sourceTree = "<group>"; };
+		335BAC91221BEF2200F026BB /* UCFNewPureTransBidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewPureTransBidViewController.h; sourceTree = "<group>"; };
+		335BAC92221BEF2200F026BB /* UCFNewPureTransBidViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewPureTransBidViewController.m; sourceTree = "<group>"; };
+		335BAC95221BF33C00F026BB /* UCFTransMoneyBoardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransMoneyBoardView.h; sourceTree = "<group>"; };
+		335BAC96221BF33C00F026BB /* UCFTransMoneyBoardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransMoneyBoardView.m; sourceTree = "<group>"; };
+		335BAC98221BFDA900F026BB /* UCFPureTransBidRootModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFPureTransBidRootModel.h; sourceTree = "<group>"; };
+		335BAC99221BFDA900F026BB /* UCFPureTransBidRootModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFPureTransBidRootModel.m; sourceTree = "<group>"; };
+		335BAC9B221C0F9600F026BB /* UCFPureTransPageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFPureTransPageViewModel.h; sourceTree = "<group>"; };
+		335BAC9C221C0F9600F026BB /* UCFPureTransPageViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFPureTransPageViewModel.m; sourceTree = "<group>"; };
 		33614B1921F9964400569989 /* UCFNewProjectDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewProjectDetailViewController.h; sourceTree = "<group>"; };
 		33614B1A21F9964400569989 /* UCFNewProjectDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewProjectDetailViewController.m; sourceTree = "<group>"; };
 		33614B1D21F998F300569989 /* UCFBidDetailNavView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBidDetailNavView.h; sourceTree = "<group>"; };
@@ -1357,6 +1382,8 @@
 		33614B2321F9BAE700569989 /* UCFBidDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBidDetailModel.m; sourceTree = "<group>"; };
 		33614B2621F9BF0600569989 /* UVFBidDetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UVFBidDetailViewModel.h; sourceTree = "<group>"; };
 		33614B2721F9BF0600569989 /* UVFBidDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UVFBidDetailViewModel.m; sourceTree = "<group>"; };
+		336AA938221D61CA00F14236 /* UCFTransPureBidApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransPureBidApi.h; sourceTree = "<group>"; };
+		336AA939221D61CA00F14236 /* UCFTransPureBidApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransPureBidApi.m; sourceTree = "<group>"; };
 		33793F3A21EC2AA3001065D9 /* UIButton+MLSpace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+MLSpace.h"; sourceTree = "<group>"; };
 		33793F3B21EC2AA3001065D9 /* UIButton+MLSpace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MLSpace.m"; sourceTree = "<group>"; };
 		33793F3D21EC392F001065D9 /* UCFNewUserBidCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewUserBidCell.h; sourceTree = "<group>"; };
@@ -3490,6 +3517,21 @@
 			path = FDFullscreenPopGesture;
 			sourceTree = "<group>";
 		};
+		332B6056221F9558008893EF /* HQFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				332B605B221F9558008893EF /* RCFFlowView.h */,
+				332B6057221F9558008893EF /* RCFFlowView.m */,
+				332B605C221F9558008893EF /* HQFlowView.h */,
+				332B6058221F9558008893EF /* HQFlowView.m */,
+				332B605D221F9558008893EF /* HQImagePageControl.h */,
+				332B605A221F9558008893EF /* HQImagePageControl.m */,
+				332B605E221F9558008893EF /* HQIndexBannerSubview.h */,
+				332B6059221F9558008893EF /* HQIndexBannerSubview.m */,
+			);
+			path = HQFlowView;
+			sourceTree = "<group>";
+		};
 		3332C89D2213B953009956BB /* Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -3618,6 +3660,15 @@
 			path = UIView;
 			sourceTree = "<group>";
 		};
+		335BAC94221BF2D500F026BB /* TransView */ = {
+			isa = PBXGroup;
+			children = (
+				335BAC95221BF33C00F026BB /* UCFTransMoneyBoardView.h */,
+				335BAC96221BF33C00F026BB /* UCFTransMoneyBoardView.m */,
+			);
+			path = TransView;
+			sourceTree = "<group>";
+		};
 		33614B1821F995FD00569989 /* BidDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -3663,6 +3714,8 @@
 				33614B2321F9BAE700569989 /* UCFBidDetailModel.m */,
 				337BB2E522154C8A001ACDE6 /* UCFTransBidInfoModel.h */,
 				337BB2E622154C8A001ACDE6 /* UCFTransBidInfoModel.m */,
+				335BAC98221BFDA900F026BB /* UCFPureTransBidRootModel.h */,
+				335BAC99221BFDA900F026BB /* UCFPureTransBidRootModel.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -3676,6 +3729,15 @@
 				337BB2EC22155D71001ACDE6 /* UCFTransBidDetailViewModel.m */,
 			);
 			path = VM;
+			sourceTree = "<group>";
+		};
+		336AA937221D618B00F14236 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				336AA938221D61CA00F14236 /* UCFTransPureBidApi.h */,
+				336AA939221D61CA00F14236 /* UCFTransPureBidApi.m */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		33813A1521BFB114004666E5 /* NewSection */ = {
@@ -7334,6 +7396,7 @@
 		E352FCE421E4AF0A00617AB7 /* PublicModule(公共组件) */ = {
 			isa = PBXGroup;
 			children = (
+				332B6056221F9558008893EF /* HQFlowView */,
 				E36EB86D21F815420093915D /* CQCountDownButton */,
 				334790D021E85275005131A5 /* CustomStyleButton */,
 				331089C421E74EB80073F71B /* SDCycleScrollView */,
@@ -7465,6 +7528,7 @@
 		E352FD0A21E4AF0A00617AB7 /* Bid */ = {
 			isa = PBXGroup;
 			children = (
+				336AA937221D618B00F14236 /* API */,
 				E352FD0B21E4AF0A00617AB7 /* Models */,
 				E352FD1021E4AF0B00617AB7 /* VM */,
 				E352FD1321E4AF0B00617AB7 /* Controllers */,
@@ -7487,8 +7551,10 @@
 		E352FD1021E4AF0B00617AB7 /* VM */ = {
 			isa = PBXGroup;
 			children = (
-				E352FD1121E4AF0B00617AB7 /* UCFBidViewModel.m */,
 				E352FD1221E4AF0B00617AB7 /* UCFBidViewModel.h */,
+				E352FD1121E4AF0B00617AB7 /* UCFBidViewModel.m */,
+				335BAC9B221C0F9600F026BB /* UCFPureTransPageViewModel.h */,
+				335BAC9C221C0F9600F026BB /* UCFPureTransPageViewModel.m */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -7496,8 +7562,10 @@
 		E352FD1321E4AF0B00617AB7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E352FD1421E4AF0B00617AB7 /* NewPurchaseBidController.m */,
 				E352FD1521E4AF0B00617AB7 /* NewPurchaseBidController.h */,
+				E352FD1421E4AF0B00617AB7 /* NewPurchaseBidController.m */,
+				335BAC91221BEF2200F026BB /* UCFNewPureTransBidViewController.h */,
+				335BAC92221BEF2200F026BB /* UCFNewPureTransBidViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -7505,13 +7573,8 @@
 		E352FD1621E4AF0B00617AB7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				335BAC94221BF2D500F026BB /* TransView */,
 				E352FD1821E4AF0B00617AB7 /* FundsBoardViews */,
-				E352FD2721E4AF0B00617AB7 /* UCFBidInfoView.h */,
-				E352FD2321E4AF0B00617AB7 /* UCFBidInfoView.m */,
-				E352FD2521E4AF0B00617AB7 /* UCFRemindFlowView.h */,
-				E352FD1721E4AF0B00617AB7 /* UCFRemindFlowView.m */,
-				E352FD2621E4AF0B00617AB7 /* UCFSectionHeadView.h */,
-				E352FD2421E4AF0B00617AB7 /* UCFSectionHeadView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -7519,14 +7582,20 @@
 		E352FD1821E4AF0B00617AB7 /* FundsBoardViews */ = {
 			isa = PBXGroup;
 			children = (
+				E352FD2721E4AF0B00617AB7 /* UCFBidInfoView.h */,
+				E352FD2321E4AF0B00617AB7 /* UCFBidInfoView.m */,
+				E352FD2521E4AF0B00617AB7 /* UCFRemindFlowView.h */,
+				E352FD1721E4AF0B00617AB7 /* UCFRemindFlowView.m */,
+				E352FD2621E4AF0B00617AB7 /* UCFSectionHeadView.h */,
+				E352FD2421E4AF0B00617AB7 /* UCFSectionHeadView.m */,
 				E352FD1921E4AF0B00617AB7 /* UCFFundsInvestButton.h */,
-				E352FD1A21E4AF0B00617AB7 /* UCFInvestFundsBoard.h */,
 				E352FD1B21E4AF0B00617AB7 /* UCFRecommendView.h */,
-				E352FD1C21E4AF0B00617AB7 /* UCFBidFootBoardView.m */,
 				E352FD1D21E4AF0B00617AB7 /* UCFCouponBoard.m */,
+				E352FD1A21E4AF0B00617AB7 /* UCFInvestFundsBoard.h */,
 				E352FD1E21E4AF0B00617AB7 /* UCFInvestFundsBoard.m */,
 				E352FD1F21E4AF0B00617AB7 /* UCFFundsInvestButton.m */,
 				E352FD2021E4AF0B00617AB7 /* UCFBidFootBoardView.h */,
+				E352FD1C21E4AF0B00617AB7 /* UCFBidFootBoardView.m */,
 				E352FD2121E4AF0B00617AB7 /* UCFRecommendView.m */,
 				E352FD2221E4AF0B00617AB7 /* UCFCouponBoard.h */,
 			);
@@ -9057,6 +9126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A830DE851F8DDB0D003855B9 /* UCFCalendarModularDayCell.xib in Sources */,
+				332B6062221F9558008893EF /* HQImagePageControl.m in Sources */,
 				A830DE841F8DDAF1003855B9 /* UCFCalendarModularDetailHeaderView.xib in Sources */,
 				A830DE831F8DDA6A003855B9 /* UCFCalendarModularHeaderView.xib in Sources */,
 				74877CC81FB2AB8900F32428 /* UCFHandingInViewController.m in Sources */,
@@ -9067,6 +9137,7 @@
 				7470C8481E5E7CDE007D52F4 /* UCFCollectionBidModel.m in Sources */,
 				74270C9D1EC58F6800F9419B /* UCFHomeListCell.m in Sources */,
 				74270CA41EC58F6800F9419B /* UCFSignView.m in Sources */,
+				332B6061221F9558008893EF /* HQIndexBannerSubview.m in Sources */,
 				E3ED83E122018913000F8F50 /* Image.m in Sources */,
 				339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */,
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
@@ -9174,6 +9245,7 @@
 				740586D51F41B15B00E2DE01 /* UCFGoldRaiseSectionHeaderView.m in Sources */,
 				747A91251B0206DB00FE2334 /* UCFFacBeanModel.m in Sources */,
 				7462CB921F8B4F0200F96831 /* UCFNoticeModel.m in Sources */,
+				335BAC9D221C0F9600F026BB /* UCFPureTransPageViewModel.m in Sources */,
 				331089D521E74EB80073F71B /* UIView+SDExtension.m in Sources */,
 				83DAEFB31F16112000D7948F /* UCFGoldCalculatorView.m in Sources */,
 				A8E02DA91F0DD4BB00FC2260 /* UCFCellStyleModel.m in Sources */,
@@ -9212,6 +9284,7 @@
 				3307E22421A3B147009FFF6D /* QuickRechargeHeadView.m in Sources */,
 				33AF83A521F5C2060035ED53 /* UCFInvestTableViewCell.m in Sources */,
 				7BA6E4BB1AD6731900FE8C37 /* SDWebImageCompat.m in Sources */,
+				336AA93A221D61CA00F14236 /* UCFTransPureBidApi.m in Sources */,
 				333B42C821FC31AB00741A47 /* UCFBidDetailTopBoardCell.m in Sources */,
 				E30C799121F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.m in Sources */,
 				FBB685881AE4A76800F222B6 /* MJRefreshLegendHeader.m in Sources */,
@@ -9276,6 +9349,7 @@
 				4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */,
 				E31BD53721C0C10100D3651F /* TYAlertController+TransitionAnimate.m in Sources */,
 				E352FD4E21E4AF0B00617AB7 /* UCFInvestmentCouponInstructionsView.m in Sources */,
+				335BAC9A221BFDA900F026BB /* UCFPureTransBidRootModel.m in Sources */,
 				E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */,
 				FB2173191AF20DFC00649AA0 /* UCFBackMoneyCell.m in Sources */,
 				A851F3481F132713003DE8B8 /* UCFGoldTransactionHeadView.m in Sources */,
@@ -9499,7 +9573,9 @@
 				7443C7311F1F3881009669C0 /* UCFGoldRecordHeaderFooterView.m in Sources */,
 				EDEE0D411C5F42D200021CCC /* BJGridItem.m in Sources */,
 				4AD6F6901AF07EF500F1B490 /* MoneyBoardCell.m in Sources */,
+				332B6060221F9558008893EF /* HQFlowView.m in Sources */,
 				4A675E3E1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m in Sources */,
+				332B605F221F9558008893EF /* RCFFlowView.m in Sources */,
 				74B98C9F1F7111D100CB6A9F /* UCFMineFuncCell.m in Sources */,
 				745D37D01F3AE95900897F1A /* UCFGoldChargeOneCell.m in Sources */,
 				2509C3BE1D6590C400D9F9B5 /* PulsingHaloLayer.m in Sources */,
@@ -9693,6 +9769,7 @@
 				7B2E56941ADBBE97008B0F9E /* UCFRetrievePasswordStepOneView.m in Sources */,
 				7BD35A991AD61E4200389D6B /* LLLockView.m in Sources */,
 				E31BD53121C0C10100D3651F /* TYAlertController+BlurEffects.m in Sources */,
+				335BAC93221BEF2200F026BB /* UCFNewPureTransBidViewController.m in Sources */,
 				FBB685861AE4A76800F222B6 /* MJRefreshHeader.m in Sources */,
 				84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */,
 				74D9B8541FD793650076F733 /* KTUpDownAnimationController.m in Sources */,
@@ -9841,6 +9918,7 @@
 				4A0E074A1B218E8C0099AEC3 /* RedAlertView.m in Sources */,
 				749099AD1F7279B800C2AD6C /* UCFAttachModel.m in Sources */,
 				FB72B08D1D74233E00F4DC8E /* BaseNavigationViewController.m in Sources */,
+				335BAC97221BF33C00F026BB /* UCFTransMoneyBoardView.m in Sources */,
 				E3041D3821F7039C007B09B6 /* UCFRegisterGetRegisterInfoApi.m in Sources */,
 				832942CE1F39914E001E34F1 /* UCFGoldCouponModel.m in Sources */,
 				746FFE2C1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m in Sources */,

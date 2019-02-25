@@ -19,8 +19,9 @@
 @property(nonatomic, strong) NZLabel    *contractMsgLabel;
 @property(nonatomic, strong) UIView     *fiveSectionView;
 @property(nonatomic, strong) UIView     *sixSectionView;
-
+@property(nonatomic, strong) UIView     *sevenSectionView;
 @property(nonatomic, weak)UCFBidViewModel *myVM;
+@property(nonatomic, weak)UCFPureTransPageViewModel *myTransVM;
 
 @end
 @implementation UCFBidFootBoardView
@@ -91,12 +92,77 @@
         }
     }];
 }
+- (void)showTransView:(UCFPureTransPageViewModel *)viewModel
+{
+    self.myTransVM = viewModel;
+    @PGWeakObj(self);
+    [self.KVOController observe:viewModel keyPaths:@[@"isShowCFCA",@"isShowRisk",@"isShowHonerTip",@"contractMsg"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"isShowCFCA"]) {
+           BOOL isShowCFCA = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+            if (isShowCFCA) {
+                selfWeak.secondSectionView.myVisibility = MyVisibility_Visible;
+            } else {
+                selfWeak.secondSectionView.myVisibility = MyVisibility_Gone;
+            }
+        } else if ([keyPath isEqualToString:@"isShowRisk"]) {
+            BOOL isShowRisk = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+            if (isShowRisk) {
+                selfWeak.thirdSectionView.myVisibility = MyVisibility_Visible;
+            } else {
+                selfWeak.thirdSectionView.myVisibility = MyVisibility_Gone;
+            }
+        }  else if ([keyPath isEqualToString:@"contractMsg"]) {
+            NSArray *contractMsg = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            if (contractMsg.count > 0) {
+                NSString *totalStr = [NSString stringWithFormat:@"本人已阅读并同意签署"];
+                for (int i = 0; i < contractMsg.count; i++) {
+                    UCFTransPureContractmsg *md = [contractMsg objectAtIndex:i];
+                    NSString *tmpStr = md.contractName;
+                    totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
+                }
+                selfWeak.contractMsgLabel.text = totalStr;
+                //                __weak typeof(self) weakSelf = self;
+                for (int i = 0; i < contractMsg.count; i++) {
+                    UCFTransPureContractmsg *md = [contractMsg objectAtIndex:i];
+
+                    NSString *tmpStr = [NSString stringWithFormat:@"《%@》",md.contractName] ;
+                    [selfWeak.contractMsgLabel setFontColor:UIColorWithRGB(0x4aa1f9) range:[totalStr rangeOfString:tmpStr]];
+                    
+                    [selfWeak.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+                        NSLog(@"111");
+                        [selfWeak totalString:linkModel.linkString];
+                    }];
+                    
+                }
+                selfWeak.fourSectionView.myVisibility = MyVisibility_Visible;
+                
+            } else {
+                selfWeak.fourSectionView.myVisibility = MyVisibility_Gone;
+            }
+        } else if ([keyPath isEqualToString:@"isShowHonerTip"]) {
+            BOOL isShowHonerTip = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+            if (isShowHonerTip) {
+                selfWeak.sevenSectionView.myVisibility = MyVisibility_Visible;
+            } else {
+                selfWeak.sevenSectionView.myVisibility = MyVisibility_Gone;
+            }
+        }
+    }];
+}
 - (void)totalString:(NSString *)constractName
 {
     constractName = [constractName stringByReplacingOccurrencesOfString:@"《" withString:@""];
     constractName = [constractName stringByReplacingOccurrencesOfString:@"》" withString:@""];
-    DDLogDebug(@"%@",constractName);
-    [self.myVM bidViewModel:self.myVM WithContractName:constractName];
+    if (self.myVM) {
+        DDLogDebug(@"%@",constractName);
+        [self.myVM bidViewModel:self.myVM WithContractName:constractName];
+    }
+    if (self.myTransVM) {
+        DDLogDebug(@"%@",constractName);
+        [self.myTransVM bidViewModel:self.myTransVM WithContractName:constractName];
+    }
+
 }
 - (void)createAllShowView
 {
@@ -105,6 +171,13 @@
     [self createSectionThree];
     [self createSectionFour];
     [self createSectionsix];
+}
+- (void)createTransShowView
+{
+    [self createSectionTwo];
+    [self createSectionThree];
+    [self createSectionFour];
+    [self createSectionSeven];
 }
 - (void)createSectionOne
 {
@@ -329,6 +402,34 @@
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
     [self.sixSectionView addSubview:limitAmountMessLabel];
+    [limitAmountMessLabel sizeToFit];
+}
+- (void)createSectionSeven
+{
+    UIView *view = [MyRelativeLayout new];
+    view.backgroundColor = [UIColor clearColor];
+    view.topPos.equalTo(self.fourSectionView.bottomPos);
+    view.myHeight = 20;
+    view.myHorzMargin = 0;
+    [self addSubview:view];
+    self.sevenSectionView = view;
+    
+    UIImageView * imageView = [[UIImageView alloc] init];
+    imageView.myLeading = 15;
+    imageView.myTop = 7;
+    imageView.mySize = CGSizeMake(5, 5);
+    imageView.image = [UIImage imageNamed:@"point.png"];
+    [self.sevenSectionView addSubview:imageView];
+    
+    YYLabel *limitAmountMessLabel = [[YYLabel alloc] init];
+    limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
+    limitAmountMessLabel.numberOfLines = 0;
+    //不要删除，需要占位，要不数据反射回来 这个lab的frame 会变成0
+    limitAmountMessLabel.text = @"单笔尊享项目仅支持一对一转让，不支持部分购买";
+    limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
+    limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
+    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
+    [self.sevenSectionView addSubview:limitAmountMessLabel];
     [limitAmountMessLabel sizeToFit];
 }
 @end

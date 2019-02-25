@@ -76,7 +76,6 @@
     _bidHeadView.myHorzMargin = 0;
     _bidHeadView.myHeight = 43;
     [self.contentLayout addSubview:_bidHeadView];
-    self.bidInfoHeadSectionView = _bidHeadView;
     [_bidHeadView layoutSubviewFrame];
     
     UCFBidInfoView *bidInfo = [UCFBidInfoView new];
@@ -134,7 +133,7 @@
     UCFFundsInvestButton *investButton = [UCFFundsInvestButton new];
     investButton.myHorzMargin = 0;
     investButton.bottomPos.equalTo(@0);
-    investButton.myHeight = 57;
+    investButton.myHeight = 50;
     investButton.backgroundColor = [UIColor whiteColor];
     [rootLayout addSubview:investButton];
     [investButton createSubviews];
