@@ -26,7 +26,7 @@
           messageStr =@"请先登录金融工场网站开通尊享徽商存管账户";
         }
       }else{
-        if(SingleUserInfo.loginData.userInfo.openStatus < 3){
+        if([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 3){
         messageStr =@"请先登录金融工场网站开通微金徽商存管账户";
         }
       }
@@ -113,7 +113,7 @@
                 
                 if (![dic[@"data"][@"zxIsAuthorization"] boolValue]) {
                     UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = SingleUserInfo.loginData.userInfo.openStatus;
+                    bankDepositoryAccountVC.openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
                     bankDepositoryAccountVC.accoutType = _accoutType;
                     [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
                 } else {
@@ -134,7 +134,7 @@
                 
                 if (![dic[@"data"][@"p2pIsAuthorization"] boolValue]) {//未授权
                     UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = SingleUserInfo.loginData.userInfo.openStatus;
+                    bankDepositoryAccountVC.openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
                      bankDepositoryAccountVC.accoutType = _accoutType;
                     [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
                 } else { //已经授权

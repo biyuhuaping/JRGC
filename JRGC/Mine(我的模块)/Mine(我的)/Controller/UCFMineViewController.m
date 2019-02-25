@@ -385,7 +385,7 @@
         if (indexPath.row == 0) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_wj"];
             cell.titleDesLabel.text = @"微金账户";
-            if (SingleUserInfo.loginData.userInfo.openStatus > 2) {
+            if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] > 2) {
                 cell.valueLabel.text = self.assetModel.p2pCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.p2pCashBalance] : [NSString stringWithFormat:@"¥0.00"];
                 cell.describeLabel.text = self.benefitModel.repayPerDateWJ.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateWJ] : @"最近无回款";
                 cell.descriLabel.hidden = NO;
@@ -506,7 +506,7 @@
             else
             {
                     HSHelper *helper = [HSHelper new];
-                    if (SingleUserInfo.loginData.userInfo.openStatus < 3 && [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3 )
+                    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 3 && [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3 )
                     {
                        
                         if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {//先授权
@@ -619,7 +619,7 @@
     if(SingleUserInfo.superviseSwitch && SingleUserInfo.loginData.userInfo.zxIsNew && SingleUserInfo.loginData.userInfo.goldIsNew)
     {
         self.mineHeaderView.cashButton.enabled = YES;
-        if(SingleUserInfo.loginData.userInfo.openStatus < 3 )//微金未开通账户
+        if([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 3 )//微金未开通账户
         {
             [AuxiliaryFunc showToastMessage:@"没有可提现的账户" withView:self.view];
             return;
@@ -644,7 +644,7 @@
         }
     }
     else{
-        if(SingleUserInfo.loginData.userInfo.openStatus < 3 && [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3 && !SingleUserInfo.loginData.userInfo.goldAuthorization)//微金未开通账户
+        if([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 3 && [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 3 && !SingleUserInfo.loginData.userInfo.goldAuthorization)//微金未开通账户
         {
             [AuxiliaryFunc showToastMessage:@"没有可提现的账户" withView:self.view];
             self.mineHeaderView.cashButton.enabled = YES;
@@ -694,7 +694,7 @@
     NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
     NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
     
-    NSInteger openStatus = accout == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus :[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
@@ -732,7 +732,7 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
         }
     }else if (alertView.tag == 8010) {
         if (buttonIndex == 1) {

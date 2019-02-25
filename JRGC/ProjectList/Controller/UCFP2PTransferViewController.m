@@ -197,7 +197,7 @@
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
-            SingleUserInfo.loginData.userInfo.openStatus = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"] integerValue];
+            SingleUserInfo.loginData.userInfo.openStatus = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
             [SingleUserInfo setUserData:SingleUserInfo.loginData];
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
@@ -319,7 +319,7 @@
 }
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {
-    switch (SingleUserInfo.loginData.userInfo.openStatus)
+    switch ([SingleUserInfo.loginData.userInfo.openStatus integerValue])
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
@@ -358,7 +358,7 @@
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
            HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
         }
         
     }else if (alertView.tag == 9000) {

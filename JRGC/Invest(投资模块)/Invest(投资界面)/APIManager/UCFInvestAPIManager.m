@@ -66,7 +66,7 @@
             
             if (SingleUserInfo.loginData.userInfo.userId) {
                 NSString *oepnState =  [resultData objectSafeForKey:@"openStatus"];
-                SingleUserInfo.loginData.userInfo.openStatus = [oepnState integerValue];
+                SingleUserInfo.loginData.userInfo.openStatus = oepnState;
                 [SingleUserInfo setUserData:SingleUserInfo.loginData];
             }
             

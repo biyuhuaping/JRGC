@@ -74,7 +74,7 @@
         if (_isFromeBankCardInfo) {
             self.tableViewHight.constant = 44*5;
         } else {
-            if (SingleUserInfo.loginData.userInfo.openStatus == 2) {
+            if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 2) {
                 self.tableViewHight.constant = 44*5;
             } else {
                 self.tableViewHight.constant = 44*3;
@@ -388,7 +388,7 @@
         
         return  5;
     }else{
-        if (self.accoutType == SelectAccoutTypeP2P && SingleUserInfo.loginData.userInfo.openStatus == 2) {
+        if (self.accoutType == SelectAccoutTypeP2P && [SingleUserInfo.loginData.userInfo.openStatus integerValue] == 2) {
             return 5;
         } else {
             return 3;
@@ -429,7 +429,7 @@
                     [cell addSubview:imgView];
                     [cell.contentView addSubview:_textField3];
                 }else{
-                    if (SingleUserInfo.loginData.userInfo.openStatus == 2) {
+                    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 2) {
                         //银行卡
                         UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12, 20, 20)];
                         imgView.image = [UIImage imageNamed:@"safecenter_icon_bankcard"];
@@ -510,7 +510,7 @@
         }
     }else{
 
-        if((self.accoutType == SelectAccoutTypeP2P &&  indexPath.row == 2) || (SingleUserInfo.loginData.userInfo.openStatus == 2 && indexPath.row == 3))
+        if((self.accoutType == SelectAccoutTypeP2P &&  indexPath.row == 2) || ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 2 && indexPath.row == 3))
         {
             isGotoChooseBankVC = YES;
         }
@@ -628,7 +628,7 @@
             return;
         }
     }else{
-        if (SingleUserInfo.loginData.userInfo.openStatus == 2) {
+        if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 2) {
             if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0 || _textField4.text.length == 0) {
                 [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
                 return;
@@ -659,7 +659,7 @@
     //升级存管账户接口
     else{
         NSMutableDictionary *encryptParamDic = nil;
-        if ((SingleUserInfo.loginData.userInfo.openStatus == 2 && self.accoutType == SelectAccoutTypeP2P) || self.accoutType == SelectAccoutTypeHoner) {
+        if (([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 2 && self.accoutType == SelectAccoutTypeP2P) || self.accoutType == SelectAccoutTypeHoner) {
             encryptParamDic =[[NSMutableDictionary alloc]initWithDictionary: @{@"realName":realName,             //真实姓名
                                                                                @"idCardNo":idCardNo,             //身份证号
                                                                                @"bankCardNo":bankCard,           //银行卡号
@@ -683,7 +683,7 @@
         }
         else
         {
-            if (SingleUserInfo.loginData.userInfo.openStatus == 2) {
+            if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 2) {
                 [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
             } else {
                 [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
@@ -731,7 +731,7 @@
             NSDictionary *userInfoDic = dic[@"data"][@"userInfo"];
             _openStatus = dic[@"data"][@"openStatus"];
             if (self.accoutType == SelectAccoutTypeP2P) {
-                SingleUserInfo.loginData.userInfo.openStatus = [_openStatus integerValue];
+                SingleUserInfo.loginData.userInfo.openStatus = _openStatus;
             } else {
                 SingleUserInfo.loginData.userInfo.zxOpenStatus = _openStatus;
             }
@@ -746,7 +746,7 @@
             
             if (realName.length > 0) {
                 
-                if (SingleUserInfo.loginData.userInfo.openStatus != 1)
+                if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] != 1)
                 {
                     _textField1.userInteractionEnabled = NO;
                     _textField1.placeholder = realName;
@@ -764,7 +764,7 @@
                 //打码
                 NSString *asteriskIdCardNo = [self replaceStringWithAsterisk:idCardNo startLocation:3 lenght:idCardNo.length -7];
                 NSString *asteriskMobile = [self replaceStringWithAsterisk:self.phoneNum startLocation:3 lenght:self.phoneNum.length -7];
-                if (SingleUserInfo.loginData.userInfo.openStatus != 1)
+                if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] != 1)
                 {
                     _textField2.userInteractionEnabled = NO;
                     _textField2.placeholder = asteriskIdCardNo;
@@ -854,7 +854,7 @@
         if ([ret boolValue]) {
             DDLogDebug(@"%@",dic[@"data"]);
             if (self.accoutType == SelectAccoutTypeP2P) {
-                SingleUserInfo.loginData.userInfo.openStatus = 3;
+                SingleUserInfo.loginData.userInfo.openStatus = @"3";
             } else {
                 SingleUserInfo.loginData.userInfo.zxOpenStatus = @"3";
             }

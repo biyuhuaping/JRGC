@@ -58,7 +58,7 @@
     {
         if (self.accoutType == SelectAccoutTypeP2P)
         {
-            SingleUserInfo.loginData.userInfo.openStatus = 3;
+            SingleUserInfo.loginData.userInfo.openStatus = @"3";
         }
         NSDictionary *encryptParamDic = @{
                                           @"userId": SingleUserInfo.loginData.userInfo.userId                 //用户id

@@ -41,7 +41,7 @@
 -(void)gotoOpenAccout
 {
     HSHelper *helper = [HSHelper new];
-    [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
+    [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
 }
 
 - (void)didReceiveMemoryWarning {

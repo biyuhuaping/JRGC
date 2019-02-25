@@ -224,9 +224,9 @@
             SingleUserInfo.loginData.userInfo.isRisk = [[result objectSafeForKey:@"isRisk"] boolValue];
             SingleUserInfo.loginData.userInfo.isAutoBid = [[result objectSafeForKey:@"isAutoBid"] boolValue];
             SingleUserInfo.loginData.userInfo.p2pAuthorization = [[result objectSafeForKey:@"p2pAuthorization"] boolValue];
-            SingleUserInfo.loginData.userInfo.zxAuthorization = [result objectSafeForKey:@"zxAuthorization"];
+            SingleUserInfo.loginData.userInfo.zxAuthorization = [[result objectSafeForKey:@"zxAuthorization"] boolValue];
             SingleUserInfo.loginData.userInfo.goldAuthorization = [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
-            SingleUserInfo.loginData.userInfo.openStatus = [[result objectSafeForKey:@"openStatus"] integerValue];
+            SingleUserInfo.loginData.userInfo.openStatus = [result objectSafeForKey:@"openStatus"];
             SingleUserInfo.loginData.userInfo.zxOpenStatus  = [result objectSafeForKey:@"zxOpenStatus"] ;
             [SingleUserInfo setUserData:SingleUserInfo.loginData];
             

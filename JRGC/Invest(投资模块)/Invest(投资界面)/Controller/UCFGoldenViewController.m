@@ -151,7 +151,7 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+        NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
         NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
         if (  enjoyOpenStatus < 3  && openStatus < 3) {
             [self showHSAlert:tipStr1];
@@ -303,7 +303,7 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+        NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
         NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
         if (  enjoyOpenStatus < 3 && openStatus < 3) {
             [self showHSAlert:tipStr1];
@@ -335,7 +335,7 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+        NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
         NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
         if (enjoyOpenStatus < 3 && openStatus < 3) {//去开户页面
             [self showHSAlert:tipStr1];

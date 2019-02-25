@@ -121,7 +121,7 @@
             if([[dataDict objectSafeForKey:@"status"] intValue] == 1){//授权成功
                 
                 [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
-                 SingleUserInfo.loginData.userInfo.zxAuthorization = @"true";
+                 SingleUserInfo.loginData.userInfo.zxAuthorization = YES;
                 [SingleUserInfo setUserData: SingleUserInfo.loginData];
                 [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
                 
