@@ -33,6 +33,7 @@
 
 #import "UCFLoginViewController.h"
 #import "BaseNavigationViewController.h"
+#import "UCFP2POrHonerAccoutViewController.h"
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -205,7 +206,7 @@
         [self.rt_navigationController pushViewController:personMessageVC animated:YES];
     }
     else if (btn.tag == 10002){
-        //信息中心
+        //消息中心
     }
     else if (btn.tag == 10003){
         //是否展示用户资金,关闭都是*****
@@ -222,6 +223,10 @@
 {
     if (tag == 1001) {
         //每日签到
+        
+        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+        subVC.accoutType = SelectAccoutTypeP2P;
+        [self.navigationController pushViewController:subVC animated:YES];
     }
     else if (tag == 1002){
         //我的工贝

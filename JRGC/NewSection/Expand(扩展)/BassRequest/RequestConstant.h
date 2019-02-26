@@ -35,6 +35,8 @@ static NSString *GetWithdrawInfoApiURL = @"api/withdraw/v2/getWithdrawInfo.json"
 
 static NSString *IdnoCheckInfoApiURL = @"api/userInfo/v2/idnoCheckInfo.json";   //获取用户身份认证信息
 
+static NSString *GetHSAccountInfoApiURL = @"api/homePage/v2/getHSAccountInfo.json";   //徽商银行存管账户信息查询
 
+static NSString *UserAccountInfoApiURL = @"api/userAccount/v2/userAccountInfo.json"; //P2P或尊享账户信息
 
 #endif /* RequestConstant_h */

@@ -91,7 +91,7 @@
         [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateNormal];
         [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateHighlighted];
     }else {
-        [leftButton setImage:[UIImage imageNamed:@"icon_back.png"]forState:UIControlStateNormal];
+        [leftButton setImage:[UIImage imageNamed:@"icon_left.png"]forState:UIControlStateNormal];
     }
     //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
     [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
@@ -221,4 +221,15 @@
 
 - (void)refresh
 { }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.rt_navigationController.rt_viewControllers.count) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    else
+    {
+        self.hidesBottomBarWhenPushed = NO;
+    }
+}
 @end

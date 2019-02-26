@@ -172,7 +172,8 @@
         _totalAssetsMoneyLabel.textAlignment = NSTextAlignmentLeft;
         _totalAssetsMoneyLabel.font = [Color gc_Font:30.0];
         _totalAssetsMoneyLabel.textColor = [Color color:PGColorOptionThemeWhite];
-        //        [_titleLabel sizeToFit];
+        _totalAssetsMoneyLabel.text =@"   ";
+        [_totalAssetsMoneyLabel sizeToFit];
     }
     return _totalAssetsMoneyLabel;
 }
@@ -314,7 +315,7 @@
 - (void)showMyReceipt:(UCFMineMyReceiptModel *)myModel
 {
     if (myModel == nil || ![myModel isKindOfClass:[UCFMineMyReceiptModel class]]) {
-        self.totalAssetsMoneyLabel.text = @"";//总资产
+        self.totalAssetsMoneyLabel.text = @"   ";//总资产
         self.expectedInterestMoneyLabel.text = @"";//总待收利息
         self.accountBalanceMoneyLabel.text = @"";//余额
         [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];

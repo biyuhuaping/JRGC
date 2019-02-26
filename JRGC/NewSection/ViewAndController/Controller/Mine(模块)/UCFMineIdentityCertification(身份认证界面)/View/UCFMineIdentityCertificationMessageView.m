@@ -40,7 +40,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        
         // 初始化视图对象
+        self.rootLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
         [self.rootLayout addSubview:self.titleLabel];
         [self.rootLayout addSubview:self.nameLabel];
         [self.rootLayout addSubview:self.nameContentLabel];
@@ -59,7 +61,7 @@
 {
     if (nil == _titleLabel) {
         _titleLabel = [NZLabel new];
-        _titleLabel.myTop = 25;
+        _titleLabel.myTop = 21;
         _titleLabel.centerXPos.equalTo(self.rootLayout.centerXPos);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.font = [Color gc_Font:18.0];
@@ -74,11 +76,13 @@
 {
     if (nil == _nameLabel) {
         _nameLabel = [NZLabel new];
-        _nameLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(30);
+        _nameLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(26);
         _nameLabel.myLeft = 15;
         _nameLabel.textAlignment = NSTextAlignmentLeft;
         _nameLabel.font = [Color gc_Font:15.0];
         _nameLabel.textColor = [Color color:PGColorOptionTitleGray];
+        _nameLabel.text = @"姓名";
+        [_nameLabel sizeToFit];
     }
     return _nameLabel;
 }
@@ -103,7 +107,7 @@
         _nameLine = [UIView new];
         _nameLine.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         _nameLine.leftPos.equalTo(self.nameLabel.leftPos);
-        _nameLine.rightPos.equalTo(self.nameContentLabel.rightPos);
+        _nameLine.myRight =15;
         _nameLine.topPos.equalTo(self.nameLabel.bottomPos).offset(16);
         _nameLine.myHeight = 0.5;
     }
@@ -119,6 +123,8 @@
         _detailsLabel.textAlignment = NSTextAlignmentLeft;
         _detailsLabel.font = self.nameLabel.font;
         _detailsLabel.textColor = self.nameLabel.textColor;
+        _detailsLabel.text = @"性别";
+        [_detailsLabel sizeToFit];
     }
     return _detailsLabel;
 }
@@ -143,7 +149,7 @@
         _detailsLine = [UIView new];
         _detailsLine.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         _detailsLine.leftPos.equalTo(self.detailsLabel.leftPos);
-        _detailsLine.rightPos.equalTo(self.detailsLabel.rightPos);
+        _detailsLine.rightPos.equalTo(self.nameLine.rightPos);
         _detailsLine.topPos.equalTo(self.detailsLabel.bottomPos).offset(16);
         _detailsLine.myHeight = 0.5;
     }
@@ -159,6 +165,8 @@
         _credentialsLabel.textAlignment = NSTextAlignmentLeft;
         _credentialsLabel.font = self.nameLabel.font;
         _credentialsLabel.textColor = self.nameLabel.textColor;
+        _credentialsLabel.text = @"证件号";
+        [_credentialsLabel sizeToFit];
     }
     return _credentialsLabel;
 }

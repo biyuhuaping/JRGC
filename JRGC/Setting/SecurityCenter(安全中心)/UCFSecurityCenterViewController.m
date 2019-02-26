@@ -45,7 +45,7 @@
 #import "NSString+Misc.h"
 #import "UCFMineMyReceiptApi.h"
 #import "UCFMineMyReceiptModel.h"
-
+#import "UCFMineDimensionCodeViewController.h"
 
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
@@ -91,7 +91,7 @@
         
         UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"idcard_icon" title:@"身份认证" destVcClass:[UCFMineIdentityCertificationViewController class]];
         UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"bind_phone_icon" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
-        UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"gongchang_code_icon" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
+        UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"gongchang_code_icon" title:@"工场码" destVcClass:[UCFMineDimensionCodeViewController class]];
        
         self.userLevel = [UCFSettingArrowItem itemWithIcon:@"membership_level_icon" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
         self.userLevel.isShowOrHide = YES;//不显示
@@ -110,10 +110,16 @@
         }
 
         UCFSettingItem *weijinAccount  = [UCFSettingArrowItem itemWithIcon:@"vjin_account_icon" title:@"微金存管账户" destVcClass:[BindPhoneNumViewController class]];
+        UCFSettingItem *zunxiangAccount  = [UCFSettingArrowItem itemWithIcon:@"zunxiang_account_icon" title:@"尊享存管账户" destVcClass:[BindPhoneNumViewController class]];
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
-        group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount]];
         
-        
+        if (SingleUserInfo.loginData.userInfo.zxIsNew) {
+            group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount]];
+        }
+        else
+        {
+            group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount,zunxiangAccount]];
+        }
         
         UCFSettingGroup *group3 = [[UCFSettingGroup alloc] init];//账户安全
         
@@ -128,40 +134,40 @@
     }
     return _itemsData;
 }
-- (void)requestMyReceipt//请求总资产信息
-{
-    UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
-    
-    request.animatingView = self.view;
-    //    request.tag =tag;
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
-        DDLogDebug(@"---------%@",model);
-        if (model.ret == YES) {
-            
-            UCFSettingItem *weijinAccount  = [UCFSettingArrowItem itemWithIcon:@"vjin_account_icon" title:@"微金存管账户" destVcClass:[BindPhoneNumViewController class]];
-            UCFSettingItem *zunxiangAccount  = [UCFSettingArrowItem itemWithIcon:@"zunxiang_account_icon" title:@"尊享存管账户" destVcClass:[BindPhoneNumViewController class]];
-             UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
-            if (model.data.zxAccountIsShow) {
-                group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount,zunxiangAccount]];
-            }
-            else
-            {
-                group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount]];
-            }
-            [self.itemsData replaceObjectAtIndex:1 withObject:group2];
-            [self.tableview reloadData];
-        }
-        else{
-            ShowMessage(model.message);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        
-    }];
-    
-}
+//- (void)requestMyReceipt//请求总资产信息
+//{
+//    UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
+//
+//    request.animatingView = self.view;
+//    //    request.tag =tag;
+//    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+//        // 你可以直接在这里使用 self
+//        UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
+//        DDLogDebug(@"---------%@",model);
+//        if (model.ret == YES) {
+//
+//            UCFSettingItem *weijinAccount  = [UCFSettingArrowItem itemWithIcon:@"vjin_account_icon" title:@"微金存管账户" destVcClass:[BindPhoneNumViewController class]];
+//            UCFSettingItem *zunxiangAccount  = [UCFSettingArrowItem itemWithIcon:@"zunxiang_account_icon" title:@"尊享存管账户" destVcClass:[BindPhoneNumViewController class]];
+//             UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
+//            if (model.data.zxAccountIsShow) {
+//                group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount,zunxiangAccount]];
+//            }
+//            else
+//            {
+//                group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount]];
+//            }
+//            [self.itemsData replaceObjectAtIndex:1 withObject:group2];
+//            [self.tableview reloadData];
+//        }
+//        else{
+//            ShowMessage(model.message);
+//        }
+//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//        // 你可以直接在这里使用 self
+//
+//    }];
+//
+//}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -508,7 +514,12 @@
     titleLab.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
     if (section == 0) {
         titleLab.text = @"我的信息";
-    }else{
+    }
+    else if (section == 1)
+    {
+        titleLab.text = @"银行存管账户";
+    }
+    else{
         titleLab.text = @"账户安全";
     }
     [headerView addSubview:titleLab];
@@ -831,6 +842,7 @@
                  }
                 else{
                     vc = [[UCFMineIdentityCertificationViewController alloc] init];
+                    vc.isHideNavigationBar = YES;
                     vc.title = arrowItem.title;
                 }
             }
@@ -854,8 +866,9 @@
                 break;
             case 2:{
                 if ([SingleUserInfo.loginData.userLevel integerValue] < 2 && SingleUserInfo.superviseSwitch) {
-                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE],self.sex];
+//                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
+//                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",SingleUserInfo.loginData.userInfo.promotionCode,self.sex];
+                    UCFMineDimensionCodeViewController *subVC = [[UCFMineDimensionCodeViewController alloc] init];
                     vc = subVC;
                 }
                 else {
@@ -885,8 +898,9 @@
                 break;
             case 3:
                 {
-                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE],self.sex];
+//                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
+//                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE],self.sex];
+                    UCFMineDimensionCodeViewController *subVC = [[UCFMineDimensionCodeViewController alloc] init];
                     vc = subVC;
                 }
                 break;
@@ -898,6 +912,12 @@
             
             if ([item.title isEqualToString:@"微金存管账户"]) {
                 //微金存管账户
+                if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] > 0) {
+                    //已经开户
+                }
+                else{
+                    //未开户
+                }
             }
             else
             {

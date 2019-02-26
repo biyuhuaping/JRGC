@@ -31,20 +31,23 @@
     self.rootLayout.backgroundColor = [UIColor whiteColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
-    
+    baseTitleLabel.text = @"我的工场码";
+    baseTitleLabel.textColor = [Color color:PGColorOptionTitleBlack];
     [self.rootLayout addSubview:self.backgroundImageView];
     [self.rootLayout addSubview:self.gcmImageView];
     [self.rootLayout addSubview:self.gcmTitleLabel];
     [self.rootLayout addSubview:self.gcmContentLabel];
+    [self getData];
+    [self addLeftButton];
 }
 - (UIImageView *)backgroundImageView
 {
     if (nil == _backgroundImageView) {
         _backgroundImageView = [[UIImageView alloc] init];
         _backgroundImageView.centerXPos.equalTo(self.rootLayout.centerXPos);
-        _backgroundImageView.myTop = 48;
-        _backgroundImageView.myWidth = 375;
-        _backgroundImageView.myHeight = 530;
+        _backgroundImageView.myTop = 20;
+        _backgroundImageView.myWidth = PGScreenWidth;//530
+        _backgroundImageView.heightSize.equalTo(self.rootLayout.widthSize).multiply(1.41);
         _backgroundImageView.image = [UIImage imageNamed:@"gongchangma_code_bg"];
     }
     return _backgroundImageView;
@@ -54,9 +57,9 @@
     if (nil == _gcmImageView) {
         _gcmImageView = [[UIImageView alloc] init];
         _gcmImageView.centerXPos.equalTo(self.backgroundImageView.centerXPos);
-        _gcmImageView.topPos.equalTo(self.backgroundImageView.topPos).offset(153);
-        _gcmImageView.myWidth = 160;
-        _gcmImageView.myHeight = 160;
+        _gcmImageView.topPos.equalTo(self.backgroundImageView.topPos).offset(PGScreenWidth *1.41 *0.289);
+        _gcmImageView.myWidth = PGScreenWidth*0.424;
+        _gcmImageView.myHeight = PGScreenWidth*0.424;
     }
     return _gcmImageView;
 }
@@ -64,7 +67,7 @@
 {
     if (nil == _gcmTitleLabel) {
         _gcmTitleLabel = [NZLabel new];
-        _gcmTitleLabel.topPos.equalTo(self.gcmImageView.bottomPos).offset(24);
+        _gcmTitleLabel.topPos.equalTo(self.gcmImageView.bottomPos).offset(PGScreenWidth *1.41*0.03);
         _gcmTitleLabel.centerXPos.equalTo(self.gcmImageView.centerXPos);
         _gcmTitleLabel.textAlignment = NSTextAlignmentCenter;
         _gcmTitleLabel.font = [Color gc_Font:15.0];

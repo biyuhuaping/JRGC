@@ -27,8 +27,8 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
     PGColorOpttonRateNoramlTextColor,      //利率字体正常FF4133
     PGColorOpttonRateRedTextColor,         //利率字体提醒 #FFCFB2
     PGColorOpttonSeprateLineColor,         //分割线 #FF7F5B
-    PGColorOpttonTabeleViewBackgroundColor,//tavleviewh背景色 #F5F5F5
-    
+    PGColorOpttonTabeleViewBackgroundColor,//tableviewh背景色 #F5F5F5
+    PGColorOpttonBankCardTextColor,//银行卡字体颜色 #FFE9E5
 };
 
 
