@@ -189,7 +189,7 @@
         [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
         return;
     }else if (textField == _textField2){
-        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus;
+        NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
         
         //机构用户
         if (_isCompanyAgent && ![Common isEnglishAndNumbers:textField.text]) {

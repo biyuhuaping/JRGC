@@ -117,7 +117,7 @@
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             if (SingleUserInfo.loginData.userInfo.userId) {
                 NSString *oepnState =  [resultData objectSafeForKey:@"openStatus"];
-                 SingleUserInfo.loginData.userInfo.openStatus = [oepnState integerValue];
+                 SingleUserInfo.loginData.userInfo.openStatus = oepnState;
                 NSString *zxOpenState = [resultData objectSafeForKey:@"zxOpenStatus"];
                  SingleUserInfo.loginData.userInfo.zxOpenStatus = zxOpenState;
                 NSString *nmGoldAuthorization = [resultData objectSafeForKey:@"nmGoldAuthorization"];

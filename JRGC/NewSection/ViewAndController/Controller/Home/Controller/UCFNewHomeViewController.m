@@ -97,6 +97,22 @@
 }
 - (void)fetchData
 {
+//<<<<<<< HEAD
+//=======
+//    self.dataArray = [NSMutableArray arrayWithCapacity:10];
+//    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] >= 4 && SingleUserInfo.loginData.userInfo.isRisk) {
+//        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"" showInfoMethod:nil heightOfCell:140];
+//        NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
+//        [section1 addObject:data1];
+//        [self.dataArray addObject:section1];
+//    } else {
+//        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:185];
+//        NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
+//        [section1 addObject:data1];
+//        [self.dataArray addObject:section1];
+//    }
+//    CellConfig *data2_0 = [CellConfig cellConfigWithClassName:@"UCFNewUserBidCell" title:@"新手专享" showInfoMethod:nil heightOfCell:150];
+//>>>>>>> ace59cd3a2c2da0baaa1ead4d8d10ecf32b8688a
     
     [self.homeListViewModel fetchNetData];
     [self.bannerViewModel fetchNetData];

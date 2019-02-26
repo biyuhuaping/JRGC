@@ -330,7 +330,7 @@
         UINavigationController *nav = app.tabBarController.selectedViewController;
         [nav pushViewController:web animated:YES];
     } else if ([dic[@"type"] isEqualToString:@"bidID"]){
-        if (SingleUserInfo.loginData.userInfo.openStatus > 3) {
+        if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] > 3) {
             UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
 //            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, dic[@"value"]];
             facReservedWeb.navTitle = @"工场预约";
@@ -903,7 +903,7 @@
 -(void)gotoGoldInvestVC:(UCFHomeListCellModel *)model{
     
     NSString *tipStr1 = ZXTIP1;
-    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
+    NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
     NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     if ( enjoyOpenStatus < 3  && openStatus < 3) {
         [self showHSAlert:tipStr1];
@@ -962,8 +962,8 @@
 -(void)gotoGoldDetailVC:(UCFHomeListCellModel *)model{
     
     NSString *tipStr1 = ZXTIP1;
-    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus ;
-    NSInteger enjoyOpenStatus = SingleUserInfo.loginData.userInfo.zxOpenStatus;
+    NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
+    NSInteger enjoyOpenStatus = [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     if ( enjoyOpenStatus < 3  && openStatus < 3) {
         [self showHSAlert:tipStr1];
         return;
@@ -1273,7 +1273,7 @@
     NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
     NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
     
-    NSInteger openStatus = accout == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus :[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
@@ -1317,7 +1317,7 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
         }
     }else if (alertView.tag == 8010) {
         if (buttonIndex == 1) {
@@ -1344,7 +1344,7 @@
     } else if (alertView.tag == 8000) {
         if (index == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
         }
     }else if (alertView.tag == 8010) {
         if (index == 1) {

@@ -25,6 +25,14 @@
 
 #import "UCFSecurityCenterViewController.h"
 
+
+
+
+
+
+
+#import "UCFLoginViewController.h"
+#import "BaseNavigationViewController.h"
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -34,8 +42,6 @@
 @property (nonatomic, strong) NSMutableArray *arryData;
 
 @property (nonatomic, strong) NSMutableArray *cellConfigData;
-
-@property (nonatomic, strong) UCFMineMyReceiptModel *myReceiptModel;
 
 @end
 
@@ -52,13 +58,23 @@
     [self.rootLayout addSubview:self.tableView];
  
     [self loadCellConfig];
-//    [self requestMyReceipt];
-    
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if (SingleUserInfo.loginData == nil) {
+        [SingleUserInfo loadLoginViewController];
+//        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+//        BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
+//        loginViewController.sourceVC = @"homePage";
+//        [self presentViewController:loginNaviController animated:YES completion:nil];
+    }
+    else
+    {
+        [self requestMyReceipt];
+        [self requestMySimpleInfo];
+    }
 }
 - (BaseTableView *)tableView
 {
@@ -230,9 +246,9 @@
         // 你可以直接在这里使用 self
         UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",model);
-        if (self.myReceiptModel.ret == YES) {
+        if (model.ret == YES) {
             
-           
+           [self setTableViewArrayWithData:model];
         }
         else{
             ShowMessage(model.message);
@@ -252,13 +268,13 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
         UCFMineMySimpleInfoModel *model = [request.responseJSONModel copy];
-        DDLogDebug(@"---------%@",self.myReceiptModel);
+        DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
             
-            
+            [self setTableViewArrayWithData:model];
         }
         else{
-            ShowMessage(self.myReceiptModel.message);
+            ShowMessage(model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -371,33 +387,33 @@
 //账户是否展示
 - (void)getAccountCellConfig:(UCFMineMyReceiptModel  *)model
 {
-    NSMutableArray  *accountArray = [NSMutableArray arrayWithArray:[self getCellAccountArrayData]];
+    NSMutableArray  *accountCellConfigArray = [NSMutableArray arrayWithArray:[self loadingAccountCellConfig]];
     NSMutableArray  *accountCellData = [NSMutableArray arrayWithArray:[self getCellAccountArrayData]];
     
     if (model.data.zxAccountIsShow)//尊享账户是否显示
     {
         //尊享账户是否显示
         CellConfig *cellConfigRespect = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineItemCell class]) title:@"尊享项目" showInfoMethod:@selector(showInfo:) heightOfCell:50];
-        [accountArray insertObject:cellConfigRespect atIndex:accountArray.count -2];
+        [accountCellConfigArray insertObject:cellConfigRespect atIndex:accountCellConfigArray.count -2];
         
         UCFMineCellAccountModel *cellAccountRespect = [[UCFMineCellAccountModel alloc]init];//尊享项目
         cellAccountRespect.cellAccountTitle = @"尊享项目";
         cellAccountRespect.cellAccountImage = @"mine_icon_gold.png";
-        [accountCellData insertObject:cellConfigRespect atIndex:accountArray.count -2];
+        [accountCellData insertObject:cellConfigRespect atIndex:accountCellData.count -2];
     }
     if (model.data.nmAccountIsShow) {
         //黄金账户是否显示
         CellConfig *cellConfigGold = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineItemCell class]) title:@"持有黄金" showInfoMethod:@selector(showInfo:) heightOfCell:50];
-        [accountArray insertObject:cellConfigGold atIndex:accountArray.count -2];
+        [accountCellConfigArray insertObject:cellConfigGold atIndex:accountCellConfigArray.count -2];
        
         UCFMineCellAccountModel *cellAccountGold = [[UCFMineCellAccountModel alloc]init];//持有黄金
         cellAccountGold.cellAccountTitle = @"持有黄金";
         cellAccountGold.cellAccountImage = @"mine_icon_respect.png";
-        [accountCellData insertObject:cellAccountGold atIndex:accountArray.count -2];
+        [accountCellData insertObject:cellAccountGold atIndex:accountCellData.count -2];
     }
     //新的数据直接替换第二组内容
-    [self.cellConfigData replaceObjectAtIndex:1 withObject:[NSArray arrayWithObjects:[accountArray copy], nil]];
-    [self.arryData replaceObjectAtIndex:1 withObject:[NSArray arrayWithObjects:[accountCellData copy], nil]];
+    [self.cellConfigData replaceObjectAtIndex:1 withObject:[accountCellConfigArray copy]];
+    [self.arryData replaceObjectAtIndex:1 withObject:[accountCellData copy]];
 }
 
 

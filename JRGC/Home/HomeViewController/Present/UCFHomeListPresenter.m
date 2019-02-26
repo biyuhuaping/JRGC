@@ -159,11 +159,11 @@
 
 #pragma mark - 无奈的代码
 - (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type {
-    NSUInteger openStatus = (type == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus  : [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue]);
+    NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]  : [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue]);
     __weak typeof(self) weakSelf = self;
     if (openStatus == 1 || openStatus == 2) {
         NSString *message = (type == SelectAccoutTypeP2P ? P2PTIP1 : ZXTIP1);
-        NSInteger step = (type == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus  : [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue]);
+        NSInteger step = (type == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue] : [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue]);
         BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
             if (index == 1) {
                 HSHelper *helper = [HSHelper new];
@@ -378,9 +378,9 @@
         SingleUserInfo.loginData.userInfo.isRisk = [[result objectSafeForKey:@"isRisk"] boolValue];
         SingleUserInfo.loginData.userInfo.isAutoBid = [[result objectSafeForKey:@"isAutoBid"] boolValue];
         SingleUserInfo.loginData.userInfo.goldAuthorization = [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
-        SingleUserInfo.loginData.userInfo.openStatus = [[result objectSafeForKey:@"openStatus"] integerValue];
+        SingleUserInfo.loginData.userInfo.openStatus = [result objectSafeForKey:@"openStatus"];
         SingleUserInfo.loginData.userInfo.zxOpenStatus = [result objectSafeForKey:@"zxOpenStatus"] ;
-        SingleUserInfo.loginData.userInfo.zxAuthorization = [result objectSafeForKey:@"zxAuthorization"];
+        SingleUserInfo.loginData.userInfo.zxAuthorization = [[result objectSafeForKey:@"zxAuthorization"] boolValue];
         
 //        [UserInfoSingle sharedManager].p2pAuthorization = [[result objectSafeForKey:@"p2pAuthorization"] boolValue];
         [SingleUserInfo setUserData:SingleUserInfo.loginData];

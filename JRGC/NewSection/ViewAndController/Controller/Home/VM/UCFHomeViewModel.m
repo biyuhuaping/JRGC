@@ -18,7 +18,7 @@
             NSDictionary *dic = request.responseObject;
             NSDictionary *userDict = dic[@"data"][@"userSatus"];
             SingleUserInfo.loginData.userInfo.zxOpenStatus = [NSString stringWithFormat:@"%@",userDict[@"zxOpenStatus"]];
-            SingleUserInfo.loginData.userInfo.openStatus = [userDict[@"openStatus"] intValue];
+            SingleUserInfo.loginData.userInfo.openStatus = [NSString stringWithFormat:@"%@",userDict[@"openStatus"]];
             SingleUserInfo.loginData.userInfo.nmAuthorization = [userDict[@"nmGoldAuthStatus"] boolValue];
             SingleUserInfo.loginData.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
             SingleUserInfo.loginData.userInfo.isRisk = [userDict[@"isRisk"] boolValue];

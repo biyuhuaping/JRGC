@@ -177,7 +177,7 @@
               riskAssessment= [UCFSettingArrowItem itemWithIcon:nil title:@"尊享风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }else{
             myInVest.title  = [UserInfoSingle sharedManager].isSubmitTime ? @"我的购买": @"我的出借";
-            if (SingleUserInfo.loginData.userInfo.openStatus == 4) {
+            if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 4) {
                 setChangePassword.title = @"修改交易密码";
             }else{
                 setChangePassword.title = @"设置交易密码";
@@ -546,7 +546,7 @@
     
     if( [self checkIDAAndBankBlindState:self.accoutType]){ //判断是否设置交易密码
         [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-        NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)SingleUserInfo.loginData.userInfo.openStatus];
+        NSString *userSatues = [NSString stringWithFormat:@"%@",SingleUserInfo.loginData.userInfo.openStatus];
         NSDictionary *parametersDict =  @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"userSatues":userSatues};
         [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
     }

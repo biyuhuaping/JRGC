@@ -21,48 +21,57 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL ret;
 
+@property (nonatomic, assign) NSInteger ver;
+
 @end
+
 @interface UCFLoginData : BaseModel
 
 @property (nonatomic, strong) UCFLoginUserinfo *userInfo;
 
 @property (nonatomic, copy) NSString *userLevel;
 
+@property (nonatomic, copy) NSString *imei;
+
 @end
 
 @interface UCFLoginUserinfo : BaseModel
-////用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
-@property(nonatomic, assign) NSInteger  openStatus;
 
-@property (nonatomic, assign) BOOL isCompanyAgent;
+//@property(nonatomic, assign) NSInteger  openStatus;//用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+@property (nonatomic, copy) NSString *openStatus;//用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
 
-@property (nonatomic, copy) NSString *loginName;
+@property (nonatomic, assign) BOOL isCompanyAgent;//是否是机构
 
-@property (nonatomic, copy) NSString *headerUrl;
+@property (nonatomic, copy) NSString *loginName; //登录名
 
-@property (nonatomic, assign) BOOL isSpecial;
+@property (nonatomic, copy) NSString *headerUrl;//头像地址
 
-@property (nonatomic, copy) NSString *mobile;
+@property (nonatomic, assign) BOOL isSpecial;//是否特殊用户
 
-@property (nonatomic, assign) BOOL p2pAuthorization;
+@property (nonatomic, copy) NSString *mobile;//手机号
 
-@property (nonatomic, copy) NSString *realName;
+@property (nonatomic, assign) BOOL p2pAuthorization;//P2P是否授权 true 已经授权    boolean
 
-@property (nonatomic, assign) long long time;
+@property (nonatomic, copy) NSString *realName;//真实姓名
 
-@property (nonatomic, copy) NSString *zxOpenStatus;
+@property (nonatomic, assign) long long time; //客户端登录时间戳
 
-@property (nonatomic, copy) NSString *jg_ckie;
+@property (nonatomic, copy) NSString *zxOpenStatus;//zxOpenStatus    尊享开户状态    string    1：未开户 2：已开户 3：已绑卡 4：已设交易密
 
-@property (nonatomic, copy) NSString *promotionCode;
+@property (nonatomic, copy) NSString *jg_ckie;//免登陆cookie
 
-@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *promotionCode;//工场码
 
-@property (nonatomic, copy) NSString *zxAuthorization;
+@property (nonatomic, copy) NSString *userId; //用户ID
 
-@property (nonatomic, copy) NSString *gender;
+//@property (nonatomic, copy) NSString *zxAuthorization;//尊享是否授权 true 已经授权    object
+@property (nonatomic, assign) BOOL zxAuthorization;//尊享是否授权 true 已经授权
 
-@property (nonatomic, assign) BOOL nmAuthorization;
+@property (nonatomic, copy) NSString *gender;//性别
+
+@property (nonatomic, copy) NSString *checkId;
+
+@property (nonatomic, assign) BOOL nmAuthorization; //黄金账户是否已经授权（新）    boolean    true：是；false:否
 
 @property(nonatomic, assign) BOOL isRisk;       //是否风险评估
 
@@ -74,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign) BOOL zxIsNew; //是否尊享新手
 
-@property(nonatomic, assign)BOOL goldIsShow;
+@property(nonatomic, assign)BOOL goldIsShow; //是否展示黄金
 
 @property(nonatomic, assign)BOOL transferIsShow;
 

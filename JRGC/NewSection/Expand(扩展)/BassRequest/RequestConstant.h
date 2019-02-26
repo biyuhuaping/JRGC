@@ -33,8 +33,7 @@ static NSString *IntoCoinPageApiURL = @"api/coin/v2/intoCoinPage.json"; // 进�
 
 static NSString *GetWithdrawInfoApiURL = @"api/withdraw/v2/getWithdrawInfo.json";   //提现新接口
 
-
-
+static NSString *IdnoCheckInfoApiURL = @"api/userInfo/v2/idnoCheckInfo.json";   //获取用户身份认证信息
 
 
 

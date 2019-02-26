@@ -152,7 +152,7 @@
     NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
     NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
     
-    NSInteger openStatus = accout == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus :[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
@@ -190,7 +190,7 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
         }
     }
     if (alertView.tag == 8010) {
@@ -288,7 +288,7 @@
             if (SingleUserInfo.loginData.userInfo.userId) {
                 NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
                 NSString *enjoyOpenStatus =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"zxOpenStatus"];
-                SingleUserInfo.loginData.userInfo.openStatus = [oepnState integerValue];
+                SingleUserInfo.loginData.userInfo.openStatus = oepnState;
                 SingleUserInfo.loginData.userInfo.zxOpenStatus = enjoyOpenStatus ;
                 [SingleUserInfo setUserData:SingleUserInfo.loginData];
             }

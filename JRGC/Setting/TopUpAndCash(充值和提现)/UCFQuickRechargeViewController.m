@@ -84,7 +84,7 @@
 - (void)quickRechargeHeadView:(QuickRechargeHeadView *)view rechargeButtonClick:(UIButton *)button
 {
 //    fff
-    if ( self.accoutType == SelectAccoutTypeP2P &&  SingleUserInfo.loginData.userInfo.openStatus == 3 && [self checkOrderIsLegitimate]) {
+    if ( self.accoutType == SelectAccoutTypeP2P &&  [SingleUserInfo.loginData.userInfo.openStatus integerValue] == 3 && [self checkOrderIsLegitimate]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP2 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag =  8000;
         [alert show];
@@ -187,7 +187,7 @@
             fee = [NSString stringWithFormat:@"%@",dic[@"data"][@"fee"]];
             if (self.accoutType == SelectAccoutTypeP2P)
             {
-                SingleUserInfo.loginData.userInfo.openStatus = [[coreDict objectSafeForKey:@"openStatus"] integerValue];
+                SingleUserInfo.loginData.userInfo.openStatus = [coreDict objectSafeForKey:@"openStatus"] ;
             }
             NSString *bankPhone =  [dic[@"data"][@"bankInfo"] objectSafeForKey:@"bankPhone"];
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
@@ -279,7 +279,7 @@
     }else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:self.accoutType Step:SingleUserInfo.loginData.userInfo.openStatus nav: ((UIViewController *)self.rootVc).navigationController];
+            [helper pushOpenHSType:self.accoutType Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav: ((UIViewController *)self.rootVc).navigationController];
         }
     }else {
         if (buttonIndex == 1) {

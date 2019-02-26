@@ -16,7 +16,7 @@
 //#import "BindBankCardViewController.h"
 #import "BindPhoneNumViewController.h"
 #import "ModifyPasswordViewController.h"
-#import "UCFModifyIdAuthViewController.h"
+#import "UCFMineIdentityCertificationViewController.h"
 #import "UCFBankCardInfoViewController.h"
 #import "UCFModifyPhoneViewController.h"
 #import "AppDelegate.h"
@@ -45,6 +45,8 @@
 #import "NSString+Misc.h"
 #import "UCFMineMyReceiptApi.h"
 #import "UCFMineMyReceiptModel.h"
+
+
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -87,7 +89,7 @@
 {
     if (_itemsData == nil) {
         
-        UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"idcard_icon" title:@"身份认证" destVcClass:[UCFModifyIdAuthViewController class]];
+        UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"idcard_icon" title:@"身份认证" destVcClass:[UCFMineIdentityCertificationViewController class]];
         UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"bind_phone_icon" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
         UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"gongchang_code_icon" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
        
@@ -97,7 +99,7 @@
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"gesture_account_icon" title:@"启用手势密码"];
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"password_account_icon" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
 
-        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
+//        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
         
         if (SingleUserInfo.superviseSwitch && [SingleUserInfo.loginData.userLevel integerValue] < 2) {
@@ -117,9 +119,9 @@
         
         if ([self checkTouchIdIsOpen]) {
             UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"fingerprint_account_icon" title:@"启用指纹解锁" withSwitchType:1];
-             group3.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith,modifyPassword,moreVc]];
+             group3.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith,modifyPassword]];
         } else {
-             group3.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,modifyPassword,moreVc]];
+             group3.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,modifyPassword]];
 
         }
         _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,group3,nil];
@@ -138,7 +140,18 @@
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
             
-            
+            UCFSettingItem *weijinAccount  = [UCFSettingArrowItem itemWithIcon:@"vjin_account_icon" title:@"微金存管账户" destVcClass:[BindPhoneNumViewController class]];
+            UCFSettingItem *zunxiangAccount  = [UCFSettingArrowItem itemWithIcon:@"zunxiang_account_icon" title:@"尊享存管账户" destVcClass:[BindPhoneNumViewController class]];
+             UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
+            if (model.data.zxAccountIsShow) {
+                group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount,zunxiangAccount]];
+            }
+            else
+            {
+                group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount]];
+            }
+            [self.itemsData replaceObjectAtIndex:1 withObject:group2];
+            [self.tableview reloadData];
         }
         else{
             ShowMessage(model.message);
@@ -209,7 +222,7 @@
     
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
     _userLevelImage = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth - 63, 9, 25, 25)];
-    if (SingleUserInfo.loginData.userInfo.openStatus == 4) {
+    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 4) {
         _setChangePassword.title = @"修改交易密码";
     } else {
         _setChangePassword.title = @"设置交易密码";
@@ -262,7 +275,7 @@
     }else if(alertView.tag == 10005){
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
         }
     }else if(alertView.tag == 10003){
         if (buttonIndex == 1) {
@@ -358,7 +371,7 @@
 //                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
 //            }
             
-            if (SingleUserInfo.loginData.userInfo.openStatus == 4) {
+            if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 4) {
                 _setChangePassword.title = @"修改交易密码";
             }else{
                 _setChangePassword.title = @"设置交易密码";
@@ -780,7 +793,7 @@
     UCFSettingGroup *group = self.itemsData[indexPath.section];
     UCFSettingItem *item = group.items[indexPath.row];
     
-    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus;
+    NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
 
     if (item.option) { // block有值(点击这个cell,.有特定的操作需要执行)
         item.option();
@@ -817,7 +830,7 @@
                      }
                  }
                 else{
-                    vc = [[UCFModifyIdAuthViewController alloc] init];
+                    vc = [[UCFMineIdentityCertificationViewController alloc] init];
                     vc.title = arrowItem.title;
                 }
             }
@@ -857,7 +870,7 @@
                     }
                     else{
                         
-                        NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus;
+                        NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
                         if(openStatus < 3){
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                             alert.tag = 10005;
@@ -881,7 +894,17 @@
           }
             [self.navigationController pushViewController:vc  animated:YES];
         }
-        if (indexPath.section == 1) {
+        if (indexPath.section == 1){
+            
+            if ([item.title isEqualToString:@"微金存管账户"]) {
+                //微金存管账户
+            }
+            else
+            {
+                //尊享存管账户
+            }
+        }
+        if (indexPath.section == 2) {
             
             if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"ModifyPasswordViewController"]){//修改登录密码
                 ModifyPasswordViewController * modifyPasswordVC = [[ModifyPasswordViewController alloc]initWithNibName:@"ModifyPasswordViewController" bundle:nil];
@@ -914,7 +937,7 @@
     }
 }
 - (BOOL) checkHSIsLegitimate {
-    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus;
+    NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
     if(openStatus < 3){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 10005;

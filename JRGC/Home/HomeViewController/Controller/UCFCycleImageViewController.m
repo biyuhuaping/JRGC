@@ -338,7 +338,7 @@ static NSString *cellId = @"iconCell";
     NSString *tipStr1 = baseVC.accoutType == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
     NSString *tipStr2 = baseVC.accoutType == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
     
-    NSInteger openStatus = baseVC.accoutType == SelectAccoutTypeP2P ? SingleUserInfo.loginData.userInfo.openStatus :[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+    NSInteger openStatus = baseVC.accoutType == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
