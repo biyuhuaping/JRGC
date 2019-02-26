@@ -8,18 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum : NSUInteger {
-    UCFHomeListCellModelTypeDefault,
-    UCFHomeListCellModelTypeReserved,
-    UCFHomeListCellModelTypeAI,
-    UCFHomeListCellModelTypeBatch,
-    UCFHomeListCellModelTypeGoldFixed,
-    UCFHomeListCellModelTypeNewUser,
-    UCFHomeListCellModelTypeDebtsTransfer,
-    UCFHomeListCellModelTypeOneImageBatchLending,
-    UCFHomeListCellModelTypeOneImageTransfer,
-    UCFHomeListCellModelTypeOneImageBatchCycle,
-} UCFHomeListCellModelType;
+
 
 @interface UCFHomeListCellModel : NSObject
 @property (nonatomic, copy) NSString *annualRate;

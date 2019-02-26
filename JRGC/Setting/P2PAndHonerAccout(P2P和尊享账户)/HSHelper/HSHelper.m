@@ -18,7 +18,7 @@
 
 -(NSString *)checkCompanyIsOpen:(SelectAccoutType)accoutType{
      NSString *messageStr = @"";
-    if ([[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]) {//企业老用户
+    if (SingleUserInfo.loginData.userInfo.isCompanyAgent) {//企业老用户
    
       if (accoutType == SelectAccoutTypeHoner) {
         

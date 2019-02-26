@@ -105,6 +105,29 @@ typedef NS_ENUM(NSInteger, SelectAccoutType) {
     SelectAccoutTypeHoner, //尊享账户
     SelectAccoutTypeGold,//黄金账户
 };
+typedef enum : NSUInteger {
+    UCFHomeListTypeP2PMore,
+    UCFHomeListTypeZXMore,
+    UCFHomeListTypeGlodMore,
+    UCFHomeListTypeDebtsMore,
+    UCFHomeListTypeDetail,
+    UCFHomeListTypeInvest,
+    UCFHomeListTypeIntelligentLoan,//智能出借
+    UCFHomeListTypeQualityClaims,//优质债权
+} UCFHomeListType;
+
+typedef enum : NSUInteger {
+    UCFHomeListCellModelTypeDefault,
+    UCFHomeListCellModelTypeReserved,
+    UCFHomeListCellModelTypeAI,
+    UCFHomeListCellModelTypeBatch,
+    UCFHomeListCellModelTypeGoldFixed,
+    UCFHomeListCellModelTypeNewUser,
+    UCFHomeListCellModelTypeDebtsTransfer,
+    UCFHomeListCellModelTypeOneImageBatchLending,
+    UCFHomeListCellModelTypeOneImageTransfer,
+    UCFHomeListCellModelTypeOneImageBatchCycle,
+} UCFHomeListCellModelType;
 
 #define GUIDE_OPEN @"1"
 #define OCRSerVer @"http://58.17.246.116:5005/icr/recognize_id_card?encoding=UTF8&head_portrait=0&crop_image=0"

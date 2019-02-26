@@ -17,14 +17,17 @@
 - (id)initWithUserId:(NSString *)userId
 {
     if (self = [super init]) {
-        self.userID = userId;
     }
     return self;
 }
 - (NSString *)requestUrl {
-    return P2PINVESTMODULEURL;
+    return @"api/publicMsg/v2/indexPage.json";
 }
 - (id)requestArgument {
-    return nil;
+    return @{};
+}
+- (NSString *)modelClass
+{
+    return @"UCFNewHomeListModel";
 }
 @end
