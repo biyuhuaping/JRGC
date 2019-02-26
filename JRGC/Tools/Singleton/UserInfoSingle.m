@@ -118,6 +118,7 @@
 - (void)deleteUserData{
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LOGINDATA];
     self.signatureStr = @"";
+    self.loginData.userInfo = [UCFLoginData new];
 }
 
 

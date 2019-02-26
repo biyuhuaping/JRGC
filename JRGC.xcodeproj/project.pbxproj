@@ -127,7 +127,6 @@
 		33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */; };
 		33E1A5E220FDC5A9008244BD /* UCFRedBagViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33E1A5DE20FDC5A8008244BD /* UCFRedBagViewController.xib */; };
 		33E3032221F1800700FD657C /* UCFHomeBannerApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3032121F1800700FD657C /* UCFHomeBannerApi.m */; };
-		33E3032521F182C300FD657C /* UCFBannerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3032421F182C300FD657C /* UCFBannerViewModel.m */; };
 		33E3032821F182FD00FD657C /* BaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3032721F182FD00FD657C /* BaseViewModel.m */; };
 		33E3032D21F1866500FD657C /* UCFNewBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3032C21F1866500FD657C /* UCFNewBannerModel.m */; };
 		33E3033021F1E00A00FD657C /* UCFOldUserNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3032F21F1E00A00FD657C /* UCFOldUserNoticeCell.m */; };
@@ -1474,8 +1473,6 @@
 		33E1A5DE20FDC5A8008244BD /* UCFRedBagViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRedBagViewController.xib; sourceTree = "<group>"; };
 		33E3032021F1800700FD657C /* UCFHomeBannerApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHomeBannerApi.h; sourceTree = "<group>"; };
 		33E3032121F1800700FD657C /* UCFHomeBannerApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeBannerApi.m; sourceTree = "<group>"; };
-		33E3032321F182C300FD657C /* UCFBannerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBannerViewModel.h; sourceTree = "<group>"; };
-		33E3032421F182C300FD657C /* UCFBannerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBannerViewModel.m; sourceTree = "<group>"; };
 		33E3032621F182FD00FD657C /* BaseViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewModel.h; sourceTree = "<group>"; };
 		33E3032721F182FD00FD657C /* BaseViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewModel.m; sourceTree = "<group>"; };
 		33E3032B21F1866500FD657C /* UCFNewBannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewBannerModel.h; sourceTree = "<group>"; };
@@ -3692,8 +3689,6 @@
 			children = (
 				334790C321E82F28005131A5 /* UCFHomeViewModel.h */,
 				334790C421E82F28005131A5 /* UCFHomeViewModel.m */,
-				33E3032321F182C300FD657C /* UCFBannerViewModel.h */,
-				33E3032421F182C300FD657C /* UCFBannerViewModel.m */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -9879,7 +9874,6 @@
 				74270D481EC5967B00F9419B /* UCFRegistrationRecord.m in Sources */,
 				7BD588031B098E12005091D3 /* UCFNoPermissionViewController.m in Sources */,
 				74931A061B13267600143424 /* NZLabel.m in Sources */,
-				33E3032521F182C300FD657C /* UCFBannerViewModel.m in Sources */,
 				FBB685831AE4A76800F222B6 /* MJRefreshFooter.m in Sources */,
 				E3C1179E1D40CFCC0053A052 /* UCFContributionValueViewController.m in Sources */,
 				4A2966511BEC830A001FCD5F /* PraiseAlert.m in Sources */,

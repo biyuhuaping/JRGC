@@ -18,10 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)NSArray *modelListArray;
 
+@property(nonatomic, strong)NSArray *imagesArr;
+
+@property(nonatomic, copy)  NSString    *siteNoticeStr;
+
+@property(nonatomic, weak) UIViewController *rootViewController;
 
 - (void)fetchNetData;
 
-
+- (void)cycleViewSelectIndex:(NSInteger)index;
 
 @end
 

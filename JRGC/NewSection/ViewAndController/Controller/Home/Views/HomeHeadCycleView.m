@@ -9,12 +9,12 @@
 #import "HomeHeadCycleView.h"
 
 @interface HomeHeadCycleView()<RCFFlowViewDelegate>
-@property(nonatomic, weak)UCFBannerViewModel *VM;
+@property(nonatomic, weak)UCFHomeViewModel *VM;
 @end
 
 @implementation HomeHeadCycleView
 
-- (void)showView:(UCFBannerViewModel *)viewModel
+- (void)showView:(UCFHomeViewModel *)viewModel
 {
     self.VM = viewModel;
     @PGWeakObj(self);

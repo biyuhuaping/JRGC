@@ -69,6 +69,10 @@
     }
     return self;
 }
+- (void)reflectDataModel:(id)dataModel
+{
+    self.notiView.titleLab.text = (NSString *)dataModel;
+}
 - (NSInteger)numberOfListView:(UCFShopHListView *)shopListView
 {
     return 4;

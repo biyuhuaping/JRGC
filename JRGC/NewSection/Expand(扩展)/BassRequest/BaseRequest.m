@@ -43,37 +43,37 @@
  *
  *  完成回调前先进行的方法
  */
-//- (void)requestCompleteFilter
-//{
-//    NSDictionary *responseObject = [self.responseObject copy];
-//     NSString* codeStr =  [NSString stringWithFormat:@"%@",responseObject[@"code"]];
-//
-//
-//    if ([codeStr isEqualToString:@"-5"])
-//    {
-//        //强制更新,去查询版本信息，获取强更的标题和内容
+- (void)requestCompleteFilter
+{
+    NSDictionary *responseObject = [self.responseObject copy];
+     NSString* codeStr =  [NSString stringWithFormat:@"%@",responseObject[@"code"]];
+
+
+    if ([codeStr isEqualToString:@"-5"])
+    {
+        //强制更新,去查询版本信息，获取强更的标题和内容
 //        [VersionCheek cheekVersion];
-//    }
-//    if ([codeStr isEqualToString:@"100008"] )
-//    {
-//        //账号被挤掉
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//
-//            // dispatch_sync:表示执行同步任务
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//
-//                if (SingShare.rtNav.rt_viewControllers.firstObject == SingShare.rtNav.rt_viewControllers.lastObject) {
-//                    [UserObeject loginOutWith];
-//                    ShowMessage(responseObject[@"message"]);
-//                }
-//
-//            });
-//
-//        });
-//        return;
-//    }
-//
-//}
+        [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
+
+    }
+    if ([codeStr isEqualToString:@"-2"] || [codeStr isEqualToString:@"-3"] || [codeStr isEqualToString:@"-4"] || [codeStr isEqualToString:@"-6"] )
+    {
+        //账号被挤掉
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+            // dispatch_sync:表示执行同步任务
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SingleUserInfo deleteUserData];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:responseObject[@"message"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新登录", nil];
+                alertView.tag = 0x100;
+                [alertView show];
+            });
+
+        });
+        return;
+    }
+
+}
 //
 //- (void)requestFailedPreprocessor
 //{
