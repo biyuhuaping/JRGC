@@ -7,11 +7,21 @@
 //
 
 #import "UCFNewBaseViewController.h"
+#import "UCFNewHomeListModel.h"
+typedef enum : NSUInteger {
+    
+    UCFNewHomeListTypeDetail,
+    UCFNewHomeListTypeInvest,
+
+} UCFNewHomeListType;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewHomeViewController : UCFNewBaseViewController
 - (void)userGuideCellClickButton:(UIButton *)button;
+
+- (void)homeViewDataBidClickModel:(UCFNewHomeListModel *)model type:(UCFNewHomeListType)type;
+
 @end
 
 NS_ASSUME_NONNULL_END

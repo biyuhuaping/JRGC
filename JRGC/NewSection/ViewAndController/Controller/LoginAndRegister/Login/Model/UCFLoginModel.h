@@ -81,6 +81,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL wjIsShow;
 
 @property(nonatomic, assign)BOOL zxIsShow;
+
+/**
+ 是否新手
+ */
+@property(nonatomic, assign)BOOL isNewUser;
 @end
 
 NS_ASSUME_NONNULL_END

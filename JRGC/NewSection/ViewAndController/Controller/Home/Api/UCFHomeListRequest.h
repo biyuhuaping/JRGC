@@ -7,6 +7,7 @@
 //
 
 #import "BaseRequest.h"
+#import "UCFNewHomeListModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

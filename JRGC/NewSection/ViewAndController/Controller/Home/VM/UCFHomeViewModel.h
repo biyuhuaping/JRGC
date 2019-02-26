@@ -7,10 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "UCFHomeListRequest.h"
+#import "UCFUserAllStatueRequest.h"
+#import "CellConfig.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFHomeViewModel : NSObject
+
+@property(nonatomic, weak)UIView    *loaingSuperView;
+
+@property(nonatomic, strong)NSArray *modelListArray;
+
+
+- (void)fetchNetData;
+
+
 
 @end
 

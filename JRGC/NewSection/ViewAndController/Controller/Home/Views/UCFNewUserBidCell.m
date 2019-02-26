@@ -8,6 +8,15 @@
 
 #import "UCFNewUserBidCell.h"
 #import "UIButton+Gradient.h"
+#import "UCFNewHomeListModel.h"
+@interface UCFNewUserBidCell()
+
+@property(nonatomic, strong)UILabel *termValueLab;
+@property(nonatomic, strong)UILabel *rateValueLab;
+@property(nonatomic, strong)UILabel *repayModelValueLab;
+@property(nonatomic, weak)  UCFNewHomeListPrdlist *dataModel;
+@end
+
 @implementation UCFNewUserBidCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -20,7 +29,7 @@
         whitBaseView.leftPos.equalTo(@15);
         whitBaseView.rightPos.equalTo(@15);
         whitBaseView.topPos.equalTo(@0);
-        whitBaseView.bottomPos.equalTo(@0);
+        whitBaseView.bottomPos.equalTo(@15);
         whitBaseView.backgroundColor = [UIColor whiteColor];
         whitBaseView.layer.cornerRadius = 5.0f;
         [self.rootLayout addSubview:whitBaseView];
@@ -32,7 +41,7 @@
         button.heightSize.equalTo(@40);
         [button setBackgroundColor:[UIColor blueColor]];
         button.clipsToBounds = YES;
-        [self.rootLayout addSubview:button];
+        [whitBaseView addSubview:button];
         [button setTitle:@"立即出借" forState:UIControlStateNormal];
         button.titleLabel.font = [Color gc_Font:16];
         [button setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
@@ -41,6 +50,7 @@
             UIImage *image = [(UIButton *)v buttonImageFromColors:colorArray ByGradientType:leftToRight];
             [(UIButton *)v setBackgroundImage:image forState:UIControlStateNormal];
         }];
+        [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UILabel *termMarkLab = [[UILabel alloc] init];
         termMarkLab.text = @"出借期限";
@@ -49,15 +59,16 @@
         [termMarkLab sizeToFit];
         termMarkLab.leftPos.equalTo(button.leftPos);
         termMarkLab.bottomPos.equalTo(button.topPos).offset(20);
-        [self.rootLayout addSubview:termMarkLab];
+        [whitBaseView addSubview:termMarkLab];
         
         UILabel *termValueLab = [[UILabel alloc] init];
         termValueLab.text = @"30天";
         termValueLab.bottomPos.equalTo(termMarkLab.topPos).offset(3);
         termValueLab.centerXPos.equalTo(termMarkLab.centerXPos);
         termValueLab.font = [Color gc_Font:18.0f];
-        [self.rootLayout addSubview:termValueLab];
+        [whitBaseView addSubview:termValueLab];
         [termValueLab sizeToFit];
+        self.termValueLab = termValueLab;
 
         UILabel *rateMarkLab = [[UILabel alloc] init];
         rateMarkLab.text = @"预期年化利率";
@@ -66,7 +77,7 @@
         [rateMarkLab sizeToFit];
         rateMarkLab.centerXPos.equalTo(button.centerXPos);
         rateMarkLab.bottomPos.equalTo(button.topPos).offset(20);
-        [self.rootLayout addSubview:rateMarkLab];
+        [whitBaseView addSubview:rateMarkLab];
         
         UILabel *rateValueLab = [[UILabel alloc] init];
         rateValueLab.text = @"9.5%";
@@ -74,8 +85,9 @@
         rateValueLab.centerXPos.equalTo(rateMarkLab.centerXPos);
         rateValueLab.font = [Color gc_ANC_font:23.0f];
         rateValueLab.textColor = [Color color:PGColorOpttonTextRedColor];
-        [self.rootLayout addSubview:rateValueLab];
+        [whitBaseView addSubview:rateValueLab];
         [rateValueLab sizeToFit];
+        self.rateValueLab = rateValueLab;
         
         
         UILabel *repayModelMarkLab = [[UILabel alloc] init];
@@ -85,7 +97,7 @@
         [repayModelMarkLab sizeToFit];
         repayModelMarkLab.rightPos.equalTo(button.rightPos);
         repayModelMarkLab.bottomPos.equalTo(button.topPos).offset(20);
-        [self.rootLayout addSubview:repayModelMarkLab];
+        [whitBaseView addSubview:repayModelMarkLab];
         
         UILabel *repayModelValueLab = [[UILabel alloc] init];
         repayModelValueLab.text = @"一次结清";
@@ -94,13 +106,29 @@
         [repayModelValueLab sizeToFit];
         repayModelValueLab.centerXPos.equalTo(repayModelMarkLab.centerXPos);
         repayModelValueLab.bottomPos.equalTo(repayModelMarkLab.topPos).offset(3);
-        [self.rootLayout addSubview:repayModelValueLab];
-        
+        [whitBaseView addSubview:repayModelValueLab];
+        self.repayModelValueLab = repayModelValueLab;
     }
     return self;
 }
 
-
+- (void)reflectDataModel:(id)model
+{
+    self.dataModel = (UCFNewHomeListPrdlist *)model;
+    self.termValueLab.text = self.dataModel .repayPeriodtext;
+    [self.termValueLab sizeToFit];
+    self.rateValueLab.text = [NSString stringWithFormat:@"%@%%",self.dataModel .annualRate];
+    [self.rateValueLab sizeToFit];
+    self.repayModelValueLab.text = self.dataModel .repayModeText;
+    [self.repayModelValueLab sizeToFit];
+}
+- (void)buttonClick:(UIButton *)button
+{
+    if (self.deleage && [self.deleage respondsToSelector:@selector(baseTableViewCell:buttonClick:withModel:)]) {
+        [self.deleage baseTableViewCell:self buttonClick:button withModel:self.dataModel];
+    }
+//    self.bc 
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

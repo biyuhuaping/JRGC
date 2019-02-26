@@ -8,10 +8,13 @@
 
 #import "BaseTableViewCell.h"
 
+
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UCFNewUserBidCell : BaseTableViewCell
 
+@interface UCFNewUserBidCell : BaseTableViewCell
+- (void)reflectDataModel:(id)model;
 @end
 
 NS_ASSUME_NONNULL_END

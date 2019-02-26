@@ -23,15 +23,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
         self.rootLayout.useFrame = YES;
-//        SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(15, 15, Screen_Width - 30, (Screen_Width - 30) * 6 /23) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
-//        adCycleScrollView.zoomType = NO;  // 是否使用缩放效果
-//        adCycleScrollView.hidesForSinglePage = YES;
-//        adCycleScrollView.autoScroll = NO;
-//        adCycleScrollView.infiniteLoop = NO;
-//
-        
-//        [self.rootLayout addSubview:adCycleScrollView];
-//        self.adCycleScrollView = adCycleScrollView;
+
         RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(15, 0, [UIScreen mainScreen].bounds.size.width - 30,([UIScreen mainScreen].bounds.size.width - 30) * 6 /23)];
         view.delegate = self;
         self.adCycleScrollView = view;
