@@ -74,6 +74,10 @@
 		3349B4E921F86A55002C1ADA /* UIView+RoundingCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 3349B4E821F86A55002C1ADA /* UIView+RoundingCorners.m */; };
 		334C713F21FAAA49006AE8F7 /* UCFNewBidDetaiInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334C713E21FAAA49006AE8F7 /* UCFNewBidDetaiInfoView.m */; };
 		334C714221FAF58B006AE8F7 /* NSString+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 334C714121FAF58B006AE8F7 /* NSString+Tool.m */; };
+		334D7D7E22263B6A0048CCDC /* UCFNewNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D7D22263B6A0048CCDC /* UCFNewNoticeViewController.m */; };
+		334D7D86222660F40048CCDC /* UCFSimpleNoticeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D84222660F40048CCDC /* UCFSimpleNoticeTableViewCell.m */; };
+		334D7D8B22266D8D0048CCDC /* UCFNoticeCenterApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D8A22266D8D0048CCDC /* UCFNoticeCenterApi.m */; };
+		334D7D8F22266DB00048CCDC /* NoticeCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D8E22266DB00048CCDC /* NoticeCenterModel.m */; };
 		33527147222388D90086FC92 /* UCFUserAllStatueRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33527146222388D90086FC92 /* UCFUserAllStatueRequest.m */; };
 		335BAC93221BEF2200F026BB /* UCFNewPureTransBidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC92221BEF2200F026BB /* UCFNewPureTransBidViewController.m */; };
 		335BAC97221BF33C00F026BB /* UCFTransMoneyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC96221BF33C00F026BB /* UCFTransMoneyBoardView.m */; };
@@ -1384,6 +1388,14 @@
 		334C713E21FAAA49006AE8F7 /* UCFNewBidDetaiInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBidDetaiInfoView.m; sourceTree = "<group>"; };
 		334C714021FAF58B006AE8F7 /* NSString+Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Tool.h"; sourceTree = "<group>"; };
 		334C714121FAF58B006AE8F7 /* NSString+Tool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Tool.m"; sourceTree = "<group>"; };
+		334D7D7C22263B6A0048CCDC /* UCFNewNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewNoticeViewController.h; sourceTree = "<group>"; };
+		334D7D7D22263B6A0048CCDC /* UCFNewNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewNoticeViewController.m; sourceTree = "<group>"; };
+		334D7D83222660F40048CCDC /* UCFSimpleNoticeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFSimpleNoticeTableViewCell.h; sourceTree = "<group>"; };
+		334D7D84222660F40048CCDC /* UCFSimpleNoticeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFSimpleNoticeTableViewCell.m; sourceTree = "<group>"; };
+		334D7D8922266D8D0048CCDC /* UCFNoticeCenterApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNoticeCenterApi.h; sourceTree = "<group>"; };
+		334D7D8A22266D8D0048CCDC /* UCFNoticeCenterApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNoticeCenterApi.m; sourceTree = "<group>"; };
+		334D7D8D22266DB00048CCDC /* NoticeCenterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeCenterModel.h; sourceTree = "<group>"; };
+		334D7D8E22266DB00048CCDC /* NoticeCenterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeCenterModel.m; sourceTree = "<group>"; };
 		33527145222388D90086FC92 /* UCFUserAllStatueRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFUserAllStatueRequest.h; sourceTree = "<group>"; };
 		33527146222388D90086FC92 /* UCFUserAllStatueRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFUserAllStatueRequest.m; sourceTree = "<group>"; };
 		335BAC91221BEF2200F026BB /* UCFNewPureTransBidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewPureTransBidViewController.h; sourceTree = "<group>"; };
@@ -3700,6 +3712,53 @@
 				3349B4E821F86A55002C1ADA /* UIView+RoundingCorners.m */,
 			);
 			path = UIView;
+			sourceTree = "<group>";
+		};
+		334D7D77222638010048CCDC /* Message(首页消息列表) */ = {
+			isa = PBXGroup;
+			children = (
+				334D7D8C22266D920048CCDC /* Model */,
+				334D7D8822266D550048CCDC /* Api */,
+				334D7D7F22265FC50048CCDC /* View */,
+				334D7D78222638140048CCDC /* Controller */,
+			);
+			path = "Message(首页消息列表)";
+			sourceTree = "<group>";
+		};
+		334D7D78222638140048CCDC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				334D7D7C22263B6A0048CCDC /* UCFNewNoticeViewController.h */,
+				334D7D7D22263B6A0048CCDC /* UCFNewNoticeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		334D7D7F22265FC50048CCDC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				334D7D83222660F40048CCDC /* UCFSimpleNoticeTableViewCell.h */,
+				334D7D84222660F40048CCDC /* UCFSimpleNoticeTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		334D7D8822266D550048CCDC /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				334D7D8922266D8D0048CCDC /* UCFNoticeCenterApi.h */,
+				334D7D8A22266D8D0048CCDC /* UCFNoticeCenterApi.m */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		334D7D8C22266D920048CCDC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				334D7D8D22266DB00048CCDC /* NoticeCenterModel.h */,
+				334D7D8E22266DB00048CCDC /* NoticeCenterModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		335BAC94221BF2D500F026BB /* TransView */ = {
@@ -7482,6 +7541,7 @@
 		E352FCED21E4AF0A00617AB7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				334D7D77222638010048CCDC /* Message(首页消息列表) */,
 				E3D6D513221E48F000261622 /* MicroBank(微商银行模块) */,
 				E3E4D9B921F5A35C003D41E9 /* LoginAndRegister */,
 				33614B1821F995FD00569989 /* BidDetail */,
@@ -7784,7 +7844,6 @@
 				3328796421EEC74500832CE8 /* NSString */,
 				334790C621E83DA5005131A5 /* UIButton */,
 				E352FD7421E4AFD800617AB7 /* Component */,
-				E352FD7D21E4AFD800617AB7 /* Image */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -7816,6 +7875,7 @@
 		E352FD8321E4AFD800617AB7 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				E352FD7D21E4AFD800617AB7 /* Image */,
 				E352FD8421E4AFD800617AB7 /* BaseModel.m */,
 				E352FD8521E4AFD800617AB7 /* BaseModel.h */,
 			);
@@ -9414,6 +9474,7 @@
 				FB7EDE3F1D6BFCD700C3E924 /* UCFBaseViewController.m in Sources */,
 				E352FDC921E4B08D00617AB7 /* YTKRequest.m in Sources */,
 				4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */,
+				334D7D8F22266DB00048CCDC /* NoticeCenterModel.m in Sources */,
 				E31BD53721C0C10100D3651F /* TYAlertController+TransitionAnimate.m in Sources */,
 				E352FD4E21E4AF0B00617AB7 /* UCFInvestmentCouponInstructionsView.m in Sources */,
 				335BAC9A221BFDA900F026BB /* UCFPureTransBidRootModel.m in Sources */,
@@ -9937,6 +9998,7 @@
 				7BC8AA241AD4C74200BF4660 /* UCFTransterBidHeadDetail.m in Sources */,
 				835B88851E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m in Sources */,
 				83F2D59E1DCB508F0041F913 /* UCFAccountTool.m in Sources */,
+				334D7D8B22266D8D0048CCDC /* UCFNoticeCenterApi.m in Sources */,
 				E352FD8F21E4AFD800617AB7 /* NSObject+HXSwizzling.m in Sources */,
 				74F490E51E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m in Sources */,
 				FB21732F1AF2362800649AA0 /* UCFBackMoneyModel.m in Sources */,
@@ -9981,9 +10043,11 @@
 				74A2C0D81F4306A000EDF0FA /* UCFGoldCashThirdCell.m in Sources */,
 				33480A2821E6E8EE007C8AAA /* UCFNewHomeViewController.m in Sources */,
 				E352FD4321E4AF0B00617AB7 /* Toast.m in Sources */,
+				334D7D7E22263B6A0048CCDC /* UCFNewNoticeViewController.m in Sources */,
 				7BC8AA221AD4C74200BF4660 /* UCFRepayment.m in Sources */,
 				74CE8B861F220C7500512B15 /* UCFContractModel.m in Sources */,
 				7BC3048A1ACBC22D007767F1 /* UITextFieldFactory.m in Sources */,
+				334D7D86222660F40048CCDC /* UCFSimpleNoticeTableViewCell.m in Sources */,
 				743985421F175EB800F2EDB8 /* UCFGoldRechargeCell.m in Sources */,
 				74702BB81FB552AE00CBB655 /* UCFExtractGoldFrameModel.m in Sources */,
 				FB1E7F811D8E4230009CBE2C /* UCFMarkOfBondsRransferNewView.m in Sources */,

@@ -31,13 +31,10 @@
 }
 - (void)createSubviews
 {
-    
     RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 180)];
     view.delegate = self;
     self.adCycleScrollView = view;
     [self addSubview:view];
-    
-
 }
 - (void)didSelectRCCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex
 {

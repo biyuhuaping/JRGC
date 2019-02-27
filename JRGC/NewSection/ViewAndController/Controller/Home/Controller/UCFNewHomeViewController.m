@@ -16,6 +16,7 @@
 #import "UCFHomeViewModel.h"
 #import "UCFBidDetailRequest.h"
 #import "UCFBidDetailAndInvestPageLogic.h"
+#import "UCFNewNoticeViewController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -58,6 +59,13 @@
     self.showTableView.tableFooterView = homefootView;
     [self addLeftButtonTitle:@"首页"];
     [self addRightbuttonImageName:@"home_icon_news"];
+}
+- (void)rightBarClicked:(UIButton *)button
+{
+    UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
+
 }
 - (void)viewDidLayoutSubviews
 {
