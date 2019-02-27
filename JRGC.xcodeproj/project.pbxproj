@@ -78,6 +78,7 @@
 		334D7D86222660F40048CCDC /* UCFSimpleNoticeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D84222660F40048CCDC /* UCFSimpleNoticeTableViewCell.m */; };
 		334D7D8B22266D8D0048CCDC /* UCFNoticeCenterApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D8A22266D8D0048CCDC /* UCFNoticeCenterApi.m */; };
 		334D7D8F22266DB00048CCDC /* NoticeCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D8E22266DB00048CCDC /* NoticeCenterModel.m */; };
+		334D7D922226B2770048CCDC /* UCFBatchBidRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D912226B2770048CCDC /* UCFBatchBidRequest.m */; };
 		33527147222388D90086FC92 /* UCFUserAllStatueRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33527146222388D90086FC92 /* UCFUserAllStatueRequest.m */; };
 		335BAC93221BEF2200F026BB /* UCFNewPureTransBidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC92221BEF2200F026BB /* UCFNewPureTransBidViewController.m */; };
 		335BAC97221BF33C00F026BB /* UCFTransMoneyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC96221BF33C00F026BB /* UCFTransMoneyBoardView.m */; };
@@ -1396,6 +1397,8 @@
 		334D7D8A22266D8D0048CCDC /* UCFNoticeCenterApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNoticeCenterApi.m; sourceTree = "<group>"; };
 		334D7D8D22266DB00048CCDC /* NoticeCenterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeCenterModel.h; sourceTree = "<group>"; };
 		334D7D8E22266DB00048CCDC /* NoticeCenterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeCenterModel.m; sourceTree = "<group>"; };
+		334D7D902226B2770048CCDC /* UCFBatchBidRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBatchBidRequest.h; sourceTree = "<group>"; };
+		334D7D912226B2770048CCDC /* UCFBatchBidRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBatchBidRequest.m; sourceTree = "<group>"; };
 		33527145222388D90086FC92 /* UCFUserAllStatueRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFUserAllStatueRequest.h; sourceTree = "<group>"; };
 		33527146222388D90086FC92 /* UCFUserAllStatueRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFUserAllStatueRequest.m; sourceTree = "<group>"; };
 		335BAC91221BEF2200F026BB /* UCFNewPureTransBidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewPureTransBidViewController.h; sourceTree = "<group>"; };
@@ -3550,6 +3553,8 @@
 				33527146222388D90086FC92 /* UCFUserAllStatueRequest.m */,
 				33433A0C22252B6200538487 /* UCFBidDetailRequest.h */,
 				33433A0D22252B6200538487 /* UCFBidDetailRequest.m */,
+				334D7D902226B2770048CCDC /* UCFBatchBidRequest.h */,
+				334D7D912226B2770048CCDC /* UCFBatchBidRequest.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -9948,6 +9953,7 @@
 				7BCCA8B61ACA97EB0089DAAC /* UCFLoginView.m in Sources */,
 				743985461F17699600F2EDB8 /* UCFGoldRechargeModel.m in Sources */,
 				840A79451C2A7C160059A946 /* UCFMessageCenterCell.m in Sources */,
+				334D7D922226B2770048CCDC /* UCFBatchBidRequest.m in Sources */,
 				4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */,
 				33614B1F21F998F300569989 /* UCFBidDetailNavView.m in Sources */,
 				E352FD9221E4AFD800617AB7 /* NSDictionary+HXNilSafe.m in Sources */,
