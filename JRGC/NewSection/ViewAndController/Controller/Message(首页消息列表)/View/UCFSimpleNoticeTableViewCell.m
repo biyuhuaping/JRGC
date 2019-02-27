@@ -107,7 +107,7 @@
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:NO];
+    [super setSelected:NO animated:NO];
 }
 
 @end

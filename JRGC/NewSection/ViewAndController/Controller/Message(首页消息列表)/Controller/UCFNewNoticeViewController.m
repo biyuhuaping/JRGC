@@ -9,6 +9,7 @@
 #import "UCFNewNoticeViewController.h"
 #import "UCFSimpleNoticeTableViewCell.h"
 #import "UCFNoticeCenterApi.h"
+#import "UCFWebViewJavascriptBridgeBanner.h"
 @interface UCFNewNoticeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate>
 @property(nonatomic, strong)NSMutableArray *dataArray;
 @property(nonatomic, strong)BaseTableView    *showTableView;
@@ -140,7 +141,19 @@
     [cell setModel:[self.dataArray objectAtIndex:indexPath.row] isEndView:isEnd];
     return cell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NoticeResult*model = [self.dataArray objectAtIndex:indexPath.row];
+    if (model.noviceUrl.length > 0) {
+        UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+        webView.rootVc = self;
+        webView.url = model.noviceUrl;
+        webView.navTitle = model.title;
+        webView.hidesBottomBarWhenPushed = YES;
+        [self.rt_navigationController pushViewController:webView animated:YES];
+    }
 
+}
 /*
 #pragma mark - Navigation
 
