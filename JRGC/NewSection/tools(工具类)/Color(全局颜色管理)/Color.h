@@ -29,6 +29,7 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
     PGColorOpttonSeprateLineColor,         //分割线 #FF7F5B
     PGColorOpttonTabeleViewBackgroundColor,//tableviewh背景色 #F5F5F5
     PGColorOpttonBankCardTextColor,//银行卡字体颜色 #FFE9E5
+    PGColorOpttonBatchTextColor,        //黑色字体t颜色 #363333
 };
 
 

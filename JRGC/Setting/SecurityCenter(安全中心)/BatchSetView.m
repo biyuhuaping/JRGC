@@ -28,20 +28,20 @@
 
 - (void)initView:(CGRect)frame
 {
-    _iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (frame.size.height - 50)/2, 50, 50)];
+    _iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, (frame.size.height - 65)/2, 65, 65)];
     _iconImageView.backgroundColor = [UIColor clearColor];
     [self addSubview:_iconImageView];
     
     
-    _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 10, CGRectGetMinY(_iconImageView.frame), SCREEN_WIDTH - CGRectGetMaxX(_iconImageView.frame) - 10 - 10,  16)];
-    _titleLab.font = [UIFont systemFontOfSize:16.0f];
-    _titleLab.textColor = UIColorWithRGB(0x50627a);
+    _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 12, CGRectGetMinY(_iconImageView.frame), SCREEN_WIDTH - CGRectGetMaxX(_iconImageView.frame) - 10 - 10,  18)];
+    _titleLab.font = [Color gc_Font:16.0f];
+    _titleLab.textColor =  [Color color:PGColorOpttonBatchTextColor];
     [self addSubview:_titleLab];
     
-    _desLabe = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 10, CGRectGetMaxY(_titleLab.frame), CGRectGetWidth(_titleLab.frame), 40)];
-    _desLabe.font = [UIFont systemFontOfSize:13.0f];
+    _desLabe = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 12, CGRectGetMaxY(_titleLab.frame) + 5, CGRectGetWidth(_titleLab.frame), 40)];
+    _desLabe.font = [UIFont systemFontOfSize:14.0f];
     _desLabe.numberOfLines = 0;
-    _desLabe.textColor = [UIColor lightGrayColor];
+    _desLabe.textColor = [Color color:PGColorOptionTitleGray];
     [self addSubview:_desLabe];
 }
 

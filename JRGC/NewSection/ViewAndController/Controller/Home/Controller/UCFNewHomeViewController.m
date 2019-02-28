@@ -17,6 +17,7 @@
 #import "UCFBidDetailRequest.h"
 #import "UCFBidDetailAndInvestPageLogic.h"
 #import "UCFNewNoticeViewController.h"
+#import "UCFBatchInvestmentViewController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -62,6 +63,14 @@
 }
 - (void)rightBarClicked:(UIButton *)button
 {
+    
+    UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+    batchInvestment.isStep = 1;
+    batchInvestment.accoutType = SelectAccoutTypeP2P;
+    batchInvestment.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:batchInvestment animated:YES];
+    return;
+    
     UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
