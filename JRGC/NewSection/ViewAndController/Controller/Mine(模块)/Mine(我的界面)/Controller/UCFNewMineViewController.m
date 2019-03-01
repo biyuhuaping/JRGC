@@ -34,6 +34,7 @@
 #import "UCFLoginViewController.h"
 #import "BaseNavigationViewController.h"
 #import "UCFP2POrHonerAccoutViewController.h"
+#import "UCFMicroBankDepositoryAccountHomeViewController.h"
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -227,6 +228,8 @@
         UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
         subVC.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:subVC animated:YES];
+        
+
     }
     else if (tag == 1002){
         //我的工贝
@@ -238,7 +241,9 @@
         //优惠券
     }
     else if (tag == 1005){
-        //优惠券
+        //邀请返利
+        UCFMicroBankDepositoryAccountHomeViewController *ccc = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
+        [self.rt_navigationController pushViewController:ccc animated:YES];
     }
 }
 - (void)requestMyReceipt//请求总资产信息

@@ -11,6 +11,7 @@
 #import "UCFMicroBankDepositoryAccountHomeHeadView.h"
 #import "BaseScrollview.h"
 #import "UCFMicroBankDepositoryAccountHomeCellView.h"
+#import "UCFMicroBankDepositoryAccountSeriaViewController.h"
 
 #import "UCFMicroBankUserAccountInfoAPI.h"
 #import "UCFMicroBankGetHSAccountInfoAPI.h"
@@ -45,8 +46,8 @@
 //    self.rootLayout.backgroundColor = [UIColor whiteColor];
 //    self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
 //    self.view = self.rootLayout;
-    
-    [self.view addSubview: self.scrollView];
+    self.view =  self.scrollView ;
+//    [self.view addSubview: self.scrollView];
     [self.scrollView addSubview:self.scrollLayout];
     [self.scrollLayout addSubview:self.tableHead];
     [self.scrollLayout addSubview:self.accountSerial];
@@ -56,6 +57,8 @@
     [self.scrollLayout addSubview:self.batchLend];
     [self reuqestCell];
     [self reuqestHead];
+    [self addLeftButton];
+    baseTitleLabel.text = @"微金徽商银行存管账户";
 }
 - (BaseScrollview *)scrollView
 {
@@ -65,7 +68,7 @@
         _scrollView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
         _scrollView.leftPos.equalTo(@0);
         _scrollView.rightPos.equalTo(@0);
-        _scrollView.topPos.equalTo(@10);
+        _scrollView.topPos.equalTo(@0);
         _scrollView.bottomPos.equalTo(@0);
     }
     return _scrollView;
@@ -106,6 +109,10 @@
         
         _accountSerial.microBankContentLabel.text = @"";
         [_accountSerial.microBankContentLabel sizeToFit];
+        
+        _accountSerial.tag = 1001;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_accountSerial addGestureRecognizer:tapGesturRecognizer];
     }
     return _accountSerial;
 }
@@ -178,6 +185,8 @@
         
         _batchLend.microBankContentLabel.text = @"";
         [_batchLend.microBankContentLabel sizeToFit];
+        
+        _batchLend.itemLineView.myVisibility = MyVisibility_Invisible;
     }
     return _batchLend;
 }
@@ -199,8 +208,9 @@
         if (model.ret == YES) {
 
             self.tableHead.bankDepositNameLabel.text = model.data.hsAccountInfo.bankBranch;
-            self.tableHead.bankCardNumberLabel.text = model.data.hsAccountInfo.bankCardNo;
+            self.tableHead.bankCardNumberLabel.text = [NSString dealWithString:model.data.hsAccountInfo.bankCardNo];
             self.tableHead.openAccountNameLabel.text =  model.data.hsAccountInfo.accountName;
+            
             [self.tableHead.bankDepositNameLabel sizeToFit];
             [self.tableHead.bankCardNumberLabel sizeToFit];
             [self.tableHead.openAccountNameLabel sizeToFit];
@@ -224,13 +234,26 @@
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
             
-//            self.modifyBankCard.cont bankCardNum; //修改银行卡
-//            self.changePassword; //修改交易密码
-//            self.riskTolerance; //微金风险承担能力
-//            self.batchLend; //批量出借
-//            
-//            model.data.otherNum;
-//            model.data.riskLevel;
+            //修改银行卡
+            self.modifyBankCard.microBankContentLabel.text = model.data.bankCardNum;
+            [self.modifyBankCard.microBankContentLabel sizeToFit];
+            //微金风险承担能力
+            self.riskTolerance.microBankSubtitleLabel.text = [NSString stringWithFormat:@"(剩%ld次)",(long)model.data.otherNum];
+            [self.riskTolerance.microBankSubtitleLabel sizeToFit];
+            self.riskTolerance.microBankContentLabel.text = model.data.riskLevel;
+            [self.riskTolerance.microBankContentLabel sizeToFit];
+            
+            //批量出借
+            if (model.data.batchMaximum.length == 0) {
+                self.batchLend.microBankSubtitleLabel.text = @"批量出借(开通后一次可投多个项目)";
+                [self.batchLend.microBankSubtitleLabel sizeToFit];
+                self.batchLend.microBankContentLabel.text =  @"未开启";
+            }
+            else
+            {
+                self.batchLend.microBankContentLabel.text = model.data.batchMaximum;
+            }
+            [self.batchLend.microBankContentLabel sizeToFit];
         }
         else{
             ShowMessage(model.message);
@@ -240,7 +263,13 @@
         
     }];
 }
-
+-(void)layoutClick:(UIGestureRecognizer *)sender
+{
+    if (sender.view.tag == 1001) {
+        UCFMicroBankDepositoryAccountSeriaViewController *vc = [[UCFMicroBankDepositoryAccountSeriaViewController alloc] init];
+        [self.rt_navigationController pushViewController:vc animated:YES];
+    }
+}
 /*
 #pragma mark - Navigation
 

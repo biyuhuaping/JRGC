@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NZLabel     *microBankContentLabel;//内容
 
+@property (nonatomic, strong) UIView *itemLineView;//下划线
+
 @end
 
 NS_ASSUME_NONNULL_END

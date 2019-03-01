@@ -62,9 +62,9 @@ static float const kUIemptyOverlayLabelHeight    = 20;
 }
 
 - (void)addUIemptyOverlayImageView {
-    self.emptyOverlayImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 83, 83)];
+    self.emptyOverlayImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 65, 65)];
     self.emptyOverlayImageView.center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2 - 100);
-    self.emptyOverlayImageView.image = [UIImage imageNamed:@"default_icon"];
+    self.emptyOverlayImageView.image = [UIImage imageNamed:@"no_data_icon"];
     [self addSubview:self.emptyOverlayImageView];
 }
 
@@ -75,13 +75,13 @@ static float const kUIemptyOverlayLabelHeight    = 20;
     emptyOverlayLabel.numberOfLines = 0;
     emptyOverlayLabel.backgroundColor = [UIColor clearColor];
     emptyOverlayLabel.text = @"暂无数据";
-    emptyOverlayLabel.font = [UIFont boldSystemFontOfSize:14];
+    emptyOverlayLabel.font = [UIFont boldSystemFontOfSize:18];
     emptyOverlayLabel.frame = ({
         CGRect frame = emptyOverlayLabel.frame;
         frame.origin.y = CGRectGetMaxY(self.emptyOverlayImageView.frame) + 10;
         frame;
     });
-    emptyOverlayLabel.textColor = UIColorWithRGB(0x8591b3);
+    emptyOverlayLabel.textColor = UIColorWithRGB(0xA0A4B1);
     [self addSubview:emptyOverlayLabel];
 }
 

@@ -11,8 +11,6 @@
 
 @interface UCFMicroBankDepositoryAccountHomeCellView ()
 
-@property (nonatomic, strong) UIView *itemLineView;//下划线
-
 @property (nonatomic, strong) UIImageView *itemArrawImageView;//图片
 
 @end
@@ -99,7 +97,7 @@
         _itemLineView = [UIView new];
         _itemLineView.myBottom = 1;
         _itemLineView.myHeight = 0.5;
-        _itemLineView.myLeft = 50;
+        _itemLineView.myLeft = 25;
         _itemLineView.myRight = 0;
         _itemLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         //

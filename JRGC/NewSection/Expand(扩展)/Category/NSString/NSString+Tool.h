@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (Tool)
 //给字符串添加逗号
 + (NSString *)AddComma:(NSString *)string;
+
+//银行卡每隔4位加空格
++ (NSString *)dealWithString:(NSString *)number;
 @end
 
 NS_ASSUME_NONNULL_END

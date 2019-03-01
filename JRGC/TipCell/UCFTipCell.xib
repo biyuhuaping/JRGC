@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,12 +15,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="34.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y74-NP-76K" userLabel="lineDown">
-                        <rect key="frame" x="0.0" y="33.5" width="320" height="1"/>
-                        <color key="backgroundColor" red="0.97254901960784312" green="0.88627450980392153" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="0.0" y="34" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.88627450980392153" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="GIv-F0-2c8"/>
                         </constraints>
@@ -34,11 +38,11 @@
                             <constraint firstAttribute="height" constant="21" id="uEL-Un-hIX"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.41960784313725491" green="0.27058823529411763" blue="0.031372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.41960784313725491" green="0.27058823529411763" blue="0.031372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="1" green="0.96470588235294119" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="1" green="0.96470588235294119" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="UeG-cm-7Z8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="1ff-H4-Aqh"/>
                     <constraint firstItem="UeG-cm-7Z8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="N64-gh-e4d"/>
@@ -50,7 +54,7 @@
                     <constraint firstItem="WtJ-eM-iIB" firstAttribute="centerY" secondItem="UeG-cm-7Z8" secondAttribute="centerY" id="rLM-lk-Ucl"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="lab_informationTXT" destination="UeG-cm-7Z8" id="STA-cj-8lc"/>
             </connections>
