@@ -9,7 +9,6 @@
 
 #import "UCFSiteNoticeView.h"
 @interface UCFSiteNoticeView ()
-@property(nonatomic, strong)UILabel *titleLab;
 @end
 @implementation UCFSiteNoticeView
 

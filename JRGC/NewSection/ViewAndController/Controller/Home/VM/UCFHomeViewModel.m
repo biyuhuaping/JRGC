@@ -7,10 +7,18 @@
 //
 
 #import "UCFHomeViewModel.h"
+#import "UCFHomeBannerApi.h"
+#import "UCFNewBannerModel.h"
+#import "UCFWebViewJavascriptBridgeBanner.h"
+@interface UCFHomeViewModel ()
+@property(nonatomic, strong)UCFNewBannerModel *bannerModel;
+@end
 
 @implementation UCFHomeViewModel
 - (void)fetchNetData
 {
+    @PGWeakObj(self);
+
     if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
         UCFUserAllStatueRequest *request1 = [[UCFUserAllStatueRequest alloc] initWithUserId:SingleUserInfo.loginData.userInfo.userId];
         request1.animatingView = _loaingSuperView;
@@ -32,10 +40,35 @@
         }];
         [request1 start];
     }
+    
+    //获取banner数据
+    UCFHomeBannerApi *api = [[UCFHomeBannerApi alloc] init];
+    [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+        UCFNewBannerModel *bannerModel = request.responseJSONModel;
+        selfWeak.bannerModel = bannerModel;
+        if (bannerModel.ret) {
+            NSMutableArray *imgsArr = [NSMutableArray arrayWithCapacity:10];
+            for (Banner *bannermodel in bannerModel.data.banner) {
+                [imgsArr addObject:bannermodel.thumb];
+            }
+            selfWeak.imagesArr = imgsArr;
+        } else {
+            
+        }
+        NSString *siteNotice = bannerModel.data.siteNoticeMap.siteNotice;
+        if (siteNotice.length > 0) {
+            selfWeak.siteNoticeStr = siteNotice;
+            
+        }
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+    [api start];
 
     UCFHomeListRequest *request = [[UCFHomeListRequest alloc] init];
     request.animatingView = _loaingSuperView;
-    @PGWeakObj(self);
     [request setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         
         [selfWeak dealRequestData:request];
@@ -44,6 +77,9 @@
 
     }];
     [request start];
+    
+
+    
 }
 - (void)dealRequestData:(YTKBaseRequest *)request
 {
@@ -53,8 +89,11 @@
         NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:5];
         NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
 
-        if (SingleUserInfo.loginData.userInfo.openStatus >= 4 && SingleUserInfo.loginData.userInfo.isRisk) {
-            CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"" showInfoMethod:nil heightOfCell:140];
+        if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] >= 4 && SingleUserInfo.loginData.userInfo.isRisk) {
+            SEL sel = NSSelectorFromString(@"reflectDataModel:");
+
+            CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"" showInfoMethod:sel heightOfCell:140];
+            data1.dataModel = self.siteNoticeStr;
             [section1 addObject:data1];
         } else {
             //新手引导
@@ -151,5 +190,19 @@
     }
     
 
+}
+- (void)cycleViewSelectIndex:(NSInteger)index
+{
+    Banner *bannermodel = self.bannerModel.data.banner[index];
+    UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+    webView.rootVc = _rootViewController;
+    webView.baseTitleType = @"lunbotuhtml";
+    webView.url = bannermodel.url;
+    webView.navTitle = bannermodel.title;
+    webView.dicForShare.url = bannermodel.url;
+    webView.dicForShare.thumb = bannermodel.thumb;
+    webView.title = bannermodel.title;
+    webView.hidesBottomBarWhenPushed = YES;
+    [_rootViewController.rt_navigationController pushViewController:webView animated:YES];
 }
 @end

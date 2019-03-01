@@ -1259,12 +1259,11 @@
     UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)] autorelease];
     view.backgroundColor = [UIColor whiteColor];
     view.layer.borderWidth = 1;
-    view.layer.borderColor = [[UIColor redColor] CGColor];
+    view.clipsToBounds = YES;
+    view.layer.cornerRadius = 5;
+    view.layer.borderColor = UIColorWithRGB(0xff4133).CGColor;
     
-    UIImageView *leftDownView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(view.frame) - 28 , CGRectGetHeight(view.frame) -25, 28, 25)];
-    leftDownView.image = [UIImage imageNamed:@"investment_selected"];
-    leftDownView.backgroundColor = [UIColor clearColor];
-    [view addSubview:leftDownView];
+
     return [self getImageFromView:view];
 }
 + (UIImage *)batchImageNormalState:(CGRect)rect
@@ -1272,7 +1271,8 @@
     UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)] autorelease];
     view.backgroundColor = [UIColor whiteColor];
     view.layer.borderWidth = 0.8;
-    view.layer.borderColor = [UIColorWithRGB(0xd8d8d8) CGColor];
+    view.layer.cornerRadius = 5;
+    view.layer.borderColor = [UIColorWithRGB(0xe3e5ea) CGColor];
     return [self getImageFromView:view];
 }
 + (UIImage *)getImageFromView:(UIView *)theView

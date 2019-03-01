@@ -602,10 +602,7 @@ static NetworkModule *gInstance = NULL;
     
     [Common deleteCookies];
     [[UserInfoSingle sharedManager] deleteUserData];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:TIME];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:IDCARD_STATE];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:BANKCARD_STATE];
+
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -750,31 +747,32 @@ static NetworkModule *gInstance = NULL;
 //唤起登陆框
 - (void)shouLoginView
 {
-    [MBProgressHUD hideAllHUDsForView:nil animated:NO];
-    UCFLoginViewController *loginViewController = [[[UCFLoginViewController alloc] init] autorelease];
-    loginViewController.isForce = YES;
-    UINavigationController *loginNaviController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
-    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    UINavigationController *nav = app.tabBarController.selectedViewController ;
-    if (app.tabBarController.presentedViewController)
-    {
-        NSString *className =  [NSString stringWithUTF8String:object_getClassName(app.tabBarController.presentedViewController)];
-        if ([className hasSuffix:@"UINavigationController"]) {
-            [app.tabBarController dismissViewControllerAnimated:NO completion:^{
-                [nav popToRootViewControllerAnimated:NO];
-                [app.tabBarController setSelectedIndex:0];
-            }];
-        }
-    }
-    else
-    {
-        [nav popToRootViewControllerAnimated:NO];
-        [app.tabBarController setSelectedIndex:0];
-    }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
-
-    });
+    [SingleUserInfo loadLoginViewController];
+//    [MBProgressHUD hideAllHUDsForView:nil animated:NO];
+//    UCFLoginViewController *loginViewController = [[[UCFLoginViewController alloc] init] autorelease];
+//    loginViewController.isForce = YES;
+//    UINavigationController *loginNaviController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
+//    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    UINavigationController *nav = app.tabBarController.selectedViewController ;
+//    if (app.tabBarController.presentedViewController)
+//    {
+//        NSString *className =  [NSString stringWithUTF8String:object_getClassName(app.tabBarController.presentedViewController)];
+//        if ([className hasSuffix:@"UINavigationController"]) {
+//            [app.tabBarController dismissViewControllerAnimated:NO completion:^{
+//                [nav popToRootViewControllerAnimated:NO];
+//                [app.tabBarController setSelectedIndex:0];
+//            }];
+//        }
+//    }
+//    else
+//    {
+//        [nav popToRootViewControllerAnimated:NO];
+//        [app.tabBarController setSelectedIndex:0];
+//    }
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//    [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+//
+//    });
 }
 
 // 提示框的代理方法

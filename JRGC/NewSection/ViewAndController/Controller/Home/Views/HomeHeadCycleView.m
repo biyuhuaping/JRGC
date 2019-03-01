@@ -9,12 +9,12 @@
 #import "HomeHeadCycleView.h"
 
 @interface HomeHeadCycleView()<RCFFlowViewDelegate>
-@property(nonatomic, weak)UCFBannerViewModel *VM;
+@property(nonatomic, weak)UCFHomeViewModel *VM;
 @end
 
 @implementation HomeHeadCycleView
 
-- (void)showView:(UCFBannerViewModel *)viewModel
+- (void)showView:(UCFHomeViewModel *)viewModel
 {
     self.VM = viewModel;
     @PGWeakObj(self);
@@ -31,13 +31,10 @@
 }
 - (void)createSubviews
 {
-    
     RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 180)];
     view.delegate = self;
     self.adCycleScrollView = view;
     [self addSubview:view];
-    
-
 }
 - (void)didSelectRCCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex
 {

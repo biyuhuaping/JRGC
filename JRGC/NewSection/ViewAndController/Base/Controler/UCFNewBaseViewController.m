@@ -59,6 +59,19 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = leftItem;
 }
+- (void)addRightbuttonImageName:(NSString *)name
+{
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [rightButton setBackgroundColor:[UIColor clearColor]];
+    [rightButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [rightButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+    [rightButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
+    [rightButton setImage:[UIImage imageNamed:name]forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(rightBarClicked:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = leftItem;
+}
 - (void)addLeftButtonTitle:(NSString *)title
 {
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];

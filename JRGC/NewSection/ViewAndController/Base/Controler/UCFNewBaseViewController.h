@@ -48,6 +48,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param text 标题文案
  */
 - (void)setTitleViewText:(NSString *)text;
+
+/**
+ 
+
+ @param name <#name description#>
+ */
+- (void)addRightbuttonImageName:(NSString *)name;
 @end
 
 NS_ASSUME_NONNULL_END

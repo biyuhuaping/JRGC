@@ -46,7 +46,7 @@
                 }
                 else
                 {
-                    NSInteger step = SingleUserInfo.loginData.userInfo.openStatus;
+                    NSInteger step = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
                     if (step == 1 || step == 2) {
                         BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
                             if (index == 1) {
@@ -196,6 +196,8 @@
     }
 }
 +(void)gotoCollectionDetailViewContoller:(UCFNewHomeListPrdlist *)model{
+    
+    
     /*
      NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
      self.accoutType = SelectAccoutTypeP2P;
@@ -229,7 +231,7 @@
     NSString *tipStr1 = P2PTIP1;
     NSString *tipStr2 = P2PTIP2;
     
-    NSInteger openStatus = SingleUserInfo.loginData.userInfo.openStatus;
+    NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
     
     switch (openStatus)
     {// ***hqy添加
@@ -261,7 +263,7 @@
     BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:alertMessage cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
         if (index == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:control.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:control.navigationController];
         }
     } otherButtonTitles:@"测试"];
     [alert show];

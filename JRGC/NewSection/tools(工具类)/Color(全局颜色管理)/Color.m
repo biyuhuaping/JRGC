@@ -37,6 +37,7 @@
         {0xFF,0x7F,0x5B},          //分割线 #FF7F5B
         {0xF5,0xF5,0xF5},          //tableviewh背景色 #F5F5F5
         {0xff,0xe9,0xe5},          //银行卡字体颜色 #FFE9E5
+        {0x36,0x33,0x33},          //黑色字体t颜色 #363333
     };
     
     return [UIColor colorWithRed:colors[colorOptions][0]/255.0 green:colors[colorOptions][1]/255.0 blue:colors[colorOptions][2]/255.0 alpha:1];
