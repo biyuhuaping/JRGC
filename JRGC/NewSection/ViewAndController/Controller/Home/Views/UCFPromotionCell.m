@@ -10,6 +10,7 @@
 //#import "SDCycleScrollView.h"
 #import "RCFFlowView.h"
 #import "CellConfig.h"
+#import "UCFCellDataModel.h"
 @interface UCFPromotionCell()<RCFFlowViewDelegate>
 
 @property(nonatomic, strong)RCFFlowView *adCycleScrollView;
@@ -27,9 +28,7 @@
         RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(15, 0, [UIScreen mainScreen].bounds.size.width - 30,([UIScreen mainScreen].bounds.size.width - 30) * 6 /23)];
         view.delegate = self;
         self.adCycleScrollView = view;
-        view.advArray = [NSMutableArray arrayWithArray:@[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"]];
         [self addSubview:view];
-        [view reloadCycleView];
     }
     return self;
 }
@@ -39,25 +38,35 @@
 }
 - (void)reflectDataModel:(id)model
 {
-    CellConfig *mod = model;
-    if ([mod.title isEqualToString:@"新手专享"]) {
-        _cellType = HomeBeansAdType;
-    } else if ([mod.title isEqualToString:@"推荐内容"]) {
-        _cellType = HomeShopAdType;
-    }
-    switch (_cellType) {
-        case 0:
-            _vTopSpace = _hLeftSpace = _hRightSpace = 15.0f;
-            _vBottomSpace = 0;
-            break;
-        case 1:
-            _hLeftSpace = _hRightSpace = 15.0f;
-            _vTopSpace = _vBottomSpace = 0.0f;
-            break;
-        default:
-            break;
+    
+    
+//    CellConfig *mod = model;
+//    if ([mod.title isEqualToString:@"新手专享"]) {
+//        _cellType = HomeBeansAdType;
+//    } else if ([mod.title isEqualToString:@"推荐内容"]) {
+//        _cellType = HomeShopAdType;
+//    }
+//    switch (_cellType) {
+//        case 0:
+//            _vTopSpace = _hLeftSpace = _hRightSpace = 15.0f;
+//            _vBottomSpace = 0;
+//            break;
+//        case 1:
+//            _hLeftSpace = _hRightSpace = 15.0f;
+//            _vTopSpace = _vBottomSpace = 0.0f;
+//            break;
+//        default:
+//            break;
+//    }
+    UCFCellDataModel *dataModel = model;
+    if ([dataModel.modelType isEqualToString:@"coinArray"]) {
+        _adCycleScrollView.advArray = dataModel.data1;
+    } else if ([dataModel.modelType isEqualToString:@"recommend"]) {
+        _adCycleScrollView.advArray = dataModel.data1;
     }
     
+    [_adCycleScrollView reloadCycleView];
+
 }
 - (void)layoutSubviews
 {

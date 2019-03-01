@@ -19,6 +19,7 @@
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.frame = CGRectMake(0, 0, frame.size.width, height);
         imageView.backgroundColor = [UIColor yellowColor];
+        self.shopImageView = imageView;
         [self addSubview:imageView];
         
         UILabel *nameLal = [[UILabel alloc] init];
@@ -27,6 +28,7 @@
         nameLal.textColor = [UIColor blackColor];
         nameLal.textAlignment = NSTextAlignmentCenter;
         nameLal.text = @"iphone3";
+        self.shopName = nameLal;
         [self addSubview:nameLal];
         
         UILabel *beansLal = [[UILabel alloc] init];
@@ -35,6 +37,7 @@
         beansLal.textAlignment = NSTextAlignmentCenter;
         beansLal.textColor = UIColorWithRGB(0xff4133);
         beansLal.text = @"8000工贝";
+        self.shopValue = beansLal;
         [self addSubview:beansLal];
     }
     return self;

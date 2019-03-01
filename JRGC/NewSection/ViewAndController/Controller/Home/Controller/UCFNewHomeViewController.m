@@ -63,14 +63,6 @@
 }
 - (void)rightBarClicked:(UIButton *)button
 {
-    
-    UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-    batchInvestment.isStep = 1;
-    batchInvestment.accoutType = SelectAccoutTypeP2P;
-    batchInvestment.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:batchInvestment animated:YES];
-    return;
-    
     UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
@@ -102,6 +94,7 @@
         if ([keyPath isEqualToString:@"modelListArray"]) {
             NSArray *modelListArray = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (modelListArray.count > 0) {
+                [selfWeak.showTableView endRefresh];
                 selfWeak.dataArray = [NSMutableArray arrayWithArray:modelListArray];
                 [selfWeak.showTableView reloadData];
             }
@@ -116,7 +109,7 @@
 #pragma BaseTableViewDelegate
 - (void)refreshTableViewHeader
 {
-    [_showTableView endRefresh];
+    [self fetchData];
 }
 
 - (BaseTableView *)showTableView

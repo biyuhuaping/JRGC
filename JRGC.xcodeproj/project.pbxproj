@@ -57,6 +57,8 @@
 		332B6068221FFDED008893EF /* UCFNewHomeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6067221FFDED008893EF /* UCFNewHomeListModel.m */; };
 		3332C8A32213BA15009956BB /* UCFCheckCouponApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3332C8A22213BA15009956BB /* UCFCheckCouponApi.m */; };
 		333548BD221153D100DE0BB8 /* InvestPageInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 333548BC221153D100DE0BB8 /* InvestPageInfoApi.m */; };
+		333979542229267000BB40BC /* UCFMallProductApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 333979532229267000BB40BC /* UCFMallProductApi.m */; };
+		33397957222927E300BB40BC /* UCFHomeMallDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33397956222927E300BB40BC /* UCFHomeMallDataModel.m */; };
 		333B42C821FC31AB00741A47 /* UCFBidDetailTopBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */; };
 		333B42CE21FC4E6B00741A47 /* UCFNewInvestBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B42CD21FC4E6B00741A47 /* UCFNewInvestBtnView.m */; };
 		33433A0E22252B6200538487 /* UCFBidDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33433A0D22252B6200538487 /* UCFBidDetailRequest.m */; };
@@ -89,6 +91,7 @@
 		33614B2421F9BAE700569989 /* UCFBidDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33614B2321F9BAE700569989 /* UCFBidDetailModel.m */; };
 		33614B2821F9BF0600569989 /* UVFBidDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33614B2721F9BF0600569989 /* UVFBidDetailViewModel.m */; };
 		336AA93A221D61CA00F14236 /* UCFTransPureBidApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 336AA939221D61CA00F14236 /* UCFTransPureBidApi.m */; };
+		3375F2DA22291A6E00D21FE2 /* UCFCellDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3375F2D922291A6E00D21FE2 /* UCFCellDataModel.m */; };
 		33793F3C21EC2AA3001065D9 /* UIButton+MLSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F3B21EC2AA3001065D9 /* UIButton+MLSpace.m */; };
 		33793F3F21EC392F001065D9 /* UCFNewUserBidCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F3E21EC392F001065D9 /* UCFNewUserBidCell.m */; };
 		33793F4521EC674D001065D9 /* UCFPromotionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F4421EC674D001065D9 /* UCFPromotionCell.m */; };
@@ -1356,6 +1359,10 @@
 		3332C8A22213BA15009956BB /* UCFCheckCouponApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCheckCouponApi.m; sourceTree = "<group>"; };
 		333548BB221153D100DE0BB8 /* InvestPageInfoApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvestPageInfoApi.h; sourceTree = "<group>"; };
 		333548BC221153D100DE0BB8 /* InvestPageInfoApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvestPageInfoApi.m; sourceTree = "<group>"; };
+		333979522229267000BB40BC /* UCFMallProductApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMallProductApi.h; sourceTree = "<group>"; };
+		333979532229267000BB40BC /* UCFMallProductApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMallProductApi.m; sourceTree = "<group>"; };
+		33397955222927E300BB40BC /* UCFHomeMallDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHomeMallDataModel.h; sourceTree = "<group>"; };
+		33397956222927E300BB40BC /* UCFHomeMallDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeMallDataModel.m; sourceTree = "<group>"; };
 		333B42C621FC31AB00741A47 /* UCFBidDetailTopBoardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBidDetailTopBoardCell.h; sourceTree = "<group>"; };
 		333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBidDetailTopBoardCell.m; sourceTree = "<group>"; };
 		333B42CC21FC4E6B00741A47 /* UCFNewInvestBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewInvestBtnView.h; sourceTree = "<group>"; };
@@ -1419,6 +1426,8 @@
 		33614B2721F9BF0600569989 /* UVFBidDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UVFBidDetailViewModel.m; sourceTree = "<group>"; };
 		336AA938221D61CA00F14236 /* UCFTransPureBidApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransPureBidApi.h; sourceTree = "<group>"; };
 		336AA939221D61CA00F14236 /* UCFTransPureBidApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransPureBidApi.m; sourceTree = "<group>"; };
+		3375F2D822291A6E00D21FE2 /* UCFCellDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCellDataModel.h; sourceTree = "<group>"; };
+		3375F2D922291A6E00D21FE2 /* UCFCellDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCellDataModel.m; sourceTree = "<group>"; };
 		33793F3A21EC2AA3001065D9 /* UIButton+MLSpace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+MLSpace.h"; sourceTree = "<group>"; };
 		33793F3B21EC2AA3001065D9 /* UIButton+MLSpace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MLSpace.m"; sourceTree = "<group>"; };
 		33793F3D21EC392F001065D9 /* UCFNewUserBidCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewUserBidCell.h; sourceTree = "<group>"; };
@@ -3555,6 +3564,8 @@
 				33433A0D22252B6200538487 /* UCFBidDetailRequest.m */,
 				334D7D902226B2770048CCDC /* UCFBatchBidRequest.h */,
 				334D7D912226B2770048CCDC /* UCFBatchBidRequest.m */,
+				333979522229267000BB40BC /* UCFMallProductApi.h */,
+				333979532229267000BB40BC /* UCFMallProductApi.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -3990,6 +4001,8 @@
 				33E3032C21F1866500FD657C /* UCFNewBannerModel.m */,
 				332B6066221FFDED008893EF /* UCFNewHomeListModel.h */,
 				332B6067221FFDED008893EF /* UCFNewHomeListModel.m */,
+				33397955222927E300BB40BC /* UCFHomeMallDataModel.h */,
+				33397956222927E300BB40BC /* UCFHomeMallDataModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -7747,6 +7760,8 @@
 				E352FD3B21E4AF0B00617AB7 /* WeChatStyle */,
 				332640A52223DC3500C24A67 /* SubCellConfig.h */,
 				332640A62223DC3500C24A67 /* SubCellConfig.m */,
+				3375F2D822291A6E00D21FE2 /* UCFCellDataModel.h */,
+				3375F2D922291A6E00D21FE2 /* UCFCellDataModel.m */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -9328,6 +9343,7 @@
 				74F490E91E5B0BD70057AC62 /* UCFMyInvestBatchCell.m in Sources */,
 				742D50EC1F74E5E800951AE2 /* UCFMineAPIManager.m in Sources */,
 				746BBEAB1AF8E93E00EBA0E7 /* UCFCouponUseCell.m in Sources */,
+				3375F2DA22291A6E00D21FE2 /* UCFCellDataModel.m in Sources */,
 				74AFB1451EE93ACC007DBAFC /* UCFMicroMoneyGroup.m in Sources */,
 				E3264BED221D49750045FE94 /* UCFMineDimensionCodeViewController.m in Sources */,
 				847103BA1D59AD7500935B19 /* UCFBankDepositoryAccountViewController.m in Sources */,
@@ -9484,6 +9500,7 @@
 				E352FD4E21E4AF0B00617AB7 /* UCFInvestmentCouponInstructionsView.m in Sources */,
 				335BAC9A221BFDA900F026BB /* UCFPureTransBidRootModel.m in Sources */,
 				E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */,
+				33397957222927E300BB40BC /* UCFHomeMallDataModel.m in Sources */,
 				FB2173191AF20DFC00649AA0 /* UCFBackMoneyCell.m in Sources */,
 				A851F3481F132713003DE8B8 /* UCFGoldTransactionHeadView.m in Sources */,
 				833CC9EF1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.m in Sources */,
@@ -9824,6 +9841,7 @@
 				83CD842C1F13A50800227704 /* UCFHonerViewController.m in Sources */,
 				33E3032221F1800700FD657C /* UCFHomeBannerApi.m in Sources */,
 				7BA6E4C11AD6731900FE8C37 /* UIButton+WebCache.m in Sources */,
+				333979542229267000BB40BC /* UCFMallProductApi.m in Sources */,
 				840A79431C2A7C160059A946 /* UCFMessageCenterViewController.m in Sources */,
 				FB120BB41ADE462F00023365 /* CircleProgressView.m in Sources */,
 				744BE8591F6BE01D00107FAA /* UCFHomeIconCollectionCell.m in Sources */,

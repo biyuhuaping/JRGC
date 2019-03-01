@@ -19,7 +19,7 @@
 @implementation Data
 
 + (NSDictionary<NSString *,id> *)modelContainerPropertyGenericClass{
-    return @{@"giftBanner" : [Giftbanner class], @"banner" : [Banner class], @"recommendBanner" : [RecommendBanner class]};
+    return @{@"giftBanner" : [Giftbanner class], @"banner" : [Banner class], @"recommendBanner" : [RecommendBanner class],@"coinBanner":[CoinBanner class]};
 }
 
 
@@ -44,6 +44,12 @@
 @end
 
 @implementation RecommendBanner
+
+
+
+@end
+
+@implementation CoinBanner
 
 
 

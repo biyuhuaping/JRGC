@@ -11,8 +11,13 @@
 #import "RCFFlowView.h"
 #import "UCFShopHListView.h"
 #import "UCFCommodityView.h"
+#import "UCFCellDataModel.h"
+#import "UCFHomeMallDataModel.h"
+#import "UIImageView+WebCache.h"
 @interface UCFShopPromotionCell()<RCFFlowViewDelegate,UCFShopHListViewDataSource,UCFShopHListViewDelegate>
-
+@property(nonatomic, strong)RCFFlowView *adCycleScrollView;
+@property(nonatomic, strong)UCFShopHListView *shopList;
+@property(nonatomic, strong)NSMutableArray  *dataArray;
 @end
 @implementation UCFShopPromotionCell
 
@@ -30,30 +35,36 @@
         whitBaseView.backgroundColor = [UIColor whiteColor];
         [self.rootLayout addSubview:whitBaseView];
         
-//        SDCycleScrollView *adCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, Screen_Width - 30, (Screen_Width - 30) * 6 /23) delegate:self placeholderImage:[UIImage imageNamed:@"banner_unlogin_default"]];
-//        adCycleScrollView.zoomType = NO;  // 是否使用缩放效果
-//        adCycleScrollView.hidesForSinglePage = YES;
-//        adCycleScrollView.autoScroll = NO;
-//        adCycleScrollView.infiniteLoop = NO;
-//        adCycleScrollView.isHideImageCorner = YES;
-//        adCycleScrollView.imageURLStringsGroup = @[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"];
-//        [whitBaseView addSubview:adCycleScrollView];
         RCFFlowView *adCycleScrollView = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 30,([UIScreen mainScreen].bounds.size.width - 30) * 6 /23)];
         adCycleScrollView.delegate = self;
         adCycleScrollView.isHideImageCorner = YES;
-        adCycleScrollView.advArray = [NSMutableArray arrayWithArray:@[@"https://fore.9888.cn/cms/uploadfile/2017/0619/20170619055317291.jpg"]];
+       
         [whitBaseView addSubview:adCycleScrollView];
         [adCycleScrollView reloadCycleView];
-        
+        self.adCycleScrollView = adCycleScrollView;
         self.rootLayout.useFrame = YES;
     
         UCFShopHListView *shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(adCycleScrollView.frame), CGRectGetWidth(whitBaseView.frame), 160)];
         shopList.horizontalSpace = 1.0f;
         shopList.dataSource = self;
         shopList.delegate = self;
-        [whitBaseView addSubview:shopList];        
+        [whitBaseView addSubview:shopList];
+        self.shopList = shopList;
+        
     }
     return self;
+}
+- (void)reflectDataModel:(id)model
+{
+    UCFCellDataModel *dataModel = model;
+    if ([dataModel.modelType isEqualToString:@"mall"]) {
+        self.adCycleScrollView.advArray = dataModel.data1;
+        [self.adCycleScrollView reloadCycleView];
+        
+        self.dataArray = dataModel.data2;
+        [self.shopList reloadView];
+        
+    }
 }
 - (CGSize)sizeForPageFlowView:(RCFFlowView *)viwe
 {
@@ -61,7 +72,7 @@
 }
 - (NSInteger)numberOfListView:(UCFShopHListView *)shopListView
 {
-    return 10;
+    return self.dataArray.count;
 }
 - (CGSize)shopHListView:(UCFShopHListView *)shopListViewCommodityImageSize
 {
@@ -70,7 +81,11 @@
 
 - (UIView *)shopHListView:(UCFShopHListView *)shopListView cellForRowAtIndex:(NSInteger)index
 {
+    UCFHomeMallrecommends *model = self.dataArray[index];
     UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, 115, 160) withHeightOfCommodity:115];
+    [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:nil];
+    view.shopName.text = model.title;
+    view.shopValue.text = model.price;
     return view;
 }
 
