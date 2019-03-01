@@ -29,11 +29,11 @@
 @property (nonatomic, strong) UIView *firstView;    //申请view
 @property (nonatomic, strong) UIView *secondView;   //设置额度view
 @property (nonatomic, strong) UIView *thirdView;    //成功view
-@property (nonatomic, strong) UILabel *tipLabel;    //蓝色提醒lable
+//@property (nonatomic, strong) UILabel *tipLabel;    //蓝色提醒lable
 @property (nonatomic, strong) UIScrollView *baseScrollView;
 @property (nonatomic, strong) NSArray *quotaArr;    //额度数组
 @property (nonatomic, copy)   NSString  *batchInvestment;//先前选中的金额
-
+@property (nonatomic, strong) UIView *tipBaseView; //提示框底视图
 @end
 
 @implementation UCFBatchInvestmentViewController
@@ -79,12 +79,21 @@
     UIView *tipView = [[UIView alloc] initWithFrame:CGRectMake(0, TITLEHEIGHT, ScreenWidth, 62)];
     tipView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:tipView];
+    self.tipBaseView = tipView;
     
     UIView *sepView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
     sepView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
     [tipView addSubview:sepView];
+
+}
+- (void)cereateTipView:(NSString *)tipString;
+{
+    for (UIView *view in self.tipBaseView.subviews) {
+        [view removeFromSuperview];
+    }
     
-    CGFloat strWidth = [Common getStrWitdth:@"批量出借授权开启后可一次性出借多个小额项目" Font:13].width;
+    NSString *tipStr = tipString;
+    CGFloat strWidth = [Common getStrWitdth:tipStr Font:13].width;
     CGFloat baseRoundViewWidth = strWidth + 30 * 2;
     
     UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake((ScreenWidth - baseRoundViewWidth)/2, 62 - 27, baseRoundViewWidth, 27)];
@@ -92,27 +101,27 @@
     borderView.layer.cornerRadius = 27.0/2;
     borderView.layer.borderWidth = 1.0f;
     borderView.layer.borderColor = [Color color:PGColorOptionTitlerRead].CGColor;
-    [tipView addSubview:borderView];
+    [self.tipBaseView addSubview:borderView];
     
-    _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake((CGRectGetWidth(borderView.frame) - (strWidth + 10))/2 , 0, strWidth + 10, 27)];
-    _tipLabel.backgroundColor = [UIColor clearColor];
-    _tipLabel.font = [UIFont systemFontOfSize:13.0f];
-    _tipLabel.text = @"批量出借授权开启后可一次性出借多个小额项目";
-    _tipLabel.textColor = [Color color:PGColorOptionTitlerRead];
-    _tipLabel.textAlignment = NSTextAlignmentCenter;
-    [borderView addSubview:_tipLabel];
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake((CGRectGetWidth(borderView.frame) - (strWidth + 10))/2 , 0, strWidth + 10, 27)];
+    tipLabel.backgroundColor = [UIColor clearColor];
+    tipLabel.font = [UIFont systemFontOfSize:13.0f];
+    tipLabel.text = tipStr;
+    tipLabel.textColor = [Color color:PGColorOptionTitlerRead];
+    tipLabel.textAlignment = NSTextAlignmentCenter;
+    [borderView addSubview:tipLabel];
     
     UIImageView *iconView1 = [[UIImageView alloc] init];
     iconView1.image = [UIImage imageNamed:@"decorative_dots"];
-    iconView1.frame = CGRectMake(CGRectGetMinX(_tipLabel.frame) - 6, (27 - 6)/2, 6, 6);
+    iconView1.frame = CGRectMake(CGRectGetMinX(tipLabel.frame) - 6, (27 - 6)/2, 6, 6);
     [borderView addSubview:iconView1];
     
     UIImageView *iconView2 = [[UIImageView alloc] init];
     iconView2.image = [UIImage imageNamed:@"decorative_dots"];
-    iconView2.frame = CGRectMake(CGRectGetMaxX(_tipLabel.frame), (27 - 6)/2, 6, 6);
+    iconView2.frame = CGRectMake(CGRectGetMaxX(tipLabel.frame), (27 - 6)/2, 6, 6);
     [borderView addSubview:iconView2];
-
 }
+
 //主要内容下面是个滚动视图
 - (void)initScrollView
 {
@@ -202,27 +211,38 @@
     NSString *totalStr = [NSString stringWithFormat:@"单次最高限额："];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
     NZLabel *label1 = [[NZLabel alloc] init];
-    label1.font = [UIFont systemFontOfSize:13.0f];
+    label1.font = [UIFont systemFontOfSize:16.0f];
     label1.numberOfLines = 0;
-    label1.frame = CGRectMake(ScreenWidth + 15, 15, ScreenWidth-25, size.height);
+    label1.frame = CGRectMake(ScreenWidth + 15, 15, ScreenWidth - 25, size.height);
     label1.text = totalStr;
     label1.userInteractionEnabled = YES;
-    label1.textColor = UIColorWithRGB(0x4aa1f9);
+    label1.textColor = UIColorWithRGB(0x363333);
     [_baseScrollView addSubview:label1];
     
     [self initSecondBtnView:CGRectGetMaxY(label1.frame) + 15];
 }
 - (void)initThirdSectionView
 {
-    UIImageView *sucessImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * 2 + (ScreenWidth - 220)/2, (CGRectGetHeight(_baseScrollView.frame) - 99 - 30)/2 - 50, 220, 99)];
+    CGFloat imgWidth = CGRectGetWidth(_baseScrollView.frame) - 43 * 2;
+    CGFloat imgHeight = imgWidth * 37 / 58;
+    
+    UIImageView *sucessImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * 2 + 43, 40, imgWidth, imgHeight)];
     sucessImageView.image = [UIImage imageNamed:@"automatic_success"];
     [_baseScrollView addSubview:sucessImageView];
     
-    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(sucessImageView.frame) + 20, ScreenWidth, 16)];
-    tipLabel.text = [NSString stringWithFormat:@"单次最高限额：%@",[selectButton titleForState:UIControlStateNormal]];
+    UILabel *tipLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2 , CGRectGetMaxY(sucessImageView.frame) + 21, ScreenWidth, 20)];
+    tipLab.textColor = [Color color:PGColorOptionTitleBlack];
+    tipLab.textAlignment = NSTextAlignmentCenter;
+    tipLab.font = [Color gc_Font:18];
+    tipLab.text = @"批量出借已经开启";
+    [_baseScrollView addSubview:tipLab];
+    
+    
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(tipLab.frame) + 10, ScreenWidth, 16)];
+    tipLabel.text = [NSString stringWithFormat:@"批量出借单次最高限额：%@",[selectButton titleForState:UIControlStateNormal]];
     tipLabel.textAlignment = NSTextAlignmentCenter;
-    tipLabel.font = [UIFont systemFontOfSize:13.0f];
-    tipLabel.textColor = UIColorWithRGB(0x5b6993);
+    tipLabel.font = [UIFont systemFontOfSize:15.0f];
+    tipLabel.textColor = [Color color:PGColorOptionTitleGray];
     [_baseScrollView addSubview:tipLabel];
     
     
@@ -234,6 +254,7 @@
     CGFloat statrOrendLength = ScreenWidth + 15.0f;
     CGFloat btnWidth = (ScreenWidth - 15.0f * 2 - 10.0f * 2)/3;
     CGFloat btnHeight = (btnWidth * 7) / 9;
+    CGFloat btnMaxY = 0;
     for (int i = 0; i < self.quotaArr.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(statrOrendLength + (btnWidth + intervalLength) * (i%3) ,offY + (i/3) * (btnHeight + intervalLength), btnWidth, btnHeight);
@@ -262,9 +283,28 @@
                 selectButton = button;
             }
         }
-
+        
+        if (i == self.quotaArr.count -1) {
+            btnMaxY = CGRectGetMaxY(button.frame);
+        }
+        
         [_baseScrollView addSubview:button];
     }
+    
+    UIView *bottomBackView = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth, btnMaxY + 20, ScreenWidth , CGRectGetHeight(_baseScrollView.frame) - btnMaxY)];
+    bottomBackView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+    [_baseScrollView addSubview:bottomBackView];
+    
+    UIButton *submitBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [submitBtn2 setTitle:@"提交" forState:UIControlStateNormal];
+    submitBtn2.frame = CGRectMake(ScreenWidth + 25, btnMaxY + 40, ScreenWidth - 50, 40);
+    UIImage *image = [UIImage gc_styleImageSize:submitBtn2.size];
+    [submitBtn2 setBackgroundImage:image forState:UIControlStateNormal];
+    [submitBtn2 addTarget:self action:@selector(checkIsCanInvest:) forControlEvents:UIControlEventTouchUpInside];
+    submitBtn2.clipsToBounds = YES;
+    submitBtn2.layer.cornerRadius = 20;
+    [_baseScrollView addSubview:submitBtn2];
+    
 }
 - (void)changeBtnState:(UIButton *)button
 {
@@ -367,12 +407,12 @@
 }
 //初始化标题view
 - (void)initView {
-    NSString *firstStr = [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买授权开启后可一次性出借多个小额项目":  @"批量出借授权开启后可一次性出借多个小额项目";
-     NSString *secondStr =  @"为保证您的资金安全，请合理选择";
-    NSString *thirdStr =  [UserInfoSingle sharedManager].isSubmitTime ?@"批量购买授权已经开启":@"批量出借授权已经开启";
+    NSString *firstStr = @"批量出借授权开启后可一次性出借多个小额项目";
+    NSString *secondStr = @"为保证您的资金安全，请合理选择出借金额";
+//    NSString *thirdStr = @"批量出借授权已经开启";
     switch (self.isStep) {
         case 1:{
-            _tipLabel.text = firstStr;
+            [self cereateTipView:firstStr];
             _baseScrollView.contentOffset = CGPointMake(0, 0);
 
             //显示开启授权
@@ -380,14 +420,16 @@
         }
             break;
         case 2:{
-            _tipLabel.text = secondStr;
+             [self cereateTipView:secondStr];
             _baseScrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
             //显示设置限额
             [self showDepositoryView];
         }
             break;
         case 3:{
-            _tipLabel.text = thirdStr;
+//            [self cereateTipView: thirdStr];
+            self.tipBaseView.hidden = YES;
+            self.view.backgroundColor = [UIColor whiteColor];
             _baseScrollView.contentOffset = CGPointMake(SCREEN_WIDTH * 2, 0);
             //显示授权完成
             [self showPassWordView];
@@ -412,7 +454,7 @@
     [self saveBeforeView];
     [self passWordBeforeView];
 }
-- (void)saveView {//徽商选中的样子
+- (void)saveView {//设置限额
     self.secondView.backgroundColor = [UIColor whiteColor];
     for (UIView *views  in self.secondView.subviews) {
         if ([views isKindOfClass:[UIImageView class]]) {
@@ -420,7 +462,7 @@
                 ((UIImageView *)views).image = [UIImage imageNamed:@"ic_step_2_normal"];
             }
             else {
-                ((UIImageView *)views).image = [UIImage imageNamed:@"step_arrow_gray"];
+                ((UIImageView *)views).image = [UIImage imageNamed:@"step_arrow_transparent"];
             }
         }
         if ([views isKindOfClass:[UILabel class]]) {
@@ -480,7 +522,7 @@
                 ((UIImageView *)views).image = [UIImage imageNamed:@"authentication_icon_finish"];
             }
             else {
-                ((UIImageView *)views).image = [UIImage imageNamed:@"step_arrow_gray"];
+                ((UIImageView *)views).image = [UIImage imageNamed:@"step_arrow_transparent"];
             }
         }
         if ([views isKindOfClass:[UILabel class]]) {
@@ -496,7 +538,7 @@
                 ((UIImageView *)views).image = [UIImage imageNamed:@"ic_step_3"];
             }
             else {
-                ((UIImageView *)views).image = [UIImage imageNamed:@"step_arrow_gray"];
+                ((UIImageView *)views).image = [UIImage imageNamed:@"step_arrow_transparent"];
             }
         }
         if ([views isKindOfClass:[UILabel class]]) {
@@ -624,7 +666,7 @@
                  UCFBatchSetNumWebViewController *webView = [[UCFBatchSetNumWebViewController alloc]initWithNibName:@"UCFBatchSetNumWebViewController" bundle:nil];
                  webView.url = urlStr;
                  webView.webDataDic =dataDict;
-                 webView.navTitle = [UserInfoSingle sharedManager].isSubmitTime ?  @"批量购买授权":@"批量出借授权";
+                 webView.navTitle = @"批量出借授权";
                  webView.sourceType = _sourceType;
                  webView.accoutType = self.accoutType;
                  [self.navigationController pushViewController:webView animated:YES];
