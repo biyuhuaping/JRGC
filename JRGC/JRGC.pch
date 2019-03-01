@@ -68,6 +68,8 @@
 
 #import "AFNetworking.h"
 #import "NSObject+FBKVOController.h"
+#import "NSString+Tool.h"
+
 
 #define XPOS 15
 #define YPOS 25

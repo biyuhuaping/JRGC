@@ -20,13 +20,13 @@
 - (UIView *)setupPlaceHolder;
 
 /**
- *  下拉刷新完成的回调
+ *  下拉刷新的回调
  *
  */
 - (void)refreshTableViewHeader;
 
 /**
- *  上提刷新完成的回调
+ *  上提刷新的回调
  *
  */
 - (void)refreshTableViewFooter;

@@ -58,12 +58,12 @@
 {
     if (nil == _bankCardNumberLabel) {
         _bankCardNumberLabel = [NZLabel new];
-        _bankCardNumberLabel.leftPos.equalTo(self.bankCardBKImageView.leftPos).offset(19);
-        _bankCardNumberLabel.rightPos.equalTo(self.bankCardBKImageView.rightPos).offset(19);
+        _bankCardNumberLabel.leftPos.equalTo(self.bankCardBKImageView.leftPos).offset(29);
+        _bankCardNumberLabel.rightPos.equalTo(self.bankCardBKImageView.rightPos).offset(29);
         _bankCardNumberLabel.topPos.equalTo(self.bankCardBKImageView.topPos).offset(PGScreenWidth *0.573*0.437);
         _bankCardNumberLabel.textAlignment = NSTextAlignmentLeft;
-        _bankCardNumberLabel.font = [Color gc_Font:12.0];
-        _bankCardNumberLabel.textColor = [Color color:PGColorOptionTitleGray];
+        _bankCardNumberLabel.font = [Color gc_Font:25.0];
+        _bankCardNumberLabel.textColor = [Color color:PGColorOptionThemeWhite];
         _bankCardNumberLabel.text = @"     ";
         [_bankCardNumberLabel sizeToFit];
         
@@ -74,7 +74,7 @@
 {
     if (nil == _bankDepositLabel) {
         _bankDepositLabel = [NZLabel new];
-        _bankDepositLabel.bottomPos.equalTo(self.bankCardBKImageView.bottomPos).offset(-50);
+        _bankDepositLabel.bottomPos.equalTo(self.bankCardBKImageView.bottomPos).offset(40);
         _bankDepositLabel.leftPos.equalTo(self.bankCardNumberLabel.leftPos);
         _bankDepositLabel.textAlignment = NSTextAlignmentLeft;
         _bankDepositLabel.font = [Color gc_Font:12.0];
@@ -105,7 +105,7 @@
 {
     if (nil == _openAccountLabel) {
         _openAccountLabel = [NZLabel new];
-        _openAccountLabel.bottomPos.equalTo(self.bankDepositLabel.topPos).offset(-22);
+        _openAccountLabel.bottomPos.equalTo(self.bankDepositLabel.topPos);
         _openAccountLabel.leftPos.equalTo(self.bankCardNumberLabel.leftPos);
         _openAccountLabel.textAlignment = NSTextAlignmentLeft;
         _openAccountLabel.font = self.bankDepositLabel.font;

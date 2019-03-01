@@ -267,7 +267,7 @@
 {
     if(indexPath.section == ([self.itemsData count]-1))
     {
-        return 39;
+        return 50;
     }else{
         return 44;
     }

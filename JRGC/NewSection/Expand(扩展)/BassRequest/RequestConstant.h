@@ -39,4 +39,6 @@ static NSString *GetHSAccountInfoApiURL = @"api/homePage/v2/getHSAccountInfo.jso
 
 static NSString *UserAccountInfoApiURL = @"api/userAccount/v2/userAccountInfo.json"; //P2P或尊享账户信息
 
+static NSString *GetHSAccountInfoBillApiURL = @"api/homePage/v2/getHSAccountInfoBill.json";  //徽商账户资金流水
+
 #endif /* RequestConstant_h */

@@ -35,4 +35,22 @@
     
     return temp;
 }
+//银行卡每隔4位加空格
++ (NSString *)dealWithString:(NSString *)number
+{
+    NSString *doneTitle = @"";
+    int count = 0;
+    for (int i = 0; i < number.length; i++) {
+        
+        count++;
+        doneTitle = [doneTitle stringByAppendingString:[number substringWithRange:NSMakeRange(i, 1)]];
+        if (count == 4) {
+            doneTitle = [NSString stringWithFormat:@"%@ ", doneTitle];
+            count = 0;
+        }
+    }
+    NSLog(@"%@", doneTitle);
+    return doneTitle;
+}
+
 @end

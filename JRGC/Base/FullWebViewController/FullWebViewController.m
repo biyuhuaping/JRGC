@@ -330,4 +330,32 @@
     //vc.isToken = NO;
     //[self.navigationController pushViewController:vc animated:YES];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//2 代码相关
+///*A*网页操控相关方法**/
+//[self.webView goBack];      回退
+//[self.webView goForward];   前进
+//[self.webView reload];      刷新
+//
+////设置是否能够前进和回退
+//self.goBackBtn.enabled = webView.canGoBack;
+//self.fowardBtn.enabled = webView.canGoForward;
+//
+///*B*常用的属性设置**/
+//self.webView.scalesPageToFit = YES; 设置网页自动适应
+//self.webView.dataDetectorTypes = UIDataDetectorTypeAll;
+//设置检测网页中的格式类型，all表示检测所有类型包括超链接、电话号码、地址等。
+//self.webView.scrollView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0);
+
 @end

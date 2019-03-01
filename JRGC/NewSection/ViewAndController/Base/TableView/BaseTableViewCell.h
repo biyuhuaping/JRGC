@@ -15,10 +15,16 @@
 @end
 
 @interface BaseTableViewCell : UITableViewCell
+
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 @property (nonatomic, weak) id bc;
 @property (nonatomic, weak) id <BaseTableViewCellDelegate>deleage;
+@property (nonatomic, assign, getter = isLastRowInSection) BOOL lastRowInSection;
+
 - (void)refreshCellData:(id)data;
 
 - (void)getBassController:(id)bassController;
+
+- (void)cellLineHidden:(BOOL)isCellLineHidden;
+
 @end

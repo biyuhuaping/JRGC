@@ -60,21 +60,32 @@
         return;
     }
 }
-
-
-- (void)aaaaa
+- (void)setLastRowInSection:(BOOL)lastRowInSection
 {
-    //    UIView *v = [sender superview];//获取父类view
-    //    UIView *v1 = [v superview];
+    _lastRowInSection = lastRowInSection;
+    //当是最后一行的时候，隐藏横线
+    [self cellLineHidden:_lastRowInSection];
     
-    for (UIView* next = [self superview]; next; next = next.superview) {
-        UIResponder* nextResponder = [next nextResponder];
-        if ([nextResponder isKindOfClass:[UITableView class]]) {
-            //            UITableViewCell *cell = (UITableViewCell *)[self superview];//获取cell
-            //            NSIndexPath *indexPathAll = [(UITableView *)nextResponder indexPathForCell:cell];//获取cell对应的section
-            
-        }
-    }
 }
+
+- (void)cellLineHidden:(BOOL)isCellLineHidden
+{
+    
+}
+
+//- (void)aaaaa
+//{
+//    //    UIView *v = [sender superview];//获取父类view
+//    //    UIView *v1 = [v superview];
+//    
+//    for (UIView* next = [self superview]; next; next = next.superview) {
+//        UIResponder* nextResponder = [next nextResponder];
+//        if ([nextResponder isKindOfClass:[UITableView class]]) {
+//            //            UITableViewCell *cell = (UITableViewCell *)[self superview];//获取cell
+//            //            NSIndexPath *indexPathAll = [(UITableView *)nextResponder indexPathForCell:cell];//获取cell对应的section
+//            
+//        }
+//    }
+//}
 
 @end

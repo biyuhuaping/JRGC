@@ -1037,6 +1037,7 @@
 		E34B5E8A22253C080027718C /* UCFMicroBankUserAccountInfoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E34B5E8922253C080027718C /* UCFMicroBankUserAccountInfoAPI.m */; };
 		E34B5E8D222540A90027718C /* UCFMicroBankDepositoryAccountHomeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E34B5E8C222540A90027718C /* UCFMicroBankDepositoryAccountHomeCellView.m */; };
 		E34B5E91222541DC0027718C /* BaseScrollview.m in Sources */ = {isa = PBXBuildFile; fileRef = E34B5E90222541DC0027718C /* BaseScrollview.m */; };
+		E34B5E99222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E34B5E98222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m */; };
 		E352FD4321E4AF0B00617AB7 /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCE721E4AF0A00617AB7 /* Toast.m */; };
 		E352FD4421E4AF0B00617AB7 /* HUDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCE821E4AF0A00617AB7 /* HUDManager.m */; };
 		E352FD4521E4AF0B00617AB7 /* PageControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCEC21E4AF0A00617AB7 /* PageControlView.m */; };
@@ -1095,6 +1096,8 @@
 		E352FDCB21E4B08D00617AB7 /* YTKBatchRequest+AnimatingAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FDB921E4B08C00617AB7 /* YTKBatchRequest+AnimatingAccessory.m */; };
 		E352FDCC21E4B08D00617AB7 /* YTKChainRequest+AnimatingAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FDBA21E4B08C00617AB7 /* YTKChainRequest+AnimatingAccessory.m */; };
 		E352FDCD21E4B08D00617AB7 /* YTKBaseRequest+AnimatingAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FDBB21E4B08C00617AB7 /* YTKBaseRequest+AnimatingAccessory.m */; };
+		E36BD5D6222927E100ED32E3 /* UCFMicroBankOpenAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E36BD5D5222927E100ED32E3 /* UCFMicroBankOpenAccountViewController.m */; };
+		E36BD5D92229310000ED32E3 /* UCFMicroBankOpenAccountOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E36BD5D82229310000ED32E3 /* UCFMicroBankOpenAccountOptionView.m */; };
 		E36EB87021F815430093915D /* CQCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB86E21F815420093915D /* CQCountDownButton.m */; };
 		E36EB87321F8158F0093915D /* LineOfSendVerifyCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB87121F8158F0093915D /* LineOfSendVerifyCodeView.m */; };
 		E36EB87621F84CCB0093915D /* UCFRegisterSendCodeApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB87521F84CCB0093915D /* UCFRegisterSendCodeApi.m */; };
@@ -1141,6 +1144,9 @@
 		E3C1EF2721EDE2200014658E /* UCFMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C1EF2621EDE2200014658E /* UCFMineItemCell.m */; };
 		E3C66A9D21E5FB0A001017DA /* UCFRechargeAndCashView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C66A9A21E5FB09001017DA /* UCFRechargeAndCashView.m */; };
 		E3C66A9E21E5FB0A001017DA /* UCFRechargeAndCashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C66A9B21E5FB09001017DA /* UCFRechargeAndCashView.xib */; };
+		E3C9E9BB22266CE2003F6AC5 /* UCFMicroBankDepositoryAccountSeriaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C9E9BA22266CE2003F6AC5 /* UCFMicroBankDepositoryAccountSeriaCell.m */; };
+		E3C9E9C1222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C9E9C0222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m */; };
+		E3C9E9C422267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C9E9C322267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m */; };
 		E3D6D520221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D6D51F221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m */; };
 		E3E05C5C1DD07D710066B65C /* UCFCouponExchangeToFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E05C5A1DD07D710066B65C /* UCFCouponExchangeToFriends.m */; };
 		E3E05C5D1DD07D710066B65C /* UCFCouponExchangeToFriends.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E05C5B1DD07D710066B65C /* UCFCouponExchangeToFriends.xib */; };
@@ -2990,6 +2996,8 @@
 		E34B5E8C222540A90027718C /* UCFMicroBankDepositoryAccountHomeCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryAccountHomeCellView.m; sourceTree = "<group>"; };
 		E34B5E8F222541DC0027718C /* BaseScrollview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseScrollview.h; sourceTree = "<group>"; };
 		E34B5E90222541DC0027718C /* BaseScrollview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseScrollview.m; sourceTree = "<group>"; };
+		E34B5E97222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryAccountSeriaViewController.h; sourceTree = "<group>"; };
+		E34B5E98222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryAccountSeriaViewController.m; sourceTree = "<group>"; };
 		E352FC9021E4ABA300617AB7 /* Macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		E352FCE621E4AF0A00617AB7 /* HUDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDManager.h; sourceTree = "<group>"; };
 		E352FCE721E4AF0A00617AB7 /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toast.m; sourceTree = "<group>"; };
@@ -3111,6 +3119,10 @@
 		E352FDB921E4B08C00617AB7 /* YTKBatchRequest+AnimatingAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YTKBatchRequest+AnimatingAccessory.m"; sourceTree = "<group>"; };
 		E352FDBA21E4B08C00617AB7 /* YTKChainRequest+AnimatingAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YTKChainRequest+AnimatingAccessory.m"; sourceTree = "<group>"; };
 		E352FDBB21E4B08C00617AB7 /* YTKBaseRequest+AnimatingAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YTKBaseRequest+AnimatingAccessory.m"; sourceTree = "<group>"; };
+		E36BD5D4222927E100ED32E3 /* UCFMicroBankOpenAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankOpenAccountViewController.h; sourceTree = "<group>"; };
+		E36BD5D5222927E100ED32E3 /* UCFMicroBankOpenAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankOpenAccountViewController.m; sourceTree = "<group>"; };
+		E36BD5D72229310000ED32E3 /* UCFMicroBankOpenAccountOptionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankOpenAccountOptionView.h; sourceTree = "<group>"; };
+		E36BD5D82229310000ED32E3 /* UCFMicroBankOpenAccountOptionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankOpenAccountOptionView.m; sourceTree = "<group>"; };
 		E36EB86E21F815420093915D /* CQCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQCountDownButton.m; sourceTree = "<group>"; };
 		E36EB86F21F815420093915D /* CQCountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQCountDownButton.h; sourceTree = "<group>"; };
 		E36EB87121F8158F0093915D /* LineOfSendVerifyCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineOfSendVerifyCodeView.m; sourceTree = "<group>"; };
@@ -3194,6 +3206,12 @@
 		E3C66A9A21E5FB09001017DA /* UCFRechargeAndCashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRechargeAndCashView.m; sourceTree = "<group>"; };
 		E3C66A9B21E5FB09001017DA /* UCFRechargeAndCashView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRechargeAndCashView.xib; sourceTree = "<group>"; };
 		E3C66A9C21E5FB09001017DA /* UCFRechargeAndCashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRechargeAndCashView.h; sourceTree = "<group>"; };
+		E3C9E9B922266CE2003F6AC5 /* UCFMicroBankDepositoryAccountSeriaCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryAccountSeriaCell.h; sourceTree = "<group>"; };
+		E3C9E9BA22266CE2003F6AC5 /* UCFMicroBankDepositoryAccountSeriaCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryAccountSeriaCell.m; sourceTree = "<group>"; };
+		E3C9E9BF222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryGetHSAccountInfoBillApi.h; sourceTree = "<group>"; };
+		E3C9E9C0222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryGetHSAccountInfoBillApi.m; sourceTree = "<group>"; };
+		E3C9E9C222267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryGetHSAccountInfoBillModel.h; sourceTree = "<group>"; };
+		E3C9E9C322267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryGetHSAccountInfoBillModel.m; sourceTree = "<group>"; };
 		E3D6D51E221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryAccountHomeViewController.h; sourceTree = "<group>"; };
 		E3D6D51F221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryAccountHomeViewController.m; sourceTree = "<group>"; };
 		E3E05C591DD07D710066B65C /* UCFCouponExchangeToFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCouponExchangeToFriends.h; sourceTree = "<group>"; };
@@ -7416,6 +7434,53 @@
 			path = Scrollview;
 			sourceTree = "<group>";
 		};
+		E34B5E92222578840027718C /*  UCFMicroBankDepositoryAccountSerial(微商存管账户流水) */ = {
+			isa = PBXGroup;
+			children = (
+				E34B5E93222578840027718C /* Controller */,
+				E34B5E94222578840027718C /* Model */,
+				E34B5E95222578840027718C /* View */,
+				E34B5E96222578840027718C /* Api */,
+			);
+			path = " UCFMicroBankDepositoryAccountSerial(微商存管账户流水)";
+			sourceTree = "<group>";
+		};
+		E34B5E93222578840027718C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E34B5E97222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.h */,
+				E34B5E98222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E34B5E94222578840027718C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E3C9E9C222267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.h */,
+				E3C9E9C322267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E34B5E95222578840027718C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E3C9E9B922266CE2003F6AC5 /* UCFMicroBankDepositoryAccountSeriaCell.h */,
+				E3C9E9BA22266CE2003F6AC5 /* UCFMicroBankDepositoryAccountSeriaCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E34B5E96222578840027718C /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				E3C9E9BF222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.h */,
+				E3C9E9C0222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		E352FC8C21E4ABA300617AB7 /* Constants(全局配置&宏) */ = {
 			isa = PBXGroup;
 			children = (
@@ -7900,6 +7965,49 @@
 			path = Accessory;
 			sourceTree = "<group>";
 		};
+		E36BD5CF222927BF00ED32E3 /*  UCFMicroBankOpenAccount */ = {
+			isa = PBXGroup;
+			children = (
+				E36BD5D0222927BF00ED32E3 /* Controller */,
+				E36BD5D1222927BF00ED32E3 /* Model */,
+				E36BD5D2222927BF00ED32E3 /* View */,
+				E36BD5D3222927BF00ED32E3 /* Api */,
+			);
+			path = " UCFMicroBankOpenAccount";
+			sourceTree = "<group>";
+		};
+		E36BD5D0222927BF00ED32E3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E36BD5D4222927E100ED32E3 /* UCFMicroBankOpenAccountViewController.h */,
+				E36BD5D5222927E100ED32E3 /* UCFMicroBankOpenAccountViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E36BD5D1222927BF00ED32E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E36BD5D2222927BF00ED32E3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E36BD5D72229310000ED32E3 /* UCFMicroBankOpenAccountOptionView.h */,
+				E36BD5D82229310000ED32E3 /* UCFMicroBankOpenAccountOptionView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E36BD5D3222927BF00ED32E3 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		E36EB86D21F815420093915D /* CQCountDownButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -8137,6 +8245,7 @@
 		E3D6D513221E48F000261622 /* MicroBank(微商银行模块) */ = {
 			isa = PBXGroup;
 			children = (
+				E36BD5CF222927BF00ED32E3 /*  UCFMicroBankOpenAccount */,
 				E3D6D514221E4A1C00261622 /*  UCFMicroBankDepositoryAccount(微商银行存管账户) */,
 			);
 			path = "MicroBank(微商银行模块)";
@@ -8145,12 +8254,13 @@
 		E3D6D514221E4A1C00261622 /*  UCFMicroBankDepositoryAccount(微商银行存管账户) */ = {
 			isa = PBXGroup;
 			children = (
-				E3D6D519221E4ABB00261622 /* MicroBankHome */,
+				E34B5E92222578840027718C /*  UCFMicroBankDepositoryAccountSerial(微商存管账户流水) */,
+				E3D6D519221E4ABB00261622 /* MicroBankHome(存管账户首页) */,
 			);
 			path = " UCFMicroBankDepositoryAccount(微商银行存管账户)";
 			sourceTree = "<group>";
 		};
-		E3D6D519221E4ABB00261622 /* MicroBankHome */ = {
+		E3D6D519221E4ABB00261622 /* MicroBankHome(存管账户首页) */ = {
 			isa = PBXGroup;
 			children = (
 				E3D6D51A221E4ABB00261622 /* Controller */,
@@ -8158,7 +8268,7 @@
 				E3D6D51C221E4ABB00261622 /* View */,
 				E3D6D51D221E4ABB00261622 /* Api */,
 			);
-			path = MicroBankHome;
+			path = "MicroBankHome(存管账户首页)";
 			sourceTree = "<group>";
 		};
 		E3D6D51A221E4ABB00261622 /* Controller */ = {
@@ -9199,6 +9309,7 @@
 				A830DE851F8DDB0D003855B9 /* UCFCalendarModularDayCell.xib in Sources */,
 				332B6062221F9558008893EF /* HQImagePageControl.m in Sources */,
 				A830DE841F8DDAF1003855B9 /* UCFCalendarModularDetailHeaderView.xib in Sources */,
+				E34B5E99222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m in Sources */,
 				A830DE831F8DDA6A003855B9 /* UCFCalendarModularHeaderView.xib in Sources */,
 				74877CC81FB2AB8900F32428 /* UCFHandingInViewController.m in Sources */,
 				A8FF32E41F1666D000066A80 /* UCFGoldBidSuccessViewController.m in Sources */,
@@ -9418,6 +9529,7 @@
 				741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */,
 				FB7EDE3F1D6BFCD700C3E924 /* UCFBaseViewController.m in Sources */,
 				E352FDC921E4B08D00617AB7 /* YTKRequest.m in Sources */,
+				E3C9E9C1222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m in Sources */,
 				4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */,
 				E31BD53721C0C10100D3651F /* TYAlertController+TransitionAnimate.m in Sources */,
 				E352FD4E21E4AF0B00617AB7 /* UCFInvestmentCouponInstructionsView.m in Sources */,
@@ -9437,6 +9549,7 @@
 				74270D1E1EC595ED00F9419B /* UCFRebateCell.m in Sources */,
 				74EB306F1B0E004900D27BA9 /* UCFBankModel.m in Sources */,
 				840A794A1C2A80B60059A946 /* UCFMessageSettingViewController.m in Sources */,
+				E36BD5D6222927E100ED32E3 /* UCFMicroBankOpenAccountViewController.m in Sources */,
 				FBB685841AE4A76800F222B6 /* MJRefreshGifFooter.m in Sources */,
 				747A91151B01A46300FE2334 /* UCFInvestDetailModel.m in Sources */,
 				74270D451EC5960100F9419B /* UIColor+Hex.m in Sources */,
@@ -9653,6 +9766,7 @@
 				4AD6F6901AF07EF500F1B490 /* MoneyBoardCell.m in Sources */,
 				332B6060221F9558008893EF /* HQFlowView.m in Sources */,
 				4A675E3E1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m in Sources */,
+				E3C9E9BB22266CE2003F6AC5 /* UCFMicroBankDepositoryAccountSeriaCell.m in Sources */,
 				332B605F221F9558008893EF /* RCFFlowView.m in Sources */,
 				74B98C9F1F7111D100CB6A9F /* UCFMineFuncCell.m in Sources */,
 				745D37D01F3AE95900897F1A /* UCFGoldChargeOneCell.m in Sources */,
@@ -9909,6 +10023,7 @@
 				7BE45C911ADF9C4C00B955A6 /* HMSegmentedControl.m in Sources */,
 				746BBEA41AF8AEC700EBA0E7 /* UCFSelectedView.m in Sources */,
 				74BDA99F1F09F8780054403F /* DIYCalendarCell.m in Sources */,
+				E3C9E9C422267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m in Sources */,
 				E31BD53821C0C10100D3651F /* UIView+TYAutoLayout.m in Sources */,
 				E34B5E8D222540A90027718C /* UCFMicroBankDepositoryAccountHomeCellView.m in Sources */,
 				7BCE01FA1AC8FC260084C15C /* ASIHTTPRequest.m in Sources */,
@@ -9964,6 +10079,7 @@
 				7BC8AA201AD4C74200BF4660 /* UCFNormalBid.m in Sources */,
 				7BCE01F81AC8FC260084C15C /* ASIDownloadCache.m in Sources */,
 				74BDA98D1F09F6C60054403F /* FSCalendarDelegationProxy.m in Sources */,
+				E36BD5D92229310000ED32E3 /* UCFMicroBankOpenAccountOptionView.m in Sources */,
 				E352FD4721E4AF0B00617AB7 /* UCFCouponPopupModel.m in Sources */,
 				83CD843B1F13A50800227704 /* UCFProjectListModel.m in Sources */,
 				74FBC1BD1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m in Sources */,
