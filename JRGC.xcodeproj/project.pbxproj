@@ -111,6 +111,7 @@
 		3382D21B21A2698A00104CCD /* BankDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21921A2698A00104CCD /* BankDetailTableViewCell.xib */; };
 		3382D21F21A286F200104CCD /* BankLogoSectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21D21A286F200104CCD /* BankLogoSectionTableViewCell.m */; };
 		3382D22021A286F200104CCD /* BankLogoSectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21E21A286F200104CCD /* BankLogoSectionTableViewCell.xib */; };
+		33930ACE222CD9460081F894 /* UCFBatchRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33930ACD222CD9460081F894 /* UCFBatchRootModel.m */; };
 		339930A821A29BBF00C72F54 /* UCFTransferTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */; };
 		339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */; };
 		339930AD21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */; };
@@ -1469,6 +1470,8 @@
 		3382D21C21A286F200104CCD /* BankLogoSectionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankLogoSectionTableViewCell.h; sourceTree = "<group>"; };
 		3382D21D21A286F200104CCD /* BankLogoSectionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankLogoSectionTableViewCell.m; sourceTree = "<group>"; };
 		3382D21E21A286F200104CCD /* BankLogoSectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankLogoSectionTableViewCell.xib; sourceTree = "<group>"; };
+		33930ACC222CD9460081F894 /* UCFBatchRootModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBatchRootModel.h; sourceTree = "<group>"; };
+		33930ACD222CD9460081F894 /* UCFBatchRootModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBatchRootModel.m; sourceTree = "<group>"; };
 		339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTransferTableView.xib; sourceTree = "<group>"; };
 		339930A921A2B0E000C72F54 /* BankTraIntroduceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTraIntroduceTableViewCell.h; sourceTree = "<group>"; };
 		339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankTraIntroduceTableViewCell.m; sourceTree = "<group>"; };
@@ -4021,6 +4024,8 @@
 				332B6067221FFDED008893EF /* UCFNewHomeListModel.m */,
 				33397955222927E300BB40BC /* UCFHomeMallDataModel.h */,
 				33397956222927E300BB40BC /* UCFHomeMallDataModel.m */,
+				33930ACC222CD9460081F894 /* UCFBatchRootModel.h */,
+				33930ACD222CD9460081F894 /* UCFBatchRootModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -9452,6 +9457,7 @@
 				744EB7F81EE7E858003C57C4 /* UCFMicroMoneyViewController.m in Sources */,
 				744EB7F31EE7E836003C57C4 /* UCFHonorInvestViewController.m in Sources */,
 				74F490E91E5B0BD70057AC62 /* UCFMyInvestBatchCell.m in Sources */,
+				33930ACE222CD9460081F894 /* UCFBatchRootModel.m in Sources */,
 				742D50EC1F74E5E800951AE2 /* UCFMineAPIManager.m in Sources */,
 				746BBEAB1AF8E93E00EBA0E7 /* UCFCouponUseCell.m in Sources */,
 				3375F2DA22291A6E00D21FE2 /* UCFCellDataModel.m in Sources */,

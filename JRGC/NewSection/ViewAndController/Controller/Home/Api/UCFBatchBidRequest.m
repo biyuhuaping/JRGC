@@ -26,11 +26,11 @@
     return self;
 }
 - (id)requestArgument {
-    return @{@"prdClaimsId":_projectId,@"status":_statue};
+    return @{@"colPrdClaimId":_projectId,@"status":_statue};
 }
-//- (NSString *)modelClass
-//{
-//    return @"UCFBidDetailModel";
-//}
+- (NSString *)modelClass
+{
+    return @"UCFBatchRootModel";
+}
 
 @end

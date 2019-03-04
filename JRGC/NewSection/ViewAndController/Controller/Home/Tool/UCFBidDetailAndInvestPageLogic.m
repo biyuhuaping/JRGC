@@ -18,11 +18,11 @@
 #import "UCFNewProjectDetailViewController.h"
 #import "NewPurchaseBidController.h"
 #import "RiskAssessmentViewController.h"
+#import "UCFBatchBidRequest.h"
+#import "UCFCollectionDetailViewController.h"
 @implementation UCFBidDetailAndInvestPageLogic
 + (void)bidDetailAndInvestPageLogicUseDataModel:(id)bidmodel detail:(BOOL)isDetail rootViewController:(UIViewController *)controler
 {
-    
-    
     if (isDetail) {
         if ([bidmodel isKindOfClass:[UCFNewHomeListPrdlist class]]) {
             if (!SingleUserInfo.loginData.userInfo.userId) {
@@ -42,7 +42,7 @@
                 }
                 if(type == 14)
                 { //集合标详情
-                    [self gotoCollectionDetailViewContoller:model];
+                    [self gotoCollectionDetailViewContoller:model controller:controler];
                 }
                 else
                 {
@@ -139,7 +139,7 @@
                     return;
                 }
                 if (type == 14) {
-                    [self gotoCollectionDetailViewContoller:tmpModel];
+                    [self gotoCollectionDetailViewContoller:tmpModel controller:controler];
                 } else {
                     if ([tmpModel.status intValue ] != 2){
                         return;
@@ -195,35 +195,59 @@
         }
     }
 }
-+(void)gotoCollectionDetailViewContoller:(UCFNewHomeListPrdlist *)model{
++(void)gotoCollectionDetailViewContoller:(UCFNewHomeListPrdlist *)model controller:(UIViewController *)controller{
     
     
-    /*
-     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
-     self.accoutType = SelectAccoutTypeP2P;
+     NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
      __weak typeof(self) weakSelf = self;
-     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
-     NSString  *colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
-     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", colPrdClaimIdStr, @"colPrdClaimId",model.status,@"status", nil];
-     [self.cycleImageVC.presenter fetchCollectionDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
-     [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
-     NSDictionary *dic = (NSDictionary *)result;
-     NSString *rstcode = dic[@"ret"];
-     NSString *rsttext = dic[@"message"];
-     if ([rstcode intValue] == 1) {
-     
-     UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
-     collectionDetailVC.souceVC = @"P2PVC";
-     collectionDetailVC.colPrdClaimId = colPrdClaimIdStr;
-     collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
-     collectionDetailVC.accoutType = SelectAccoutTypeP2P;
-     [self.navigationController pushViewController:collectionDetailVC  animated:YES];
-     }else {
-     [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+     if ([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P control:controller]) {
+//     NSString  *colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.ID];
+//     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys: colPrdClaimIdStr, @"colPrdClaimId",model.status,@"status", nil];
+        UCFBatchBidRequest *api = [[UCFBatchBidRequest alloc] initWithProjectId:model.ID bidState:model.status];
+    
+         [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+             ShowMessage(request.responseString);
+             NSDictionary *dic = request.responseObject;
+             NSString *rstcode = dic[@"ret"];
+             NSString *rsttext = dic[@"message"];
+             if ([rstcode intValue] == 1) {
+                 
+                 UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+                 collectionDetailVC.souceVC = @"P2PVC";
+                 collectionDetailVC.colPrdClaimId = model.ID;
+                 collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
+                 collectionDetailVC.accoutType = SelectAccoutTypeP2P;
+                 collectionDetailVC.hidesBottomBarWhenPushed = YES;
+                 [controller.navigationController pushViewController:collectionDetailVC  animated:YES];
+             }
+             
+         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+             
+         }];
+         
+         [api start];
      }
-     }];
-     }
-     */
+         
+         
+//    [self.cycleImageVC.presenter fetchCollectionDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+//     [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
+//     NSDictionary *dic = (NSDictionary *)result;
+//     NSString *rstcode = dic[@"ret"];
+//     NSString *rsttext = dic[@"message"];
+//     if ([rstcode intValue] == 1) {
+//
+//     UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+//     collectionDetailVC.souceVC = @"P2PVC";
+//     collectionDetailVC.colPrdClaimId = colPrdClaimIdStr;
+//     collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
+//     collectionDetailVC.accoutType = SelectAccoutTypeP2P;
+//     [self.navigationController pushViewController:collectionDetailVC  animated:YES];
+//     }else {
+//     [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+//     }
+//     }];
+//     }
+
 }
 + (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout control:(UIViewController *)control;
 {
