@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class NoticeCenterModelData,NoticeCenterNoicepage,NoticePagination,NoticeResult;
 @interface NoticeCenterModel : NSObject
 
-@property (nonatomic, assign) CGFloat code;
+@property (nonatomic, assign) NSInteger code;
 
 @property (nonatomic, copy) NSString *message;
 
-@property (nonatomic, assign) CGFloat ver;
+@property (nonatomic, assign) NSInteger ver;
 
 @property (nonatomic, strong) NoticeCenterModelData *data;
 
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @interface NoticeCenterModelData : NSObject
 
-@property (nonatomic, strong) NoticeCenterNoicepage *noicePage;
+@property (nonatomic, strong) NoticeCenterNoicepage *pageData;
 
 @end
 
@@ -42,17 +42,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL hasNextPage;
 
-@property (nonatomic, assign) CGFloat totalCount;
+@property (nonatomic, assign) NSInteger totalCount;
 
-@property (nonatomic, assign) CGFloat totalPage;
+@property (nonatomic, assign) NSInteger totalPage;
 
 @property (nonatomic, assign) BOOL hasPrev5Page;
 
-@property (nonatomic, assign) CGFloat prevPage;
+@property (nonatomic, assign) NSInteger prevPage;
 
-@property (nonatomic, assign) CGFloat nextPage;
+@property (nonatomic, assign) NSInteger nextPage;
 
-@property (nonatomic, assign) CGFloat currentlyPageFirstResoultIndex;
+@property (nonatomic, assign) NSInteger currentlyPageFirstResoultIndex;
 
 @property (nonatomic, assign) BOOL readTotalCount;
 
@@ -60,9 +60,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL hasNext5Page;
 
-@property (nonatomic, assign) CGFloat pageNo;
+@property (nonatomic, assign) NSInteger pageNo;
 
-@property (nonatomic, assign) CGFloat pageSize;
+@property (nonatomic, assign) NSInteger pageSize;
 
 @end
 
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *noviceUrl;
 
-@property (nonatomic, assign) CGFloat ID;
+@property (nonatomic, assign) NSInteger ID;
 
 @property (nonatomic, copy) NSString *title;
 
