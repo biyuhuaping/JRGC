@@ -112,6 +112,8 @@
 		3382D21F21A286F200104CCD /* BankLogoSectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21D21A286F200104CCD /* BankLogoSectionTableViewCell.m */; };
 		3382D22021A286F200104CCD /* BankLogoSectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21E21A286F200104CCD /* BankLogoSectionTableViewCell.xib */; };
 		33930ACE222CD9460081F894 /* UCFBatchRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33930ACD222CD9460081F894 /* UCFBatchRootModel.m */; };
+		33930AD1222D064E0081F894 /* UCFPageControlTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 33930AD0222D064E0081F894 /* UCFPageControlTool.m */; };
+		33930AD5222D0BD50081F894 /* UCFPageHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33930AD4222D0BD50081F894 /* UCFPageHeadView.m */; };
 		339930A821A29BBF00C72F54 /* UCFTransferTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */; };
 		339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */; };
 		339930AD21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */; };
@@ -1472,6 +1474,10 @@
 		3382D21E21A286F200104CCD /* BankLogoSectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankLogoSectionTableViewCell.xib; sourceTree = "<group>"; };
 		33930ACC222CD9460081F894 /* UCFBatchRootModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBatchRootModel.h; sourceTree = "<group>"; };
 		33930ACD222CD9460081F894 /* UCFBatchRootModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBatchRootModel.m; sourceTree = "<group>"; };
+		33930ACF222D064E0081F894 /* UCFPageControlTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFPageControlTool.h; sourceTree = "<group>"; };
+		33930AD0222D064E0081F894 /* UCFPageControlTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFPageControlTool.m; sourceTree = "<group>"; };
+		33930AD3222D0BD50081F894 /* UCFPageHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFPageHeadView.h; sourceTree = "<group>"; };
+		33930AD4222D0BD50081F894 /* UCFPageHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFPageHeadView.m; sourceTree = "<group>"; };
 		339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTransferTableView.xib; sourceTree = "<group>"; };
 		339930A921A2B0E000C72F54 /* BankTraIntroduceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTraIntroduceTableViewCell.h; sourceTree = "<group>"; };
 		339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankTraIntroduceTableViewCell.m; sourceTree = "<group>"; };
@@ -7622,6 +7628,10 @@
 			children = (
 				E352FCEB21E4AF0A00617AB7 /* PageControlView.h */,
 				E352FCEC21E4AF0A00617AB7 /* PageControlView.m */,
+				33930ACF222D064E0081F894 /* UCFPageControlTool.h */,
+				33930AD0222D064E0081F894 /* UCFPageControlTool.m */,
+				33930AD3222D0BD50081F894 /* UCFPageHeadView.h */,
+				33930AD4222D0BD50081F894 /* UCFPageHeadView.m */,
 			);
 			path = PageControlView;
 			sourceTree = "<group>";
@@ -9961,6 +9971,7 @@
 				83CD842C1F13A50800227704 /* UCFHonerViewController.m in Sources */,
 				33E3032221F1800700FD657C /* UCFHomeBannerApi.m in Sources */,
 				7BA6E4C11AD6731900FE8C37 /* UIButton+WebCache.m in Sources */,
+				33930AD1222D064E0081F894 /* UCFPageControlTool.m in Sources */,
 				333979542229267000BB40BC /* UCFMallProductApi.m in Sources */,
 				840A79431C2A7C160059A946 /* UCFMessageCenterViewController.m in Sources */,
 				FB120BB41ADE462F00023365 /* CircleProgressView.m in Sources */,
@@ -10071,6 +10082,7 @@
 				ED70C8791C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m in Sources */,
 				83FF205C1F0BAF0500F21119 /* UCFGoldDetailViewController.m in Sources */,
 				744B9ED51F0B8AC100440FBA /* UCFCalendarDetailHeaderView.m in Sources */,
+				33930AD5222D0BD50081F894 /* UCFPageHeadView.m in Sources */,
 				74270C9A1EC58F6800F9419B /* UCFUserPresenter.m in Sources */,
 				7443C7431F1F6E6B009669C0 /* UCFGoldCashHistoryModel.m in Sources */,
 				74EB30731B0E0EC900D27BA9 /* UCFBankTableViewCell.m in Sources */,
