@@ -19,16 +19,20 @@
         self.parentController = parentController;
         self.childControllers = childControllers;
         self.headView = headView;
+        self.headView.delegate = self;
         [self addSubview:self.headView];
-        
+        for (UIViewController *viewControler in self.childControllers) {
+            [parentController addChildViewController:viewControler];
+        }
+
         CGFloat segmentViewHeight = CGRectGetHeight(self.headView.frame);
         //添加scrollView
         self.segmentScrollV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, segmentViewHeight, frame.size.width, frame.size.height- segmentViewHeight)];
         self.segmentScrollV.bounces = NO;
         self.segmentScrollV.delegate = self;
         self.segmentScrollV.pagingEnabled = YES;
-        self.segmentScrollV.showsHorizontalScrollIndicator = NO;
-        self.segmentScrollV.contentSize = CGSizeMake(frame.size.width *_childControllers.count, 0);
+        self.segmentScrollV.showsHorizontalScrollIndicator = YES;
+        self.segmentScrollV.contentSize = CGSizeMake(frame.size.width *_childControllers.count, frame.size.height- segmentViewHeight);
         self.segmentScrollV.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.segmentScrollV];
         

@@ -45,83 +45,70 @@
     [self.rootLayout addSubview:self.instructionsView];
     [self.rootLayout addSubview:self.useEnterBtn];
     [self.rootLayout addSubview:self.shadowView];
-    [self.tableView beginRefresh];
-}
-- (void)request
-{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
-    if (![userId isEqualToString:@""] && userId != nil) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,
-                                                          @"prdclaimid":self.db.prdclaimid,
-                                                          @"investAmt":self.db.investAmt,
-                                                          @"couponType":@"0"}//0：返现券  1：返息券
-                                                    tag:kSXTagInvestCashTicktList owner:self signature:YES Type:SelectAccoutTypeP2P];
-        
-    }
-}
-- (void)refreshTableViewHeader{
     
-    [self request];
-    
+    [self starCouponPopup];
+//    [self.tableView beginRefresh];
 }
+//- (void)request
+//{
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
+//    if (![userId isEqualToString:@""] && userId != nil) {
+//        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,
+//                                                          @"prdclaimid":self.db.prdclaimid,
+//                                                          @"investAmt":self.db.investAmt,
+//                                                          @"couponType":@"0"}//0：返现券  1：返息券
+//                                                    tag:kSXTagInvestCashTicktList owner:self signature:YES Type:SelectAccoutTypeP2P];
+//
+//    }
+//}
+//- (void)refreshTableViewHeader{
+//
+//    [self request];
+//
+//}
 
--(void)beginPost:(kSXTag)tag
-{
-    
-}
+//-(void)beginPost:(kSXTag)tag
+//{
+//
+//}
 
-- (void)endPost:(id)result tag:(NSNumber *)tag
-{
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-    if ([tag intValue] == kSXTagInvestCashTicktList)
-    {
-        NSMutableDictionary *dic = [result objectFromJSONString];
-        [self starCouponPopup:dic];
-    }
-    [self.tableView endRefresh];
-    [self.tableView cyl_reloadData];
-}
+//- (void)endPost:(id)result tag:(NSNumber *)tag
+//{
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//
+//    if ([tag intValue] == kSXTagInvestCashTicktList)
+//    {
+//        NSMutableDictionary *dic = [result objectFromJSONString];
+//        [self starCouponPopup:dic];
+//    }
+//    [self.tableView endRefresh];
+//    [self.tableView cyl_reloadData];
+//}
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
     [self.tableView endRefresh];
     [self.tableView cyl_reloadData];
 }
--(void)starCouponPopup:(NSDictionary *)dic
+-(void)starCouponPopup
 {
-    UCFInvestmentCouponModel *model = [ModelTransition TransitionModelClassName:[UCFInvestmentCouponModel class] dataGenre:dic];
-    
-    NSMutableArray *overdueArray = [NSMutableArray array];
-    NSMutableArray *noOverdueArray = [NSMutableArray array];
-    self.arryData = [NSMutableArray array];
+
+    self.arryData = [NSMutableArray arrayWithArray:self.cashArray];
     
     
-    [model.data.couponList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.arryData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         InvestmentCouponCouponlist *newObj = obj;
         //判断投资界面带回来的值,在列表页面勾选
         [self.db.cashSelectArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             InvestmentCouponCouponlist *cashObj = obj;
-            if ( cashObj.couponId ==  newObj.couponId) {
+            if (cashObj.couponId ==  newObj.couponId) {
                 newObj.isCheck = YES;
             }
         }];
-        //把可用券和不可用券拆分成两个数组
-        if (newObj.isCanUse)
-        {
-            [overdueArray addObject:obj];
-        }
-        else
-        {
-            [noOverdueArray addObject:obj];
-        }
     }];
-    
-    [self.arryData addObject:overdueArray];
-    [self.arryData addObject:noOverdueArray];
-    
+    [self.tableView reloadData];
 }
 
 - (BaseTableView *)tableView
@@ -131,7 +118,8 @@
         _tableView.backgroundColor = UIColorWithRGB(0xebebee);
         _tableView.delegate = self;
         _tableView.dataSource =self;
-        _tableView.tableRefreshDelegate= self;
+//        _tableView.tableRefreshDelegate= self;
+        _tableView.enableRefreshHeader = NO;
         _tableView.enableRefreshFooter = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.topPos.equalTo(@0);
@@ -244,31 +232,16 @@
     }
 }
 #pragma mark--tableView delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
-{
-    return self.arryData.count;
-}
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if ([[self.arryData objectAtIndex:indexPath.section] count] >0 ) {
-        if ( indexPath.row == [[self.arryData objectAtIndex:indexPath.section] count] -1) {
-            return 112;
-        }
-        else
-        {
-            return 97;
-        }
-    }
-    else{
-        return 97;
-    }
+    return 97;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.arryData objectAtIndex:section] count];
+    return [self.arryData  count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -282,7 +255,7 @@
     }
     [cell.selectCouponsBtn addTarget:self action:@selector(checkButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 
-    [cell refreshCellData:[[self.arryData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
+    [cell refreshCellData:[self.arryData  objectAtIndex:indexPath.row]];
     
     return cell;
 }
@@ -296,52 +269,52 @@
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];//创建一个视图
-    headerView.backgroundColor = UIColorWithRGB(0xEBEBEE);
-
-    UIView *view = [[UIView alloc] init];
-    view.frame = CGRectMake(0,10,ScreenWidth,37);
-    view.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0];
-    [headerView addSubview:view];
-    
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 95, 37)];
-    headerLabel.backgroundColor = [UIColor clearColor];
-    headerLabel.font = [UIFont boldSystemFontOfSize:13.0];
-    headerLabel.textColor = UIColorWithRGB(0x555555);
-    [view addSubview:headerLabel];
-    
-    if (section == 0) {
-        headerLabel.text = @"可使用优惠券";
-    }
-    else
-    {
-        headerLabel.text = @"不可使用优惠券";
-        UIButton *button = [UIButton buttonWithType:0];
-        button.frame = CGRectMake(CGRectGetMaxX(headerLabel.frame), (headerLabel.frame.size.height -20)/2, 20, 20);
-        [button setImage:[UIImage imageNamed:@"icon_question.png"] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(moreConfusion) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
-    }
-    
-    if ([[self.arryData objectAtIndex:section] count] == 0) {
-        return nil;
-    }else
-    {
-        return headerView;
-    }
-    
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if ([[self.arryData objectAtIndex:section] count] == 0) {
-        return 0.01;
-    }else
-    {
-        return 47;
-    }
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];//创建一个视图
+//    headerView.backgroundColor = UIColorWithRGB(0xEBEBEE);
+//
+//    UIView *view = [[UIView alloc] init];
+//    view.frame = CGRectMake(0,10,ScreenWidth,37);
+//    view.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0];
+//    [headerView addSubview:view];
+//
+//    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 95, 37)];
+//    headerLabel.backgroundColor = [UIColor clearColor];
+//    headerLabel.font = [UIFont boldSystemFontOfSize:13.0];
+//    headerLabel.textColor = UIColorWithRGB(0x555555);
+//    [view addSubview:headerLabel];
+//
+//    if (section == 0) {
+//        headerLabel.text = @"可使用优惠券";
+//    }
+//    else
+//    {
+//        headerLabel.text = @"不可使用优惠券";
+//        UIButton *button = [UIButton buttonWithType:0];
+//        button.frame = CGRectMake(CGRectGetMaxX(headerLabel.frame), (headerLabel.frame.size.height -20)/2, 20, 20);
+//        [button setImage:[UIImage imageNamed:@"icon_question.png"] forState:UIControlStateNormal];
+//        [button addTarget:self action:@selector(moreConfusion) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:button];
+//    }
+//
+//    if ([[self.arryData objectAtIndex:section] count] == 0) {
+//        return nil;
+//    }else
+//    {
+//        return headerView;
+//    }
+//
+//}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    if ([[self.arryData objectAtIndex:section] count] == 0) {
+//        return 0.01;
+//    }else
+//    {
+//        return 47;
+//    }
+//}
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01;//设置尾视图高度为0.01
 }
@@ -372,7 +345,7 @@
     CGPoint point = btn.center;
     point = [self.tableView convertPoint:point fromView:btn.superview];
     NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:point];
-    InvestmentCouponCouponlist *newObj = [[self.arryData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    InvestmentCouponCouponlist *newObj = [self.arryData objectAtIndex:indexPath.row];
     
     [self setButtonType:btn withData:newObj];
     if (![self calculateTheSelectedAmount]) {

@@ -61,6 +61,7 @@
 		33397957222927E300BB40BC /* UCFHomeMallDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33397956222927E300BB40BC /* UCFHomeMallDataModel.m */; };
 		333B42C821FC31AB00741A47 /* UCFBidDetailTopBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */; };
 		333B42CE21FC4E6B00741A47 /* UCFNewInvestBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B42CD21FC4E6B00741A47 /* UCFNewInvestBtnView.m */; };
+		333B5DD3222E1BC200B9D11A /* UCFNewCashParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333B5DD2222E1BC200B9D11A /* UCFNewCashParentViewController.m */; };
 		33433A0E22252B6200538487 /* UCFBidDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33433A0D22252B6200538487 /* UCFBidDetailRequest.m */; };
 		33433A12222534B700538487 /* UCFBidDetailAndInvestPageLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 33433A11222534B700538487 /* UCFBidDetailAndInvestPageLogic.m */; };
 		33459CEF21F07C920048443C /* GlobalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33459CEE21F07C920048443C /* GlobalView.m */; };
@@ -1376,6 +1377,8 @@
 		333B42C721FC31AB00741A47 /* UCFBidDetailTopBoardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBidDetailTopBoardCell.m; sourceTree = "<group>"; };
 		333B42CC21FC4E6B00741A47 /* UCFNewInvestBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewInvestBtnView.h; sourceTree = "<group>"; };
 		333B42CD21FC4E6B00741A47 /* UCFNewInvestBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewInvestBtnView.m; sourceTree = "<group>"; };
+		333B5DD1222E1BC200B9D11A /* UCFNewCashParentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewCashParentViewController.h; sourceTree = "<group>"; };
+		333B5DD2222E1BC200B9D11A /* UCFNewCashParentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewCashParentViewController.m; sourceTree = "<group>"; };
 		33433A0C22252B6200538487 /* UCFBidDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBidDetailRequest.h; sourceTree = "<group>"; };
 		33433A0D22252B6200538487 /* UCFBidDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBidDetailRequest.m; sourceTree = "<group>"; };
 		33433A10222534B700538487 /* UCFBidDetailAndInvestPageLogic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBidDetailAndInvestPageLogic.h; sourceTree = "<group>"; };
@@ -7712,6 +7715,8 @@
 				E352FCFE21E4AF0A00617AB7 /* UCFInvestmentCouponCashTicketController.m */,
 				E352FCFF21E4AF0A00617AB7 /* UCFInvestmentCouponInterestTicketController.h */,
 				E352FCFC21E4AF0A00617AB7 /* UCFInvestmentCouponInterestTicketController.m */,
+				333B5DD1222E1BC200B9D11A /* UCFNewCashParentViewController.h */,
+				333B5DD2222E1BC200B9D11A /* UCFNewCashParentViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -10146,6 +10151,7 @@
 				747A91211B01B11100FE2334 /* UCFConstractModel.m in Sources */,
 				4A0558DE1BFCA2A20021DF59 /* ToolSingleTon.m in Sources */,
 				7BD35A971AD61E4200389D6B /* LLLockIndicator.m in Sources */,
+				333B5DD3222E1BC200B9D11A /* UCFNewCashParentViewController.m in Sources */,
 				4AEA750A1B03764D00B03A46 /* UCFPurchaseTranBidViewController.m in Sources */,
 				4A14F68A1BA94A84002BD5DF /* LockFlagSingle.m in Sources */,
 				8335BF081FF5E39C00E62833 /* UCFGoldRewardTableViewCell.m in Sources */,

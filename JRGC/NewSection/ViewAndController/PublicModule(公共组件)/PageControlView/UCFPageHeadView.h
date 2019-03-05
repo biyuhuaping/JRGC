@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)pageHeadView:(UCFPageHeadView *)pageView chiliControllerSelectIndex:(NSInteger)index;
 
+- (void)headViewSetSelectIndex:(NSInteger)index;
 
 - (instancetype)initWithFrame:(CGRect)frame WithTitleArray:(NSArray <NSString *> *)titleArray WithType:(NSInteger)type;
 

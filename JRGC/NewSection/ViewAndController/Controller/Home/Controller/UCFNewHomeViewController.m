@@ -63,6 +63,8 @@
 }
 - (void)rightBarClicked:(UIButton *)button
 {
+    
+    return;
     UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
