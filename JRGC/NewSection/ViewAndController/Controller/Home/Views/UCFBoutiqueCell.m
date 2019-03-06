@@ -9,9 +9,12 @@
 #import "UCFBoutiqueCell.h"
 #import "UCFShopHListView.h"
 #import "UCFCommodityView.h"
-
+#import "UCFCellDataModel.h"
+#import "UCFHomeMallDataModel.h"
+#import "UIImageView+WebCache.h"
 @interface UCFBoutiqueCell ()<UCFShopHListViewDataSource,UCFShopHListViewDelegate>
-
+@property(nonatomic, strong)UCFShopHListView *shopList;
+@property(nonatomic, strong)NSMutableArray  *dataArray;
 @end
 
 @implementation UCFBoutiqueCell
@@ -28,13 +31,22 @@
         shopList.dataSource = self;
         shopList.delegate = self;
         [self addSubview:shopList];
+        self.shopList = shopList;
         
     }
     return self;
 }
+- (void)reflectDataModel:(id)model
+{
+    UCFCellDataModel *dataModel = model;
+    if ([dataModel.modelType isEqualToString:@"mallDiscounts"]) {
+        self.dataArray = dataModel.data1;
+        [self.shopList reloadView];
+    }
+}
 - (NSInteger)numberOfListView:(UCFShopHListView *)shopListView
 {
-    return 10;
+    return self.dataArray.count;
 }
 - (CGSize)shopHListView:(UCFShopHListView *)shopListViewCommodityImageSize
 {
@@ -43,9 +55,14 @@
 
 - (UIView *)shopHListView:(UCFShopHListView *)shopListView cellForRowAtIndex:(NSInteger)index
 {
+    UCFHomeMallrecommends *model = self.dataArray[index];
     UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, 105, 150) withHeightOfCommodity:105];
     view.clipsToBounds = YES;
     view.layer.cornerRadius = 5.0f;
+    
+    [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:nil];
+    view.shopName.text = model.title;
+    view.shopValue.text = model.price;
     return view;
 }
 

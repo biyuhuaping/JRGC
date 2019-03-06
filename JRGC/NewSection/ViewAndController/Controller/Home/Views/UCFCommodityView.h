@@ -11,6 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFCommodityView : BaseView
+
+@property(nonatomic, strong)UIImageView *shopImageView;
+@property(nonatomic, strong)UILabel     *shopName;
+@property(nonatomic, strong)UILabel     *shopValue;
+
 - (instancetype)initWithFrame:(CGRect)frame withHeightOfCommodity:(CGFloat)height;
 @end
 

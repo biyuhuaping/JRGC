@@ -23,8 +23,7 @@
 @property (nonatomic, strong)NSString       *investMoeny;
 @property (nonatomic, strong)NSString       *recommendCode;
 
-@property (nonatomic, strong)NSArray        *cashCouponArray;
-@property (nonatomic, strong)NSArray        *interestCouponArray;
+
 
 @end
 
@@ -334,46 +333,25 @@
 
 - (void)dealCouponData:(NSString *)investMoeny
 {
-//    if (self.cashSelectCount == 0) {
         int a = 0;
+    
         for (InvestmentCouponCouponlist *model in self.cashCouponArray) {
             if (model.investMultip <= [investMoeny doubleValue]) {
                 a++;
             }
         }
-//        NSString *tmpCash = self.availableCashNum;
-//        if ([tmpCash containsString:@"张可用"]) {
-//            NSString *tmpStr = [tmpCash stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-//            if ([tmpStr intValue] != a) {
-//                self.availableCashNum = [NSString stringWithFormat:@"%d张可用",a];
-//            }
-//        } else {
-            self.availableCashNum = [NSString stringWithFormat:@"%d张可用",a];
-//        }
-//    } else {0
-//
-//    }
-    
-//    if (self.couponSelectCount == 0) {
+
+       self.availableCashNum = [NSString stringWithFormat:@"%d张可用",a];
+
         int b = 0;
+
         for (InvestmentCouponCouponlist *model in self.interestCouponArray) {
             if (model.investMultip <= [investMoeny doubleValue]) {
                 b++;
             }
         }
-//        NSString *tmpCoupon = self.availableCouponNum;
-//        if ([tmpCoupon containsString:@"张可用"]) {
-//            NSString *tmpStr = [tmpCoupon stringByReplacingOccurrencesOfString:@"张可用" withString:@""];
-//            if ([tmpStr intValue] != b) {
-//                self.availableCouponNum = [NSString stringWithFormat:@"%d张可用",b];
-//            }
-//        } else {
-            self.availableCouponNum = [NSString stringWithFormat:@"%d张可用",b];
-//        }
-//    }
-
-
-
+       self.availableCouponNum = [NSString stringWithFormat:@"%d张可用",b];
+    
 }
 
 

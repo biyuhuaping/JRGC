@@ -23,7 +23,7 @@
 #import "UCFBidViewModel.h"
 #import "UCFInvestmentCouponModel.h"
 #import "IQKeyboardManager.h"
-
+#import "UCFNewCashParentViewController.h"
 @interface NewPurchaseBidController ()<UCFCouponBoardDelegate,UCFInvestFundsBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -190,7 +190,6 @@
     
 
 }
-
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
     NSString *prdclaimid = [self.viewModel getDataModelBidID];
@@ -198,16 +197,59 @@
     if (prdclaimid == nil || [prdclaimid isEqualToString:@""] || investAmt == nil || [investAmt isEqualToString:@""]) {
         return;
     }
-    UCFInvestmentCouponController *uc = [[UCFInvestmentCouponController alloc] init];
-    uc.prdclaimid = prdclaimid;
-    uc.investAmt = investAmt;
-    uc.barSelectIndex = button.tag - 100;
-//    uc.barSelectIndex = 1;
-    uc.cashSelectArr = [NSMutableArray arrayWithArray:self.cashArray];
-    uc.couponSelectArr = [NSMutableArray arrayWithArray:self.couponArray];
-    [self.navigationController pushViewController:uc animated:YES];
     
-    [self bindCoupleView:uc];
+    if (button.tag == 100) {
+        
+        NSMutableArray *canUseCashArr = [NSMutableArray arrayWithCapacity:1];
+        NSMutableArray *unCanUseCashArr = [NSMutableArray arrayWithCapacity:1];
+        
+        for (InvestmentCouponCouponlist *model in self.cashArray) {
+            if (model.investMultip <= [investAmt doubleValue]) {
+                model.isCanUse = YES;
+                [canUseCashArr addObject:model];
+            } else {
+                 model.isCanUse = NO;
+                [unCanUseCashArr addObject:model];
+            }
+        }
+        
+        UCFNewCashParentViewController *vc = [[UCFNewCashParentViewController alloc] init];
+        vc.canUseCashArray = canUseCashArr;
+        vc.unCanUseCashArray = unCanUseCashArr;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    } else {
+        
+    }
+    
+    
+//    {
+//
+//        
+//        int b = 0;
+//        NSMutableArray *canUseCuponArr = [NSMutableArray arrayWithCapacity:1];
+//        NSMutableArray *unCanUseCuponArr = [NSMutableArray arrayWithCapacity:1];
+//        for (InvestmentCouponCouponlist *model in self.interestCouponArray) {
+//            if (model.investMultip <= [investMoeny doubleValue]) {
+//                b++;
+//                [canUseCuponArr addObject:model];
+//                [unCanUseCuponArr addObject:model];
+//            }
+//        }
+//        self.availableCouponNum = [NSString stringWithFormat:@"%d张可用",b];
+//        
+//    }
+    
+    
+//    UCFInvestmentCouponController *uc = [[UCFInvestmentCouponController alloc] init];
+//    uc.prdclaimid = prdclaimid;
+//    uc.investAmt = investAmt;
+//    uc.barSelectIndex = button.tag - 100;
+//    uc.cashSelectArr = [NSMutableArray arrayWithArray:self.cashArray];
+//    uc.couponSelectArr = [NSMutableArray arrayWithArray:self.couponArray];
+//    [self.navigationController pushViewController:uc animated:YES];
+    
+//    [self bindCoupleView:uc];
 }
 - (void)investFundsBoard:(UCFInvestFundsBoard *)board withRechargeButtonClick:(UIButton *)button
 {
@@ -248,7 +290,7 @@
                 weakSelf.viewModel.repayCash = @"0";
                 weakSelf.viewModel.cashTotalcouponAmount = @"0";
                 weakSelf.viewModel.cashTotalIDStr = @"";
-                weakSelf.cashArray = [NSArray array];
+//                weakSelf.cashArray = [NSArray array];
             }
         }
     }];
@@ -275,7 +317,7 @@
                 weakSelf.viewModel.repayCoupon = @"0";
                 weakSelf.viewModel.couponTotalcouponAmount = @"0";
                 weakSelf.viewModel.couponIDStr = @"";
-                weakSelf.couponArray = [NSArray array];
+//                weakSelf.couponArray = [NSArray array];
             }
         }
     }];
@@ -286,7 +328,7 @@
 {
     vm.superView = self.view;
     __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict",@"rechargeStr",@"investMoneyIsChange"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel",@"hsbidInfoDict",@"rechargeStr",@"investMoneyIsChange",@"cashCouponArray",@"interestCouponArray"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"contractTypeModel"]) {
             id funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -332,13 +374,28 @@
                 weakSelf.viewModel.repayCash = @"0";
                 weakSelf.viewModel.cashTotalcouponAmount = @"0";
                 weakSelf.viewModel.cashTotalIDStr = @"";
-                weakSelf.cashArray = [NSArray array];
+//                weakSelf.cashArray = [NSArray array];
                 
                 weakSelf.viewModel.couponSelectCount = 0;
                 weakSelf.viewModel.repayCoupon = @"0";
                 weakSelf.viewModel.couponTotalcouponAmount = @"0";
                 weakSelf.viewModel.couponIDStr = @"";
-                weakSelf.couponArray = [NSArray array];
+//                weakSelf.couponArray = [NSArray array];
+            }
+        } else if ([keyPath isEqualToString:@"cashCouponArray"]) {
+            NSArray  *cashArray = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            if (cashArray.count > 0) {
+                
+                weakSelf.cashArray = [NSArray arrayWithArray:cashArray];
+            } else {
+                weakSelf.cashArray = nil;
+            }
+        } else if ([keyPath isEqualToString:@"interestCouponArray"]) {
+            NSArray  *couponArray = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            if (couponArray.count > 0) {
+                weakSelf.couponArray = [NSArray arrayWithArray:couponArray];
+            } else {
+                weakSelf.couponArray = nil;
             }
         }
     }];

@@ -48,23 +48,23 @@
 }
 - (void)fetchData
 {
-    for (int i = 0; i < 10; i++) {
-        NoticeResult *model = [NoticeResult new];
-        model.title = @"豆哥商城|关于豆哥商城春节期间物流停 止发货时间的通知";
-        model.sendTime = @"2018-09-09";
-        [self.dataArray addObject:model];
-    }
-    [self.showTableView reloadData];
-    return;
+//    for (int i = 0; i < 10; i++) {
+//        NoticeResult *model = [NoticeResult new];
+//        model.title = @"豆哥商城|关于豆哥商城春节期间物流停 止发货时间的通知";
+//        model.sendTime = @"2018-09-09";
+//        [self.dataArray addObject:model];
+//    }
+//    [self.showTableView reloadData];
+//    return;
     UCFNoticeCenterApi *api = [[UCFNoticeCenterApi alloc] initWithPageSize:@"20" PageIndex:[NSString stringWithFormat:@"%ld",_pageIndex]];
     api.animatingView = [UIApplication sharedApplication].keyWindow;
     @PGWeakObj(self);
     [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         
         NoticeCenterModel *model = request.responseJSONModel;
-        if (model.data.noicePage.pagination.hasNextPage) {
+        if (model.data.pageData.pagination.hasNextPage) {
             selfWeak.pageIndex++;
-            [selfWeak.dataArray addObjectsFromArray:model.data.noicePage.result];
+            [selfWeak.dataArray addObjectsFromArray:model.data.pageData.result];
         } else {
             self.showTableView.enableRefreshFooter = YES;
         }

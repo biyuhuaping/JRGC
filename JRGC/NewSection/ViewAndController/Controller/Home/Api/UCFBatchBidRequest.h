@@ -6,11 +6,11 @@
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "BaseModel.h"
-
+#import "BaseRequest.h"
+#import "UCFBatchRootModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UCFBatchBidRequest : BaseModel
+@interface UCFBatchBidRequest :BaseRequest
 - (id)initWithProjectId:(NSString *)projectId bidState:(NSString *)statue;
 @end
 

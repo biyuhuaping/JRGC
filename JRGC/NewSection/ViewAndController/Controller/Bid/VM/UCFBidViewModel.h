@@ -104,6 +104,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy)NSString          *availableCouponNum;
 
+
+/**
+ 返现券所有数据的数组
+ */
+@property (nonatomic, strong)NSArray        *cashCouponArray;
+
+/**
+ 返息券所有数据的数组
+ */
+@property (nonatomic, strong)NSArray        *interestCouponArray;
+
 @property(nonatomic, assign)BOOL            couponIsHide;
 /**
  返息券反的总钱数
@@ -134,6 +145,9 @@ NS_ASSUME_NONNULL_BEGIN
  当前输入金额下的可用张数
  */
 @property(nonatomic, copy)NSString          *availableCashNum;
+
+
+
 
 @property(nonatomic, assign)BOOL            cashIsHide;
 /**

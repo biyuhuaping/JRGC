@@ -99,19 +99,6 @@
     }
     [self.segmentScrollV setContentOffset:CGPointMake((sender.tag - 100) * self.frame.size.width, 0) animated:YES ];
     
-    //    __weak typeof(self) weakSelf = self;
-    //    dispatch_queue_t queue= dispatch_get_main_queue();
-    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), queue, ^{
-    //        [UIView animateWithDuration:0.25  delay:0.1 options: UIViewAnimationOptionCurveLinear animations:^{
-    //            CGPoint  frame = weakSelf.indicateView.center;
-    //            frame.x = button.center.x;
-    //            weakSelf.indicateView.center = frame;
-    //
-    //        } completion:^(BOOL finished) {
-    //        }];
-    //    });
-    
-    
 }
 
 #pragma UIScorllerViewDelegate
@@ -162,13 +149,5 @@
         }
     }
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
