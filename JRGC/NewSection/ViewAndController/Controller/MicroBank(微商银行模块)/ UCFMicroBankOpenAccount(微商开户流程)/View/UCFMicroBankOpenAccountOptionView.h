@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFMicroBankOpenAccountOptionView : BaseView
 
+
+- (void)selectStep:(OpenAccoutStep)step;
 @end
 
 NS_ASSUME_NONNULL_END

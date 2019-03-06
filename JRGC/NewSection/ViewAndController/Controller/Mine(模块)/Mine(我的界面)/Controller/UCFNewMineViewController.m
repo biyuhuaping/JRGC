@@ -35,6 +35,8 @@
 #import "BaseNavigationViewController.h"
 #import "UCFP2POrHonerAccoutViewController.h"
 #import "UCFMicroBankDepositoryAccountHomeViewController.h"
+
+#import "UCFMicroBankOpenAccountViewController.h"
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -233,6 +235,8 @@
     }
     else if (tag == 1002){
         //我的工贝
+        UCFMicroBankOpenAccountViewController *vc= [[UCFMicroBankOpenAccountViewController alloc] init];
+        [self.rt_navigationController pushViewController:vc animated:YES];
     }
     else if (tag == 1003){
         //我的工豆
@@ -255,7 +259,7 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
         UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
-        DDLogDebug(@"---------%@",model);
+//        DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
             
            [self setTableViewArrayWithData:model];

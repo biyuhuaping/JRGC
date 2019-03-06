@@ -16,6 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 //银行卡每隔4位加空格
 + (NSString *)dealWithString:(NSString *)number;
+
+//把字符串替换成星号
++ (NSString *)replaceStringWithAsterisk:(NSString *)originalStr startLocation:(NSInteger)startLocation lenght:(NSInteger)lenght;
+
+//银行卡每四位分隔
++ (NSString *)bankIdSeparate:(NSString *)originalString;
 @end
 
 NS_ASSUME_NONNULL_END

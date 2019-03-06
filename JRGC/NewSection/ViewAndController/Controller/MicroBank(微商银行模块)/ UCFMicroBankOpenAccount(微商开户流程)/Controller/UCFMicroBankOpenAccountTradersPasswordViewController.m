@@ -1,22 +1,23 @@
 //
-//  UCFMicroBankOpenAccountViewController.m
+//  UCFMicroBankOpenAccountTradersPasswordViewController.m
 //  JRGC
 //
-//  Created by kuangzhanzhidian on 2019/3/1.
+//  Created by kuangzhanzhidian on 2019/3/4.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "UCFMicroBankOpenAccountViewController.h"
+#import "UCFMicroBankOpenAccountTradersPasswordViewController.h"
 
-@interface UCFMicroBankOpenAccountViewController ()
+@interface UCFMicroBankOpenAccountTradersPasswordViewController ()
 
 @end
 
-@implementation UCFMicroBankOpenAccountViewController
+@implementation UCFMicroBankOpenAccountTradersPasswordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor redColor];
 }
 
 /*

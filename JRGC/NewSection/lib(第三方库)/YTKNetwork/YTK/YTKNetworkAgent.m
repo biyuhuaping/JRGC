@@ -408,6 +408,8 @@
     }
     
     [request setValue:[ModelTransition TransitionModelClassName:modelClass dataGenre:request.responseJSONObject] forKey:@"responseJSONModel"];
+    
+//    DDLogInfo(@"%@请求数据----%@",NSStringFromClass([request class]),request.responseJSONObject);
 //    responseJSONObject
 //    if ([request.responseJSONObject isKindOfClass:[NSDictionary class]]) {
 //

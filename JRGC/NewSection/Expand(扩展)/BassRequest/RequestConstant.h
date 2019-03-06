@@ -41,4 +41,14 @@ static NSString *UserAccountInfoApiURL = @"api/userAccount/v2/userAccountInfo.js
 
 static NSString *GetHSAccountInfoBillApiURL = @"api/homePage/v2/getHSAccountInfoBill.json";  //徽商账户资金流水
 
+
+static NSString *GetOpenAccountInfoApiURL = @"api/userInfo/v2/getOpenAccountInfo.json"; //获取徽商开户页面信息
+
+static NSString *identifysendCodeApiURL = @"api/identifyCode/v2/sendCode.json";        //发送验证码
+
+static NSString *OpenAccountApiURL = @"api/userInfo/v2/openAccount.json" ;        //徽商绑定银行卡
+
+static NSString *ChangeBankCardApiURL = @"api/userInfo/v2/changeBankCard.json";  //更改绑定银行卡信息
+
+static NSString *OpenAccountIntoBankApiURL = @"api/userInfo/v2/openAccountIntoBank.json"; //***新徽商绑定银行卡接口
 #endif /* RequestConstant_h */

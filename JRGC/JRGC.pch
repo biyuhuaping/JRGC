@@ -107,6 +107,10 @@ typedef NS_ENUM(NSInteger, SelectAccoutType) {
     SelectAccoutTypeHoner, //尊享账户
     SelectAccoutTypeGold,//黄金账户
 };
+typedef NS_ENUM(NSInteger, OpenAccoutStep) {
+    OpenAccoutMicroBank = 1, //存管开户
+    OpenAccoutPassWord , //选择交易密码
+};
 typedef enum : NSUInteger {
     UCFHomeListTypeP2PMore,
     UCFHomeListTypeZXMore,

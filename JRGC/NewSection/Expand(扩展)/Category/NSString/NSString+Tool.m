@@ -52,5 +52,29 @@
     NSLog(@"%@", doneTitle);
     return doneTitle;
 }
+//把字符串替换成星号
++ (NSString *)replaceStringWithAsterisk:(NSString *)originalStr startLocation:(NSInteger)startLocation lenght:(NSInteger)lenght
+{
+    NSString *newStr = originalStr;
+    for (int i = 0; i < lenght; i++) {
+        NSRange range = NSMakeRange(startLocation, 1);
+        newStr = [newStr stringByReplacingCharactersInRange:range withString:@"*"];
+        startLocation ++;
+    }
+    return newStr;
+}
 
++ (NSString *)bankIdSeparate:(NSString *)originalString
+{
+    NSString *newString = @"";
+    while (originalString.length > 0) {
+        NSString *subString = [originalString substringToIndex:MIN(originalString.length,4)];
+        newString = [newString stringByAppendingString:subString];
+        if (subString.length == 4) {
+            newString = [newString stringByAppendingString:@" "];
+        }
+        originalString = [originalString substringFromIndex:MIN(originalString.length,4)];
+    }
+    return newString;
+}
 @end
