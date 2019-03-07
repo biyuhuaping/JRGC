@@ -105,4 +105,9 @@
 - (UCFLoginData *)getUserData;
 
 - (void)loadLoginViewController;
+
+//保存上次登录名字
+- (void)saveLoginAccount:(NSDictionary *)account;
+
+- (NSDictionary *)getLoginAccount;
 @end

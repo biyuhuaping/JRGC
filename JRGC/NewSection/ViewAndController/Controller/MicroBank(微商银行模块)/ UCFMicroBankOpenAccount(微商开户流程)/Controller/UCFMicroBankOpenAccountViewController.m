@@ -138,6 +138,14 @@
     }];
     
 }
+- (void)setOpenAccountSucceed:(BOOL)openAccountSucceed
+{
+    _openAccountSucceed = openAccountSucceed;
+    if (openAccountSucceed) {
+        //开户成功
+        [self changeControllerFromOldController:self.currentVC toNewController:self.tradersPasswordView];
+    }
+}
 /*
 #pragma mark - Navigation
 

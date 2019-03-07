@@ -32,7 +32,7 @@
 - (NSUInteger)getDownNum;
 /** 获取正在进行的倒计时间 */
 - (NSUInteger)getRestDownNum;
-/** 当前是否正在进行倒计时 */
+/** 当前是否正在进行倒计时 倒计时结束,设为no*/
 -(BOOL)getIsCountDown;
 /** 开始倒计时 */
 - (void)startCountDown;

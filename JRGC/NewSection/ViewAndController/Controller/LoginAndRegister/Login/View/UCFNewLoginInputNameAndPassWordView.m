@@ -93,17 +93,17 @@
              _userField.keyboardType = UIKeyboardTypeNumberPad;
         }
         
-        // 读取上次登录的账号
-//        NSDictionary *dic = [UCFUserOperation getLoginPhoneNum];
-       
-//        if (dic != nil && dic.count > 0) {
-//            if ([[dic objectForKey:@"userType"] isEqualToString:self.userType]) {
-//                NSString *phoneNum = [dic objectForKey:@"phoneNum"];
-//                if (phoneNum != nil &&  phoneNum.length > 0) {
-//                    _userField.text = phoneNum;
-//                }
-//            }
-//        }
+        // 读取上次登录的账号...
+//        [NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil];
+        NSDictionary *dic = [[UserInfoSingle sharedManager] getLoginAccount];
+        if (nil != dic && dic.count > 0) {
+            if ([[dic objectSafeForKey:@"isCompany"] isEqualToString:@"个人"] && [self.userType isEqualToString:@"个人"]) {
+                _userField.text = [dic objectSafeForKey:@"lastLoginName"];
+            }
+            if ([[dic objectSafeForKey:@"isCompany"] isEqualToString:@"企业"] && [self.userType isEqualToString:@"企业"]) {
+                _userField.text = [dic objectSafeForKey:@"lastLoginName"];
+            }
+        }
 
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
@@ -214,7 +214,7 @@
         _loginBtn.heightSize.equalTo(@40);
         [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
         _loginBtn.titleLabel.font= [Color gc_Font:15.0];
-        self.loginBtn.userInteractionEnabled = YES;
+        self.loginBtn.userInteractionEnabled = NO;
         [self.loginBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _loginBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)

@@ -56,16 +56,7 @@
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
-    
-//    UIButton *cancleButton = [UIButton buttonWithType:UIButtonTypeSystem];UU
-//    [cancleButton setTitle:@"注册" forState:UIControlStateNormal];
-//    [cancleButton setTitleColor:[Color color:PGColorOpttonTextRedColor] forState:UIControlStateNormal];
-//    [cancleButton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
-//
-//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:cancleButton];
-////    rightItem.imageEdgeInsets = UIEdgeInsetsMake(0, -15,0, 0);//设置向左偏移
-//    self.navigationItem.rightBarButtonItem = rightItem;
+
 }
 - (void)clickRightBtn
 {
@@ -115,12 +106,16 @@
         _loginInputView.topPos.equalTo(self.loginLabel.bottomPos);
         _loginInputView.myLeft = 0;
         _loginInputView.personalInput.userField.delegate = self;
+        [_loginInputView.personalInput.userField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
         _loginInputView.personalInput.passWordField.delegate = self;
+        [_loginInputView.personalInput.passWordField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
         _loginInputView.personalInput.loginBtn.tag = 1000;
         [_loginInputView.personalInput.loginBtn addTarget:self action:@selector(loginBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         _loginInputView.enterpriseInput.userField.delegate = self;
+        [_loginInputView.enterpriseInput.userField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
         _loginInputView.enterpriseInput.passWordField.delegate = self;
+         [_loginInputView.enterpriseInput.passWordField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
         _loginInputView.enterpriseInput.loginBtn.tag = 1001;
         [_loginInputView.enterpriseInput.loginBtn addTarget:self action:@selector(loginBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 //        @property (nonatomic, strong) UCFNewLoginInputNameAndPassWordView *personalInput;//个人用户界面
@@ -148,14 +143,14 @@
     }
     
     UCFLoginApi * request = [[UCFLoginApi alloc] initWithUsername:username andPwd:pwd andIsCompany:isCompany];
-    //    request.animatingView = self.view;
+    request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
         UCFLoginModel *model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
-            
+            [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:pwd andInputAccountText:username];
             
             [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES];
@@ -188,6 +183,112 @@
 }
 -(void)buttonforgetClick
 {}
+
+- (void)textFieldEditChanged:(UITextField *)textField
+{
+    [self inspectPersonalTextField]; //个人用户输入界面
+    [self inspectEnterpriseTextField];//企业用户输入界面
+}
+
+- (void)inspectPersonalTextField
+{
+    if ([self inspectPersonalInputUser] && [self inspectPersonalInputPassWord])
+    {
+        //输入正常,按钮可点击
+        self.loginInputView.personalInput.loginBtn.userInteractionEnabled = YES;
+        [self.loginInputView.personalInput.loginBtn setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
+    }
+    else
+    {
+        //输入非正常,按钮不可点击
+        [self.loginInputView.personalInput.loginBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
+        self.loginInputView.personalInput.loginBtn.userInteractionEnabled = NO;
+    }
+}
+- (void)inspectEnterpriseTextField
+{
+    if ([self inspectEnterpriseInputUser] && [self inspectEnterpriseInputPassWord])
+    {
+        //输入正常,按钮可点击
+        self.loginInputView.enterpriseInput.loginBtn.userInteractionEnabled = YES;
+        [self.loginInputView.enterpriseInput.loginBtn setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
+    }
+    else
+    {
+        //输入非正常,按钮不可点击
+        [self.loginInputView.enterpriseInput.loginBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
+        self.loginInputView.enterpriseInput.loginBtn.userInteractionEnabled = NO;
+    }
+}
+//个人用户账户输入判断
+- (BOOL)inspectPersonalInputUser
+{
+    if (self.loginInputView.personalInput.userField.text.length >0 && ![self.loginInputView.personalInput.userField.text isEqualToString:@""]) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+- (BOOL)inspectPersonalInputPassWord
+{
+    if (self.loginInputView.personalInput.passWordField.text.length >0 && ![self.loginInputView.personalInput.passWordField.text isEqualToString:@""]) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+//企业用户账户输入判断
+- (BOOL)inspectEnterpriseInputUser
+{
+    if (self.loginInputView.enterpriseInput.userField.text.length >0 && ![self.loginInputView.enterpriseInput.userField.text isEqualToString:@""]) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+- (BOOL)inspectEnterpriseInputPassWord
+{
+    if (self.loginInputView.enterpriseInput.passWordField.text.length >0 && ![self.loginInputView.enterpriseInput.passWordField.text isEqualToString:@""]) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.loginInputView.personalInput.userField && [self.loginInputView.personalInput.userField.text isEqualToString:@""] ) {//&& ![Common isChinese:_textField1.text]
+        [AuxiliaryFunc showToastMessage:@"请输入用户名" withView:self.view];
+        return;
+    }
+    else if (textField == self.loginInputView.enterpriseInput.userField && [self.loginInputView.enterpriseInput.userField.text isEqualToString:@""] )
+    {//&& ![Common isChinese:_textField1.text]
+        [AuxiliaryFunc showToastMessage:@"请输入用户名" withView:self.view];
+        return;
+    }
+    else if (textField == self.loginInputView.personalInput.passWordField && [self.loginInputView.personalInput.passWordField.text isEqualToString:@""])
+    {
+        [AuxiliaryFunc showToastMessage:@"请输入密码" withView:self.view];
+        return;
+    }
+    else if(textField == self.loginInputView.enterpriseInput.passWordField && [self.loginInputView.enterpriseInput.passWordField.text isEqualToString:@""])
+    {
+        [AuxiliaryFunc showToastMessage:@"请输入密码" withView:self.view];
+        return;
+    }
+    
+}
+
+
+
+
 /*
 #pragma mark - Navigation
 

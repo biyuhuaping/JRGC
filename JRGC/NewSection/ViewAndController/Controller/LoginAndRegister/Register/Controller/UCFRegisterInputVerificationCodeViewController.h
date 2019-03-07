@@ -12,9 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFRegisterInputVerificationCodeViewController : UCFBaseViewController
 
-@property(nonatomic,strong) NSString *registerTokenStr;
-
 @property(nonatomic,strong) NSString *phoneNum;
+
 @end
 
 NS_ASSUME_NONNULL_END

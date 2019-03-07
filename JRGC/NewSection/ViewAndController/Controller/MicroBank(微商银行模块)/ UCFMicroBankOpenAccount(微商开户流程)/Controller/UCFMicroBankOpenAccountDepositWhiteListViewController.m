@@ -17,11 +17,16 @@
 
 #import "UCFMicroBankOpenAccountGetOpenAccountInfoAPI.h"
 #import "UCFMicroBankOpenAccountGetOpenAccountInfoModel.h"
-#import "UCFMicroBankOpenAccountOpenAccountIntoBankInfoAPI.h"
-#import "UCFMicroBankOpenAccountOpenAccountIntoBankInfoModel.h"
+#import "UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI.h"
+#import "UCFMicroBankOpenAccountZXGetOpenAccountInfoModel.h"
+#import "UCFMicroBankIdentifysendCodeInfoAPI.h"
+#import "UCFMicroBankIdentifysendCodeInfoModel.h"
+#import "UCFMicroBankOpenAccountViewController.h"
 
 #import "FullWebViewController.h"
 #import "AccountWebView.h"
+#import "AccountSuccessVC.h"
+#import "UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.h"
 
 @interface UCFMicroBankOpenAccountDepositWhiteListViewController ()<UIScrollViewDelegate,UITextFieldDelegate,UCFHuiShangChooseBankViewControllerDelegate>
 
@@ -37,7 +42,7 @@
 
 @property (nonatomic, strong) UCFMicroBankOpenAccountDepositBankListCellView *selectBankView;// 选择银行卡
 
-@property (nonatomic, strong) UCFMicroBankOpenAccountDepositCellView *BankNumView; //输入银行卡号
+@property (nonatomic, strong) UCFMicroBankOpenAccountDepositCellView *bankNumView; //输入银行卡号
 
 @property (nonatomic, strong) UIButton *enterButton; //确认按钮
 
@@ -70,17 +75,12 @@
     [self loadLayoutView];
     
 }
-- (void)loadLayoutView{
-    if (self.accoutType == SelectAccoutTypeP2P) {
-        baseTitleLabel.text = @"开通微金徽商存管账户";
-    } else {
-        baseTitleLabel.text = @"开通尊享徽商存管账户";
-    }
-    
+- (void)loadLayoutView
+{
     [self.scrollLayout addSubview:self.nameView];
     [self.scrollLayout addSubview:self.idView];
     [self.scrollLayout addSubview:self.selectBankView];
-    [self.scrollLayout addSubview:self.BankNumView];
+    [self.scrollLayout addSubview:self.bankNumView];
     [self.scrollLayout addSubview:self.smsView];
     [self.scrollLayout addSubview:self.enterButton];
     [self.scrollLayout addSubview:self.agreementLabel];
@@ -160,30 +160,30 @@
     return _idView;
 }
 
-- (UCFMicroBankOpenAccountDepositCellView *)BankNumView
+- (UCFMicroBankOpenAccountDepositCellView *)bankNumView
 {
-    if (nil == _BankNumView) {
-        _BankNumView = [[UCFMicroBankOpenAccountDepositCellView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
-        _BankNumView.topPos.equalTo(self.selectBankView.bottomPos);
-        _BankNumView.myLeft = 0;
-        _BankNumView.titleImageView.image = [UIImage imageNamed:@"bank_card_icon"];
-        _BankNumView.contentField.delegate = self;
-        _BankNumView.contentField.placeholder = @"请输入银行卡号";
-        [_BankNumView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+    if (nil == _bankNumView) {
+        _bankNumView = [[UCFMicroBankOpenAccountDepositCellView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
+        _bankNumView.topPos.equalTo(self.selectBankView.bottomPos);
+        _bankNumView.myLeft = 0;
+        _bankNumView.titleImageView.image = [UIImage imageNamed:@"bank_card_icon"];
+        _bankNumView.contentField.delegate = self;
+        _bankNumView.contentField.placeholder = @"请输入银行卡号";
+        [_bankNumView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
-    return _BankNumView;
+    return _bankNumView;
 }
 
 - (UCFMicroBankOpenAccountDepositSMSCodeCellView *)smsView
 {
     if (nil == _smsView) {
         _smsView = [[UCFMicroBankOpenAccountDepositSMSCodeCellView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
-        _smsView.topPos.equalTo(self.BankNumView.bottomPos);
+        _smsView.topPos.equalTo(self.bankNumView.bottomPos);
         _smsView.myLeft = 0;
         _smsView.contentField.delegate = self;
         @PGWeakObj(self);
         _smsView.backBlock = ^(void) {
-            [selfWeak statVerifyCodeRequest];
+            [selfWeak statVerifyCodeRequest:@"SMS"];
         };
         [_smsView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
@@ -259,34 +259,34 @@
     }
     return _enterButton;
 }
+
 - (void)enterButtoClick
 {
-    UCFMicroBankOpenAccountOpenAccountIntoBankInfoAPI * request = [[UCFMicroBankOpenAccountOpenAccountIntoBankInfoAPI alloc] initWithRealName:self.nameView.contentField.text idCardNo:self.idView.contentField.text bankNo:self.bankId openStatus:self.GetOpenAccountModel.data.openStatus AccoutType:SelectAccoutTypeP2P];
+    UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text idCardNo:self.idView.contentField.text bankCardNo:self.bankNumView.contentField.text bankNo:self.bankId openStatus:self.GetOpenAccountModel.data.openStatus validateCode:self.smsView.contentField.text AccoutType:SelectAccoutTypeP2P];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
         DDLogDebug(@"---------%@",request.responseJSONModel);
-        UCFMicroBankOpenAccountOpenAccountIntoBankInfoModel *model = [request.responseJSONModel copy];
+        UCFMicroBankOpenAccountZXGetOpenAccountInfoModel *model = [request.responseJSONModel copy];
         if (model.ret == YES)
         {
+            SingleUserInfo.loginData.userInfo.openStatus = @"3";
             SingleUserInfo.loginData.userInfo.realName = self.nameView.contentField.text;
             [SingleUserInfo setUserData:SingleUserInfo.loginData];
-            AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
-            webView.title = @"即将跳转";
-            //            webView.isPresentViewController = self.db.isPresentViewController;
-            webView.rootVc = @"UpgradeAccountVC";
-            webView.url = model.data.url;
-            NSString *SIGNStr = model.data.tradeReq.SIGN;
-            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
-            [data setValue: model.data.tradeReq.PARAMS  forKey:@"PARAMS"];
-            [data setValue:[NSString  urlEncodeStr:SIGNStr] forKey:@"SIGN"];
-            webView.webDataDic = data;
-            //            if(self.db){
-            //                [self.db.navigationController pushViewController:webView animated:YES];
-            //            }else{
-            [self.rt_navigationController pushViewController:webView animated:YES];
-            //            }
+            
+            //提交信息成功之后，显示开户成功页面
+            [self.view endEditing:YES];
+            
+            CGFloat viewHeight = PGStatusBarHeight + self.navigationController.navigationBar.frame.size.height+60;
+            UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView *wzSucceedView = [[UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, PGScreenHeight - viewHeight)];
+            wzSucceedView.useFrame = YES;
+            wzSucceedView.myTop = 0;
+            wzSucceedView.myLeft = 0;
+            [wzSucceedView setUserSelectAccoutType:SelectAccoutTypeP2P];
+            [wzSucceedView.settingTransactionPasswordButton addTarget:self action:@selector(changeTransactionPassword) forControlEvents:UIControlEventTouchUpInside];
+            [self.scrollLayout addSubview:wzSucceedView];
+            
         }
         else
         {
@@ -294,10 +294,17 @@
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
-        
+
     }];
 }
-
+- (void)changeTransactionPassword
+{
+    for (UCFMicroBankOpenAccountViewController *vc in self.rt_navigationController.rt_viewControllers) {
+        if ([vc isKindOfClass:[UCFMicroBankOpenAccountViewController class]]) {
+            vc.openAccountSucceed = YES;
+        }
+    }
+}
 - (NZLabel *)agreementLabel
 {
     if (nil == _agreementLabel) {
@@ -311,8 +318,7 @@
         //自动折行设置
         _agreementLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _agreementLabel.numberOfLines = 0;
-        //        _agreementLabel.text = @"查看支持银行";
-        //        [_agreementLabel sizeToFit];
+        _agreementLabel.userInteractionEnabled = YES;
         
     }
     return _agreementLabel;
@@ -330,8 +336,7 @@
         //自动折行设置
         _smsLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _smsLabel.numberOfLines = 0;
-        //        _agreementLabel.text = @"查看支持银行";
-        //        [_agreementLabel sizeToFit];
+        _smsLabel.userInteractionEnabled = YES;
         
     }
     return _smsLabel;
@@ -340,7 +345,8 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     //身份证号
-    if (textField == self.idView.contentField) {
+    if (textField == self.idView.contentField)
+    {
         if (textField.text.length >= 18 && ![string isEqualToString:@""]) {
             if (range.location == 17 && range.length == 1) {
                 return YES;
@@ -352,6 +358,39 @@
             return NO;
         }
         return YES;
+    }
+    else if (textField == self.bankNumView.contentField)
+    {
+        // 4位分隔银行卡卡号
+        NSString *text = [textField text];
+        
+        NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789\b"];
+        string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if ([string rangeOfCharacterFromSet:[characterSet invertedSet]].location != NSNotFound) {
+            return NO;
+        }
+        
+        text = [text stringByReplacingCharactersInRange:range withString:string];
+        text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        NSString *newString = @"";
+        while (text.length > 0) {
+            NSString *subString = [text substringToIndex:MIN(text.length, 4)];
+            newString = [newString stringByAppendingString:subString];
+            if (subString.length == 4) {
+                newString = [newString stringByAppendingString:@" "];
+            }
+            text = [text substringFromIndex:MIN(text.length, 4)];
+        }
+        
+        newString = [newString stringByTrimmingCharactersInSet:[characterSet invertedSet]];
+        
+        if ([newString stringByReplacingOccurrencesOfString:@" " withString:@""].length >= 20) {
+            return NO;
+        }
+        
+        [textField setText:newString];
+        return NO;
     }
     return YES;
 }
@@ -365,12 +404,21 @@
         [AuxiliaryFunc showToastMessage:@"请输入正确的身份证号码" withView:self.view];
         return;
     }
+    else if (textField == self.bankNumView.contentField && ![Common isValidCardNumber:self.bankNumView.contentField.text]){
+        [AuxiliaryFunc showToastMessage:@"请输入正确的银行卡号" withView:self.view];
+        return;
+    }
+    else if (textField == self.smsView.contentField && [self.smsView.contentField.text isEqualToString:@""]){
+        [AuxiliaryFunc showToastMessage:@"请输入正确的短信验证码" withView:self.view];
+        return;
+    }
+
     
 }
 
 - (void)inspectTextField
 {
-    if ([self inspectNameViewInPut] && [self inspectIdViewInPut] && [self inspectSelectBankView]) {
+    if ([self inspectNameViewInPut] && [self inspectIdViewInPut] && [self inspectSelectBankView] && [self inspectSmsView] && [self inspectSelectBankView]) {
         //输入正常,按钮可点击
         self.enterButton.userInteractionEnabled = YES;
         [self.enterButton setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
@@ -412,6 +460,26 @@
         return NO;
     }
 }
+- (BOOL)inspectBankNumView
+{
+    if (self.bankNumView.contentField.text.length >0 && ![self.bankNumView.contentField.text isEqualToString:@""] && [Common isValidCardNumber:self.bankNumView.contentField.text]) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+- (BOOL)inspectSmsView
+{
+    if (self.smsView.contentField.text.length >0 && ![self.smsView.contentField.text isEqualToString:@""] ) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
 - (void)queryUserData
 {
     UCFMicroBankOpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountGetOpenAccountInfoAPI alloc] initWithAccoutType:SelectAccoutTypeP2P];
@@ -426,25 +494,21 @@
             //获取徽商开户页面信息
             
             //设置用户协议
-            if(![self.GetOpenAccountModel.data.cfcaContractName isEqualToString:@""]){
-                
+            if(![self.GetOpenAccountModel.data.cfcaContractName isEqualToString:@""])
+//            if([self.GetOpenAccountModel.data.cfcaContractName isEqualToString:@""])
+            {
                 self.agreementLabel.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》";
+                [self.agreementLabel sizeToFit];
                 __weak typeof(self) weakSelf = self;
                 [self.agreementLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》"];
                 [self.agreementLabel addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
                     FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:weakSelf.GetOpenAccountModel.data.cfcaContractUrl title:@"CFCA数字证书服务协议"];
                     webController.baseTitleType = @"specialUser";
-                    [weakSelf.navigationController pushViewController:webController animated:YES];
+                    [weakSelf.rt_navigationController pushViewController:webController animated:YES];
                 }];
             }
-            
-            
             SingleUserInfo.loginData.userInfo.openStatus = self.GetOpenAccountModel.data.openStatus;
-            
-            
-            
             //            _nameView.contentField.enabled=NO;
-            
             if (self.GetOpenAccountModel.data.userInfo.realName.length > 0)
             {
                 //                用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
@@ -459,7 +523,7 @@
             }
             if (self.GetOpenAccountModel.data.userInfo.bankCard.length > 0) {
                 //将银行卡（textField3）要显示的文字四位分隔
-                self.selectBankView.oaContentLabel.text = [NSString bankIdSeparate:self.GetOpenAccountModel.data.userInfo.bankCard];
+                self.bankNumView.contentField.text  = [NSString bankIdSeparate:self.GetOpenAccountModel.data.userInfo.bankCard];
             }
             
             //银行logo
@@ -494,10 +558,46 @@
         
     }];
 }
-
-- (void)statVerifyCodeRequest
+- (void)statVerifyCodeRequest:(NSString *)isVms
 {
-    
+    NSString *isVmsNew = isVms;//SMS："普通短信渠道"；VMS："验证码语音渠道"
+    UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:self.GetOpenAccountModel.data.userInfo.phoneNum isVms:isVmsNew type:@"6" AccoutType:SelectAccoutTypeP2P];
+    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        DDLogDebug(@"---------%@",request.responseJSONModel);
+        UCFMicroBankIdentifysendCodeInfoModel *model = [request.responseJSONModel copy];
+        if (model.ret == YES)
+        {
+            [self.smsView.verifyCodeButton startCountDown];
+            __weak typeof(self) weakSelf = self;
+            
+            NSString *replaceStr = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.phoneNum startLocation:3 lenght:self.GetOpenAccountModel.data.userInfo.phoneNum.length -7];
+            self.smsLabel.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",replaceStr];
+            [self.smsLabel sizeToFit];
+            [self.smsLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
+            [self.smsLabel addLinkString:@"点击这里" block:^(ZBLinkLabelModel *linkModel) {
+                if (![weakSelf.smsView.verifyCodeButton getIsCountDown]) {
+                    [weakSelf statVerifyCodeRequest:@"VMS"];
+                }
+                
+            }];
+            if ([isVmsNew isEqualToString:@"VMS"]) {
+                [AuxiliaryFunc showToastMessage:@"系统正在准备外呼，请保持手机信号畅通" withView:self.view];
+            }
+        }
+        else
+        {
+            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
 }
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
+}
 @end

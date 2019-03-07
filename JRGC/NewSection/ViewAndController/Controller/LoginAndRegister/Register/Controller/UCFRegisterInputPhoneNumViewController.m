@@ -14,6 +14,9 @@
 #import "UCFRegisterGetRegisterInfoApi.h"
 #import "UCFXieYiViewController.h"
 #import "UCFNewLoginViewController.h"
+#import "IQKeyboardManager.h"
+#import "UCFRegisterInputVerificationCodeViewController.h"
+
 @interface UCFRegisterInputPhoneNumViewController ()<YTKChainRequestDelegate,UITextFieldDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -63,6 +66,18 @@
     [self.rootLayout addSubview:self.registerAgreeLabel];
     [self addLeftButtons];
     [self addRightButton];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
+    keyboardManager.enable = YES;
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
+    keyboardManager.enable = NO;
 }
 - (void)addRightButton
 {
@@ -229,20 +244,42 @@
         _registerPhoneField.leftPos.equalTo(self.registerPhoneImageView.rightPos).offset(9);
         _registerPhoneField.rightPos.equalTo(self.rootLayout.rightPos).offset(25);
         _registerPhoneField.centerYPos.equalTo(self.registerPhoneImageView.centerYPos);
-        
-        
-        //设置清除按钮图片
-//        UIButton *clearButton = [_registerPhoneField valueForKey:@"_clearButton"];
-//        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
-//
-//            [clearButton setImage:[UIImage imageNamed:@"register_clear_icon.png"] forState:UIControlStateNormal];
-//            [clearButton setImage:[UIImage imageNamed:@"register_clear_icon.png"] forState:UIControlStateHighlighted];
-//
-//        }
+         [_registerPhoneField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+//        设置清除按钮图片
+        UIButton *clearButton = [_registerPhoneField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateHighlighted];
+
+        }
     }
     return _registerPhoneField;
 }
-
+- (void)textFieldEditChanged:(UITextField *)textField
+{
+    if ([self inspectRegisterPhone]) {
+        //输入正常,按钮可点击
+        self.nextBtn.userInteractionEnabled = YES;
+        [self.nextBtn setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
+    }
+    else
+    {
+        //输入非正常,按钮不可点击
+        [self.nextBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
+        self.nextBtn.userInteractionEnabled = NO;
+    }
+}
+- (BOOL)inspectRegisterPhone
+{
+    if (self.registerPhoneField.text.length == 11 && [Common isOnlyNumber:self.registerPhoneField.text]) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
 - (UIButton*)nextBtn
 {
     
@@ -284,6 +321,15 @@
         _registerAgreeLabel.text = @"*注册即视为本人已阅读并同意《金融工场用户服务协议》";
         [_registerAgreeLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"《金融工场用户服务协议》"];
         [_registerAgreeLabel sizeToFit];
+        __weak typeof(self) weakSelf = self;
+        [_registerAgreeLabel addLinkString:@"《金融工场用户服务协议》" block:^(ZBLinkLabelModel *linkModel) {
+            //注册协议 加载本地文件
+            UCFXieYiViewController *zhuCeXieYi = [[UCFXieYiViewController alloc] init];
+            zhuCeXieYi.titleName = @"金融工场用户服务协议";
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"jrgcuserxieyi" ofType:@"docx"];
+            zhuCeXieYi.filePath = [NSURL fileURLWithPath:path];
+            [weakSelf.rt_navigationController pushViewController:zhuCeXieYi animated:YES];
+        }];
     }
     return _registerAgreeLabel;
 }
@@ -297,19 +343,18 @@
 }
 - (void)buttonNextBtnClick:(UIButton *)btn
 {
-    UCFRegistVerificationMobileApi * request = [[UCFRegistVerificationMobileApi alloc] init];
+    UCFRegistVerificationMobileApi * request = [[UCFRegistVerificationMobileApi alloc] initWithphoneNum:self.registerPhoneField.text];
     request.animatingView = self.view;
-    YTKChainRequest *chainReq = [[YTKChainRequest alloc] init];
     
-    [chainReq addRequest:request callback:^(YTKChainRequest * _Nonnull chainRequest, YTKBaseRequest * _Nonnull baseRequest) {
-//        RegisterApi *result = (RegisterApi *)baseRequest;
-//        NSString*userId = [result userId];
-        UCFRegistVerificationMobileModel *model = [baseRequest.responseJSONModel copy];
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        UCFRegistVerificationMobileModel *model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
-            //电话可以允许注册
-            UCFRegisterGetRegisterInfoApi *api = [[UCFRegisterGetRegisterInfoApi alloc]initWithphoneNum:@""];
-            [chainRequest addRequest:api callback:nil];
+            //电话号码可以允许注册
+            UCFRegisterInputVerificationCodeViewController *vc = [[UCFRegisterInputVerificationCodeViewController alloc] init];
+            vc.phoneNum = self.registerPhoneField.text;
+            [self.rt_navigationController pushViewController:vc animated:YES];
         }
         else if(model.code == 3) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:model.message delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles:@"立即拨打", nil];
@@ -319,21 +364,29 @@
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:model.message delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
             [alertView show];
         }
-        
-        
-        
+//        else{
+//            ShowMessage(model.message);
+//        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+
     }];
     
-    chainReq.delegate = self;
-    // start to send request
-    [chainReq start];
-   
-//    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        // 你可以直接在这里使用 self
-//        UCFRegistVerificationMobileModel *model = [request.responseJSONModel copy];
+    
+    
+    
+    
+//    YTKChainRequest *chainReq = [[YTKChainRequest alloc] init];
+//
+//    [chainReq addRequest:request callback:^(YTKChainRequest * _Nonnull chainRequest, YTKBaseRequest * _Nonnull baseRequest) {
+////        RegisterApi *result = (RegisterApi *)baseRequest;
+////        NSString*userId = [result userId];
+//        UCFRegistVerificationMobileModel *model = [baseRequest.responseJSONModel copy];
 //        DDLogDebug(@"---------%@",model);
 //        if (model.ret == YES) {
 //            //电话可以允许注册
+//            UCFRegisterGetRegisterInfoApi *api = [[UCFRegisterGetRegisterInfoApi alloc]initWithphoneNum:self.registerPhoneField.text];
+//            [chainRequest addRequest:api callback:nil];
 //        }
 //        else if(model.code == 3) {
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:model.message delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles:@"立即拨打", nil];
@@ -343,34 +396,44 @@
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:model.message delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
 //            [alertView show];
 //        }
-////        else{
-////            ShowMessage(model.message);
-////        }
-//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        // 你可以直接在这里使用 self
+//
+//
 //
 //    }];
+//
+//    chainReq.delegate = self;
+//    // start to send request
+//    [chainReq start];
+//
+
 
 }
-- (void)chainRequestFinished:(YTKChainRequest *)chainRequest {
-    // all requests are done
-    
-    for (YTKBaseRequest *request in chainRequest.requestArray) {
-        if ([request isKindOfClass:[UCFRegistVerificationMobileApi class]]) {
-            
-        }
-        if ([request isKindOfClass:[UCFRegisterGetRegisterInfoApi class]]) {
-            UCFRegisterGetRegisterInfoModel *model = request.responseJSONModel;
-            if(model.ret){
-//                UCFRegisterStepTwoViewController *twoController = [[UCFRegisterStepTwoViewController alloc] initWithPhoneNumber:[_registerOneView phoneNumberText]];
-//                twoController.isLimitFactoryCode = isLimitFactoryCode;
-//                twoController.registerTokenStr = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"registTicket"];
-//                [self.navigationController pushViewController:twoController animated:YES];
-            }
-        }
-    }
-
-}
+//- (void)chainRequestFinished:(YTKChainRequest *)chainRequest {
+//    // all requests are done
+//
+//    for (YTKBaseRequest *request in chainRequest.requestArray) {
+//        if ([request isKindOfClass:[UCFRegistVerificationMobileApi class]]) {
+//
+//        }
+//        if ([request isKindOfClass:[UCFRegisterGetRegisterInfoApi class]]) {
+//            UCFRegisterGetRegisterInfoModel *model = request.responseJSONModel;
+//            if(model.ret){
+//
+//                UCFRegisterInputVerificationCodeViewController *vc = [[UCFRegisterInputVerificationCodeViewController alloc] init];
+//                vc.registerTokenStr = model.data.registTicket;
+//                vc.phoneNum = self.registerPhoneField.text;
+//                [self.rt_navigationController pushViewController:vc animated:YES];
+//
+//
+////                UCFRegisterStepTwoViewController *twoController = [[UCFRegisterStepTwoViewController alloc] initWithPhoneNumber:[_registerOneView phoneNumberText]];
+////                twoController.isLimitFactoryCode = isLimitFactoryCode;
+////                twoController.registerTokenStr = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"registTicket"];
+////                [self.navigationController pushViewController:twoController animated:YES];
+//            }
+//        }
+//    }
+//
+//}
 - (void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest*)request {
     // some one of request is failed
     

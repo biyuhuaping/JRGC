@@ -37,6 +37,8 @@
 #import "UCFMicroBankDepositoryAccountHomeViewController.h"
 
 #import "UCFMicroBankOpenAccountViewController.h"
+#import "AccountSuccessVC.h"
+
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -240,6 +242,14 @@
     }
     else if (tag == 1003){
         //我的工豆
+        AccountSuccessVC *acVC = [[AccountSuccessVC alloc]initWithNibName:@"AccountSuccessVC" bundle:nil];
+        //            acVC.site = self.site;
+        acVC.accoutType = self.accoutType;
+        acVC.fromVC = 2;
+        //            acVC.db = self.db;
+        //            self.db.isOpenAccount = YES;
+        [self.rt_navigationController pushViewController:acVC animated:YES];
+        
     }
     else if (tag == 1004){
         //优惠券

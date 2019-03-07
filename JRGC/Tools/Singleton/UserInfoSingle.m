@@ -89,13 +89,14 @@
 //    }
 //}
 
-- (void)saveLoginAccount:(NSString *)account;
+- (void)saveLoginAccount:(NSDictionary *)account;
 {
+//    [NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil]
     [[NSUserDefaults standardUserDefaults] setValue:account forKey:@"lastLoginName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (NSString *)getLoginAccount
+- (NSDictionary *)getLoginAccount
 {
     return  [[NSUserDefaults standardUserDefaults] valueForKey:@"lastLoginName"];
 }

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFMicroBankOpenAccountViewController : UCFBaseViewController
 
+@property (nonatomic, assign) BOOL openAccountSucceed;//开户成功
+
 @end
 
 NS_ASSUME_NONNULL_END

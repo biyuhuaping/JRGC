@@ -49,7 +49,7 @@
  */
 - (id)requestArgument {
     return @{
-             @"fromSite":[NSString stringWithFormat:@"%d",_accoutType],
+             @"fromSite":[NSString stringWithFormat:@"%ld",(long)_accoutType],
              @"destPhoneNo": _destPhoneNo,
              @"isVms" : _isVms,
              @"type" : _type

@@ -42,7 +42,7 @@
     [self.rootLayout addSubview:self.verificationCodeContentLabel];
     [self.rootLayout addSubview:self.verificationCodeView];
     [self.rootLayout addSubview:self.lineSendVCView];
-    
+    [self starCountDown];
 
 //    (^endLayoutBlock)(void)
 }
@@ -128,7 +128,7 @@
         _lineSendVCView.voiceVerifyCodebackBlock = ^(void) {
             [selfWeak requestAgainVerificationCode:@"VMS"];
         };
-        [_lineSendVCView.verifyCodeButton startCountDown];
+//        [_lineSendVCView.verifyCodeButton startCountDown];
     }
     return _lineSendVCView;
 }
@@ -137,7 +137,7 @@
 {
     //重新获取验证码验证码接口  //语音@"VMS";短信 @"SMS"
     self.isVmsStr = typeStr;
-    UCFRegisterSendCodeApi * request = [[UCFRegisterSendCodeApi alloc] initWithDestPhoneNo:self.verificationCodeView.code andIsVms:typeStr];
+    UCFRegisterSendCodeApi * request = [[UCFRegisterSendCodeApi alloc] initWithDestPhoneNo:self.phoneNum andIsVms:typeStr];
     //    request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {

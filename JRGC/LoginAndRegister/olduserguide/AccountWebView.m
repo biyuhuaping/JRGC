@@ -9,6 +9,7 @@
 #import "AccountWebView.h"
 #import "AppDelegate.h"
 #import "NSString+Misc.h"
+#import "UCFMicroBankOpenAccountViewController.h"
 @interface AccountWebView ()
 
 @end
@@ -59,6 +60,7 @@
         if (self.accoutType == SelectAccoutTypeP2P)
         {
             SingleUserInfo.loginData.userInfo.openStatus = @"3";
+            [SingleUserInfo setUserData:SingleUserInfo.loginData];
         }
         NSDictionary *encryptParamDic = @{
                                           @"userId": SingleUserInfo.loginData.userInfo.userId                 //用户id
@@ -107,40 +109,20 @@
 
 - (void)closeWebView
 {
-    if (self.isPresentViewController)
+    if ([baseTitleLabel.text hasSuffix:@"账户开立"])
     {
-//        [self dismissViewControllerAnimated:YES completion:nil];
-        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-        [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
-            NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
-            UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
-            [nav popToRootViewControllerAnimated:NO];
-        }];
-    }
-    else
-    {
-        if ([baseTitleLabel.text hasSuffix:@"账户开立"] || [baseTitleLabel.text hasSuffix:@"开户失败"])
-        {
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            if ([self.rootVc isEqualToString:@"UpgradeAccountVC"]){
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            }else{
-                
-                
-                [self.navigationController popViewControllerAnimated:YES];
+        for (UCFMicroBankOpenAccountViewController *vc in self.rt_navigationController.rt_viewControllers) {
+            if ([vc isKindOfClass:[UCFMicroBankOpenAccountViewController class]]) {
+                vc.openAccountSucceed = YES;
             }
         }
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getP2PAccountDataMessage" object:nil]; //刷新微金充值页面
-    //刷新首页、债券转让、个人中心数据
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUserState" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:MODIBANKZONE_SUCCESSED object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:BACK_TO_HS object:nil];
+    else
+    {
+        //([baseTitleLabel.text hasSuffix:@"开户失败"])
+//        [self.rt_navigationController popViewControllerAnimated:YES];
+    }
+    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 
 @end
