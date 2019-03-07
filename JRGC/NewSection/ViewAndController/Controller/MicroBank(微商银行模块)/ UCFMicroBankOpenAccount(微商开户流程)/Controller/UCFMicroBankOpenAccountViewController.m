@@ -143,6 +143,7 @@
     _openAccountSucceed = openAccountSucceed;
     if (openAccountSucceed) {
         //开户成功
+        [self.optionView selectStep:OpenAccoutPassWord];
         [self changeControllerFromOldController:self.currentVC toNewController:self.tradersPasswordView];
     }
 }

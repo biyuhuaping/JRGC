@@ -260,7 +260,7 @@
 
 - (void)enterButtoClick
 {
-    UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text idCardNo:self.idView.contentField.text bankCardNo:self.bankNumView.contentField.text bankNo:self.bankId openStatus:self.GetOpenAccountModel.data.openStatus validateCode:self.smsView.contentField.text AccoutType:SelectAccoutTypeP2P];
+    UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text idCardNo:self.idView.contentField.text bankCardNo:[self.bankNumView.contentField.text stringByReplacingOccurrencesOfString:@" " withString:@""] bankNo:self.bankId openStatus:self.GetOpenAccountModel.data.openStatus validateCode:self.smsView.contentField.text AccoutType:SelectAccoutTypeP2P];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
