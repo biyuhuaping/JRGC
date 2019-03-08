@@ -74,7 +74,7 @@
         UIViewController *childVC = _parentController.childViewControllers[index];
         self.currentSelectIndex = index;
         
-        if (!_parentController.view.superview) {
+        if (!childVC.view.superview) {
             
             childVC.view.frame = CGRectMake(index * self.segmentScrollV.frame.size.width, 0, self.segmentScrollV.frame.size.width, self.self.segmentScrollV.frame.size.height);
             [self.segmentScrollV addSubview:childVC.view];
