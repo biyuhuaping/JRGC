@@ -207,8 +207,13 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    InvestmentCouponCouponlist *newObj = self.cashArray[indexPath.row];
+    if (newObj.isCanUse) {
         UCFSelectionCouponsCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         [self checkButtonClick: cell.selectCouponsBtn];
+    } else {
+        [self alertUnableToUseCoupons];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

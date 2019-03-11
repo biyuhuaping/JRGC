@@ -36,7 +36,9 @@
         [self.couponTypeLayout addSubview:self.couponAmounLabel];
         [self.couponTypeLayout addSubview:self.remarkLabel];
         [self.couponTypeLayout addSubview:self.overdueTimeLabel];
-//
+
+        [self.couponTypeLayout addSubview:self.unUseReasonMarkLab];
+        [self.couponTypeLayout addSubview:self.detailReasonLab];
         [self.couponTypeLayout addSubview:self.willExpireLayout];
 //
         [self.couponTypeLayout addSubview:self.investMultipLabel];
@@ -173,37 +175,38 @@
     }
     return _overdueTimeLabel;
 }
+- (UILabel *)unUseReasonMarkLab
+{
+    if (nil == _unUseReasonMarkLab) {
+        _unUseReasonMarkLab = [UILabel new];
+        _unUseReasonMarkLab.bottomPos.equalTo(self.detailReasonLab.topPos).offset(5);
+        _unUseReasonMarkLab.rightPos.equalTo(@15);
+        _unUseReasonMarkLab.textAlignment = NSTextAlignmentRight;
+        _unUseReasonMarkLab.font = self.remarkLabel.font;
+        _unUseReasonMarkLab.textColor = self.remarkLabel.textColor;
+        _unUseReasonMarkLab.text = @"不可用原因";
+        [_unUseReasonMarkLab sizeToFit];
+    }
+    return _unUseReasonMarkLab;
+}
+- (UILabel *)detailReasonLab
+{
+    if (nil == _detailReasonLab) {
+        _detailReasonLab = [UILabel new];
+        _detailReasonLab.bottomPos.equalTo(self.overdueTimeLabel.topPos).offset(13);
+        _detailReasonLab.rightPos.equalTo(@15);
+        _detailReasonLab.textAlignment = NSTextAlignmentRight;
+        _detailReasonLab.font = self.remarkLabel.font;
+        _detailReasonLab.textColor = self.remarkLabel.textColor;
+        _detailReasonLab.text = @"出借金额小于优惠券的最低使用金额";
+        [_detailReasonLab sizeToFit];
 
-//- (MyRelativeLayout *)couponDateLayout
-//{
-//    if (nil == _couponDateLayout) {
-//        _couponDateLayout = [MyRelativeLayout new];
-//        _couponDateLayout.topPos.equalTo(self.couponTypeLayout.bottomPos);
-//        _couponDateLayout.leftPos.equalTo(self.couponTypeLayout.leftPos);
-//        _couponDateLayout.rightPos.equalTo(self.couponTypeLayout.rightPos);
-//        _couponDateLayout.heightSize.equalTo(@32);
-//        //        _couponDateLayout.layer.borderColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1.0].CGColor;
-//        //        _couponDateLayout.layer.borderWidth = 0.5;
-//        _couponDateLayout.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
-//        { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
-//            //2.将指定的几个角切为圆角
-//
-//            UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:sbv.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(5, 5)];
-//            CAShapeLayer *temp = [CAShapeLayer layer];
-//            temp.lineWidth = 0.5;
-//            temp.fillColor = [UIColor clearColor].CGColor;
-//            temp.strokeColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1.0].CGColor;
-//            temp.frame = sbv.bounds;
-//            temp.path = maskPath.CGPath;
-//            [sbv.layer addSublayer:temp];
-//
-//            CAShapeLayer *mask = [[CAShapeLayer alloc]initWithLayer:temp];
-//            mask.path = maskPath.CGPath;
-//            sbv.layer.mask = mask;
-//        };
-//    }
-//    return _couponDateLayout;
-//}
+    }
+    return _detailReasonLab;
+}
+//@property (nonatomic, strong) UILabel     *unUseReasonMarkLab;
+//@property (nonatomic, strong) UILabel     *detailReasonLab;
+
 
 //@property (nonatomic, strong) YYLabel     *inverstPeriodLabel;//投资期限
 - (UILabel *)investMultipLabel
@@ -275,13 +278,16 @@
     {
         UIImage *image = [self createImageWithColor:UIColorWithRGB(0xdddddd)];
         [self.selectCouponsBtn setImage:image forState:UIControlStateNormal];
-        self.selectCouponsBtn.userInteractionEnabled = NO;
+        self.selectCouponsBtn.userInteractionEnabled = YES;
         self.couponAmounLabel.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
-        
+        self.unUseReasonMarkLab.myVisibility = MyVisibility_Invisible;
+        self.detailReasonLab.myVisibility = MyVisibility_Invisible;
     } else {
         [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
-        self.selectCouponsBtn.userInteractionEnabled = YES;
+        self.selectCouponsBtn.userInteractionEnabled = NO;
         self.couponAmounLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        self.unUseReasonMarkLab.myVisibility = MyVisibility_Visible;
+        self.detailReasonLab.myVisibility = MyVisibility_Visible;
     }
     
     [self.couponAmounLabel sizeToFit];

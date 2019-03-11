@@ -47,6 +47,7 @@
     self.view = self.rootLayout;
     
     [self.rootLayout addSubview:self.tableView];
+    [self.rootLayout addSubview:self.instructionsView];
     [self.rootLayout addSubview:self.useEnterBtn];
     [self.rootLayout addSubview:self.shadowView];
     
@@ -90,7 +91,7 @@
         _tableView.topPos.equalTo(@0);
         _tableView.leftPos.equalTo(@0);
         _tableView.rightPos.equalTo(@0);
-        _tableView.bottomPos.equalTo(self.useEnterBtn.topPos);
+        _tableView.bottomPos.equalTo(self.instructionsView.topPos);
         
     }
     return _tableView;
@@ -100,9 +101,9 @@
 {
     if (nil == _shadowView) {
         UIImageView *shadowView = [[UIImageView alloc] init];
-        shadowView.topPos.equalTo(self.useEnterBtn.topPos).offset(-2);
-        shadowView.leftPos.equalTo(self.useEnterBtn.leftPos);
-        shadowView.rightPos.equalTo(self.useEnterBtn.rightPos);
+        shadowView.topPos.equalTo(self.instructionsView.topPos).offset(-2);
+        shadowView.leftPos.equalTo(self.instructionsView.leftPos);
+        shadowView.rightPos.equalTo(self.instructionsView.rightPos);
         shadowView.myHeight = 2;
         UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
         shadowView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
@@ -191,13 +192,14 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    if (indexPath.section == 1) {
-//        [self alertUnableToUseCoupons];
-//    }
-//    else{
+    InvestmentCouponCouponlist *newObj = self.couponArray[indexPath.row];
+    
+    if (newObj.isCanUse) {
         UCFSelectionCouponsCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         [self checkButtonClick: cell.selectCouponsBtn];
-//    }
+    } else {
+        [self alertUnableToUseCoupons];
+    }
 }
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 //{
