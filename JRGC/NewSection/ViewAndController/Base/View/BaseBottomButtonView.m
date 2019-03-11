@@ -55,14 +55,16 @@
         [_enterButton setTitle:@"确定" forState:UIControlStateNormal];
         [_enterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _enterButton.bottomPos.equalTo(@10);
-        _enterButton.leftPos.equalTo(@15);
-        _enterButton.rightPos.equalTo(@15);
-        _enterButton.heightSize.equalTo(@37);
+        _enterButton.leftPos.equalTo(@25);
+        _enterButton.rightPos.equalTo(@25);
+//        _enterButton.heightSize.equalTo(@37);
+        _enterButton.topPos.equalTo(@10);
         _enterButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
         [_enterButton setBackgroundColor:[UIColor whiteColor]];
         _enterButton.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         {//viewLayoutCompleteBlock是在子视图布局完成后给子视图一个机会进行一些特殊设置的block。这里面我们将子视图的半径设置为尺寸的一半，这样就可以实现在任意的屏幕上，这个子视图总是呈现为圆形。viewLayoutCompleteBlock只会在布局完成后调用一次，就会被布局系统销毁。
-            sbv.layer.cornerRadius = 2;
+            sbv.layer.cornerRadius = CGRectGetHeight(sbv.frame)/2;
+            sbv.clipsToBounds = YES;
         };
         
     }
@@ -95,5 +97,9 @@
 - (void)setProjectionViewHidden:(BOOL)hidden
 {
     self.projectionView.hidden = hidden;
+}
+- (void)setButtonBackgroundImage:(UIImage *)backImage
+{
+    [self.enterButton setBackgroundImage:backImage forState:UIControlStateNormal];
 }
 @end

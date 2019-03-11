@@ -134,6 +134,7 @@
 		33B66167215C80B30027325F /* 银行存管证明.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33B6615F215C80B20027325F /* 银行存管证明.pdf */; };
 		33B66168215C80B30027325F /* Contract of guarantee.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33B66160215C80B20027325F /* Contract of guarantee.pdf */; };
 		33B6616A215C81480027325F /* 合作协议.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33B66169215C81480027325F /* 合作协议.pdf */; };
+		33CE365622364FB200FF707C /* UCFNewCouponParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CE365522364FB200FF707C /* UCFNewCouponParentViewController.m */; };
 		33E1A5DF20FDC5A9008244BD /* UCFCustomPopTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */; };
 		33E1A5E020FDC5A9008244BD /* UCFOpenRedBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */; };
 		33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */; };
@@ -1071,7 +1072,6 @@
 		E352FD4821E4AF0B00617AB7 /* UCFCouponPopupHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCF621E4AF0A00617AB7 /* UCFCouponPopupHomeView.m */; };
 		E352FD4921E4AF0B00617AB7 /* UCFCouponPopupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCF721E4AF0A00617AB7 /* UCFCouponPopupCell.m */; };
 		E352FD4A21E4AF0B00617AB7 /* UCFInvestmentCouponInterestTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCFC21E4AF0A00617AB7 /* UCFInvestmentCouponInterestTicketController.m */; };
-		E352FD4B21E4AF0B00617AB7 /* UCFInvestmentCouponController.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCFD21E4AF0A00617AB7 /* UCFInvestmentCouponController.m */; };
 		E352FD4C21E4AF0B00617AB7 /* UCFInvestmentCouponCashTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCFE21E4AF0A00617AB7 /* UCFInvestmentCouponCashTicketController.m */; };
 		E352FD4D21E4AF0B00617AB7 /* UCFInvestmentCouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FD0421E4AF0A00617AB7 /* UCFInvestmentCouponModel.m */; };
 		E352FD4E21E4AF0B00617AB7 /* UCFInvestmentCouponInstructionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FD0821E4AF0A00617AB7 /* UCFInvestmentCouponInstructionsView.m */; };
@@ -1524,6 +1524,8 @@
 		33B6615F215C80B20027325F /* 银行存管证明.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "银行存管证明.pdf"; sourceTree = "<group>"; };
 		33B66160215C80B20027325F /* Contract of guarantee.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Contract of guarantee.pdf"; sourceTree = "<group>"; };
 		33B66169215C81480027325F /* 合作协议.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "合作协议.pdf"; sourceTree = "<group>"; };
+		33CE365422364FB200FF707C /* UCFNewCouponParentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewCouponParentViewController.h; sourceTree = "<group>"; };
+		33CE365522364FB200FF707C /* UCFNewCouponParentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewCouponParentViewController.m; sourceTree = "<group>"; };
 		33E1A5D820FDC5A8008244BD /* UCFOpenRedBagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOpenRedBagButton.h; sourceTree = "<group>"; };
 		33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCustomPopTransitionAnimation.m; sourceTree = "<group>"; };
 		33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOpenRedBagButton.m; sourceTree = "<group>"; };
@@ -3093,11 +3095,9 @@
 		E352FCF821E4AF0A00617AB7 /* UCFCouponPopupHomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCouponPopupHomeView.h; sourceTree = "<group>"; };
 		E352FCF921E4AF0A00617AB7 /* UCFCouponPopupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCouponPopupCell.h; sourceTree = "<group>"; };
 		E352FCFC21E4AF0A00617AB7 /* UCFInvestmentCouponInterestTicketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentCouponInterestTicketController.m; sourceTree = "<group>"; };
-		E352FCFD21E4AF0A00617AB7 /* UCFInvestmentCouponController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentCouponController.m; sourceTree = "<group>"; };
 		E352FCFE21E4AF0A00617AB7 /* UCFInvestmentCouponCashTicketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentCouponCashTicketController.m; sourceTree = "<group>"; };
 		E352FCFF21E4AF0A00617AB7 /* UCFInvestmentCouponInterestTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponInterestTicketController.h; sourceTree = "<group>"; };
 		E352FD0021E4AF0A00617AB7 /* UCFInvestmentCouponCashTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponCashTicketController.h; sourceTree = "<group>"; };
-		E352FD0121E4AF0A00617AB7 /* UCFInvestmentCouponController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponController.h; sourceTree = "<group>"; };
 		E352FD0321E4AF0A00617AB7 /* UCFInvestmentCouponModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponModel.h; sourceTree = "<group>"; };
 		E352FD0421E4AF0A00617AB7 /* UCFInvestmentCouponModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentCouponModel.m; sourceTree = "<group>"; };
 		E352FD0621E4AF0A00617AB7 /* UCFInvestmentCouponInstructionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentCouponInstructionsView.h; sourceTree = "<group>"; };
@@ -7763,14 +7763,14 @@
 		E352FCFB21E4AF0A00617AB7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E352FD0121E4AF0A00617AB7 /* UCFInvestmentCouponController.h */,
-				E352FCFD21E4AF0A00617AB7 /* UCFInvestmentCouponController.m */,
 				E352FD0021E4AF0A00617AB7 /* UCFInvestmentCouponCashTicketController.h */,
 				E352FCFE21E4AF0A00617AB7 /* UCFInvestmentCouponCashTicketController.m */,
 				E352FCFF21E4AF0A00617AB7 /* UCFInvestmentCouponInterestTicketController.h */,
 				E352FCFC21E4AF0A00617AB7 /* UCFInvestmentCouponInterestTicketController.m */,
 				333B5DD1222E1BC200B9D11A /* UCFNewCashParentViewController.h */,
 				333B5DD2222E1BC200B9D11A /* UCFNewCashParentViewController.m */,
+				33CE365422364FB200FF707C /* UCFNewCouponParentViewController.h */,
+				33CE365522364FB200FF707C /* UCFNewCouponParentViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -9588,7 +9588,6 @@
 				FB3A80211CC612B8004B56C3 /* UCFCouponReturn.m in Sources */,
 				840A794F1C2AA4CA0059A946 /* UCFMessageDetailViewController.m in Sources */,
 				4A8884B51BFA039F001A6909 /* BeansFamilyViewController.m in Sources */,
-				E352FD4B21E4AF0B00617AB7 /* UCFInvestmentCouponController.m in Sources */,
 				74877CD71FB2AC3900F32428 /* UCFCompleteViewController.m in Sources */,
 				E32D696D222E571B00803CE5 /* UCFMicroBankOpenAccountGetOpenAccountInfoAPI.m in Sources */,
 				7BCE020B1AC8FDEF0084C15C /* PostRequest.m in Sources */,
@@ -10075,6 +10074,7 @@
 				74BDA98B1F09F6C60054403F /* FSCalendarConstants.m in Sources */,
 				8414490B1CB4B6A6000CD292 /* UCFMessageCenterModel.m in Sources */,
 				E352FD6F21E4AF2600617AB7 /* Color.m in Sources */,
+				33CE365622364FB200FF707C /* UCFNewCouponParentViewController.m in Sources */,
 				83CD842C1F13A50800227704 /* UCFHonerViewController.m in Sources */,
 				33E3032221F1800700FD657C /* UCFHomeBannerApi.m in Sources */,
 				7BA6E4C11AD6731900FE8C37 /* UIButton+WebCache.m in Sources */,

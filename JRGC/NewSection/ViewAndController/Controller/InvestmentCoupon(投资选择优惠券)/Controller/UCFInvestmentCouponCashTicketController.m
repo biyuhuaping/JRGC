@@ -10,11 +10,11 @@
 #import "BaseBottomButtonView.h"
 #import "UCFSelectionCouponsCell.h"
 #import "UCFInvestmentCouponModel.h"
-#import "UCFInvestmentCouponController.h"
 #import "BaseTableView.h"
 #import "UCFNoDataView.h"
 #import "UCFInvestmentCouponInstructionsView.h"
-
+#import "NSObject+Compression.h"
+#import "UCFNewCashParentViewController.h"
 @interface UCFInvestmentCouponCashTicketController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -29,73 +29,30 @@
 
 @property (nonatomic, strong) NSMutableArray *arryData;
 
+@property (nonatomic, strong) UCFNewCashParentViewController *db;
+
 @end
 
 @implementation UCFInvestmentCouponCashTicketController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.db = (UCFNewCashParentViewController *)self.parentViewController;
     // Do any additional setup after loading the view.
     self.rootLayout = [MyRelativeLayout new];
     self.rootLayout.backgroundColor = [UIColor whiteColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
-
     [self.rootLayout addSubview:self.tableView];
-    [self.rootLayout addSubview:self.instructionsView];
     [self.rootLayout addSubview:self.useEnterBtn];
     [self.rootLayout addSubview:self.shadowView];
     
     [self starCouponPopup];
-//    [self.tableView beginRefresh];
 }
-//- (void)request
-//{
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
-//    if (![userId isEqualToString:@""] && userId != nil) {
-//        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,
-//                                                          @"prdclaimid":self.db.prdclaimid,
-//                                                          @"investAmt":self.db.investAmt,
-//                                                          @"couponType":@"0"}//0：返现券  1：返息券
-//                                                    tag:kSXTagInvestCashTicktList owner:self signature:YES Type:SelectAccoutTypeP2P];
-//
-//    }
-//}
-//- (void)refreshTableViewHeader{
-//
-//    [self request];
-//
-//}
 
-//-(void)beginPost:(kSXTag)tag
-//{
-//
-//}
-
-//- (void)endPost:(id)result tag:(NSNumber *)tag
-//{
-//    [MBProgressHUD hideHUDForView:self.view animated:YES];
-//
-//    if ([tag intValue] == kSXTagInvestCashTicktList)
-//    {
-//        NSMutableDictionary *dic = [result objectFromJSONString];
-//        [self starCouponPopup:dic];
-//    }
-//    [self.tableView endRefresh];
-//    [self.tableView cyl_reloadData];
-//}
-- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
-{
-    [self.tableView endRefresh];
-    [self.tableView cyl_reloadData];
-}
 -(void)starCouponPopup
 {
-
     self.arryData = [NSMutableArray arrayWithArray:self.cashArray];
-    
-    
     [self.arryData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         InvestmentCouponCouponlist *newObj = obj;
@@ -125,7 +82,7 @@
         _tableView.topPos.equalTo(@0);
         _tableView.leftPos.equalTo(@0);
         _tableView.rightPos.equalTo(@0);
-        _tableView.bottomPos.equalTo(self.instructionsView.topPos);
+        _tableView.bottomPos.equalTo(self.useEnterBtn.topPos);
         
     }
     return _tableView;
@@ -134,9 +91,9 @@
 {
     if (nil == _shadowView) {
         UIImageView *shadowView = [[UIImageView alloc] init];
-        shadowView.topPos.equalTo(self.instructionsView.topPos).offset(-2);
-        shadowView.leftPos.equalTo(self.instructionsView.leftPos);
-        shadowView.rightPos.equalTo(self.instructionsView.rightPos);
+        shadowView.topPos.equalTo(self.useEnterBtn.topPos).offset(-2);
+        shadowView.leftPos.equalTo(self.useEnterBtn.leftPos);
+        shadowView.rightPos.equalTo(self.useEnterBtn.rightPos);
         shadowView.myHeight = 2;
         UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
         shadowView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
@@ -157,17 +114,19 @@
 - (BaseBottomButtonView *)useEnterBtn
 {
     if (nil == _useEnterBtn) {
-        _useEnterBtn= [[BaseBottomButtonView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 57)];
+        _useEnterBtn= [[BaseBottomButtonView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
         [_useEnterBtn.enterButton addTarget:self action:@selector(useEnterBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _useEnterBtn.bottomPos.equalTo(@0);
         _useEnterBtn.widthSize.equalTo(self.rootLayout.widthSize);
-        _useEnterBtn.heightSize.equalTo(@57);
+        _useEnterBtn.heightSize.equalTo(@60);
         _useEnterBtn.leftPos.equalTo(self.rootLayout.leftPos);
         
         [_useEnterBtn setButtonTitleWithString:@"确认使用"];
         [_useEnterBtn setButtonTitleWithColor:[UIColor whiteColor]];
         [_useEnterBtn setViewBackgroundColor:[UIColor whiteColor]];
-        [_useEnterBtn setButtonBackgroundColor:UIColorWithRGB(0xFD4D4C)];
+        
+        UIImage *backImage = [UIImage  gc_styleImageSize:CGSizeMake(ScreenWidth - 50, 40)];
+        [_useEnterBtn setButtonBackgroundImage:backImage];
         
     }
     return _useEnterBtn;
@@ -182,18 +141,12 @@
     if (self.arryData.count > 0) {
         NSMutableArray *selectArray = [NSMutableArray array];
         [self.arryData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            NSMutableArray *array = obj;
-            
-            [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            InvestmentCouponCouponlist *newObj = obj;
+            //判断投资界面带回来的值,在列表页面勾选
+            if (newObj.isCheck) {
+                [selectArray addObject:newObj];
+            }
                 
-                InvestmentCouponCouponlist *newObj = obj;
-                //判断投资界面带回来的值,在列表页面勾选
-                if (newObj.isCheck ) {
-                    [selectArray addObject:newObj];
-                }
-                
-            }];
         }];
         self.db.cashSelectArr = [selectArray mutableCopy];
     }
@@ -203,18 +156,12 @@
     //计算s每次勾选的金额相加是否大于投资金额,大于则不能勾选
     __block NSInteger moneyValue = 0;
     [self.arryData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        NSMutableArray *array = obj;
-        
-        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
             InvestmentCouponCouponlist *newObj = obj;
             //判断投资界面带回来的值,在列表页面勾选
-            if (newObj.isCheck ) {
+            if (newObj.isCheck) {
                 moneyValue += newObj.investMultip;
             }
-            
-        }];
+
     }];
     if (moneyValue > [self.db.investAmt integerValue]) {
         @PGWeakObj(self);
@@ -260,61 +207,10 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (indexPath.section == 1) {
-        [self alertUnableToUseCoupons];
-    }else{
         UCFSelectionCouponsCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         [self checkButtonClick: cell.selectCouponsBtn];
-    }
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];//创建一个视图
-//    headerView.backgroundColor = UIColorWithRGB(0xEBEBEE);
-//
-//    UIView *view = [[UIView alloc] init];
-//    view.frame = CGRectMake(0,10,ScreenWidth,37);
-//    view.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0];
-//    [headerView addSubview:view];
-//
-//    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 95, 37)];
-//    headerLabel.backgroundColor = [UIColor clearColor];
-//    headerLabel.font = [UIFont boldSystemFontOfSize:13.0];
-//    headerLabel.textColor = UIColorWithRGB(0x555555);
-//    [view addSubview:headerLabel];
-//
-//    if (section == 0) {
-//        headerLabel.text = @"可使用优惠券";
-//    }
-//    else
-//    {
-//        headerLabel.text = @"不可使用优惠券";
-//        UIButton *button = [UIButton buttonWithType:0];
-//        button.frame = CGRectMake(CGRectGetMaxX(headerLabel.frame), (headerLabel.frame.size.height -20)/2, 20, 20);
-//        [button setImage:[UIImage imageNamed:@"icon_question.png"] forState:UIControlStateNormal];
-//        [button addTarget:self action:@selector(moreConfusion) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:button];
-//    }
-//
-//    if ([[self.arryData objectAtIndex:section] count] == 0) {
-//        return nil;
-//    }else
-//    {
-//        return headerView;
-//    }
-//
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    if ([[self.arryData objectAtIndex:section] count] == 0) {
-//        return 0.01;
-//    }else
-//    {
-//        return 47;
-//    }
-//}
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01;//设置尾视图高度为0.01
 }
@@ -337,11 +233,6 @@
 }
 -(void)checkButtonClick:(UIButton *)btn
 {
-//    NSIndexPath *indexPath = [self.tableView indexPathForCell:(UCFSelectionCouponsCell *)btn.superview.superview];
-    //获取cell在屏幕中位置
-    //    CGRect rectInTableView = [_rightView rectForRowAtIndexPath:indexPath];//cell在tabview的尺寸
-    //    CGRect rect = [_rightView convertRect:rectInTableView toView:[_rightView superview]];
-    //    cellFrame=rect;
     CGPoint point = btn.center;
     point = [self.tableView convertPoint:point fromView:btn.superview];
     NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:point];
@@ -358,12 +249,10 @@
     if (btn.selected)
     {
         newObj.isCheck = YES;
-        [btn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateNormal];
     }
     else
     {
         newObj.isCheck = NO;
-        [btn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
     }
 }
 

@@ -317,7 +317,7 @@
         UCFInvestmentCouponModel *cashModel = request.responseJSONModel;
         self.cashCouponArray = cashModel.data.couponList;
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        self.cashCouponArray = nil;
+        self.cashCouponArray = [NSMutableArray array];
     }];
 
     //获取返息券数据
@@ -327,7 +327,7 @@
         self.interestCouponArray = couponModel.data.couponList;
 
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        self.interestCouponArray = nil;
+        self.interestCouponArray = [NSMutableArray array];
     }];
 }
 

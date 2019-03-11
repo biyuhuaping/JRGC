@@ -100,7 +100,8 @@
         _selectCouponsBtn.leftPos.equalTo(@0);
         _selectCouponsBtn.widthSize.equalTo(@50);
         _selectCouponsBtn.heightSize.equalTo(@50 );
-        
+        [_selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateSelected];
+        [_selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
     }
     return _selectCouponsBtn;
 }
@@ -256,7 +257,6 @@
     }
     else
     {
-//        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0xFD4D4C);
         self.couponAmounLabel.text = [NSString stringWithFormat:@"%@%%",couponAmount];
         [self.couponAmounLabel setFont:[UIFont systemFontOfSize:13.0] string:@"%"];
     }
@@ -264,12 +264,10 @@
     if (cpData.isCheck)
     {
         self.selectCouponsBtn.selected = YES;
-        [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateNormal];
     }
     else
     {
         self.selectCouponsBtn.selected = NO;
-        [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
     }
     
     //优惠券是否可用

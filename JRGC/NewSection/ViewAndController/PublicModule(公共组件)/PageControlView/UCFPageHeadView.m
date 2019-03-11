@@ -66,7 +66,7 @@
     [self pageHeadView:self chiliControllerSelectIndex:button.tag - 100];
     button.selected = YES;
     if (self.delegate && [self.delegate respondsToSelector:@selector(pageHeadView:noticeScroViewScrollToPoint:)]) {
-        [self.delegate pageHeadView:self noticeScroViewScrollToPoint:CGPointMake(ScreenWidth * button.tag - 100, 0)];
+        [self.delegate pageHeadView:self noticeScroViewScrollToPoint:CGPointMake(ScreenWidth * (button.tag - 100), 0)];
     }
 }
 - (void)headViewSetSelectIndex:(NSInteger)index

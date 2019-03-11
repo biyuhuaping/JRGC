@@ -7,15 +7,13 @@
 //
 
 #import "UCFBaseViewController.h"
-@class UCFInvestmentCouponController;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFInvestmentCouponCashTicketController : UCFBaseViewController
 
 @property(nonatomic, strong)NSArray     *cashArray;
 
-
-@property (nonatomic, weak) UCFInvestmentCouponController *db;
 
 - (void)couponOfChoice;
 
