@@ -9,7 +9,6 @@
 #import "UCFNewCashParentViewController.h"
 #import "UCFPageHeadView.h"
 #import "UCFPageControlTool.h"
-#import "UCFInvestmentCouponCashTicketController.h"
 @interface UCFNewCashParentViewController ()
 @property(nonatomic, strong)UCFPageControlTool *pageController;
 @property(nonatomic, strong)UCFPageHeadView    *pageHeadView;
@@ -28,12 +27,8 @@
     [super viewDidLoad];
     [self addBlueLeftButton];
     [self setTitleViewText:@"使用返现券"];
-
 }
-
-
-
-#pragma mark ViewInIt
+#pragma mark ViewInIt 返现券
 - (UCFPageHeadView *)pageHeadView
 {
     if (nil == _pageHeadView) {
@@ -52,7 +47,6 @@
 }
 - (UCFInvestmentCouponCashTicketController *)canUseVC
 {
-    
     if (nil == _canUseVC) {
         _canUseVC = [[UCFInvestmentCouponCashTicketController alloc] init];
     }
@@ -66,5 +60,19 @@
     }
     _unCanUseVC.cashArray = _unCanUseCashArray;
     return _unCanUseVC;
+}
+#pragma mark ViewInIt 返息券
+
+
+
+- (void)backToTheInvestmentPage
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)confirmTheCouponOfYourChoice
+{
+    [self.canUseVC couponOfChoice];//返现券
+    [self backToTheInvestmentPage];
+    
 }
 @end

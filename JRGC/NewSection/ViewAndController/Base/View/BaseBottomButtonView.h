@@ -23,4 +23,6 @@
 - (void)setViewBackgroundColor:(UIColor *)BackgroundColor;
 
 - (void)setButtonTitleWithColor:(UIColor *)color;
+
+- (void)setButtonBackgroundImage:(UIImage *)backImage;
 @end
