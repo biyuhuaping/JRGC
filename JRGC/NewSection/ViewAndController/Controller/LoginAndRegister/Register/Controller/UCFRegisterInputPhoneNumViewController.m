@@ -35,7 +35,7 @@
 
 @property (nonatomic, strong) UITextField *registerPhoneField;//注册的手机号
 
-@property (nonatomic, strong) UIView *registerPhoneLine;//注册的图片
+@property (nonatomic, strong) UIView *registerPhoneLine;//注册的分割线
 
 @property (nonatomic, strong) UIButton *nextBtn; //下一步按钮
 
@@ -319,6 +319,7 @@
         _registerAgreeLabel.font = [Color gc_Font:13.0];
         _registerAgreeLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
         _registerAgreeLabel.text = @"*注册即视为本人已阅读并同意《金融工场用户服务协议》";
+        _registerAgreeLabel.userInteractionEnabled = YES;
         [_registerAgreeLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"《金融工场用户服务协议》"];
         [_registerAgreeLabel sizeToFit];
         __weak typeof(self) weakSelf = self;
@@ -367,6 +368,7 @@
 //        else{
 //            ShowMessage(model.message);
 //        }
+//        [self.registerPhoneField resignFirstResponder];
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
 
@@ -434,11 +436,11 @@
 //    }
 //
 //}
-- (void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest*)request {
-    // some one of request is failed
-    
-}
-    
+//- (void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest*)request {
+//    // some one of request is failed
+//
+//}
+
 
 #pragma mark - UITextFieldDelegate
 
@@ -555,6 +557,9 @@
             return NO;
         }
     }
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.rootLayout endEditing:YES];
 }
 /*
 #pragma mark - Navigation

@@ -136,7 +136,7 @@
 
 - (void)getToRoot
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 
 - (void)addLeftButtonWithName:(NSString *)leftButtonName

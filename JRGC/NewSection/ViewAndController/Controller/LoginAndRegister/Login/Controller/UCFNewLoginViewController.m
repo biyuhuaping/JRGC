@@ -12,6 +12,7 @@
 #import "UCFLoginApi.h"
 #import "UCFLoginModel.h"
 #import "UCFRegisterInputPhoneNumViewController.h"
+#import "UCFNewFindPassWordViewController.h"
 
 @interface UCFNewLoginViewController ()<UITextFieldDelegate>
 
@@ -151,7 +152,7 @@
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil]];
-            [SingleUserInfo setUserData:model.data withPassWord:pwd andInputAccountText:username];
+            [SingleUserInfo setUserData:model.data withPassWord:pwd];
             
             [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES];
         }
@@ -182,7 +183,10 @@
     return _forgetBtn;
 }
 -(void)buttonforgetClick
-{}
+{
+    UCFNewFindPassWordViewController *vc = [[UCFNewFindPassWordViewController alloc] init];
+    [SingGlobalView.rootNavController pushViewController:vc animated:YES];
+}
 
 - (void)textFieldEditChanged:(UITextField *)textField
 {
@@ -286,7 +290,9 @@
     
 }
 
-
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.rootLayout endEditing:YES];
+}
 
 
 /*

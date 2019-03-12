@@ -96,7 +96,7 @@
         // 读取上次登录的账号...
 //        [NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil];
         NSDictionary *dic = [[UserInfoSingle sharedManager] getLoginAccount];
-        if (nil != dic && dic.count > 0) {
+        if ([dic isKindOfClass:[NSDictionary class]] && nil != dic && dic.count > 0) {
             if ([[dic objectSafeForKey:@"isCompany"] isEqualToString:@"个人"] && [self.userType isEqualToString:@"个人"]) {
                 _userField.text = [dic objectSafeForKey:@"lastLoginName"];
             }
@@ -233,13 +233,13 @@
     if (btn.selected)
     {
         [btn setImage:[UIImage imageNamed:@"mine_icon_ exhibition"] forState:UIControlStateNormal];
-        _passWordField.secureTextEntry = NO;
+        self.passWordField.secureTextEntry = NO;
 
     }
     else
     {
         [btn setImage:[UIImage imageNamed:@"icon_invisible_bule"] forState:UIControlStateNormal];
-        _passWordField.secureTextEntry = YES;
+        self.passWordField.secureTextEntry = YES;
     }
 }
 

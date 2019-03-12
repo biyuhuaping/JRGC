@@ -27,7 +27,7 @@
     });
     return sharedAccountManagerInstance;
 }
-- (void)setUserData:(UCFLoginData *)loginData withPassWord:(NSString *)passWord andInputAccountText:(NSString *)account{
+- (void)setUserData:(UCFLoginData *)loginData withPassWord:(NSString *)passWord{
     
     //注册成功后，先清cookies，把老账户的清除掉，然后再用新账户的信息
     [Common deleteCookies];
@@ -35,7 +35,6 @@
     [self setUserData:loginData];
     [Common setHTMLCookies:loginData.userInfo.jg_ckie];//html免登录的cookies
     [[NSUserDefaults standardUserDefaults] setValue:[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]] forKey:AWP];
-    [self saveLoginAccount:account];
 
     //注册通知
     [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];

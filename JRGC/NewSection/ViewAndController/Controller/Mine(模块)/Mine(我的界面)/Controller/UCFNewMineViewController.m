@@ -24,7 +24,7 @@
 #import "CellConfig.h"
 
 #import "UCFSecurityCenterViewController.h"
-
+#import "UCFRegisterInputPassWordViewController.h"
 
 
 
@@ -253,6 +253,8 @@
     }
     else if (tag == 1004){
         //优惠券
+        UCFRegisterInputPassWordViewController *vc =  [[UCFRegisterInputPassWordViewController alloc] init];
+        [self.rt_navigationController pushViewController:vc animated:YES];
     }
     else if (tag == 1005){
         //邀请返利

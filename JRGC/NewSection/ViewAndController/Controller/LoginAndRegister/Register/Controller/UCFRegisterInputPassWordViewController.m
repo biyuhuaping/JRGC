@@ -8,6 +8,11 @@
 
 #import "UCFRegisterInputPassWordViewController.h"
 #import "NZLabel.h"
+#import "SharedSingleton.h"
+#import "UCFRegisterUserBaseMessRegisterApi.h"
+#import "UCFRegisterUserBaseMessRegisterModel.h"
+#import "IQKeyboardManager.h"
+
 @interface UCFRegisterInputPassWordViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -56,11 +61,43 @@
     [self.rootLayout addSubview:self.recommendLine];
     [self.rootLayout addSubview:self.recommendTitleLabel];
     [self.rootLayout addSubview:self.registerBtn];
-    
-    
-    
-    
+    [self addLeftButton];
+ 
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
+    keyboardManager.enable = YES;
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
+    keyboardManager.enable = NO;
+}
+- (void)addLeftButton
+{
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [leftButton setBackgroundColor:[UIColor clearColor]];
+    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
+    [leftButton setImage:[UIImage imageNamed:@"calculator_gray_close.png"]forState:UIControlStateNormal];
+    //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
+    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    
+    self.navigationItem.leftBarButtonItem = leftItem;
+}
+
+- (void)getToBack
+{
+    [self.rootLayout endEditing:NO];
+    [self.rt_navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (NZLabel *)passWordTitleLabel
 {
     if (nil == _passWordTitleLabel) {
@@ -80,7 +117,7 @@
 {
     if (nil == _passWordImageView) {
         _passWordImageView = [[UIImageView alloc] init];
-        _passWordImageView.myTop = 38;
+        _passWordImageView.topPos.equalTo(self.passWordTitleLabel.bottomPos).offset(38);
         _passWordImageView.myLeft = 30;
         _passWordImageView.myWidth = 25;
         _passWordImageView.myHeight = 25;
@@ -100,6 +137,7 @@
         _passWordField.textAlignment = NSTextAlignmentLeft;
         _passWordField.placeholder = @"6-16位密码，数字、字母组合";
         _passWordField.secureTextEntry = YES;
+        _passWordField.delegate = self;
 //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
@@ -108,9 +146,9 @@
         _passWordField.textColor = [Color color:PGColorOptionTitleBlack];
         _passWordField.heightSize.equalTo(@25);
         _passWordField.leftPos.equalTo(self.passWordImageView.rightPos).offset(9);
-        _passWordField.rightPos.equalTo(self.showPassWordBtn.rightPos).offset(20);
+        _passWordField.rightPos.equalTo(self.showPassWordBtn.leftPos).offset(10);
         _passWordField.centerYPos.equalTo(self.passWordImageView.centerYPos);
-        
+        [_passWordField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _passWordField;
 }
@@ -125,7 +163,7 @@
         _showPassWordBtn.rightPos.equalTo(@12.5);
         _showPassWordBtn.widthSize.equalTo(@50);
         _showPassWordBtn.heightSize.equalTo(@50);
-        [_showPassWordBtn setImage:[UIImage imageNamed:@"mine_icon_ exhibition.png"] forState:UIControlStateNormal];
+       [_showPassWordBtn setImage:[UIImage imageNamed:@"icon_invisible_bule.png"] forState:UIControlStateNormal];
         [_showPassWordBtn addTarget:self action:@selector(setSelectedButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _showPassWordBtn;
@@ -166,8 +204,8 @@
         _recommendField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _recommendField.font = [Color font:15.0 andFontName:nil];
         _recommendField.textAlignment = NSTextAlignmentLeft;
-        _recommendField.placeholder = @"6-16位密码，数字、字母组合";
-        _recommendField.secureTextEntry = YES;
+        _recommendField.placeholder = @"推荐人工场码(选填)";
+        _recommendField.delegate = self;
         //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
@@ -189,8 +227,8 @@
         _recommendLine = [UIView new];
         _recommendLine.topPos.equalTo(self.recommendImageView.bottomPos).offset(12);
         _recommendLine.myHeight = 0.5;
-        _recommendLine.myLeft = 50;
-        _recommendLine.myRight = 0;
+        _recommendLine.myLeft = 25;
+        _recommendLine.myRight = 25;
         _recommendLine.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         //
     }
@@ -201,7 +239,7 @@
 {
     if (nil == _recommendTitleLabel) {
         _recommendTitleLabel = [NZLabel new];
-        _recommendTitleLabel.myTop = 40;
+        _recommendTitleLabel.topPos.equalTo(self.recommendLine.bottomPos).offset(10);
         _recommendTitleLabel.leftPos.equalTo(@25);
         _recommendTitleLabel.textAlignment = NSTextAlignmentLeft;
         _recommendTitleLabel.font = [Color gc_Font:13.0];
@@ -244,19 +282,52 @@
     btn.selected = !btn.selected;
     if (btn.selected)
     {
-//        newObj.isCheck = YES;
-//        [btn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"mine_icon_ exhibition"] forState:UIControlStateNormal];
+        self.passWordField.secureTextEntry = NO;
+        
     }
     else
     {
-//        newObj.isCheck = NO;
-//        [btn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"icon_invisible_bule"] forState:UIControlStateNormal];
+        self.passWordField.secureTextEntry = YES;
     }
 }
+
 - (void)buttonregisterClick
 {
-    
+    NSString *FactoryCode;
+    if (self.recommendField.text == nil || [self.recommendField.text isEqualToString:@""]) {
+        FactoryCode = @"";
+    }
+    else
+    {
+        FactoryCode = self.recommendField.text;
+    }
+    UCFRegisterUserBaseMessRegisterApi * request = [[UCFRegisterUserBaseMessRegisterApi alloc] initWithFactoryCode:FactoryCode andPhoneNo:self.phoneNo andPwd:self.passWordField.text andRegistTicket:self.registTicket];
+    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        UCFRegisterUserBaseMessRegisterModel *model = [request.responseJSONModel copy];
+        DDLogDebug(@"---------%@",model);
+        if (model.ret == YES) {
+            
+            [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:@"个人",@"isCompany",self.phoneNo,@"lastLoginName", nil]];
+            [SingleUserInfo setUserData:model.data withPassWord:self.passWordField.text];
+            [self.rt_navigationController popToRootViewControllerAnimated:YES];
+            [self.rootLayout endEditing:YES];
+        }
+        else{
+            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
 }
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    [self.rootLayout endEditing:YES];
+//}
 /*
 #pragma mark - Navigation
 
@@ -266,5 +337,60 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSInteger existedLength = textField.text.length;
+    NSInteger selectedLength = range.length;
+    NSInteger replaceLength = string.length;
+    if (textField == self.passWordField) {
+        if (existedLength - selectedLength + replaceLength > 16) {
+            return NO;
+        }
+    } else if (textField == self.recommendField) {
+        if (existedLength - selectedLength + replaceLength > 6) {
+            return NO;
+        }
+    }
+    return YES;
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.passWordField) {
+        if (![self inspectPassWord]) {
+            //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码格式不正确" message:@"6-16位字符，只能包含字母、数字及标点符号（必须组合），区分大小写" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"密码格式不正确" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            [alert show];
+            ShowMessage(@"密码格式不正确");
+            return;
+        }
+    }
+}
+- (void)textFieldEditChanged:(UITextField *)textField
+{
+    [self inspectTextField];
+}
+- (void)inspectTextField
+{
+    if ([self inspectPassWord]) {
+        //输入正常,按钮可点击
+        self.registerBtn.userInteractionEnabled = YES;
+        [self.registerBtn setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
+    }
+    else
+    {
+        //输入非正常,按钮不可点击
+        [self.registerBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
+        self.registerBtn.userInteractionEnabled = NO;
+    }
+}
+- (BOOL)inspectPassWord
+{
+    if ([SharedSingleton isValidatePassWord:self.passWordField.text]) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
 @end

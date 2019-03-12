@@ -99,7 +99,7 @@
 #pragma mark - 同盾
 + (NSString *) didReceiveDeviceBlackBox;
 
-- (void)setUserData:(UCFLoginData *)loginData withPassWord:(NSString *)passWord andInputAccountText:(NSString *)account;
+- (void)setUserData:(UCFLoginData *)loginData withPassWord:(NSString *)passWord;
 - (void)setUserData:(UCFLoginData *) loginData;
 - (void)deleteUserData;
 - (UCFLoginData *)getUserData;

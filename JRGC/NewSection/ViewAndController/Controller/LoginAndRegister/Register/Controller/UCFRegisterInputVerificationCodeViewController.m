@@ -11,8 +11,13 @@
 #import "HWTFCursorView.h"
 #import "LineOfSendVerifyCodeView.h"
 #import "Timer.h"
+#import "UCFRegisterInputPassWordViewController.h"
 #import "UCFRegisterSendCodeApi.h"
 #import "UCFRegisterSendCodeModel.h"
+#import "UCFRegisterUserBaseMessVerifCodeApi.h"
+#import "UCFRegisterUserBaseMessVerifCodeModel.h"
+#import "IQKeyboardManager.h"
+
 @interface UCFRegisterInputVerificationCodeViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -42,9 +47,23 @@
     [self.rootLayout addSubview:self.verificationCodeContentLabel];
     [self.rootLayout addSubview:self.verificationCodeView];
     [self.rootLayout addSubview:self.lineSendVCView];
+    [self addLeftButton];
     [self starCountDown];
-
+    [self.verificationCodeView textFieldResignFirstResponder];
 //    (^endLayoutBlock)(void)
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
+    keyboardManager.enable = YES;
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
+    keyboardManager.enable = NO;
 }
 - (void)starCountDown
 {
@@ -138,7 +157,7 @@
     //重新获取验证码验证码接口  //语音@"VMS";短信 @"SMS"
     self.isVmsStr = typeStr;
     UCFRegisterSendCodeApi * request = [[UCFRegisterSendCodeApi alloc] initWithDestPhoneNo:self.phoneNum andIsVms:typeStr];
-    //    request.animatingView = self.view;
+    request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -154,8 +173,6 @@
             {
                  [self.lineSendVCView.verifyCodeButton startCountDown];//语音开始倒计时开始倒计时
             }
-
-            [self performSelector:@selector(veriFieldFstRepder:) withObject:nil afterDelay:2.5];
 //            [self verificatioCodeSend]; //获取语音验证码也是在短信验证码进行倒计时
         }
         else{
@@ -171,16 +188,41 @@
     }];
     
 }
-- (void)veriFieldFstRepder:(NSNumber*)delay
-{
-     [self.verificationCodeView textFieldResignFirstResponder];
-}
 
 - (void)requestVerificationCode
 {
     //校验验证码接口
+    UCFRegisterUserBaseMessVerifCodeApi * request = [[UCFRegisterUserBaseMessVerifCodeApi alloc] initWithDestPhoneNo:self.phoneNum andValidateCode:self.verificationCodeView.code];
+    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        UCFRegisterUserBaseMessVerifCodeModel *model = [request.responseJSONModel copy];
+        DDLogDebug(@"---------%@",model);
+        if (model.ret == YES) {
+            
+            UCFRegisterInputPassWordViewController *vc = [[UCFRegisterInputPassWordViewController alloc] init];
+            vc.registTicket = model.data.registTicket;
+            vc.phoneNo = self.phoneNum;
+            [self.rt_navigationController pushViewController:vc animated:YES complete:^(BOOL finished) {
+                NSMutableArray<__kindof UIViewController *> *controllers = [self.rt_navigationController.viewControllers mutableCopy];
+                [self.rt_navigationController removeViewController:controllers.firstObject];
+                [self.rt_navigationController removeViewController:self];
+            }];
+            [self.rootLayout endEditing:YES];
+        }
+        else{
+            [self.verificationCodeView sharkWithClearContent];
+            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
     
-    
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.rootLayout endEditing:YES];
 }
 /*
 #pragma mark - Navigation

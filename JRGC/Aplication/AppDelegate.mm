@@ -272,7 +272,7 @@
 - (void)registJush
 {
    //fixes IOS-3537
-    if (nil != [UserInfoSingle sharedManager].loginData.userInfo.userId) {
+    if (nil != [UserInfoSingle sharedManager].loginData && nil != [UserInfoSingle sharedManager].loginData.userInfo.userId) {
         [JPUSHService setAlias:SingleUserInfo.loginData.userInfo.userId callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     } else {
         [JPUSHService setBadge:0];

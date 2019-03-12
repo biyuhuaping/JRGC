@@ -344,22 +344,7 @@
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    //身份证号
-    if (textField == self.idView.contentField)
-    {
-        if (textField.text.length >= 18 && ![string isEqualToString:@""]) {
-            if (range.location == 17 && range.length == 1) {
-                return YES;
-            }
-            return NO;
-        }
-        NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789xX\b"];
-        if ([string rangeOfCharacterFromSet:[characterSet invertedSet]].location != NSNotFound) {
-            return NO;
-        }
-        return YES;
-    }
-    else if (textField == self.bankNumView.contentField)
+    if (textField == self.bankNumView.contentField)
     {
         // 4位分隔银行卡卡号
         NSString *text = [textField text];
@@ -397,28 +382,26 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField == self.nameView.contentField && [self.nameView.contentField.text isEqualToString:@""] ) {//&& ![Common isChinese:_textField1.text]
+    if (textField == self.nameView.contentField && [self inspectNameViewInPut] ) {//&& ![Common isChinese:_textField1.text]
         [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
         return;
-    }else if (textField == self.idView.contentField && ![Common isIdentityCard:self.idView.contentField.text]){
+    }else if (textField == self.idView.contentField && ![self inspectIdViewInPut]){
         [AuxiliaryFunc showToastMessage:@"请输入正确的身份证号码" withView:self.view];
         return;
     }
-    else if (textField == self.bankNumView.contentField && ![Common isValidCardNumber:self.bankNumView.contentField.text]){
+    else if (textField == self.bankNumView.contentField && ![self inspectBankNumView]){
         [AuxiliaryFunc showToastMessage:@"请输入正确的银行卡号" withView:self.view];
         return;
     }
-    else if (textField == self.smsView.contentField && [self.smsView.contentField.text isEqualToString:@""]){
+    else if (textField == self.smsView.contentField && [self inspectSmsView]){
         [AuxiliaryFunc showToastMessage:@"请输入正确的短信验证码" withView:self.view];
         return;
     }
-
-    
 }
 
 - (void)inspectTextField
 {
-    if ([self inspectNameViewInPut] && [self inspectIdViewInPut] && [self inspectSelectBankView] && [self inspectSmsView] && [self inspectSelectBankView]) {
+    if ([self inspectNameViewInPut] && [self inspectIdViewInPut] && [self inspectSelectBankView] && [self inspectSmsView] && [self inspectBankNumView]) {
         //输入正常,按钮可点击
         self.enterButton.userInteractionEnabled = YES;
         [self.enterButton setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
@@ -442,7 +425,7 @@
 }
 - (BOOL)inspectIdViewInPut
 {
-    if (![self.idView.contentField.text isEqualToString:@""] && [Common isIdentityCard:self.idView.contentField.text]) {
+    if (![self.idView.contentField.text isEqualToString:@""] && self.idView.contentField.text.length > 0) {
         return YES;
     }
     else

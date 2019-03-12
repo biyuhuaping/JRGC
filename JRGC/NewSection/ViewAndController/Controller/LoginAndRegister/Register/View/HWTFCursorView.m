@@ -179,7 +179,7 @@
 {
     [self shakeAnimationForView:self];
 //    [self.textField becomeFirstResponder];
-    [self.textField resignFirstResponder];
+    [self.textField becomeFirstResponder];
     self.textField.text = @"";
     
     for (HWCursorLabel *lb in self.labels) {
@@ -191,7 +191,7 @@
 
 - (void)textFieldResignFirstResponder
 {
-    [self.textField resignFirstResponder];
+    [self.textField becomeFirstResponder];
 }
 #pragma mark 抖动动画
 - (void)shakeAnimationForView:(UIView *) view

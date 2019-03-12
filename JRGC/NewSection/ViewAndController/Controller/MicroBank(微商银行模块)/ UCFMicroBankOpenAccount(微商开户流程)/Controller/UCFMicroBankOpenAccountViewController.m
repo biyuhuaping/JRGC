@@ -40,7 +40,7 @@
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     
-    self.accoutStep = OpenAccoutMicroBank;
+    self.accoutStep = OpenAccoutPassWord;
     
     
     
@@ -57,22 +57,15 @@
     [self addChildViewController:self.depositView];
     
     
-    
-    
-    
-    
-    
-    
-    
     self.tradersPasswordView = [[UCFMicroBankOpenAccountTradersPasswordViewController alloc] init];//返现券
     self.tradersPasswordView.view.frame = CGRectMake(0, viewHeight,PGScreenWidth, PGScreenHeight - viewHeight);
-    
     self.tradersPasswordView.view.topPos.equalTo(self.optionView.bottomPos);
     self.tradersPasswordView.view.myLeft = 0;
-    
-//    self.itController.db = self;
     [self addChildViewController:self.tradersPasswordView];
     
+    
+    
+//    [self changeControllerFromOldController:self.currentVC toNewController:self.tradersPasswordView];
     
     [self transitionToViewController:self.accoutStep];
 }
@@ -105,7 +98,6 @@
         default:
             break;
     }
-//    [self changeControllerFromOldController:self.currentVC toNewController:self.tradersPasswordView];
 }
 
 #pragma mark - 切换页面

@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFRegisterInputPassWordViewController : UCFBaseViewController
 
+@property (nonatomic, copy) NSString *registTicket;
+
+@property (nonatomic, copy) NSString *phoneNo;
+
 @end
 
 NS_ASSUME_NONNULL_END
