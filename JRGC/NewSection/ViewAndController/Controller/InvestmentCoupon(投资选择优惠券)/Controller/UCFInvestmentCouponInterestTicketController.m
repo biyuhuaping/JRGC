@@ -201,51 +201,9 @@
         [self alertUnableToUseCoupons];
     }
 }
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];//创建一个视图
-//    headerView.backgroundColor = UIColorWithRGB(0xEBEBEE);
-//
-//    UIView *view = [[UIView alloc] init];
-//    view.frame = CGRectMake(0,10,ScreenWidth,37);
-//    view.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0];
-//    [headerView addSubview:view];
-//
-//    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 95, 37)];
-//    headerLabel.backgroundColor = [UIColor clearColor];
-//    headerLabel.font = [UIFont boldSystemFontOfSize:13.0];
-//    headerLabel.textColor = UIColorWithRGB(0x555555);
-//    [view addSubview:headerLabel];
-//
-//    if (section == 0) {
-//        headerLabel.text = @"可使用优惠券";
-//    }
-//    else
-//    {
-//        headerLabel.text = @"不可使用优惠券";
-//        UIButton *button = [UIButton buttonWithType:0];
-//        button.frame = CGRectMake(CGRectGetMaxX(headerLabel.frame), (headerLabel.frame.size.height -20)/2, 20, 20);
-//        [button setImage:[UIImage imageNamed:@"icon_question.png"] forState:UIControlStateNormal];
-//        [button addTarget:self action:@selector(moreConfusion) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:button];
-//    }
-//
-//    if ([[self.arryData objectAtIndex:section] count] == 0) {
-//        return nil;
-//    }else
-//    {
-//        return headerView;
-//    }
-//
-//}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-//    if ([[self.arryData objectAtIndex:section] count] == 0) {
-        return 0.01;
-//    }else
-//    {
-//        return 47;
-//    }
+    return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

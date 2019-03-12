@@ -218,6 +218,10 @@
     if (button.tag == 100) {
         NSMutableArray *canUseCashArr = [NSMutableArray arrayWithCapacity:1];
         NSMutableArray *unCanUseCashArr = [NSMutableArray arrayWithCapacity:1];
+        if (self.selectCashArray.count == 0) {
+            
+        }
+        BOOL isHasCheck = self.selectCashArray.count == 0 ? YES : NO;
         for (InvestmentCouponCouponlist *model in self.cashArray) {
             if (model.investMultip <= [investAmt doubleValue]) {
                 model.isCanUse = YES;
@@ -225,6 +229,9 @@
             } else {
                  model.isCanUse = NO;
                 [unCanUseCashArr addObject:model];
+            }
+            if (isHasCheck) {
+                model.isCheck = NO;
             }
         }
         UCFNewCashParentViewController *vc = [[UCFNewCashParentViewController alloc] init];
@@ -237,6 +244,8 @@
     } else {
         NSMutableArray *canUseCouponArr = [NSMutableArray arrayWithCapacity:1];
         NSMutableArray *unCanUseCouponArr = [NSMutableArray arrayWithCapacity:1];
+        BOOL isHasCheck = self.selectCouponArray.count == 0 ? YES : NO;
+
         for (InvestmentCouponCouponlist *model in self.couponArray) {
             if (model.investMultip <= [investAmt doubleValue]) {
                 model.isCanUse = YES;
@@ -244,6 +253,9 @@
             } else {
                 model.isCanUse = NO;
                 [unCanUseCouponArr addObject:model];
+            }
+            if (isHasCheck) {
+                model.isCheck = NO;
             }
         }
         
