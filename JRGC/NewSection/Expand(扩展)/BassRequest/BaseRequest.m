@@ -75,12 +75,16 @@
 
 }
 //
+//- (void)requestFailedFilter
+//{
+//    ShowMessage(@"111");
+//}
 //- (void)requestFailedPreprocessor
 //{
 //    //note：子类如需继承，必须必须调用 [super requestFailedPreprocessor];
 //    [super requestFailedPreprocessor];
 //
-//     ShowMessage(requestFailedMessage);
+//     ShowMessage(@"222");
 //    NSError * error = self.error;
 //
 //    if ([error.domain isEqualToString:AFURLResponseSerializationErrorDomain])

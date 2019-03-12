@@ -35,8 +35,7 @@
     [self setUserData:loginData];
     [Common setHTMLCookies:loginData.userInfo.jg_ckie];//html免登录的cookies
     [[NSUserDefaults standardUserDefaults] setValue:[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]] forKey:AWP];
-
-    //注册通知
+    //注册通知self.loginData.userInfo
     [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
 }
 
@@ -56,7 +55,7 @@
         UCFLoginData *data = [UCFLoginData yy_modelWithJSON:userData];
         _loginData = [data copy];
     }
-    return _loginData;
+    return [_loginData copy];
 }
 
 
@@ -100,6 +99,11 @@
     return  [[NSUserDefaults standardUserDefaults] valueForKey:@"lastLoginName"];
 }
 
+- (NSString *)getlastLoginName
+{
+    NSDictionary *dic = [self getLoginAccount];
+    return [dic objectForKey:@"lastLoginName"];
+}
 
 #pragma mark - 同盾
 + (NSString *) didReceiveDeviceBlackBox{
@@ -127,7 +131,7 @@
     if (self.loginData.userInfo.userId.length > 0) {
         if (!_signatureStr) {
             //更新验签串
-            NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getLoginAccount],[self getAwp],self.loginData.userInfo.time];
+            NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getlastLoginName],[self getAwp],self.loginData.userInfo.time];
             NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
             _signatureStr = signatureStr;
         }

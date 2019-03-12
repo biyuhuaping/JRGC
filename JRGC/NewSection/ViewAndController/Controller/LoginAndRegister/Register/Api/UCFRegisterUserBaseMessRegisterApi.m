@@ -56,6 +56,7 @@
              @"registTicket":_registTicket,
              @"channelCode":@"AppStore",
              @"fromSite":@"1",
+             @"userId":@"1",
              };
 }
 

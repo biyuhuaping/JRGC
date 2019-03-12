@@ -110,4 +110,5 @@
 - (void)saveLoginAccount:(NSDictionary *)account;
 
 - (NSDictionary *)getLoginAccount;
+- (NSString *)getlastLoginName;
 @end

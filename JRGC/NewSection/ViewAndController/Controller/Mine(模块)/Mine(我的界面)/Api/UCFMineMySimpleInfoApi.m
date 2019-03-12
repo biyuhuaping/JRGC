@@ -41,4 +41,5 @@
 {
     return @"UCFMineMySimpleInfoModel";
 }
+
 @end

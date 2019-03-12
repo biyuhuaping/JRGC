@@ -63,6 +63,8 @@
     if (self) {
         _config = [YTKNetworkConfig sharedConfig];
         _manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:_config.sessionConfiguration];
+        _manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
+        _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         _requestsRecord = [NSMutableDictionary dictionary];
         _processingQueue = dispatch_queue_create("com.yuantiku.networkagent.processing", DISPATCH_QUEUE_CONCURRENT);
         _allStatusCodes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(100, 500)];
@@ -368,6 +370,7 @@
     if (succeed) {
         [self requestDidSucceedWithRequest:request];
     } else {
+        NSString *sttt = [[NSString alloc] initWithData:request.responseData encoding:NSUTF8StringEncoding];
         [self requestDidFailWithRequest:request error:requestError];
     }
 
@@ -377,6 +380,32 @@
     });
 }
 
+//-(void)bytearrtostr:(Byte *)data length:(int)length
+//{
+//    char char_1 = '1',char_0 = '0';
+//    char *chars = malloc(length*8+1);
+//    chars[length*8] = '\n';
+//    for(int i=0;i<length;i++)
+//    {
+//        Byte bb = data[i];
+//        for(int j=0;j<8;j++)
+//        {
+//            if(((bb>>j)&0x01) == 1)
+//            {
+//                chars[i*8+j] = char_1;
+//            }else{
+//                chars[i*8+j] = char_0;
+//            }
+//        }
+//        char temp = 0;
+//        temp =  chars[i*8+0];chars[i*8+0] = chars[i*8+7];chars[i*8+7] = temp;
+//        temp =  chars[i*8+1];chars[i*8+1] = chars[i*8+6];chars[i*8+6] = temp;
+//        temp =  chars[i*8+2];chars[i*8+2] = chars[i*8+5];chars[i*8+5] = temp;
+//        temp =  chars[i*8+3];chars[i*8+3] = chars[i*8+4];chars[i*8+4] = temp;
+//    }
+//    NSString *string = [NSString stringWithCString:chars encoding:NSUTF8StringEncoding];
+//    NSLog(@"binnary string = %@",string);
+//}
 - (void)requestDidSucceedWithRequest:(YTKBaseRequest *)request {
     @autoreleasepool {
         [request requestCompletePreprocessor];
