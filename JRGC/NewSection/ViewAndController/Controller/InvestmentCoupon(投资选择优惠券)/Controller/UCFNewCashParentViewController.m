@@ -29,12 +29,18 @@
     [self setTitleViewText:@"使用返现券"];
 }
 #pragma mark ViewInIt 返现券
+static UCFPageHeadView *extracted() {
+    return [UCFPageHeadView alloc];
+}
+
 - (UCFPageHeadView *)pageHeadView
 {
     if (nil == _pageHeadView) {
         NSString *title1 = [NSString stringWithFormat:@"可用返现券(%ld)",self.canUseCashArray.count];
         NSString *title2 = [NSString stringWithFormat:@"不可用返现券(%ld)",self.unCanUseCashArray.count];
-        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:@[title1,title2] WithType:1];
+        _pageHeadView = [extracted() initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:@[title1,title2]];
+        _pageHeadView.delegate = self;
+        [_pageHeadView reloaShowView];
     }
     return _pageHeadView;
 }

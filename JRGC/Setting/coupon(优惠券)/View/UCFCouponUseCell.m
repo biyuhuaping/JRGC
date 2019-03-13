@@ -32,7 +32,16 @@
     static NSString *Id = @"Coupon";
     UCFCouponUseCell *cell = [tableview dequeueReusableCellWithIdentifier:Id];
     if (!cell) {
-        cell = [[UCFCouponUseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Id];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFCouponUseCell" owner:self options:nil] lastObject];
+        PrintView *printView = [[PrintView alloc] initWithFrame:cell.bgImgeView.bounds andTime:@"xxxx-xx-xx"];
+        [printView setBackgroundColor:[UIColor clearColor]];
+        [cell.contentView addSubview:printView];
+        cell.printView = printView;
+        printView.translatesAutoresizingMaskIntoConstraints = NO;
+        NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[printView]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(printView)];
+        NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[printView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(printView)];
+        [cell.contentView addConstraints:constraints1H];
+        [cell.contentView addConstraints:constraints1V];
         cell.signForOverDue.angleString = @"即将过期";
         cell.signForOverDue.angleStatus = @"2";
         cell.signForOverDue.hidden = YES;
@@ -40,23 +49,6 @@
     return cell;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        self = [[[NSBundle mainBundle] loadNibNamed:@"UCFCouponUseCell" owner:self options:nil] lastObject];
-        PrintView *printView = [[PrintView alloc] initWithFrame:self.bgImgeView.bounds andTime:@"xxxx-xx-xx"];
-        [printView setBackgroundColor:[UIColor clearColor]];
-        [self.contentView addSubview:printView];
-        self.printView = printView;
-        printView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[printView]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(printView)];
-        NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[printView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(printView)];
-        [self.contentView addConstraints:constraints1H];
-        [self.contentView addConstraints:constraints1V];
-    }
-    return self;
-}
 
 - (void)setCouponModel:(UCFCouponModel *)couponModel
 {

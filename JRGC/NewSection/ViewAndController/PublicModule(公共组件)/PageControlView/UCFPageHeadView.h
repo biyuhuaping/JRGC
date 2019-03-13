@@ -26,11 +26,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, weak)id<UCFPageHeadViewDelegate>delegate;
 
-- (void)pageHeadView:(UCFPageHeadView *)pageView chiliControllerSelectIndex:(NSInteger)index;
+@property(nonatomic, assign)CGFloat leftSpace;//按钮区域的左边距
+
+@property(nonatomic, assign)CGFloat rightSpace;//按钮区域的右边距
+
+@property(nonatomic, assign)CGFloat btnHorizontal; //按钮横向间距
+
+@property(nonatomic, strong)NSArray *nameArray;   //按钮文字数组
+
+
+
+
+
+- (void)pageHeadView:(UCFPageHeadView *)pageView chiliControllerSelectIndex:(CGFloat)index;
 
 - (void)headViewSetSelectIndex:(NSInteger)index;
 
-- (instancetype)initWithFrame:(CGRect)frame WithTitleArray:(NSArray <NSString *> *)titleArray WithType:(NSInteger)type;
+- (instancetype)initWithFrame:(CGRect)frame WithTitleArray:(NSArray <NSString *> *)titleArray;
+
+- (void)reloaShowView;
 
 @end
 

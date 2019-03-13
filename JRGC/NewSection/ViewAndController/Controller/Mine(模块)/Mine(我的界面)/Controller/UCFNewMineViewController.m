@@ -38,7 +38,7 @@
 
 #import "UCFMicroBankOpenAccountViewController.h"
 #import "AccountSuccessVC.h"
-
+#import "UCFCouponViewController.h"
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -253,8 +253,8 @@
     }
     else if (tag == 1004){
         //优惠券
-        UCFRegisterInputPassWordViewController *vc =  [[UCFRegisterInputPassWordViewController alloc] init];
-        [self.rt_navigationController pushViewController:vc animated:YES];
+        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+        [self.navigationController pushViewController:coupon animated:YES];
     }
     else if (tag == 1005){
         //邀请返利

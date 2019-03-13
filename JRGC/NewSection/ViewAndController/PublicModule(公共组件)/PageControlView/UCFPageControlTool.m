@@ -44,19 +44,19 @@
 #pragma UIScorllerViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
    
-    NSInteger index = self.segmentScrollV.contentOffset.x / self.segmentScrollV.frame.size.width;
+    CGFloat index = self.segmentScrollV.contentOffset.x / self.segmentScrollV.frame.size.width;
 
     [self.headView pageHeadView:self.headView chiliControllerSelectIndex:index];
     
 
 }
 
-
+//不是人为拖拽scrollView导致滚动完毕，会调用scrollViewDidEndScrollingAnimation这个方法
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     
     [self initChildViewController];
 }
-
+//（如果是人为拖拽scrollView导致滚动完毕，才会调用这个方法）
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
     int pageNum = scrollView.contentOffset.x / [UIScreen mainScreen].bounds.size.width;

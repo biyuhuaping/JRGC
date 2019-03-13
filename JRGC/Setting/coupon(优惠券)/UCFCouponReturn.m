@@ -46,7 +46,11 @@
     // Do any additional setup after loading the view from its nib.
     _selectedStateArray = [[NSMutableArray alloc] init];// 已选中状态存储数组
     _currentPage = 1;
+    _unUserFxCount.textColor = [Color color:PGColorOptionTitlerRead];
+    _unUserFxCount.font = [Color gc_Font:32];
     [_unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@"张"];
+    _couponNameLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    [_couponCenterBtn setTitleColor:[Color color:PGColorOptionInputDefaultBlackGray] forState:UIControlStateNormal];
     
     [self initTableView];
     _noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-176) errorTitle:@"暂无数据"];

@@ -158,6 +158,9 @@
 - (void)showInfo:(id)model
 {
     UCFMineCellAccountModel *caModel = model;
+    if (caModel == nil || ![caModel isKindOfClass:[UCFMineCellAccountModel class]]) {
+        return;
+    }
     self.itemImageView.image = [UIImage imageNamed:caModel.cellAccountImage];
     self.itemTitleLabel.text = caModel.cellAccountTitle;
     [self.itemTitleLabel sizeToFit];

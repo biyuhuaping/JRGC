@@ -15,7 +15,7 @@
 
 #import "UCFCouponReturn.h"
 #import "UCFCouponInterest.h"
-#import "UCFGoldCouponReturn.h"
+//#import "UCFGoldCouponReturn.h"
 
 #import "NZLabel.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
@@ -35,7 +35,7 @@
 
 @property (strong, nonatomic) UCFCouponReturn   *couponReturnView;      //返现券
 @property (strong, nonatomic) UCFCouponInterest *couponInterestView;    //返息券
-@property (strong, nonatomic) UCFGoldCouponReturn *couponGoldView;    //返金券
+//@property (strong, nonatomic) UCFGoldCouponReturn *couponGoldView;    //返金券
 //@property (strong, nonatomic) UIViewController  *currentViewController; //当前viewCotl
 
 @property (strong, nonatomic) NSMutableArray *listArray;
@@ -54,17 +54,13 @@
     baseTitleLabel.text = @"优惠券";
     _currentSelectedState = 0;
     
-    if([UserInfoSingle sharedManager].superviseSwitch)
-    {
-        self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
-    }
-    else{
-         self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金券"];
-    }
+
+    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
+    
+
     self.itemSelectView.delegate = self;
     
     //下拉选框
-//    self.listArray = [[NSMutableArray alloc]initWithObjects:@"使用记录",@"过期记录",@"赠送记录", nil];
     self.listArray = [[NSMutableArray alloc]initWithObjects:@"使用记录",@"赠送记录", nil];
     _cellViewShowList = [[MLMOptionSelectView alloc] initOptionView];//***初始化下拉弹框
 
@@ -85,11 +81,7 @@
     _couponInterestView.status = @"1";
     _couponInterestView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
     [self addChildViewController:_couponInterestView];
-    //返现券
-    _couponGoldView = [[UCFGoldCouponReturn alloc]initWithNibName:@"UCFGoldCouponReturn" bundle:nil];
-    _couponGoldView.status = @"1";
-    _couponGoldView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
-    [self addChildViewController:_couponGoldView];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -117,17 +109,11 @@
             _currentViewController = _couponInterestView;
         }
             break;
-        case 2: {//返金券
-            // 需要显示的子ViewController，要将其View添加到父View中
-            [self.view addSubview:_couponGoldView.view];
-            _currentViewController = _couponGoldView;
-        }
-            break;
+
     }
     _itemSelectView.segmentedControl.selectedSegmentIndex = _segmentIndex;
     _couponReturnView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
     _couponInterestView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
-    _couponGoldView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
 }
 
 - (void)addRightButtonWithName:(NSString *)rightButtonName{
@@ -160,12 +146,6 @@
         case 1: {
             [self transitionFromViewController:_currentViewController toViewController:_couponInterestView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
                 self.currentViewController = _couponInterestView;
-            }];
-        }
-            break;
-        case 2:{
-            [self transitionFromViewController:_currentViewController toViewController:_couponGoldView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
-                self.currentViewController = _couponGoldView;
             }];
         }
             break;
@@ -230,11 +210,6 @@
             subVC.status = @"2";//status; //1：未使用 2：已使用 3：已过期 4：已赠送
         }
             break;
-//        case 1: {
-//            subVC.baseTitleText = @"过期记录";
-//            subVC.status = @"3";//status; //1：未使用 2：已使用 3：已过期 4：已赠送
-//        }
-//            break;
         case 1: {
             subVC.baseTitleText = @"赠送记录";
             subVC.status = @"4";//status; //1：未使用 2：已使用 3：已过期 4：已赠送
