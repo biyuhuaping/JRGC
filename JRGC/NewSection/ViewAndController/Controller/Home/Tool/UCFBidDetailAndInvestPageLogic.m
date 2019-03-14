@@ -20,6 +20,7 @@
 #import "RiskAssessmentViewController.h"
 #import "UCFBatchBidRequest.h"
 #import "UCFCollectionDetailViewController.h"
+#import "UCFNewCollectionDetailViewController.h"
 @implementation UCFBidDetailAndInvestPageLogic
 + (void)bidDetailAndInvestPageLogicUseDataModel:(id)bidmodel detail:(BOOL)isDetail rootViewController:(UIViewController *)controler
 {
@@ -201,12 +202,18 @@
      NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
      __weak typeof(self) weakSelf = self;
      if ([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P control:controller]) {
-//     NSString  *colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.ID];
-//     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys: colPrdClaimIdStr, @"colPrdClaimId",model.status,@"status", nil];
+
         UCFBatchBidRequest *api = [[UCFBatchBidRequest alloc] initWithProjectId:model.ID bidState:model.status];
     
          [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-             ShowMessage(request.responseString);
+             DDLogDebug(@"%@",request.responseString);
+             
+             UCFNewCollectionDetailViewController *vc = [[UCFNewCollectionDetailViewController alloc] init];
+             vc.model = request.responseJSONModel;
+             vc.hidesBottomBarWhenPushed = YES;
+             [controller.navigationController pushViewController:vc  animated:YES];
+
+             return ;
              NSDictionary *dic = request.responseObject;
              NSString *rstcode = dic[@"ret"];
              NSString *rsttext = dic[@"message"];

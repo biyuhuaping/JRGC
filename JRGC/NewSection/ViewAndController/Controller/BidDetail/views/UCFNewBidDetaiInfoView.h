@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)blindVM:(UVFBidDetailViewModel *)vm;
 
 - (void)blindTransVM:(UCFTransBidDetailViewModel *)vm;
+
+- (void)blindCollectionVM:(BaseViewModel *)vm;
 @end
 
 NS_ASSUME_NONNULL_END

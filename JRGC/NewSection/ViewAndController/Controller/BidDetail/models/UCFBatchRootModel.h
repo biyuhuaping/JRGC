@@ -26,11 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @interface UCFBatchDataModel : BaseModel
 
-@property (nonatomic, assign) NSInteger totalAmt;
+@property (nonatomic, assign) NSString *totalAmt;
 
-@property (nonatomic, assign) NSInteger canBuyAmt;
+@property (nonatomic, assign) NSString *canBuyAmt;
 
-@property (nonatomic, assign) NSInteger percentage;
+@property (nonatomic, assign) CGFloat percentage;
 
 @property (nonatomic, copy) NSString *colPeriod;
 
