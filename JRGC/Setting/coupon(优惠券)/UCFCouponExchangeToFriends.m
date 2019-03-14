@@ -12,7 +12,7 @@
 #import "UCFNoDataView.h"
 #import "UCFCouponUseCell.h"
 #import "UCFCouponViewController.h"
-
+#import "UCFNewCouponTableViewCell.h"
 @interface UCFCouponExchangeToFriends ()<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *headView;
@@ -36,11 +36,11 @@
     self.page = 1;
     self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64 -102) errorTitle:@"暂无数据"];
     
-    UCFCouponUseCell *cell = [UCFCouponUseCell cellWithTableView:self.myTableView];
-    cell.frame = CGRectMake(0, 0, ScreenWidth, 92);
-    cell.couponModel = self.quanData;
-//    cell.signForOverDue.hidden = NO;
+    UCFNewCouponTableViewCell *cell = [[UCFNewCouponTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"11"];
+    cell.frame = CGRectMake(0, 0, ScreenWidth, 125);
+    cell.model = self.quanData;
     cell.donateButton.hidden = YES;
+    cell.investButton.hidden = YES;
     [self.headView addSubview:cell];
     self.headView.userInteractionEnabled = NO;
     
@@ -232,10 +232,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = [self.dataList objectAtIndex:indexPath.row];
     NSString *moneyStr;
-    if ([self.quanData.couponType intValue] == 0) {
+    if (self.quanData.couponType == 0) {
         moneyStr = [NSString stringWithFormat:@"确认将￥%@元返现券,赠送给%@吗？",self.quanData.useInvest,[dic[@"userName"] isEqualToString:@"未认证"] ? [NSString stringWithFormat:@"用户%@",dic[@"mobile"]]:dic[@"userName"]];
     }
-    else if ([self.quanData.couponType intValue] == 3) {
+    else if (self.quanData.couponType == 3) {
         moneyStr = [NSString stringWithFormat:@"确认将%@克返金券,赠送给%@吗？",self.quanData.useInvest,[dic[@"userName"] isEqualToString:@"未认证"] ? [NSString stringWithFormat:@"用户%@",dic[@"mobile"]]:dic[@"userName"]];
     }
     else {

@@ -59,8 +59,9 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), queue, ^{
         [UIView animateWithDuration:0.25  delay:0.1 options: UIViewAnimationOptionCurveLinear animations:^{
             CGPoint  point = weakSelf.indicateView.center;
-            point.x = _leftSpace + (buttonWidth * _btnHorizontal) * index + buttonWidth/2;
+            point.x = _leftSpace + (buttonWidth + _btnHorizontal) * index + buttonWidth/2;
             weakSelf.indicateView.center = point;
+            NSLog(@"%lf  index = %lf",point.x,index);
         } completion:^(BOOL finished) {
 
         }];

@@ -7,10 +7,13 @@
 //
 
 #import "BaseRequest.h"
-
+#import "UCFCouponListModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewCouponList : BaseRequest
+
+
+- (instancetype)initWithCouponType:(NSString *)couponType CurrentPage:(NSInteger)page PageSize:(NSInteger)pageSize Statue:(NSString *)statue;
 
 @end
 

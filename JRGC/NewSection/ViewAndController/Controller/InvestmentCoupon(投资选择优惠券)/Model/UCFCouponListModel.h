@@ -86,6 +86,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *inverstPeriod;
 
+@property (nonatomic, assign)NSInteger couponType;
+
 @end
 
 NS_ASSUME_NONNULL_END

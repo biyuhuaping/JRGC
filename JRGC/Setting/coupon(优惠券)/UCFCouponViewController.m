@@ -7,7 +7,7 @@
 //
 
 #import "UCFCouponViewController.h"
-#import "UCFSelectedView.h"
+//#import "UCFSelectedView.h"
 #import "UCFCouponUseCell.h"
 #import "UCFCouponModel.h"
 #import "UCFToolsMehod.h"
@@ -26,11 +26,13 @@
 #import "JRGCCustomGroupCell.h"//***下拉弹框中的自定义cell
 #import "MLMOptionSelectView.h"//***下拉弹框
 #import "UCFWorkPointsViewController.h"
+#import "UCFPageControlTool.h"
+#import "UCFPageHeadView.h"
+@interface UCFCouponViewController ()
 
-@interface UCFCouponViewController () <UCFSelectedViewDelegate>
-
-
-@property (weak, nonatomic) IBOutlet UCFSelectedView *itemSelectView;   // 选项条
+@property(nonatomic, strong)UCFPageControlTool *pageController;
+@property(nonatomic, strong)UCFPageHeadView    *pageHeadView;
+//@property (weak, nonatomic) IBOutlet UCFSelectedView *itemSelectView;   // 选项条
 @property (assign, nonatomic) NSInteger currentSelectedState;           //当前选中状态
 
 @property (strong, nonatomic) UCFCouponReturn   *couponReturnView;      //返现券
@@ -54,12 +56,6 @@
     baseTitleLabel.text = @"优惠券";
     _currentSelectedState = 0;
     
-
-    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
-    
-
-    self.itemSelectView.delegate = self;
-    
     //下拉选框
     self.listArray = [[NSMutableArray alloc]initWithObjects:@"使用记录",@"赠送记录", nil];
     _cellViewShowList = [[MLMOptionSelectView alloc] initOptionView];//***初始化下拉弹框
@@ -73,17 +69,35 @@
     //返现券
     _couponReturnView = [[UCFCouponReturn alloc]initWithNibName:@"UCFCouponReturn" bundle:nil];
     _couponReturnView.status = @"1";
-    _couponReturnView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
-    [self addChildViewController:_couponReturnView];
+//    _couponReturnView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
     
     //返息券
     _couponInterestView = [[UCFCouponInterest alloc]initWithNibName:@"UCFCouponInterest" bundle:nil];
     _couponInterestView.status = @"1";
-    _couponInterestView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
-    [self addChildViewController:_couponInterestView];
+//    _couponInterestView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
+    
+    
+    [self.view addSubview:self.pageController];
 
 }
-
+#pragma mark ViewInIt 返息券
+- (UCFPageHeadView *)pageHeadView
+{
+    if (nil == _pageHeadView) {
+        NSString *title1 = [NSString stringWithFormat:@"返现券"];
+        NSString *title2 = [NSString stringWithFormat:@"返息券"];
+        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:@[title1,title2]];
+        [_pageHeadView reloaShowView];
+    }
+    return _pageHeadView;
+}
+- (UCFPageControlTool *)pageController
+{
+    if (nil == _pageController) {
+        _pageController = [[UCFPageControlTool alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1) WithChildControllers:@[_couponReturnView,_couponInterestView] WithParentViewController:self WithHeadView:self.pageHeadView];
+    }
+    return _pageController;
+}
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
@@ -98,22 +112,14 @@
     
     switch (_segmentIndex) {
         default: {//返现券
-            // 需要显示的子ViewController，要将其View添加到父View中
-            [self.view addSubview:_couponReturnView.view];
-            _currentViewController = _couponReturnView;
+            [self.pageHeadView headViewSetSelectIndex:0];
         }
             break;
         case 1: {//返息券
-            // 需要显示的子ViewController，要将其View添加到父View中
-            [self.view addSubview:_couponInterestView.view];
-            _currentViewController = _couponInterestView;
+            [self.pageHeadView headViewSetSelectIndex:1];
         }
             break;
-
     }
-    _itemSelectView.segmentedControl.selectedSegmentIndex = _segmentIndex;
-    _couponReturnView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
-    _couponInterestView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
 }
 
 - (void)addRightButtonWithName:(NSString *)rightButtonName{
@@ -133,25 +139,25 @@
 }
 
 // 选项的点击事件
-- (void)SelectedView:(UCFSelectedView *)selectedView didClickSelectedItemWithSeg:(HMSegmentedControl *)sender{
-    _currentSelectedState = sender.selectedSegmentIndex;
-    switch (sender.selectedSegmentIndex) {
-        case 0:{
-            [self transitionFromViewController:_currentViewController toViewController:_couponReturnView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
-                self.currentViewController = _couponReturnView;
-            }];
-        }
-            break;
-            
-        case 1: {
-            [self transitionFromViewController:_currentViewController toViewController:_couponInterestView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
-                self.currentViewController = _couponInterestView;
-            }];
-        }
-            break;
-            
-    }
-}
+//- (void)SelectedView:(UCFSelectedView *)selectedView didClickSelectedItemWithSeg:(HMSegmentedControl *)sender{
+//    _currentSelectedState = sender.selectedSegmentIndex;
+//    switch (sender.selectedSegmentIndex) {
+//        case 0:{
+//            [self transitionFromViewController:_currentViewController toViewController:_couponReturnView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
+//                self.currentViewController = _couponReturnView;
+//            }];
+//        }
+//            break;
+//
+//        case 1: {
+//            [self transitionFromViewController:_currentViewController toViewController:_couponInterestView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
+//                self.currentViewController = _couponInterestView;
+//            }];
+//        }
+//            break;
+//
+//    }
+//}
 
 #pragma mark - 右边“记录”按钮点击
 - (void)clickRightBtn{
