@@ -46,8 +46,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString  *percentage;
 
 
-@property(nonnull, strong)NSArray   *markList;
+@property(nonatomic, strong)NSArray   *markList;
 
+@property(nonatomic, copy)NSString    *bidInvestText;
+
+- (void)dealClickAction:(NSString *)title;
 @end
 
 NS_ASSUME_NONNULL_END

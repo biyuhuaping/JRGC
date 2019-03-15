@@ -10,6 +10,8 @@
 #import "UCFCollectionRootModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
+//@interface BaseTableViewCell
+
 @interface UCFCollectionChildCell : BaseTableViewCell
 @property(nonatomic, strong)UCFCollcetionResult *dataModel;
 @end

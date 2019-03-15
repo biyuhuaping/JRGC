@@ -91,9 +91,8 @@
     UCFNewInvestBtnView *investView = [[UCFNewInvestBtnView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 57)];
     investView.myHorzMargin = 0;
     investView.bottomPos.equalTo(@0);
-    
-    [self.rootLayout addSubview:investView];
     self.investView = investView;
+    [self.rootLayout addSubview:investView];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -108,13 +107,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
     [self blindVM];
+    
     [self.navView blindCollectionVM:self.VM];
     
     [self.bidinfoView blindCollectionVM:self.VM];
     
     [self.remind blindCollectionVM:self.VM];
+    
+    [self.investView blindBaseVM:self.VM];
 }
 - (void)blindVM
 {
@@ -186,4 +187,5 @@
 //        [_unCanInvestVC refreshDataWithOrderStr:self.currentOrderStr andListType:@"1"];
     }
 }
+
 @end

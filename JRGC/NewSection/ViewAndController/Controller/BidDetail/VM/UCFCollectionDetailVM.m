@@ -24,6 +24,9 @@
     [self dealBidInfoData];
     
     [self dealMarkInfo];
+    
+    //处理投标按钮状态
+    [self invetsButtonState];
 }
 - (void)dealNavData
 {
@@ -76,5 +79,15 @@
         [arr addObject:colRepayModeStr];
     }
     self.markList = [NSArray arrayWithArray:arr];
+}
+
+- (void)invetsButtonState
+{
+    self.bidInvestText = @"批量出借";
+}
+
+- (void)dealClickAction:(NSString *)title
+{
+    
 }
 @end
