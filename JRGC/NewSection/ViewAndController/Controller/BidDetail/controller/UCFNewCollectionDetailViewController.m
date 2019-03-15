@@ -17,6 +17,9 @@
 #import "UCFPageHeadView.h"
 #import "UCFCollectionBidListViewController.h"
 #import "MjAlertView.h"
+#import "HSHelper.h"
+#import "RiskAssessmentViewController.h"
+#import "UCFNewPureCollectionViewController.h"
 @interface UCFNewCollectionDetailViewController ()<UCFBidDetailNavViewDelegate,MjAlertViewDelegate>
 {
     NSInteger _currentSelectSortTag;//当前选择排序tag
@@ -120,6 +123,54 @@
 - (void)blindVM
 {
     self.VM.model = self.model;
+    @PGWeakObj(self);
+    [self.KVOController observe:self.VM keyPaths:@[@"collcetionBidPageModel"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"collcetionBidPageModel"]) {
+            id model = [change objectForKey:NSKeyValueChangeNewKey];
+            if ([model isKindOfClass:[UCFBatchPageRootModel class]]) {
+                UCFBatchPageRootModel *dataModel = (UCFBatchPageRootModel *)model;
+                if (dataModel.ret) {
+                    UCFNewPureCollectionViewController *vc = [[UCFNewPureCollectionViewController alloc] init];
+                    vc.batchPageModel = dataModel;
+                    [selfWeak.navigationController pushViewController:vc animated:YES];
+                    
+                } else if(dataModel.code == 30){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dataModel.message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+                    alert.tag = 9000;
+                    [alert show];
+                } else if(dataModel.code == 40){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dataModel.message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
+                    alert.tag = 9001;
+                    [alert show];
+                } else if(dataModel.code == 10040){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP2 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认",nil];
+                    alert.tag = 8000;
+                    [alert show];
+                } else {
+                    [AuxiliaryFunc showAlertViewWithMessage:dataModel.message];
+                }
+            }
+        }
+    }];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus intValue] nav:self.navigationController];
+        }
+    }else if (alertView.tag == 9000) {
+        if(buttonIndex == 1){ //测试
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else if(alertView.tag == 9001){
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+        }
+    }
 }
 - (UCFCollectionDetailVM *)VM
 {
@@ -184,7 +235,6 @@
             self.currentOrderStr = @"32";//@"金额递增"
         }
         [_canInvestVC refreshDataWithOrderStr:self.currentOrderStr andListType:@"0"];
-//        [_unCanInvestVC refreshDataWithOrderStr:self.currentOrderStr andListType:@"1"];
     }
 }
 

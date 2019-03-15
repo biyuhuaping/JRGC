@@ -150,6 +150,10 @@
         }
     }];
 }
+- (void)blindCollectionView:(UCFCollectionViewModel *)viewModel
+{
+    
+}
 - (void)totalString:(NSString *)constractName
 {
     constractName = [constractName stringByReplacingOccurrencesOfString:@"《" withString:@""];
@@ -178,6 +182,15 @@
     [self createSectionThree];
     [self createSectionFour];
     [self createSectionSeven];
+}
+- (void)createCollectionView
+{
+    [self createSectionTwo];
+    [self createSectionThree];
+    [self createSectionFour];
+    //下周一来了添加这两个的占位
+//     NSArray *contractList = @[@"出借人承诺书",@"履行反洗钱义务的承诺书"];
+    [self createSectionsix];
 }
 - (void)createSectionOne
 {

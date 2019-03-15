@@ -36,6 +36,34 @@
     }
     return self;
 }
+- (void)blindBaseViewModel:(BaseViewModel *)viewModel
+{
+    @PGWeakObj(self);
+    [self.KVOController observe:viewModel keyPaths:@[@"annualRate",@"timeLimitText",@"remainingMoney"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"annualRate"]) {
+            selfWeak.rateLab.text =  [change objectSafeForKey:NSKeyValueChangeNewKey];
+            [selfWeak.rateLab setFont:[Color gc_Font:16] string:@"%"];
+            [selfWeak.rateLab sizeToFit];
+        } else if ([keyPath isEqualToString:@"timeLimitText"]) {
+            NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (markStr.length > 0) {
+                selfWeak.timeLimitLab.text = markStr;
+                if ([markStr containsString:@"天"]) {
+                    [selfWeak.timeLimitLab setFont:[Color gc_Font:14] string:@"天"];
+                } else {
+                    [selfWeak.timeLimitLab setFont:[Color gc_Font:14] string:@"个月"];
+                }
+                [selfWeak.timeLimitLab sizeToFit];
+            }
+        } else if ([keyPath isEqualToString:@"remainingMoney"]) {
+            NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (markStr.length > 0) {
+                selfWeak.moneyAmountLab.text = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            }
+        }
+    }];
+}
 - (void)showTransView:(UCFPureTransPageViewModel *)viewModel
 {
     @PGWeakObj(self);

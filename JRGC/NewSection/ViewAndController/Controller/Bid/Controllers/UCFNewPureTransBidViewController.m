@@ -141,12 +141,7 @@
     
     [self blindVM:vm];
     
-    
-    
     [vm setDataModel:self.model];
-    
-
-    
 }
 - (void)blindVM:(UCFPureTransPageViewModel *)vm
 {

@@ -8,7 +8,7 @@
 
 #import "BaseViewModel.h"
 #import "UCFBatchBidRequest.h"
-
+#import "UCFIntoBatchPageRequest.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFCollectionDetailVM : BaseViewModel
@@ -51,6 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString    *bidInvestText;
 
 - (void)dealClickAction:(NSString *)title;
+
+@property(nonatomic, strong)UCFBatchPageRootModel *collcetionBidPageModel;
 @end
 
 NS_ASSUME_NONNULL_END

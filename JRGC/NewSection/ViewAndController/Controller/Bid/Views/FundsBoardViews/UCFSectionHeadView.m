@@ -117,7 +117,22 @@
         }
     }];
 }
-
+- (void)blindBaseViewModel:(BaseViewModel *)viewModel
+{
+    @PGWeakObj(self);
+    [self.KVOController observe:viewModel keyPaths:@[@"prdName"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"prdName"]) {
+            NSString *prdName = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (prdName.length > 0) {
+                selfWeak.titleLab.text = prdName;
+                [selfWeak.titleLab sizeToFit];
+            }
+            
+        }
+    }];
+}
 - (UIImageView *)iconView
 {
     if (!_iconView) {

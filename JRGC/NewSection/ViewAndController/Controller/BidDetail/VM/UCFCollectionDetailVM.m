@@ -7,6 +7,7 @@
 //
 
 #import "UCFCollectionDetailVM.h"
+
 @interface UCFCollectionDetailVM()
 @property(nonatomic,strong)UCFBatchRootModel *dataModel;
 @end
@@ -88,6 +89,15 @@
 
 - (void)dealClickAction:(NSString *)title
 {
-    
+    @PGWeakObj(self);
+    NSString *colPrdClaimId = [NSString stringWithFormat:@"%ld",self.dataModel.data.colPrdClaimId];
+    UCFIntoBatchPageRequest *api = [[UCFIntoBatchPageRequest alloc] initWithTenderID:colPrdClaimId];
+    [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        UCFBatchPageRootModel *model = request.responseJSONModel;
+        selfWeak.collcetionBidPageModel = model;
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+    [api start];
 }
 @end
