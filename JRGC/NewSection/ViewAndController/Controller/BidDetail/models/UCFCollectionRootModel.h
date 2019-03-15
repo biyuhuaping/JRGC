@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *childPrdClaimName;
 
-@property (nonatomic, assign) NSInteger totalAmt;
+@property (nonatomic, assign) CGFloat totalAmt;
 
 @property (nonatomic, assign) CGFloat canBuyAmt;
 

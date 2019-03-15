@@ -83,14 +83,16 @@
     [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         [selfWeak.showTableView endRefresh];
         UCFCollectionRootModel *model = request.responseJSONModel;
+        if (currentIndex == 0) {
+            [selfWeak.dataArray removeAllObjects];
+        }
         BOOL hasNext = model.data.pageData.pagination.hasNextPage;
         if (hasNext) {
-            if (currentIndex == 0) {
-                [selfWeak.dataArray removeAllObjects];
-            }
             currentIndex++;
+            selfWeak.showTableView.enableRefreshFooter = YES;
         } else {
-//            self.showTableView
+            selfWeak.showTableView.enableRefreshFooter = NO;
+
         }
         for (UCFCollcetionResult *tmpModel in model.data.pageData.result) {
             [selfWeak.dataArray addObject:tmpModel];

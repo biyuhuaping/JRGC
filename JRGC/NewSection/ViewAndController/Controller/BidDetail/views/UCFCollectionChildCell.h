@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFCollectionChildCell : BaseTableViewCell
-@property(nonatomic, strong)UCFCollectionRootModel *dataModel;
+@property(nonatomic, strong)UCFCollcetionResult *dataModel;
 @end
 
 NS_ASSUME_NONNULL_END
