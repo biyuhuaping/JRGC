@@ -8,6 +8,10 @@
 
 #import "UCFRechargeAndWithdrawalDetailsViewController.h"
 #import "NZLabel.h"
+#import "HSHelper.h"
+#import "UCFCashWithdrawalRequest.h"
+#import "UCFCashViewController.h"
+#import "ToolSingleTon.h"
 @interface UCFRechargeAndWithdrawalDetailsViewController ()
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -211,6 +215,37 @@
     }
     else if (btn.tag == 10002){
         //微金提现
+        
+        if( [self checkIDAAndBankBlindState:self.accoutType]){ //判断是否设置交易密码
+            NSMutableDictionary *parmDict = [NSMutableDictionary dictionaryWithCapacity:2];
+            [parmDict setValue:[NSString stringWithFormat:@"%@",SingleUserInfo.loginData.userInfo.openStatus] forKey:@"userSatues"];
+            [parmDict setValue:@"1" forKey:@"fromSite"];
+            
+            UCFCashWithdrawalRequest *api = [[UCFCashWithdrawalRequest alloc] initWithParameterdict:parmDict];
+            api.animatingView = self.view;
+            [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+                NSDictionary *dic = request.responseObject;
+                BOOL ret = [dic[@"ret"] boolValue];
+                if (ret) {
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TopUpAndCash" bundle:nil];
+                    UCFCashViewController *crachViewController  = [storyboard instantiateViewControllerWithIdentifier:@"cash"];
+                    [ToolSingleTon sharedManager].apptzticket = dic[@"apptzticket"];
+                    crachViewController.title = @"提现";
+                    //                crachViewController.isCompanyAgent = _isCompanyAgent;
+                    crachViewController.cashInfoDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+                    crachViewController.accoutType = self.accoutType;
+                    [self.navigationController pushViewController:crachViewController animated:YES];
+                    return;
+                } else {
+                    [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
+                }
+                
+            } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+                
+            }];
+            [api start];
+        }
+        
     }
     else if (btn.tag == 10003){
         //尊享提现
@@ -219,6 +254,23 @@
     {
         //黄金提现
     }
+}
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type
+{
+    NSInteger step = (type == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus intValue] : [SingleUserInfo.loginData.userInfo.zxOpenStatus intValue]);
+    __weak typeof(self) weakSelf = self;
+    if (step <= 3) {
+        NSString *message = type == SelectAccoutTypeHoner ? ZXTIP2:P2PTIP2;
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+            if (index == 1) {
+                HSHelper *helper = [HSHelper new];
+                [helper pushOpenHSType:type Step:3 nav:weakSelf.navigationController];
+            }
+        } otherButtonTitles:@"确认"];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
 //在价格，金额的计算中，如果直接使用<, >, =去计算金额会导致由精度导致的不准确问题。好的做法是：
 //NSNumber *totalPriceNumber = [NSNumber numberWithFloat:totalPrice];
