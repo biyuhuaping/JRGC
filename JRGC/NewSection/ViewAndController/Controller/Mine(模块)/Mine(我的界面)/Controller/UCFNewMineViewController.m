@@ -25,8 +25,8 @@
 
 #import "UCFSecurityCenterViewController.h"
 #import "UCFRegisterInputPassWordViewController.h"
-
-
+#import "UCFMineServiceViewController.h"
+#import "UCFRechargeAndWithdrawalViewController.h"
 
 
 
@@ -38,7 +38,7 @@
 
 #import "UCFMicroBankOpenAccountViewController.h"
 #import "AccountSuccessVC.h"
-
+#import "UCFNewResetPassWordViewController.h"
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -168,11 +168,13 @@
     if (indexPath.section == 2) {
         if ([cellConfig.title isEqualToString:@"服务中心"])
         {
-            
+            UCFMineServiceViewController *vc = [[UCFMineServiceViewController alloc] init];
+            [self.rt_navigationController pushViewController:vc animated:YES];
         }
         else if ([cellConfig.title isEqualToString:@"客服热线"])
         {
-            
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
     }
 }
@@ -221,6 +223,8 @@
     }
     else if (btn.tag == 10005){
         //各个账户的充值与提现,尊享、黄金账户已经不允许充值,只能提现
+        UCFRechargeAndWithdrawalViewController *vc = [[UCFRechargeAndWithdrawalViewController alloc] init];
+        [self.rt_navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -237,8 +241,11 @@
     }
     else if (tag == 1002){
         //我的工贝
-        UCFMicroBankOpenAccountViewController *vc= [[UCFMicroBankOpenAccountViewController alloc] init];
-        [self.rt_navigationController pushViewController:vc animated:YES];
+        
+        UCFNewResetPassWordViewController *vc= [[UCFNewResetPassWordViewController alloc] init];
+                [self.rt_navigationController pushViewController:vc animated:YES];
+//        UCFMicroBankOpenAccountViewController *vc= [[UCFMicroBankOpenAccountViewController alloc] init];
+//        [self.rt_navigationController pushViewController:vc animated:YES];
     }
     else if (tag == 1003){
         //我的工豆
@@ -259,6 +266,7 @@
     else if (tag == 1005){
         //邀请返利
         UCFMicroBankDepositoryAccountHomeViewController *ccc = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
+        ccc.accoutType = SelectAccoutTypeP2P;
         [self.rt_navigationController pushViewController:ccc animated:YES];
     }
 }

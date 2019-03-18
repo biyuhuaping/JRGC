@@ -295,10 +295,10 @@
     if(_arrowBtn == nil)
     {
         _arrowBtn = [UIButton buttonWithType:0];
-        _arrowBtn.centerYPos.equalTo(self.rootLayout.centerYPos);
-        _arrowBtn.centerXPos.equalTo(self.rootLayout.centerXPos);
+        _arrowBtn.centerYPos.equalTo(self.topUpWithdrawalLayout.centerYPos);
+        _arrowBtn.centerXPos.equalTo(self.topUpWithdrawalLayout.centerXPos);
         _arrowBtn.widthSize.equalTo(self.topUpWithdrawalLayout.widthSize);
-        _arrowBtn.heightSize.equalTo(self.topUpWithdrawalLayout.heightSize);;
+        _arrowBtn.heightSize.equalTo(self.topUpWithdrawalLayout.heightSize);
         _arrowBtn.adjustsImageWhenHighlighted = NO;
         _arrowBtn.tag = 10005;
         [_arrowBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];

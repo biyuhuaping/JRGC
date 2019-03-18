@@ -12,15 +12,17 @@
 {
     NSString* _destPhoneNo;
     NSString* _isVms;
+    NSString* _type;
 }
 
-- (id)initWithDestPhoneNo:(NSString* )destPhoneNo andIsVms:(NSString *)isVms;
+- (id)initWithDestPhoneNo:(NSString* )destPhoneNo andIsVms:(NSString *)isVms  andType:(NSString *)type;
 {
     self = [super init];
     if (self) {
         
         _destPhoneNo= destPhoneNo;
         _isVms = isVms;
+        _type = type;
     }
     return self;
 }
@@ -45,7 +47,7 @@
     return @{
              @"destPhoneNo":_destPhoneNo,
              @"userId":@"1",
-             @"type":@"2",
+             @"type":_type,
              @"isVms":_isVms,
              };
 }

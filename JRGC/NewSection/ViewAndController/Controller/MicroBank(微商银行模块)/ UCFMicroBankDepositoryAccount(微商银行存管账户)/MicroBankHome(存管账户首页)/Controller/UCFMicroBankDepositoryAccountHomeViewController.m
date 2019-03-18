@@ -12,6 +12,8 @@
 #import "BaseScrollview.h"
 #import "UCFMicroBankDepositoryAccountHomeCellView.h"
 #import "UCFMicroBankDepositoryAccountSeriaViewController.h"
+#import "RiskAssessmentViewController.h"
+#import "UCFMicroBankDepositoryChangeBankCardViewController.h"
 
 #import "UCFMicroBankUserAccountInfoAPI.h"
 #import "UCFMicroBankGetHSAccountInfoAPI.h"
@@ -35,6 +37,7 @@
 @property (nonatomic, strong) UCFMicroBankDepositoryAccountHomeCellView *changePassword; //修改交易密码
 @property (nonatomic, strong) UCFMicroBankDepositoryAccountHomeCellView *riskTolerance; //微金风险承担能力
 @property (nonatomic, strong) UCFMicroBankDepositoryAccountHomeCellView *batchLend; //批量出借
+@property (nonatomic, assign) NSInteger otherNum;
 @end
 
 @implementation UCFMicroBankDepositoryAccountHomeViewController
@@ -42,23 +45,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.rootLayout = [MyRelativeLayout new];
-//    self.rootLayout.backgroundColor = [UIColor whiteColor];
-//    self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
-//    self.view = self.rootLayout;
+
     self.view =  self.scrollView ;
-//    [self.view addSubview: self.scrollView];
     [self.scrollView addSubview:self.scrollLayout];
     [self.scrollLayout addSubview:self.tableHead];
     [self.scrollLayout addSubview:self.accountSerial];
     [self.scrollLayout addSubview:self.modifyBankCard];
     [self.scrollLayout addSubview:self.changePassword];
     [self.scrollLayout addSubview:self.riskTolerance];
-    [self.scrollLayout addSubview:self.batchLend];
+    
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        [self.scrollLayout addSubview:self.batchLend];
+    }
+    
     [self reuqestCell];
     [self reuqestHead];
     [self addLeftButton];
-    baseTitleLabel.text = @"微金徽商银行存管账户";
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        baseTitleLabel.text = @"微金徽商银行存管账户";
+    }
+    else
+    {
+        baseTitleLabel.text = @"尊享徽商银行存管账户";
+    }
 }
 - (BaseScrollview *)scrollView
 {
@@ -131,6 +140,10 @@
         
         _modifyBankCard.microBankContentLabel.text = @"";
         [_modifyBankCard.microBankContentLabel sizeToFit];
+        
+        _modifyBankCard.tag = 1002;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_modifyBankCard addGestureRecognizer:tapGesturRecognizer];
     }
     return _modifyBankCard;
 }
@@ -149,6 +162,10 @@
         
         _changePassword.microBankContentLabel.text = @"";
         [_changePassword.microBankContentLabel sizeToFit];
+        
+        _changePassword.tag = 1003;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_changePassword addGestureRecognizer:tapGesturRecognizer];
     }
     return _changePassword;
 }
@@ -167,6 +184,9 @@
         
         _riskTolerance.microBankContentLabel.text = @"";
         [_riskTolerance.microBankContentLabel sizeToFit];
+        _riskTolerance.tag = 1004;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_riskTolerance addGestureRecognizer:tapGesturRecognizer];
     }
     return _riskTolerance;
 }
@@ -187,6 +207,10 @@
         [_batchLend.microBankContentLabel sizeToFit];
         
         _batchLend.itemLineView.myVisibility = MyVisibility_Invisible;
+        
+        _batchLend.tag = 1005;
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_batchLend addGestureRecognizer:tapGesturRecognizer];
     }
     return _batchLend;
 }
@@ -198,7 +222,7 @@
 
 - (void)reuqestHead
 {
-    UCFMicroBankGetHSAccountInfoAPI * request = [[UCFMicroBankGetHSAccountInfoAPI alloc] initWithAccoutType:SelectAccoutTypeP2P];
+    UCFMicroBankGetHSAccountInfoAPI * request = [[UCFMicroBankGetHSAccountInfoAPI alloc] initWithAccoutType:self.accoutType];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -225,7 +249,7 @@
 }
 - (void)reuqestCell
 {
-    UCFMicroBankUserAccountInfoAPI * request = [[UCFMicroBankUserAccountInfoAPI alloc] initWithAccoutType:SelectAccoutTypeP2P];
+    UCFMicroBankUserAccountInfoAPI * request = [[UCFMicroBankUserAccountInfoAPI alloc] initWithAccoutType:self.accoutType];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -238,22 +262,27 @@
             self.modifyBankCard.microBankContentLabel.text = model.data.bankCardNum;
             [self.modifyBankCard.microBankContentLabel sizeToFit];
             //微金风险承担能力
+            self.otherNum = model.data.otherNum;
             self.riskTolerance.microBankSubtitleLabel.text = [NSString stringWithFormat:@"(剩%ld次)",(long)model.data.otherNum];
             [self.riskTolerance.microBankSubtitleLabel sizeToFit];
             self.riskTolerance.microBankContentLabel.text = model.data.riskLevel;
             [self.riskTolerance.microBankContentLabel sizeToFit];
             
             //批量出借
-            if (model.data.batchMaximum.length == 0) {
-                self.batchLend.microBankSubtitleLabel.text = @"批量出借(开通后一次可投多个项目)";
-                [self.batchLend.microBankSubtitleLabel sizeToFit];
-                self.batchLend.microBankContentLabel.text =  @"未开启";
-            }
-            else
+            if (self.accoutType == SelectAccoutTypeP2P)
             {
-                self.batchLend.microBankContentLabel.text = model.data.batchMaximum;
+                //只有微金账户才有批量投标,尊享没有批量投标
+                if (model.data.batchMaximum.length == 0) {
+                    self.batchLend.microBankSubtitleLabel.text = @"批量出借(开通后一次可投多个项目)";
+                    [self.batchLend.microBankSubtitleLabel sizeToFit];
+                    self.batchLend.microBankContentLabel.text =  @"未开启";
+                }
+                else
+                {
+                    self.batchLend.microBankContentLabel.text = model.data.batchMaximum;
+                }
+                [self.batchLend.microBankContentLabel sizeToFit];
             }
-            [self.batchLend.microBankContentLabel sizeToFit];
         }
         else{
             ShowMessage(model.message);
@@ -267,7 +296,32 @@
 {
     if (sender.view.tag == 1001) {
         UCFMicroBankDepositoryAccountSeriaViewController *vc = [[UCFMicroBankDepositoryAccountSeriaViewController alloc] init];
+        vc.accoutType = self.accoutType;
         [self.rt_navigationController pushViewController:vc animated:YES];
+    }else if (sender.view.tag == 1002){
+//        修改银行卡
+        UCFMicroBankDepositoryChangeBankCardViewController *vc = [[UCFMicroBankDepositoryChangeBankCardViewController alloc] init];
+        [self.rt_navigationController pushViewController:vc animated:YES];
+    }
+    else if (sender.view.tag == 1003){
+//        修改交易密码
+    }
+    else if (sender.view.tag == 1004){
+//        微金风险承担能力
+        if (self.otherNum <= 0) { //风险承担能力评估剩余次数
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您的评估次数已用完" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }else{
+            RiskAssessmentViewController *riskAssessmentVC = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            riskAssessmentVC.title = @"风险承担能力";
+            riskAssessmentVC.accoutType = self.accoutType;
+            riskAssessmentVC.sourceVC = @"P2POrHonerAccoutVC";
+            [self.rt_navigationController pushViewController:riskAssessmentVC  animated:YES];
+        }
+    }
+    else if (sender.view.tag == 1005){
+        //        批量出借
     }
 }
 /*

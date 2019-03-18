@@ -203,7 +203,10 @@
             UCFNewResetPassWordViewController *controller = [[UCFNewResetPassWordViewController alloc] init];
 //            WithPhoneNumber:[_retPassView getPhoneFieldText] andUserName:[_retPassView getUserNameText]
             controller.phoneNum = [self.findPwdPhoneField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-            [self.rt_navigationController pushViewController:controller animated:YES];
+            
+            [self.rt_navigationController pushViewController:controller animated:YES complete:^(BOOL finished) {
+                [self.findPwdPhoneField resignFirstResponder];
+            }];
         }
         else
         {

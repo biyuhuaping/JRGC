@@ -141,6 +141,7 @@
         _nameView.titleImageView.image = [UIImage imageNamed:@"list_icon_name"];
         _nameView.contentField.delegate = self;
         _nameView.contentField.placeholder = @"请输入真实姓名";
+        _nameView.contentField.enabled = NO;
         [_nameView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _nameView;
@@ -155,6 +156,7 @@
         _idView.titleImageView.image = [UIImage imageNamed:@"list_icon_id"];
         _idView.contentField.delegate = self;
         _idView.contentField.placeholder = @"请输入身份证号";
+        _idView.contentField.enabled = NO;
         [_idView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _idView;

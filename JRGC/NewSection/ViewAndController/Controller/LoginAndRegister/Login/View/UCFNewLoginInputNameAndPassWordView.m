@@ -214,8 +214,8 @@
         _loginBtn.heightSize.equalTo(@40);
         [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
         _loginBtn.titleLabel.font= [Color gc_Font:15.0];
-        self.loginBtn.userInteractionEnabled = NO;
-        [self.loginBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
+        _loginBtn.userInteractionEnabled = NO;
+        [_loginBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _loginBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。

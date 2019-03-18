@@ -200,7 +200,7 @@
 }
 
 - (void)getToBack {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dismissBack {

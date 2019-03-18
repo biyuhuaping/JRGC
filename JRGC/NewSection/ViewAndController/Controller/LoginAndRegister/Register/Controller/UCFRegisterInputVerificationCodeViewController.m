@@ -154,9 +154,9 @@
 
 - (void)requestAgainVerificationCode:(NSString *)typeStr
 {
-    //重新获取验证码验证码接口  //语音@"VMS";短信 @"SMS"
+    //重新获取验证码验证码接口  //语音@"VMS";短信 @"SMS" 2注册 1找回密码
     self.isVmsStr = typeStr;
-    UCFRegisterSendCodeApi * request = [[UCFRegisterSendCodeApi alloc] initWithDestPhoneNo:self.phoneNum andIsVms:typeStr];
+    UCFRegisterSendCodeApi * request = [[UCFRegisterSendCodeApi alloc] initWithDestPhoneNo:self.phoneNum andIsVms:typeStr andType:@"2"];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {

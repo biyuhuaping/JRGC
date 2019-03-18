@@ -20,11 +20,13 @@ static NSString *UserBaseMessRegisterApiURL = @"api/userBaseMess/v2/register.jso
 
 static NSString *GetRegisterInfoApiURL = @"api/register/v2/getRegisterInfo.json";//获取注册时token 防止重复提交
 
-static NSString *RegisterSendCodeApiURL =@"api/sendMsgRegister/v2/sendCode.json"; //注册登录的验证码
+static NSString *RegisterSendCodeApiURL = @"api/sendMsgRegister/v2/sendCode.json"; //注册和找回密码发送验证码
+
+static NSString *RetrievePwdApiURL = @"api/user/v2/retrievePwd.json";  //找回密码
 
 static NSString *loginApiURL = @"api/user/v2/login.json"; //登录接口
 
-static NSString *GetRetrievePwdInfoApiURL = @"api/user/v2/getRetrievePwdInfo.json";//获取找回密码的请求信息
+static NSString *GetRetrievePwdInfoApiURL = @"api/user/v2/getRetrievePwdInfo.json";//找回密码验证手机号信息
 
 #pragma mark --- 我的模块
 static NSString *MyReceiptApiURL = @"api/accountCenter/v2/myReceipt.json";   //我的页面新接口---账户显隐及金额信息
@@ -59,4 +61,6 @@ static NSString *ChangeBankCardApiURL = @"api/userInfo/v2/changeBankCard.json"; 
 static NSString *OpenAccountIntoBankApiURL = @"api/userInfo/v2/openAccountIntoBank.json"; //***新徽商绑定银行卡接口
 
 static NSString *SetHsPwdReturnJsonApiURL = @"api/userAccount/v2/setHsPwdReturnJson.json";//设置、修改交易密码通用
+
+static NSString *AccountBalancePageApiURL = @"/api/accountCenter/v2/accountBalancePage.json";//充值提现聚合页
 #endif /* RequestConstant_h */

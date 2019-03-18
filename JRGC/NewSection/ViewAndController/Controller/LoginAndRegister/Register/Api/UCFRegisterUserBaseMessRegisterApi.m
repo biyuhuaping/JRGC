@@ -14,12 +14,14 @@
      NSString* _phoneNo;
      NSString* _pwd;
     NSString* _registTicket;
+    NSString* _token_id;
 }
 
 - (id)initWithFactoryCode:(NSString *)factoryCode
                    andPhoneNo:(NSString* )phoneNo
                        andPwd:(NSString *)pwd
               andRegistTicket:(NSString *)registTicket
+              andToken_id:(NSString *)token_id
 {
     self = [super init];
     if (self) {
@@ -57,6 +59,7 @@
              @"channelCode":@"AppStore",
              @"fromSite":@"1",
              @"userId":@"1",
+             @"token_id":_token_id,
              };
 }
 

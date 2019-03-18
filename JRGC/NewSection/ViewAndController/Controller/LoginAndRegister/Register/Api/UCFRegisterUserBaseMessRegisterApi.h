@@ -12,9 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFRegisterUserBaseMessRegisterApi : BaseRequest
 - (id)initWithFactoryCode:(NSString *)factoryCode
-                   andPhoneNo:(NSString* )phoneNo
-                       andPwd:(NSString *)pwd
-              andRegistTicket:(NSString *)registTicket;
+               andPhoneNo:(NSString* )phoneNo
+                   andPwd:(NSString *)pwd
+          andRegistTicket:(NSString *)registTicket
+              andToken_id:(NSString *)token_id;
 
 //新注册接口 factoryCode 工场码 phoneNo 注册手机号  pwd 密码    channelCode  渠道号(AppStore)  registTicket 验证token sourceType  注册来源 fromSite 平台标识(1)
 

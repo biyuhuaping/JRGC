@@ -11,7 +11,6 @@
 #import "UCFSelectionCouponsCell.h"
 #import "UCFInvestmentCouponModel.h"
 #import "BaseTableView.h"
-#import "UCFNoDataView.h"
 #import "UCFInvestmentCouponInstructionsView.h"
 #import "NSObject+Compression.h"
 #import "UCFNewCashParentViewController.h"

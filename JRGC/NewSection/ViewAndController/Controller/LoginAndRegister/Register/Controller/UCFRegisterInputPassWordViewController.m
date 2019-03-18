@@ -12,6 +12,10 @@
 #import "UCFRegisterUserBaseMessRegisterApi.h"
 #import "UCFRegisterUserBaseMessRegisterModel.h"
 #import "IQKeyboardManager.h"
+#import "Common.h"
+#import "UCFToolsMehod.h"
+#import "MD5Util.h"
+#import "FMDeviceManager.h"
 
 @interface UCFRegisterInputPassWordViewController ()<UITextFieldDelegate>
 
@@ -295,15 +299,63 @@
 
 - (void)buttonregisterClick
 {
-    NSString *FactoryCode;
-    if (self.recommendField.text == nil || [self.recommendField.text isEqualToString:@""]) {
-        FactoryCode = @"";
+    if (self.recommendField.text != nil && ![self.recommendField.text isEqualToString:@""])
+    {
+        //有推荐码,就先去检测推荐码,然后再请求注册,没有就直接请求注册
+        NSString *strParameters = [NSString stringWithFormat:@"pomoCode=%@",self.recommendField.text];
+        if (strParameters) {
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagValidpomoCode owner:self Type:SelectAccoutDefault];
+        }
     }
     else
     {
-        FactoryCode = self.recommendField.text;
+        //同盾
+        // 获取设备管理器实例
+        FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
+        //        manager->getDeviceInfoAsync(nil, self);
+        //#warning 同盾修改
+        NSString *blackBox = manager->getDeviceInfo();
+        //        NSLog(@"同盾设备指纹数据: %@", blackBox);
+        [self requestRegister:@"" andToken_id:blackBox];
     }
-    UCFRegisterUserBaseMessRegisterApi * request = [[UCFRegisterUserBaseMessRegisterApi alloc] initWithFactoryCode:FactoryCode andPhoneNo:self.phoneNo andPwd:self.passWordField.text andRegistTicket:self.registTicket];
+    
+}
+-(void)beginPost:(kSXTag)tag
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSString *data = (NSString *)result;
+    NSMutableDictionary *dic = [data objectFromJSONString];
+    NSString *rstcode = dic[@"status"];
+    NSString *rsttext = dic[@"statusdes"];
+    if (tag.intValue == kSXTagValidpomoCode) {
+        if (rstcode && [rstcode intValue] == 1) {
+            //同盾
+            // 获取设备管理器实例
+            FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
+            //            manager->getDeviceInfoAsync(nil, self);
+            //#warning 同盾修改
+            NSString *blackBox = manager->getDeviceInfo();
+            //            DDLogDebug(@"同盾设备指纹数据: %@", blackBox);
+            [self requestRegister:self.recommendField.text andToken_id:blackBox];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
+            [alertView show];
+        }
+    }
+}
+-(void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [AuxiliaryFunc showToastMessage:@"当前没有网络，请检查网络！" withView:self.view];
+}
+- (void)requestRegister:(NSString *)FactoryCode andToken_id:(NSString *)token_id
+{
+    UCFRegisterUserBaseMessRegisterApi * request = [[UCFRegisterUserBaseMessRegisterApi alloc] initWithFactoryCode:FactoryCode andPhoneNo:self.phoneNo andPwd:self.passWordField.text andRegistTicket:self.registTicket andToken_id:token_id];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -318,13 +370,24 @@
             [self.rootLayout endEditing:YES];
         }
         else{
-            ShowMessage(model.message);
+            if(model.code == 2) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"用户名格式不正确" message:model.message delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
+                [alertView show];
+            } else if(model.code == 4) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"密码格式不正确" message:model.message delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
+                [alertView show];
+            } else {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:model.message delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
+                [alertView show];
+            }
+//            ShowMessage(model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
         
     }];
 }
+
 //- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 //    [self.rootLayout endEditing:YES];
 //}
