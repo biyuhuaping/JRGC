@@ -125,7 +125,7 @@
 - (void)initializationData
 {
     UCFPureTransPageViewModel *vm = [UCFPureTransPageViewModel new];
-    
+    vm.parentViewController = self;
     
     [self.bidHeadView showTransView:vm];
     

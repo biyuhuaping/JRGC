@@ -8,9 +8,11 @@
 
 #import "UCFFundsInvestButton.h"
 #import "NSObject+Compression.h"
+#import "UCFCollectionViewModel.h"
 @interface UCFFundsInvestButton ()
 @property(nonatomic, weak)UCFBidViewModel *myVM;
 @property(nonatomic, weak)UCFPureTransPageViewModel *mytransVM;
+@property(nonatomic, weak)UCFCollectionViewModel    *myCollectionVM;
 @end
 
 @implementation UCFFundsInvestButton
@@ -22,6 +24,10 @@
 - (void)showTransView:(UCFPureTransPageViewModel *)viewModel
 {
     self.mytransVM = viewModel;
+}
+- (void)blindBaseVM:(BaseViewModel *)viewModel
+{
+    self.myCollectionVM = viewModel;
 }
 - (void)createSubviews
 {
@@ -57,6 +63,9 @@
     }
     if (self.mytransVM) {
         [self.mytransVM dealInvestLogic];
+    }
+    if (self.myCollectionVM) {
+        [self.myCollectionVM dealInvestLogic];
     }
 }
 /*

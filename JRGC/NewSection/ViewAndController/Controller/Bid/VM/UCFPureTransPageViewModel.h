@@ -105,6 +105,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)NSDictionary    *hsbidInfoDict;
 
+@property(nonatomic, weak)UIViewController *parentViewController;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,7 +11,8 @@
 #import "NetworkModule.h"
 #import "MBProgressHUD.h"
 #import "JSONKit.h"
-
+#import "UCFNewRechargeViewController.h"
+#import "UCFTopUpViewController.h"
 @interface UCFPureTransPageViewModel ()
 {
     double  needToRechare;
@@ -334,5 +335,60 @@
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     [MBProgressHUD hideAllHUDsForView:_superView animated:YES];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        if (alertView.tag == 1000) {
+//            MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//            [cell.inputMoneyTextFieldLable becomeFirstResponder];
+        } else if (alertView.tag == 2000) {
+            
+        } else if (alertView.tag == 10023) {
+            [self.parentViewController.navigationController popToRootViewControllerAnimated:YES];
+            
+        }
+    } else if (buttonIndex == 1) {
+        if (alertView.tag == 3000) {
+            [self getNormalBidNetData];
+            return;
+        }
+        if (alertView.tag == 2000) {
+            SelectAccoutType type = [self.model.data.type isEqualToString:@"2"] ? SelectAccoutTypeHoner : SelectAccoutTypeP2P;
+            
+            if (type == SelectAccoutTypeP2P) {
+                UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+                vc.uperViewController = self.parentViewController;
+                vc.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
+                vc.accoutType = SelectAccoutTypeP2P;
+                [self.parentViewController.navigationController pushViewController:vc animated:YES];
+            } else {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
+                UCFTopUpViewController *topUpView  = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
+                topUpView.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
+                topUpView.title = @"充值";
+                //topUpView.isGoBackShowNavBar = YES;
+                topUpView.uperViewController = self.parentViewController;
+                topUpView.accoutType = type;
+                [self.parentViewController.navigationController pushViewController:topUpView animated:YES];
+            }
+        }
+        if (alertView.tag == 4000) {
+            SelectAccoutType type = [self.model.data.type isEqualToString:@"2"] ? SelectAccoutTypeHoner : SelectAccoutTypeP2P;
+            NSString *showStr =( type == SelectAccoutTypeP2P ? @"出借":@"购买");
+            int compare = [Common stringA:self.investMoeny ComparedStringB:@"1000"];
+            if (compare == 1 || compare == 0 ) {
+                UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@金额%@元,确认%@吗？",showStr,self.investMoeny,showStr] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                alert1.tag = 3000;
+                [alert1 show];
+            } else {
+                [self getNormalBidNetData];
+            }
+        }
+        if (alertView.tag == 5000) {
+            
+        }
+    }
+    
 }
 @end

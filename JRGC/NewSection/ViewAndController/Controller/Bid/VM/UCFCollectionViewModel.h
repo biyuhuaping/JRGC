@@ -74,6 +74,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)UCFContractTypleModel *contractTypeModel;
 
 - (void)bidViewModel:(UCFCollectionViewModel *)viewModel WithContractName:(NSString *)contractName;
+
+@property(nonatomic, weak)UIViewController  *parentViewController;
+
+/**
+ 是否填写工场吗
+ */
+@property(nonatomic, assign)BOOL    isLimit;
+
+- (void)dealInvestLogic;
+
+@property(nonatomic, copy)NSString  *recommendStr;
+
+- (void)outputRecommendCode:(NSString *)recommendStr;
 @end
 
 NS_ASSUME_NONNULL_END

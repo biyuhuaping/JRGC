@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showView:(UCFBidViewModel *)viewModel;
 - (void)createSubviews;
 - (void)showTransView:(UCFPureTransPageViewModel *)viewModel;
+
+- (void)blindBaseVM:(BaseViewModel *)viewModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

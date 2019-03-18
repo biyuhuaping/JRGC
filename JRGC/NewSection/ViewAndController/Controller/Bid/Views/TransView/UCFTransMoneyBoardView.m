@@ -233,9 +233,7 @@
     }
     if (self.myCollectionVM) {
         [self.myCollectionVM calculate:currentInputText];
-
     }
-    
 }
 - (void)allInvestClick:(UIButton *)button
 {

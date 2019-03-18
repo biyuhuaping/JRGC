@@ -15,13 +15,17 @@
 #import "UCFFundsInvestButton.h"
 #import "UCFCollectionViewModel.h"
 #import "FullWebViewController.h"
-@interface UCFNewPureCollectionViewController ()<UCFTransMoneyBoardViewDelegate>
+#import "UCFNewRechargeViewController.h"
+#import "UCFRecommendView.h"
+
+@interface UCFNewPureCollectionViewController ()<UCFTransMoneyBoardViewDelegate,UCFTransMoneyBoardViewDelegate>
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidHeadView;
 @property(nonatomic, strong) UCFBidInfoView     *bidInfoDetailView;
 @property(nonatomic, strong) UCFRemindFlowView  *remind;
 @property(nonatomic, strong) UCFTransMoneyBoardView *fundsBoardView;
+@property(nonatomic, strong) UCFRecommendView   *recommendView;
 @property(nonatomic, strong) UCFBidFootBoardView    *footView;
 @property(nonatomic, strong) UCFFundsInvestButton   *investButton;
 
@@ -90,6 +94,11 @@
     [fundsBoard addSubSectionViews];
     self.fundsBoardView = fundsBoard;
     
+    UCFRecommendView *recommendView = [UCFRecommendView linearLayoutWithOrientation:MyOrientation_Vert];
+    recommendView.myHorzMargin = 0;
+    [self.contentLayout addSubview:recommendView];
+    [recommendView addSubSectionViews];
+    self.recommendView = recommendView;
     
     UCFBidFootBoardView *footView = [UCFBidFootBoardView linearLayoutWithOrientation:MyOrientation_Vert];
     footView.myVertMargin = 10;
@@ -124,6 +133,7 @@
 - (void)initializationData
 {
     UCFCollectionViewModel *vm = [UCFCollectionViewModel new];
+    vm.parentViewController = self;
     self.VM = vm;
     
     [self.bidHeadView blindBaseViewModel:vm];
@@ -134,9 +144,11 @@
 
     [self.fundsBoardView showTransView:vm];
 
+    [self.recommendView blindBaseViewModel:vm];
+    
     [self.footView blindCollectionView:vm];
-//
-//    [self.investButton showTransView:vm];
+
+    [self.investButton blindBaseVM:vm];
     
     
     [self blindVM:vm];
@@ -195,5 +207,11 @@
          */
     }];
 }
-
+- (void)investTransFundsBoard:(UCFTransMoneyBoardView *)board withRechargeButtonClick:(UIButton *)button
+{
+    UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+    vc.accoutType = SelectAccoutTypeP2P;
+    vc.uperViewController = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end
