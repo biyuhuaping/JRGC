@@ -40,49 +40,32 @@
 - (void)createUI
 {
     DDLogDebug(@"%@", NSStringFromCGSize(self.bounds.size));
-    UIView *bottomSignView = [[UIView alloc] init];
-    [self addSubview:bottomSignView];
-//    bottomSignView.translatesAutoresizingMaskIntoConstraints=NO;
-    [bottomSignView setBackgroundColor:UIColorWithRGB(0xebebee)];
-    self.bottomSignView = bottomSignView;
-    // 添加约束
-//    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bottomSignView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomSignView)];
-//    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSignView(==2)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomSignView)];
-//    [self addConstraints:constraints1H];
-//    [self addConstraints:constraints1V];
+//    UIView *bottomSignView = [[UIView alloc] init];
+//    [self addSubview:bottomSignView];
+//    [bottomSignView setBackgroundColor:[Color ]];
+//    self.bottomSignView = bottomSignView;
+
     
     UIView *bottomLine = [[UIView alloc] init];
     [self addSubview:bottomLine];
-//    bottomLine.translatesAutoresizingMaskIntoConstraints=NO;
-    [bottomLine setBackgroundColor:UIColorWithRGB(0xd8d8d8)];
+    [bottomLine setBackgroundColor:[Color color:PGColorOptionCellSeparatorGray]];
     self.bottomLine = bottomLine;
     
-//    NSArray *constraints2H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bottomLine]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomLine)];
-//    NSArray *constraints2V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomLine(==0.5)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomLine)];
-//    [self addConstraints:constraints2H];
-//    [self addConstraints:constraints2V];
+
     
     HMSegmentedControl *seg = [[HMSegmentedControl alloc] init];
-//    seg.translatesAutoresizingMaskIntoConstraints=NO;
     seg.selectionIndicatorHeight = 2.0f;
     seg.backgroundColor = [UIColor clearColor];
     seg.font = [UIFont systemFontOfSize:14];
-    seg.textColor = UIColorWithRGB(0x3c3c3c);
-//    seg.selectedTextColor = UIColorWithRGB(0xf03b43);
-    seg.selectedTextColor = UIColorWithRGB(0xfd4d4c);
-//    seg.selectionIndicatorColor = UIColorWithRGB(0xf03b43);
-    seg.selectionIndicatorColor = UIColorWithRGB(0xfd4d4c);
+    seg.textColor = [Color color:PGColorOptionTitleBlack];
+    seg.selectedTextColor = [Color color:PGColorOpttonRateNoramlTextColor];
+    seg.selectionIndicatorColor = [Color color:PGColorOpttonRateNoramlTextColor];
     seg.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
     seg.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     seg.shouldAnimateUserSelection = YES;
     [self addSubview:seg];
     self.segmentedControl = seg;
     
-//    NSArray *constraints3H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[seg]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(seg)];
-//    self.constraintsForSeg = constraints3H;
-//    NSArray *constraints3V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[seg]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(seg)];
-//    [self addConstraints:constraints3H];
-//    [self addConstraints:constraints3V];
     [seg addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -115,7 +98,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.bottomSignView.frame = CGRectMake(-8, self.height - 2, ScreenWidth, 2);
+//    self.bottomSignView.frame = CGRectMake(-8, self.height - 1, ScreenWidth, 1);
     self.bottomLine.frame = CGRectMake(0, self.height - 0.5, ScreenWidth, 0.5);
     self.segmentedControl.frame = CGRectMake(0, 0, ScreenWidth, self.height);
 }

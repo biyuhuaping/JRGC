@@ -22,7 +22,8 @@
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 // 错误界面
 #import "UCFNoDataView.h"
-
+#import "UCFNewCouponList.h"
+#import "UCFNewCouponTableViewCell.h"
 @interface UCFCouponReturn ()<NetworkModuleDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -46,7 +47,15 @@
     // Do any additional setup after loading the view from its nib.
     _selectedStateArray = [[NSMutableArray alloc] init];// 已选中状态存储数组
     _currentPage = 1;
+    if (_sourceVC == 1) {
+        _unUserFxCount.textColor = [Color color:PGColorOptionTitleBlack];
+    } else {
+        _unUserFxCount.textColor = [Color color:PGColorOptionTitlerRead];
+    }
+    _unUserFxCount.font = [Color gc_Font:32];
     [_unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@"张"];
+    _couponNameLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    [_couponCenterBtn setTitleColor:[Color color:PGColorOptionInputDefaultBlackGray] forState:UIControlStateNormal];
     
     [self initTableView];
     _noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-176) errorTitle:@"暂无数据"];
@@ -103,7 +112,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataArr.count;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([_status intValue]== 4) {
+        return 92;
+    }
+    return 125;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([_status intValue] == 4) {
         UCFGivingPointCell *cell = [UCFGivingPointCell cellWithTableView:tableView];
@@ -111,11 +126,22 @@
         cell.couponModel = model;
         return cell;
     }else{
-        UCFCouponUseCell *cell = [UCFCouponUseCell cellWithTableView:tableView];
-        [cell.donateButton addTarget:self action:@selector(toUCFCouponExchangeToFriendsView:) forControlEvents:UIControlEventTouchUpInside];
-        UCFCouponModel *model = _dataArr[indexPath.row];
-        cell.couponModel = model;
+        
+
+        static NSString *cellStr = @"CouponCell";
+        UCFNewCouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+        if (!cell) {
+            cell = [[UCFNewCouponTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
+            [cell.donateButton addTarget:self action:@selector(toUCFCouponExchangeToFriendsView:) forControlEvents:UIControlEventTouchUpInside];
+            
+        }
+        cell.model = _dataArr[indexPath.row];
         return cell;
+        
+//        [cell.donateButton addTarget:self action:@selector(toUCFCouponExchangeToFriendsView:) forControlEvents:UIControlEventTouchUpInside];
+//        UCFCouponModel *model = _dataArr[indexPath.row];
+//        cell.couponModel = model;
+//        return cell;
     }
 }
 
@@ -155,89 +181,63 @@
 }
 // 上拉加载更多
 - (void)getCouponDataList{
-    //status：0未使用 1已过期 2已使用
-    NSString *userId = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
-    NSDictionary *dic = @{@"couponType":@"1",//1:返现 2：返息
-                          @"page":[NSString stringWithFormat:@"%ld",_currentPage],
-                          @"pageSize":@"20",
-                          @"status":_status,   //status：1：未使用 2：已使用 3：已过期 4：已赠送
-                          @"userId":userId};
-    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagReturnCouponList owner:self signature:YES Type:SelectAccoutDefault];
-}
 
-//开始请求
-- (void)beginPost:(kSXTag)tag{
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-}
-
-//请求成功及结果
-- (void)endPost:(id)result tag:(NSNumber *)tag{
-    [_tableView.header endRefreshing];
-    [_tableView.footer endRefreshing];
-//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    NSMutableDictionary *dic = [result objectFromJSONString];
-    DDLogDebug(@"返现券列表：%@",dic);
-    
-    if (tag.intValue == kSXTagReturnCouponList) {
-        if ([dic[@"ret"] boolValue]) {
-            BOOL hasNextPage = [dic[@"data"][@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
-            _presentFriendExist = [dic[@"data"][@"presentFriendExist"] boolValue];
-            NSArray *dataArr = dic[@"data"][@"pageData"][@"result"];
+    UCFNewCouponList *api = [[UCFNewCouponList alloc] initWithCouponType:@"1" CurrentPage:_currentPage PageSize:20 Statue:_status];
+    @PGWeakObj(self);
+    [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        [_tableView.header endRefreshing];
+        [_tableView.footer endRefreshing];
+        UCFCouponListModel *model = request.responseJSONModel;
+        if (model.ret) {
+            BOOL hasNextPage = model.data.pageData.pagination.hasNextPage;
+            selfWeak.presentFriendExist = [model.data.presentFriendExist boolValue];
+            NSArray *dataArr = model.data.pageData.result;
             NSMutableArray *temp1 = [NSMutableArray array];
-            for (NSDictionary *dict in dataArr) {
-                UCFCouponModel *couponModel = [UCFCouponModel couponWithDict:dict];
-//                couponModel.state = [_status integerValue];//1：未使用 2：已使用 3：已过期 4：已赠送
-                couponModel.couponType = @"0";
+            for (UCFCouponListResult *couponModel in dataArr) {
+                couponModel.couponType = 0;
                 [temp1 addObject:couponModel];
             }
-            id unUserFxCount = dic[@"data"][@"unUserFxCount"];
-            _unUserFxCount.text = [NSString stringWithFormat:@"%@张",unUserFxCount?unUserFxCount:@"0"];
-            [_unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@"张"];
-            
-            
+            id unUserFxCount = model.data.unUserFxCount;
+            selfWeak.unUserFxCount.text = [NSString stringWithFormat:@"%@张",unUserFxCount?unUserFxCount:@"0"];
+            [selfWeak.unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@"张"];
             if (_currentPage == 1) {
-                [_tableView.header endRefreshing];
-                _dataArr = [NSMutableArray arrayWithArray:temp1];
+                selfWeak.dataArr = [NSMutableArray arrayWithArray:temp1];
                 if (dataArr.count == 0) {
-                    [self.tableView.footer noticeNoMoreData];
-                    [_noDataView showInView:_tableView];
-                }else{
-                    [self.noDataView hide];
-                    _tableView.footer.hidden = NO;
+                    [selfWeak.tableView.footer noticeNoMoreData];
+                    [selfWeak.noDataView showInView:selfWeak.tableView];
+                } else {
+                    [selfWeak.noDataView hide];
+                   selfWeak.tableView.footer.hidden = NO;
                     if (!hasNextPage) {
-                        [_tableView.footer noticeNoMoreData];
+                        [selfWeak.tableView.footer noticeNoMoreData];
+                    } else {
+                        selfWeak.currentPage ++;
+                        [selfWeak.tableView.footer resetNoMoreData];
                     }
-                    else {
-                        _currentPage ++;
-                        [_tableView.footer resetNoMoreData];
-                    }
-                };
+                }
             }else{
-                [_tableView.footer endRefreshing];
-                [_dataArr addObjectsFromArray:temp1];
+                [selfWeak.tableView.footer endRefreshing];
+                [selfWeak.dataArr addObjectsFromArray:temp1];
                 if (!hasNextPage) {
-                    [_tableView.footer noticeNoMoreData];
+                    [selfWeak.tableView.footer noticeNoMoreData];
                 }
                 else {
-                    _currentPage ++;
-                    [_tableView.footer resetNoMoreData];
+                    selfWeak.currentPage ++;
+                    [selfWeak.tableView.footer resetNoMoreData];
                 }
             }
-            [_tableView reloadData];
-        }else {
-            [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
+            [selfWeak.tableView reloadData];
+        } else {
+            [AuxiliaryFunc showToastMessage:model.message withView:self.view];
         }
-    }
-//    [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"2"];
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+    [api start];
 }
 
-//请求失败
-- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
-{
-    [_tableView.header endRefreshing];
-    [_tableView.footer endRefreshing];
-    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-}
 
+- (void)dealloc {
+    
+}
 @end

@@ -259,4 +259,61 @@
     }];
 }
 
+- (void)blindCollectionVM:(BaseViewModel *)vm
+{
+    @PGWeakObj(self);
+    [self.KVOController observe:vm keyPaths:@[@"projectNum",@"remainMoney",@"annualRate",@"markTimeStr",@"percentage"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"projectNum"]) { //项目个数
+            NSString *projectNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (projectNum.length > 0) {
+                selfWeak.totalMoneyLab.text = projectNum;
+                [selfWeak.totalMoneyLab sizeToFit];
+                selfWeak.totalMoneyLab.centerY = selfWeak.totalMoneyLab.superview.size.height/2;
+            }
+        } else if ([keyPath isEqualToString:@"remainMoney"]) { //可投金额
+            NSString *remainMoney = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (remainMoney.length > 0) {
+                selfWeak.availableMoneyLab.text = remainMoney;
+                [selfWeak.availableMoneyLab sizeToFit];
+                selfWeak.availableMoneyLab.centerY = selfWeak.totalMoneyLab.superview.size.height/2;
+            }
+        } else if ([keyPath isEqualToString:@"annualRate"]) { //利率
+            NSString *annualRate = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (annualRate.length > 0) {
+                selfWeak.rateLab.text = annualRate;
+                [selfWeak.rateLab sizeToFit];
+                [selfWeak.rateLab setFont:[Color gc_Font:16] string:@"%"];
+            }
+            
+        } else if ([keyPath isEqualToString:@"markTimeStr"]) { //期限
+            NSString *markTimeStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (markTimeStr.length > 0) {
+                selfWeak.timeLimitLab.text = markTimeStr;
+                [selfWeak.timeLimitLab sizeToFit];
+                if ([markTimeStr containsString:@"天"]) {
+                    [selfWeak.timeLimitLab setFont:[Color gc_Font:16] string:@"天"];
+                } else if ([markTimeStr containsString:@"个月"]) {
+                    [selfWeak.timeLimitLab setFont:[Color gc_Font:16] string:@"个月"];
+                }
+            }
+            
+        }else if ([keyPath isEqualToString:@"percentage"]) { //投资百分比
+            NSString *percentage = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (percentage.length > 0) {
+                selfWeak.circleProgress.label.text = [NSString stringWithFormat:@"%@%%",percentage];
+                selfWeak.proressView.progress = [percentage floatValue]/100;
+                
+            }
+            
+        }
+//        else if ([keyPath isEqualToString:@"platformSubsidyExpense"]) {
+//            NSString *platformSubsidyExpense = [change objectSafeForKey:NSKeyValueChangeNewKey];
+//            if (platformSubsidyExpense.length > 0) {
+//
+//            }
+//        }
+    }];
+}
+
 @end

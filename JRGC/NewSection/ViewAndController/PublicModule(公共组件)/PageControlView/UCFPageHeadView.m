@@ -9,47 +9,59 @@
 #import "UCFPageHeadView.h"
 
 @interface UCFPageHeadView ()
+{
+    CGFloat buttonWidth;
+}
 @property(nonatomic, strong)UIView *indicateView;
-@property(nonatomic, strong)NSArray *nameArray;
+
 @end
 
 @implementation UCFPageHeadView
 
-- (instancetype)initWithFrame:(CGRect)frame WithTitleArray:(NSArray <NSString *> *)titleArray WithType:(NSInteger)type
+- (instancetype)initWithFrame:(CGRect)frame WithTitleArray:(NSArray <NSString *> *)titleArray
 {
     if (self = [super initWithFrame:frame]) {
-        if (type == 1) {
-            for (int i = 0; i < titleArray.count; i++) {
-                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-                [button setTitleColor:[Color color:PGColorOpttonRateNoramlTextColor] forState:UIControlStateSelected];
-                [button setTitleColor:[Color color:PGColorOptionTitleBlack] forState:UIControlStateNormal];
-                button.frame = CGRectMake(frame.size.width/titleArray.count * i, 0, frame.size.width/titleArray.count, frame.size.height);
-                button.tag = 100 + i;
-                [button setTitle:titleArray[i] forState:UIControlStateNormal];
-                [button setBackgroundColor:[UIColor whiteColor]];
-                [button addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
-                [self addSubview:button];
-                if (i == 0) {
-                    [self click:button];
-                }
-                [self addSubview:self.indicateView];
-                button.titleLabel.font = [Color gc_Font:15];
-            }
-            
-        }
+        _leftSpace = 0;
+        _rightSpace = 0;
+        _btnHorizontal = 0;
+        self.nameArray = titleArray;
     }
     return self;
 }
-- (void)pageHeadView:(UCFPageHeadView *)pageView chiliControllerSelectIndex:(NSInteger)index
+- (void)reloaShowView
+{
+    if (self.nameArray.count == 0) {
+        return;
+    }
+    buttonWidth = (self.frame.size.width - _leftSpace -_rightSpace - (_btnHorizontal * (self.nameArray.count - 1)))/self.nameArray.count;
+
+    for (int i = 0; i < self.nameArray.count; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitleColor:[Color color:PGColorOpttonRateNoramlTextColor] forState:UIControlStateSelected];
+        [button setTitleColor:[Color color:PGColorOptionTitleBlack] forState:UIControlStateNormal];
+        button.frame = CGRectMake(_leftSpace + (buttonWidth + _btnHorizontal) * i, 0, buttonWidth, self.frame.size.height);
+        button.tag = 100 + i;
+        [button setTitle:self.nameArray[i] forState:UIControlStateNormal];
+        [button setBackgroundColor:[UIColor whiteColor]];
+        [button addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+        if (i == 0) {
+            [self click:button];
+        }
+        [self addSubview:self.indicateView];
+        button.titleLabel.font = [Color gc_Font:15];
+    }
+}
+- (void)pageHeadView:(UCFPageHeadView *)pageView chiliControllerSelectIndex:(CGFloat )index
 {
     __weak typeof(self) weakSelf = self;
     dispatch_queue_t queue= dispatch_get_main_queue();
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), queue, ^{
         [UIView animateWithDuration:0.25  delay:0.1 options: UIViewAnimationOptionCurveLinear animations:^{
             CGPoint  point = weakSelf.indicateView.center;
-            UIView *childView = [self viewWithTag:index + 100];
-            point.x = childView.center.x;
+            point.x = _leftSpace + (buttonWidth + _btnHorizontal) * index + buttonWidth/2;
             weakSelf.indicateView.center = point;
+            NSLog(@"%lf  index = %lf",point.x,index);
         } completion:^(BOOL finished) {
 
         }];

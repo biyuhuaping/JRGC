@@ -301,8 +301,6 @@
     
     [_bridge registerHandler:@"nativeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         
-//        DDLogDebug(@"testObjcCallback called: %@", data);
-        
         weakSelf.isHideNativeNav = NO;
         NSDictionary *nativeData = data;
         

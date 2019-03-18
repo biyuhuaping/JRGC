@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UCFRecommendView : MyLinearLayout
 - (void)showView:(UCFBidViewModel *)viewModel;
 - (void)addSubSectionViews;
+
+- (void)blindBaseViewModel:(BaseViewModel *)baseVM;
+
 @end
 
 NS_ASSUME_NONNULL_END

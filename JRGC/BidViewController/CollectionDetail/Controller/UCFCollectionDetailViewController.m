@@ -86,7 +86,6 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 @implementation UCFCollectionDetailViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    self.navigationController.navigationBar.translucent = NO;
     if([_souceVC isEqualToString:@"BatchProjectVC"] || [_intoViewControllerStr isEqualToString:@"CollctionKeyBidVC"] || [_intoViewControllerStr isEqualToString:@"NoPermissionVC"])
     {
          [self.navigationController setNavigationBarHidden:YES animated:YES];

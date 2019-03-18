@@ -7,10 +7,11 @@
 //
 
 #import "UCFRecommendView.h"
-
+#import "UCFCollectionViewModel.h"
 @interface UCFRecommendView ()
 @property(nonatomic, weak)UCFBidViewModel *myVM;
 @property(nonatomic, strong)UITextField *gCCodeTextField;
+@property(nonatomic, weak) UCFCollectionViewModel *collectionVM;
 @end
 
 @implementation UCFRecommendView
@@ -31,7 +32,25 @@
         }
     }];
 }
+- (void)blindBaseViewModel:(BaseViewModel *)baseVM
+{
+    self.collectionVM = (UCFCollectionViewModel *)baseVM;
+    @PGWeakObj(self);
+    [self.KVOController observe:baseVM keyPaths:@[@"isLimit"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"isLimit"]) {
+            BOOL isExistRecomder = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+            if (isExistRecomder) {
+                selfWeak.myVisibility = MyVisibility_Gone;
 
+            } else {
+                selfWeak.myVisibility = MyVisibility_Visible;
+
+
+            }
+        }
+    }];
+}
 - (void)addSubSectionViews
 {
     [self addSepateteView];
@@ -135,6 +154,12 @@
 }
 - (void)textfieldLength:(UITextField *)textField
 {
-    [self.myVM outputRecommendCode:textField.text];
+    if (self.myVM) {
+        [self.myVM outputRecommendCode:textField.text];
+    }
+    if (self.collectionVM) {
+        [self.collectionVM outputRecommendCode:textField.text];
+
+    }
 }
 @end

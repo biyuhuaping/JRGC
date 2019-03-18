@@ -8,9 +8,12 @@
 
 #import "UCFTransMoneyBoardView.h"
 #import "UCFPureTransPageViewModel.h"
+#import "UCFCollectionViewModel.h"
 @interface UCFTransMoneyBoardView()
 
 @property(nonatomic, weak)UCFPureTransPageViewModel *myVM;
+
+@property(nonatomic, weak)UCFCollectionViewModel    *myCollectionVM;
 
 @property(nonatomic, strong)MyRelativeLayout *totalMoneyBoard;
 @property(nonatomic, strong)UILabel          *keYongTipLabel;
@@ -27,7 +30,12 @@
 
 - (void)showTransView:(BaseViewModel *)viewModel
 {
-    self.myVM = (UCFPureTransPageViewModel *)viewModel;
+    if ([viewModel isKindOfClass:[UCFPureTransPageViewModel class]]) {
+        self.myVM = (UCFPureTransPageViewModel *)viewModel;
+    } else if ([viewModel isKindOfClass:[UCFCollectionViewModel class]]) {
+        self.myCollectionVM = (UCFCollectionViewModel *)viewModel;
+    }
+    
     @PGWeakObj(self);
     [self.KVOController observe:viewModel keyPaths:@[@"myMoneyNum",@"inputViewPlaceStr",@"expectedInterestStr",@"allMoneyInputNum"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
@@ -58,43 +66,7 @@
                 selfWeak.investMoneyTextfield.text = allMoneyInputNum;
             }
         }
-        
-//        } else if ([keyPath isEqualToString:@"myBeansNum"]) {
-//            NSString *myBeansNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
-//            selfWeak.beanNumLab.text = myBeansNum;
-//            [selfWeak.beanNumLab sizeToFit];
-//            NSString *num = [myBeansNum stringByReplacingOccurrencesOfString:@"¥" withString:@""];
-//            if ([num doubleValue] >= 0.01) {
-//                selfWeak.beanSwitch.selected = YES;
-//                selfWeak.beanSwitch.userInteractionEnabled = YES;
-//            } else {
-//                selfWeak.beanSwitch.selected = NO;
-//                selfWeak.beanSwitch.userInteractionEnabled = NO;
-//            }
-//            [selfWeak changeSwitchStatue:selfWeak.beanSwitch];
-//        } else if ([keyPath isEqualToString:@"inputViewPlaceStr"]) {
-//            NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
-//            selfWeak.investMoneyTextfield.placeholder = inputViewPlaceStr;
-//            [selfWeak.investMoneyTextfield sizeToFit];
-//        } else if ([keyPath isEqualToString:@"expectedInterestNum"]) {
-//            NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
-//            selfWeak.interestNumLab.text = [inputViewPlaceStr isEqualToString:@""] ? @"¥0.00" : inputViewPlaceStr;
-//            [selfWeak.interestNumLab sizeToFit];
-//        } else if ([keyPath isEqualToString:@"allMoneyInputNum"]) {
-//            NSString *allMoneyInputNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
-//            if (allMoneyInputNum.length > 0) {
-//                selfWeak.investMoneyTextfield.text = allMoneyInputNum;
-//                [selfWeak textfieldLength:selfWeak.investMoneyTextfield];
-//            }
-//        } else if ([keyPath isEqualToString:@"isCompanyAgent"]) {
-//            BOOL isCompanyAgent = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-//            if (isCompanyAgent) {
-//                selfWeak.beansBoard.myVisibility = MyVisibility_Gone;
-//                selfWeak.totalKeYongTipLabel.text = @"";
-//            } else {
-//                selfWeak.beansBoard.myVisibility = MyVisibility_Visible;
-//            }
-//        }
+
     }];
 }
 
@@ -256,11 +228,21 @@
 - (void)textfieldLength:(UITextField *)textField
 {
     NSString *currentInputText = textField.text;
-    [self.myVM calculate:currentInputText];
+    if (self.myVM) {
+        [self.myVM calculate:currentInputText];
+    }
+    if (self.myCollectionVM) {
+        [self.myCollectionVM calculate:currentInputText];
+    }
 }
 - (void)allInvestClick:(UIButton *)button
 {
-    [self.myVM calculateTotalMoney];
+    if (self.myVM) {
+        [self.myVM calculateTotalMoney];
+    }
+    if (self.myCollectionVM) {
+        [self.myCollectionVM calculateTotalMoney];
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -48,7 +48,8 @@
 - (UCFPageHeadView *)pageHeadView
 {
     if (nil == _pageHeadView) {
-        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:[self.accountTitleArray copy] WithType:1];
+//        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:[self.accountTitleArray copy] WithType:1];
+        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:[self.accountTitleArray copy]];
     }
     return _pageHeadView;
 }

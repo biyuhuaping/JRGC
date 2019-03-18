@@ -39,7 +39,8 @@
     if (nil == _pageHeadView) {
         NSString *title1 = [NSString stringWithFormat:@"可用返息券(%ld)",self.canUseCouponArray.count];
         NSString *title2 = [NSString stringWithFormat:@"不可用返息券(%ld)",self.unCanUseCouponArray.count];
-        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:@[title1,title2] WithType:1];
+        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:@[title1,title2]];
+        [_pageHeadView reloaShowView];
     }
     return _pageHeadView;
 }

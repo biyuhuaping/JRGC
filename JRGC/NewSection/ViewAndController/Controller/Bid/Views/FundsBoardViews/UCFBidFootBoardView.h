@@ -9,13 +9,18 @@
 #import "MyLinearLayout.h"
 #import "UCFBidViewModel.h"
 #import "UCFPureTransPageViewModel.h"
+#import "UCFCollectionViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFBidFootBoardView : MyLinearLayout
 - (void)showView:(UCFBidViewModel *)viewModel;
 - (void)createAllShowView;
-- (void)createTransShowView;
+
 - (void)showTransView:(UCFPureTransPageViewModel *)viewModel;
+- (void)createTransShowView;
+
+- (void)blindCollectionView:(UCFCollectionViewModel *)viewModel;
+- (void)createCollectionView;
 @end
 
 NS_ASSUME_NONNULL_END
