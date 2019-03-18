@@ -7977,8 +7977,8 @@
 			children = (
 				E352FD0C21E4AF0B00617AB7 /* UCFBidModel.h */,
 				E352FD0E21E4AF0B00617AB7 /* UCFBidModel.m */,
-				E352FD0D21E4AF0B00617AB7 /* UCFContractTypleModel.m */,
 				E352FD0F21E4AF0B00617AB7 /* UCFContractTypleModel.h */,
+				E352FD0D21E4AF0B00617AB7 /* UCFContractTypleModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";

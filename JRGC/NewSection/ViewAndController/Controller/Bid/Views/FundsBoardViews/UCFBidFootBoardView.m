@@ -22,6 +22,8 @@
 @property(nonatomic, strong) UIView     *sevenSectionView;
 @property(nonatomic, weak)UCFBidViewModel *myVM;
 @property(nonatomic, weak)UCFPureTransPageViewModel *myTransVM;
+@property(nonatomic, weak)UCFCollectionViewModel    *myCollectionVM;
+
 
 @end
 @implementation UCFBidFootBoardView
@@ -152,7 +154,51 @@
 }
 - (void)blindCollectionView:(UCFCollectionViewModel *)viewModel
 {
-    
+    self.myCollectionVM = viewModel;
+    @PGWeakObj(self);
+    [self.KVOController observe:viewModel keyPaths:@[@"cfcaContractName",@"isShowRisk",@"contractMsg"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"cfcaContractName"]) {
+            NSString *cfcaContractName = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (cfcaContractName.length > 0) {
+                selfWeak.secondSectionView.myVisibility = MyVisibility_Visible;
+            } else {
+                selfWeak.secondSectionView.myVisibility = MyVisibility_Gone;
+            }
+        } else if ([keyPath isEqualToString:@"contractMsg"]) {
+            NSArray *contractMsg = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            if (contractMsg.count > 0) {
+                NSString *totalStr = [NSString stringWithFormat:@"本人已阅读并同意签署"];
+                for (int i = 0; i < contractMsg.count; i++) {
+                    NSString *tmpStr = [contractMsg objectAtIndex:i];
+                    totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
+                }
+                selfWeak.contractMsgLabel.text = totalStr;
+                //                __weak typeof(self) weakSelf = self;
+                for (int i = 0; i < contractMsg.count; i++) {
+                    NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[contractMsg objectAtIndex:i]];
+                    [selfWeak.contractMsgLabel setFontColor:UIColorWithRGB(0x4aa1f9) range:[totalStr rangeOfString:tmpStr]];
+                    
+                    [selfWeak.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+                        NSLog(@"111");
+                        [selfWeak totalString:linkModel.linkString];
+                    }];
+                    
+                }
+                selfWeak.fourSectionView.myVisibility = MyVisibility_Visible;
+                
+            } else {
+                selfWeak.fourSectionView.myVisibility = MyVisibility_Gone;
+            }
+        } else if ([keyPath isEqualToString:@"isShowRisk"]) {
+            BOOL isShowRisk = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+            if (isShowRisk) {
+                selfWeak.thirdSectionView.myVisibility = MyVisibility_Visible;
+            } else {
+                selfWeak.thirdSectionView.myVisibility = MyVisibility_Gone;
+            }
+        }
+    }];
 }
 - (void)totalString:(NSString *)constractName
 {
@@ -166,7 +212,11 @@
         DDLogDebug(@"%@",constractName);
         [self.myTransVM bidViewModel:self.myTransVM WithContractName:constractName];
     }
-
+    if (self.myCollectionVM) {
+        [self.myCollectionVM bidViewModel:self.myCollectionVM WithContractName:constractName];
+        
+        
+    }
 }
 - (void)createAllShowView
 {
@@ -189,7 +239,6 @@
     [self createSectionThree];
     [self createSectionFour];
     //下周一来了添加这两个的占位
-//     NSArray *contractList = @[@"出借人承诺书",@"履行反洗钱义务的承诺书"];
     [self createSectionsix];
 }
 - (void)createSectionOne

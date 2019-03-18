@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewModel.h"
-
+#import "UCFContractTypleModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFCollectionViewModel : BaseViewModel
@@ -58,6 +58,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)calculate:(NSString *)investMoney;
 - (void)calculateTotalMoney;
+#pragma mark 合同
+
+/**
+ 字符串长度大于0 展示CFCA
+ */
+@property(nonatomic, copy)NSString      *cfcaContractName;
+//是否展示风险提示
+@property(nonatomic, assign)BOOL          isShowRisk;
+/**
+ 合同内容
+ */
+@property(nonatomic,strong)NSArray       *contractMsg;
+//当前点击的合同模型，在controller 里进行监听
+@property(nonatomic, strong)UCFContractTypleModel *contractTypeModel;
+
+- (void)bidViewModel:(UCFCollectionViewModel *)viewModel WithContractName:(NSString *)contractName;
 @end
 
 NS_ASSUME_NONNULL_END

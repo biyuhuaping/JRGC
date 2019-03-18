@@ -14,6 +14,7 @@
 #import "UCFBidFootBoardView.h"
 #import "UCFFundsInvestButton.h"
 #import "UCFCollectionViewModel.h"
+#import "FullWebViewController.h"
 @interface UCFNewPureCollectionViewController ()<UCFTransMoneyBoardViewDelegate>
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
@@ -97,7 +98,7 @@
     footView.userInteractionEnabled = YES;
     [self.contentLayout addSubview:footView];
     self.footView = footView;
-    [footView createTransShowView];
+    [footView createCollectionView];
     
     
     UCFFundsInvestButton *investButton = [UCFFundsInvestButton new];
@@ -133,13 +134,66 @@
 
     [self.fundsBoardView showTransView:vm];
 
-    [self.footView showTransView:vm];
+    [self.footView blindCollectionView:vm];
 //
 //    [self.investButton showTransView:vm];
+    
+    
+    [self blindVM:vm];
     
     [vm setModel:_batchPageModel];
 
 }
-
+- (void)blindVM:(BaseViewModel *)vm
+{
+//    vm.superView = self.view;
+    __weak typeof(self) weakSelf = self;
+//    ,@"hsbidInfoDict",@"rechargeStr"
+    [self.KVOController observe:vm keyPaths:@[@"contractTypeModel"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"contractTypeModel"]) {
+            id funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if ([funds isKindOfClass:[UCFContractTypleModel class]]) {
+                UCFContractTypleModel *model = (UCFContractTypleModel *)funds;
+                if ([model.type isEqualToString:@"1"]) {
+                    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:model.url title:model.title];
+                    controller.baseTitleType = @"detail_heTong";
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                }
+                else if ([model.type isEqualToString:@"3"]) {
+                    FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:model.htmlContent title:model.title];
+                    controller.baseTitleType = @"detail_heTong";
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                }
+            }
+            NSLog(@"%@",funds);
+        }
+        
+        /*
+        else if ([keyPath isEqualToString:@"hsbidInfoDict"]) {
+            NSDictionary *dic = [change objectSafeDictionaryForKey:NSKeyValueChangeNewKey];
+            if ([[dic allKeys] count] > 0) {
+                NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
+                NSString *urlStr = dic[@"data"][@"url"];
+                UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
+                webView.url = urlStr;
+                webView.rootVc = weakSelf.rootVc;
+                webView.webDataDic =dataDict;
+                webView.navTitle = @"即将跳转";
+                webView.accoutType = SelectAccoutTypeP2P;
+                [weakSelf.navigationController pushViewController:webView animated:YES];
+                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:weakSelf.navigationController.viewControllers];
+                [navVCArray removeObjectAtIndex:navVCArray.count-2];
+                [weakSelf.navigationController setViewControllers:navVCArray animated:NO];
+            }
+        } else if ([keyPath isEqualToString:@"rechargeStr"]) {
+            NSString *str = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (str.length > 0) {
+                weakSelf.rechargeMoneyStr = str;
+            }
+        }
+         */
+    }];
+}
 
 @end
