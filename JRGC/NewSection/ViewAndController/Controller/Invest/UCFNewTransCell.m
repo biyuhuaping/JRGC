@@ -7,7 +7,7 @@
 //
 
 #import "UCFNewTransCell.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 #import "UIView+RoundingCorners.h"
 #import "UILabel+Misc.h"
 @interface UCFNewTransCell()
@@ -52,7 +52,7 @@
         
         
         NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
-        UIImage *image = [self.addRateTipView imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 20) gradientType:leftToRight];
+        UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 20) gradientType:leftToRight];
         [self.addRateTipView setBackgroundImage:image forState:UIControlStateNormal];
         
         self.rateLab.leftPos.equalTo(@25);

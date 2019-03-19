@@ -7,7 +7,7 @@
 //
 
 #import "UCFCollectionChildCell.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 @interface UCFCollectionChildCell()
 
 /**

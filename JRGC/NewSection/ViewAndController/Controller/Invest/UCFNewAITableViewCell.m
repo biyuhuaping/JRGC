@@ -10,7 +10,7 @@
 #import "UCFProjectLabel.h"
 //#import "UIButton+Gradient.h"
 #import "UILabel+Misc.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 @interface UCFNewAITableViewCell()
 /**
  标题
@@ -170,13 +170,13 @@
         self.rateLab.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
         self.timeLimitLab.textColor = [Color color:PGColorOptionTitleBlackGray];
         NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
-        UIImage *image = [self.investButton imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
+        UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
         self.iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
         
     } else {
         NSArray *colorArray = [NSArray arrayWithObjects:[Color color:PGColorOptionTitleGray],[Color color:PGColorOptionTitleGray], nil];
-        UIImage *image = [self.investButton imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
+        UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
         [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
         self.rateLab.textColor = [Color color:PGColorOptionTitleGray];
         self.timeLimitLab.textColor = [Color color:PGColorOptionTitleGray];

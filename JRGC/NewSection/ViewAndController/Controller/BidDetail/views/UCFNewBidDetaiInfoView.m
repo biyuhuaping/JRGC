@@ -11,7 +11,7 @@
 #import "MDRadialProgressLabel.h"
 #import "SDLoopProgressView.h"
 #import "MDRadialProgressTheme.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 #import "UILabel+Misc.h"
 @interface UCFNewBidDetaiInfoView()
 @property(nonatomic, strong)MDRadialProgressView *circleProgress;

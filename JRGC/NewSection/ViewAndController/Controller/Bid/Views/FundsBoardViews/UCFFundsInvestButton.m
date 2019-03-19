@@ -7,7 +7,7 @@
 //
 
 #import "UCFFundsInvestButton.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 #import "UCFCollectionViewModel.h"
 @interface UCFFundsInvestButton ()
 @property(nonatomic, weak)UCFBidViewModel *myVM;

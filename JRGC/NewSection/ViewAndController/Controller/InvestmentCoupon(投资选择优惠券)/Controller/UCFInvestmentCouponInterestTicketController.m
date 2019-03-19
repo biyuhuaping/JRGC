@@ -12,7 +12,7 @@
 #import "UCFInvestmentCouponModel.h"
 #import "BaseTableView.h"
 #import "UCFInvestmentCouponInstructionsView.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 #import "UCFNewCouponParentViewController.h"
 @interface UCFInvestmentCouponInterestTicketController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 

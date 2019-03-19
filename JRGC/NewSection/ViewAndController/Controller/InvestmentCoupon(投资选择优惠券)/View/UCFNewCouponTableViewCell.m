@@ -8,7 +8,7 @@
 
 #import "UCFNewCouponTableViewCell.h"
 #import "UCFToolsMehod.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 #import "Image.h"
 @implementation UCFNewCouponTableViewCell
 

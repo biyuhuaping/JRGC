@@ -11,7 +11,7 @@
 #import "NZLabel.h"
 #import "UCFBatchSetNumWebViewController.h"
 #import "FullWebViewController.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 #define TITLEHEIGHT 50
 #define TITLEWIDTH  SCREEN_WIDTH/3
 #define IMAGEVIEWWIDTH 16

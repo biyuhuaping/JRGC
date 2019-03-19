@@ -7,7 +7,7 @@
 //
 
 #import "UCFBidDetailNavView.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 @interface UCFBidDetailNavView()
 @property(nonatomic, strong)MyRelativeLayout *titleBaseView;
 @property(nonatomic, strong)UILabel *prdNameLab;

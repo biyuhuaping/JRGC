@@ -291,33 +291,38 @@
                                                 </connections>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRA-n7-USF">
-                                                <rect key="frame" x="15" y="528" width="345" height="37"/>
+                                                <rect key="frame" x="25" y="528" width="325" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="37" id="7Ra-Oq-Chu"/>
+                                                    <constraint firstAttribute="height" constant="40" id="7Ra-Oq-Chu"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <state key="normal" title="提现">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="sumitBtnClick:" destination="3AR-Rt-IIC" eventType="touchUpInside" id="5P5-h1-4SR"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="温馨提示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVT-qc-WIv">
-                                                <rect key="frame" x="15" y="580" width="49.5" height="14.5"/>
+                                                <rect key="frame" x="15" y="583" width="49.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aF-9T-lnY" customClass="NZLabel">
-                                                <rect key="frame" x="15" y="609.5" width="345" height="0.0"/>
+                                                <rect key="frame" x="15" y="612.5" width="345" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•如遇问题请与客服联系400-0322-988" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDj-fU-5d2" customClass="NZLabel">
-                                                <rect key="frame" x="15" y="609.5" width="345" height="14.5"/>
+                                                <rect key="frame" x="15" y="612.5" width="345" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -396,6 +401,11 @@
                                                             <constraint firstAttribute="width" constant="4" id="acN-Go-q4L"/>
                                                             <constraint firstAttribute="height" constant="18" id="mmK-Lt-YBF"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提现方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvK-JR-tya">
                                                         <rect key="frame" x="29" y="16" width="66" height="20"/>
@@ -414,7 +424,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="2aF-9T-lnY" firstAttribute="top" secondItem="cVT-qc-WIv" secondAttribute="bottom" constant="15" id="0WZ-sC-0EP"/>
                                             <constraint firstItem="msM-Ky-E98" firstAttribute="top" secondItem="4Wo-gD-hjv" secondAttribute="bottom" id="2Wp-qS-dtk"/>
@@ -429,7 +439,7 @@
                                             <constraint firstAttribute="trailing" secondItem="4Wo-gD-hjv" secondAttribute="trailing" id="9nw-Kf-691"/>
                                             <constraint firstItem="dAd-dv-3ZG" firstAttribute="top" secondItem="msM-Ky-E98" secondAttribute="bottom" constant="10" id="B0v-ux-EYX"/>
                                             <constraint firstItem="sQK-8C-lQv" firstAttribute="top" secondItem="dAd-dv-3ZG" secondAttribute="bottom" id="EjN-Zf-9nE"/>
-                                            <constraint firstItem="fRA-n7-USF" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" constant="15" id="MVe-8G-fIH"/>
+                                            <constraint firstItem="fRA-n7-USF" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" constant="25" id="MVe-8G-fIH"/>
                                             <constraint firstAttribute="trailing" secondItem="pDj-fU-5d2" secondAttribute="trailing" constant="15" id="Nr2-Fs-Xjm"/>
                                             <constraint firstItem="msM-Ky-E98" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" id="OWP-1T-IYF"/>
                                             <constraint firstAttribute="height" constant="600" id="PkO-dp-HWp"/>
@@ -448,7 +458,7 @@
                                             <constraint firstItem="4Wo-gD-hjv" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" id="oJ4-LS-551"/>
                                             <constraint firstItem="Pvx-kl-tRy" firstAttribute="top" secondItem="4H4-IL-vcc" secondAttribute="top" constant="10" id="sE8-4t-2K5"/>
                                             <constraint firstItem="dAd-dv-3ZG" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" id="sOD-xg-skm"/>
-                                            <constraint firstAttribute="trailing" secondItem="fRA-n7-USF" secondAttribute="trailing" constant="15" id="saH-BA-NgU"/>
+                                            <constraint firstAttribute="trailing" secondItem="fRA-n7-USF" secondAttribute="trailing" constant="25" id="saH-BA-NgU"/>
                                             <constraint firstItem="xLO-RF-mbj" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" id="svO-do-4hY"/>
                                             <constraint firstItem="upD-d2-N3g" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" constant="15" id="uVC-eX-WfB"/>
                                             <constraint firstItem="upD-d2-N3g" firstAttribute="trailing" secondItem="eDo-l7-lsE" secondAttribute="leading" id="vZk-lk-wbl"/>
@@ -520,7 +530,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bankcard_icon_fast" width="36" height="20"/>
+        <image name="bankcard_icon_fast" width="44.5" height="21.5"/>
         <image name="list_icon_arrow" width="8" height="13"/>
     </resources>
 </document>
