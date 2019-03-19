@@ -7,7 +7,7 @@
 //
 
 #import "UCFNewInvestBtnView.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 #import "UCFCollectionDetailVM.h"
 @interface UCFNewInvestBtnView()
 @property(nonatomic, strong)UIButton    *investButtom;

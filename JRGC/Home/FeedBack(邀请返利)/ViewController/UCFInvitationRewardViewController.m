@@ -16,6 +16,7 @@
 #import "UCFSharePictureViewController.h"
 @interface UCFInvitationRewardViewController () <UITableViewDelegate, UITableViewDataSource, UCFInvitationRewardCell2Delegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) IBOutlet UIControl *bkview;
 
 @property (nonatomic,strong)IBOutlet UILabel *beansCountLabel;
 @property (nonatomic,strong)IBOutlet UILabel *userRecommendLabel;
@@ -44,6 +45,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CAGradientLayer *layer = [CAGradientLayer layer];
+    layer.startPoint = CGPointMake(0, 0);//（0，0）表示从左上角开始变化。默认值是(0.5,0.0)表示从x轴为中间，y为顶端的开始变化
+    layer.endPoint = CGPointMake(1, 0);//（1，1）表示到右下角变化结束。默认值是(0.5,1.0)  表示从x轴为中间，y为低端的结束变化
+    layer.colors = [NSArray arrayWithObjects:(id)[Color color:PGColorOptionTitlerRead].CGColor,(id)[Color color:PGColorOpttonGradientBackgroundColor].CGColor, nil];
+    layer.locations = @[@0.0f,@1.0f];//渐变颜色的区间分布，locations的数组长度和color一致，这个值一般不用管它，默认是nil，会平均分布
+    layer.frame = CGRectMake(0, 0, PGScreenWidth, 95);
+    [self.bkview.layer insertSublayer:layer atIndex:0];
+    
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     UIImage *bgShadowImage= [UIImage imageNamed:@"tabbar_shadow.png"];
     self.baseimageView.image = [bgShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeTile];

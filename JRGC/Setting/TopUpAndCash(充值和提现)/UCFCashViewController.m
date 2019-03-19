@@ -23,6 +23,7 @@
 #import "UCFOpenRedBagButton.h"
 #import "AppDelegate.h"
 #import "UCFInvestViewController.h"
+#import "UIImage+Compression.h"
 #define CASHWAYCELLHIGHT  73.0 //提现方式cell 的高度
 @interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 {
@@ -115,21 +116,14 @@
     
     [self getMyBindCardMessage];//初始化数据
     [self initCashStyle]; //初始化提现方式
-    //_warnSendLabel.hidden = YES;
-//    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
-//    [_timer setFireDate:[NSDate distantFuture]];
-//    _counter = 60;
+
     _height1.constant = 0.5;
     _height2.constant = 0.5;
     _height3.constant = 0.5;
     _height4.constant = 0.5;
     _height5.constant = 0.5;
     _height6.constant = 0.5;
-    
-    
-    
-//    _codeTextField.hidden = YES;
-//    _getCodeBtn.hidden = YES;
+
     
     isSendSMS = NO;
     self.getMoneyBtn.tag = 1010; //设置当前按钮tag 为 1010
@@ -141,13 +135,15 @@
     [self addLeftButton];
     [self addRightButtonWithName:@"提现记录"];
     _crachTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    _getCodeBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-    _getCodeBtn.backgroundColor = UIColorWithRGB(0x8296af);
-//    [_getCodeBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-//    [_getCodeBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
+    _getCodeBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];    
+
     
-    [_getMoneyBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-    [_getMoneyBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
+    UIImage *image = [UIImage gc_styleImageSize:CGSizeMake(ScreenWidth - 50, 40)];
+    [_getMoneyBtn setBackgroundImage:image forState:UIControlStateNormal];
+    _getMoneyBtn.layer.cornerRadius = 20.0f;
+    _getMoneyBtn.layer.masksToBounds = YES;
+    
+
     
     [_crachTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     [_crachTextField addTarget:self action:@selector(textFieldEditingDidEnd:) forControlEvents:UIControlEventEditingDidEnd];
@@ -160,7 +156,7 @@
     tap1.delegate = self;
     [_phoneLabel addGestureRecognizer:tap1];
     _phoneLabel.text = [NSString stringWithFormat:@"如果您绑定的银行卡暂不支持手机快捷支付请联系客服%@",_telServiceNo];
-    [_phoneLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:_telServiceNo];
+    [_phoneLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:_telServiceNo];
     //[_warnSendLabel setHidden:YES];
     
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] init];
@@ -538,13 +534,7 @@
     _noticeTxt = [dataDic objectSafeForKey:@"noticeTxt"];
     _hasCoupon = [[dataDic objectSafeForKey:@"hasCoupon"] boolValue];
     _honerCashTipLabel.text = _noticeTxt;
-//    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-//    paragraph.alignment = NSTextAlignmentLeft;
-//    paragraph.lineSpacing = 1;
-//    NSDictionary *dic = @{
-//                          NSFontAttributeName:[UIFont systemFontOfSize:13],/*(字体)*/
-//                          NSParagraphStyleAttributeName:paragraph,/*(段落)*/
-//                          };
+
     NSString *isThreePlatStr = self.accoutType == SelectAccoutTypeP2P ? @"平台方":@"第三方支付平台";
     NSString *withdrawDescriptionStr = [NSString stringWithFormat: @"•单笔提现金额不能低于%@元，提现申请成功后不可撤回；\n•对首次充值后无投资的提现，%@收取%@%%的手续费；\n•徽电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；",[dataDic  objectForKey:@"minAmt"],isThreePlatStr,_fee];
     _withdrawDescriptionLab.text = withdrawDescriptionStr;
@@ -554,7 +544,7 @@
     [self.telServiceLabel addLinkString:self.telServiceNo block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf openURL];
     }];
-    [self.telServiceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:self.telServiceNo];
+    [self.telServiceLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:self.telServiceNo];
 
    
 }

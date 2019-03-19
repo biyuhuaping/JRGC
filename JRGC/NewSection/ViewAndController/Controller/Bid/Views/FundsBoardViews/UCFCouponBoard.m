@@ -7,7 +7,7 @@
 //
 
 #import "UCFCouponBoard.h"
-#import "NSObject+Compression.h"
+#import "UIImage+Compression.h"
 @interface UCFCouponBoard ()
 @property(nonatomic, weak)UCFBidViewModel *myVM;
 @property(nonatomic, strong) UILabel        *couponLab;

@@ -63,4 +63,6 @@ static NSString *OpenAccountIntoBankApiURL = @"api/userInfo/v2/openAccountIntoBa
 static NSString *SetHsPwdReturnJsonApiURL = @"api/userAccount/v2/setHsPwdReturnJson.json";//设置、修改交易密码通用
 
 static NSString *AccountBalancePageApiURL = @"/api/accountCenter/v2/accountBalancePage.json";//充值提现聚合页
+
+static NSString *AccountCashWithDrawalApiURL = @"api/withdraw/v2/getWithdrawInfo.json";
 #endif /* RequestConstant_h */
