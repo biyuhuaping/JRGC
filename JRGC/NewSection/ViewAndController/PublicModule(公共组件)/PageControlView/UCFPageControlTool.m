@@ -26,6 +26,11 @@
         }
 
         CGFloat segmentViewHeight = CGRectGetHeight(self.headView.frame);
+        
+        if (self.headView.nameArray.count <= 1 && self.headView.isHiddenHeadView == YES) {
+            self.headView.hidden = YES;
+            segmentViewHeight = 0;
+        }
         //添加scrollView
         self.segmentScrollV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, segmentViewHeight, frame.size.width, frame.size.height- segmentViewHeight)];
         self.segmentScrollV.bounces = NO;

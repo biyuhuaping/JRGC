@@ -148,7 +148,9 @@
             }
                 break;
             case 4:{
+                
                 UCFNewMineViewController *mine = [[UCFNewMineViewController alloc] init];
+//                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
                 controller = mine;
                 _mineView = mine;
             }

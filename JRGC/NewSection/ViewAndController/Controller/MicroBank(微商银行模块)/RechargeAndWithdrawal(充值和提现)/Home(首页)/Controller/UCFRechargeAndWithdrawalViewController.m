@@ -50,6 +50,8 @@
     if (nil == _pageHeadView) {
 //        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:[self.accountTitleArray copy] WithType:1];
         _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:[self.accountTitleArray copy]];
+        _pageHeadView.isHiddenHeadView = YES;
+        [_pageHeadView reloaShowView];
     }
     return _pageHeadView;
 }
@@ -60,10 +62,6 @@
     }
     return _pageController;
 }
-
-
-
-
 
 - (void)requetAccount
 {
@@ -76,8 +74,6 @@
         self.model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",self.model);
         if (self.model.ret == YES) {
-            
-         
             self.accountTitleArray = [NSMutableArray new];
             self.accountControllerArray = [NSMutableArray new];
             UCFRechargeAndWithdrawalDetailsViewController *vc;

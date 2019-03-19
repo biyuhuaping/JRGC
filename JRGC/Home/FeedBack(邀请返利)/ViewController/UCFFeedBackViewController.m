@@ -60,6 +60,7 @@
 @property (weak, nonatomic) IBOutlet UIView *secondView_lineView;
 @property (weak, nonatomic) IBOutlet UIView *P2P_secondView;
 @property (weak, nonatomic) IBOutlet UIView *gold_secondView;
+@property (weak, nonatomic) IBOutlet UIControl *bkView;
 
 @property (strong, nonatomic) IBOutlet UILabel *label_moutheMoney;
 @property (strong, nonatomic) IBOutlet UILabel *label_p2pMoney;
@@ -95,6 +96,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self addLeftButton];
+    
+    //为颜色设置渐变效果：
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    //设置开始和结束位置(设置渐变的方向)
+    gradient.startPoint = CGPointMake(0, 0.5);
+    gradient.endPoint = CGPointMake(0, 0.5);
+    gradient.frame =CGRectMake(0,0,PGScreenWidth,95);
+    gradient.colors = [NSArray arrayWithObjects:(id)[UIColor redColor].CGColor,(id)[UIColor whiteColor].CGColor,nil];
+    [self.bkView.layer insertSublayer:gradient atIndex:0];
+ 
+    
     
     if (self.accoutType == SelectAccoutTypeHoner) {
         baseTitleLabel.text = @"尊享邀请返利";
@@ -365,7 +377,7 @@
             NSString *tipsStr = dictemp[@"recruitDes"];
             if (tipsStr.length > 0) {
                 _tipsLabel.text = tipsStr;
-                _tipsViewHeight.constant = 35;
+                _tipsViewHeight.constant = 45;
             }
             //**************************qyy**************
             NSString *adviserAnnualRate = @"¥0.00";

@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)NSArray *nameArray;   //按钮文字数组
 
-
+@property (nonatomic, assign) BOOL  isHiddenHeadView; //当只有数组中只有一个数据的时候,是否需要隐藏头
 
 
 

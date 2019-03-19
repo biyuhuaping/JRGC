@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFRechargeAndWithdrawalDetailsViewController : UCFBaseViewController
 
-@property (nonatomic, assign) CGFloat accoutBalance;//微金账户余额
+@property (nonatomic, assign) CGFloat accoutBalance;//账户余额(微金,尊享,黄金)
 
 @end
 
