@@ -12,18 +12,35 @@
 
 @end
 
-
-
 @implementation UCFNewBaseViewController
+
 - (void)loadView
 {
     self.edgesForExtendedLayout = UIRectEdgeNone;  //设置视图控制器中的视图尺寸不延伸到导航条或者工具条下面。您可以注释这句代码看看效果。
     MyRelativeLayout *rootLayout = [MyRelativeLayout new];
-    rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+    rootLayout.backgroundColor = [UIColor colorWithRed:245.0/255.0f green:245.0/255.0f blue:245.0/255.0f alpha:1];
     rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     rootLayout.insetsPaddingFromSafeArea = UIRectEdgeBottom;
     self.rootLayout = rootLayout;
     self.view = rootLayout;
+}
+- (UIView *)customNav
+{
+    if (!_customNav) {
+        _customNav = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, NavigationBarHeight1)];
+    }
+    return _customNav;
+}
+- (void)addCustomBlueLeftButton
+{
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftButton.mySize = CGSizeMake(60, 44);
+    leftButton.bottomPos.equalTo(@0);
+    leftButton.leftPos.equalTo(@0);
+    [leftButton addTarget:self action:@selector(leftBar1Clicked) forControlEvents:UIControlEventTouchUpInside];
+    [leftButton setImage:[UIImage imageNamed:@"icon_back.png"]forState:UIControlStateNormal];
+    [leftButton setImage:[UIImage imageNamed:@"icon_back.png"]forState:UIControlStateHighlighted];
+    [self.customNav addSubview:leftButton];
 }
 - (void)setTitleViewText:(NSString *)text
 {

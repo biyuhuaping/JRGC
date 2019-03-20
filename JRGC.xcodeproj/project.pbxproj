@@ -96,6 +96,9 @@
 		334D7D8F22266DB00048CCDC /* NoticeCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D8E22266DB00048CCDC /* NoticeCenterModel.m */; };
 		334D7D922226B2770048CCDC /* UCFBatchBidRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D912226B2770048CCDC /* UCFBatchBidRequest.m */; };
 		334DE85D2240D7DC0043A864 /* UIImage+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DE85C2240D7DC0043A864 /* UIImage+Compression.m */; };
+		334DE8662240EA0F0043A864 /* UCFNewAiLoanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DE8652240EA0F0043A864 /* UCFNewAiLoanViewController.m */; };
+		334DE8692240EA390043A864 /* UCFNewBatchBidListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DE8682240EA390043A864 /* UCFNewBatchBidListViewController.m */; };
+		334DE86C22411AB90043A864 /* UCFNewBatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DE86B22411AB90043A864 /* UCFNewBatchTableViewCell.m */; };
 		33527147222388D90086FC92 /* UCFUserAllStatueRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33527146222388D90086FC92 /* UCFUserAllStatueRequest.m */; };
 		335BAC93221BEF2200F026BB /* UCFNewPureTransBidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC92221BEF2200F026BB /* UCFNewPureTransBidViewController.m */; };
 		335BAC97221BF33C00F026BB /* UCFTransMoneyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC96221BF33C00F026BB /* UCFTransMoneyBoardView.m */; };
@@ -151,6 +154,8 @@
 		33B66167215C80B30027325F /* 银行存管证明.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33B6615F215C80B20027325F /* 银行存管证明.pdf */; };
 		33B66168215C80B30027325F /* Contract of guarantee.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33B66160215C80B20027325F /* Contract of guarantee.pdf */; };
 		33B6616A215C81480027325F /* 合作协议.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33B66169215C81480027325F /* 合作协议.pdf */; };
+		33CBEF702241F055007D977B /* UCFMyBatchBidListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CBEF6F2241F055007D977B /* UCFMyBatchBidListRequest.m */; };
+		33CBEF732241F299007D977B /* UCFMyBatchBidModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CBEF722241F299007D977B /* UCFMyBatchBidModel.m */; };
 		33CE365622364FB200FF707C /* UCFNewCouponParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CE365522364FB200FF707C /* UCFNewCouponParentViewController.m */; };
 		33D218C1223B917B008A9BDE /* UCFIntoBatchPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D218C0223B917B008A9BDE /* UCFIntoBatchPageRequest.m */; };
 		33D218C4223B92A5008A9BDE /* UCFBatchPageRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D218C3223B92A5008A9BDE /* UCFBatchPageRootModel.m */; };
@@ -1509,6 +1514,12 @@
 		334D7D912226B2770048CCDC /* UCFBatchBidRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBatchBidRequest.m; sourceTree = "<group>"; };
 		334DE85B2240D7DC0043A864 /* UIImage+Compression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Compression.h"; sourceTree = "<group>"; };
 		334DE85C2240D7DC0043A864 /* UIImage+Compression.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Compression.m"; sourceTree = "<group>"; };
+		334DE8642240EA0F0043A864 /* UCFNewAiLoanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewAiLoanViewController.h; sourceTree = "<group>"; };
+		334DE8652240EA0F0043A864 /* UCFNewAiLoanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewAiLoanViewController.m; sourceTree = "<group>"; };
+		334DE8672240EA390043A864 /* UCFNewBatchBidListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewBatchBidListViewController.h; sourceTree = "<group>"; };
+		334DE8682240EA390043A864 /* UCFNewBatchBidListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBatchBidListViewController.m; sourceTree = "<group>"; };
+		334DE86A22411AB90043A864 /* UCFNewBatchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewBatchTableViewCell.h; sourceTree = "<group>"; };
+		334DE86B22411AB90043A864 /* UCFNewBatchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBatchTableViewCell.m; sourceTree = "<group>"; };
 		33527145222388D90086FC92 /* UCFUserAllStatueRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFUserAllStatueRequest.h; sourceTree = "<group>"; };
 		33527146222388D90086FC92 /* UCFUserAllStatueRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFUserAllStatueRequest.m; sourceTree = "<group>"; };
 		335BAC91221BEF2200F026BB /* UCFNewPureTransBidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewPureTransBidViewController.h; sourceTree = "<group>"; };
@@ -1603,6 +1614,10 @@
 		33B6615F215C80B20027325F /* 银行存管证明.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "银行存管证明.pdf"; sourceTree = "<group>"; };
 		33B66160215C80B20027325F /* Contract of guarantee.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Contract of guarantee.pdf"; sourceTree = "<group>"; };
 		33B66169215C81480027325F /* 合作协议.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "合作协议.pdf"; sourceTree = "<group>"; };
+		33CBEF6E2241F055007D977B /* UCFMyBatchBidListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMyBatchBidListRequest.h; sourceTree = "<group>"; };
+		33CBEF6F2241F055007D977B /* UCFMyBatchBidListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMyBatchBidListRequest.m; sourceTree = "<group>"; };
+		33CBEF712241F299007D977B /* UCFMyBatchBidModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMyBatchBidModel.h; sourceTree = "<group>"; };
+		33CBEF722241F299007D977B /* UCFMyBatchBidModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMyBatchBidModel.m; sourceTree = "<group>"; };
 		33CE365422364FB200FF707C /* UCFNewCouponParentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewCouponParentViewController.h; sourceTree = "<group>"; };
 		33CE365522364FB200FF707C /* UCFNewCouponParentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewCouponParentViewController.m; sourceTree = "<group>"; };
 		33D218BF223B917B008A9BDE /* UCFIntoBatchPageRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFIntoBatchPageRequest.h; sourceTree = "<group>"; };
@@ -4013,6 +4028,62 @@
 				334D7D8E22266DB00048CCDC /* NoticeCenterModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		334DE85E2240E9100043A864 /* AILoan(智能出借) */ = {
+			isa = PBXGroup;
+			children = (
+				334DE8632240E9B10043A864 /* Views */,
+				334DE8622240E9AF0043A864 /* Controllers */,
+				334DE8612240E9AD0043A864 /* Models */,
+				334DE8602240E9A90043A864 /* APi */,
+			);
+			path = "AILoan(智能出借)";
+			sourceTree = "<group>";
+		};
+		334DE85F2240E9280043A864 /* HighQualityLoan(优质债权) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "HighQualityLoan(优质债权)";
+			sourceTree = "<group>";
+		};
+		334DE8602240E9A90043A864 /* APi */ = {
+			isa = PBXGroup;
+			children = (
+				33CBEF6E2241F055007D977B /* UCFMyBatchBidListRequest.h */,
+				33CBEF6F2241F055007D977B /* UCFMyBatchBidListRequest.m */,
+			);
+			path = APi;
+			sourceTree = "<group>";
+		};
+		334DE8612240E9AD0043A864 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				33CBEF712241F299007D977B /* UCFMyBatchBidModel.h */,
+				33CBEF722241F299007D977B /* UCFMyBatchBidModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		334DE8622240E9AF0043A864 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				334DE8642240EA0F0043A864 /* UCFNewAiLoanViewController.h */,
+				334DE8652240EA0F0043A864 /* UCFNewAiLoanViewController.m */,
+				334DE8672240EA390043A864 /* UCFNewBatchBidListViewController.h */,
+				334DE8682240EA390043A864 /* UCFNewBatchBidListViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		334DE8632240E9B10043A864 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				334DE86A22411AB90043A864 /* UCFNewBatchTableViewCell.h */,
+				334DE86B22411AB90043A864 /* UCFNewBatchTableViewCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		335BAC94221BF2D500F026BB /* TransView */ = {
@@ -8732,6 +8803,8 @@
 		E3B76E6D21EC6E89009C9021 /* Mine(模块) */ = {
 			isa = PBXGroup;
 			children = (
+				334DE85F2240E9280043A864 /* HighQualityLoan(优质债权) */,
+				334DE85E2240E9100043A864 /* AILoan(智能出借) */,
 				E335540B223F4349001FADEA /* MineService(服务中心) */,
 				E3264BE6221D49440045FE94 /* UCFMineDimensionCode(我的工场码界面) */,
 				E3AF0766221BFDC0005CC653 /* UCFMineIdentityCertification(身份认证界面) */,
@@ -10001,6 +10074,7 @@
 				74F490E91E5B0BD70057AC62 /* UCFMyInvestBatchCell.m in Sources */,
 				33930ACE222CD9460081F894 /* UCFBatchRootModel.m in Sources */,
 				742D50EC1F74E5E800951AE2 /* UCFMineAPIManager.m in Sources */,
+				33CBEF732241F299007D977B /* UCFMyBatchBidModel.m in Sources */,
 				746BBEAB1AF8E93E00EBA0E7 /* UCFCouponUseCell.m in Sources */,
 				3375F2DA22291A6E00D21FE2 /* UCFCellDataModel.m in Sources */,
 				74AFB1451EE93ACC007DBAFC /* UCFMicroMoneyGroup.m in Sources */,
@@ -10495,6 +10569,7 @@
 				7BA6E4C31AD6731900FE8C37 /* UIImage+MultiFormat.m in Sources */,
 				FBE265DA1B26CAB100240A79 /* UCFMyClaimCtrl.m in Sources */,
 				83BC799F21087C8500A591AA /* UCFMicroMoneyCell.m in Sources */,
+				33CBEF702241F055007D977B /* UCFMyBatchBidListRequest.m in Sources */,
 				74877CCD1FB2ABCF00F32428 /* UCFDeliveryingViewController.m in Sources */,
 				E3B26F481CA136F9002E87F4 /* DBColor.m in Sources */,
 				74A2C0CE1F4306A000EDF0FA /* UCFGoldCashViewController.m in Sources */,
@@ -10642,6 +10717,7 @@
 				74D9B8541FD793650076F733 /* KTUpDownAnimationController.m in Sources */,
 				331089D621E74EB80073F71B /* SDCollectionViewCell.m in Sources */,
 				334790C521E82F28005131A5 /* UCFHomeViewModel.m in Sources */,
+				334DE8662240EA0F0043A864 /* UCFNewAiLoanViewController.m in Sources */,
 				74270D5B1EC5AE8700F9419B /* UCFInvitationRewardCell2.m in Sources */,
 				E32490C422365D5E00F84ECD /* UCFRegisterUserBaseMessRegisterApi.m in Sources */,
 				33793F3F21EC392F001065D9 /* UCFNewUserBidCell.m in Sources */,
@@ -10808,8 +10884,10 @@
 				FB72B08D1D74233E00F4DC8E /* BaseNavigationViewController.m in Sources */,
 				335BAC97221BF33C00F026BB /* UCFTransMoneyBoardView.m in Sources */,
 				E3041D3821F7039C007B09B6 /* UCFRegisterGetRegisterInfoApi.m in Sources */,
+				334DE8692240EA390043A864 /* UCFNewBatchBidListViewController.m in Sources */,
 				832942CE1F39914E001E34F1 /* UCFGoldCouponModel.m in Sources */,
 				746FFE2C1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m in Sources */,
+				334DE86C22411AB90043A864 /* UCFNewBatchTableViewCell.m in Sources */,
 				7BE51D901ADE5079007600AB /* FullWebViewController.m in Sources */,
 				334B9E8B223A83A300E278D8 /* UCFCollectionChildCell.m in Sources */,
 				33527147222388D90086FC92 /* UCFUserAllStatueRequest.m in Sources */,

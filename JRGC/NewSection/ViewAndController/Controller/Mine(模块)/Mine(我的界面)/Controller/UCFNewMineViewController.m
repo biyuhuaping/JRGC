@@ -40,6 +40,8 @@
 #import "AccountSuccessVC.h"
 #import "UCFNewResetPassWordViewController.h"
 #import "UCFCouponViewController.h"
+
+#import "UCFNewAiLoanViewController.h"
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -151,7 +153,8 @@
         }
         else if ([cellConfig.title isEqualToString:@"智能出借"])
         {
-            
+            UCFNewAiLoanViewController *vc = [[UCFNewAiLoanViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
         else if ([cellConfig.title isEqualToString:@"尊享项目"])
         {
