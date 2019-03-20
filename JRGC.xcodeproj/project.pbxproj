@@ -156,6 +156,10 @@
 		33B6616A215C81480027325F /* 合作协议.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33B66169215C81480027325F /* 合作协议.pdf */; };
 		33CBEF702241F055007D977B /* UCFMyBatchBidListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CBEF6F2241F055007D977B /* UCFMyBatchBidListRequest.m */; };
 		33CBEF732241F299007D977B /* UCFMyBatchBidModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CBEF722241F299007D977B /* UCFMyBatchBidModel.m */; };
+		33CBEF7A22426866007D977B /* UCFHighQualityContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CBEF7922426866007D977B /* UCFHighQualityContainerViewController.m */; };
+		33CBEF7D2242687B007D977B /* UCFHighQualityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CBEF7C2242687B007D977B /* UCFHighQualityViewController.m */; };
+		33CBEF802242688B007D977B /* UCFTransBidListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CBEF7F2242688B007D977B /* UCFTransBidListViewController.m */; };
+		33CBEF8322426A61007D977B /* UCFHighQualityBidHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CBEF8222426A61007D977B /* UCFHighQualityBidHeaderView.m */; };
 		33CE365622364FB200FF707C /* UCFNewCouponParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CE365522364FB200FF707C /* UCFNewCouponParentViewController.m */; };
 		33D218C1223B917B008A9BDE /* UCFIntoBatchPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D218C0223B917B008A9BDE /* UCFIntoBatchPageRequest.m */; };
 		33D218C4223B92A5008A9BDE /* UCFBatchPageRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D218C3223B92A5008A9BDE /* UCFBatchPageRootModel.m */; };
@@ -1619,6 +1623,14 @@
 		33CBEF6F2241F055007D977B /* UCFMyBatchBidListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMyBatchBidListRequest.m; sourceTree = "<group>"; };
 		33CBEF712241F299007D977B /* UCFMyBatchBidModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMyBatchBidModel.h; sourceTree = "<group>"; };
 		33CBEF722241F299007D977B /* UCFMyBatchBidModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMyBatchBidModel.m; sourceTree = "<group>"; };
+		33CBEF7822426866007D977B /* UCFHighQualityContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHighQualityContainerViewController.h; sourceTree = "<group>"; };
+		33CBEF7922426866007D977B /* UCFHighQualityContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHighQualityContainerViewController.m; sourceTree = "<group>"; };
+		33CBEF7B2242687B007D977B /* UCFHighQualityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHighQualityViewController.h; sourceTree = "<group>"; };
+		33CBEF7C2242687B007D977B /* UCFHighQualityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHighQualityViewController.m; sourceTree = "<group>"; };
+		33CBEF7E2242688B007D977B /* UCFTransBidListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransBidListViewController.h; sourceTree = "<group>"; };
+		33CBEF7F2242688B007D977B /* UCFTransBidListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransBidListViewController.m; sourceTree = "<group>"; };
+		33CBEF8122426A61007D977B /* UCFHighQualityBidHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHighQualityBidHeaderView.h; sourceTree = "<group>"; };
+		33CBEF8222426A61007D977B /* UCFHighQualityBidHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHighQualityBidHeaderView.m; sourceTree = "<group>"; };
 		33CE365422364FB200FF707C /* UCFNewCouponParentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewCouponParentViewController.h; sourceTree = "<group>"; };
 		33CE365522364FB200FF707C /* UCFNewCouponParentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewCouponParentViewController.m; sourceTree = "<group>"; };
 		33D218BF223B917B008A9BDE /* UCFIntoBatchPageRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFIntoBatchPageRequest.h; sourceTree = "<group>"; };
@@ -4047,6 +4059,10 @@
 		334DE85F2240E9280043A864 /* HighQualityLoan(优质债权) */ = {
 			isa = PBXGroup;
 			children = (
+				33CBEF77224267FA007D977B /* Api */,
+				33CBEF76224267F8007D977B /* Controller */,
+				33CBEF75224267F5007D977B /* Model */,
+				33CBEF74224267EE007D977B /* Views */,
 			);
 			path = "HighQualityLoan(优质债权)";
 			sourceTree = "<group>";
@@ -4288,6 +4304,42 @@
 				33B66159215C80AF0027325F /* Loan contract.pdf */,
 			);
 			name = source;
+			sourceTree = "<group>";
+		};
+		33CBEF74224267EE007D977B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				33CBEF8122426A61007D977B /* UCFHighQualityBidHeaderView.h */,
+				33CBEF8222426A61007D977B /* UCFHighQualityBidHeaderView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		33CBEF75224267F5007D977B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		33CBEF76224267F8007D977B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				33CBEF7822426866007D977B /* UCFHighQualityContainerViewController.h */,
+				33CBEF7922426866007D977B /* UCFHighQualityContainerViewController.m */,
+				33CBEF7B2242687B007D977B /* UCFHighQualityViewController.h */,
+				33CBEF7C2242687B007D977B /* UCFHighQualityViewController.m */,
+				33CBEF7E2242688B007D977B /* UCFTransBidListViewController.h */,
+				33CBEF7F2242688B007D977B /* UCFTransBidListViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		33CBEF77224267FA007D977B /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		33E1A5D620FDC5A8008244BD /* RedBag */ = {
@@ -8143,7 +8195,6 @@
 				E3D6D513221E48F000261622 /* MicroBank(微商银行模块) */,
 				E3E4D9B921F5A35C003D41E9 /* LoginAndRegister */,
 				33614B1821F995FD00569989 /* BidDetail */,
-				33AF83A221F5BB4E0035ED53 /* Invest */,
 				E3B76E6D21EC6E89009C9021 /* Mine(模块) */,
 				33480A2121E6E1F0007C8AAA /* Home */,
 				E352FCEE21E4AF0A00617AB7 /* CouponPopup(优惠券弹窗) */,
@@ -8296,6 +8347,7 @@
 		E352FD1621E4AF0B00617AB7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				33AF83A221F5BB4E0035ED53 /* Invest */,
 				335BAC94221BF2D500F026BB /* TransView */,
 				E352FD1821E4AF0B00617AB7 /* FundsBoardViews */,
 			);
@@ -10436,6 +10488,7 @@
 				74EAF5BC1B0F119D00807C1C /* UCFBankCardInfoViewController.m in Sources */,
 				E3ACB2172202DAB1005BEF27 /* UCFLoginApi.m in Sources */,
 				74270C8C1EC58F6800F9419B /* UCFCycleImageViewController.m in Sources */,
+				33CBEF8322426A61007D977B /* UCFHighQualityBidHeaderView.m in Sources */,
 				E3DEC72B22327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m in Sources */,
 				E3C1179A1D40CFCC0053A052 /* UCFContributionValueCell.m in Sources */,
 				E3041D4121F71C3F007B09B6 /* HWTFCursorView.m in Sources */,
@@ -10513,6 +10566,7 @@
 				3328796B21EECE7600832CE8 /* UCFHomeListRequest.m in Sources */,
 				A8BF2E5C1F739DCB003ABDE7 /* UCFLoginBaseView.m in Sources */,
 				258291341DD31F0F00AB1FD2 /* UCFGivingPointCell.m in Sources */,
+				33CBEF7D2242687B007D977B /* UCFHighQualityViewController.m in Sources */,
 				74BDA98C1F09F6C60054403F /* FSCalendarDelegationFactory.m in Sources */,
 				7BC217281ACD4A030086D374 /* GuideViewController.m in Sources */,
 				748D776C1ADE51C900910FF7 /* UCFSettingGroup.m in Sources */,
@@ -10534,6 +10588,7 @@
 				E3355432223FC3BF001FADEA /* UCFRechargeViewController.m in Sources */,
 				74931A361B1326FE00143424 /* OHASMarkupParserBase.m in Sources */,
 				74D6578E1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m in Sources */,
+				33CBEF7A22426866007D977B /* UCFHighQualityContainerViewController.m in Sources */,
 				83D64F5E1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.m in Sources */,
 				7443C7311F1F3881009669C0 /* UCFGoldRecordHeaderFooterView.m in Sources */,
 				EDEE0D411C5F42D200021CCC /* BJGridItem.m in Sources */,
@@ -10865,6 +10920,7 @@
 				835B88851E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m in Sources */,
 				83F2D59E1DCB508F0041F913 /* UCFAccountTool.m in Sources */,
 				334D7D8B22266D8D0048CCDC /* UCFNoticeCenterApi.m in Sources */,
+				33CBEF802242688B007D977B /* UCFTransBidListViewController.m in Sources */,
 				E352FD8F21E4AFD800617AB7 /* NSObject+HXSwizzling.m in Sources */,
 				74F490E51E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m in Sources */,
 				FB21732F1AF2362800649AA0 /* UCFBackMoneyModel.m in Sources */,

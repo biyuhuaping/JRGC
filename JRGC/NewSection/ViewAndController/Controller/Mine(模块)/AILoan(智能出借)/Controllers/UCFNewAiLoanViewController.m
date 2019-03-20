@@ -32,13 +32,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addBlueLeftButton];
 
 }
-- (void)leftBar1Clicked
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 #pragma mark ViewInIt 返现券
 
 
