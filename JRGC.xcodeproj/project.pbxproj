@@ -1095,6 +1095,7 @@
 		E3355424223F8F3D001FADEA /* UCFRechargeAndWithdrawalAccountBalancePageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3355423223F8F3D001FADEA /* UCFRechargeAndWithdrawalAccountBalancePageApi.m */; };
 		E3355427223F8F57001FADEA /* UCFRechargeAndWithdrawalAccountBalancePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3355426223F8F57001FADEA /* UCFRechargeAndWithdrawalAccountBalancePageModel.m */; };
 		E335542A223FA235001FADEA /* UCFRechargeAndWithdrawalDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3355429223FA235001FADEA /* UCFRechargeAndWithdrawalDetailsViewController.m */; };
+		E3355432223FC3BF001FADEA /* UCFRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3355431223FC3BF001FADEA /* UCFRechargeViewController.m */; };
 		E337444C2216616700003FEF /* UCFMineTableViewHead.m in Sources */ = {isa = PBXBuildFile; fileRef = E337444B2216616700003FEF /* UCFMineTableViewHead.m */; };
 		E343360D22140C3E00343E78 /* UCFMineCellAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E343360C22140C3E00343E78 /* UCFMineCellAccountModel.m */; };
 		E3461A9F2237B1C600A00334 /* UCFNewResetPassWordSMSCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3461A9E2237B1C600A00334 /* UCFNewResetPassWordSMSCodeView.m */; };
@@ -3191,6 +3192,8 @@
 		E3355426223F8F57001FADEA /* UCFRechargeAndWithdrawalAccountBalancePageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRechargeAndWithdrawalAccountBalancePageModel.m; sourceTree = "<group>"; };
 		E3355428223FA235001FADEA /* UCFRechargeAndWithdrawalDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFRechargeAndWithdrawalDetailsViewController.h; sourceTree = "<group>"; };
 		E3355429223FA235001FADEA /* UCFRechargeAndWithdrawalDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRechargeAndWithdrawalDetailsViewController.m; sourceTree = "<group>"; };
+		E3355430223FC3BF001FADEA /* UCFRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFRechargeViewController.h; sourceTree = "<group>"; };
+		E3355431223FC3BF001FADEA /* UCFRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRechargeViewController.m; sourceTree = "<group>"; };
 		E337444A2216616700003FEF /* UCFMineTableViewHead.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineTableViewHead.h; sourceTree = "<group>"; };
 		E337444B2216616700003FEF /* UCFMineTableViewHead.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineTableViewHead.m; sourceTree = "<group>"; };
 		E343360B22140C3E00343E78 /* UCFMineCellAccountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineCellAccountModel.h; sourceTree = "<group>"; };
@@ -7909,6 +7912,7 @@
 		E3355419223F8D26001FADEA /* RechargeAndWithdrawal(充值和提现) */ = {
 			isa = PBXGroup;
 			children = (
+				E335542B223FC37F001FADEA /* Recharge(充值) */,
 				E335541A223F8D86001FADEA /* Home(首页) */,
 			);
 			path = "RechargeAndWithdrawal(充值和提现)";
@@ -7959,6 +7963,47 @@
 				338A5599223FC4BD00B5A31A /* UCFCashWithdrawalRequest.m */,
 				E3355422223F8F3D001FADEA /* UCFRechargeAndWithdrawalAccountBalancePageApi.h */,
 				E3355423223F8F3D001FADEA /* UCFRechargeAndWithdrawalAccountBalancePageApi.m */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		E335542B223FC37F001FADEA /* Recharge(充值) */ = {
+			isa = PBXGroup;
+			children = (
+				E335542C223FC37F001FADEA /* Controller */,
+				E335542D223FC37F001FADEA /* Model */,
+				E335542E223FC37F001FADEA /* View */,
+				E335542F223FC37F001FADEA /* Api */,
+			);
+			path = "Recharge(充值)";
+			sourceTree = "<group>";
+		};
+		E335542C223FC37F001FADEA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E3355430223FC3BF001FADEA /* UCFRechargeViewController.h */,
+				E3355431223FC3BF001FADEA /* UCFRechargeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E335542D223FC37F001FADEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E335542E223FC37F001FADEA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E335542F223FC37F001FADEA /* Api */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -10486,6 +10531,7 @@
 				7BCBF1231ADB613C00C874FC /* UCFRegisterStepTwoViewController.m in Sources */,
 				FB1E7F7F1D8E4230009CBE2C /* UCFBidNewDetailView.m in Sources */,
 				E352FD5521E4AF0B00617AB7 /* UCFBidFootBoardView.m in Sources */,
+				E3355432223FC3BF001FADEA /* UCFRechargeViewController.m in Sources */,
 				74931A361B1326FE00143424 /* OHASMarkupParserBase.m in Sources */,
 				74D6578E1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m in Sources */,
 				83D64F5E1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.m in Sources */,

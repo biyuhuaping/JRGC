@@ -60,6 +60,7 @@
 @property (weak, nonatomic) IBOutlet UIView *secondView_lineView;
 @property (weak, nonatomic) IBOutlet UIView *P2P_secondView;
 @property (weak, nonatomic) IBOutlet UIView *gold_secondView;
+@property (weak, nonatomic) IBOutlet UIControl *bkView;
 
 @property (strong, nonatomic) IBOutlet UILabel *label_moutheMoney;
 @property (strong, nonatomic) IBOutlet UILabel *label_p2pMoney;
@@ -95,6 +96,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self addLeftButton];
+    
+    //为颜色设置渐变效果：
+    CAGradientLayer *layer = [CAGradientLayer layer];
+    layer.startPoint = CGPointMake(0, 0);//（0，0）表示从左上角开始变化。默认值是(0.5,0.0)表示从x轴为中间，y为顶端的开始变化
+    layer.endPoint = CGPointMake(1, 0);//（1，1）表示到右下角变化结束。默认值是(0.5,1.0)  表示从x轴为中间，y为低端的结束变化
+    layer.colors = [NSArray arrayWithObjects:(id)[Color color:PGColorOptionTitlerRead].CGColor,(id)[Color color:PGColorOpttonGradientBackgroundColor].CGColor, nil];
+    layer.locations = @[@0.0f,@1.0f];//渐变颜色的区间分布，locations的数组长度和color一致，这个值一般不用管它，默认是nil，会平均分布
+    layer.frame = CGRectMake(0, 0, PGScreenWidth, 95);
+    [self.bkView.layer insertSublayer:layer atIndex:0];
+ 
+    
     
     if (self.accoutType == SelectAccoutTypeHoner) {
         baseTitleLabel.text = @"尊享邀请返利";
@@ -153,7 +165,13 @@
     [self getMyInvestDataList];
     [self getAppSetting];
 }
-
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    // self.contentView为子控件
+    if ([touch.view isDescendantOfView:self.bkView]) {
+        return NO;
+    }
+    return YES;
+}
 //复制到剪切板
 - (IBAction)copy:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -365,7 +383,7 @@
             NSString *tipsStr = dictemp[@"recruitDes"];
             if (tipsStr.length > 0) {
                 _tipsLabel.text = tipsStr;
-                _tipsViewHeight.constant = 35;
+                _tipsViewHeight.constant = 45;
             }
             //**************************qyy**************
             NSString *adviserAnnualRate = @"¥0.00";

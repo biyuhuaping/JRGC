@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSArray *data;
 
-@property (nonatomic, assign) NSInteger message;
+@property (nonatomic, copy) NSString *message;
 
 @property (nonatomic, assign) BOOL ret;
 @end

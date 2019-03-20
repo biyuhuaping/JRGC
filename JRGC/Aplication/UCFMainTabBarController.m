@@ -126,9 +126,12 @@
             }
                 break;
             case 1:{
-                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
-                controller = invest;
-                _AssignmentView = invest;
+//                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
+//                controller = invest;
+//                _AssignmentView = invest;
+                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
+                controller = mine;
+                _mineView = mine;
             }
                 break;
             case 2:{
@@ -148,7 +151,9 @@
             }
                 break;
             case 4:{
+                
                 UCFNewMineViewController *mine = [[UCFNewMineViewController alloc] init];
+//                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
                 controller = mine;
                 _mineView = mine;
             }

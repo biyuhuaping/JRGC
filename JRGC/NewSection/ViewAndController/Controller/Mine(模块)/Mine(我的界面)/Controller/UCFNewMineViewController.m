@@ -27,8 +27,8 @@
 #import "UCFRegisterInputPassWordViewController.h"
 #import "UCFMineServiceViewController.h"
 #import "UCFRechargeAndWithdrawalViewController.h"
-
-
+#import "UCFMessageCenterViewController.h"
+#import "UCFInvitationRebateViewController.h"
 
 
 #import "UCFLoginViewController.h"
@@ -42,6 +42,8 @@
 #import "UCFCouponViewController.h"
 
 #import "UCFNewAiLoanViewController.h"
+#import "UCFRechargeViewController.h"
+
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -218,12 +220,18 @@
     }
     else if (btn.tag == 10002){
         //消息中心
+        UCFMessageCenterViewController *messagecenterVC = [[UCFMessageCenterViewController alloc]initWithNibName:@"UCFMessageCenterViewController" bundle:nil];
+        messagecenterVC.title =@"消息中心";
+        [self.navigationController pushViewController:messagecenterVC animated:YES];
     }
     else if (btn.tag == 10003){
         //是否展示用户资金,关闭都是*****
     }
     else if (btn.tag == 10004){
         //只进入微金的充值
+        UCFRechargeViewController *vc = [[UCFRechargeViewController alloc] init];
+        vc.accoutType = SelectAccoutTypeP2P;
+        [self.rt_navigationController pushViewController:vc animated:YES];
     }
     else if (btn.tag == 10005){
         //各个账户的充值与提现,尊享、黄金账户已经不允许充值,只能提现
@@ -269,9 +277,14 @@
     }
     else if (tag == 1005){
         //邀请返利
-        UCFMicroBankDepositoryAccountHomeViewController *ccc = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
-        ccc.accoutType = SelectAccoutTypeP2P;
-        [self.rt_navigationController pushViewController:ccc animated:YES];
+//        UCFMicroBankDepositoryAccountHomeViewController *ccc = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
+//        ccc.accoutType = SelectAccoutTypeP2P;
+//        [self.rt_navigationController pushViewController:ccc animated:YES];
+        
+        UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
+        feedBackVC.title = @"邀请获利";
+        feedBackVC.accoutType = SelectAccoutTypeP2P;
+        [self.navigationController pushViewController:feedBackVC animated:YES];
     }
 }
 - (void)requestMyReceipt//请求总资产信息
