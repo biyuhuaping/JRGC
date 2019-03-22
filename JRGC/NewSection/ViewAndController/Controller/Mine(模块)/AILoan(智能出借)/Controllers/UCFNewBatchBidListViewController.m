@@ -10,6 +10,9 @@
 #import "UCFNewBatchTableViewCell.h"
 #import "UCFMyBatchBidListRequest.h"
 #import "UCFMyBatchBidModel.h"
+#import "UCFMyInvestBatchBidDetailViewController.h"
+#import "UCFMyBatchInvestDetailRequest.h"
+#import "UCFMyInvestBatchBidDetailViewController.h"
 @interface UCFNewBatchBidListViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate>
 {
     
@@ -35,7 +38,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self.showTableView beginRefresh];
 }
 - (void)refreshTableViewHeader
@@ -72,6 +74,7 @@
             } else {
                 selfWeak.showTableView.enableRefreshFooter = YES;
             }
+            [selfWeak.showTableView reloadData];
         } else {
             ShowMessage(model.message);
         }
@@ -113,14 +116,43 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellStr = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+    UCFNewBatchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
     if (!cell) {
         cell = [[UCFNewBatchTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
     }
+    cell.model = self.dataArray[indexPath.row];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 0.01;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return nil;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UCFMyBatchBidResult *dataModel = self.dataArray[indexPath.row];
+    if ([dataModel.status intValue] == 1) {
+        NSString *colPrdClaimIdStr  = [NSString stringWithFormat:@"%ld",dataModel.colId];
+        NSString *batchOrderIdStr = [NSString stringWithFormat:@"%ld",dataModel.ID];
+        UCFMyBatchInvestDetailRequest *api = [[UCFMyBatchInvestDetailRequest alloc] initWithColPrdClaimsId:colPrdClaimIdStr BatchOrderId:batchOrderIdStr];
+        [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+            UCFMyBtachBidRoot *model = request.responseJSONModel;
+            if (model.ret) {
+                UCFMyInvestBatchBidDetailViewController *vc = [[UCFMyInvestBatchBidDetailViewController alloc] init];
+                vc.dataModel = model;
+                vc.colPrdClaimIdStr = colPrdClaimIdStr;
+                vc.batchOrderIdStr = batchOrderIdStr;
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                ShowMessage(model.message);
+            }
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            
+        }];
+        [api start];
+    }
 }
 @end

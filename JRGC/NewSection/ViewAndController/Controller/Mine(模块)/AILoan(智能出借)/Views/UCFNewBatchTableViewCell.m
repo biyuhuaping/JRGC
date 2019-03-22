@@ -25,6 +25,8 @@
     if (self) {
         
         self.rootLayout.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         
         UIView *whiteView = [MyRelativeLayout new];
         whiteView.backgroundColor = [Color color:PGColorOptionThemeWhite];
@@ -73,7 +75,8 @@
         [loanTimeValueLab sizeToFit];
         [whiteView addSubview:loanTimeValueLab];
         self.loanTimeValueLab = loanTimeValueLab;
-       
+        self.loanTimeValueLab.textAlignment = NSTextAlignmentRight;
+
        
         CGFloat VSpace = 6;
         
@@ -95,6 +98,7 @@
         [loanMoneyValueLab sizeToFit];
         [whiteView addSubview:loanMoneyValueLab];
         self.loanMoneyValueLab = loanMoneyValueLab;
+        self.loanMoneyValueLab.textAlignment = NSTextAlignmentRight;
 
         
         UILabel *loanPeriodMarkLab = [UILabel new];
@@ -115,7 +119,7 @@
         [loanPeriodValueLab sizeToFit];
         [whiteView addSubview:loanPeriodValueLab];
         self.loanPeriodValueLab = loanPeriodValueLab;
-
+        self.loanPeriodValueLab.textAlignment = NSTextAlignmentRight;
         
         UILabel *loanRateMarkLab = [UILabel new];
         loanRateMarkLab.text = @"预期年化利率";
@@ -135,6 +139,7 @@
         [loanRateValueLab sizeToFit];
         [whiteView addSubview:loanRateValueLab];
         self.loanRateValueLab = loanRateValueLab;
+        self.loanRateValueLab.textAlignment = NSTextAlignmentRight;
     }
     return self;
 }
@@ -142,9 +147,9 @@
 {
     _model = model;
     self.titleLab.text = model.collName;
-    self.loanRateValueLab.text = [NSString stringWithFormat:@"%.2f",model.collRate];
+    self.loanRateValueLab.text = [NSString stringWithFormat:@"%.2f%%",model.collRate];
     self.loanPeriodValueLab.text = [NSString stringWithFormat:@"%@",model.colPeriodTxt];
-    self.loanMoneyValueLab.text = [NSString stringWithFormat:@"%.2f",model.investSuccessTotal];
+    self.loanMoneyValueLab.text = [NSString stringWithFormat:@"¥%.2f",model.investSuccessTotal];
     self.loanTimeValueLab.text = model.investTime;
     
     

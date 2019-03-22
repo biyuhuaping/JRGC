@@ -95,10 +95,15 @@
 		334D7D8B22266D8D0048CCDC /* UCFNoticeCenterApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D8A22266D8D0048CCDC /* UCFNoticeCenterApi.m */; };
 		334D7D8F22266DB00048CCDC /* NoticeCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D8E22266DB00048CCDC /* NoticeCenterModel.m */; };
 		334D7D922226B2770048CCDC /* UCFBatchBidRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 334D7D912226B2770048CCDC /* UCFBatchBidRequest.m */; };
+		334DDF44224386F10096EED4 /* UCFMyInvestBatchBidDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DDF43224386F10096EED4 /* UCFMyInvestBatchBidDetailViewController.m */; };
+		334DDF47224389D90096EED4 /* UCFMyBtachBidRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DDF46224389D90096EED4 /* UCFMyBtachBidRoot.m */; };
+		334DDF4A22438B4A0096EED4 /* UCFMyBatchInvestDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DDF4922438B4A0096EED4 /* UCFMyBatchInvestDetailRequest.m */; };
+		334DDF4E224391980096EED4 /* UCFMyBatchBidViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DDF4D224391980096EED4 /* UCFMyBatchBidViewModel.m */; };
 		334DE85D2240D7DC0043A864 /* UIImage+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DE85C2240D7DC0043A864 /* UIImage+Compression.m */; };
 		334DE8662240EA0F0043A864 /* UCFNewAiLoanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DE8652240EA0F0043A864 /* UCFNewAiLoanViewController.m */; };
 		334DE8692240EA390043A864 /* UCFNewBatchBidListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DE8682240EA390043A864 /* UCFNewBatchBidListViewController.m */; };
 		334DE86C22411AB90043A864 /* UCFNewBatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 334DE86B22411AB90043A864 /* UCFNewBatchTableViewCell.m */; };
+		3351B6492244EA86000AE65D /* NewInvestmentDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3351B6482244EA86000AE65D /* NewInvestmentDetailTableViewCell.m */; };
 		33527147222388D90086FC92 /* UCFUserAllStatueRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33527146222388D90086FC92 /* UCFUserAllStatueRequest.m */; };
 		335BAC93221BEF2200F026BB /* UCFNewPureTransBidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC92221BEF2200F026BB /* UCFNewPureTransBidViewController.m */; };
 		335BAC97221BF33C00F026BB /* UCFTransMoneyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BAC96221BF33C00F026BB /* UCFTransMoneyBoardView.m */; };
@@ -1517,6 +1522,14 @@
 		334D7D8E22266DB00048CCDC /* NoticeCenterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeCenterModel.m; sourceTree = "<group>"; };
 		334D7D902226B2770048CCDC /* UCFBatchBidRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBatchBidRequest.h; sourceTree = "<group>"; };
 		334D7D912226B2770048CCDC /* UCFBatchBidRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBatchBidRequest.m; sourceTree = "<group>"; };
+		334DDF42224386F10096EED4 /* UCFMyInvestBatchBidDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMyInvestBatchBidDetailViewController.h; sourceTree = "<group>"; };
+		334DDF43224386F10096EED4 /* UCFMyInvestBatchBidDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMyInvestBatchBidDetailViewController.m; sourceTree = "<group>"; };
+		334DDF45224389D90096EED4 /* UCFMyBtachBidRoot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMyBtachBidRoot.h; sourceTree = "<group>"; };
+		334DDF46224389D90096EED4 /* UCFMyBtachBidRoot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMyBtachBidRoot.m; sourceTree = "<group>"; };
+		334DDF4822438B4A0096EED4 /* UCFMyBatchInvestDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMyBatchInvestDetailRequest.h; sourceTree = "<group>"; };
+		334DDF4922438B4A0096EED4 /* UCFMyBatchInvestDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMyBatchInvestDetailRequest.m; sourceTree = "<group>"; };
+		334DDF4C224391980096EED4 /* UCFMyBatchBidViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMyBatchBidViewModel.h; sourceTree = "<group>"; };
+		334DDF4D224391980096EED4 /* UCFMyBatchBidViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMyBatchBidViewModel.m; sourceTree = "<group>"; };
 		334DE85B2240D7DC0043A864 /* UIImage+Compression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Compression.h"; sourceTree = "<group>"; };
 		334DE85C2240D7DC0043A864 /* UIImage+Compression.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Compression.m"; sourceTree = "<group>"; };
 		334DE8642240EA0F0043A864 /* UCFNewAiLoanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewAiLoanViewController.h; sourceTree = "<group>"; };
@@ -1525,6 +1538,8 @@
 		334DE8682240EA390043A864 /* UCFNewBatchBidListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBatchBidListViewController.m; sourceTree = "<group>"; };
 		334DE86A22411AB90043A864 /* UCFNewBatchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewBatchTableViewCell.h; sourceTree = "<group>"; };
 		334DE86B22411AB90043A864 /* UCFNewBatchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBatchTableViewCell.m; sourceTree = "<group>"; };
+		3351B6472244EA86000AE65D /* NewInvestmentDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewInvestmentDetailTableViewCell.h; sourceTree = "<group>"; };
+		3351B6482244EA86000AE65D /* NewInvestmentDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewInvestmentDetailTableViewCell.m; sourceTree = "<group>"; };
 		33527145222388D90086FC92 /* UCFUserAllStatueRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFUserAllStatueRequest.h; sourceTree = "<group>"; };
 		33527146222388D90086FC92 /* UCFUserAllStatueRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFUserAllStatueRequest.m; sourceTree = "<group>"; };
 		335BAC91221BEF2200F026BB /* UCFNewPureTransBidViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewPureTransBidViewController.h; sourceTree = "<group>"; };
@@ -4045,9 +4060,19 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		334DDF4B224391640096EED4 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				334DDF4C224391980096EED4 /* UCFMyBatchBidViewModel.h */,
+				334DDF4D224391980096EED4 /* UCFMyBatchBidViewModel.m */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
 		334DE85E2240E9100043A864 /* AILoan(智能出借) */ = {
 			isa = PBXGroup;
 			children = (
+				334DDF4B224391640096EED4 /* VM */,
 				334DE8632240E9B10043A864 /* Views */,
 				334DE8622240E9AF0043A864 /* Controllers */,
 				334DE8612240E9AD0043A864 /* Models */,
@@ -4070,6 +4095,8 @@
 		334DE8602240E9A90043A864 /* APi */ = {
 			isa = PBXGroup;
 			children = (
+				334DDF4822438B4A0096EED4 /* UCFMyBatchInvestDetailRequest.h */,
+				334DDF4922438B4A0096EED4 /* UCFMyBatchInvestDetailRequest.m */,
 				33CBEF6E2241F055007D977B /* UCFMyBatchBidListRequest.h */,
 				33CBEF6F2241F055007D977B /* UCFMyBatchBidListRequest.m */,
 			);
@@ -4081,6 +4108,8 @@
 			children = (
 				33CBEF712241F299007D977B /* UCFMyBatchBidModel.h */,
 				33CBEF722241F299007D977B /* UCFMyBatchBidModel.m */,
+				334DDF45224389D90096EED4 /* UCFMyBtachBidRoot.h */,
+				334DDF46224389D90096EED4 /* UCFMyBtachBidRoot.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4092,6 +4121,8 @@
 				334DE8652240EA0F0043A864 /* UCFNewAiLoanViewController.m */,
 				334DE8672240EA390043A864 /* UCFNewBatchBidListViewController.h */,
 				334DE8682240EA390043A864 /* UCFNewBatchBidListViewController.m */,
+				334DDF42224386F10096EED4 /* UCFMyInvestBatchBidDetailViewController.h */,
+				334DDF43224386F10096EED4 /* UCFMyInvestBatchBidDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -6464,6 +6495,8 @@
 				7BCA210D1AEDCE67001CD258 /* InvestmentDetailTableViewCell.m */,
 				A85A2EC01F4321B0004BF4C1 /* QLHeaderViewController.h */,
 				A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */,
+				3351B6472244EA86000AE65D /* NewInvestmentDetailTableViewCell.h */,
+				3351B6482244EA86000AE65D /* NewInvestmentDetailTableViewCell.m */,
 			);
 			name = InvestmentDetail;
 			path = ../InvestmentDetail;
@@ -10097,6 +10130,7 @@
 				A830DE851F8DDB0D003855B9 /* UCFCalendarModularDayCell.xib in Sources */,
 				332B6062221F9558008893EF /* HQImagePageControl.m in Sources */,
 				A830DE841F8DDAF1003855B9 /* UCFCalendarModularDetailHeaderView.xib in Sources */,
+				334DDF47224389D90096EED4 /* UCFMyBtachBidRoot.m in Sources */,
 				E34B5E99222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m in Sources */,
 				A830DE831F8DDA6A003855B9 /* UCFCalendarModularHeaderView.xib in Sources */,
 				74877CC81FB2AB8900F32428 /* UCFHandingInViewController.m in Sources */,
@@ -10137,6 +10171,7 @@
 				740E2E941ECD4D55006FA335 /* UCFNoticeView.m in Sources */,
 				74D657931F2F135700177EB7 /* UCFHomeInvestCell.m in Sources */,
 				E3355415223F444B001FADEA /* UCFMineServiceHeadView.m in Sources */,
+				3351B6492244EA86000AE65D /* NewInvestmentDetailTableViewCell.m in Sources */,
 				83C3E7E21F346188007BE065 /* UCFGoldCouponViewController.m in Sources */,
 				E30C799721F1C287000183FA /* UCFMineGetWithdrawInfoModel.m in Sources */,
 				7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */,
@@ -10337,6 +10372,7 @@
 				E352FDC921E4B08D00617AB7 /* YTKRequest.m in Sources */,
 				E3C9E9C1222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m in Sources */,
 				4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */,
+				334DDF44224386F10096EED4 /* UCFMyInvestBatchBidDetailViewController.m in Sources */,
 				334D7D8F22266DB00048CCDC /* NoticeCenterModel.m in Sources */,
 				E31BD53721C0C10100D3651F /* TYAlertController+TransitionAnimate.m in Sources */,
 				E352FD4E21E4AF0B00617AB7 /* UCFInvestmentCouponInstructionsView.m in Sources */,
@@ -10436,6 +10472,7 @@
 				74C230231F7A24310022D02B /* UCFPicADModel.m in Sources */,
 				7BA6E4B81AD6731900FE8C37 /* MKAnnotationView+WebCache.m in Sources */,
 				74F6493A1F47159A00328235 /* UCFGoldCashSucessController.m in Sources */,
+				334DDF4E224391980096EED4 /* UCFMyBatchBidViewModel.m in Sources */,
 				7B5B8E4A1B141C6E0098042E /* UCF404ErrorView.m in Sources */,
 				7443C7281F1EFF61009669C0 /* UCFGoldCashTwoCell.m in Sources */,
 				FB377F841CCE480400F5DAF2 /* UCFExchangeModel.m in Sources */,
@@ -10943,6 +10980,7 @@
 				7BC8AA201AD4C74200BF4660 /* UCFNormalBid.m in Sources */,
 				7BCE01F81AC8FC260084C15C /* ASIDownloadCache.m in Sources */,
 				74BDA98D1F09F6C60054403F /* FSCalendarDelegationProxy.m in Sources */,
+				334DDF4A22438B4A0096EED4 /* UCFMyBatchInvestDetailRequest.m in Sources */,
 				E32D697F222E599A00803CE5 /* UCFMicroBankIdentifysendCodeInfoModel.m in Sources */,
 				E36BD5D92229310000ED32E3 /* UCFMicroBankOpenAccountOptionView.m in Sources */,
 				E352FD4721E4AF0B00617AB7 /* UCFCouponPopupModel.m in Sources */,

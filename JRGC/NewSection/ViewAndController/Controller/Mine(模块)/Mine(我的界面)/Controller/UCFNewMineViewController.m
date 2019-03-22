@@ -44,6 +44,8 @@
 #import "UCFNewAiLoanViewController.h"
 #import "UCFRechargeViewController.h"
 
+#import "UCFHighQualityContainerViewController.h"
+
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -143,6 +145,9 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    UCFNewAiLoanViewController *vc = [[UCFNewAiLoanViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
     CellConfig *cellConfig = self.cellConfigData[indexPath.section][indexPath.row];
     if (indexPath.section == 1) {
         if ([cellConfig.title isEqualToString:@"回款日历"])
@@ -151,7 +156,8 @@
         }
         else if ([cellConfig.title isEqualToString:@"优质债权"])
         {
-            
+            UCFHighQualityContainerViewController *vc = [[UCFHighQualityContainerViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
         else if ([cellConfig.title isEqualToString:@"智能出借"])
         {

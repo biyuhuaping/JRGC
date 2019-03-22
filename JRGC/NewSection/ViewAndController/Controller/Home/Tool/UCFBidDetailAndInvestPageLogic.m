@@ -199,8 +199,8 @@
 +(void)gotoCollectionDetailViewContoller:(UCFNewHomeListPrdlist *)model controller:(UIViewController *)controller{
     
     
-     NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
-     __weak typeof(self) weakSelf = self;
+//     NSString *uuid = SingleUserInfo.loginData.userInfo.userId;
+//     __weak typeof(self) weakSelf = self;
      if ([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P control:controller]) {
 
         UCFBatchBidRequest *api = [[UCFBatchBidRequest alloc] initWithProjectId:model.ID bidState:model.status];
@@ -213,20 +213,20 @@
              vc.hidesBottomBarWhenPushed = YES;
              [controller.navigationController pushViewController:vc  animated:YES];
 
-             return ;
-             NSDictionary *dic = request.responseObject;
-             NSString *rstcode = dic[@"ret"];
-             NSString *rsttext = dic[@"message"];
-             if ([rstcode intValue] == 1) {
-                 
-                 UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
-                 collectionDetailVC.souceVC = @"P2PVC";
-                 collectionDetailVC.colPrdClaimId = model.ID;
-                 collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
-                 collectionDetailVC.accoutType = SelectAccoutTypeP2P;
-                 collectionDetailVC.hidesBottomBarWhenPushed = YES;
-                 [controller.navigationController pushViewController:collectionDetailVC  animated:YES];
-             }
+//             return ;
+//             NSDictionary *dic = request.responseObject;
+//             NSString *rstcode = dic[@"ret"];
+//             NSString *rsttext = dic[@"message"];
+//             if ([rstcode intValue] == 1) {
+//
+//                 UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+//                 collectionDetailVC.souceVC = @"P2PVC";
+//                 collectionDetailVC.colPrdClaimId = model.ID;
+//                 collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
+//                 collectionDetailVC.accoutType = SelectAccoutTypeP2P;
+//                 collectionDetailVC.hidesBottomBarWhenPushed = YES;
+//                 [controller.navigationController pushViewController:collectionDetailVC  animated:YES];
+//             }
              
          } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
              

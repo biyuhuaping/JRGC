@@ -16,6 +16,7 @@
 @property(nonatomic, strong)UCFPageHeadView    *pageHeadView;
 @property(nonatomic, strong)UCFHighQualityViewController *hightQualityController;
 @property(nonatomic, strong)UCFTransBidListViewController *transBidListController;
+
 @end
 
 @implementation UCFHighQualityContainerViewController
