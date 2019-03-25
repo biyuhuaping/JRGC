@@ -39,7 +39,9 @@
         {0xff,0xe9,0xe5},          //银行卡字体颜色 #FFE9E5
         {0x36,0x33,0x33},          //黑色字体t颜色 #363333
         {0xff,0x7f,0x40},           //渐变色背景#FF7F40
-        {0xFE,0xBD,0xB9}            //#FEBDB9
+        {0xFE,0xBD,0xB9},            //#FEBDB9
+        {0xa0,0xa4,0xb1},        //银行卡标题字体灰色#A0A4B1
+        {0xfe,0xf1,0xDD},        //注册成功标题字体黄色#FEF1DD
     };
     
     return [UIColor colorWithRed:colors[colorOptions][0]/255.0 green:colors[colorOptions][1]/255.0 blue:colors[colorOptions][2]/255.0 alpha:1];

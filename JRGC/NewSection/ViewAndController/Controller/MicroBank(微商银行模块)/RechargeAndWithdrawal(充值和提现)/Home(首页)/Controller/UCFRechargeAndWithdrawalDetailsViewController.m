@@ -224,7 +224,7 @@
 
 - (void)buttonClick:(UIButton *)btn
 {
-    //        openStatus;//用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+    //        openStatus;//用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
     //        openStatus == 2 白名单用户,未绑卡,需要去绑卡
     //        openStatus == 3 正常用户开完户,可以去充值,但不能提现
     //        openStatus == 4 正常用户开完户,并设置完交易密码,可以去充值,可以去提现

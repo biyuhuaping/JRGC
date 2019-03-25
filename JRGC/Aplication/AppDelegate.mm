@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 //#import "UCFSession.h"
-#import "UCFLoginViewController.h"
 #import "LLLockPassword.h"
 #import "JSONKit.h"
 #import <UMSocialCore/UMSocialCore.h>

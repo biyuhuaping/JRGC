@@ -8,7 +8,6 @@
 
 #import "UCFProjectDetailViewController.h"
 #import "UCFPurchaseBidViewController.h"
-#import "UCFLoginViewController.h"
 #import "FullWebViewController.h"
 #import "UCFToolsMehod.h"
 #import "UCFPurchaseTranBidViewController.h"
@@ -645,9 +644,7 @@
 {
     // 获取购买接口
     if (!SingleUserInfo.loginData.userInfo.userId) {
-        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-        [self presentViewController:loginNaviController animated:YES completion:nil];
+        [SingleUserInfo loadLoginViewController];
     } else {
         if ([self checkUserCanInvest]) {
             

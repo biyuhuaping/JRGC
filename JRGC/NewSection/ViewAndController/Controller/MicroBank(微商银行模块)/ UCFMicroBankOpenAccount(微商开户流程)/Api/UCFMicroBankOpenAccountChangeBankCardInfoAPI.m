@@ -52,7 +52,7 @@
  */
 - (id)requestArgument {
     return @{
-             @"fromSite":[NSString stringWithFormat:@"%d",_accoutType],
+             @"fromSite":[NSString stringWithFormat:@"%zd",_accoutType],
              @"bankCard": _bankCard,
              @"bankId" : _bankId,
              @"bvalidateCode" : _validateCode,

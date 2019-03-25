@@ -32,6 +32,8 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
     PGColorOpttonBatchTextColor,        //黑色字体t颜色 #363333
     PGColorOpttonGradientBackgroundColor,        //渐变色背景#FF7F40
     PGColorOpttonRedLineBackColor,               //#FEBDB9
+    PGColorOpttonBankTextGrayColor,        //银行卡标题字体灰色#A0A4B1
+    PGColorOpttonRegisterdSucceedColor,        //注册成功标题字体黄色#FEF1DD
 };
 
 

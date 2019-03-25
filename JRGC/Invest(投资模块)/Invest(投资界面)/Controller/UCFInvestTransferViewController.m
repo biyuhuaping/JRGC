@@ -14,7 +14,6 @@
 #import "UCFToolsMehod.h"
 #import "UCFNoPermissionViewController.h"
 #import "RiskAssessmentViewController.h"
-#import "UCFLoginViewController.h"
 #import "UCFProjectDetailViewController.h"
 #import "UCFNewTransCell.h"
 #import "UCFNewTransProjectDetailViewController.h"
@@ -141,9 +140,7 @@
 }
 - (void)showLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 #pragma mark -开户判断
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;

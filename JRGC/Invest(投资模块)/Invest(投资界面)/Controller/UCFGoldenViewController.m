@@ -13,7 +13,6 @@
 #import "UCFGoldModel.h"
 #import "UCFGoldPurchaseViewController.h"
 #import "UCFGoldAuthorizationViewController.h"
-#import "UCFLoginViewController.h"
 #import "HSHelper.h"
 #import "UCFGoldDetailViewController.h"
 #import "ToolSingleTon.h"
@@ -378,9 +377,7 @@
 #pragma mark -去登录页面
 - (void)showLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 - (BOOL)checkUserCanInvestIsDetailType:(SelectAccoutType)accout;
 {

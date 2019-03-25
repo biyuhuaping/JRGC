@@ -10,6 +10,7 @@
 
 
 @interface UCFTipCell:UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *bkView;
 @property (weak, nonatomic) IBOutlet UILabel *lab_informationTXT;
 //@property (nonatomic, assign) RechargeTypeThreeVC *selfDB;
 - (void)showInfo:(id)model;

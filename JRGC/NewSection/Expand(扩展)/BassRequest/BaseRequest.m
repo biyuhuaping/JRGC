@@ -8,6 +8,7 @@
 
 #define REQUESTTIME 30
 #import "BaseRequest.h"
+#import "UCFRequestSucceedDetection.h"
 
 @implementation BaseRequest
 
@@ -45,34 +46,29 @@
  */
 - (void)requestCompleteFilter
 {
-    NSDictionary *responseObject = [self.responseObject copy];
-     NSString* codeStr =  [NSString stringWithFormat:@"%@",responseObject[@"code"]];
+    UCFRequestSucceedDetection *succeedDetection = [[UCFRequestSucceedDetection alloc] init];
+    [succeedDetection requestSucceedDetection:[self.responseObject copy]];
+}
 
+- (void)requestFailedPreprocessor
+{
+    //note：子类如需继承，必须必须调用 [super requestFailedPreprocessor];
+    [super requestFailedPreprocessor];
 
-    if ([codeStr isEqualToString:@"-5"])
+     ShowMessage(@"当前网络不可用,请稍后重试");
+    NSError * error = self.error;
+    if ([error.domain isEqualToString:AFURLResponseSerializationErrorDomain])
     {
-        //强制更新,去查询版本信息，获取强更的标题和内容
-//        [VersionCheek cheekVersion];
-        [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
+        //AFNetworking处理过的错误
 
-    }
-    if ([codeStr isEqualToString:@"-2"] || [codeStr isEqualToString:@"-3"] || [codeStr isEqualToString:@"-4"] || [codeStr isEqualToString:@"-6"] )
+    }else if ([error.domain isEqualToString:YTKRequestValidationErrorDomain])
     {
-        //账号被挤掉
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //猿题库处理过的错误
 
-            // dispatch_sync:表示执行同步任务
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SingleUserInfo deleteUserData];
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:responseObject[@"message"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新登录", nil];
-                alertView.tag = 0x100;
-                [alertView show];
-            });
-
-        });
-        return;
+    }else{
+        //系统级别的domain错误，无网络等[NSURLErrorDomain]
+        //根据error的code去定义显示的信息，保证显示的内容可以便捷的控制
     }
-
 }
 //
 //- (void)requestFailedFilter

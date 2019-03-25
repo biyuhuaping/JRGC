@@ -45,6 +45,8 @@ static NSString *IdnoCheckInfoApiURL = @"api/userInfo/v2/idnoCheckInfo.json";   
 
 static NSString *GetHSAccountInfoApiURL = @"api/homePage/v2/getHSAccountInfo.json";   //徽商银行存管账户信息查询
 
+static NSString *WJSetAndRestHsPwdApiURL = @"api/userAccount/v2/setAndRestHsPwd.json"; //微金修改交易密码
+
 static NSString *UserAccountInfoApiURL = @"api/userAccount/v2/userAccountInfo.json"; //P2P或尊享账户信息
 
 static NSString *GetHSAccountInfoBillApiURL = @"api/homePage/v2/getHSAccountInfoBill.json";  //徽商账户资金流水
@@ -65,4 +67,6 @@ static NSString *SetHsPwdReturnJsonApiURL = @"api/userAccount/v2/setHsPwdReturnJ
 static NSString *AccountBalancePageApiURL = @"/api/accountCenter/v2/accountBalancePage.json";//充值提现聚合页
 
 static NSString *AccountCashWithDrawalApiURL = @"api/withdraw/v2/getWithdrawInfo.json";
+
+static NSString *UserStatusInfoForCacheApiURL = @"/api/homePage/v2/statusInfoForCache.json";//查询当前用户状态信息
 #endif /* RequestConstant_h */

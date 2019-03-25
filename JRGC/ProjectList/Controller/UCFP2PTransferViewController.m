@@ -14,7 +14,6 @@
 #import "UCFProjectDetailViewController.h"
 #import "UCFPurchaseTranBidViewController.h"
 #import "UCFNoPermissionViewController.h"
-#import "UCFLoginViewController.h"
 //#import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
 #import "HSHelper.h"
@@ -149,9 +148,7 @@
 }
 - (void)showLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+   [SingleUserInfo loadLoginViewController];
 }
 -(void)reloadP2PTransferData{
     [self.tableview.header beginRefreshing];
@@ -295,9 +292,7 @@
         return;
     }
     if (!SingleUserInfo.loginData.userInfo.userId) {
-        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-        [self presentViewController:loginNaviController animated:YES completion:nil];
+        [SingleUserInfo loadLoginViewController];
     } else {
         HSHelper *helper = [HSHelper new];
         if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权

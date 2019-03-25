@@ -1,0 +1,118 @@
+//
+//  UCFRequestSucceedDetection.m
+//  JRGC
+//
+//  Created by kuangzhanzhidian on 2019/3/25.
+//  Copyright © 2019 JRGC. All rights reserved.
+//
+
+#import "UCFRequestSucceedDetection.h"
+#import "AppDelegate.h"
+@interface UCFRequestSucceedDetection()
+@property (nonatomic, assign) BOOL isShowAlert;
+
+@property (nonatomic, assign) BOOL isShowSingleAlert; //是否已经弹出单设备警告框
+
+@end
+@implementation UCFRequestSucceedDetection
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.isShowAlert = YES;
+        self.isShowSingleAlert = YES;
+    }
+    return self;
+}
+- (void)requestSucceedDetection:(NSDictionary *)succeedDetectionDic
+{
+    if (![succeedDetectionDic isKindOfClass:[NSDictionary class]] || succeedDetectionDic == nil) {
+        return;
+    }
+    NSDictionary *dic = [NSDictionary dictionaryWithDictionary:succeedDetectionDic];
+    NSInteger rstcode = [dic[@"code"] integerValue];
+    if (rstcode == -1) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
+    else if (rstcode == -2 || rstcode == -3 || rstcode == -4)
+    {
+        //清空数据
+        [SingleUserInfo deleteUserData];
+        if (self.isShowSingleAlert) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新登录", nil];
+            alertView.tag = 0x100;
+            [alertView show];
+        }
+        self.isShowSingleAlert = NO;
+    } else if (rstcode == -5) {
+        //强制更新
+        if (self.isShowAlert) {
+            self.isShowAlert = NO;
+            [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
+        }
+        else return;
+    } else if (rstcode == -6) {
+        //清空数据
+        [SingleUserInfo deleteUserData];
+        if (self.isShowSingleAlert) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"联系客服" otherButtonTitles:@"重新登录", nil];
+            alertView.tag = 0x101;
+            [alertView show];
+        }
+        self.isShowSingleAlert = NO;
+    }
+}
+
+// 提示框的代理方法
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 0x100) {
+        if(buttonIndex == 0){//取消
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+            UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+            [nav popToRootViewControllerAnimated:NO];
+            [appDelegate.tabBarController setSelectedIndex:0];
+        } else {//重新登录
+            [SingleUserInfo loadLoginViewController];
+        }
+        self.isShowSingleAlert = YES;
+    } else if (alertView.tag == 0x101) {
+        if (buttonIndex == 0) {
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            AppDelegate *app = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            NSUInteger selectedIndex = app.tabBarController.selectedIndex;
+            UINavigationController *nav = [app.tabBarController.viewControllers objectAtIndex:selectedIndex];
+            if (app.tabBarController.presentedViewController)
+            {
+                NSString *className =  [NSString stringWithUTF8String:object_getClassName(app.tabBarController.presentedViewController)];
+                if ([className hasSuffix:@"UINavigationController"]) {
+                    [app.tabBarController dismissViewControllerAnimated:NO completion:^{
+                        [nav popToRootViewControllerAnimated:NO];
+                        [app.tabBarController setSelectedIndex:0];
+                    }];
+                }
+            }
+            else
+            {
+                [nav popToRootViewControllerAnimated:NO];
+                [app.tabBarController setSelectedIndex:0];
+            }
+        }
+        else {
+            [SingleUserInfo loadLoginViewController];
+        }
+        self.isShowSingleAlert = YES;
+    } else {
+        // 升级新版本 退出应用
+        NSURL *url = [NSURL URLWithString:APP_RATING_URL];
+        [[UIApplication sharedApplication] openURL:url];
+        AppDelegate *dele = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [dele exitApplication];
+    }
+}
+@end

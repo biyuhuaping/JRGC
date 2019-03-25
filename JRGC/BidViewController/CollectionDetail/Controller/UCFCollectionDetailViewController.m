@@ -27,7 +27,6 @@
 #import "UCFProjectDetailViewController.h"
 #import "UCFNoDataView.h"
 #import "UCFCollctionKeyBidViewController.h"
-#import "UCFLoginViewController.h"
 #import "UCFBatchBidWebViewController.h"
 #import "RiskAssessmentViewController.h"
 #import "HSHelper.h"
@@ -680,9 +679,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 }
 - (void)showLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 -(void)beginPost:(kSXTag)tag{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];

@@ -14,7 +14,6 @@
 #import "UCFBatchBidModel.h"
 #import "UCFOldUserGuideViewController.h"
 #import "UCFBankDepositoryAccountViewController.h"
-#import "UCFLoginViewController.h"
 #import "HSHelper.h"
 @interface UCFBatchBidController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
 {
@@ -265,9 +264,7 @@
 }
 - (void)showLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+   [SingleUserInfo loadLoginViewController];
 }
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {

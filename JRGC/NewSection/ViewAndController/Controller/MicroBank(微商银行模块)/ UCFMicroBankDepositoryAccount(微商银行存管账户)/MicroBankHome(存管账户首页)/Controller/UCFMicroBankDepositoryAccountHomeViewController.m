@@ -14,13 +14,16 @@
 #import "UCFMicroBankDepositoryAccountSeriaViewController.h"
 #import "RiskAssessmentViewController.h"
 #import "UCFMicroBankDepositoryChangeBankCardViewController.h"
+#import "AccountWebView.h"
+#import "UCFMicroBankOpenAccountTradersPasswordViewController.h"
+#import "UCFBankCardInfoViewController.h"
 
 #import "UCFMicroBankUserAccountInfoAPI.h"
 #import "UCFMicroBankGetHSAccountInfoAPI.h"
 #import "UCFMicroBankUserAccountInfoModel.h"
 #import "UCFMicroBankGetHSAccountInfoModel.h"
-
-
+#import "UCFWJSetAndRestHsPwdApi.h"
+#import "UCFWJSetAndRestHsPwdModel.h"
 
 @interface UCFMicroBankDepositoryAccountHomeViewController ()<UIScrollViewDelegate>
 
@@ -300,11 +303,48 @@
         [self.rt_navigationController pushViewController:vc animated:YES];
     }else if (sender.view.tag == 1002){
 //        修改银行卡
-        UCFMicroBankDepositoryChangeBankCardViewController *vc = [[UCFMicroBankDepositoryChangeBankCardViewController alloc] init];
-        [self.rt_navigationController pushViewController:vc animated:YES];
+//        UCFMicroBankDepositoryChangeBankCardViewController *vc = [[UCFMicroBankDepositoryChangeBankCardViewController alloc] init];
+//        [self.rt_navigationController pushViewController:vc animated:YES];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
+        UCFBankCardInfoViewController *bankCardInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"bankcardinfo"];
+        bankCardInfoVC.accoutType = self.accoutType;
+        [self.rt_navigationController pushViewController:bankCardInfoVC animated:YES];
     }
     else if (sender.view.tag == 1003){
 //        修改交易密码
+        if (self.accoutType != SelectAccoutTypeP2P) {
+
+            UCFWJSetAndRestHsPwdApi * request = [[UCFWJSetAndRestHsPwdApi alloc] init];
+            request.animatingView = self.view;
+            //    request.tag =tag;
+            [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+                // 你可以直接在这里使用 self
+                UCFWJSetAndRestHsPwdModel *model = [request.responseJSONModel copy];
+                DDLogDebug(@"---------%@",model);
+                if (model.ret == YES) {
+                    
+                    AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
+                    webView.title = @"即将跳转";
+                    webView.url =model.data.url;
+                    NSDictionary *dic = request.responseObject;
+                    webView.webDataDic = dic[@"data"][@"tradeReq"];
+                    [self.navigationController pushViewController:webView animated:YES];
+                }
+                else{
+                    ShowMessage(model.message);
+                }
+            } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+                // 你可以直接在这里使用 self
+                
+            }];
+//            
+        } else {
+            //修改交易密码
+            UCFMicroBankOpenAccountTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankOpenAccountTradersPasswordViewController alloc] init];
+            tradePasswordVC.accoutType = self.accoutType;
+            tradePasswordVC.updatePassWorld = YES;
+            [self.rt_navigationController pushViewController:tradePasswordVC  animated:YES];
+        }
     }
     else if (sender.view.tag == 1004){
 //        微金风险承担能力

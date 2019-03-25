@@ -11,19 +11,29 @@
 #import "UCFMicroBankOpenAccountDepositViewController.h"
 #import "UCFMicroBankOpenAccountTradersPasswordViewController.h"
 #import "UCFMicroBankOpenAccountDepositWhiteListViewController.h"
+#import "UCFMicroBankNewOpenAccountDepositViewController.h"
+#import "UCFCompanyNoOpenViewController.h"
+#import "HSHelper.h"
+
+#define HEADVIEWHEIGHT 60
+
 @interface UCFMicroBankOpenAccountViewController ()
 
 @property (nonatomic, strong) UCFMicroBankOpenAccountOptionView *optionView;
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
-//@property (nonatomic, strong) UCFMicroBankOpenAccountDepositViewController *depositView; //开户界面
+@property (nonatomic, strong) UCFMicroBankOpenAccountDepositViewController *depositView; //微金老开户界面
 
-@property (nonatomic, strong) UCFMicroBankOpenAccountDepositWhiteListViewController *depositView; //开户界面
+@property (nonatomic, strong) UCFMicroBankNewOpenAccountDepositViewController *theNewDepositView; //微金新开户界面
+
+@property (nonatomic, strong) UCFMicroBankOpenAccountDepositWhiteListViewController *theWhiteListDepositView; //白名单开户界面
 
 @property (nonatomic, strong) UCFMicroBankOpenAccountTradersPasswordViewController *tradersPasswordView;//交易密码界面
 
 @property (strong, nonatomic) UIViewController *currentVC;
+
+@property (nonatomic, assign) CGFloat viewHeight;
 
 @property (nonatomic, assign) OpenAccoutStep accoutStep;//当前页面类型
 
@@ -40,65 +50,180 @@
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     
-    self.accoutStep = OpenAccoutPassWord;
-    
-    
-    
-    [self.rootLayout addSubview:self.optionView];
+    self.viewHeight = PGStatusBarHeight + self.navigationController.navigationBar.frame.size.height + HEADVIEWHEIGHT;
+//    self.accoutStep = OpenAccoutPassWord;
     [self addLeftButton];
     
-    CGFloat viewHeight = PGStatusBarHeight + self.navigationController.navigationBar.frame.size.height+60;
-    
-    self.depositView = [[UCFMicroBankOpenAccountDepositWhiteListViewController alloc] init];//返现券
-    self.depositView.view.frame = CGRectMake(0, viewHeight, PGScreenWidth, PGScreenHeight - viewHeight);
-    self.depositView.view.topPos.equalTo(self.optionView.bottomPos);
-    self.depositView.view.myLeft = 0;
-//    self.ctController.db = self;
-    [self addChildViewController:self.depositView];
-    
-    
-    self.tradersPasswordView = [[UCFMicroBankOpenAccountTradersPasswordViewController alloc] init];//返现券
-    self.tradersPasswordView.view.frame = CGRectMake(0, viewHeight,PGScreenWidth, PGScreenHeight - viewHeight);
-    self.tradersPasswordView.view.topPos.equalTo(self.optionView.bottomPos);
-    self.tradersPasswordView.view.myLeft = 0;
-    [self addChildViewController:self.tradersPasswordView];
-    
-    
-    
-//    [self changeControllerFromOldController:self.currentVC toNewController:self.tradersPasswordView];
-    
-    [self transitionToViewController:self.accoutStep];
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        baseTitleLabel.text = @"开通微金徽商存管账户";
+    } else {
+        baseTitleLabel.text = @"开通尊享徽商存管账户";
+    }
+
+    SingleUserInfo.requestUserbackBlock = ^(BOOL requestFinsh)
+    {
+        if (requestFinsh) {
+            //请求成功并刷新完数据
+            
+            if (SingleUserInfo.loginData.userInfo.isCompanyAgent)
+            {
+//                UCFCompanyNoOpenViewController * fullVC =[[UCFCompanyNoOpenViewController alloc]initWithNibName:@"UCFCompanyNoOpenViewController" bundle:nil];
+//                fullVC.baseTitleText = @"提示";
+//                if (kIS_IOS8) {
+//                    fullVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//                }
+//
+//                [self presentViewController:fullVC animated:NO completion:^{
+//                }];
+                HSHelper *helper = [HSHelper new];
+                BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:[helper checkCompanyIsOpen:SelectAccoutTypeP2P] cancelButtonTitle:nil clickButton:^(NSInteger index){
+                    [self.rt_navigationController popViewControllerAnimated:YES];
+                } otherButtonTitles:@"确认"];
+                [alert show];
+                return ;
+            }
+            
+            
+//            用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码
+            NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue]; //微金开户状态
+//            OpenAccoutMicroBank = 1, //存管开户
+//            OpenAccoutPassWord , //选择交易密码
+                //微金用户
+//                openStatus = 2;
+                [self.rootLayout addSubview:self.optionView];
+                if (openStatus >= 3)
+                {
+                    self.openAccountSucceed = YES;
+                }
+                
+                if (openStatus == 1)
+                {
+                    //微金未开户,走新的开户页面(开户+设置交易密码)
+                    self.optionView.myVisibility = MyVisibility_Gone;
+                    
+                    [self addChildViewController:self.theNewDepositView];
+                    self.currentVC = self.theNewDepositView;
+                    [self.rootLayout addSubview:self.theNewDepositView.view];
+                }
+                else if (openStatus == 2)
+                {
+                    //白名单用户.开户未绑卡
+                    [self addChildViewController:self.theWhiteListDepositView];
+                    [self addChildViewController:self.tradersPasswordView];
+                    [self.rootLayout addSubview:self.theWhiteListDepositView.view];
+                    self.currentVC = self.theWhiteListDepositView;
+                }
+                else if (openStatus == 3)
+                {
+                    //开户完成,未设置交易密码.走老的设置交易密码页面
+                    [self addChildViewController:self.depositView];
+                    [self addChildViewController:self.tradersPasswordView];
+                    [self.rootLayout addSubview:self.tradersPasswordView.view];
+                    self.currentVC = self.tradersPasswordView;
+                }
+        }
+        else
+        {
+            //请求失败
+            [self.rt_navigationController popViewControllerAnimated:YES];
+        }
+    };
+    [SingleUserInfo requestUserAllStatueWithView:self.view];
+}
+- (void)getToBack
+{
+    if (self.openAccountSucceed) {
+        //开户成功了,给提示去设置交易密码
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"未开通微金徽商存管不能 投标、提现、充值" cancelButtonTitle:@"我不要了" clickButton:^(NSInteger index){
+            if (index == 1) {
+                [self.rt_navigationController popViewControllerAnimated:YES];
+            }
+        } otherButtonTitles:@"继续开户"];
+        [alert show];
+    }
+    else{
+        //提示去开户
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"未设置微金交易密码不能 投标、提现、充值" cancelButtonTitle:@"我不要了" clickButton:^(NSInteger index){
+            if (index == 1) {
+                [self.rt_navigationController popViewControllerAnimated:YES];
+            }
+        } otherButtonTitles:@"继续设置"];
+        [alert show];
+    }
+}
+- (UCFMicroBankOpenAccountDepositViewController *)depositView
+{
+    if (nil == _depositView) {
+        _depositView = [[UCFMicroBankOpenAccountDepositViewController alloc] init];
+        _depositView.view.frame = CGRectMake(0, self.viewHeight, PGScreenWidth, PGScreenHeight - self.viewHeight);
+        _depositView.view.topPos.equalTo(self.optionView.bottomPos);
+        _depositView.view.myLeft = 0;
+    }
+    return _depositView;
+}
+
+- (UCFMicroBankNewOpenAccountDepositViewController *)theNewDepositView
+{
+    if (nil == _theNewDepositView) {
+        _theNewDepositView = [[UCFMicroBankNewOpenAccountDepositViewController alloc] init];
+        _theNewDepositView.view.frame = CGRectMake(0, 0, PGScreenWidth, PGScreenHeight - self.viewHeight + HEADVIEWHEIGHT);
+        _theNewDepositView.view.topPos.equalTo(self.optionView.bottomPos);
+        _theNewDepositView.view.myLeft = 0;
+    }
+    return _theNewDepositView;
+}
+
+- (UCFMicroBankOpenAccountDepositWhiteListViewController *)theWhiteListDepositView
+{
+    if (nil == _theWhiteListDepositView) {
+        _theWhiteListDepositView = [[UCFMicroBankOpenAccountDepositWhiteListViewController alloc] init];
+        _theWhiteListDepositView.view.frame = CGRectMake(0, self.viewHeight, PGScreenWidth, PGScreenHeight - self.viewHeight);
+        _theWhiteListDepositView.view.topPos.equalTo(self.optionView.bottomPos);
+        _theWhiteListDepositView.view.myLeft = 0;
+    }
+    return _theWhiteListDepositView;
+}
+
+- (UCFMicroBankOpenAccountTradersPasswordViewController *)tradersPasswordView
+{
+    if (nil == _tradersPasswordView) {
+        _tradersPasswordView = [[UCFMicroBankOpenAccountTradersPasswordViewController alloc] init];
+        _tradersPasswordView.view.frame = CGRectMake(0, self.viewHeight, PGScreenWidth, PGScreenHeight - self.viewHeight);
+        _tradersPasswordView.view.topPos.equalTo(self.optionView.bottomPos);
+        _tradersPasswordView.view.myLeft = 0;
+    }
+    return _tradersPasswordView;
 }
 
 - (UCFMicroBankOpenAccountOptionView *)optionView
 {
     if (nil == _optionView) {
-        _optionView = [[UCFMicroBankOpenAccountOptionView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 60)];
+        _optionView = [[UCFMicroBankOpenAccountOptionView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, HEADVIEWHEIGHT)];
         [_optionView selectStep:self.accoutStep];//OpenAccoutMicroBank
     }
     return _optionView;
 }
 
-#pragma mark - 加载页面的类型
-- (void)transitionToViewController:(OpenAccoutStep )step
-{
-    switch (step) {
-        case OpenAccoutMicroBank:
-        {
-            [self.view addSubview:self.depositView.view];
-            self.currentVC = self.depositView;
-        }
-            break;
-        case OpenAccoutPassWord:
-        {
-            [self.view addSubview:self.tradersPasswordView.view];
-            self.currentVC = self.tradersPasswordView;
-        }
-            break;
-        default:
-            break;
-    }
-}
+//#pragma mark - 加载页面的类型
+//- (void)transitionToViewController:(OpenAccoutStep )step
+//{
+//    switch (step) {
+//        case OpenAccoutMicroBank:
+//        {
+//            [self.view addSubview:self.depositView.view];
+//            self.currentVC = self.depositView;
+//        }
+//            break;
+//        case OpenAccoutPassWord:
+//        {
+//            [self.view addSubview:self.tradersPasswordView.view];
+//            self.currentVC = self.tradersPasswordView;
+//        }
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 #pragma mark - 切换页面
 - (void)changeControllerFromOldController:(UIViewController *)oldController toNewController:(UIViewController *)newController

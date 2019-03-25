@@ -14,6 +14,7 @@
 #import "UCFPageControlTool.h"
 #import "UCFRechargeAndWithdrawalDetailsViewController.h"
 
+#import "UCFUserAllStatueRequest.h"
 @interface UCFRechargeAndWithdrawalViewController ()
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -41,7 +42,7 @@
     self.view = self.rootLayout;
     [self addLeftButton];
     baseTitleLabel.text = @"我的余额";
-    
+
     [self requetAccount];
 }
 

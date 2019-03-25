@@ -23,7 +23,6 @@
 #import "HSHelper.h"
 #import "UCFToolsMehod.h"
 #import "UCFNoPermissionViewController.h"
-#import "UCFLoginViewController.h"
 #import "UCFProjectDetailViewController.h"
 #import "UCFPurchaseBidViewController.h"
 #import "RiskAssessmentViewController.h"
@@ -195,10 +194,7 @@
     else if ([homeListHeader.headerTitleLabel.text isEqualToString:@"预约宝"]) {
         NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if (nil == userId) {
-            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-            UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-            [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+            [SingleUserInfo loadLoginViewController];
             return;
         }
         self.accoutType = SelectAccoutTypeP2P;
@@ -483,10 +479,7 @@
 #pragma mark -去登录页面
 - (void)showLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 #pragma mark -开户判断
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;

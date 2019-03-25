@@ -181,7 +181,7 @@
 {
     [super layoutSubviews];
     if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
-        //用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+        //用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
         switch ([SingleUserInfo.loginData.userInfo.openStatus integerValue]) {
             case 1:
                 self.leftTopbutton.enabled = NO;

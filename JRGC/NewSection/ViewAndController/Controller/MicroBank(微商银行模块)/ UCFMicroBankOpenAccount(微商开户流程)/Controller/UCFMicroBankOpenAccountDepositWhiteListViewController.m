@@ -87,7 +87,7 @@
     [self.scrollLayout addSubview:self.smsLabel];
     
     [self queryUserData];
-    //    用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+    //    用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
     //    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 1) {
     //        //正常的新用户
     //        self.enterButton.topPos.equalTo(self.selectBankView.bottomPos).offset(20);
@@ -155,7 +155,13 @@
         _idView.myLeft = 0;
         _idView.titleImageView.image = [UIImage imageNamed:@"list_icon_id"];
         _idView.contentField.delegate = self;
-        _idView.contentField.placeholder = @"请输入身份证号";
+        if (SingleUserInfo.loginData.userInfo.isSpecial) {
+            _idView.contentField.placeholder = @"请输入证件号码";
+        }
+        else
+        {
+            _idView.contentField.placeholder = @"请输入身份证号";
+        }
         _idView.contentField.enabled = NO;
         [_idView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
@@ -388,7 +394,13 @@
         [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
         return;
     }else if (textField == self.idView.contentField && ![self inspectIdViewInPut]){
-        [AuxiliaryFunc showToastMessage:@"请输入正确的身份证号码" withView:self.view];
+        if (SingleUserInfo.loginData.userInfo.isSpecial) {
+            [AuxiliaryFunc showToastMessage:@"请输入正确的证件号码" withView:self.view];
+        }
+        else
+        {
+            [AuxiliaryFunc showToastMessage:@"请输入正确的证件号码" withView:self.view];
+        }
         return;
     }
     else if (textField == self.bankNumView.contentField && ![self inspectBankNumView]){
@@ -496,7 +508,7 @@
             //            _nameView.contentField.enabled=NO;
             if (self.GetOpenAccountModel.data.userInfo.realName.length > 0)
             {
-                //                用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+                //                用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
                 self.nameView.contentField.text = self.GetOpenAccountModel.data.userInfo.realName;
                 SingleUserInfo.loginData.userInfo.realName = self.GetOpenAccountModel.data.userInfo.realName;
             }
