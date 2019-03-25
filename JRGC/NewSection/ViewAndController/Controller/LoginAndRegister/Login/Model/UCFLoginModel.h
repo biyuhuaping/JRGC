@@ -37,8 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFLoginUserinfo : BaseModel
 
-//@property(nonatomic, assign) NSInteger  openStatus;//用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
-@property (nonatomic, copy) NSString *openStatus;//用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+//@property(nonatomic, assign) NSInteger  openStatus;//用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
+@property (nonatomic, copy) NSString *openStatus;//用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
 
 @property (nonatomic, assign) BOOL isCompanyAgent;//是否是机构
 

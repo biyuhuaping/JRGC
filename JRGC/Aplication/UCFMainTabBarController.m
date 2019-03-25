@@ -7,7 +7,6 @@
 //
 
 #import "UCFMainTabBarController.h"
-#import "UCFLoginViewController.h"
 #import "UCFHomeViewController.h"
 #import "UCFMoreViewController.h"
 #import "AppDelegate.h"
@@ -262,13 +261,7 @@
     if ([self.viewControllers indexOfObject:viewController] == 3) {
         NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if(nil == userId) {
-            
-
-            
-            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-            loginViewController.sourceVC = @"homePage";
-            [self presentViewController:loginNaviController animated:YES completion:nil];
+            [SingleUserInfo loadLoginViewController];
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
         } else {
@@ -329,18 +322,13 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
-        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-        BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-        [self presentViewController:loginNaviController animated:YES completion:nil];
+       [SingleUserInfo loadLoginViewController];
     }
 }
 
 -(void)checkLogin
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    loginViewController.sourceVC = @"fromPersonCenter";
-    BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 
 - (void)choiceConWithIndex:(int)index webview:(UIWebView*)webview

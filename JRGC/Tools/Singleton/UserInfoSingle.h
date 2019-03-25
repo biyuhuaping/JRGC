@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UCFLoginModel.h"
-
+typedef void(^requestUserAllStatueCallBackBlock)(BOOL);
 @interface UserInfoSingle : NSObject <NetworkModuleDelegate>
 
 
@@ -33,6 +33,8 @@
 
 @property(nonatomic, assign) NSInteger wrangGCodeNumber;  //输错手势密码的次数;
 
+
+@property (nonatomic,strong) requestUserAllStatueCallBackBlock requestUserbackBlock;
 ////用户id
 //@property(nonatomic, copy) NSString *userId;
 ////用户性别
@@ -43,7 +45,7 @@
 //@property(nonatomic, copy) NSString *loginName;
 ////用户手机
 //@property(nonatomic, copy) NSString *mobile;
-////用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+////用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
 //@property(nonatomic, assign) NSInteger openStatus;
 ////尊享账号开户状态啊
 //@property(nonatomic, assign) NSInteger enjoyOpenStatus;
@@ -93,7 +95,7 @@
 #warning check userinfo on supervise
 - (void)checkUserLevelOnSupervise;
 
-
+- (void)requestUserAllStatueWithView:(UIView *)view;
 //获取用户信息单利对象
 + (UserInfoSingle *)sharedManager;
 #pragma mark - 同盾

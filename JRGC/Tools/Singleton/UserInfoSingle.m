@@ -16,6 +16,8 @@
 #import "FMDeviceManager.h"
 #import "MD5Util.h"
 #import "UCFNewLoginViewController.h"
+#import "UCFUserAllStatueRequest.h"
+
 @implementation UserInfoSingle
 
 + (UserInfoSingle *)sharedManager
@@ -102,7 +104,17 @@
 - (NSString *)getlastLoginName
 {
     NSDictionary *dic = [self getLoginAccount];
-    return [dic objectForKey:@"lastLoginName"];
+    if ([dic isKindOfClass:[NSDictionary class]]) {
+        return [dic objectForKey:@"lastLoginName"];
+    }
+    else if ([dic isKindOfClass:[NSString class]]){
+        return dic;
+    }
+    else
+    {
+        return @"";
+    }
+    
 }
 
 #pragma mark - 同盾
@@ -122,7 +134,7 @@
 - (void)deleteUserData{
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LOGINDATA];
     self.signatureStr = @"";
-    self.loginData.userInfo = [UCFLoginData new];
+    self.loginData = [UCFLoginData new];
 }
 
 
@@ -146,6 +158,39 @@
 }
 
 
+- (void)requestUserAllStatueWithView:(UIView *)view
+{
+    if (self.loginData.userInfo.userId.length > 0) {
+        UCFUserAllStatueRequest *request1 = [[UCFUserAllStatueRequest alloc] initWithUserId:SingleUserInfo.loginData.userInfo.userId];
+        request1.animatingView = view;
+        [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+            NSDictionary *dic = request.responseObject;
+            if ([dic[@"ret"] boolValue]) {
+                NSDictionary *userDict = dic[@"data"][@"userSatus"];
+                self.loginData.userInfo.zxOpenStatus = [NSString stringWithFormat:@"%@",userDict[@"zxOpenStatus"]];
+                self.loginData.userInfo.openStatus = [NSString stringWithFormat:@"%@",userDict[@"openStatus"]];
+                self.loginData.userInfo.nmAuthorization = [userDict[@"nmGoldAuthStatus"] boolValue];
+                self.loginData.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
+                self.loginData.userInfo.isRisk = [userDict[@"isRisk"] boolValue];
+                self.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
+                self.loginData.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
+                self.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
+                [self setUserData:self.loginData];
+                
+                self.requestUserbackBlock(YES);
+            }
+            else
+            {
+                ShowMessage(dic[@"message"]);
+                self.requestUserbackBlock(NO);
+            }
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            
+            self.requestUserbackBlock(NO);
+        }];
+        [request1 start];
+    }
+}
 
 
 

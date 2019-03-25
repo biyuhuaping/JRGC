@@ -7,7 +7,6 @@
 //
 
 #import "UCFWebViewJavascriptBridgeLevel.h"
-#import "UCFLoginViewController.h"
 @interface UCFWebViewJavascriptBridgeLevel ()
 
 @end
@@ -34,10 +33,7 @@
 - (void)jsLogin:(NSDictionary *)dic
 {
     //没有登录去调登录
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    loginViewController.sourceVC = @"bannerLongin";
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 /*
 #pragma mark - Navigation

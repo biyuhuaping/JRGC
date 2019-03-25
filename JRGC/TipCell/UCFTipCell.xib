@@ -25,43 +25,54 @@
                             <constraint firstAttribute="height" constant="0.5" id="GIv-F0-2c8"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homepage_message_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="WtJ-eM-iIB" userLabel="Image ViewGo">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right_white" translatesAutoresizingMaskIntoConstraints="NO" id="WtJ-eM-iIB" userLabel="Image ViewGo">
                         <rect key="frame" x="297" y="10" width="10" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="VQ3-Z1-rwr"/>
                             <constraint firstAttribute="height" constant="15" id="gH2-KZ-vrY"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UeG-cm-7Z8">
-                        <rect key="frame" x="14" y="7" width="296" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1111111111" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UeG-cm-7Z8">
+                        <rect key="frame" x="55" y="7" width="255" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="uEL-Un-hIX"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.41960784313725491" green="0.27058823529411763" blue="0.031372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_prompt_white" translatesAutoresizingMaskIntoConstraints="NO" id="UcB-to-nbI" userLabel="Imageleft">
+                        <rect key="frame" x="25" y="7.5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="JDR-FC-Nmp"/>
+                            <constraint firstAttribute="width" constant="20" id="Z1m-RT-a4H"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
-                <color key="backgroundColor" red="1" green="0.96470588235294119" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="UeG-cm-7Z8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="1ff-H4-Aqh"/>
                     <constraint firstItem="UeG-cm-7Z8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="N64-gh-e4d"/>
                     <constraint firstItem="y74-NP-76K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="a6N-DR-UEH"/>
+                    <constraint firstItem="UcB-to-nbI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="abG-fy-XEL"/>
                     <constraint firstAttribute="trailing" secondItem="y74-NP-76K" secondAttribute="trailing" id="dca-fS-yl9"/>
                     <constraint firstAttribute="trailing" secondItem="WtJ-eM-iIB" secondAttribute="trailing" constant="13" id="fuS-uL-ABY"/>
                     <constraint firstAttribute="bottom" secondItem="y74-NP-76K" secondAttribute="bottom" id="hJ3-fE-ND0"/>
+                    <constraint firstItem="UcB-to-nbI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kIo-AW-gFI"/>
                     <constraint firstAttribute="trailing" secondItem="UeG-cm-7Z8" secondAttribute="trailing" constant="10" id="nin-zY-KjQ"/>
+                    <constraint firstItem="UeG-cm-7Z8" firstAttribute="leading" secondItem="UcB-to-nbI" secondAttribute="trailing" constant="10" id="qBZ-0m-s75"/>
                     <constraint firstItem="WtJ-eM-iIB" firstAttribute="centerY" secondItem="UeG-cm-7Z8" secondAttribute="centerY" id="rLM-lk-Ucl"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="bkView" destination="H2p-sc-9uM" id="41h-5j-BXo"/>
                 <outlet property="lab_informationTXT" destination="UeG-cm-7Z8" id="STA-cj-8lc"/>
             </connections>
             <point key="canvasLocation" x="340" y="362.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="homepage_message_arrow" width="7" height="12"/>
+        <image name="arrow_right_white" width="7" height="12"/>
+        <image name="icon_prompt_white" width="19.5" height="19.5"/>
     </resources>
 </document>

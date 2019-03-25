@@ -1,6 +1,6 @@
 //----qinyangye--修改绑定银行卡
 #import "UCFBankCardInfoViewController.h"
-#import "UCFBankCard.h"
+#import "UCFNewBankCardView.h"
 #import "UCFToolsMehod.h"
 #import "OHAttributedLabel.h"
 //#import "UCFMoreCell.h"
@@ -16,6 +16,11 @@
 #import "alertViewCS.h"
 #import "TradePasswordVC.h"
 #import "BlockUIAlertView.h"
+#import "UCFMicroBankOpenAccountTradersPasswordViewController.h"
+#import "UCFWJSetAndRestHsPwdApi.h"
+#import "UCFWJSetAndRestHsPwdModel.h"
+#import "AccountWebView.h"
+#import "UCFMicroBankDepositoryChangeBankCardViewController.h"
 @interface UCFBankCardInfoViewController ()<UITableViewDataSource, UITableViewDelegate,MjAlertViewDelegate,UCFChoseBankViewControllerDelegate>
 {
     int sectionNumberInTableview;//***本页中有几个section
@@ -52,6 +57,8 @@
 @property (nonatomic, assign) NSInteger openStatus;
 
 @property (nonatomic, strong) NSMutableArray *itemsData;
+
+@property (nonatomic, copy) NSString *bankCardStatus;//银行卡是否失效
 @end
 
 @implementation UCFBankCardInfoViewController
@@ -123,22 +130,23 @@
     if(section==([self.itemsData count]-1))
     {
 //        CGSize markContentSize = [self sizeWithText:@"如果您绑定的银行卡暂不支持手机一键支付请联系客服400-0322-988" font:[UIFont systemFontOfSize:13] maxSize:CGSizeMake(ScreenWidth - 30, MAXFLOAT)];
-        CGSize markContentSize = CGSizeMake(0, 0);
-        NSString *machineType = [Common machineName];
-        if ([machineType isEqualToString:@"4"] || [machineType isEqualToString:@"5"]) {
-           
-            return 202 + markContentSize.height +10;
-        }
-        else if ([machineType isEqualToString:@"6"]) {
-          
-            return 215 + markContentSize.height + 20;
-        }
-        else if ([machineType isEqualToString:@"6Plus"]) {
-            return 231 + markContentSize.height;
-        } else {
-            return 231 + markContentSize.height;
-        }
-        return 0;
+//        CGSize markContentSize = CGSizeMake(0, 0);
+//        NSString *machineType = [Common machineName];
+//        if ([machineType isEqualToString:@"4"] || [machineType isEqualToString:@"5"]) {
+//
+//            return 202 + markContentSize.height +10;
+//        }
+//        else if ([machineType isEqualToString:@"6"]) {
+//
+//            return 215 + markContentSize.height + 20;
+//        }
+//        else if ([machineType isEqualToString:@"6Plus"]) {
+//            return 231 + markContentSize.height;
+//        } else {
+//            return 231 + markContentSize.height;
+//        }
+//        return 0;
+        return PGScreenWidth *0.83;
     }
     return 0.01;
 }
@@ -164,7 +172,7 @@
         }
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, height)];
         
-        UCFBankCard *bankCard = [[UCFBankCard alloc] initWithFrame:CGRectMake(15, 15, ScreenWidth-30, CGRectGetHeight(view.frame) - 26 - markContentSize.height - 25)];//***银行卡view
+        UCFNewBankCardView *bankCard = [[UCFNewBankCardView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, PGScreenWidth *0.83)];//***银行卡view
         
 //        OHAttributedLabel *label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(bankCard.frame), ScreenWidth - 30, height - CGRectGetMaxY(bankCard.frame))];
         float heightFanal = 0;
@@ -195,7 +203,7 @@
         if (self.bankCardImageViewUrl != nil) {
             [bankCard.bankCardImageView sd_setImageWithURL:[NSURL URLWithString:self.bankCardImageViewUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
                 
-                if(self.openStatus == 1||self.openStatus == 2||_openStatus==5)
+                if([self.bankCardStatus isEqualToString:@"0"])
                 {
                 [bankCard thisBankCardInvaluable:YES];//***???银行卡view 至灰
                 }
@@ -205,12 +213,15 @@
         
         if (self.bankName) {
             bankCard.bankNameLabel.text = self.bankName;
+            [bankCard.bankNameLabel sizeToFit];
         }
         if (self.userName) {
             bankCard.userNameLabel.text = self.userName;
+            [bankCard.userNameLabel sizeToFit];
         }
         if (self.bankCardNo) {
             bankCard.cardNoLabel.text = self.bankCardNo;
+            [bankCard.cardNoLabel sizeToFit];
         }
         bankCard.quickPayImageView.hidden = !self.quickPaySign;
         return view;
@@ -349,9 +360,40 @@
                 break;
             case 3://已绑卡-->>>去设置交易密码页面
             {
-                TradePasswordVC *vc = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
-                vc.title = @"设置交易密码";
-                [self.navigationController pushViewController:vc animated:YES];
+//                TradePasswordVC *vc = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
+//                vc.title = @"设置交易密码";
+//                [self.navigationController pushViewController:vc animated:YES];
+                if (self.accoutType == SelectAccoutTypeP2P) {
+                    UCFWJSetAndRestHsPwdApi * request = [[UCFWJSetAndRestHsPwdApi alloc] init];
+                    request.animatingView = self.view;
+                    //    request.tag =tag;
+                    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+                        // 你可以直接在这里使用 self
+                        UCFWJSetAndRestHsPwdModel *model = [request.responseJSONModel copy];
+                        DDLogDebug(@"---------%@",model);
+                        if (model.ret == YES) {
+                            
+                            AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
+                            webView.title = @"即将跳转";
+                            webView.url =model.data.url;
+                            NSDictionary *dic = request.responseObject;
+                            webView.webDataDic = dic[@"data"][@"tradeReq"];
+                            [self.navigationController pushViewController:webView animated:YES];
+                        }
+                        else{
+                            ShowMessage(model.message);
+                        }
+                    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+                        // 你可以直接在这里使用 self
+                        
+                    }];
+                }
+                else if (self.accoutType == SelectAccoutTypeHoner){
+                    UCFMicroBankOpenAccountTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankOpenAccountTradersPasswordViewController alloc] init];
+                    tradePasswordVC.accoutType = self.accoutType;
+                    tradePasswordVC.updatePassWorld = YES;
+                    [self.rt_navigationController pushViewController:tradePasswordVC  animated:YES];
+                }
             }
                 break;
         }
@@ -361,16 +403,19 @@
         UCFSettingItem  *item = [group.items objectAtIndex:indexPath.row];
         if([item.subtitle isEqualToString:@"申请修改"])//***申请修改绑定银行卡
         {
-           UpgradeAccountVC *ugVC = [[UpgradeAccountVC alloc]initWithNibName:@"UpgradeAccountVC" bundle:nil];
-            ugVC.isFromeBankCardInfo = YES;
-            ugVC.accoutType = self.accoutType;
-           [self.navigationController pushViewController:ugVC animated:YES];
+//           UpgradeAccountVC *ugVC = [[UpgradeAccountVC alloc]initWithNibName:@"UpgradeAccountVC" bundle:nil];
+//            ugVC.isFromeBankCardInfo = YES;
+//            ugVC.accoutType = self.accoutType;
+//           [self.navigationController pushViewController:ugVC animated:YES];
+            UCFMicroBankDepositoryChangeBankCardViewController *changeBank = [[UCFMicroBankDepositoryChangeBankCardViewController alloc] init];
+            changeBank.accoutType = self.accoutType;
+            [self.rt_navigationController pushViewController:changeBank animated:YES];
         }else if ([item.subtitle isEqualToString:@"请选择"]){//***选择更改支行信息
            UCFChoseBankViewController *choseBankVC = [[UCFChoseBankViewController alloc]initWithNibName:@"UCFChoseBankViewController" bundle:nil];
             choseBankVC.delegate = self;
             choseBankVC.bankName = self.bankName;
             choseBankVC.accoutType = self.accoutType;
-           [self.navigationController pushViewController:choseBankVC animated:YES];
+           [self.rt_navigationController pushViewController:choseBankVC animated:YES];
         }
       }
 }
@@ -421,7 +466,7 @@
         NSDictionary *dictotal = [data objectFromJSONString];
         NSString *rstcode = [dictotal objectSafeForKey:@"ret"];
         NSString *rsttext = [dictotal objectSafeForKey:@"message"];
-        
+        self.bankCardStatus =  dictotal[@"data"][@"bankInfoDetail"][@"bankCardStatus"];
         if ([rstcode intValue] == 1) {
             [self dataForDecode:dictotal];//***数据解析
             [self.tableview reloadData];//***刷新tableview数据

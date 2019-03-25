@@ -9,7 +9,6 @@
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UIDic+Safe.h"
-#import "UCFLoginViewController.h"
 #import "NSString+Misc.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 @interface UCFWebViewJavascriptBridgeMallDetails ()
@@ -116,10 +115,7 @@
 }
 - (void)jumpLogin
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    loginViewController.sourceVC = @"webViewLongin";
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 
 //-(void)webViewReload

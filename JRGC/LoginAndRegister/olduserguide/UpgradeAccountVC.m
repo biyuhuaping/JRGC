@@ -41,7 +41,7 @@
 @property BOOL isQuick;//银行是否支持快捷支付
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableViewHight;
 
-@property (strong, nonatomic) NSString *openStatus;//开户状态:1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+@property (strong, nonatomic) NSString *openStatus;//开户状态:1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
 @property (assign, nonatomic) BOOL isNotFirstCome;//不是第一次进入本页面
 
 @property (assign, nonatomic) BOOL isSendVoiceMessage;//是否发送语音验证码 默认为没有发送

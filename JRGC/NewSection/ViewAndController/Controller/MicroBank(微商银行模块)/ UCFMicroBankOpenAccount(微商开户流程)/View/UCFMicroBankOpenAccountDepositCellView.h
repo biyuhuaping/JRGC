@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UITextField     *contentField;//开户名
 
+@property (nonatomic, strong) UIView *itemLineView;//下划线
 @end
 
 NS_ASSUME_NONNULL_END

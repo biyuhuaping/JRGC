@@ -9,8 +9,6 @@
 #import "UCFMicroBankOpenAccountDepositCellView.h"
 @interface UCFMicroBankOpenAccountDepositCellView ()
 
-@property (nonatomic, strong) UIView *itemLineView;//下划线
-
 @end
 @implementation UCFMicroBankOpenAccountDepositCellView
 

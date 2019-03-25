@@ -8,7 +8,6 @@
 
 #import "UCFHomeViewController.h"
 #import "UCFCycleImageViewController.h"
-#import "UCFLoginViewController.h"
 #import "UCFSecurityCenterViewController.h"
 #import "UCFMessageCenterViewController.h"
 #import "UCFMyFacBeanViewController.h"
@@ -1040,9 +1039,7 @@
 }
 - (void)showLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 #pragma mark - 去批量投资集合详情
 -(void)gotoCollectionDetailViewContoller:(UCFHomeListCellModel *)model{
@@ -1075,9 +1072,7 @@
 
 - (void)homeListNavView:(UCFHomeListNavView *)navView didClicked:(UIButton *)loginAndRegister
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 
 - (void)homeListNavView:(UCFHomeListNavView *)navView didClickedGiftButton:(UIButton *)giftButton
@@ -1215,10 +1210,7 @@
         case 6: {
             NSString *userId = SingleUserInfo.loginData.userInfo.userId;
             if (nil == userId) {
-                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-                UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+                [SingleUserInfo loadLoginViewController];
                 return;
             }
             self.accoutType = SelectAccoutTypeP2P;

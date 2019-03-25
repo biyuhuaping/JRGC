@@ -7,7 +7,6 @@
 //
 
 #import "UCFLoginBaseView.h"
-#import "UCFLoginViewController.h"
 #import "AppDelegate.h"
 #import "UCFRegisterStepOneViewController.h"
 #import "UCFMoreViewController.h"
@@ -140,16 +139,7 @@
 }
 - (void)shouLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController] ;
-    
-    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    UINavigationController *nav = app.tabBarController.selectedViewController ;
-    if ([UserInfoSingle sharedManager].isSubmitTime) {
-         nav = (UINavigationController *)app.window.rootViewController;
-    }
-    
-    [nav presentViewController:loginNaviController animated:YES completion:nil];
+    [SingleUserInfo loadLoginViewController];
 }
 - (void)showMoreView
 {

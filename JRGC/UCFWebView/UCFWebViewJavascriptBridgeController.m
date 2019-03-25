@@ -14,7 +14,6 @@
 #import "UCFCouponViewController.h"
 #import "UCFFacCodeViewController.h"
 #import "UCFInvestmentDetailViewController.h"
-#import "UCFLoginViewController.h"
 #import "UCFMyFacBeanViewController.h"
 //#import "UCFRedEnvelopeViewController.h"
 #import "UCFRegisterStepOneViewController.h"
@@ -943,17 +942,7 @@
 }
 - (void)jumpLogin
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    loginViewController.sourceVC = @"webViewLongin";
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    if (self.presentingViewController) {
-//        [self dismissViewControllerAnimated:YES completion:nil];
-        [self presentViewController:loginNaviController animated:YES completion:nil];
-    } else {
-//        [self.navigationController popViewControllerAnimated:YES];
-        [appDelegate.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
-    }
+    [SingleUserInfo loadLoginViewController];
 }
 //跳转到App 原生界面 规则从哪来回哪去
 -(void)jsGotoAppBackNative{

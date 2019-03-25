@@ -31,7 +31,6 @@
 #import "UCFInvitationRebateViewController.h"
 
 
-#import "UCFLoginViewController.h"
 #import "BaseNavigationViewController.h"
 #import "UCFP2POrHonerAccoutViewController.h"
 #import "UCFMicroBankDepositoryAccountHomeViewController.h"
@@ -41,6 +40,7 @@
 #import "UCFNewResetPassWordViewController.h"
 #import "UCFCouponViewController.h"
 #import "UCFRechargeViewController.h"
+#import "UCFRegisterdSucceedViewController.h"
 
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
@@ -74,10 +74,6 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if (SingleUserInfo.loginData == nil) {
         [SingleUserInfo loadLoginViewController];
-//        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-//        BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-//        loginViewController.sourceVC = @"homePage";
-//        [self presentViewController:loginNaviController animated:YES completion:nil];
     }
     else
     {
@@ -243,7 +239,6 @@
         //每日签到
         
         UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
-        subVC.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:subVC animated:YES];
         
 
@@ -251,10 +246,19 @@
     else if (tag == 1002){
         //我的工贝
         
-        UCFNewResetPassWordViewController *vc= [[UCFNewResetPassWordViewController alloc] init];
-                [self.rt_navigationController pushViewController:vc animated:YES];
+        
+        UCFRegisterdSucceedViewController *vc= [[UCFRegisterdSucceedViewController alloc] init];
+        [self.rt_navigationController pushViewController:vc animated:YES];
+        
+//        UCFNewResetPassWordViewController *vc= [[UCFNewResetPassWordViewController alloc] init];
+//                [self.rt_navigationController pushViewController:vc animated:YES];
+        
 //        UCFMicroBankOpenAccountViewController *vc= [[UCFMicroBankOpenAccountViewController alloc] init];
 //        [self.rt_navigationController pushViewController:vc animated:YES];
+        
+//                UCFMicroBankDepositoryAccountHomeViewController *ccc = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
+//                ccc.accoutType = SelectAccoutTypeP2P;
+//                [self.rt_navigationController pushViewController:ccc animated:YES];
     }
     else if (tag == 1003){
         //我的工豆

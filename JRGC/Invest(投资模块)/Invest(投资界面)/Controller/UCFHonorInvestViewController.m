@@ -18,7 +18,6 @@
 #import "HSHelper.h"
 #import "UCFToolsMehod.h"
 #import "UCFNoPermissionViewController.h"
-#import "UCFLoginViewController.h"
 #import "RiskAssessmentViewController.h"
 #import "UCFInvestMicroMoneyCell.h"
 
@@ -322,9 +321,7 @@
 #pragma mark -去登录页面
 - (void)showLoginView
 {
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+  [SingleUserInfo loadLoginViewController];
 }
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {

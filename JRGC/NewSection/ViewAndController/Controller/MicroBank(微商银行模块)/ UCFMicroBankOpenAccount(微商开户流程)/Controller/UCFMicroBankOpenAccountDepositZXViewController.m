@@ -27,6 +27,7 @@
 #import "FullWebViewController.h"
 #import "AccountWebView.h"
 #import "AccountSuccessVC.h"
+
 @interface UCFMicroBankOpenAccountDepositZXViewController ()<UIScrollViewDelegate,UITextFieldDelegate,UCFHuiShangChooseBankViewControllerDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -54,6 +55,7 @@
 @property (nonatomic, strong) UCFMicroBankOpenAccountGetOpenAccountInfoModel *GetOpenAccountModel;
 
 @property (nonatomic, copy)   NSString *bankId;
+
 @end
 
 @implementation UCFMicroBankOpenAccountDepositZXViewController
@@ -61,8 +63,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    baseTitleLabel.text = @"开通尊享徽商存管账户";
-    
     self.rootLayout = [MyRelativeLayout new];
     self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -260,7 +260,12 @@
 
 - (void)enterButtoClick
 {
-    UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text idCardNo:self.idView.contentField.text bankCardNo:[self.bankNumView.contentField.text stringByReplacingOccurrencesOfString:@" " withString:@""] bankNo:self.bankId openStatus:self.GetOpenAccountModel.data.openStatus validateCode:self.smsView.contentField.text AccoutType:SelectAccoutTypeP2P];
+    if (self.accoutType != SelectAccoutTypeP2P) {
+        //不等于p2p说明是尊享开户,如果等于p2p说明是特殊用户(港澳台用户)
+        self.accoutType = SelectAccoutTypeHoner;
+    }
+    
+    UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountZXGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text idCardNo:self.idView.contentField.text bankCardNo:[self.bankNumView.contentField.text stringByReplacingOccurrencesOfString:@" " withString:@""] bankNo:self.bankId openStatus:self.GetOpenAccountModel.data.openStatus validateCode:self.smsView.contentField.text AccoutType:self.accoutType];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -474,7 +479,11 @@
 }
 - (void)queryUserData
 {
-    UCFMicroBankOpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountGetOpenAccountInfoAPI alloc] initWithAccoutType:SelectAccoutTypeHoner];
+    if (self.accoutType != SelectAccoutTypeP2P) {
+        //不等于p2p说明是尊享开户,如果等于p2p说明是特殊用户(港澳台用户)
+        self.accoutType = SelectAccoutTypeHoner;
+    }
+    UCFMicroBankOpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountGetOpenAccountInfoAPI alloc] initWithAccoutType:self.accoutType];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -538,8 +547,12 @@
 }
 - (void)statVerifyCodeRequest:(NSString *)isVms
 {
+    if (self.accoutType != SelectAccoutTypeP2P) {
+        //不等于p2p说明是尊享开户,如果等于p2p说明是特殊用户(港澳台用户)
+        self.accoutType = SelectAccoutTypeHoner;
+    }
     NSString *isVmsNew = isVms;//SMS："普通短信渠道"；VMS："验证码语音渠道"
-    UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:self.GetOpenAccountModel.data.userInfo.phoneNum isVms:isVmsNew type:@"6" AccoutType:SelectAccoutTypeHoner];
+    UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:self.GetOpenAccountModel.data.userInfo.phoneNum isVms:isVmsNew type:@"6" AccoutType:self.accoutType];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {

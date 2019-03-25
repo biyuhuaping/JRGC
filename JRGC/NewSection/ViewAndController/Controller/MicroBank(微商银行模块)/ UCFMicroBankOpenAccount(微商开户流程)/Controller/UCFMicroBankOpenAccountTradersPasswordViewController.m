@@ -62,6 +62,7 @@
     // Do any additional setup after loading the view.
     if (self.updatePassWorld) {
         baseTitleLabel.text = @"验证身份";
+        [self addLeftButton];
     }
     self.isCompanyAgent = SingleUserInfo.loginData.userInfo.isCompanyAgent;
    
@@ -136,11 +137,11 @@
         _idView.contentField.delegate = self;
         if (self.isCompanyAgent)
         {
-            _idView.contentField.placeholder = @"请输入身份证号";
+            _idView.contentField.placeholder = @"请输入社会信用代码/组织机构代码";
         }
         else
         {
-            _idView.contentField.placeholder = @"请输入证件号";
+            _idView.contentField.placeholder = @"请输入身份证号";
         }
         if (nil != self.idCardNo && self.idCardNo.length == 18) {
             _idView.contentField.text = self.idCardNo;

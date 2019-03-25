@@ -18,7 +18,6 @@
 #import "UCFGoldFlexibleCell.h"
 #import "UCFNewUserCell.h"
 #import "UCFHomeListHeaderSectionView.h"
-#import "UCFLoginViewController.h"
 #import "UCFRegisterStepOneViewController.h"
 #import "AppDelegate.h"
 #import "UCFHomeListFooterView.h"
@@ -266,10 +265,7 @@
         UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
         NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if (nil == userId) {
-            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-            UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-            [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+            [SingleUserInfo loadLoginViewController];
             return;
         }
         if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
@@ -354,10 +350,7 @@
 //    }
     NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if (nil == userId) {
-        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+       [SingleUserInfo loadLoginViewController];
         return;
     }
     

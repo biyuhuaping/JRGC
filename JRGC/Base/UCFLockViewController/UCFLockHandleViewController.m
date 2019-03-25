@@ -11,7 +11,6 @@
 #import "UIButton+Misc.h"
 #import "Common.h"
 #import "UIImageView+WebCache.h"
-#import "UCFLoginViewController.h"
 #import "UCFVerifyLoginViewController.h"
 #import "AppDelegate.h"
 #import "AuxiliaryFunc.h"
@@ -700,18 +699,19 @@
 {
     [self checkGoBackShowGestureOrFingerprint];
     isClickCgAndCertiBtn = YES;
-    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-    loginViewController.sourceVC = @"changeUser";
-    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self dismissViewControllerAnimated:NO completion:^{
-        [LockFlagSingle sharedManager].disappearType = DisDefault;
-    }];
-    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate.tabBarController presentViewController:loginNaviController animated:NO completion:^{
-        
-    }];
-    //[[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
+//    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+//    loginViewController.sourceVC = @"changeUser";
+//    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+//    [self dismissViewControllerAnimated:NO completion:^{
+//        [LockFlagSingle sharedManager].disappearType = DisDefault;
+//    }];
+//    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [delegate.tabBarController presentViewController:loginNaviController animated:NO completion:^{
+//
+//    }];
+//    //[[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
+//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
+    [SingleUserInfo loadLoginViewController];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -877,11 +877,7 @@
             
             // 强制注销该账户，并清除手势密码，以便重设
             [self dismissViewControllerAnimated:NO completion:^{
-                AppDelegate *delegate =  (AppDelegate*)[UIApplication sharedApplication].delegate;
-                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-                loginViewController.sourceVC = @"errorNum";
-                UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-                [delegate.window.rootViewController presentViewController:loginNaviController animated:YES completion:nil];
+                [SingleUserInfo loadLoginViewController];
                 [LockFlagSingle sharedManager].disappearType = DisDefault;
             }]; // 由于是强制登录，这里必须以NO ani的方式才可
             [LLLockPassword saveLockPassword:nil];

@@ -14,7 +14,6 @@
 #import "UCFMicroMoneyModel.h"
 #import "UCFNoPermissionViewController.h"
 #import "UCFProjectDetailViewController.h"
-//#import "UCFLoginViewController.h"
 #import "UCFPurchaseBidViewController.h"
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
@@ -390,9 +389,6 @@
 
 - (void)showLoginView
 {
-//    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-//    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-//    [self presentViewController:loginNaviController animated:YES completion:nil];
     [SingleUserInfo loadLoginViewController];
 }
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail

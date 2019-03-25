@@ -21,7 +21,6 @@
 #import "UITabBar+TabBarBadge.h"
 #import "AuxiliaryFunc.h"
 #import "JSONKit.h"
-#import "UCFLoginViewController.h"
 @interface NetworkModule () <UIAlertViewDelegate>
 @property (nonatomic, assign) BOOL isShowAlert;
 @property (nonatomic, assign) BOOL isShowSingleAlert; //是否已经弹出单设备警告框

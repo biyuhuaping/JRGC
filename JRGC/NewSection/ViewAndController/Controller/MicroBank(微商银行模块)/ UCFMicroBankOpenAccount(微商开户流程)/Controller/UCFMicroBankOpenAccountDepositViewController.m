@@ -67,12 +67,6 @@
 
 }
 - (void)loadLayoutView{
-    if (self.accoutType == SelectAccoutTypeP2P) {
-        baseTitleLabel.text = @"开通微金徽商存管账户";
-    } else {
-        baseTitleLabel.text = @"开通尊享徽商存管账户";
-    }
-    
     [self.scrollLayout addSubview:self.nameView];
     [self.scrollLayout addSubview:self.idView];
     [self.scrollLayout addSubview:self.selectBankView];
@@ -80,7 +74,7 @@
     [self.scrollLayout addSubview:self.agreementLabel];
     
     [self queryUserData];
-//    用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+//    用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
 //    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 1) {
 //        //正常的新用户
 //        self.enterButton.topPos.equalTo(self.selectBankView.bottomPos).offset(20);
@@ -382,6 +376,7 @@
             if(![self.GetOpenAccountModel.data.cfcaContractName isEqualToString:@""]){
                 
                 self.agreementLabel.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》";
+                [self.agreementLabel sizeToFit];
                 __weak typeof(self) weakSelf = self;
                 [self.agreementLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》"];
                 [self.agreementLabel addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
@@ -400,7 +395,7 @@
             
             if (self.GetOpenAccountModel.data.userInfo.realName.length > 0)
             {
-//                用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
+//                用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
                 self.nameView.contentField.text = self.GetOpenAccountModel.data.userInfo.realName;
                 SingleUserInfo.loginData.userInfo.realName = self.GetOpenAccountModel.data.userInfo.realName;
             }
