@@ -56,19 +56,19 @@
     [super requestFailedPreprocessor];
 
      ShowMessage(@"当前网络不可用,请稍后重试");
-//    NSError * error = self.error;
-//    if ([error.domain isEqualToString:AFURLResponseSerializationErrorDomain])
-//    {
-//        //AFNetworking处理过的错误
-//
-//    }else if ([error.domain isEqualToString:YTKRequestValidationErrorDomain])
-//    {
-//        //猿题库处理过的错误
-//
-//    }else{
-//        //系统级别的domain错误，无网络等[NSURLErrorDomain]
-//        //根据error的code去定义显示的信息，保证显示的内容可以便捷的控制
-//    }
+    NSError * error = self.error;
+    if ([error.domain isEqualToString:AFURLResponseSerializationErrorDomain])
+    {
+        //AFNetworking处理过的错误
+
+    }else if ([error.domain isEqualToString:YTKRequestValidationErrorDomain])
+    {
+        //猿题库处理过的错误
+
+    }else{
+        //系统级别的domain错误，无网络等[NSURLErrorDomain]
+        //根据error的code去定义显示的信息，保证显示的内容可以便捷的控制
+    }
 }
 //
 //- (void)requestFailedFilter
