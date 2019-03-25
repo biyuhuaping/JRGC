@@ -1,23 +1,22 @@
 //
-//  UCFNewBatchTableViewCell.m
+//  UCFHighQualityTableViewCell.m
 //  JRGC
 //
-//  Created by zrc on 2019/3/19.
+//  Created by zrc on 2019/3/25.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "UCFNewBatchTableViewCell.h"
-
-@interface UCFNewBatchTableViewCell ()
+#import "UCFHighQualityTableViewCell.h"
+@interface UCFHighQualityTableViewCell()
 @property(nonatomic, strong)UILabel   *titleLab;
+@property(nonatomic, strong)UILabel   *bidStatusLab;
 @property(nonatomic, strong)UILabel   *loanTimeValueLab;
 @property(nonatomic, strong)UILabel   *loanMoneyValueLab;
 @property(nonatomic, strong)UILabel   *loanPeriodValueLab;
 @property(nonatomic, strong)UILabel   *loanRateValueLab;
+@property(nonatomic, strong)UILabel   *playRepayValueLab;
 @end
-
-@implementation UCFNewBatchTableViewCell
-
+@implementation UCFHighQualityTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -32,17 +31,17 @@
         whiteView.backgroundColor = [Color color:PGColorOptionThemeWhite];
         whiteView.leftPos.equalTo(@15);
         whiteView.rightPos.equalTo(@15);
-        whiteView.topPos.equalTo(@15);
-        whiteView.bottomPos.equalTo(@0);
+        whiteView.topPos.equalTo(@0);
+        whiteView.bottomPos.equalTo(@15);
         whiteView.clipsToBounds = YES;
-        whiteView.layer.cornerRadius = 10;
+        whiteView.layer.cornerRadius = 8;
         [self.rootLayout addSubview:whiteView];
         
         UIImageView *iconView = [[UIImageView alloc] init];
         iconView.heightSize.equalTo(@18);
         iconView.widthSize.equalTo(@3);
         iconView.leftPos.equalTo(@15);
-        iconView.topPos.equalTo(@10);
+        iconView.topPos.equalTo(@16);
         iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         iconView.clipsToBounds = YES;
         iconView.layer.cornerRadius = 2;
@@ -56,13 +55,59 @@
         [whiteView addSubview:label];
         [label sizeToFit];
         self.titleLab = label;
-       
+        
+        self.bidStatusLab = [UILabel new];
+        self.bidStatusLab.text = @"已回款";
+        self.bidStatusLab.textColor = [Color color:PGColorOptionTitleGray];
+        self.bidStatusLab.rightPos.equalTo(@32);
+        self.bidStatusLab.centerYPos.equalTo(self.titleLab.centerYPos);
+        self.bidStatusLab.font = [Color gc_Font:15];
+        [whiteView addSubview:self.bidStatusLab];
+        [self.bidStatusLab sizeToFit];
+        
+        UIImageView *arrowView = [UIImageView new];
+        arrowView.image = [UIImage imageNamed:@"list_icon_arrow"];
+        arrowView.mySize = CGSizeMake(7, 11);
+        arrowView.rightPos.equalTo(@15);
+        arrowView.centerYPos.equalTo(self.titleLab.centerYPos);
+        [whiteView addSubview:arrowView];
+        
+        
+        UIView *lineView = [[UIView alloc] init];
+        lineView.heightSize.equalTo(@1);
+        lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+        lineView.myHorzMargin = 15;
+        lineView.topPos.equalTo(@50);
+        [whiteView addSubview:lineView];
+        
+        CGFloat VSpace = 6;
+        
+        UILabel *loanRateMarkLab = [UILabel new];
+        loanRateMarkLab.text = @"预期年化利率";
+        loanRateMarkLab.textColor = [Color color:PGColorOptionTitleBlack];
+        loanRateMarkLab.font = [Color gc_Font:14];
+        loanRateMarkLab.leftPos.equalTo(@15);
+        loanRateMarkLab.topPos.equalTo(lineView.bottomPos).offset(15);
+        [loanRateMarkLab sizeToFit];
+        [whiteView addSubview:loanRateMarkLab];
+        
+        UILabel *loanRateValueLab = [UILabel new];
+        loanRateValueLab.text = @"12%";
+        loanRateValueLab.textColor = [Color color:PGColorOptionTitleBlack];
+        loanRateValueLab.font = [Color gc_Font:14];
+        loanRateValueLab.rightPos.equalTo(@15);
+        loanRateValueLab.centerYPos.equalTo(loanRateMarkLab.centerYPos);
+        [loanRateValueLab sizeToFit];
+        [whiteView addSubview:loanRateValueLab];
+        self.loanRateValueLab = loanRateValueLab;
+        self.loanRateValueLab.textAlignment = NSTextAlignmentRight;
+        
         UILabel *loanTimeMarkLab = [UILabel new];
-        loanTimeMarkLab.text = @"出借日期";
+        loanTimeMarkLab.text = @"交易日期";
         loanTimeMarkLab.textColor = [Color color:PGColorOptionTitleBlack];
         loanTimeMarkLab.font = [Color gc_Font:14];
         loanTimeMarkLab.leftPos.equalTo(@15);
-        loanTimeMarkLab.bottomPos.equalTo(@20);
+        loanTimeMarkLab.topPos.equalTo(loanRateMarkLab.bottomPos).offset(VSpace);
         [loanTimeMarkLab sizeToFit];
         [whiteView addSubview:loanTimeMarkLab];
         
@@ -76,16 +121,14 @@
         [whiteView addSubview:loanTimeValueLab];
         self.loanTimeValueLab = loanTimeValueLab;
         self.loanTimeValueLab.textAlignment = NSTextAlignmentRight;
-
-       
-        CGFloat VSpace = 6;
+        
         
         UILabel *loanMoneyMarkLab = [UILabel new];
         loanMoneyMarkLab.text = @"出借金额";
         loanMoneyMarkLab.textColor = [Color color:PGColorOptionTitleBlack];
         loanMoneyMarkLab.font = [Color gc_Font:14];
         loanMoneyMarkLab.leftPos.equalTo(@15);
-        loanMoneyMarkLab.bottomPos.equalTo(loanTimeMarkLab.topPos).offset(VSpace);
+        loanMoneyMarkLab.topPos.equalTo(loanTimeMarkLab.bottomPos).offset(VSpace);
         [loanMoneyMarkLab sizeToFit];
         [whiteView addSubview:loanMoneyMarkLab];
         
@@ -99,14 +142,14 @@
         [whiteView addSubview:loanMoneyValueLab];
         self.loanMoneyValueLab = loanMoneyValueLab;
         self.loanMoneyValueLab.textAlignment = NSTextAlignmentRight;
-
+        
         
         UILabel *loanPeriodMarkLab = [UILabel new];
-        loanPeriodMarkLab.text = @"项目周期";
+        loanPeriodMarkLab.text = @"起息日期";
         loanPeriodMarkLab.textColor = [Color color:PGColorOptionTitleBlack];
         loanPeriodMarkLab.font = [Color gc_Font:14];
         loanPeriodMarkLab.leftPos.equalTo(@15);
-        loanPeriodMarkLab.bottomPos.equalTo(loanMoneyMarkLab.topPos).offset(VSpace);
+        loanPeriodMarkLab.topPos.equalTo(loanMoneyMarkLab.bottomPos).offset(VSpace);
         [loanPeriodMarkLab sizeToFit];
         [whiteView addSubview:loanPeriodMarkLab];
         
@@ -121,43 +164,29 @@
         self.loanPeriodValueLab = loanPeriodValueLab;
         self.loanPeriodValueLab.textAlignment = NSTextAlignmentRight;
         
-        UILabel *loanRateMarkLab = [UILabel new];
-        loanRateMarkLab.text = @"预期年化利率";
-        loanRateMarkLab.textColor = [Color color:PGColorOptionTitleBlack];
-        loanRateMarkLab.font = [Color gc_Font:14];
-        loanRateMarkLab.leftPos.equalTo(@15);
-        loanRateMarkLab.bottomPos.equalTo(loanPeriodMarkLab.topPos).offset(VSpace);
-        [loanRateMarkLab sizeToFit];
-        [whiteView addSubview:loanRateMarkLab];
+        UILabel *playRepayMarkLab = [UILabel new];
+        playRepayMarkLab.text = @"计划回款日";
+        playRepayMarkLab.textColor = [Color color:PGColorOptionTitleBlack];
+        playRepayMarkLab.font = [Color gc_Font:14];
+        playRepayMarkLab.leftPos.equalTo(@15);
+        playRepayMarkLab.topPos.equalTo(loanPeriodMarkLab.bottomPos).offset(VSpace);
+        [playRepayMarkLab sizeToFit];
+        [whiteView addSubview:playRepayMarkLab];
         
-        UILabel *loanRateValueLab = [UILabel new];
-        loanRateValueLab.text = @"12%";
-        loanRateValueLab.textColor = [Color color:PGColorOptionTitleBlack];
-        loanRateValueLab.font = [Color gc_Font:14];
-        loanRateValueLab.rightPos.equalTo(@15);
-        loanRateValueLab.centerYPos.equalTo(loanRateMarkLab.centerYPos);
-        [loanRateValueLab sizeToFit];
-        [whiteView addSubview:loanRateValueLab];
-        self.loanRateValueLab = loanRateValueLab;
-        self.loanRateValueLab.textAlignment = NSTextAlignmentRight;
+        UILabel *playRepayValueLab = [UILabel new];
+        playRepayValueLab.text = @"12个月";
+        playRepayValueLab.textColor = [Color color:PGColorOptionTitleBlack];
+        playRepayValueLab.font = [Color gc_Font:14];
+        playRepayValueLab.rightPos.equalTo(@15);
+        playRepayValueLab.centerYPos.equalTo(playRepayMarkLab.centerYPos);
+        [playRepayValueLab sizeToFit];
+        [whiteView addSubview:playRepayValueLab];
+        self.playRepayValueLab = playRepayValueLab;
+        self.loanPeriodValueLab.textAlignment = NSTextAlignmentRight;
     }
     return self;
 }
-- (void)setModel:(UCFMyBatchBidResult *)model
-{
-    _model = model;
-    self.titleLab.text = model.collName;
-    self.loanRateValueLab.text = [NSString stringWithFormat:@"%.2f%%",model.collRate];
-    self.loanPeriodValueLab.text = [NSString stringWithFormat:@"%@",model.colPeriodTxt];
-    self.loanMoneyValueLab.text = [NSString stringWithFormat:@"¥%.2f",model.investSuccessTotal];
-    self.loanTimeValueLab.text = model.investTime;
-    
-    
-    [self.titleLab sizeToFit];
-    [self.loanRateValueLab sizeToFit];
-    [self.loanMoneyValueLab sizeToFit];
-    [self.loanTimeValueLab sizeToFit];
-}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

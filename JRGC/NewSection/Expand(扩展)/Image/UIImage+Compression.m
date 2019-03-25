@@ -106,4 +106,17 @@
     NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
     return [self imageGradientByColorArray:colorArray ImageSize:size gradientType:leftToRight];
 }
++ (UIImage*) imageWithUIView:(UIView*) view{
+    
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(view.bounds.size);
+    CGContextRef currnetContext = UIGraphicsGetCurrentContext();
+    [view.layer renderInContext:currnetContext];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    return image;
+}
 @end

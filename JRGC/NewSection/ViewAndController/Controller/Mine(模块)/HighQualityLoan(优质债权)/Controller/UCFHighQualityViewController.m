@@ -7,8 +7,10 @@
 //
 
 #import "UCFHighQualityViewController.h"
-
-@interface UCFHighQualityViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate>
+#import "UCFHighQualityBidHeaderView.h"
+#import "UCFHighQualityTableViewCell.h"
+#import "UCFSegementBtnView.h"
+@interface UCFHighQualityViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,UCFSegementBtnViewDelegate>
 @property(nonatomic, assign)NSInteger currentPage;
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
@@ -18,6 +20,25 @@
 - (void)loadView
 {
     [super loadView];
+    
+    MyRelativeLayout *headView = [MyRelativeLayout new];
+    headView.heightSize.equalTo(@(131 +57));
+    headView.myHorzMargin = 0;
+
+    UCFHighQualityBidHeaderView *board = [UCFHighQualityBidHeaderView new];
+    board.heightSize.equalTo(@(131));
+    board.myHorzMargin = 0;
+    board.topPos.equalTo(@0);
+    [headView addSubview:board];
+    
+    UCFSegementBtnView *segeView = [[UCFSegementBtnView alloc] initWithTitleArray:@[@"回款中",@"未起息",@"已回款"] delegate:self];
+    segeView.heightSize.equalTo(@57);
+    segeView.myHorzMargin = 0;
+    segeView.topPos.equalTo(board.bottomPos);
+    [headView addSubview:segeView];
+    self.showTableView.tableHeaderView = headView;
+
+    
     self.showTableView.leftPos.equalTo(@0);
     self.showTableView.rightPos.equalTo(@0);
     self.showTableView.topPos.equalTo(@0);
@@ -29,7 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.showTableView beginRefresh];
+//    [self.showTableView beginRefresh];
 }
 
 - (void)refreshTableViewHeader
@@ -45,6 +66,10 @@
 - (void)refreshTableViewFooter
 {
     [self fetchData];
+}
+- (void)segementBtnView:(UCFSegementBtnView *)segeView selectIndex:(NSInteger)index
+{
+    
 }
 - (void)fetchData
 {
@@ -100,18 +125,19 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 5;
     return self.dataArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 180;
+    return 224;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellStr = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+    UCFHighQualityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
+        cell = [[UCFHighQualityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
     }
     return cell;
 }

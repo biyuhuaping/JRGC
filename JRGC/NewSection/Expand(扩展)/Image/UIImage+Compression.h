@@ -43,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
  @return 渐变图片
  */
 + (UIImage *)gc_styleImageSize:(CGSize)size;
+
+
++ (UIImage*) imageWithUIView:(UIView*) view;
 @end
 
 NS_ASSUME_NONNULL_END

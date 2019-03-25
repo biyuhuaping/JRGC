@@ -18,6 +18,7 @@
 #import "UCFBidDetailAndInvestPageLogic.h"
 #import "UCFNewNoticeViewController.h"
 #import "UCFBatchInvestmentViewController.h"
+#import "UCFHighQualityContainerViewController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -211,6 +212,9 @@
 }
 - (void)userGuideCellClickButton:(UIButton *)button
 {
+    UCFHighQualityContainerViewController *VC= [[UCFHighQualityContainerViewController alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
+    
     NSString *title = [button titleForState:UIControlStateNormal];
     if ([title isEqualToString:@"注册领券"]) {
         
