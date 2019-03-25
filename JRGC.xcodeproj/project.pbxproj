@@ -1038,6 +1038,7 @@
 		E3041D4121F71C3F007B09B6 /* HWTFCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3041D3F21F71C3F007B09B6 /* HWTFCursorView.m */; };
 		E3046C4022310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3046C3F22310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m */; };
 		E309F647224872F800FFE9B9 /* UCFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E309F646224872F800FFE9B9 /* UCFLoginViewController.m */; };
+		E309F64A2248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = E309F6492248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m */; };
 		E30C797F21F17E6A000183FA /* UCFMineNewSignModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C797E21F17E6A000183FA /* UCFMineNewSignModel.m */; };
 		E30C798221F17E8D000183FA /* UCFMineNewSignApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798121F17E8D000183FA /* UCFMineNewSignApi.m */; };
 		E30C798521F1828E000183FA /* UCFMineIntoCoinPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C798421F1828E000183FA /* UCFMineIntoCoinPageModel.m */; };
@@ -3100,6 +3101,8 @@
 		E3046C3F22310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m; sourceTree = "<group>"; };
 		E309F645224872F700FFE9B9 /* UCFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoginViewController.h; sourceTree = "<group>"; };
 		E309F646224872F800FFE9B9 /* UCFLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoginViewController.m; sourceTree = "<group>"; };
+		E309F6482248AC2D00FFE9B9 /* UCFRequestSucceedDetection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFRequestSucceedDetection.h; sourceTree = "<group>"; };
+		E309F6492248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRequestSucceedDetection.m; sourceTree = "<group>"; };
 		E30C797D21F17E6A000183FA /* UCFMineNewSignModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineNewSignModel.h; sourceTree = "<group>"; };
 		E30C797E21F17E6A000183FA /* UCFMineNewSignModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineNewSignModel.m; sourceTree = "<group>"; };
 		E30C798021F17E8D000183FA /* UCFMineNewSignApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineNewSignApi.h; sourceTree = "<group>"; };
@@ -8605,6 +8608,8 @@
 				E352FD8E21E4AFD800617AB7 /* RequestConstant.h */,
 				E352FD8A21E4AFD800617AB7 /* BaseRequest.h */,
 				E352FD8D21E4AFD800617AB7 /* BaseRequest.m */,
+				E309F6482248AC2D00FFE9B9 /* UCFRequestSucceedDetection.h */,
+				E309F6492248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m */,
 				E352FD8C21E4AFD800617AB7 /* RequestUrlArgumentsFilter.h */,
 				E352FD8B21E4AFD800617AB7 /* RequestUrlArgumentsFilter.m */,
 			);
@@ -10542,6 +10547,7 @@
 				7BCE01F51AC8FC260084C15C /* ASIAuthenticationDialog.m in Sources */,
 				A851F3531F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m in Sources */,
 				E352FD4921E4AF0B00617AB7 /* UCFCouponPopupCell.m in Sources */,
+				E309F64A2248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m in Sources */,
 				74B98C9A1F70FF5F00CB6A9F /* UCFMineCell.m in Sources */,
 				833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */,
 				334DE85D2240D7DC0043A864 /* UIImage+Compression.m in Sources */,

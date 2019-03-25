@@ -135,6 +135,16 @@
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LOGINDATA];
     self.signatureStr = @"";
     self.loginData = [UCFLoginData new];
+    
+    //清空数据
+    //退出时清cookis
+    
+    [Common deleteCookies];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
 }
 
 

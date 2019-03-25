@@ -598,15 +598,7 @@ static NetworkModule *gInstance = NULL;
 //清空数据
 - (void)cleanData{
     //退出时清cookis
-    
-    [Common deleteCookies];
-    [[UserInfoSingle sharedManager] deleteUserData];
-
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
+    [SingleUserInfo deleteUserData];
 }
 
 // 请求失败，获取 error
