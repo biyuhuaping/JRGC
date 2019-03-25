@@ -21,9 +21,11 @@
 - (instancetype)initWithFrame:(CGRect)frame WithTitleArray:(NSArray <NSString *> *)titleArray
 {
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
         _leftSpace = 0;
         _rightSpace = 0;
         _btnHorizontal = 0;
+        _leftBackImage = @"";
         self.nameArray = titleArray;
     }
     return self;
@@ -34,12 +36,12 @@
         return;
     }
     buttonWidth = (self.frame.size.width - _leftSpace -_rightSpace - (_btnHorizontal * (self.nameArray.count - 1)))/self.nameArray.count;
-
+    CGFloat buttonY  = _leftBackImage.length > 0 ? StatusBarHeight1 : 0;
     for (int i = 0; i < self.nameArray.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitleColor:[Color color:PGColorOpttonRateNoramlTextColor] forState:UIControlStateSelected];
         [button setTitleColor:[Color color:PGColorOptionTitleBlack] forState:UIControlStateNormal];
-        button.frame = CGRectMake(_leftSpace + (buttonWidth + _btnHorizontal) * i, 0, buttonWidth, self.frame.size.height);
+        button.frame = CGRectMake(_leftSpace + (buttonWidth + _btnHorizontal) * i, buttonY , buttonWidth, self.frame.size.height - buttonY);
         button.tag = 100 + i;
         [button setTitle:self.nameArray[i] forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor whiteColor]];
@@ -51,7 +53,20 @@
         [self addSubview:self.indicateView];
         button.titleLabel.font = [Color gc_Font:15];
     }
+    
+    if (_leftBackImage.length > 0) {
+        UIImage *image = [UIImage imageNamed:_leftBackImage];
+        if (image) {
+            UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            leftButton.frame = CGRectMake(0, StatusBarHeight1, 45, 44);
+            [leftButton setImage:image forState:UIControlStateNormal];
+            [leftButton setImage:image forState:UIControlStateHighlighted];
+            [self addSubview:leftButton];
+            self.leftBarBtn = leftButton;
+        }
+    }
 }
+
 - (void)pageHeadView:(UCFPageHeadView *)pageView chiliControllerSelectIndex:(CGFloat )index
 {
     __weak typeof(self) weakSelf = self;

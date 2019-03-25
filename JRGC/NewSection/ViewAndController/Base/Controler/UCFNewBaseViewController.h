@@ -13,6 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewBaseViewController : UIViewController
 @property(nonatomic, strong)MyRelativeLayout *rootLayout;
+
+/**
+ 自定义导航烂
+ */
+@property(nonatomic, strong)UIView           *customNav;
+
+/**
+ 添加自定义返回按钮
+ */
+- (void)addCustomBlueLeftButton;
 @property(assign,nonatomic) SelectAccoutType accoutType;
 
 /**

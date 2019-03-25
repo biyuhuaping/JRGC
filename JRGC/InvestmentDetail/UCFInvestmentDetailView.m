@@ -13,6 +13,8 @@
 #import "UCFToolsMehod.h"
 #import "SharedSingleton.h"
 
+#import "NewInvestmentDetailTableViewCell.h"
+
 @interface UCFInvestmentDetailView ()
 {
     NSDictionary *_dataDic;
@@ -132,23 +134,30 @@
 {
     if(section == 0)
     {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 54)];
-        headView.backgroundColor = UIColorWithRGB(0xebebee);
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 44)];
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
+        headView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 50)];
         view.backgroundColor = [UIColor whiteColor];
-        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 12, ScreenWidth/2,20)];
+        
+        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 17, 3, 16)];
+        iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+        iconView.layer.cornerRadius = 2.0f;
+        [view addSubview:iconView];
+        
+        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(iconView.frame) + 5, 15, ScreenWidth/2,20)];
         labelTitle.text = self.investDetailModel.prdName;
-        labelTitle.textColor = UIColorWithRGB(0x333333);
+        labelTitle.textColor = [Color color:PGColorOptionTitleBlack];
         labelTitle.backgroundColor = [UIColor clearColor];
-        labelTitle.font = [UIFont systemFontOfSize:14];
+        labelTitle.font = [Color gc_Font:16];
         [view addSubview:labelTitle];
         
         UIButton *headBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [headBtn addTarget:self action:@selector(headBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        headBtn.frame = CGRectMake(0, 10, ScreenWidth, 44);
+        headBtn.frame = CGRectMake(0, 10, ScreenWidth, 50);
         [view addSubview:headBtn];
         
-        UILabel *titleStateLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 100, (44 - 12) / 2, 70, 12) text:@"" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
+        UILabel *titleStateLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 100, (50 - 12) / 2, 70, 12) text:@"" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:15]];
         titleStateLabel.textAlignment = NSTextAlignmentRight;
         switch ([self.investDetailModel.status integerValue]) {
             case 0:
@@ -175,7 +184,7 @@
         }
         titleStateLabel.backgroundColor = [UIColor clearColor];
         titleStateLabel.textAlignment = NSTextAlignmentRight;
-        titleStateLabel.font = [UIFont systemFontOfSize:12];
+        titleStateLabel.font = [UIFont systemFontOfSize:15];
         [view addSubview:titleStateLabel];
         
 //        if ([titleStateLabel.text isEqualToString:@"招标中"]) {
@@ -188,12 +197,12 @@
         
         [headView addSubview:view];
         
-        UIImageView *arrowView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth - 22, 15, 8, 13)];
+        UIImageView *arrowView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth - 22, 18.5, 8, 13)];
         arrowView.image = [UIImage imageNamed:@"list_icon_arrow.png"];
         [view addSubview:arrowView];
         
-        [self viewAddLine:view Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
-        [self viewAddLine:headView Up:NO withColor:UIColorWithRGB(0xeff0f3)];
+//        [self viewAddLine:view Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
+        [self viewAddLine:headView Up:NO withColor:[Color color:PGColorOptionCellSeparatorGray]];
         return headView;
     } if(section == 1) {
         CGFloat headviewHeight;
@@ -441,7 +450,7 @@
         }
         return 0;
     } else if (section == 0) {
-        return 54;
+        return 60;
     } else if (section == 4) {
         if (self.investDetailModel.contractClauses.count == 0) {
             return 38;
@@ -495,6 +504,9 @@
                 return 27;
             }
         } else {
+            
+            return 104;
+            
             //已回款状态增加实际回款日
             if ([self.investDetailModel.status integerValue] == 6) {
                 return 102;
@@ -589,10 +601,10 @@
     UITableViewCell *reCell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if ([indexPath section] == 0) {
         NSString *cellindifier = @"firstSectionCell";
-        InvestmentDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+        NewInvestmentDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
         if (!cell) {
-            cell = [[InvestmentDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
-            cell.backgroundColor = UIColorWithRGB(0xf7f7f7);
+            cell = [[NewInvestmentDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+//            cell.backgroundColor = UIColorWithRGB(0xf7f7f7);
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         cell.accoutType = self.accoutType;
@@ -601,6 +613,7 @@
         } else {
             [cell setValueOfTableViewCellLabel:self.investDetailModel type:@"2"];
         }
+        
         return cell;
     } else if ([indexPath section] == 1) {
         NSString *cellindifier = @"oneSectionCell";
