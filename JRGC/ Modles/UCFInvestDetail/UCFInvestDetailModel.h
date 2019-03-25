@@ -47,6 +47,12 @@
 @property (nonatomic, strong) NSString *awaitPrincipal;
 // 回款期数
 @property (nonatomic, copy) NSString *refundSummarysCount;
+
+/**
+ 交易日
+ */
+@property(nonatomic, copy) NSString *applyDate;
+
 // 起息日
 @property (nonatomic, copy) NSString *effactiveDate;
 //最近回款日

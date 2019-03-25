@@ -25,7 +25,11 @@
         button.topPos.equalTo(@0);
         button.widthSize.equalTo(@(frame.size.width));
         button.heightSize.equalTo(@(frame.size.height));
+         
+        UIImage *disableimage = [UIImage imageGradientByColorArray:@[[UIColor lightGrayColor],[UIColor lightGrayColor]] ImageSize:frame.size gradientType:leftToRight];
         [button setBackgroundImage:[UIImage gc_styleImageSize:frame.size] forState:UIControlStateNormal];
+        [button setBackgroundImage:disableimage forState:UIControlStateDisabled];
+
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         self.investButtom = button;
@@ -44,6 +48,11 @@
         if ([keyPath isEqualToString:@"bidInvestText"]) {
             NSString *bidInvestText = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (bidInvestText.length > 0) {
+                if ([bidInvestText isEqualToString:@"立即出借"]) {
+                    selfWeak.investButtom.enabled = YES;
+                } else {
+                    selfWeak.investButtom.enabled = NO;
+                }
                 [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
             }
         }
@@ -58,6 +67,11 @@
         if ([keyPath isEqualToString:@"bidInvestText"]) {
             NSString *bidInvestText = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (bidInvestText.length > 0) {
+                if ([bidInvestText isEqualToString:@"立即出借"]) {
+                    selfWeak.investButtom.enabled = YES;
+                } else {
+                    selfWeak.investButtom.enabled = NO;
+                }
                 [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
             }
         }

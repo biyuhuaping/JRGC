@@ -179,6 +179,7 @@
 		33E3032D21F1866500FD657C /* UCFNewBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3032C21F1866500FD657C /* UCFNewBannerModel.m */; };
 		33E3033021F1E00A00FD657C /* UCFOldUserNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3032F21F1E00A00FD657C /* UCFOldUserNoticeCell.m */; };
 		33E3033321F1E98800FD657C /* UCFSiteNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3033221F1E98800FD657C /* UCFSiteNoticeView.m */; };
+		33EA9C9622487C7500E4B3B6 /* NewInvestmentDetailTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EA9C9522487C7500E4B3B6 /* NewInvestmentDetailTwoTableViewCell.m */; };
 		4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */; };
 		4A04F8301F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */; };
 		4A04F8331F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F8321F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m */; };
@@ -1673,6 +1674,8 @@
 		33E3032F21F1E00A00FD657C /* UCFOldUserNoticeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFOldUserNoticeCell.m; sourceTree = "<group>"; };
 		33E3033121F1E98800FD657C /* UCFSiteNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFSiteNoticeView.h; sourceTree = "<group>"; };
 		33E3033221F1E98800FD657C /* UCFSiteNoticeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFSiteNoticeView.m; sourceTree = "<group>"; };
+		33EA9C9422487C7500E4B3B6 /* NewInvestmentDetailTwoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewInvestmentDetailTwoTableViewCell.h; sourceTree = "<group>"; };
+		33EA9C9522487C7500E4B3B6 /* NewInvestmentDetailTwoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewInvestmentDetailTwoTableViewCell.m; sourceTree = "<group>"; };
 		4A04F82C1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAccountViewController.h; sourceTree = "<group>"; };
 		4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAccountViewController.m; sourceTree = "<group>"; };
 		4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldAccountViewController.xib; sourceTree = "<group>"; };
@@ -6497,6 +6500,8 @@
 				A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */,
 				3351B6472244EA86000AE65D /* NewInvestmentDetailTableViewCell.h */,
 				3351B6482244EA86000AE65D /* NewInvestmentDetailTableViewCell.m */,
+				33EA9C9422487C7500E4B3B6 /* NewInvestmentDetailTwoTableViewCell.h */,
+				33EA9C9522487C7500E4B3B6 /* NewInvestmentDetailTwoTableViewCell.m */,
 			);
 			name = InvestmentDetail;
 			path = ../InvestmentDetail;
@@ -10414,6 +10419,7 @@
 				A8C34F331F2737BA00926B7F /* RotationButton.m in Sources */,
 				4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */,
 				4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */,
+				33EA9C9622487C7500E4B3B6 /* NewInvestmentDetailTwoTableViewCell.m in Sources */,
 				74270D301EC595FA00F9419B /* UCFDataStatisticsViewController.m in Sources */,
 				E352FD6121E4AF0B00617AB7 /* UITableView+CYLTableViewPlaceHolder.m in Sources */,
 				74AFB1481EE93B8D007DBAFC /* UCFMicroMoneyModel.m in Sources */,

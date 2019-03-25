@@ -52,6 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger intervalMilli;
 
+@property (nonatomic, copy) NSString *startTime;
+@property (nonatomic, copy) NSString *fullTime;
+
 @property (nonatomic, copy) NSString *prdDesType;
 
 @property (nonatomic, copy) NSString *type;

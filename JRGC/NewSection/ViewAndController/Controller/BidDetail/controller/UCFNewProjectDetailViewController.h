@@ -13,6 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UCFNewProjectDetailViewController : UCFNewBaseViewController
 @property(nonatomic, strong)UCFBidDetailModel *model;
 @property(nonatomic,assign) PROJECTDETAILTYPE detailType;
+
+/**
+ 1 普通标进入的详情 2我投资的标进来的详情
+ */
+@property(nonatomic, copy) NSString *sourceType;
 @end
 
 NS_ASSUME_NONNULL_END

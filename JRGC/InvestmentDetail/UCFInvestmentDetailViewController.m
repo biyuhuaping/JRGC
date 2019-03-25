@@ -14,6 +14,8 @@
 #import "UCFPurchaseWebView.h"
 #import <QuickLook/QuickLook.h>
 #import "QLHeaderViewController.h"
+#import "UCFBidDetailRequest.h"
+#import "UCFNewProjectDetailViewController.h"
 @interface UCFInvestmentDetailViewController ()
 {
     UCFInvestmentDetailView *_investmentDetailView;
@@ -339,8 +341,30 @@
     if ([_detailType isEqualToString:@"1"])
     {
         NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",uuid];
-        NSDictionary *praramDic = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"prdClaimsId":prdClaimsIdStr};
-                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:self.accoutType];
+//        NSDictionary *praramDic = @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"prdClaimsId":prdClaimsIdStr};
+//                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:self.accoutType];
+//        return;
+        UCFBidDetailRequest *api = [[UCFBidDetailRequest alloc] initWithProjectId:prdClaimsIdStr];
+        api.animatingView = self.parentViewController.view;
+        @PGWeakObj(self);
+        [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+            UCFBidDetailModel *model =  request.responseJSONModel;
+            NSString *message = model.message;
+            if (model.ret) {
+                UCFNewProjectDetailViewController *vc = [[UCFNewProjectDetailViewController alloc] init];
+                vc.model = model;
+                vc.accoutType = SelectAccoutTypeP2P;
+                vc.sourceType = @"2";
+                [selfWeak.navigationController pushViewController:vc animated:YES];
+            } else {
+                [AuxiliaryFunc showAlertViewWithMessage:message];
+            }
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            
+        }];
+        [api start];
+        
+        
     } else {
         NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",uuid,SingleUserInfo.loginData.userInfo.userId];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:self.accoutType];
