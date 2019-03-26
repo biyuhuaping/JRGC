@@ -153,6 +153,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *actBalance;
 
+/**
+ 标状态  从详情页面过来手动赋值
+ */
+@property (nonatomic, copy) NSString *modelStatue;
+
 @end
 
 @interface UCFTransPrdclaimsreveal : BaseModel

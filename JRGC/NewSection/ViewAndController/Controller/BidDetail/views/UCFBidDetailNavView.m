@@ -124,4 +124,19 @@
         }
     }];
 }
+- (void)blindTransVM:(BaseViewModel *)vm
+{
+    @PGWeakObj(self);
+    [self.KVOController observe:vm keyPaths:@[@"prdName"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"prdName"]) {
+            NSString *prdName = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (prdName.length > 0) {
+                selfWeak.prdNameLab.text = prdName;
+                [selfWeak.prdNameLab sizeToFit];
+                selfWeak.titleBaseView.myWidth = selfWeak.prdNameLab.size.width;
+            }
+        }
+    }];
+}
 @end
