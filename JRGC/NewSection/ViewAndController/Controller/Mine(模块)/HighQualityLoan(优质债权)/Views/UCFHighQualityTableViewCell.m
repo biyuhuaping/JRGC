@@ -15,9 +15,16 @@
 @property(nonatomic, strong)UILabel   *loanPeriodValueLab;
 @property(nonatomic, strong)UILabel   *loanRateValueLab;
 @property(nonatomic, strong)UILabel   *playRepayValueLab;
+@property(nonatomic, strong)NSArray   *statusArr;
 @end
 @implementation UCFHighQualityTableViewCell
-
+- (NSArray *)statusArr
+{
+    if (!_statusArr) {
+        _statusArr = @[@"未审核", @"待确认", @"招标中", @"流标", @"满标", @"回款中", @"已回款"];
+    }
+    return _statusArr;
+}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -186,7 +193,62 @@
     }
     return self;
 }
+- (void)setDataDict:(NSDictionary *)dataDict isTrans:(BOOL)isTrans
+{
+    if (isTrans) {
+        self.titleLab.text = dataDict[@"name"];
+        [self.titleLab sizeToFit];
+        int status =  [dataDict[@"status"] intValue];
+        self.bidStatusLab.text = self.statusArr[status];
+        [self.bidStatusLab sizeToFit];
+        
+        NSString *annualRate = [dataDict objectSafeForKey:@"annualRate"];
+        NSString *transfereeYearRate = [dataDict objectSafeForKey:@"transfereeYearRate"];
+        
+        NSString *ratestr = [transfereeYearRate.length == 0?annualRate:transfereeYearRate stringByAppendingString:@"%"];
+        
+        self.loanRateValueLab.text = ratestr;
+        [self.loanRateValueLab sizeToFit];
+        
+        NSString *effactiveDate = dataDict[@"startInervestTime"];//起息日
+        NSString *repayPerDate = dataDict[@"repayPerDate"];//回款时间
+        self.loanPeriodValueLab.text = effactiveDate.length > 0?effactiveDate:@"--";
+        [self.loanPeriodValueLab sizeToFit];
+        self.playRepayValueLab.text = repayPerDate.length > 0?repayPerDate:@"--";
+        [self.playRepayValueLab sizeToFit];
+        
+        double investAmt = [dataDict[@"contributionAmt"] doubleValue];
+        self.loanMoneyValueLab.text = [NSString stringWithFormat:@"¥%0.2f",investAmt];//投资金额
+        [self.loanMoneyValueLab sizeToFit];
+        self.loanTimeValueLab.text = dataDict[@"createdTime"];//交易时间
+        
+        [self.loanTimeValueLab sizeToFit];
+        
+    } else {
+        self.titleLab.text = dataDict[@"prdName"];
+        [self.titleLab sizeToFit];
+        int status =  [dataDict[@"status"] intValue];
+        self.bidStatusLab.text = self.statusArr[status];
+        [self.bidStatusLab sizeToFit];
+        self.loanRateValueLab.text = [dataDict[@"annualRate"] stringByAppendingString:@"%"];
+        [self.loanRateValueLab sizeToFit];
+        
+        NSString *effactiveDate = dataDict[@"effactiveDate"];//起息日
+        NSString *repayPerDate = dataDict[@"repayPerDate"];//回款时间
+        self.loanPeriodValueLab.text = effactiveDate.length > 0?effactiveDate:@"--";
+        [self.loanPeriodValueLab sizeToFit];
+        self.playRepayValueLab.text = repayPerDate.length > 0?repayPerDate:@"--";
+        [self.playRepayValueLab sizeToFit];
+        
+        double investAmt = [dataDict[@"investAmt"] doubleValue];
+        self.loanMoneyValueLab.text = [NSString stringWithFormat:@"¥%0.2f",investAmt];//投资金额
+        [self.loanMoneyValueLab sizeToFit];
+        self.loanTimeValueLab.text = dataDict[@"applyDate"];//交易时间
+        
+        [self.loanTimeValueLab sizeToFit];
+    }
 
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -38,6 +38,7 @@
         principalValueLab.topPos.equalTo(@48);
         [self addSubview:principalValueLab];
         [principalValueLab sizeToFit];
+        self.principalValueLab = principalValueLab;
         
         UILabel *interestMarkLab = [UILabel new];
         interestMarkLab.text = @"待收利息";
@@ -56,6 +57,7 @@
         interestValueLab.centerYPos.equalTo(interestMarkLab.centerYPos);
         [self addSubview:interestValueLab];
         [interestValueLab sizeToFit];
+        self.interestValueLab = interestValueLab;
     }
     return self;
 }

@@ -23,7 +23,7 @@
 {
     if (self = [super init]) {
         self.delegate = delegate;
-        for (int i = 0; i < titleArr.count - 1; i++) {
+        for (int i = 0; i < titleArr.count; i++) {
             preViewX = 15 + (80 + 15) * i;
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             [button setTitle:titleArr[i] forState:UIControlStateNormal];

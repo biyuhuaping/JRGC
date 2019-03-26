@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFHighQualityTableViewCell : BaseTableViewCell
-
+- (void)setDataDict:(NSDictionary *)dataDict isTrans:(BOOL)isTrans;
 @end
 
 NS_ASSUME_NONNULL_END

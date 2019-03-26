@@ -141,7 +141,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UCFNewAiLoanViewController *vc = [[UCFNewAiLoanViewController alloc] init];
+    UCFHighQualityContainerViewController *vc = [[UCFHighQualityContainerViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
     return;
     CellConfig *cellConfig = self.cellConfigData[indexPath.section][indexPath.row];
