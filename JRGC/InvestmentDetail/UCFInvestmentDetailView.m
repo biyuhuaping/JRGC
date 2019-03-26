@@ -45,12 +45,14 @@
     _tableView.dataSource = self;
     //_tableView.bounces = NO;
     _tableView.showsVerticalScrollIndicator = NO;
-    if (kIS_IOS7) {
-        [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    }else{
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    }
+//    if (kIS_IOS7) {
+//        [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+//        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//    }else{
+//        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//    }
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     [self addSubview:_tableView];
     UIView *footerview = [[UIView alloc] init];
     footerview.frame = CGRectMake(0, 0, ScreenWidth, 0.5);
@@ -96,20 +98,27 @@
         [self viewAddLine:footerView Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
         
         return footerView;
+    } else if (section == 1) {
+        if ([_detailType isEqualToString:@"1"]) {
+            return nil;
+        } else {
+            UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 34)];
+            footerView.backgroundColor = UIColorWithRGB(0xebebee);
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 2, ScreenWidth - 30, 16)];
+            label.textColor = [Color color:PGColorOptionTitleGray];
+            label.text = @"该借款标还款日不计息";
+            label.font = [Color gc_Font:12];
+            [footerView addSubview:label];
+            
+            return footerView;
+        }
     }
     return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 2) {
-         //未获得等级加息时的判断条件
-        if (!self.investDetailModel.gradeIncreases || [[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.gradeIncreases] isEqualToString:@""] || [self.investDetailModel.gradeIncreases doubleValue] == 0.0) {
-            return 0;
-        } else {
-            return 48;
-        }
-    }if (section == 0) {
+    if (section == 0) {
         
         if ([_detailType isEqualToString:@"1"]) {
             if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil)
@@ -127,6 +136,24 @@
             }
         }
     }
+    if (section == 1) {
+        //
+        if ([_detailType isEqualToString:@"1"]) {
+            return 0;
+        } else {
+            return 34;
+        }
+    }
+    
+    if (section == 2) {
+        //未获得等级加息时的判断条件
+        if (!self.investDetailModel.gradeIncreases || [[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.gradeIncreases] isEqualToString:@""] || [self.investDetailModel.gradeIncreases doubleValue] == 0.0) {
+            return 0;
+        } else {
+            return 48;
+        }
+    }
+    
     return 0;
 }
 
@@ -365,51 +392,65 @@
                 headviewHeight = 38;
                 viewYPos = 0;
             } else {
-                headviewHeight = 48;
+                headviewHeight = 60;
                 viewYPos = 10;
             }
             UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, headviewHeight)];
-            headView.backgroundColor = UIColorWithRGB(0xebebee);
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, viewYPos, ScreenWidth, 38)];
-            view.backgroundColor = UIColorWithRGB(0xf7f7f7);
-            UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 12, 60, 14)];
-            labelTitle.text = @"原标信息";
-            labelTitle.textColor = UIColorWithRGB(0x333333);
-            labelTitle.backgroundColor = [UIColor clearColor];
-            labelTitle.font = [UIFont systemFontOfSize:14];
-            [view addSubview:labelTitle];
+            headView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+            
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, viewYPos, ScreenWidth, 50)];
+            view.backgroundColor = [Color color:PGColorOptionThemeWhite];
             [headView addSubview:view];
             
-            UILabel *detalLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(labelTitle.frame), 14, 250, 10)];
-            detalLabel.text = @"（购买的项目，按原标路径回款，详见回款明细）";
-            detalLabel.textColor = UIColorWithRGB(0x999999);
+            UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 17, 3, 16)];
+            iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+            iconView.layer.cornerRadius = 2.0f;
+            [view addSubview:iconView];
+            
+            UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(iconView.frame) + 5, 16, 65, 18)];
+            labelTitle.text = @"原标信息";
+            labelTitle.textColor = [Color color:PGColorOptionTitleBlack];
+            labelTitle.backgroundColor = [UIColor clearColor];
+            labelTitle.font = [Color gc_Font:16];
+            [view addSubview:labelTitle];
+            
+            UILabel *detalLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(labelTitle.frame) + 5, 18, ScreenWidth - CGRectGetMaxX(labelTitle.frame), 18)];
+            detalLabel.text = @"购买的项目，按原标路径回款，详见回款明细";
+            detalLabel.textColor = [Color color:PGColorOptionTitleGray];
             detalLabel.backgroundColor = [UIColor clearColor];
             detalLabel.textAlignment = NSTextAlignmentLeft;
             detalLabel.numberOfLines = 1;
-            detalLabel.font = [UIFont systemFontOfSize:10];
+            detalLabel.font = [Color gc_Font:12];
             [view addSubview:detalLabel];
             
-            [self viewAddLine:view Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
-            [self viewAddLine:headView Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
-            [self viewAddLine:headView Up:NO withColor:UIColorWithRGB(0xeff0f3)];
+//            [self viewAddLine:view Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
+//            [self viewAddLine:headView Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
+//            [self viewAddLine:headView Up:NO withColor:UIColorWithRGB(0xeff0f3)];
             return headView;
         }
        
     } else if (section == 5) {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 48)];
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
         headView.backgroundColor = UIColorWithRGB(0xebebee);
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 38)];
-        view.backgroundColor = UIColorWithRGB(0xf7f7f7);
-        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 11, ScreenWidth/2, 16)];
-        labelTitle.text = @"回款明细";
-        labelTitle.textColor = UIColorWithRGB(0x333333);
-        labelTitle.backgroundColor = [UIColor clearColor];
-        labelTitle.font = [UIFont systemFontOfSize:14];
-        [view addSubview:labelTitle];
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 50)];
+        view.backgroundColor = [Color color:PGColorOptionThemeWhite];
+        
         [headView addSubview:view];
+        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 17, 3, 16)];
+        iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+        iconView.layer.cornerRadius = 2.0f;
+        [view addSubview:iconView];
+        
+        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(iconView.frame) + 5, 15, ScreenWidth/2, 20)];
+        labelTitle.text = @"回款明细";
+        labelTitle.textColor = [Color color:PGColorOptionTitleBlack];
+        labelTitle.backgroundColor = [UIColor clearColor];
+        labelTitle.font = [UIFont systemFontOfSize:16];
+        [view addSubview:labelTitle];
         
         
-        UILabel *Label = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 15 - 100, 12, 100, 14)];
+        UILabel *Label = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 15 - 100, 18, 100, 14)];
         if (self.investDetailModel.refundSummarys.count > 0) {
             NSString *lalText = [NSString stringWithFormat:@"第%@期/共%@期",self.investDetailModel.refundSummarysNow,self.investDetailModel.refundSummarysCount];
             Label.textColor = UIColorWithRGB(0x555555);
@@ -434,9 +475,9 @@
         }
         
         
-        [self viewAddLine:view Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
-        [self viewAddLine:headView Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
-        [self viewAddLine:headView Up:NO withColor:UIColorWithRGB(0xeff0f3)];
+//        [self viewAddLine:view Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
+//        [self viewAddLine:headView Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
+//        [self viewAddLine:headView Up:NO withColor:UIColorWithRGB(0xeff0f3)];
         return headView;
     }
     return nil;
@@ -458,21 +499,37 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 3) {
-        //未获得等级加息时的判断条件
-        if (!self.investDetailModel.gradeIncreases || [[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.gradeIncreases] isEqualToString:@""] || [self.investDetailModel.gradeIncreases doubleValue] == 0.0) {
-            if (self.investDetailModel.contractClauses.count == 0) {
+        if ([_detailType intValue] == 1) {
+            if (!self.investDetailModel.gradeIncreases || [[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.gradeIncreases] isEqualToString:@""] || [self.investDetailModel.gradeIncreases doubleValue] == 0.0) { //没有等级加息
+                return 10;
+            } else {
                 return 0;
             }
-            return 10;
+            
+        } else {
+            //未获得等级加息时的判断条件
+            if (!self.investDetailModel.gradeIncreases || [[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.gradeIncreases] isEqualToString:@""] || [self.investDetailModel.gradeIncreases doubleValue] == 0.0) {
+                //            if (self.investDetailModel.contractClauses.count == 0) {
+                //                return 0;
+                //            }
+                //            return 10;
+                return 0;
+            }
+            return 0;
         }
-        return 0;
+
     } else if (section == 0) {
         return 60;
     } else if (section == 4) {
-        if (self.investDetailModel.contractClauses.count == 0) {
-            return 38;
+        if ([_detailType intValue] == 1) {
+            if (self.investDetailModel.contractClauses.count == 0) {
+                return 38;
+            }
+            return 48;
+        } else {
+            return 60;
         }
-        return 48;
+
     } else if (section == 2) {
          //未获得等级加息时的判断条件
         NSLog(@"%@",self.investDetailModel.gradeIncreases);
@@ -480,22 +537,12 @@
             return 0;
         }
         return 60;
-    }else if(section == 1){
+    } else if(section == 1){
         return 0.01;
-        if ([_detailType  intValue ] == 1) {
-            if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil) {
-                return 48;
-            } else {
-                return 38;
-            }
-            
-        }else{
-            if ([self.investDetailModel.buyCueDes isEqualToString:@""] || self.investDetailModel.buyCueDes == nil) {
-                return 48;
-            } else {
-                return 38;
-            }
-        }
+
+    } else if(section == 5){
+        return 60;
+        
     }
     return 48;
 }
@@ -540,15 +587,24 @@
     } else {
         if([indexPath section] == 3)
         {
-            return 44;
-        } else if([indexPath section] == 1 || [indexPath section] == 2) {
+            return 50;
+        } else if([indexPath section] == 1) {
+            if ([indexPath row] == 0) {
+                return 14 + 20;
+            } else if ([indexPath row] == 5) {
+                return 14 + 20 + 13;
+            } else {
+                return 27;
+            }
+        } else if ([indexPath section] == 2) {
             if ([indexPath row] == 0 || [indexPath row] == 2) {
                 return 27 + 7;
             } else {
                 return 27;
             }
-        } else if ([indexPath section] == 4) {
-            return 61;
+        }
+        else if ([indexPath section] == 4) {
+            return 118;
         } else if([indexPath section] == 5) {
             if ([indexPath row] == 0 || [indexPath row] == self.investDetailModel.refundSummarys.count) {
                 return 27 + 8;
@@ -559,7 +615,7 @@
                 return 27;
             }
         } else {
-            return 82;
+            return 104;
         }
     }
    
@@ -591,7 +647,7 @@
 
     } else {
         if(section == 1) {
-            return 3;
+            return 6;
         } else if (section == 2) {
              //未获得等级加息时的判断条件
             if (!self.investDetailModel.gradeIncreases || [[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.gradeIncreases] isEqualToString:@""] || [self.investDetailModel.gradeIncreases doubleValue] == 0.0) {
@@ -655,35 +711,78 @@
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                UILabel *titleLabel = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:14]];
+               
+                UILabel *titleLabel = [UILabel labelWithFrame:CGRectZero text:@"" textColor:[Color color:PGColorOptionTitleBlack] font:[Color gc_Font:14]];
                 titleLabel.textAlignment = NSTextAlignmentLeft;
                 titleLabel.tag = 1001;
                 [cell.contentView addSubview:titleLabel];
                 
-                UILabel *amountLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth / 2 + 14, 15, ScreenWidth / 2 - 29, 12) text:@"" textColor:UIColorWithRGB(0x555555) font:[UIFont boldSystemFontOfSize:12]];
+                UILabel *amountLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth / 2 + 14, 15, ScreenWidth / 2 - 29, 12) text:@"" textColor:UIColorWithRGB(0x555555) font:[Color gc_Font:14]];
                 amountLabel.textAlignment = NSTextAlignmentRight;
                 amountLabel.tag = 1002;
                 amountLabel.numberOfLines = 1;
                 [cell.contentView addSubview:amountLabel];
+                
                 if ([indexPath row] == 0) {
-                    titleLabel.frame = CGRectMake(15, 15, ScreenWidth / 2, 12);
-                    amountLabel.frame = CGRectMake(ScreenWidth / 2 + 14, 15, ScreenWidth / 2 - 29, 12);
+                    titleLabel.frame = CGRectMake(15, 20, ScreenWidth / 2, 14);
+                    amountLabel.frame = CGRectMake(ScreenWidth / 2 + 14, 20, ScreenWidth / 2 - 29, 14);
                 } else {
-                    titleLabel.frame = CGRectMake(15, 8, ScreenWidth / 2, 12);
-                    amountLabel.frame = CGRectMake(ScreenWidth / 2 + 14, 8, ScreenWidth / 2 - 29, 12);
+                    titleLabel.frame = CGRectMake(15, 12, ScreenWidth / 2, 14);
+                    amountLabel.frame = CGRectMake(ScreenWidth / 2 + 14, 12, ScreenWidth / 2 - 29, 14);
                 }
             }
             UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:1001];
             UILabel *amountLabel = (UILabel*)[cell.contentView viewWithTag:1002];
             
-            NSArray *titleArr = @[@"应收本金",@"应收利息",@"应收违约金"];
-            NSArray *amountArr = @[@(self.investDetailModel.awaitPrincipal.floatValue + self.investDetailModel.refundPrincipal.floatValue),
-                                   @(self.investDetailModel.awaitInterest.floatValue + self.investDetailModel.refundInterest.floatValue),
-                                   @(self.investDetailModel.refundPrepaymentPenalty.floatValue)];
-            titleLabel.text = [titleArr objectAtIndex:[indexPath row]];
-            NSString *anmout = [NSString stringWithFormat:@"%.2f",[[amountArr objectAtIndex:[indexPath row]] floatValue]];
-            anmout = [UCFToolsMehod dealmoneyFormart:anmout];
-            amountLabel.text = [NSString stringWithFormat:@"¥%@",anmout];
+            NSArray *titleArr = @[@"实付金额",@"预期利息",@"预期年化",@"还款方式",@"原标期限",@"起息日期"];
+            
+            
+            NSString * markTime = @"-";
+            if ([[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.repayModeText] isEqualToString:@""]) {
+                markTime = @"还款方式：-";
+            } else {
+                markTime = self.investDetailModel.repayModeText;
+            }
+            
+            NSString *actMoney = [UCFToolsMehod isNullOrNilWithString:self.investDetailModel.actualInvestAmt];
+            actMoney = [NSString stringWithFormat:@"¥%@",actMoney];
+            
+            NSString *taotalIntrest = [UCFToolsMehod isNullOrNilWithString:self.investDetailModel.taotalIntrest];
+            taotalIntrest = [NSString stringWithFormat:@"¥%@",taotalIntrest];
+            
+            NSString *annualRate = [UCFToolsMehod isNullOrNilWithString:self.investDetailModel.annualRate];
+            annualRate = [NSString stringWithFormat:@"%@%%",annualRate];
+            
+            NSString *repayPeriod = @"-";
+            if ([[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.repayPeriod] isEqualToString:@""]) {
+                repayPeriod = @"-";
+            } else {
+                repayPeriod = [NSString stringWithFormat:@"%@天",self.investDetailModel.repayPeriod];
+            }
+            NSString *effactiveDate = @"-";
+            if ([[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.effactiveDate] isEqualToString:@""]) {
+                effactiveDate = @"-";
+            } else {
+                effactiveDate = self.investDetailModel.effactiveDate;
+            }
+            
+            NSArray *amountArr = @[actMoney,
+                                   taotalIntrest,
+                                   annualRate,
+                                   markTime,
+                                   repayPeriod,
+                                   effactiveDate,
+                                   ];
+            NSString *title = [titleArr objectAtIndex:[indexPath row]];
+            titleLabel.text = title;
+            NSString *anmout = [NSString stringWithFormat:@"%@",[amountArr objectAtIndex:[indexPath row]]];
+            
+            amountLabel.text = [NSString stringWithFormat:@"%@",anmout];
+            if ([title isEqualToString:@"预期利息"]) {
+                amountLabel.textColor = [Color color:PGColorOpttonTextRedColor];
+            } else {
+                amountLabel.textColor = [Color color:PGColorOptionTitleBlack];
+            }
             return cell;
         }
         
@@ -738,12 +837,23 @@
             cell.textLabel.font = [UIFont systemFontOfSize:15];
             cell.textLabel.textColor = [Color color:PGColorOptionTitleBlack];
             
-            UILabel *acessoryLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 100, (cell.contentView.frame.size.height - 12) / 2, 70, 12) text:@"" textColor:[Color color:PGColorOptionTitleGray] font:[UIFont systemFontOfSize:13]];
+            UILabel *acessoryLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 100, (50 - 14) / 2, 70, 14) text:@"" textColor:[Color color:PGColorOptionTitleGray] font:[UIFont systemFontOfSize:13]];
             acessoryLabel.tag = 100;
             acessoryLabel.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:acessoryLabel];
+            
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 49, ScreenWidth - 15, 1)];
+            lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+            lineView.tag = 101;
+            [cell.contentView addSubview:lineView];
         }
         UILabel *acessoryLabel = (UILabel*)[cell.contentView viewWithTag:100];
+        UILabel *lineView = (UILabel*)[cell.contentView viewWithTag:101];
+        if (indexPath.row == self.investDetailModel.contractClauses.count - 1) {
+            lineView.hidden = YES;
+        } else {
+            lineView.hidden = NO;
+        }
         UCFConstractModel *constract = self.investDetailModel.contractClauses[indexPath.row];
         cell.textLabel.text = constract.contracttitle;
         switch ([constract.signStatus integerValue]) {
@@ -763,43 +873,75 @@
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
                 
-                UILabel *tarnsBidLabel1 = [UILabel labelWithFrame:CGRectMake(15, 15, ScreenWidth / 2, 12) text:@"" textColor:nil font:[UIFont systemFontOfSize:12]];
-                tarnsBidLabel1.textAlignment = NSTextAlignmentLeft;
+                UILabel *tarnsBidMarkLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, ScreenWidth / 2 - 15, 15)];
+                tarnsBidMarkLabel1.text = @"预期年化利率";
+                tarnsBidMarkLabel1.textColor = [Color color:PGColorOptionTitleBlack];
+                tarnsBidMarkLabel1.font = [Color gc_Font:14];
+                [cell addSubview:tarnsBidMarkLabel1];
+                
+                UILabel *tarnsBidLabel1 = [UILabel labelWithFrame:CGRectMake(ScreenWidth / 2, 5, ScreenWidth / 2 - 15, 15) text:@"" textColor:nil font:[UIFont systemFontOfSize:14]];
+                tarnsBidLabel1.textAlignment = NSTextAlignmentRight;
                 tarnsBidLabel1.numberOfLines = 1;
                 tarnsBidLabel1.tag = 0x1000;
+                tarnsBidLabel1.textColor = [Color color:PGColorOptionTitleBlack];
                 [cell.contentView addSubview:tarnsBidLabel1];
                 
-                UILabel *tarnsBidLabel2 = [UILabel labelWithFrame:CGRectMake(ScreenWidth / 2 + 15, 15, ScreenWidth / 2 - 15, 12) text:@"" textColor:nil font:[UIFont systemFontOfSize:12]];
-                tarnsBidLabel2.textAlignment = NSTextAlignmentLeft;
+                CGFloat Vspace = 10;
+                
+                UILabel *tarnsBidMarkLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(tarnsBidMarkLabel1.frame) + Vspace, ScreenWidth / 2 - 15, 15)];
+                tarnsBidMarkLabel2.text = @"原标期限";
+                tarnsBidMarkLabel2.textColor = [Color color:PGColorOptionTitleBlack];
+                tarnsBidMarkLabel2.font = [Color gc_Font:14];
+                [cell addSubview:tarnsBidMarkLabel2];
+                
+                UILabel *tarnsBidLabel2 = [UILabel labelWithFrame:CGRectMake(ScreenWidth / 2, CGRectGetMaxY(tarnsBidMarkLabel1.frame) + Vspace, ScreenWidth / 2 - 15, 15) text:@"" textColor:nil font:[UIFont systemFontOfSize:14]];
+                tarnsBidLabel2.textAlignment = NSTextAlignmentRight;
                 tarnsBidLabel2.tag = 0x1001;
                 [cell.contentView addSubview:tarnsBidLabel2];
                 
-                UILabel *tarnsBidLabel3 = [UILabel labelWithFrame:CGRectMake(15,CGRectGetMaxY(tarnsBidLabel1.frame) + 8, ScreenWidth / 2, 12) text:@"" textColor:nil font:[UIFont systemFontOfSize:12]];
+                UILabel *tarnsBidMarkLabel3 = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(tarnsBidMarkLabel2.frame) + Vspace, ScreenWidth / 2 - 15, 15)];
+                tarnsBidMarkLabel3.text = @"还款方式";
+                tarnsBidMarkLabel3.textColor = [Color color:PGColorOptionTitleBlack];
+                tarnsBidMarkLabel3.font = [Color gc_Font:14];
+                [cell addSubview:tarnsBidMarkLabel3];
+                
+                UILabel *tarnsBidLabel3 = [UILabel labelWithFrame:CGRectMake(ScreenWidth / 2, CGRectGetMaxY(tarnsBidMarkLabel2.frame) + Vspace, ScreenWidth / 2 - 15, 15) text:@"" textColor:nil font:[UIFont systemFontOfSize:14]];
                 tarnsBidLabel3.numberOfLines = 1;
                 tarnsBidLabel3.tag = 0x1002;
-                tarnsBidLabel3.textAlignment = NSTextAlignmentLeft;
+                tarnsBidLabel3.textColor = [Color color:PGColorOptionTitleBlack];
+                tarnsBidLabel3.textAlignment = NSTextAlignmentRight;
                 [cell.contentView addSubview:tarnsBidLabel3];
                 
-                UILabel *tarnsBidLabel4 = [UILabel labelWithFrame:CGRectMake(ScreenWidth / 2 + 15, CGRectGetMaxY(tarnsBidLabel1.frame) + 8, ScreenWidth / 2 - 15, 12) text:@"" textColor:nil font:[UIFont systemFontOfSize:12]];
-                tarnsBidLabel4.textAlignment = NSTextAlignmentLeft;
+                UILabel *tarnsBidMarkLabel4 = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(tarnsBidMarkLabel3.frame) + Vspace, ScreenWidth / 2 - 15, 15)];
+                tarnsBidMarkLabel4.text = @"起息日期";
+                tarnsBidMarkLabel4.textColor = [Color color:PGColorOptionTitleBlack];
+                tarnsBidMarkLabel4.font = [Color gc_Font:14];
+                [cell addSubview:tarnsBidMarkLabel4];
+                
+                UILabel *tarnsBidLabel4 = [UILabel labelWithFrame:CGRectMake(ScreenWidth / 2,  CGRectGetMaxY(tarnsBidMarkLabel3.frame) + Vspace, ScreenWidth / 2 - 15, 15) text:@"" textColor:nil font:[UIFont systemFontOfSize:14]];
+                tarnsBidLabel4.textAlignment = NSTextAlignmentRight;
                 tarnsBidLabel4.tag = 0x1003;
+                tarnsBidLabel4.textColor = [Color color:PGColorOptionTitleBlack];
                 [cell.contentView addSubview:tarnsBidLabel4];
             }
+            
             UILabel *tarnsBidLabel1 = (UILabel*)[cell.contentView viewWithTag:0x1000];
             UILabel *tarnsBidLabel2 = (UILabel*)[cell.contentView viewWithTag:0x1001];
             UILabel *tarnsBidLabel3 = (UILabel*)[cell.contentView viewWithTag:0x1002];
             UILabel *tarnsBidLabel4 = (UILabel*)[cell.contentView viewWithTag:0x1003];
-            NSMutableAttributedString *str1 = [SharedSingleton getAcolorfulStringWithText1:@"预期年化利率：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@%%", self.investDetailModel.oldPrdClaimAnnualRate] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"预期年化利率：%@%%", self.investDetailModel.oldPrdClaimAnnualRate]];
-            tarnsBidLabel1.attributedText = str1;
             
-            NSMutableAttributedString *str2 = [SharedSingleton getAcolorfulStringWithText1:@"原标期限：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimRepayPeriod] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"原标期限：%@", self.investDetailModel.oldPrdClaimRepayPeriod]];
-            tarnsBidLabel2.attributedText = str2;
             
-            NSMutableAttributedString *str3 = [SharedSingleton getAcolorfulStringWithText1:@"还款方式：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimRepayModeText] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"还款方式：%@", self.investDetailModel.oldPrdClaimRepayModeText]];
-            tarnsBidLabel3.attributedText = str3;
+//            NSMutableAttributedString *str1 = [SharedSingleton getAcolorfulStringWithText1:@"预期年化利率：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@%%", self.investDetailModel.oldPrdClaimAnnualRate] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"预期年化利率：%@%%", self.investDetailModel.oldPrdClaimAnnualRate]];
+            tarnsBidLabel1.text = [NSString stringWithFormat:@"%@%%", self.investDetailModel.oldPrdClaimAnnualRate];
             
-            NSMutableAttributedString *str4 = [SharedSingleton getAcolorfulStringWithText1:@"起息日期：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimAnnualRate] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"起息日期：%@", self.investDetailModel.oldPrdClaimEffactiveDate]];
-            tarnsBidLabel4.attributedText = str4;
+//            NSMutableAttributedString *str2 = [SharedSingleton getAcolorfulStringWithText1:@"原标期限：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimRepayPeriod] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"原标期限：%@", self.investDetailModel.oldPrdClaimRepayPeriod]];
+            tarnsBidLabel2.text = [NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimRepayPeriod];
+            
+//            NSMutableAttributedString *str3 = [SharedSingleton getAcolorfulStringWithText1:@"还款方式：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimRepayModeText] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"还款方式：%@", self.investDetailModel.oldPrdClaimRepayModeText]];
+            tarnsBidLabel3.text = [NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimRepayModeText];
+            
+//            NSMutableAttributedString *str4 = [SharedSingleton getAcolorfulStringWithText1:@"起息日期：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimAnnualRate] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"起息日期：%@", self.investDetailModel.oldPrdClaimEffactiveDate]];
+            tarnsBidLabel4.text = [NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimEffactiveDate];
             
             return cell;
         } else {

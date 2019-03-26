@@ -11,6 +11,7 @@
 #import "UCFHighQualityTableViewCell.h"
 #import "UCFSegementBtnView.h"
 #import "UCFToolsMehod.h"
+#import "UCFInvestmentDetailViewController.h"
 @interface UCFHighQualityViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,UCFSegementBtnViewDelegate>
 @property(nonatomic, assign)NSInteger currentPage;
 @property(nonatomic, assign)NSInteger index;
@@ -178,6 +179,15 @@
     api.animatingView = self.view;
     [api start];
      */
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dict = [self.dataArray objectAtIndex:indexPath.row];
+    UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
+    controller.billId = dict[@"id"];
+    controller.accoutType = SelectAccoutTypeP2P;
+    controller.detailType = @"1";
+    [self.navigationController pushViewController:controller animated:YES];
 }
 - (BaseTableView *)showTableView
 {

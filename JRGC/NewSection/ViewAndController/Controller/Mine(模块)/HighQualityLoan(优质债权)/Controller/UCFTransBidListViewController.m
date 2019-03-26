@@ -11,6 +11,7 @@
 #import "UCFHighQualityTableViewCell.h"
 #import "UCFSegementBtnView.h"
 #import "UCFToolsMehod.h"
+#import "UCFInvestmentDetailViewController.h"
 @interface UCFTransBidListViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,UCFSegementBtnViewDelegate>
 @property(nonatomic, assign)NSInteger currentPage;
 @property(nonatomic, assign)NSInteger index;
@@ -185,6 +186,15 @@
      api.animatingView = self.view;
      [api start];
      */
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dict = self.dataArray[indexPath.row];
+    UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
+    controller.billId = dict[@"prdOrderId"];
+    controller.accoutType = SelectAccoutTypeP2P;
+    controller.detailType = @"2";
+    [self.navigationController pushViewController:controller animated:YES];
 }
 - (BaseTableView *)showTableView
 {
