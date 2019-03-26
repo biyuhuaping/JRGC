@@ -46,13 +46,17 @@
     [self.rootLayout addSubview:navView];
     
     MyRelativeLayout *contentLayout = [MyRelativeLayout new];
-    contentLayout.myHorzMargin = 0; //同时指定左右边距为0表示宽度和父视图一样宽
+    contentLayout.myHorzMargin = 0;         //同时指定左右边距为0表示宽度和父视图一样宽
     self.contentLayout = contentLayout;
     
     UCFNewBidDetaiInfoView *bidinfoView = [[UCFNewBidDetaiInfoView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight1, ScreenWidth, 155)];
     self.bidinfoView = bidinfoView;
     [self.contentLayout addSubview:bidinfoView];
     
+    
+    NSArray *prdLabelsList = self.model.data.prdLabelsList;
+    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+
     UCFRemindFlowView *remind = [UCFRemindFlowView new];
     remind.topPos.equalTo(bidinfoView.bottomPos);
     remind.myHorzMargin = 0;
@@ -64,9 +68,7 @@
     [self.contentLayout addSubview:remind];
    
     //是P2p 并且不是
-//    if(_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER){
     _minuteCountDownView = [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
-
     _minuteCountDownView.topPos.equalTo(remind.bottomPos);
     _minuteCountDownView.myHorzMargin = 0;
     _minuteCountDownView.heightSize.equalTo(@45);
@@ -75,8 +77,21 @@
     _minuteCountDownView.sourceVC = @"UCFProjectDetailVC";//投资页面
     [self.contentLayout addSubview:self.minuteCountDownView];
 
-//    }
-    contentLayout.heightSize.equalTo(@(155 + 40 + 45));
+    if (![prdLabelsList isEqual:[NSNull null]]) {
+        for (DetailPrdlabelslist *tmpModel in prdLabelsList) {
+            NSInteger labelPriority = [tmpModel.labelPriority integerValue];
+            if (labelPriority > 1) {
+                if ([tmpModel.labelName rangeOfString:@"起投"].location == NSNotFound) {
+                    [labelPriorityArr addObject:tmpModel.labelName];
+                }
+            }
+        }
+    }
+    if (labelPriorityArr.count > 0) {
+        contentLayout.heightSize.equalTo(@(155 + 40 + 45));
+    } else {
+        contentLayout.heightSize.equalTo(@(155 + 45));
+    }
 
     self.showTableView.topPos.equalTo(self.navView.bottomPos);
     self.showTableView.bottomPos.equalTo(@57);

@@ -157,7 +157,7 @@
                 selfWeak.tipLabel.text = @"剩余时间";//
             }
         } else if ([keyPath isEqualToString:@"timeArray"]) {
-            NSArray *timeArray = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            NSArray *timeArray = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (timeArray.count > 0) {
                  selfWeak.tipLabel.text = [NSString stringWithFormat:@"筹标期: %@ 至 %@",timeArray[0],timeArray[1]];
             }
