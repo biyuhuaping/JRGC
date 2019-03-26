@@ -60,6 +60,10 @@ NS_ASSUME_NONNULL_BEGIN
  标识 0 代表投标中 1代表满标
  */
 @property(nonatomic, strong)NSString *stopStatus;
+//普通标的
+@property(nonatomic, copy) NSString *intervalMilli;
+@property(nonatomic, strong) NSArray *timeArray;
+
 
 
 

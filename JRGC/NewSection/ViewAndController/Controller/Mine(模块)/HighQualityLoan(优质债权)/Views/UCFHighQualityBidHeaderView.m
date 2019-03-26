@@ -13,6 +13,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
+        
         UIImageView *baseMapView = [[UIImageView alloc] init];
         baseMapView.myVertMargin = 0;
         baseMapView.myHorzMargin = 0;
@@ -22,7 +23,7 @@
         
         UILabel *principalMarkLab = [UILabel new];
         principalMarkLab.text = @"待收本金";
-        principalMarkLab.textColor = [Color color:PGColorOptionTitleOrange];
+        principalMarkLab.textColor = [Color color:PGColorOptionThemeWhite];
         principalMarkLab.font = [Color gc_Font:12];
         principalMarkLab.leftPos.equalTo(@15);
         principalMarkLab.topPos.equalTo(@25);
@@ -37,10 +38,11 @@
         principalValueLab.topPos.equalTo(@48);
         [self addSubview:principalValueLab];
         [principalValueLab sizeToFit];
+        self.principalValueLab = principalValueLab;
         
         UILabel *interestMarkLab = [UILabel new];
         interestMarkLab.text = @"待收利息";
-        interestMarkLab.textColor = [Color color:PGColorOptionTitleOrange];
+        interestMarkLab.textColor = [Color color:PGColorOptionThemeWhite];
         interestMarkLab.font = [Color gc_Font:12];
         interestMarkLab.leftPos.equalTo(@15);
         interestMarkLab.topPos.equalTo(@93);
@@ -55,6 +57,7 @@
         interestValueLab.centerYPos.equalTo(interestMarkLab.centerYPos);
         [self addSubview:interestValueLab];
         [interestValueLab sizeToFit];
+        self.interestValueLab = interestValueLab;
     }
     return self;
 }

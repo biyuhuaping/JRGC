@@ -150,6 +150,9 @@
 //    UCFNewAiLoanViewController *vc = [[UCFNewAiLoanViewController alloc] init];
 //    [self.navigationController pushViewController:vc animated:YES];
 //    return;
+    UCFHighQualityContainerViewController *vc = [[UCFHighQualityContainerViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
     CellConfig *cellConfig = self.cellConfigData[indexPath.section][indexPath.row];
     if (indexPath.section == 1) {
         if ([cellConfig.title isEqualToString:@"回款日历"])

@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "BaseTableView.h"
 #import "BaseView.h"
+#import "NetworkModule.h"
+#import "JSONKit.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UCFNewBaseViewController : UIViewController
+@interface UCFNewBaseViewController : UIViewController<NetworkModuleDelegate>
 @property(nonatomic, strong)MyRelativeLayout *rootLayout;
 
 /**

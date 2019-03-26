@@ -69,7 +69,6 @@
     NSString *annualRate = self.model.data.annualRate;;
     self.annualRate = [NSString stringWithFormat:@"%@%%",annualRate];
 
-     
     //平台补贴利息
     NSString *butieTitle = @"";
     NSString *platformSubsidyExpense = self.model.data.platformSubsidyExpense;
@@ -141,6 +140,15 @@
 {
     NSString *stopStatusStr = self.model.data.stopStatus;// 0投标中,1满标
     self.stopStatus = stopStatusStr;
+    if ([stopStatusStr isEqualToString:@"0"]) {
+        NSString *intervalMilli = [NSString stringWithFormat:@"%ld",self.model.data.intervalMilli];
+        self.intervalMilli = intervalMilli;
+    } else {
+        NSString *startTimeStr = self.model.data.startTime;
+        NSString *endTimeStr = self.model.data.fullTime;
+        NSArray *arr = [NSArray arrayWithObjects:startTimeStr,endTimeStr, nil];
+        self.timeArray = arr;
+    }
 }
 - (void)invetsButtonState
 {
@@ -148,6 +156,14 @@
     if ([statue isEqualToString:@"2"] || [statue isEqualToString:@"11"]) {
 
         self.bidInvestText = @"立即出借";
+    } else if ([statue isEqualToString:@"5"]) {
+        self.bidInvestText = @"回款中";
+    }  else if ([statue isEqualToString:@"6"]) {
+        self.bidInvestText = @"已回款";
+    } else if ([statue isEqualToString:@"1"]) {
+        self.bidInvestText = @"等待确认";
+    } else if ([statue isEqualToString:@"0"]) {
+        self.bidInvestText = @"待回款";
     }
 /*
     if ([_investmentState isEqualToString:@"2"] || [_investmentState isEqualToString:@"11"]) {

@@ -9,7 +9,7 @@
 #import "UCFNewBatchTableViewCell.h"
 
 @interface UCFNewBatchTableViewCell ()
-@property(nonatomic, strong)UILabel *titleLab;
+@property(nonatomic, strong)UILabel   *titleLab;
 @property(nonatomic, strong)UILabel   *loanTimeValueLab;
 @property(nonatomic, strong)UILabel   *loanMoneyValueLab;
 @property(nonatomic, strong)UILabel   *loanPeriodValueLab;

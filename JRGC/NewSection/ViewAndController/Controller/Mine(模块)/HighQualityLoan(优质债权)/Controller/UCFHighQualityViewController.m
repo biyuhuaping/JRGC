@@ -7,20 +7,45 @@
 //
 
 #import "UCFHighQualityViewController.h"
-
-@interface UCFHighQualityViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate>
+#import "UCFHighQualityBidHeaderView.h"
+#import "UCFHighQualityTableViewCell.h"
+#import "UCFSegementBtnView.h"
+#import "UCFToolsMehod.h"
+@interface UCFHighQualityViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,UCFSegementBtnViewDelegate>
 @property(nonatomic, assign)NSInteger currentPage;
+@property(nonatomic, assign)NSInteger index;
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
+@property(nonatomic, strong)UCFHighQualityBidHeaderView *board;
 @end
 
 @implementation UCFHighQualityViewController
 - (void)loadView
 {
     [super loadView];
+    
+    MyRelativeLayout *headView = [MyRelativeLayout new];
+    headView.heightSize.equalTo(@(131 +57));
+    headView.myHorzMargin = 0;
+
+    UCFHighQualityBidHeaderView *board = [UCFHighQualityBidHeaderView new];
+    board.heightSize.equalTo(@(131));
+    board.myHorzMargin = 0;
+    board.topPos.equalTo(@0);
+    [headView addSubview:board];
+    self.board = board;
+    
+    UCFSegementBtnView *segeView = [[UCFSegementBtnView alloc] initWithTitleArray:@[@"回款中",@"未起息",@"已回款"] delegate:self];
+    segeView.heightSize.equalTo(@57);
+    segeView.myHorzMargin = 0;
+    segeView.topPos.equalTo(board.bottomPos);
+    [headView addSubview:segeView];
+    
+    [self.rootLayout addSubview:headView];
+    
     self.showTableView.leftPos.equalTo(@0);
     self.showTableView.rightPos.equalTo(@0);
-    self.showTableView.topPos.equalTo(@0);
+    self.showTableView.topPos.equalTo(headView.bottomPos);
     self.showTableView.bottomPos.equalTo(@0);
     
     [self.rootLayout addSubview:self.showTableView];
@@ -28,13 +53,75 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _index = 0;
+    [self getHeaderInfoRequest];
     [self.showTableView beginRefresh];
-}
 
+}
+- (void)getHeaderInfoRequest
+{
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",SingleUserInfo.loginData.userInfo.userId];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:SelectAccoutTypeP2P];
+    }
+}
+- (void)beginPost:(kSXTag)tag
+{
+}
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    if (tag.integerValue == kSXTagMyInvestHeaderInfo) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        if([dic[@"status"] intValue] == 1)
+        {
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+//            id interests = data[@"interests"];
+//            self.interestsLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:interests]];//累计收益
+            id principal = data[@"noPrincipal"];
+            self.board.principalValueLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:principal]];//待收本金
+            [self.board.principalValueLab sizeToFit];
+            
+            id noInterests = data[@"noInterests"];
+            self.board.interestValueLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:noInterests]];//待收利息
+            [self.board.interestValueLab sizeToFit];
+
+        }
+    }else if (tag.integerValue == kSXTagPrdOrderUinvest) {
+        [self.showTableView endRefresh];
+        NSMutableDictionary *dic = [result objectFromJSONString];
+        NSString *rstcode = dic[@"status"];
+        NSString *rsttext = dic[@"statusdes"];
+        if ([rstcode intValue] == 1) {
+            if (_currentPage == 1) {
+                [self.dataArray removeAllObjects];
+                [self.showTableView reloadData];
+            }
+            BOOL hasNextPage = [dic[@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
+            if (hasNextPage) {
+                _currentPage++;
+            }
+            NSArray *dataArr = dic[@"pageData"][@"result"];
+            [self.dataArray addObjectsFromArray:dataArr];
+            [self.showTableView reloadData];
+        } else {
+            ShowMessage(rsttext);
+        }
+        
+
+
+    }
+    HideHUD(self.view);
+
+}
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    ShowMessage(@"网络连接异常");
+
+}
 - (void)refreshTableViewHeader
 {
-    _currentPage = 0;
+    _currentPage = 1;
     self.showTableView.enableRefreshFooter = YES;
     [self fetchData];
 }
@@ -46,8 +133,22 @@
 {
     [self fetchData];
 }
+- (void)segementBtnView:(UCFSegementBtnView *)segeView selectIndex:(NSInteger)index
+{
+    _index = index;
+    [self.showTableView beginRefresh];
+}
 - (void)fetchData
 {
+    ShowHUD(self.view);
+
+    NSArray *tempArr = @[@"3",@"100",@"4"];
+    NSString *userId = SingleUserInfo.loginData.userInfo.userId;
+    NSString *strParameters = [NSString stringWithFormat:@"page=%ld&rows=20&userId=%@&flag=%@&typeFlag=", (long)_currentPage,userId,tempArr[_index]];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderUinvest owner:self Type:SelectAccoutTypeP2P];
+    
+    
+    
     /*
     @PGWeakObj(self);
     UCFMyBatchBidListRequest *api = [[UCFMyBatchBidListRequest alloc] initWithPageIndex:_currentPage];
@@ -104,19 +205,24 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 180;
+    return 224;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellStr = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+    UCFHighQualityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
+        cell = [[UCFHighQualityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
     }
+    [cell setDataDict:self.dataArray[indexPath.row] isTrans:NO];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 0.01;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return nil;
 }
 @end

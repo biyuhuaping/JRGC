@@ -7,7 +7,7 @@
 //
 
 #import "NewInvestmentDetailTableViewCell.h"
-
+#import "UCFToolsMehod.h"
 @interface NewInvestmentDetailTableViewCell()
 @property(nonatomic, strong)UILabel *loanMarkLab;
 @property(nonatomic, strong)UILabel *loanValueLab;
@@ -87,7 +87,7 @@
         UIView *lineView = [UIView new];
         lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         lineView.leftPos.equalTo(@15);
-        lineView.heightSize.equalTo(@1);
+        lineView.heightSize.equalTo(@0.5);
         lineView.rightPos.equalTo(@15);
         lineView.bottomPos.equalTo(@0);
         [self.rootLayout addSubview:lineView];
@@ -98,7 +98,45 @@
 
 - (void)setValueOfTableViewCellLabel:(UCFInvestDetailModel *)model type:(NSString*)tp
 {
-    
+        if ([tp isEqualToString:@"1"]) {
+            NSString *strAmt = [UCFToolsMehod isNullOrNilWithString:[NSString stringWithFormat:@"%@",model.investAmt]];
+            strAmt = [UCFToolsMehod dealmoneyFormart:strAmt];
+            NSString *textStr  = self.accoutType == SelectAccoutTypeP2P ? @"出借金额" :@"认购金额";
+            self.loanMarkLab.text = textStr;
+            self.loanValueLab.text = [NSString stringWithFormat:@"¥%@",strAmt];
+            [self.loanValueLab sizeToFit];
+            [self.loanMarkLab sizeToFit];
+            //应收利息
+            NSString *anmout = [NSString stringWithFormat:@"%.2f",(model.awaitInterest.floatValue + model.refundInterest.floatValue)];
+            anmout = [UCFToolsMehod dealmoneyFormart:anmout];
+            self.interetValueLab.text = [NSString stringWithFormat:@"¥%@",anmout];
+            [self.interetValueLab sizeToFit];
+            
+            //应收违约金
+            NSString *liquidatedStr = [NSString stringWithFormat:@"%.2f", model.refundPrepaymentPenalty.floatValue];
+            liquidatedStr = [UCFToolsMehod dealmoneyFormart:liquidatedStr];
+            self.liquidatedValueLab.text = [NSString stringWithFormat:@"¥%@",liquidatedStr];
+            [self.liquidatedValueLab sizeToFit];
+        } else {
+            self.loanMarkLab.text = @"应收本金";
+            [self.loanMarkLab sizeToFit];
+            NSString *loanValue = [NSString stringWithFormat:@"%.2f",model.awaitPrincipal.floatValue + model.refundPrincipal.floatValue];
+            loanValue = [UCFToolsMehod dealmoneyFormart:loanValue];
+            self.loanValueLab.text = [NSString stringWithFormat:@"¥%@",loanValue];
+            [self.loanValueLab sizeToFit];
+            
+            //应收利息
+            NSString *anmout = [NSString stringWithFormat:@"%.2f",(model.awaitInterest.floatValue + model.refundInterest.floatValue)];
+            anmout = [UCFToolsMehod dealmoneyFormart:anmout];
+            self.interetValueLab.text = [NSString stringWithFormat:@"¥%@",anmout];
+            [self.interetValueLab sizeToFit];
+            
+            //应收违约金
+            NSString *liquidatedStr = [NSString stringWithFormat:@"%.2f", model.refundPrepaymentPenalty.floatValue];
+            liquidatedStr = [UCFToolsMehod dealmoneyFormart:liquidatedStr];
+            self.liquidatedValueLab.text = [NSString stringWithFormat:@"¥%@",liquidatedStr];
+            [self.liquidatedValueLab sizeToFit];
+        }
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
