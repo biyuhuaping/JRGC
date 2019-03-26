@@ -1244,6 +1244,7 @@
 		E3C9E9BB22266CE2003F6AC5 /* UCFMicroBankDepositoryAccountSeriaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C9E9BA22266CE2003F6AC5 /* UCFMicroBankDepositoryAccountSeriaCell.m */; };
 		E3C9E9C1222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C9E9C0222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m */; };
 		E3C9E9C422267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C9E9C322267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m */; };
+		E3D3A1E5224A104300DA6185 /* RTRootNavigationAddPushController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D3A1E4224A104300DA6185 /* RTRootNavigationAddPushController.m */; };
 		E3D6D520221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D6D51F221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m */; };
 		E3DEC72B22327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DEC72A22327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m */; };
 		E3DEC72E223276B5009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DEC72D223276B5009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel.m */; };
@@ -3505,6 +3506,8 @@
 		E3C9E9C0222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryGetHSAccountInfoBillApi.m; sourceTree = "<group>"; };
 		E3C9E9C222267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryGetHSAccountInfoBillModel.h; sourceTree = "<group>"; };
 		E3C9E9C322267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryGetHSAccountInfoBillModel.m; sourceTree = "<group>"; };
+		E3D3A1E3224A104300DA6185 /* RTRootNavigationAddPushController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTRootNavigationAddPushController.h; sourceTree = "<group>"; };
+		E3D3A1E4224A104300DA6185 /* RTRootNavigationAddPushController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTRootNavigationAddPushController.m; sourceTree = "<group>"; };
 		E3D6D51E221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryAccountHomeViewController.h; sourceTree = "<group>"; };
 		E3D6D51F221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryAccountHomeViewController.m; sourceTree = "<group>"; };
 		E3DEC72922327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.h; sourceTree = "<group>"; };
@@ -8223,6 +8226,7 @@
 		E352FCE421E4AF0A00617AB7 /* PublicModule(公共组件) */ = {
 			isa = PBXGroup;
 			children = (
+				E3D3A1E2224A0FB700DA6185 /* RTNavgationController */,
 				332B6056221F9558008893EF /* HQFlowView */,
 				E36EB86D21F815420093915D /* CQCountDownButton */,
 				334790D021E85275005131A5 /* CustomStyleButton */,
@@ -9097,6 +9101,15 @@
 			path = UCFWebView;
 			sourceTree = "<group>";
 		};
+		E3D3A1E2224A0FB700DA6185 /* RTNavgationController */ = {
+			isa = PBXGroup;
+			children = (
+				E3D3A1E3224A104300DA6185 /* RTRootNavigationAddPushController.h */,
+				E3D3A1E4224A104300DA6185 /* RTRootNavigationAddPushController.m */,
+			);
+			path = RTNavgationController;
+			sourceTree = "<group>";
+		};
 		E3D6D513221E48F000261622 /* MicroBank(微商银行模块) */ = {
 			isa = PBXGroup;
 			children = (
@@ -9749,6 +9762,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -10878,6 +10892,7 @@
 				FB4F9E451D62A6B600CCB492 /* OpeningMerchantsVC.m in Sources */,
 				FBA80F531AE6472C0066BF99 /* InvestmentItemInfo.m in Sources */,
 				74270C941EC58F6800F9419B /* UCFSignModel.m in Sources */,
+				E3D3A1E5224A104300DA6185 /* RTRootNavigationAddPushController.m in Sources */,
 				A85A2EC21F4321B0004BF4C1 /* QLHeaderViewController.m in Sources */,
 				333B42CE21FC4E6B00741A47 /* UCFNewInvestBtnView.m in Sources */,
 				741EB18A1D59829E006C885F /* UCFTableCellTwo.m in Sources */,

@@ -25,6 +25,7 @@
 #import "UCFNewHomeViewController.h"
 #import "UCFNewMineViewController.h"
 #import "UCFNewLoginViewController.h"
+#import "RTRootNavigationAddPushController.h"
 
 @interface UCFMainTabBarController ()
 
@@ -162,7 +163,7 @@
                 break;
         }
         if (controller) {
-            [vcArray addObject:[[RTRootNavigationController alloc] initWithRootViewController:controller]];
+            [vcArray addObject:[[RTRootNavigationAddPushController alloc] initWithRootViewController:controller]];
             UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:tabbarTitleArray[i] image:[[UIImage imageNamed:tabbarNormalArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:tabbarHighlightArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
             item.tag = i;
             controller.tabBarItem = item;

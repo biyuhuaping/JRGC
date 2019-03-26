@@ -40,7 +40,7 @@
     self.view = self.rootLayout;
     [self addLeftButton];
     [self addRightButtonWithName:@"充值记录"];
-    baseTitleLabel.text = @"我的余额";
+    baseTitleLabel.text = @"微金充值";
     
     [self.rootLayout addSubview:self.pageController];
 }

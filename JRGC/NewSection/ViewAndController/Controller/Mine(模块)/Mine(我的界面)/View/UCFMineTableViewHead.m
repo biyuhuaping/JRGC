@@ -43,6 +43,12 @@
 
 @property (nonatomic, strong) UIButton    *arrowBtn;//点击按钮
 
+@property (nonatomic, copy)   NSString *total;//总资产
+
+@property (nonatomic, copy)   NSString *totalDueIn;//总待收利息
+
+@property (nonatomic, copy)   NSString *cashBalance;//余额
+
 @end
 @implementation UCFMineTableViewHead
 
@@ -322,10 +328,14 @@
     }
     else
     {
-        self.totalAssetsMoneyLabel.text = myModel.data.total;//总资产
-        self.expectedInterestMoneyLabel.text = myModel.data.totalDueIn;//总待收利息
-        self.accountBalanceMoneyLabel.text = myModel.data.cashBalance;//余额
+        self.total = myModel.data.total;//总资产
+        self.totalDueIn = myModel.data.totalDueIn;//总待收利息
+        self.cashBalance = myModel.data.cashBalance;//余额
         
+        self.totalAssetsMoneyLabel.text = self.total;//总资产
+        self.expectedInterestMoneyLabel.text = self.totalDueIn;//总待收利息
+        self.accountBalanceMoneyLabel.text = self.cashBalance;//余额
+
     }
     [self.totalAssetsMoneyLabel sizeToFit];
     [self.expectedInterestMoneyLabel sizeToFit];
@@ -343,5 +353,23 @@
         [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
      
     }
+}
+- (void)hiddenMoney:(BOOL )isHiddenMoney
+{
+    if (isHiddenMoney) {
+        self.totalAssetsMoneyLabel.text = @"****";//总资产
+        self.expectedInterestMoneyLabel.text = @"****";//总待收利息
+        self.accountBalanceMoneyLabel.text = @"****";//余额
+    }
+    else
+    {
+        self.totalAssetsMoneyLabel.text = self.total;//总资产
+        self.expectedInterestMoneyLabel.text = self.totalDueIn;//总待收利息
+        self.accountBalanceMoneyLabel.text = self.cashBalance;//余额
+    }
+    
+    [self.totalAssetsMoneyLabel sizeToFit];
+    [self.expectedInterestMoneyLabel sizeToFit];
+    [self.accountBalanceMoneyLabel sizeToFit];
 }
 @end

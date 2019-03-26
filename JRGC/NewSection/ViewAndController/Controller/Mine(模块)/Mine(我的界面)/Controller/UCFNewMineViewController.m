@@ -268,6 +268,7 @@
 //            [btn setImage:[UIImage imageNamed:@"icon_invisible_bule"] forState:UIControlStateNormal];
 //            self.contentField.secureTextEntry = YES;
 //        }
+        [self.tableHead hiddenMoney:btn.selected];
     }
     else if (btn.tag == 10004){
         //只进入微金的充值
