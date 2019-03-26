@@ -32,62 +32,37 @@
 - (void)setUserData:(UCFLoginData *)loginData withPassWord:(NSString *)passWord{
     
     //注册成功后，先清cookies，把老账户的清除掉，然后再用新账户的信息
-    [Common deleteCookies];
+    [self deleteUserData];
     //登录成功保存用户的资料
     [self setUserData:loginData];
     [Common setHTMLCookies:loginData.userInfo.jg_ckie];//html免登录的cookies
+    //保存验签串
     [[NSUserDefaults standardUserDefaults] setValue:[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]] forKey:AWP];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     //注册通知self.loginData.userInfo
     [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
 }
 
 - (void)setUserData:(UCFLoginData *) loginData
 {
-    if (!_loginData) {
-        _loginData = [loginData copy];
-    }
+    _loginData = [loginData copy];
     [[NSUserDefaults standardUserDefaults] setValue:[loginData yy_modelToJSONString] forKey:LOGINDATA];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (UCFLoginData *)getUserData
 {
-    if (!_loginData) {
-        NSString *userData = [[NSUserDefaults standardUserDefaults] valueForKey:LOGINDATA];
+    NSString *userData = [[NSUserDefaults standardUserDefaults] valueForKey:LOGINDATA];
+    if (nil != userData && ![userData isEqualToString:@""] ) {
         UCFLoginData *data = [UCFLoginData yy_modelWithJSON:userData];
         _loginData = [data copy];
+        return _loginData;
     }
-    return [_loginData copy];
+    else
+    {
+        return nil;
+    }
 }
-
-
-//+ (void)saveInfoDic:(NSDictionary *)dict
-//{
-//    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:dict];
-//    NSArray *allObj = [tempDic allKeys];
-//    for (int i = 0; i < allObj.count; i ++) {
-//        id obj = [tempDic objectForKey:allObj[i]];
-//        if ([obj isKindOfClass:[NSNull class]]) {
-//            [tempDic removeObjectForKey:allObj[i]];
-//        }
-//    }
-//    [[NSUserDefaults standardUserDefaults] setObject:tempDic forKey:@"regUserMsg"];
-//}
-
-
-//#pragma mark - 弹出手势解锁密码输入框
-//+ (void)showLLLockViewController:(LLLockViewType)type
-//{
-//    AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-//    if(del.window.rootViewController.presentingViewController == nil){
-//        UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
-//        lockVc.nLockViewType = type;
-//        lockVc.isFromRegister = YES;
-//        lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//        [del.window.rootViewController presentViewController:lockVc animated:NO completion:^{
-//        }];
-//    }
-//}
 
 - (void)saveLoginAccount:(NSDictionary *)account;
 {
@@ -151,7 +126,7 @@
 - (NSString *)signatureStr
 {
     if (self.loginData.userInfo.userId.length > 0) {
-        if (!_signatureStr) {
+        if (!_signatureStr || [_signatureStr isEqualToString:@""] || _signatureStr.length <= 0) {
             //更新验签串
             NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getlastLoginName],[self getAwp],self.loginData.userInfo.time];
             NSString *signatureStr  = [UCFToolsMehod md5:yanQian];

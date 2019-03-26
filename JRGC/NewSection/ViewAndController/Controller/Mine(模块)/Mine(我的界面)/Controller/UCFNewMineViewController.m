@@ -22,6 +22,7 @@
 #import "UCFMineItemCell.h"
 #import "UCFMineCellAccountModel.h"
 #import "CellConfig.h"
+#import "NSString+Misc.h"
 
 #import "UCFSecurityCenterViewController.h"
 #import "UCFRegisterInputPassWordViewController.h"
@@ -29,7 +30,10 @@
 #import "UCFRechargeAndWithdrawalViewController.h"
 #import "UCFMessageCenterViewController.h"
 #import "UCFInvitationRebateViewController.h"
-
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
+#import "UCFMyFacBeanViewController.h"
+#import "UCFCalendarViewController.h"
+#import "UCFCalendarModularViewController.h"
 
 #import "BaseNavigationViewController.h"
 #import "UCFP2POrHonerAccoutViewController.h"
@@ -71,19 +75,12 @@
     [self.rootLayout addSubview:self.tableView];
  
     [self loadCellConfig];
+    [self.tableView beginRefresh];
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if (SingleUserInfo.loginData == nil) {
-        [SingleUserInfo loadLoginViewController];
-    }
-    else
-    {
-        [self requestMyReceipt];
-        [self requestMySimpleInfo];
-    }
 }
 - (BaseTableView *)tableView
 {
@@ -103,6 +100,15 @@
         
     }
     return _tableView;
+}
+- (void)refreshTableViewHeader
+{
+    [self refreshHomeRequest];
+}
+- (void)refreshHomeRequest
+{
+    [self requestMyReceipt];
+    [self requestMySimpleInfo];
 }
 - (UCFMineTableViewHead *)tableHead
 {
@@ -141,14 +147,33 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UCFNewAiLoanViewController *vc = [[UCFNewAiLoanViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
+//    UCFNewAiLoanViewController *vc = [[UCFNewAiLoanViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//    return;
     CellConfig *cellConfig = self.cellConfigData[indexPath.section][indexPath.row];
     if (indexPath.section == 1) {
         if ([cellConfig.title isEqualToString:@"回款日历"])
         {
-            
+            if ([UserInfoSingle sharedManager].superviseSwitch) {
+                if (!SingleUserInfo.loginData.userInfo.zxIsNew) {
+                    UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
+                    //        backMoneyDetailVC.superViewController = self;
+                    //    backMoneyCalendarVC.accoutType = self.accoutType;
+                    [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+                }
+                else {
+                    UCFCalendarModularViewController *backMoneyCalendarVC = [[UCFCalendarModularViewController alloc] initWithNibName:@"UCFCalendarModularViewController" bundle:nil];
+                    backMoneyCalendarVC.accoutType = self.accoutType;
+                    backMoneyCalendarVC.baseTitleText = @"回款日历";
+                    [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+                }
+            }
+            else {
+                UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
+                //        backMoneyDetailVC.superViewController = self;
+                //    backMoneyCalendarVC.accoutType = self.accoutType;
+                [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+            }
         }
         else if ([cellConfig.title isEqualToString:@"优质债权"])
         {
@@ -228,6 +253,18 @@
     }
     else if (btn.tag == 10003){
         //是否展示用户资金,关闭都是*****
+        btn.selected = !btn.selected;
+//        if (btn.selected)
+//        {
+//            [btn setImage:[UIImage imageNamed:@"mine_icon_ exhibition"] forState:UIControlStateNormal];
+//            self.contentField.secureTextEntry = NO;
+//            
+//        }
+//        else
+//        {
+//            [btn setImage:[UIImage imageNamed:@"icon_invisible_bule"] forState:UIControlStateNormal];
+//            self.contentField.secureTextEntry = YES;
+//        }
     }
     else if (btn.tag == 10004){
         //只进入微金的充值
@@ -247,17 +284,35 @@
     if (tag == 1001) {
         //每日签到
         
-        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
-        [self.navigationController pushViewController:subVC animated:YES];
+        if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
+        {//吐司：此活动暂时未对企业用户开放
+            [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
+        }
+        else{
+            
+            UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+            //            NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
+            //            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+            //            [data setValue:[NSString urlEncodeStr:[paramDict objectSafeForKey:@"encryptParam"]] forKey:@"encryptParam"];
+            //            [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
+            //            [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
+            //            NSString * requestStr = [Common getParameterByDictionary:data];
+            web.url  = [NSString stringWithFormat:@"%@",@"https://coin.9888keji.com/static/jh/index.html#/task/sign"];
+            web.isHideNativeNav = NO;
+            web.rootVc = @"UCFSecurityCenterVC";
+            [self.rt_navigationController pushViewController:web animated:YES];
+        }
+//        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+//        [self.navigationController pushViewController:subVC animated:YES];
         
 
     }
     else if (tag == 1002){
         //我的工贝
+        [self requestMyCoin];//请求工贝地址
         
-        
-        UCFRegisterdSucceedViewController *vc= [[UCFRegisterdSucceedViewController alloc] init];
-        [self.rt_navigationController pushViewController:vc animated:YES];
+//        UCFRegisterdSucceedViewController *vc= [[UCFRegisterdSucceedViewController alloc] init];
+//        [self.rt_navigationController pushViewController:vc animated:YES];
         
 //        UCFNewResetPassWordViewController *vc= [[UCFNewResetPassWordViewController alloc] init];
 //                [self.rt_navigationController pushViewController:vc animated:YES];
@@ -271,13 +326,17 @@
     }
     else if (tag == 1003){
         //我的工豆
-        AccountSuccessVC *acVC = [[AccountSuccessVC alloc]initWithNibName:@"AccountSuccessVC" bundle:nil];
-        //            acVC.site = self.site;
-        acVC.accoutType = self.accoutType;
-        acVC.fromVC = 2;
-        //            acVC.db = self.db;
-        //            self.db.isOpenAccount = YES;
-        [self.rt_navigationController pushViewController:acVC animated:YES];
+        
+        UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
+        bean.title = @"我的工豆";
+        [self.rt_navigationController pushViewController:bean animated:YES];
+//        AccountSuccessVC *acVC = [[AccountSuccessVC alloc]initWithNibName:@"AccountSuccessVC" bundle:nil];
+//        //            acVC.site = self.site;
+//        acVC.accoutType = self.accoutType;
+//        acVC.fromVC = 2;
+//        //            acVC.db = self.db;
+//        //            self.db.isOpenAccount = YES;
+//        [self.rt_navigationController pushViewController:acVC animated:YES];
         
     }
     else if (tag == 1004){
@@ -297,29 +356,32 @@
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }
 }
+
 - (void)requestMyReceipt//请求总资产信息
 {
     UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
     
-//    request.animatingView = self.view;
-//    request.tag =tag;
+    //    request.animatingView = self.view;
+    //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
         UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
-//        DDLogDebug(@"---------%@",model);
+        [self.tableView endRefresh];
+        //        DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
             
-           [self setTableViewArrayWithData:model];
+            [self setTableViewArrayWithData:model];
         }
         else{
             ShowMessage(model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
-        
+        [self.tableView endRefresh];
     }];
     
 }
+
 - (void)requestMySimpleInfo//查询用户工豆,工分,等信
 {
     UCFMineMySimpleInfoApi * request = [[UCFMineMySimpleInfoApi alloc] init];
@@ -330,6 +392,7 @@
         // 你可以直接在这里使用 self
         UCFMineMySimpleInfoModel *model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",model);
+        [self.tableView endRefresh];
         if (model.ret == YES) {
             
             [self setTableViewArrayWithData:model];
@@ -339,7 +402,7 @@
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
-        
+        [self.tableView endRefresh];
     }];
     
 }
@@ -362,7 +425,6 @@
              [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:model, nil]];
          }
      }
-
     [self.tableView cyl_reloadData];
 }
 
@@ -477,7 +539,53 @@
     [self.arryData replaceObjectAtIndex:1 withObject:[accountCellData copy]];
 }
 
-
+- (void)requestMyCoin//请求我的工贝
+{
+    UCFMineIntoCoinPageApi * request = [[UCFMineIntoCoinPageApi alloc] initWithPageType:@""];
+    
+    //    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        UCFMineIntoCoinPageModel *model = [request.responseJSONModel copy];
+        //        DDLogDebug(@"---------%@",model);
+        if (model.ret == YES) {
+       
+//            NSDictionary *coinRequestDicData = [dataDict objectSafeDictionaryForKey:@"coinRequest"];
+            UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+//            NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
+            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+            [data setValue:[NSString urlEncodeStr:model.data.coinRequest.param.encryptParam ] forKey:@"encryptParam"];
+            [data setObject:[NSString stringWithFormat:@"%zd",model.data.coinRequest.param.fromApp] forKey:@"fromApp"];
+            [data setObject:model.data.coinRequest.param.userId forKey:@"userId"];
+            NSString * requestStr = [Common getParameterByDictionary:data];
+            web.url  = [NSString stringWithFormat:@"%@/#/?%@",model.data.coinRequest.urlPath,requestStr];
+            web.isHidenNavigationbar = YES;
+            [self.navigationController pushViewController:web animated:YES];
+           
+            //进vip页面
+//                NSDictionary *coinRequestDicData = [dataDict objectSafeDictionaryForKey:@"coinRequest"];
+//                UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+//                NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
+//                NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+//                [data setValue:[NSString urlEncodeStr:[paramDict objectSafeForKey:@"encryptParam"]] forKey:@"encryptParam"];
+//                [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
+//                [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
+//                NSString * requestStr = [Common getParameterByDictionary:data];
+//                web.url  = [NSString stringWithFormat:@"%@?%@",[coinRequestDicData objectSafeForKey:@"urlPath"],requestStr];
+//                web.isHideNativeNav = YES;
+//                web.rootVc = @"UCFSecurityCenterVC";
+//                [self.navigationController pushViewController:web animated:YES];
+        }
+        else{
+            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
+    
+}
 
 
 @end

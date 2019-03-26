@@ -63,13 +63,11 @@
     if (self) {
         _config = [YTKNetworkConfig sharedConfig];
         _manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:_config.sessionConfiguration];
-        _manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
-        _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         _requestsRecord = [NSMutableDictionary dictionary];
         _processingQueue = dispatch_queue_create("com.yuantiku.networkagent.processing", DISPATCH_QUEUE_CONCURRENT);
         _allStatusCodes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(100, 500)];
         pthread_mutex_init(&_lock, NULL);
-
+        
         _manager.securityPolicy = _config.securityPolicy;
         _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         // Take over the status code validation

@@ -283,6 +283,16 @@
         
         return YES;
     }
+    if ([self.viewControllers indexOfObject:viewController] == 4) {
+        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
+        if(nil == userId) {
+            [SingleUserInfo loadLoginViewController];
+            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
+            return NO;
+        } else {
+            return YES;
+        }
+    }
     return YES;
 }
 - (CATransition *)presentAnimation{

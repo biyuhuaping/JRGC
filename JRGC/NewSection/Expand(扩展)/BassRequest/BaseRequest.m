@@ -55,7 +55,7 @@
     //note：子类如需继承，必须必须调用 [super requestFailedPreprocessor];
     [super requestFailedPreprocessor];
 
-     ShowMessage(@"当前网络不可用,请稍后重试");
+     ShowMessage(@"网络异常,请稍候再试");
     NSError * error = self.error;
     if ([error.domain isEqualToString:AFURLResponseSerializationErrorDomain])
     {
