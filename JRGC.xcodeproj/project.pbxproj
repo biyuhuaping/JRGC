@@ -1245,6 +1245,7 @@
 		E3C9E9C1222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C9E9C0222678D8003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillApi.m */; };
 		E3C9E9C422267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C9E9C322267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m */; };
 		E3D3A1E5224A104300DA6185 /* RTRootNavigationAddPushController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D3A1E4224A104300DA6185 /* RTRootNavigationAddPushController.m */; };
+		E3D3A1E8224A273400DA6185 /* UCFGetBindingBankCardListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D3A1E7224A273400DA6185 /* UCFGetBindingBankCardListApi.m */; };
 		E3D6D520221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D6D51F221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m */; };
 		E3DEC72B22327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DEC72A22327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m */; };
 		E3DEC72E223276B5009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DEC72D223276B5009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel.m */; };
@@ -3508,6 +3509,8 @@
 		E3C9E9C322267900003F6AC5 /* UCFMicroBankDepositoryGetHSAccountInfoBillModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryGetHSAccountInfoBillModel.m; sourceTree = "<group>"; };
 		E3D3A1E3224A104300DA6185 /* RTRootNavigationAddPushController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTRootNavigationAddPushController.h; sourceTree = "<group>"; };
 		E3D3A1E4224A104300DA6185 /* RTRootNavigationAddPushController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTRootNavigationAddPushController.m; sourceTree = "<group>"; };
+		E3D3A1E6224A273400DA6185 /* UCFGetBindingBankCardListApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGetBindingBankCardListApi.h; sourceTree = "<group>"; };
+		E3D3A1E7224A273400DA6185 /* UCFGetBindingBankCardListApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGetBindingBankCardListApi.m; sourceTree = "<group>"; };
 		E3D6D51E221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryAccountHomeViewController.h; sourceTree = "<group>"; };
 		E3D6D51F221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryAccountHomeViewController.m; sourceTree = "<group>"; };
 		E3DEC72922327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.h; sourceTree = "<group>"; };
@@ -9066,6 +9069,8 @@
 				E30C799921F1C2A7000183FA /* UCFMineGetWithdrawInfoApi.m */,
 				E3364E2B2241EE740021694D /* UCFUserStatusInfoApi.h */,
 				E3364E2C2241EE740021694D /* UCFUserStatusInfoApi.m */,
+				E3D3A1E6224A273400DA6185 /* UCFGetBindingBankCardListApi.h */,
+				E3D3A1E7224A273400DA6185 /* UCFGetBindingBankCardListApi.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -11098,6 +11103,7 @@
 				749099AD1F7279B800C2AD6C /* UCFAttachModel.m in Sources */,
 				FB72B08D1D74233E00F4DC8E /* BaseNavigationViewController.m in Sources */,
 				335BAC97221BF33C00F026BB /* UCFTransMoneyBoardView.m in Sources */,
+				E3D3A1E8224A273400DA6185 /* UCFGetBindingBankCardListApi.m in Sources */,
 				E3041D3821F7039C007B09B6 /* UCFRegisterGetRegisterInfoApi.m in Sources */,
 				334DE8692240EA390043A864 /* UCFNewBatchBidListViewController.m in Sources */,
 				832942CE1F39914E001E34F1 /* UCFGoldCouponModel.m in Sources */,

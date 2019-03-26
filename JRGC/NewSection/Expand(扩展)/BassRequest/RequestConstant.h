@@ -33,7 +33,7 @@ static NSString *MyReceiptApiURL = @"api/accountCenter/v2/myReceipt.json";   //�
 
 static NSString *MySimpleInfoApiURL = @"api/accountCenter/v2/mySimpleInfo.json" ; //我的页面新接口---查询用户工豆,工分,等信息
 
-static NSString *GetAccountBalanceListApiURL = @"/api/userAccount/v2/getAccountBalanceList.json"; //我的-->>充值接口
+static NSString *GetAccountBalanceListApiURL = @"api/userAccount/v2/getAccountBalanceList.json"; //我的-->>充值接口
 
 static NSString *NewSignApiURL = @"api/homePage/v2/newsign.json";//签到
 
@@ -64,9 +64,13 @@ static NSString *OpenAccountIntoBankApiURL = @"api/userInfo/v2/openAccountIntoBa
 
 static NSString *SetHsPwdReturnJsonApiURL = @"api/userAccount/v2/setHsPwdReturnJson.json";//设置、修改交易密码通用
 
-static NSString *AccountBalancePageApiURL = @"/api/accountCenter/v2/accountBalancePage.json";//充值提现聚合页
+static NSString *AccountBalancePageApiURL = @"api/accountCenter/v2/accountBalancePage.json";//充值提现聚合页
 
 static NSString *AccountCashWithDrawalApiURL = @"api/withdraw/v2/getWithdrawInfo.json";
 
-static NSString *UserStatusInfoForCacheApiURL = @"/api/homePage/v2/statusInfoForCache.json";//查询当前用户状态信息
+static NSString *UserStatusInfoForCacheApiURL = @"api/homePage/v2/statusInfoForCache.json";//查询当前用户状态信息
+
+static NSString *GetBindingBankCardListApiURL = @"api/userAccount/v2/getBindingBankCardList.json";//我的-->>充值接口
+
+static NSString *DougeMallOrderListURL = @"https://m.dougemall.com/static/mall/order-list/index.html#all";//商城订单
 #endif /* RequestConstant_h */

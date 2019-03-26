@@ -1170,7 +1170,7 @@
         self.accoutType = SelectAccoutTypeHoner;
     } else if ([item.title isEqualToString:@"黄金账户"]) {
         UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
-        subVC.homeView = weakSelf;
+//        subVC.homeView = weakSelf;
         [self.navigationController pushViewController:subVC animated:YES];
         return;
     }

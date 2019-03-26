@@ -16,6 +16,7 @@
 #import "UCFMineNewSignApi.h"
 #import "UCFMineIntoCoinPageModel.h"
 #import "UCFMineIntoCoinPageApi.h"
+#import "UCFGetBindingBankCardListApi.h"
 
 #import "UCFMineTableViewHead.h"
 #import "UCFMineActivitiesCell.h"
@@ -43,7 +44,10 @@
 #import "AccountSuccessVC.h"
 #import "UCFNewResetPassWordViewController.h"
 #import "UCFCouponViewController.h"
-
+#import "UCFGoldAccountViewController.h"
+#import "HSHelper.h"
+#import "UCFNewRechargeViewController.h"
+#import "UCFRechargeOrCashViewController.h"
 #import "UCFNewAiLoanViewController.h"
 #import "UCFRechargeViewController.h"
 #import "UCFRegisterdSucceedViewController.h"
@@ -194,11 +198,16 @@
         }
         else if ([cellConfig.title isEqualToString:@"持有黄金"])
         {
-            
+//            __weak typeof(self) weakSelf = self;
+            UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
+            [self.navigationController pushViewController:subVC animated:YES];
         }
         else if ([cellConfig.title isEqualToString:@"商城订单"])
         {
-            
+            UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+            web.url  = [NSString stringWithFormat:@"%@",DougeMallOrderListURL];
+            web.isHideNativeNav = NO;
+            [self.rt_navigationController pushViewController:web animated:YES];
         }
     }
     if (indexPath.section == 2) {
@@ -272,9 +281,65 @@
     }
     else if (btn.tag == 10004){
         //只进入微金的充值
-        UCFRechargeViewController *vc = [[UCFRechargeViewController alloc] init];
-        vc.accoutType = SelectAccoutTypeP2P;
-        [self.rt_navigationController pushViewController:vc animated:YES];
+        self.accoutType = SelectAccoutTypeP2P;
+        HSHelper *helper = [HSHelper new];
+        //检查企业老用户是否开户
+        NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+        if (![messageStr isEqualToString:@""]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        
+        
+        if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+            [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+            return;
+        }
+        
+        if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+            
+            UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+            vc.accoutType = SelectAccoutTypeP2P;
+            vc.uperViewController = self;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+//        if([UserInfoSingle sharedManager].superviseSwitch)
+//        {
+//            self.accoutType = SelectAccoutTypeP2P;
+//            HSHelper *helper = [HSHelper new];
+//            //检查企业老用户是否开户
+//            NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+//            if (![messageStr isEqualToString:@""]) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+//                [alert show];
+//                return;
+//            }
+//
+//
+//            if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+//                [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+//                return;
+//            }
+//
+//            if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+//
+//                UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+//                vc.accoutType = SelectAccoutTypeP2P;
+//                vc.uperViewController = self;
+//                [self.navigationController pushViewController:vc animated:YES];
+//            }
+//        }
+//        else{
+//            if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+//
+//                UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+//                vc.accoutType = SelectAccoutTypeP2P;
+//                vc.uperViewController = self;
+//                [self.navigationController pushViewController:vc animated:YES];
+//            }
+//
+//        }
     }
     else if (btn.tag == 10005){
         //各个账户的充值与提现,尊享、黄金账户已经不允许充值,只能提现
@@ -282,7 +347,85 @@
         [self.rt_navigationController pushViewController:vc animated:YES];
     }
 }
-
+//- (void)getRecharngeBindingBankCardNet
+//{
+//    UCFGetBindingBankCardListApi *request1 = [[UCFGetBindingBankCardListApi alloc] init];
+//    request1.animatingView = self.view;
+//    [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+//        NSDictionary *dic = request.responseObject;
+//        if ([dic[@"ret"] boolValue]) {
+//
+//            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+//            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
+//            rechargeCashVC.dataDict = dataDict;
+//            rechargeCashVC.isRechargeOrCash = NO;//充值
+//            UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
+//            rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+//
+//        }
+//        else
+//        {
+//            ShowMessage(dic[@"message"]);
+//        }
+//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//
+//        self.requestUserbackBlock(NO);
+//    }];
+//    [request1 start];
+//}
+- (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
+{
+    
+    NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
+    NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
+    
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+    
+    switch (openStatus)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            [self showHSAlert:tipStr1];
+            return NO;
+            break;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            if (isDetail) {
+                return YES;
+            }else
+            {
+                [self showHSAlert:tipStr2];
+                return NO;
+            }
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    alert.tag =  self.accoutType == SelectAccoutTypeP2P ? 8000 :8010;
+    [alert show];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
+        }
+    }else if (alertView.tag == 8010) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
+        }
+    }
+}
 - (void)signInButtonClick:(NSInteger )tag
 {
     if (tag == 1001) {
