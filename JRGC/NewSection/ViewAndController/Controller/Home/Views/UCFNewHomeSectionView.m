@@ -14,6 +14,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+//        self.backgroundColor = [UIColor redColor];
         UIImageView *iconView = [[UIImageView alloc] init];
         iconView.myHeight = 18;
         iconView.myWidth = 3;

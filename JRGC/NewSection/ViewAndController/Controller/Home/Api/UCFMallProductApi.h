@@ -12,6 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFMallProductApi : BaseRequest
 
+/**
+ 商城接口
+
+ @param pageType home:个人中心  index:首页
+ @return 商城接口
+ */
+- (instancetype)initWithPageType:(NSString *)pageType;
 @end
 
 NS_ASSUME_NONNULL_END

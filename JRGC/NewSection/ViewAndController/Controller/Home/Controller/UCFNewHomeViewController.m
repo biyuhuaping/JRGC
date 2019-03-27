@@ -40,6 +40,9 @@
 {
     [super loadView];
     
+    [self addLeftButtonTitle:@"首页"];
+    [self addRightbuttonImageName:@"home_icon_news"];
+    
     HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
     homeHeadView.myTop = 0;
     homeHeadView.myHeight = ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
@@ -51,7 +54,7 @@
     self.showTableView.myVertMargin = 0;
     self.showTableView.myHorzMargin = 0;
     [self.rootLayout addSubview:self.showTableView];
-    self.showTableView.backgroundColor = [UIColor clearColor];
+    self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.showTableView.tableHeaderView = self.homeHeadView;
     
     HomeFootView *homefootView = [HomeFootView new];
@@ -59,8 +62,7 @@
     homefootView.myHorzMargin = 0;
     [homefootView createSubviews];
     self.showTableView.tableFooterView = homefootView;
-    [self addLeftButtonTitle:@"首页"];
-    [self addRightbuttonImageName:@"home_icon_news"];
+
 }
 - (void)rightBarClicked:(UIButton *)button
 {

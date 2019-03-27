@@ -82,6 +82,7 @@
             NSMutableArray *recommendArr = [NSMutableArray arrayWithCapacity:10];
             for (RecommendBanner *model in bannerModel.data.recommendBanner) {
                 [recommendArr addObject:model.thumb];
+//                [recommendArr addObject:@"https://www.baidu.com/img/bd_logo1.png?where=super"];
             }
             selfWeak.recommendBannerArray = recommendArr;
         }
@@ -99,7 +100,6 @@
 }
 - (void)addUserGuideData
 {
-    
     NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
     if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] >= 4 && SingleUserInfo.loginData.userInfo.isRisk) {
         SEL sel = NSSelectorFromString(@"reflectDataModel:");
@@ -132,7 +132,7 @@
 - (void)getMallData
 {
     @PGWeakObj(self);
-    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] init];
+    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"home"];
     mallRequest.animatingView = _loaingSuperView;
     [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         [selfWeak dealMallRequestData:request];
@@ -233,8 +233,8 @@
 - (void)dealMallRequestData:(YTKBaseRequest *)request
 {
     UCFHomeMallDataModel *model = request.responseJSONModel;
+    SEL sel = NSSelectorFromString(@"reflectDataModel:");
     if (model.ret) {
-        SEL sel = NSSelectorFromString(@"reflectDataModel:");
         CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(ScreenWidth - 30) * 6 /23 + 160];
         UCFCellDataModel *dataMode = [UCFCellDataModel new];
         dataMode.modelType = @"mall";
@@ -258,22 +258,18 @@
         [section4 addObject:data4_0];
         
         [self.dataArray addObject:section4];
-        
-        CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"推荐内容" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
-        UCFCellDataModel *mallDataMode = [UCFCellDataModel new];
-        mallDataMode.modelType = @"recommend";
-        mallDataMode.data1 = self.recommendBannerArray;
-        data5_0.dataModel = mallDataMode;
-        NSMutableArray *section5 = [NSMutableArray arrayWithCapacity:1];
-        [section5 addObject:data5_0];
-        [self.dataArray addObject:section5];
-        
-        self.modelListArray = self.dataArray;
-        
     } else {
         ShowMessage(model.message);
     }
-
+    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"推荐内容" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
+    UCFCellDataModel *mallDataMode = [UCFCellDataModel new];
+    mallDataMode.modelType = @"recommend";
+    mallDataMode.data1 = self.recommendBannerArray;
+    data5_0.dataModel = mallDataMode;
+    NSMutableArray *section5 = [NSMutableArray arrayWithCapacity:1];
+    [section5 addObject:data5_0];
+    [self.dataArray addObject:section5];
+    self.modelListArray = self.dataArray;
 }
 
 - (void)cycleViewSelectIndex:(NSInteger)index

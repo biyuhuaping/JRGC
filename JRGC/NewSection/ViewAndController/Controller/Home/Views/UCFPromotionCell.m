@@ -22,7 +22,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         self.rootLayout.useFrame = YES;
 
         RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(15, 0, [UIScreen mainScreen].bounds.size.width - 30,([UIScreen mainScreen].bounds.size.width - 30) * 6 /23)];
@@ -60,9 +60,9 @@
 //    }
     UCFCellDataModel *dataModel = model;
     if ([dataModel.modelType isEqualToString:@"coinArray"]) {
-        _adCycleScrollView.advArray = dataModel.data1;
+        _adCycleScrollView.advArray = [NSMutableArray arrayWithArray:dataModel.data1];
     } else if ([dataModel.modelType isEqualToString:@"recommend"]) {
-        _adCycleScrollView.advArray = dataModel.data1;
+        _adCycleScrollView.advArray =[NSMutableArray arrayWithArray:dataModel.data1];
     }
     
     [_adCycleScrollView reloadCycleView];
@@ -71,7 +71,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-//    self.adCycleScrollView.frame = CGRectMake(_hLeftSpace, _vTopSpace, Screen_Width - _hLeftSpace - _hRightSpace, (Screen_Width - _hLeftSpace - _hRightSpace) * 6 /23);
+
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

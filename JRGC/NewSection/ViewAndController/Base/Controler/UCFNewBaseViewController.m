@@ -131,6 +131,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 
 }
 
