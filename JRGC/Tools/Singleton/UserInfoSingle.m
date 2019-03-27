@@ -26,8 +26,16 @@
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         sharedAccountManagerInstance = [[self alloc] init];
+        
     });
     return sharedAccountManagerInstance;
+}
+- (instancetype)init
+{
+    if (self =[super init]) {
+        _loginData = [UCFLoginData new];
+    }
+    return self;
 }
 - (void)setUserData:(UCFLoginData *)loginData withPassWord:(NSString *)passWord{
     
@@ -45,7 +53,7 @@
 
 - (void)setUserData:(UCFLoginData *) loginData
 {
-    _loginData = [loginData copy];
+    self.loginData = [loginData copy];
     [[NSUserDefaults standardUserDefaults] setValue:[loginData yy_modelToJSONString] forKey:LOGINDATA];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -66,7 +74,6 @@
 
 - (void)saveLoginAccount:(NSDictionary *)account;
 {
-//    [NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil]
     [[NSUserDefaults standardUserDefaults] setValue:account forKey:@"lastLoginName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -160,7 +167,7 @@
                 self.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
                 self.loginData.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
                 self.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
-                [self setUserData:self.loginData];
+                [self updateUserData];
                 
                 self.requestUserbackBlock(YES);
             }
@@ -177,7 +184,11 @@
     }
 }
 
-
+- (void)updateUserData
+{
+    [[NSUserDefaults standardUserDefaults] setValue:[self.loginData yy_modelToJSONString] forKey:LOGINDATA];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 
 

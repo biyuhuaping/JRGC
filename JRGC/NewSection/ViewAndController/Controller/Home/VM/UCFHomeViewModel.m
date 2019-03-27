@@ -21,37 +21,51 @@
 - (void)fetchNetData
 {
     [self.dataArray removeAllObjects];
-    
-    [self getUserAllStatue];
     [self getBannerData];
-    [self addUserGuideData];
-    [self getBidListData];
+    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
+        [self getUserAllStatue];
+    } else {
+        [self addUserGuideData];
+        [self getBidListData];
+    }
 
-    
 }
 - (void)getUserAllStatue
 {
-    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
-        UCFUserAllStatueRequest *request1 = [[UCFUserAllStatueRequest alloc] initWithUserId:SingleUserInfo.loginData.userInfo.userId];
-        request1.animatingView = _loaingSuperView;
-        [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-            NSDictionary *dic = request.responseObject;
-            NSDictionary *userDict = dic[@"data"][@"userSatus"];
-            SingleUserInfo.loginData.userInfo.zxOpenStatus = [NSString stringWithFormat:@"%@",userDict[@"zxOpenStatus"]];
-            SingleUserInfo.loginData.userInfo.openStatus = [NSString stringWithFormat:@"%@",userDict[@"openStatus"]];
-            SingleUserInfo.loginData.userInfo.nmAuthorization = [userDict[@"nmGoldAuthStatus"] boolValue];
-            SingleUserInfo.loginData.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
-            SingleUserInfo.loginData.userInfo.isRisk = [userDict[@"isRisk"] boolValue];
-            SingleUserInfo.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
-            SingleUserInfo.loginData.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
-            SingleUserInfo.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
-            [SingleUserInfo setUserData:SingleUserInfo.loginData];
-        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            
-            
-        }];
-        [request1 start];
-    }
+    @PGWeakObj(self);
+    SingleUserInfo.requestUserbackBlock = ^(BOOL finish) {
+        [selfWeak addUserGuideData];
+        [selfWeak getBidListData];
+    };
+    
+    [SingleUserInfo requestUserAllStatueWithView:_rootViewController.view];
+    
+//    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
+//        UCFUserAllStatueRequest *request1 = [[UCFUserAllStatueRequest alloc] initWithUserId:SingleUserInfo.loginData.userInfo.userId];
+//        request1.animatingView = _loaingSuperView;
+//        [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+//            NSDictionary *dic = request.responseObject;
+//            NSDictionary *userDict = dic[@"data"][@"userSatus"];
+//            SingleUserInfo.loginData.userInfo.zxOpenStatus = [NSString stringWithFormat:@"%@",userDict[@"zxOpenStatus"]];
+//            SingleUserInfo.loginData.userInfo.openStatus = [NSString stringWithFormat:@"%@",userDict[@"openStatus"]];
+//            SingleUserInfo.loginData.userInfo.nmAuthorization = [userDict[@"nmGoldAuthStatus"] boolValue];
+//            SingleUserInfo.loginData.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
+//            SingleUserInfo.loginData.userInfo.isRisk = [userDict[@"isRisk"] boolValue];
+//            SingleUserInfo.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
+//            SingleUserInfo.loginData.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
+//            SingleUserInfo.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
+//            [SingleUserInfo setUserData:SingleUserInfo.loginData];
+//        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//
+//        }];
+//        [request1 start];
+//    } else {
+//
+//    }
+}
+- (void)getListData
+{
+
 }
 - (void)getBannerData
 {

@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  添加自定义返回按钮
  */
 - (void)addCustomBlueLeftButton;
+
 @property(assign,nonatomic) SelectAccoutType accoutType;
 
 /**

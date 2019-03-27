@@ -19,6 +19,7 @@
 #import "UCFNewNoticeViewController.h"
 #import "UCFBatchInvestmentViewController.h"
 #import "UCFHighQualityContainerViewController.h"
+#import "UCFWebViewJavascriptBridgeBanner.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -80,8 +81,37 @@
     [super viewDidLoad];
     [self blindVM];
     [self fetchData];
+    [self blindUserStatue];
 }
+- (void)blindUserStatue
+{
+    @PGWeakObj(self);
+    [self.KVOController observe:[UserInfoSingle sharedManager] keyPaths:@[@"loginData"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"loginData"]) {
+           UCFLoginData *oldUserData = [change objectSafeForKey:NSKeyValueChangeOldKey];
+           UCFLoginData *newUserData = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            //登录或者注册
+            if (!oldUserData.userInfo && newUserData.userInfo) {
+                [selfWeak fetchData];
+                return ;
+            }
+            //退出登录，或者切换账户
+            if (oldUserData.userInfo && !newUserData.userInfo) {
+                [selfWeak fetchData];
+                return ;
+            }
+            //用户在登录的情况下，更改用户状态的时候，请求数据
+            if (oldUserData.userInfo.isRisk != newUserData.userInfo.isRisk || [oldUserData.userInfo.openStatus intValue] != [newUserData.userInfo.openStatus intValue]) {
+                [selfWeak fetchData];
+            }
+        }
+    }];
+    
+//    @PGWeakObj(self);
 
+    
+}
 - (void)blindVM
 {
     self.homeListViewModel = [UCFHomeViewModel new];
@@ -108,7 +138,6 @@
 - (void)fetchData
 {
     [self.homeListViewModel fetchNetData];
-//    [self.bannerViewModel fetchNetData];
 }
 #pragma BaseTableViewDelegate
 - (void)refreshTableViewHeader
@@ -214,8 +243,16 @@
 }
 - (void)userGuideCellClickButton:(UIButton *)button
 {
-    UCFHighQualityContainerViewController *VC= [[UCFHighQualityContainerViewController alloc] init];
-    [self.navigationController pushViewController:VC animated:YES];
+    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
+        UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+        webView.rootVc = self;
+        webView.baseTitleType = @"lunbotuhtml";
+        webView.url = @"https://www.9888keji.com/static/wap/invest/index.html#/new-guide/guide";
+        webView.navTitle = @"新手入门引导";
+        [self.rt_navigationController pushViewController:webView animated:YES];
+    } else {
+        [SingleUserInfo loadLoginViewController];
+    }
     
     NSString *title = [button titleForState:UIControlStateNormal];
     if ([title isEqualToString:@"注册领券"]) {
@@ -229,6 +266,8 @@
     } else {
         
     }
+    
+
 }
 
 
