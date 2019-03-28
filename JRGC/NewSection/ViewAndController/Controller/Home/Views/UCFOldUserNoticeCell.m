@@ -11,9 +11,13 @@
 #import "UCFShopHListView.h"
 #import "UIButton+MLSpace.h"
 #import "UCFSiteNoticeView.h"
-@interface UCFOldUserNoticeCell()<UCFShopHListViewDataSource,UCFShopHListViewDelegate>
+#import "UCFWebViewJavascriptBridgeMall.h"
+#import "UCFNewBannerModel.h"
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
+@interface UCFOldUserNoticeCell()<UCFShopHListViewDataSource,UCFShopHListViewDelegate,UCFSiteNoticeViewDelegate>
 @property(nonatomic, strong)NSMutableArray  *showImagesDataArr;
 @property(nonatomic, strong)UCFSiteNoticeView *notiView;
+@property(nonatomic, strong)Sitenoticemap      *mapModel;
 @end
 
 @implementation UCFOldUserNoticeCell
@@ -65,13 +69,25 @@
         UCFSiteNoticeView *notiView = [[UCFSiteNoticeView alloc] init];
         notiView.frame = CGRectMake(0, CGRectGetMaxY(shopList.frame), ScreenWidth - 30, 50);
         [whitBaseView addSubview:notiView];
+        notiView.deleage = self;
         self.notiView = notiView;
     }
     return self;
 }
 - (void)reflectDataModel:(id)dataModel
 {
-    self.notiView.titleLab.text = (NSString *)dataModel;
+    if ([dataModel isKindOfClass:[Sitenoticemap class]]) {
+        self.mapModel = dataModel;
+        self.notiView.titleLab.text = self.mapModel.siteNotice;
+    }
+}
+- (void)noticeSiteClick
+{
+    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    web.url = self.mapModel.noticeUrl;
+    web.title = @"公告";
+    web.isHidenNavigationbar = YES;
+    [((UIViewController *)self.bc).navigationController pushViewController:web animated:YES];
 }
 - (NSInteger)numberOfListView:(UCFShopHListView *)shopListView
 {
@@ -98,6 +114,15 @@
 - (void)shopHListView:(UCFShopHListView *)shopListView didSelectRowAtIndex:(NSInteger)index
 {
     
+    
+    NSDictionary *dataDict = [self.showImagesDataArr objectAtIndex:index];
+    NSString *title = dataDict[@"title"];
+    
+    if ([self.deleage respondsToSelector:@selector(baseTableViewCell:buttonClick:withModel:)]) {
+        [self.deleage baseTableViewCell:self buttonClick:nil withModel:title];
+    }
+    
+
 }
 - (UIButton *)getShowButton
 {

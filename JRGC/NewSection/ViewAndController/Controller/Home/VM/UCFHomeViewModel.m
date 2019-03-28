@@ -20,6 +20,10 @@
 @implementation UCFHomeViewModel
 - (void)fetchNetData
 {
+    if (self.isFetchDataLoading) {
+        return;
+    }
+    self.isFetchDataLoading = YES;
     [self.dataArray removeAllObjects];
     [self getBannerData];
     if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
@@ -39,29 +43,6 @@
     };
     
     [SingleUserInfo requestUserAllStatueWithView:_rootViewController.view];
-    
-//    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
-//        UCFUserAllStatueRequest *request1 = [[UCFUserAllStatueRequest alloc] initWithUserId:SingleUserInfo.loginData.userInfo.userId];
-//        request1.animatingView = _loaingSuperView;
-//        [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-//            NSDictionary *dic = request.responseObject;
-//            NSDictionary *userDict = dic[@"data"][@"userSatus"];
-//            SingleUserInfo.loginData.userInfo.zxOpenStatus = [NSString stringWithFormat:@"%@",userDict[@"zxOpenStatus"]];
-//            SingleUserInfo.loginData.userInfo.openStatus = [NSString stringWithFormat:@"%@",userDict[@"openStatus"]];
-//            SingleUserInfo.loginData.userInfo.nmAuthorization = [userDict[@"nmGoldAuthStatus"] boolValue];
-//            SingleUserInfo.loginData.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
-//            SingleUserInfo.loginData.userInfo.isRisk = [userDict[@"isRisk"] boolValue];
-//            SingleUserInfo.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
-//            SingleUserInfo.loginData.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
-//            SingleUserInfo.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
-//            [SingleUserInfo setUserData:SingleUserInfo.loginData];
-//        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//
-//        }];
-//        [request1 start];
-//    } else {
-//
-//    }
 }
 - (void)getListData
 {
@@ -95,8 +76,7 @@
         if (bannerModel.data.recommendBanner.count > 0) {
             NSMutableArray *recommendArr = [NSMutableArray arrayWithCapacity:10];
             for (RecommendBanner *model in bannerModel.data.recommendBanner) {
-                [recommendArr addObject:model.thumb];
-//                [recommendArr addObject:@"https://www.baidu.com/img/bd_logo1.png?where=super"];
+                [recommendArr addObject:model];
             }
             selfWeak.recommendBannerArray = recommendArr;
         }
@@ -104,7 +84,7 @@
         if (bannerModel.data.coinBanner.count > 0) {
             NSMutableArray *coinBannerArr = [NSMutableArray arrayWithCapacity:10];
             for (CoinBanner *model in bannerModel.data.coinBanner) {
-                [coinBannerArr addObject:model.thumb];
+                [coinBannerArr addObject:model];
             }
             selfWeak.coinBannerArray = coinBannerArr;
         }
@@ -118,7 +98,7 @@
     if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] >= 4 && SingleUserInfo.loginData.userInfo.isRisk) {
         SEL sel = NSSelectorFromString(@"reflectDataModel:");
         CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"" showInfoMethod:sel heightOfCell:140];
-        data1.dataModel = self.siteNoticeStr;
+        data1.dataModel = self.bannerModel.data.siteNoticeMap;
         [section1 addObject:data1];
     } else {
         //新手引导
@@ -150,10 +130,12 @@
     mallRequest.animatingView = _loaingSuperView;
     [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         [selfWeak dealMallRequestData:request];
+        selfWeak.isFetchDataLoading = NO;
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        selfWeak.isFetchDataLoading = NO;
     }];
     [mallRequest start];
-}
+} 
 - (void)dealRequestData:(YTKBaseRequest *)request
 {
     

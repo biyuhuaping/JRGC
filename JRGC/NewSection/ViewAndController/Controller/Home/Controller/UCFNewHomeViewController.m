@@ -20,6 +20,12 @@
 #import "UCFBatchInvestmentViewController.h"
 #import "UCFHighQualityContainerViewController.h"
 #import "UCFWebViewJavascriptBridgeBanner.h"
+#import "UCFWebViewJavascriptBridgeMall.h"
+#import "UCFInvitationRebateViewController.h"
+#import "UCFMineIntoCoinPageApi.h"
+#import "UCFMineIntoCoinPageModel.h"
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
+#import "NSString+Misc.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -83,34 +89,21 @@
     [self fetchData];
     [self blindUserStatue];
 }
-- (void)blindUserStatue
+- (void)monitorUserLogin
 {
-    @PGWeakObj(self);
-    [self.KVOController observe:[UserInfoSingle sharedManager] keyPaths:@[@"loginData"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
-        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
-        if ([keyPath isEqualToString:@"loginData"]) {
-           UCFLoginData *oldUserData = [change objectSafeForKey:NSKeyValueChangeOldKey];
-           UCFLoginData *newUserData = [change objectSafeForKey:NSKeyValueChangeNewKey];
-            //登录或者注册
-            if (!oldUserData.userInfo && newUserData.userInfo) {
-                [selfWeak fetchData];
-                return ;
-            }
-            //退出登录，或者切换账户
-            if (oldUserData.userInfo && !newUserData.userInfo) {
-                [selfWeak fetchData];
-                return ;
-            }
-            //用户在登录的情况下，更改用户状态的时候，请求数据
-            if (oldUserData.userInfo.isRisk != newUserData.userInfo.isRisk || [oldUserData.userInfo.openStatus intValue] != [newUserData.userInfo.openStatus intValue]) {
-                [selfWeak fetchData];
-            }
-        }
-    }];
-    
-//    @PGWeakObj(self);
-
-    
+    [self fetchData];
+}
+- (void)monitorUserGetOut
+{
+    [self fetchData];
+}
+- (void)monitorOpenStatueChange
+{
+    [self fetchData];
+}
+- (void)monitorRiskStatueChange
+{
+    [self fetchData];
 }
 - (void)blindVM
 {
@@ -228,8 +221,76 @@
 #pragma mark BaseTableViewCellDelegate
 - (void)baseTableViewCell:(BaseTableViewCell *)cell buttonClick:(UIButton *)button withModel:(id)model
 {
-    if (model) {
+    if ([model isKindOfClass:[UCFNewHomeListPrdlist class]]) {
         [UCFBidDetailAndInvestPageLogic bidDetailAndInvestPageLogicUseDataModel:model detail:NO rootViewController:self];
+    } else if ([model isKindOfClass:[NSString class]]) {
+        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
+        if(nil == userId) {
+            [SingleUserInfo loadLoginViewController];
+        } else {
+            NSString *title = model;
+
+            if ([title isEqualToString:@"豆哥商城"]) {
+                [[NSURLCache sharedURLCache] removeAllCachedResponses];
+                NSURLCache * cache = [NSURLCache sharedURLCache];
+                [cache removeAllCachedResponses];
+                [cache setDiskCapacity:0];
+                [cache setMemoryCapacity:0];
+                
+                UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                mallController.url      = @"https://m.dougemall.com";//请求地址;
+                mallController.navTitle = @"商城";
+                mallController.isFromBarMall = NO;
+                [self.navigationController pushViewController:mallController animated:YES];
+            } else if ([title isEqualToString:@"领券中心"]) {
+                UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+                web.url = COUPON_CENTER;
+                web.isHidenNavigationbar = YES;
+                [self.navigationController pushViewController:web animated:YES];
+            } else if ([title isEqualToString:@"邀请返利"]) {
+                UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
+                feedBackVC.title = @"邀请获利";
+                feedBackVC.accoutType = SelectAccoutTypeP2P;
+                [self.navigationController pushViewController:feedBackVC animated:YES];
+            } else if ([title isEqualToString:@"工力工贝"]) {
+                if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
+                {//吐司：此活动暂时未对企业用户开放
+                    ShowMessage(@"此活动暂时未对企业用户开放");
+                } else {
+                    UCFMineIntoCoinPageApi * request = [[UCFMineIntoCoinPageApi alloc] initWithPageType:@""];
+                    
+                    //    request.animatingView = self.view;
+                    //    request.tag =tag;
+                    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+                        // 你可以直接在这里使用 self
+                        UCFMineIntoCoinPageModel *model = [request.responseJSONModel copy];
+                        //        DDLogDebug(@"---------%@",model);
+                        if (model.ret == YES) {
+                            
+                            //            NSDictionary *coinRequestDicData = [dataDict objectSafeDictionaryForKey:@"coinRequest"];
+                            UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+                            //            NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
+                            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+                            [data setValue:[NSString urlEncodeStr:model.data.coinRequest.param.encryptParam ] forKey:@"encryptParam"];
+                            [data setObject:[NSString stringWithFormat:@"%zd",model.data.coinRequest.param.fromApp] forKey:@"fromApp"];
+                            [data setObject:model.data.coinRequest.param.userId forKey:@"userId"];
+                            NSString * requestStr = [Common getParameterByDictionary:data];
+                            web.url  = [NSString stringWithFormat:@"%@/#/?%@",model.data.coinRequest.urlPath,requestStr];
+                            web.isHidenNavigationbar = YES;
+                            [self.navigationController pushViewController:web animated:YES];
+                        }
+                        else{
+                            ShowMessage(model.message);
+                        }
+                    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+                        // 你可以直接在这里使用 self
+                        
+                    }];
+                }
+            }
+        }
+        
+
     }
 }
 - (void)homeViewDataBidClickModel:(UCFNewHomeListModel *)model type:(UCFNewHomeListType)type

@@ -68,6 +68,32 @@ NS_ASSUME_NONNULL_BEGIN
  @param name <#name description#>
  */
 - (void)addRightbuttonImageName:(NSString *)name;
+
+/**
+ 绑定监听用户状态
+ */
+- (void)blindUserStatue;
+/**
+ 监听用户登录注册
+ */
+- (void)monitorUserLogin;
+
+/**
+ 监听用户退出登录
+ */
+- (void)monitorUserGetOut;
+
+/**
+ 监听用户开户状态改变
+ */
+- (void)monitorOpenStatueChange;
+
+/**
+ 监听用户风险评估状态
+ */
+- (void)monitorRiskStatueChange;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

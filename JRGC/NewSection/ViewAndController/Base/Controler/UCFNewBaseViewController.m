@@ -135,4 +135,54 @@
 
 }
 
+- (void)monitorUserLgoinOrRegist
+{
+
+}
+
+- (void)blindUserStatue
+{
+    @PGWeakObj(self);
+    [self.KVOController observe:[UserInfoSingle sharedManager] keyPaths:@[@"loginData"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"loginData"]) {
+            UCFLoginData *oldUserData = [change objectSafeForKey:NSKeyValueChangeOldKey];
+            UCFLoginData *newUserData = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            //登录或者注册
+            if (!oldUserData.userInfo && newUserData.userInfo) {
+                [selfWeak monitorUserLogin];
+                return ;
+            }
+            //退出登录，或者切换账户
+            if (oldUserData.userInfo && !newUserData.userInfo) {
+                [selfWeak monitorUserGetOut];
+                return ;
+            }
+            //用户在登录的情况下，更改用户状态的时候，请求数据
+            if ( [oldUserData.userInfo.openStatus intValue] != [newUserData.userInfo.openStatus intValue]) {
+                [selfWeak monitorOpenStatueChange];
+            }
+            //用户在登录的情况下，更改用户状态的时候，请求数据
+            if (oldUserData.userInfo.isRisk != newUserData.userInfo.isRisk) {
+                [selfWeak monitorRiskStatueChange];
+            }
+        }
+    }];
+}
+- (void)monitorUserLogin
+{
+    
+}
+- (void)monitorUserGetOut
+{
+    
+}
+- (void)monitorOpenStatueChange
+{
+    
+}
+- (void)monitorRiskStatueChange
+{
+    
+}
 @end
