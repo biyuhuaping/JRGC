@@ -236,7 +236,7 @@
         dataMode.modelType = @"mall";
         NSMutableArray *arr = [NSMutableArray arrayWithCapacity:1];
         for (UCFhomeMallbannerlist *bannerModel in model.data.mallBannerList) {
-            [arr addObject:bannerModel.thumb];
+            [arr addObject:bannerModel];
         }
         dataMode.data1 =  arr;
         dataMode.data2 = model.data.mallRecommends;
@@ -245,11 +245,12 @@
         [section3 addObject:data3_0];
         [self.dataArray addObject:section3];
         
+        
         NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
         CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:150];
          UCFCellDataModel *dataMode1 = [UCFCellDataModel new];
         dataMode1.modelType = @"mallDiscounts";
-        dataMode1.data1 = model.data.mallDiscounts;
+        dataMode1.data1 = model.data.mallSale;
         data4_0.dataModel = dataMode1;
         [section4 addObject:data4_0];
         

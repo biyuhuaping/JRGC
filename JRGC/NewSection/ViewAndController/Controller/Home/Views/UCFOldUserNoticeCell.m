@@ -42,7 +42,7 @@
         [self.showImagesDataArr addObject:dict3];
 
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 //        self.rootLayout.backgroundColor = [UIColor yellowColor];
         self.rootLayout.useFrame = YES;
         

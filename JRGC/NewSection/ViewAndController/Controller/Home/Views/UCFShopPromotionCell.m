@@ -14,6 +14,7 @@
 #import "UCFCellDataModel.h"
 #import "UCFHomeMallDataModel.h"
 #import "UIImageView+WebCache.h"
+#import "UCFHomeMallDataModel.h"
 @interface UCFShopPromotionCell()<RCFFlowViewDelegate,UCFShopHListViewDataSource,UCFShopHListViewDelegate>
 @property(nonatomic, strong)RCFFlowView *adCycleScrollView;
 @property(nonatomic, strong)UCFShopHListView *shopList;
@@ -26,7 +27,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         
         UIView *whitBaseView = [UIView new];
         whitBaseView.frame = CGRectMake(15, 0,  ScreenWidth - 30, (ScreenWidth - 30) * 6 /23 + 160);
@@ -58,7 +59,12 @@
 {
     UCFCellDataModel *dataModel = model;
     if ([dataModel.modelType isEqualToString:@"mall"]) {
-        self.adCycleScrollView.advArray = dataModel.data1;
+        NSMutableArray *imgArr = [NSMutableArray arrayWithCapacity:3];
+        for (UCFhomeMallbannerlist *bannerModel in dataModel.data1) {
+            [imgArr addObject:bannerModel.thumb];
+        }
+        
+        self.adCycleScrollView.advArray = [NSMutableArray arrayWithArray:imgArr];
         [self.adCycleScrollView reloadCycleView];
         
         self.dataArray = dataModel.data2;
@@ -76,7 +82,7 @@
 }
 - (CGSize)shopHListView:(UCFShopHListView *)shopListViewCommodityImageSize
 {
-    return CGSizeMake(115, 160);
+    return CGSizeMake((ScreenWidth - 30)/3, 160);
 }
 
 - (UIView *)shopHListView:(UCFShopHListView *)shopListView cellForRowAtIndex:(NSInteger)index

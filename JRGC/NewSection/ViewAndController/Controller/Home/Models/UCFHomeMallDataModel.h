@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class UCFMallDataModel,UCFHomeMalldiscounts,UCFHomeMallrecommends,UCFhomeMallbannerlist;
+@class UCFMallDataModel,UCFHomeMallsale,UCFHomeMallrecommends,UCFhomeMallbannerlist;
 @interface UCFHomeMallDataModel : BaseModel
 
 @property (nonatomic, assign) NSInteger code;
@@ -26,15 +26,19 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @interface UCFMallDataModel : BaseModel
 
-@property (nonatomic, strong) NSArray *mallDiscounts;
+@property (nonatomic, copy) NSString *mallRecommendsUrl;
 
 @property (nonatomic, strong) NSArray *mallRecommends;
 
 @property (nonatomic, strong) NSArray *mallBannerList;
 
+@property (nonatomic, copy) NSString *mallSaleUrl;
+
+@property (nonatomic, strong) NSArray *mallSale;
+
 @end
 
-@interface UCFHomeMalldiscounts : BaseModel
+@interface UCFHomeMallsale : BaseModel
 
 @property (nonatomic, copy) NSString *bizUrl;
 
@@ -91,5 +95,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *switchFlag;
 
 @end
+
 
 NS_ASSUME_NONNULL_END
