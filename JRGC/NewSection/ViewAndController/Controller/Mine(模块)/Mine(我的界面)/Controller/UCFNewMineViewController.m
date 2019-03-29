@@ -737,6 +737,21 @@
     }];
     
 }
-
+//登录或者注册
+- (void)monitorUserLogin
+{
+    [self.tableView beginRefresh];
+}
+//退出登录，或者切换账户
+- (void)monitorUserGetOut
+{
+    [self.tableHead showMyReceipt:nil];
+    [self.tableHead showMySimple:nil];
+}
+//用户在登录的情况下，更改用户状态的时候，请求数据
+- (void)monitorOpenStatueChange
+{
+   [self.tableView beginRefresh];
+}
 
 @end

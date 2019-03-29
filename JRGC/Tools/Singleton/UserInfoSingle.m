@@ -44,6 +44,8 @@
     //注册成功后，先清cookies，把老账户的清除掉，然后再用新账户的信息
     [self deleteUserData];
     //登录成功保存用户的资料
+    NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getlastLoginName],[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]],loginData.userInfo.time];
+    self.signatureStr  = [UCFToolsMehod md5:yanQian];
     [self setUserData:loginData];
     [self generateWapSingature:loginData];
 
