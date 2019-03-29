@@ -1039,6 +1039,8 @@
 		E3041D3B21F703CD007B09B6 /* UCFRegisterGetRegisterInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3041D3A21F703CC007B09B6 /* UCFRegisterGetRegisterInfoModel.m */; };
 		E3041D3E21F71326007B09B6 /* UCFRegisterInputVerificationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3041D3D21F71326007B09B6 /* UCFRegisterInputVerificationCodeViewController.m */; };
 		E3041D4121F71C3F007B09B6 /* HWTFCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3041D3F21F71C3F007B09B6 /* HWTFCursorView.m */; };
+		E30429B2224E2E55005015E5 /* UCFNewModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30429B1224E2E55005015E5 /* UCFNewModifyPasswordViewController.m */; };
+		E30429BA224E3D64005015E5 /* UCFNewBindPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30429B9224E3D64005015E5 /* UCFNewBindPhoneNumViewController.m */; };
 		E3046C4022310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3046C3F22310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m */; };
 		E309F647224872F800FFE9B9 /* UCFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E309F646224872F800FFE9B9 /* UCFLoginViewController.m */; };
 		E309F64A2248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = E309F6492248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m */; };
@@ -3112,6 +3114,10 @@
 		E3041D3D21F71326007B09B6 /* UCFRegisterInputVerificationCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterInputVerificationCodeViewController.m; sourceTree = "<group>"; };
 		E3041D3F21F71C3F007B09B6 /* HWTFCursorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWTFCursorView.m; sourceTree = "<group>"; };
 		E3041D4021F71C3F007B09B6 /* HWTFCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWTFCursorView.h; sourceTree = "<group>"; };
+		E30429B0224E2E55005015E5 /* UCFNewModifyPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewModifyPasswordViewController.h; sourceTree = "<group>"; };
+		E30429B1224E2E55005015E5 /* UCFNewModifyPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewModifyPasswordViewController.m; sourceTree = "<group>"; };
+		E30429B8224E3D64005015E5 /* UCFNewBindPhoneNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewBindPhoneNumViewController.h; sourceTree = "<group>"; };
+		E30429B9224E3D64005015E5 /* UCFNewBindPhoneNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBindPhoneNumViewController.m; sourceTree = "<group>"; };
 		E3046C3E22310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.h; sourceTree = "<group>"; };
 		E3046C3F22310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m; sourceTree = "<group>"; };
 		E309F645224872F700FFE9B9 /* UCFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoginViewController.h; sourceTree = "<group>"; };
@@ -7847,6 +7853,88 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E30429AB224E2E1F005015E5 /* ModifyPassword(修改登录密码) */ = {
+			isa = PBXGroup;
+			children = (
+				E30429AC224E2E1F005015E5 /* Controller */,
+				E30429AD224E2E1F005015E5 /* Model */,
+				E30429AE224E2E1F005015E5 /* View */,
+				E30429AF224E2E1F005015E5 /* Api */,
+			);
+			path = "ModifyPassword(修改登录密码)";
+			sourceTree = "<group>";
+		};
+		E30429AC224E2E1F005015E5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E30429B0224E2E55005015E5 /* UCFNewModifyPasswordViewController.h */,
+				E30429B1224E2E55005015E5 /* UCFNewModifyPasswordViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E30429AD224E2E1F005015E5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E30429AE224E2E1F005015E5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E30429AF224E2E1F005015E5 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		E30429B3224E3D3F005015E5 /* BindPhoneNum(修改绑定手机号) */ = {
+			isa = PBXGroup;
+			children = (
+				E30429B4224E3D3F005015E5 /* Controller */,
+				E30429B5224E3D3F005015E5 /* Model */,
+				E30429B6224E3D3F005015E5 /* View */,
+				E30429B7224E3D3F005015E5 /* Api */,
+			);
+			path = "BindPhoneNum(修改绑定手机号)";
+			sourceTree = "<group>";
+		};
+		E30429B4224E3D3F005015E5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E30429B8224E3D64005015E5 /* UCFNewBindPhoneNumViewController.h */,
+				E30429B9224E3D64005015E5 /* UCFNewBindPhoneNumViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E30429B5224E3D3F005015E5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E30429B6224E3D3F005015E5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E30429B7224E3D3F005015E5 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		E31BD51721C0C10100D3651F /* TYAlertController */ = {
 			isa = PBXGroup;
 			children = (
@@ -8999,6 +9087,8 @@
 		E3B76E6D21EC6E89009C9021 /* Mine(模块) */ = {
 			isa = PBXGroup;
 			children = (
+				E30429B3224E3D3F005015E5 /* BindPhoneNum(修改绑定手机号) */,
+				E30429AB224E2E1F005015E5 /* ModifyPassword(修改登录密码) */,
 				334DE85F2240E9280043A864 /* HighQualityLoan(优质债权) */,
 				334DE85E2240E9100043A864 /* AILoan(智能出借) */,
 				E335540B223F4349001FADEA /* MineService(服务中心) */,
@@ -10261,6 +10351,7 @@
 				3328796321EEC68100832CE8 /* Encryption.m in Sources */,
 				74BDA9881F09F6C60054403F /* FSCalendarCell.m in Sources */,
 				742D50EF1F74FAE600951AE2 /* UCFUserAssetModel.m in Sources */,
+				E30429BA224E3D64005015E5 /* UCFNewBindPhoneNumViewController.m in Sources */,
 				7477BF951AFB0F4C00914BFB /* UCFRedEnvelopeTableViewCell.m in Sources */,
 				74673BC61FEB923A00AF3727 /* UCFMIneFuncCollectCell.m in Sources */,
 				744EB8011EE803F4003C57C4 /* UCFHonorHeaderView.m in Sources */,
@@ -10537,6 +10628,7 @@
 				FBB6858A1AE4A76800F222B6 /* UIScrollView+MJRefresh.m in Sources */,
 				7BC8AA1C1AD4C74200BF4660 /* UCFGDYouHuiModel.m in Sources */,
 				E3585FAF222D0996005CD1DB /* UCFMicroBankOpenAccountDepositViewController.m in Sources */,
+				E30429B2224E2E55005015E5 /* UCFNewModifyPasswordViewController.m in Sources */,
 				7BCE02091AC8FDEF0084C15C /* GetRequest.m in Sources */,
 				74BDA9931F09F6C60054403F /* FSCalendarWeekdayView.m in Sources */,
 				838EDD6B1F6B7244008E60EC /* CustomShapeLayer.m in Sources */,

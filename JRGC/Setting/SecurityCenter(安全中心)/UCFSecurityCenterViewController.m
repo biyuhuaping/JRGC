@@ -47,6 +47,7 @@
 #import "UCFMineMyReceiptModel.h"
 #import "UCFMineDimensionCodeViewController.h"
 #import "UCFMicroBankDepositoryAccountHomeViewController.h"
+#import "UCFNewModifyPasswordViewController.h"
 
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
@@ -951,10 +952,12 @@
         if (indexPath.section == 2) {
             
             if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"ModifyPasswordViewController"]){//修改登录密码
-                ModifyPasswordViewController * modifyPasswordVC = [[ModifyPasswordViewController alloc]initWithNibName:@"ModifyPasswordViewController" bundle:nil];
-                modifyPasswordVC.title = arrowItem.title;
-                modifyPasswordVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:modifyPasswordVC  animated:YES];
+//                ModifyPasswordViewController * modifyPasswordVC = [[ModifyPasswordViewController alloc]initWithNibName:@"ModifyPasswordViewController" bundle:nil];
+//                modifyPasswordVC.title = arrowItem.title;
+//                modifyPasswordVC.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:modifyPasswordVC  animated:YES];
+                UCFNewModifyPasswordViewController *vc= [[UCFNewModifyPasswordViewController alloc] init];
+                [self.rt_navigationController pushViewController:vc animated:YES];
             } else if([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"TradePasswordVC"]){ //设置交易密码或修改交易密码
                 if(openStatus < 3){
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];

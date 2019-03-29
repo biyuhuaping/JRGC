@@ -73,7 +73,7 @@
         {
             SingleUserInfo.loginData.userInfo.openStatus = @"3";
             [SingleUserInfo setUserData:SingleUserInfo.loginData];
-            for (UCFMicroBankOpenAccountViewController *vc in self.rt_navigationController.viewControllers) {
+            for (UCFMicroBankOpenAccountViewController *vc in self.navigationController.viewControllers) {
                 if ([vc isKindOfClass:[UCFMicroBankOpenAccountViewController class]]) {
                     vc.openAccountSucceed = YES;
                 }

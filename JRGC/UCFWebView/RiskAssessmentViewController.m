@@ -7,7 +7,7 @@
 //
 
 #import "RiskAssessmentViewController.h"
-
+#import "UCFMicroBankDepositoryAccountHomeViewController.h"
 @interface RiskAssessmentViewController ()
 
 @end
@@ -59,6 +59,12 @@
 //    if ([_sourceVC isEqualToString:@"P2POrHonerAccoutVC"]) {
 //        [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
 //    }
+    
+    for (UCFMicroBankDepositoryAccountHomeViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[UCFMicroBankDepositoryAccountHomeViewController class]]) {
+            [vc refresh];
+        }
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)dealloc

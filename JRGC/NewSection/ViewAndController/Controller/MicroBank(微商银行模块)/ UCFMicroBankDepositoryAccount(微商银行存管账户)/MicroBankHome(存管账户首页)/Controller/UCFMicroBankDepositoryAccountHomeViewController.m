@@ -373,5 +373,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)refresh
+{
+    [self reuqestCell];
+    [self reuqestHead];
+}
 
 @end
