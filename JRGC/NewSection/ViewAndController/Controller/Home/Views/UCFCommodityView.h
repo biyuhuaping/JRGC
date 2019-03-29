@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)UIImageView *shopImageView;
 @property(nonatomic, strong)UILabel     *shopName;
-@property(nonatomic, strong)UILabel     *shopValue;
+@property(nonatomic, strong)UILabel     *shopValue; //折扣价
+@property(nonatomic, strong)UILabel     *shopOrginalValue; //原价
 
 - (instancetype)initWithFrame:(CGRect)frame withHeightOfCommodity:(CGFloat)height;
 @end

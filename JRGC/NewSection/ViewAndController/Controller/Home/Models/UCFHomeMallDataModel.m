@@ -16,7 +16,8 @@
 @implementation UCFMallDataModel
 
 + (NSDictionary<NSString *,id> *)modelContainerPropertyGenericClass{
-    return @{@"mallSale" : [UCFHomeMallsale class], @"mallRecommends" : [UCFHomeMallrecommends class], @"mallBannerList" : [UCFhomeMallbannerlist class]};
+    
+    return @{@"mallSale" : [UCFHomeMallsale class], @"mallRecommends" : [UCFHomeMallrecommends class], @"mallBannerList" : [UCFhomeMallbannerlist class],@"mallSelected":[UCFHomeMallsale class],@"mallDiscounts":[UCFHomeMallrecommends class]};
 }
 
 

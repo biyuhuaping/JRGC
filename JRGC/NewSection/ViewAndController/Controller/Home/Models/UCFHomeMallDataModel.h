@@ -26,16 +26,28 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @interface UCFMallDataModel : BaseModel
 
+@property (nonatomic, strong) NSArray *mallBannerList;
+//个人中心的数据
+@property (nonatomic, copy) NSString *mallSaleUrl;
+
 @property (nonatomic, copy) NSString *mallRecommendsUrl;
 
 @property (nonatomic, strong) NSArray *mallRecommends;
 
-@property (nonatomic, strong) NSArray *mallBannerList;
-
-@property (nonatomic, copy) NSString *mallSaleUrl;
-
 @property (nonatomic, strong) NSArray *mallSale;
 
+//======================================================
+
+//首页的数据属性
+@property (nonatomic, strong) NSArray *mallSelected;
+
+@property (nonatomic, strong) NSArray *mallDiscounts;
+
+@property (nonatomic, copy) NSString *mallDiscountsUrl;
+
+@property (nonatomic, copy) NSString *mallSelectedUrl;
+
+//======================================================
 @end
 
 @interface UCFHomeMallsale : BaseModel

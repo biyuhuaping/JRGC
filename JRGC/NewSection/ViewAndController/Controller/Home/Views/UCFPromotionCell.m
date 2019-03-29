@@ -44,9 +44,6 @@
         CoinBanner *model = obj;
         url = model.url;
         title = model.title;
-        
-
-        
     } else if ([obj isKindOfClass:[RecommendBanner class]]) {
         RecommendBanner *model = obj;
         url = model.url;

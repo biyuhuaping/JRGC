@@ -166,23 +166,7 @@
     [self.timeLimitLab sizeToFit];
     self.titleLab.text = microModel.prdName;
     NSUInteger type = [microModel.type integerValue];
-    if (type == 2) {
-        self.rateLab.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
-        self.timeLimitLab.textColor = [Color color:PGColorOptionTitleBlackGray];
-        NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
-        UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
-        self.iconView.backgroundColor = UIColorWithRGB(0xFF4133);
-        [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
-        
-    } else {
-        NSArray *colorArray = [NSArray arrayWithObjects:[Color color:PGColorOptionTitleGray],[Color color:PGColorOptionTitleGray], nil];
-        UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
-        [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
-        self.rateLab.textColor = [Color color:PGColorOptionTitleGray];
-        self.timeLimitLab.textColor = [Color color:PGColorOptionTitleGray];
-        self.iconView.backgroundColor = [Color color:PGColorOptionTitleGray];;
 
-    }
     switch (type) {
         case 0://预约
         {
@@ -232,6 +216,25 @@
         default:
             break;
     }
+    
+    if ([microModel.status intValue] == 2) {
+        self.rateLab.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
+        self.timeLimitLab.textColor = [Color color:PGColorOptionTitleBlackGray];
+        NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
+        UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
+        self.iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+        [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
+        
+    } else {
+        NSArray *colorArray = [NSArray arrayWithObjects:[Color color:PGColorOptionTitleGray],[Color color:PGColorOptionTitleGray], nil];
+        UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
+        [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
+        self.rateLab.textColor = [Color color:PGColorOptionTitleGray];
+        self.timeLimitLab.textColor = [Color color:PGColorOptionTitleGray];
+        self.iconView.backgroundColor = [Color color:PGColorOptionTitleGray];;
+        
+    }
+    
     if (microModel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [microModel.prdLabelsList firstObject];
         if ([projectLabel.labelPriority integerValue] == 1) {

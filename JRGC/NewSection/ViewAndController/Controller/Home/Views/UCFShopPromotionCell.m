@@ -19,6 +19,7 @@
 @property(nonatomic, strong)RCFFlowView *adCycleScrollView;
 @property(nonatomic, strong)UCFShopHListView *shopList;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
+@property(nonatomic, strong)NSMutableArray  *cycleModelArray;
 @end
 @implementation UCFShopPromotionCell
 
@@ -28,9 +29,11 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-        
+        self.rootLayout.useFrame = YES;
+
         UIView *whitBaseView = [UIView new];
-        whitBaseView.frame = CGRectMake(15, 0,  ScreenWidth - 30, (ScreenWidth - 30) * 6 /23 + 160);
+        CGFloat shopHeight = (ScreenWidth - 30)/3.0f + 60;
+        whitBaseView.frame = CGRectMake(15, 0,  ScreenWidth - 30, (ScreenWidth - 30) * 6 /23 + shopHeight);
         whitBaseView.layer.cornerRadius = 5.0f;
         whitBaseView.clipsToBounds = YES;
         whitBaseView.backgroundColor = [UIColor whiteColor];
@@ -39,13 +42,14 @@
         RCFFlowView *adCycleScrollView = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 30,([UIScreen mainScreen].bounds.size.width - 30) * 6 /23)];
         adCycleScrollView.delegate = self;
         adCycleScrollView.isHideImageCorner = YES;
-       
         [whitBaseView addSubview:adCycleScrollView];
+        
+        
+        
         [adCycleScrollView reloadCycleView];
         self.adCycleScrollView = adCycleScrollView;
-        self.rootLayout.useFrame = YES;
     
-        UCFShopHListView *shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(adCycleScrollView.frame), CGRectGetWidth(whitBaseView.frame), 160)];
+        UCFShopHListView *shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(adCycleScrollView.frame), CGRectGetWidth(whitBaseView.frame), shopHeight)];
         shopList.horizontalSpace = 1.0f;
         shopList.dataSource = self;
         shopList.delegate = self;
@@ -58,6 +62,8 @@
 - (void)reflectDataModel:(id)model
 {
     UCFCellDataModel *dataModel = model;
+    
+    self.cycleModelArray = dataModel.data1;
     if ([dataModel.modelType isEqualToString:@"mall"]) {
         NSMutableArray *imgArr = [NSMutableArray arrayWithCapacity:3];
         for (UCFhomeMallbannerlist *bannerModel in dataModel.data1) {
@@ -82,23 +88,42 @@
 }
 - (CGSize)shopHListView:(UCFShopHListView *)shopListViewCommodityImageSize
 {
-    return CGSizeMake((ScreenWidth - 30)/3, 160);
+    return CGSizeMake((ScreenWidth - 30)/3, (ScreenWidth - 30)/3 + 60);
 }
 
 - (UIView *)shopHListView:(UCFShopHListView *)shopListView cellForRowAtIndex:(NSInteger)index
 {
     UCFHomeMallrecommends *model = self.dataArray[index];
-    UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, 115, 160) withHeightOfCommodity:115];
+    UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, (ScreenWidth - 30)/3, (ScreenWidth - 30)/3 + 60) withHeightOfCommodity:(ScreenWidth - 30)/3];
     [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:nil];
     view.shopName.text = model.title;
-    view.shopValue.text = model.price;
+    view.shopValue.text = [NSString stringWithFormat:@"%@工贝",model.score];
+    NSString *showStr =  [NSString stringWithFormat:@"%@工贝",model.price];
+    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:showStr attributes:attribtDic];
+    view.shopOrginalValue.attributedText = attribtStr;
+    
     return view;
 }
 
 - (void)shopHListView:(UCFShopHListView *)shopListView didSelectRowAtIndex:(NSInteger)index
 {
+    UCFHomeMallrecommends *model = self.dataArray[index];
+    if (self.deleage && [self.deleage respondsToSelector:@selector(baseTableViewCell:buttonClick:withModel:)]) {
+        [self.deleage baseTableViewCell:self buttonClick:nil withModel:model];
+    }
     
 }
+- (void)didSelectRCCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex
+{
+    UCFhomeMallbannerlist *bannerModel = self.cycleModelArray[subIndex];
+    if (self.deleage && [self.deleage respondsToSelector:@selector(baseTableViewCell:buttonClick:withModel:)]) {
+        [self.deleage baseTableViewCell:self buttonClick:nil withModel:bannerModel];
+    }
+}
+
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
