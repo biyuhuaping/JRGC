@@ -16,6 +16,7 @@
 #import "QLHeaderViewController.h"
 #import "UCFBidDetailRequest.h"
 #import "UCFNewProjectDetailViewController.h"
+#import "UCFNewTransProjectDetailViewController.h"
 @interface UCFInvestmentDetailViewController ()
 {
     UCFInvestmentDetailView *_investmentDetailView;
@@ -221,11 +222,56 @@
         }
     } else if (tag.intValue == kSXTagPrdTransferDetail) {
         if ([rstcode intValue] == 1) {
-            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
-            controller.sourceVc = @"investmentDetail";
-            //controller.detailType = PROJECTDETAILTYPEBONDSRRANSFER;
-            controller.accoutType = self.accoutType;
-            [self.navigationController pushViewController:controller animated:YES];
+            
+//            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
+//            controller.sourceVc = @"investmentDetail";
+//            //controller.detailType = PROJECTDETAILTYPEBONDSRRANSFER;
+//            controller.accoutType = self.accoutType;
+//            [self.navigationController pushViewController:controller animated:YES];
+//            
+//            return;
+            UCFTransBidInfoModel *model = [UCFTransBidInfoModel yy_modelWithJSON:result];
+            NSString *rsttext = model.statusdes;
+            NSString *bidStatue = @"";
+            switch ([_investmentDetailView.investDetailModel.status integerValue]) {
+                case 0:
+                    bidStatue = @"未审核";
+                    break;
+                case 1:
+                    bidStatue = @"等待确认";
+                    break;
+                case 2:
+                    bidStatue = @"招标中";
+                    break;
+                case 3:
+                    bidStatue = @"流标";
+                    break;
+                case 4:
+                    bidStatue = @"满标";
+                    break;
+                case 5:
+                    bidStatue = @"回款中";
+                    break;
+                case 6:
+                    bidStatue = @"已回款";
+                    break;
+            }
+            
+            
+            if (model.status == 1) {
+                UCFNewTransProjectDetailViewController *vc = [[UCFNewTransProjectDetailViewController alloc] init];
+                vc.model = model;
+                vc.model.prdTransferFore.modelStatue = bidStatue;
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                if (![rsttext isEqualToString:@""] && rsttext) {
+                    [AuxiliaryFunc showToastMessage:model.statusdes withView:self.view];
+                }
+            }
+            
+            
+
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:@"产品标不存在，请检查(或者不能非法操作)"];
         }
@@ -366,6 +412,7 @@
         
         
     } else {
+        
         NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",uuid,SingleUserInfo.loginData.userInfo.userId];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:self.accoutType];
     }

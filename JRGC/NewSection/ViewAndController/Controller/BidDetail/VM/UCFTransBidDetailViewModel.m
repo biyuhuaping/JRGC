@@ -106,7 +106,11 @@
 - (void)invetsButtonState
 {
     if ([self.model.prdTransferFore.type isEqualToString:@"1"]) {
-        self.bidInvestText = @"立即出借";
+        if (self.model.prdTransferFore.modelStatue.length > 0) {
+            self.bidInvestText = self.model.prdTransferFore.modelStatue;
+        } else {
+            self.bidInvestText = @"立即出借";
+        }
 
     } else {
         self.bidInvestText = @"立即购买";

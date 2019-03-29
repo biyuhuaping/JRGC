@@ -24,8 +24,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = UIColorWithRGB(0xebebee);
-        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+        self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        
         UCFShopHListView *shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(15, 0, [[UIScreen mainScreen] bounds].size.width - 30, 150)];
         shopList.horizontalSpace = 5.0f;
         shopList.dataSource = self;
@@ -55,7 +56,7 @@
 
 - (UIView *)shopHListView:(UCFShopHListView *)shopListView cellForRowAtIndex:(NSInteger)index
 {
-    UCFHomeMallrecommends *model = self.dataArray[index];
+    UCFHomeMallsale *model = self.dataArray[index];
     UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, 105, 150) withHeightOfCommodity:105];
     view.clipsToBounds = YES;
     view.layer.cornerRadius = 5.0f;

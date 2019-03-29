@@ -18,7 +18,7 @@
         
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.frame = CGRectMake(0, 0, frame.size.width, height);
-        imageView.backgroundColor = [UIColor yellowColor];
+        imageView.backgroundColor = [UIColor clearColor];
         self.shopImageView = imageView;
         [self addSubview:imageView];
         

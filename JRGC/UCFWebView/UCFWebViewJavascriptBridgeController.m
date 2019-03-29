@@ -58,7 +58,7 @@
 
 @property (strong, nonatomic) UIProgressView *progressView; //webView的进度条
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConSpace;
-
+@property (strong, nonatomic) NSString *taskType;
 
 @end
 
@@ -550,7 +550,7 @@
 }
 -(void)goToShareWeChat:(NSDictionary *)nativeData
 {
-    
+    self.taskType = @"3";
     /*
      {\"title\":\"工力大放送，赢工贝换好礼!\",\"image\":\"https:\/\/static.9888.cn\/images\/rank\/redpacket.png\",\"link\":\"http:\/\/m.jiabeibc.com\/static\/jh\/index.html#\/enterPhone?sendRecordCode=sendRecordCode\",\"desc\":\"工贝天生傲娇,总量有限,永久有效,快来抢工力赢工贝。\"}",
      
@@ -580,6 +580,11 @@
     //显示分享面板 （自定义UI可以忽略）
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
+        
+        [[UserInfoSingle sharedManager] saveIsShare:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                     self.taskType,@"taskType",
+                                                     [NSString stringWithFormat:@"%zd",platformType],@"platformType",
+                                                     nil] ];
     }];
     
 }
@@ -1359,6 +1364,7 @@
     {
         return;
     }
+    self.taskType = @"1";
     _shareUrl = self.dicForShare.url;
     
     _shareImage = [Common getImageFromURL:self.dicForShare.thumb];
@@ -1372,6 +1378,10 @@
     //显示分享面板 （自定义UI可以忽略）
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
+        [[UserInfoSingle sharedManager] saveIsShare:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                     self.taskType,@"taskType",
+                                                     [NSString stringWithFormat:@"%zd",platformType],@"platformType",
+                                                     nil] ];
     }];
 }
 //直接分享

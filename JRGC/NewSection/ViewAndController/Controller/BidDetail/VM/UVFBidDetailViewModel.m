@@ -125,7 +125,6 @@
     NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
     if (![prdLabelsList isEqual:[NSNull null]]) {
         for (DetailPrdlabelslist *tmpModel in prdLabelsList) {
-            
             NSInteger labelPriority = [tmpModel.labelPriority integerValue];
             if (labelPriority > 1) {
                 if ([tmpModel.labelName rangeOfString:@"起投"].location == NSNotFound) {

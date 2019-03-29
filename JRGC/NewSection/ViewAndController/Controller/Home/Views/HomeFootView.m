@@ -13,6 +13,8 @@
 
 - (void)createSubviews
 {
+    self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    
     UIImageView *view1 = [[UIImageView alloc] init];
     view1.heightSize.equalTo(@100);
     view1.topPos.equalTo(@17);

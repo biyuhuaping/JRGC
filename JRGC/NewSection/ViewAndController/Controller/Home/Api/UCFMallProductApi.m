@@ -7,13 +7,24 @@
 //
 
 #import "UCFMallProductApi.h"
-
+@interface UCFMallProductApi()
+@property(nonatomic, copy)NSString *pageType;
+@end
 @implementation UCFMallProductApi
+
+- (instancetype)initWithPageType:(NSString *)pageType
+{
+    if (self = [super init]) {
+        self.pageType = pageType;
+    }
+    return self;
+}
+
 - (NSString *)requestUrl {
     return @"api/publicMsg/v2/mallProductShow.json";
 }
 - (id)requestArgument {
-    return nil;
+    return @{@"pageType":self.pageType};
 }
 - (NSString *)modelClass
 {

@@ -23,9 +23,6 @@
         imageView.image = [UIImage imageNamed:@"home_icon_notice"];
         [self addSubview:imageView];
         
-        
-        
-        
         UILabel *lab = [[UILabel alloc] init];
         lab.centerYPos.equalTo(self.centerYPos);
         lab.leftPos.equalTo(imageView.rightPos).offset(15);
@@ -39,9 +36,18 @@
         [lab sizeToFit];
         self.titleLab = lab;
         
-
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.myHorzMargin = 0;
+        button.myVertMargin = 0;
+        [button addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
     }
     return self;
+}
+- (void)click:(UIButton *)btn{
+    if (self.deleage && [self.deleage respondsToSelector:@selector(noticeSiteClick)]) {
+        [self.deleage noticeSiteClick];
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.

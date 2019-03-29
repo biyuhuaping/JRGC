@@ -20,38 +20,33 @@
 @implementation UCFHomeViewModel
 - (void)fetchNetData
 {
+    if (self.isFetchDataLoading) {
+        return;
+    }
+    self.isFetchDataLoading = YES;
     [self.dataArray removeAllObjects];
-    
-    [self getUserAllStatue];
     [self getBannerData];
-    [self addUserGuideData];
-    [self getBidListData];
+    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
+        [self getUserAllStatue];
+    } else {
+        [self addUserGuideData];
+        [self getBidListData];
+    }
 
-    
 }
 - (void)getUserAllStatue
 {
-    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
-        UCFUserAllStatueRequest *request1 = [[UCFUserAllStatueRequest alloc] initWithUserId:SingleUserInfo.loginData.userInfo.userId];
-        request1.animatingView = _loaingSuperView;
-        [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-            NSDictionary *dic = request.responseObject;
-            NSDictionary *userDict = dic[@"data"][@"userSatus"];
-            SingleUserInfo.loginData.userInfo.zxOpenStatus = [NSString stringWithFormat:@"%@",userDict[@"zxOpenStatus"]];
-            SingleUserInfo.loginData.userInfo.openStatus = [NSString stringWithFormat:@"%@",userDict[@"openStatus"]];
-            SingleUserInfo.loginData.userInfo.nmAuthorization = [userDict[@"nmGoldAuthStatus"] boolValue];
-            SingleUserInfo.loginData.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
-            SingleUserInfo.loginData.userInfo.isRisk = [userDict[@"isRisk"] boolValue];
-            SingleUserInfo.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
-            SingleUserInfo.loginData.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
-            SingleUserInfo.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
-            [SingleUserInfo setUserData:SingleUserInfo.loginData];
-        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            
-            
-        }];
-        [request1 start];
-    }
+    @PGWeakObj(self);
+    SingleUserInfo.requestUserbackBlock = ^(BOOL finish) {
+        [selfWeak addUserGuideData];
+        [selfWeak getBidListData];
+    };
+    
+    [SingleUserInfo requestUserAllStatueWithView:_rootViewController.view];
+}
+- (void)getListData
+{
+
 }
 - (void)getBannerData
 {
@@ -81,7 +76,7 @@
         if (bannerModel.data.recommendBanner.count > 0) {
             NSMutableArray *recommendArr = [NSMutableArray arrayWithCapacity:10];
             for (RecommendBanner *model in bannerModel.data.recommendBanner) {
-                [recommendArr addObject:model.thumb];
+                [recommendArr addObject:model];
             }
             selfWeak.recommendBannerArray = recommendArr;
         }
@@ -89,7 +84,7 @@
         if (bannerModel.data.coinBanner.count > 0) {
             NSMutableArray *coinBannerArr = [NSMutableArray arrayWithCapacity:10];
             for (CoinBanner *model in bannerModel.data.coinBanner) {
-                [coinBannerArr addObject:model.thumb];
+                [coinBannerArr addObject:model];
             }
             selfWeak.coinBannerArray = coinBannerArr;
         }
@@ -99,12 +94,11 @@
 }
 - (void)addUserGuideData
 {
-    
     NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
     if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] >= 4 && SingleUserInfo.loginData.userInfo.isRisk) {
         SEL sel = NSSelectorFromString(@"reflectDataModel:");
         CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"" showInfoMethod:sel heightOfCell:140];
-        data1.dataModel = self.siteNoticeStr;
+        data1.dataModel = self.bannerModel.data.siteNoticeMap;
         [section1 addObject:data1];
     } else {
         //新手引导
@@ -132,14 +126,16 @@
 - (void)getMallData
 {
     @PGWeakObj(self);
-    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] init];
+    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"home"];
     mallRequest.animatingView = _loaingSuperView;
     [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         [selfWeak dealMallRequestData:request];
+        selfWeak.isFetchDataLoading = NO;
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        selfWeak.isFetchDataLoading = NO;
     }];
     [mallRequest start];
-}
+} 
 - (void)dealRequestData:(YTKBaseRequest *)request
 {
     
@@ -233,14 +229,14 @@
 - (void)dealMallRequestData:(YTKBaseRequest *)request
 {
     UCFHomeMallDataModel *model = request.responseJSONModel;
+    SEL sel = NSSelectorFromString(@"reflectDataModel:");
     if (model.ret) {
-        SEL sel = NSSelectorFromString(@"reflectDataModel:");
         CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(ScreenWidth - 30) * 6 /23 + 160];
         UCFCellDataModel *dataMode = [UCFCellDataModel new];
         dataMode.modelType = @"mall";
         NSMutableArray *arr = [NSMutableArray arrayWithCapacity:1];
         for (UCFhomeMallbannerlist *bannerModel in model.data.mallBannerList) {
-            [arr addObject:bannerModel.thumb];
+            [arr addObject:bannerModel];
         }
         dataMode.data1 =  arr;
         dataMode.data2 = model.data.mallRecommends;
@@ -249,31 +245,28 @@
         [section3 addObject:data3_0];
         [self.dataArray addObject:section3];
         
+        
         NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
         CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:150];
          UCFCellDataModel *dataMode1 = [UCFCellDataModel new];
         dataMode1.modelType = @"mallDiscounts";
-        dataMode1.data1 = model.data.mallDiscounts;
+        dataMode1.data1 = model.data.mallSale;
         data4_0.dataModel = dataMode1;
         [section4 addObject:data4_0];
         
         [self.dataArray addObject:section4];
-        
-        CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"推荐内容" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
-        UCFCellDataModel *mallDataMode = [UCFCellDataModel new];
-        mallDataMode.modelType = @"recommend";
-        mallDataMode.data1 = self.recommendBannerArray;
-        data5_0.dataModel = mallDataMode;
-        NSMutableArray *section5 = [NSMutableArray arrayWithCapacity:1];
-        [section5 addObject:data5_0];
-        [self.dataArray addObject:section5];
-        
-        self.modelListArray = self.dataArray;
-        
     } else {
         ShowMessage(model.message);
     }
-
+    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"推荐内容" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
+    UCFCellDataModel *mallDataMode = [UCFCellDataModel new];
+    mallDataMode.modelType = @"recommend";
+    mallDataMode.data1 = self.recommendBannerArray;
+    data5_0.dataModel = mallDataMode;
+    NSMutableArray *section5 = [NSMutableArray arrayWithCapacity:1];
+    [section5 addObject:data5_0];
+    [self.dataArray addObject:section5];
+    self.modelListArray = self.dataArray;
 }
 
 - (void)cycleViewSelectIndex:(NSInteger)index

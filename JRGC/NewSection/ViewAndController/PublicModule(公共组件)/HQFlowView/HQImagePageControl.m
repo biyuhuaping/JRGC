@@ -17,10 +17,10 @@
 #define activeHeight 4
 @implementation HQImagePageControl
 
--(id) initWithFrame:(CGRect)frame
+-(id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    
+    //没用上
     activeImage = [UIImage imageNamed:@"icon_pageWidget_sign"];
     inactiveImage = [UIImage imageNamed:@"icon_pageWidget"] ;
     
@@ -42,8 +42,11 @@
         //配置imageView
         UIImageView * view = vi.subviews[0];
         
-        if (i == self.currentPage) view.image = activeImage;
-        else view.image = inactiveImage;
+        if (i == self.currentPage){
+            view.image = activeImage;
+        } else {
+            view.image = inactiveImage;
+        }
     }
 }
 
@@ -60,10 +63,12 @@
             subview.backgroundColor = [UIColor whiteColor];
             subview.alpha = 1;
             size.width = activeWidth;
+            subview.layer.cornerRadius = 2.0f;
         } else {
             subview.backgroundColor = [UIColor whiteColor];
             size.width = inactiveWidth;
             subview.alpha = 0.4;
+            subview.layer.cornerRadius = 2.0f;
         }
         
         [subview setFrame:CGRectMake(subview.frame.origin.x, subview.frame.origin.y,

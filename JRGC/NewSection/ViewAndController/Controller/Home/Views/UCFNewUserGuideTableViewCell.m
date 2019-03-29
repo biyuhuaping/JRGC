@@ -31,7 +31,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+        self.rootLayout.backgroundColor =  [Color color:PGColorOpttonTabeleViewBackgroundColor];
         MyRelativeLayout *whitBaseView = [MyRelativeLayout new];
         whitBaseView.leftPos.equalTo(@15);
         whitBaseView.rightPos.equalTo(@15);

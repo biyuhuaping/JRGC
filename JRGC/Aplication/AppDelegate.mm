@@ -158,14 +158,14 @@
 #pragma ------
 - (void)luachNormalCode:(NSDictionary *)launchOptions
 {
-    [self setWebViewUserAgent];
     //设置公告展示标志位
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 //    [UcfWalletSDK setEnvironment:1];
 
     [[UserInfoSingle sharedManager] getUserData];
-    
+    [self setWebViewUserAgent];
+
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceUpdateVersion) name:CHECK_NEW_VERSION object:nil];
     
@@ -1064,9 +1064,9 @@
     NSDictionary *infoAgentDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@/%@/%@",userAgent,@"FinancialWorkshop",[Common getIOSVersion]],@"UserAgent",nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:infoAgentDic];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [Common setHTMLCookies:[[NSUserDefaults standardUserDefaults] objectForKey:DOPA]];
-//    #warning 灰度测试重新加cookies
-    [Common addTestCookies];
+
+    //    测试重新加cookies
+//    [Common addTestCookies];
 }
 #pragma mark - 初始化日志
 - (void)initializeLog

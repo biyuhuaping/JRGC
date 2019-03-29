@@ -17,7 +17,9 @@
 #import "MD5Util.h"
 #import "UCFNewLoginViewController.h"
 #import "UCFUserAllStatueRequest.h"
-
+#import <UMSocialCore/UMSocialCore.h>
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
 @implementation UserInfoSingle
 
 + (UserInfoSingle *)sharedManager
@@ -26,8 +28,16 @@
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         sharedAccountManagerInstance = [[self alloc] init];
+        
     });
     return sharedAccountManagerInstance;
+}
+- (instancetype)init
+{
+    if (self =[super init]) {
+        _loginData = [UCFLoginData new];
+    }
+    return self;
 }
 - (void)setUserData:(UCFLoginData *)loginData withPassWord:(NSString *)passWord{
     
@@ -35,7 +45,9 @@
     [self deleteUserData];
     //登录成功保存用户的资料
     [self setUserData:loginData];
-    [Common setHTMLCookies:loginData.userInfo.jg_ckie];//html免登录的cookies
+    [self generateWapSingature:loginData];
+
+    
     //保存验签串
     [[NSUserDefaults standardUserDefaults] setValue:[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]] forKey:AWP];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -45,17 +57,31 @@
 
 - (void)setUserData:(UCFLoginData *) loginData
 {
-    _loginData = [loginData copy];
+    self.loginData = [loginData copy];
+    
     [[NSUserDefaults standardUserDefaults] setValue:[loginData yy_modelToJSONString] forKey:LOGINDATA];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
+- (void)generateWapSingature:(UCFLoginData *) loginData
+{
+    //生成wap的登录加密串
+    NSMutableDictionary *wapDict = [NSMutableDictionary dictionaryWithCapacity:4];
+    [wapDict setValue:@"1" forKey:@"sourceType"];
+    [wapDict setValue:@"0" forKey:@"iswap"];
+    [wapDict setValue:[Common getKeychain] forKey:@"imei"];
+    [wapDict setValue:loginData.userInfo.userId forKey:@"userId"];
+    NSString *encryptParam = [Common AESWithKeyWithNoTranscode2:AES_TESTKEY WithData:wapDict];
+    self.wapSingature = encryptParam;
+    [Common  setHTMLCookies:loginData.userInfo.jg_ckie andCookieName:@"jg_nyscclnjsygjr"];//html免登录的cookies
+    [Common  setHTMLCookies:self.wapSingature andCookieName:@"encryptParam"];//html免登录的cookies
+}
 - (UCFLoginData *)getUserData
 {
     NSString *userData = [[NSUserDefaults standardUserDefaults] valueForKey:LOGINDATA];
     if (nil != userData && ![userData isEqualToString:@""] ) {
         UCFLoginData *data = [UCFLoginData yy_modelWithJSON:userData];
         _loginData = [data copy];
+        [self generateWapSingature:_loginData];
         return _loginData;
     }
     else
@@ -66,7 +92,6 @@
 
 - (void)saveLoginAccount:(NSDictionary *)account;
 {
-//    [NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil]
     [[NSUserDefaults standardUserDefaults] setValue:account forKey:@"lastLoginName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -160,7 +185,7 @@
                 self.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
                 self.loginData.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
                 self.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
-                [self setUserData:self.loginData];
+                [self updateUserData];
                 
                 self.requestUserbackBlock(YES);
                 self.requestUserbackBlock = nil;
@@ -180,7 +205,11 @@
     }
 }
 
-
+- (void)updateUserData
+{
+    [[NSUserDefaults standardUserDefaults] setValue:[self.loginData yy_modelToJSONString] forKey:LOGINDATA];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 
 
@@ -205,9 +234,45 @@
 }
 
 
-
-
-
+- (void)removeIsShare
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"isShare"]];
+    if (dic != nil && [dic isKindOfClass:[NSDictionary class]] && dic.count >0) {
+        [self postPlatform:[dic objectSafeForKey:@"taskType"] andPlatformType:[[dic objectSafeForKey:@"platformType"] integerValue]];
+    }
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"isShare"];
+}
+-(void)postPlatform:(NSString *)taskType andPlatformType:(NSInteger )platformType
+{
+    if (self.loginData.userInfo.userId.length > 0) {
+        NSString *sharePlatForm = @"";
+        
+        if (platformType == UMSocialPlatformType_WechatSession) {
+            sharePlatForm = @"wechat";
+        } else if (platformType == UMSocialPlatformType_WechatTimeLine) {
+            sharePlatForm = @"wechatCF";
+        } else if (platformType == UMSocialPlatformType_QQ) {
+            sharePlatForm = @"qq";
+        } else if (platformType == UMSocialPlatformType_Sina) {
+            sharePlatForm = @"weibo";
+        }
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
+        [dict setValue:self.loginData.userInfo.userId forKey:@"userId"];
+        [dict setValue:taskType forKey:@"taskType"];
+        [dict setValue:sharePlatForm forKey:@"sharePlatForm"];
+        
+        [[NetworkModule sharedNetworkModule] newPostReq:dict tag:kSXTagAppShareStyle owner:self signature:YES Type:SelectAccoutDefault];
+    }
+}
+- (void)saveIsShare:(NSDictionary *)dic
+{
+    //    [[NSUserDefaults standardUserDefaults]setValue:[NSDictionary dictionaryWithObjectsAndKeys:
+    //                                                    self.taskType,@"taskType",
+    //                                                    [NSString stringWithFormat:@"%zd",platformType],@"platformType",
+    //                                                    nil] forKey:@"isShare"];
+    [[NSUserDefaults standardUserDefaults]setValue:dic forKey:@"isShare"];
+    [[NSUserDefaults standardUserDefaults] synchronize];    //用synchronize方法把数据持久化到standardUserDefaults数据库
+}
 //
 //#pragma mark - set
 //- (void)setOpenStatus:(NSInteger)states {

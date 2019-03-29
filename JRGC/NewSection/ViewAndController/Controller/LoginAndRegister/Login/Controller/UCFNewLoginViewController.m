@@ -224,7 +224,6 @@
         if (model.ret == YES) {
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:self.isCompany,@"isCompany",self.username,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:self.pwd];
-
             [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES];
         }
         else{

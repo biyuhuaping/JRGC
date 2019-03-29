@@ -177,10 +177,7 @@ static NSString *subviewClassName;
                     cell.coverView.alpha = _minimumPageAlpha;
                     cell.layer.transform = CATransform3DMakeScale((_pageSize.width-self.leftRightMargin*2)/_pageSize.width,(_pageSize.height-self.topBottomMargin*2)/_pageSize.height, 1.0);
                     cell.frame = UIEdgeInsetsInsetRect(originCellFrame, UIEdgeInsetsMake(self.topBottomMargin, self.leftRightMargin, self.topBottomMargin, self.leftRightMargin));
-                    
-                    
                 }
-                
             }
             break;
         }
