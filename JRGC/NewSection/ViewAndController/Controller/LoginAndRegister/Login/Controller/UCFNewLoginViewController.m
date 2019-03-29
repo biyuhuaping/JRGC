@@ -152,10 +152,9 @@
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil]];
-            [SingleUserInfo setUserData:model.data withPassWord:pwd];
             [Common  setHTMLCookies:model.data.userInfo.jg_ckie andCookieName:@"jg_nyscclnjsygjr"];//html免登录的cookies
             [Common  setHTMLCookies:[UserInfoSingle sharedManager].wapSingature andCookieName:@"encryptParam"];//html免登录的cookies
-
+            [SingleUserInfo setUserData:model.data withPassWord:pwd];
             [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES];
         }
         else{

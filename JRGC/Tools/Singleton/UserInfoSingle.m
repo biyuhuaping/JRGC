@@ -59,7 +59,6 @@
 - (void)setUserData:(UCFLoginData *) loginData
 {
     self.loginData = [loginData copy];
-    
     [[NSUserDefaults standardUserDefaults] setValue:[loginData yy_modelToJSONString] forKey:LOGINDATA];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -131,9 +130,9 @@
 
 
 - (void)deleteUserData{
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LOGINDATA];
     self.signatureStr = @"";
     self.loginData = [UCFLoginData new];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LOGINDATA];
     
     //清空数据
     //退出时清cookis
