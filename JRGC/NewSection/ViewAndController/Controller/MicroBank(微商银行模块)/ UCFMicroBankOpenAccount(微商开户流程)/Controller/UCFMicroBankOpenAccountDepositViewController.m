@@ -185,7 +185,7 @@
 }
 - (void)chooseBankData:(NSDictionary *)data {
     //开户行名称
-    self.bankId = data[@"bankName"];
+    self.bankId  = [NSString stringWithFormat:@"%@",data[@"bankId"]];
     self.selectBankView.oaContentLabel.text = data[@"bankName"];
     [self.selectBankView sizeToFit];
     //银行logo

@@ -15,6 +15,8 @@
 @interface UCFMineTableViewHead ()
 @property (nonatomic, strong) MyRelativeLayout *userMesageLayout;// 用户信息
 
+@property (nonatomic, strong) UIImageView *bkImageView;//背景图
+
 @property (nonatomic, strong) UIButton *headImageBtn;//头像
 
 @property (nonatomic, strong) UIButton *messageImageBtn;//消息
@@ -59,6 +61,7 @@
         
         // 初始化视图对象
         [self.rootLayout addSubview:self.userMesageLayout];
+        [self.userMesageLayout addSubview:self.bkImageView];
         [self.userMesageLayout addSubview:self.headImageBtn];
         [self.userMesageLayout addSubview:self.messageImageBtn];
         [self.userMesageLayout addSubview:self.totalAssetsLabel];
@@ -94,7 +97,7 @@
 {
     if (nil == _userMesageLayout) {
         _userMesageLayout = [MyRelativeLayout new];
-        _userMesageLayout.backgroundColor = [UIColor redColor];
+        _userMesageLayout.backgroundColor = [UIColor whiteColor];
         _userMesageLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _userMesageLayout.myHeight = 235;
         _userMesageLayout.widthSize.equalTo(self.rootLayout.widthSize);
@@ -105,6 +108,20 @@
     }
     return _userMesageLayout;
 }
+
+- (UIImageView *)bkImageView
+{
+    if (nil == _bkImageView) {
+        _bkImageView = [[UIImageView alloc] init];
+        _bkImageView.myLeft = 0;
+        _bkImageView.myTop = 0;
+        _bkImageView.widthSize.equalTo(self.userMesageLayout.widthSize);
+        _bkImageView.myHeight = 235;
+        _bkImageView.image = [UIImage imageNamed:@"mine_head_bg"];
+    }
+    return _bkImageView;
+}
+
 - (UIButton *)headImageBtn
 {
     if (nil == _headImageBtn) {

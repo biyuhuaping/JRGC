@@ -163,15 +163,18 @@
                 [self setUserData:self.loginData];
                 
                 self.requestUserbackBlock(YES);
+                self.requestUserbackBlock = nil;
             }
             else
             {
                 ShowMessage(dic[@"message"]);
                 self.requestUserbackBlock(NO);
+                self.requestUserbackBlock = nil;
             }
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             
             self.requestUserbackBlock(NO);
+            self.requestUserbackBlock = nil;
         }];
         [request1 start];
     }

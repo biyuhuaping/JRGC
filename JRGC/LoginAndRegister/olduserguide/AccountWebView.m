@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "NSString+Misc.h"
 #import "UCFMicroBankOpenAccountViewController.h"
+
 @interface AccountWebView ()
 
 @end
@@ -47,6 +48,17 @@
     if (!self.errorView.hidden) {
         self.errorView.hidden = YES;
     }
+    
+    
+    
+    
+    
+    
+    for (UCFMicroBankOpenAccountViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[UCFMicroBankOpenAccountViewController class]]) {
+            vc.openAccountSucceed = YES;
+        }
+    }
 }
 //***无验签跳转页面走该方法
 - (void)jsToNative:(NSString *)controllerName
@@ -61,6 +73,11 @@
         {
             SingleUserInfo.loginData.userInfo.openStatus = @"3";
             [SingleUserInfo setUserData:SingleUserInfo.loginData];
+            for (UCFMicroBankOpenAccountViewController *vc in self.rt_navigationController.viewControllers) {
+                if ([vc isKindOfClass:[UCFMicroBankOpenAccountViewController class]]) {
+                    vc.openAccountSucceed = YES;
+                }
+            }
         }
         NSDictionary *encryptParamDic = @{
                                           @"userId": SingleUserInfo.loginData.userInfo.userId                 //用户id
@@ -109,20 +126,39 @@
 
 - (void)closeWebView
 {
-    if ([baseTitleLabel.text hasSuffix:@"账户开立"])
+    if ([baseTitleLabel.text hasSuffix:@"账户开立"] || [baseTitleLabel.text hasSuffix:@"开户失败"])
     {
-        for (UCFMicroBankOpenAccountViewController *vc in self.rt_navigationController.rt_viewControllers) {
-            if ([vc isKindOfClass:[UCFMicroBankOpenAccountViewController class]]) {
-                vc.openAccountSucceed = YES;
-            }
-        }
+        //微商开户页面.点击关闭,返回开户页面
+        [self.rt_navigationController popViewControllerAnimated:YES complete:^(BOOL finished) {
+            
+        }];
     }
     else
     {
-        //([baseTitleLabel.text hasSuffix:@"开户失败"])
-//        [self.rt_navigationController popViewControllerAnimated:YES];
+        [self.rt_navigationController popToRootViewControllerAnimated:YES];
     }
-    [self.rt_navigationController popViewControllerAnimated:YES];
+    
+    
+    
+    
+    
+    
+    
+    
+//    if ([baseTitleLabel.text hasSuffix:@"账户开立"])
+//    {
+//        for (UCFMicroBankOpenAccountViewController *vc in self.rt_navigationController.rt_viewControllers) {
+//            if ([vc isKindOfClass:[UCFMicroBankOpenAccountViewController class]]) {
+//                vc.openAccountSucceed = YES;
+//            }
+//        }
+//    }
+//    else
+//    {
+//        //([baseTitleLabel.text hasSuffix:@"开户失败"])
+////        [self.rt_navigationController popViewControllerAnimated:YES];
+//    }
+//    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 
 @end

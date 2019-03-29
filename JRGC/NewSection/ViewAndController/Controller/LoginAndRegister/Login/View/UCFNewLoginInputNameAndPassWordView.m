@@ -50,6 +50,9 @@
         [self.rootLayout addSubview:self.passWordField];
         [self.rootLayout addSubview:self.showPassWordBtn];
         [self.rootLayout addSubview:self.passWordLine];
+        if ([self.userType isEqualToString:@"个人"]) {
+            [self.rootLayout addSubview:self.forgetBtn];
+        }
     }
     return self;
 }
@@ -226,6 +229,22 @@
         };
     }
     return _loginBtn;
+}
+- (UIButton*)forgetBtn{
+    
+    if(_forgetBtn == nil)
+    {
+        _forgetBtn = [UIButton buttonWithType:0];
+        _forgetBtn.topPos.equalTo(self.loginBtn.bottomPos).offset(15);
+        _forgetBtn.leftPos.equalTo(@25);
+        _forgetBtn.widthSize.equalTo(@70);
+        _forgetBtn.heightSize.equalTo(@30);
+        [_forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
+        _forgetBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _forgetBtn.titleLabel.font= [Color gc_Font:13.0];
+        [_forgetBtn setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
+    }
+    return _forgetBtn;
 }
 -(void)setSelectedButton:(UIButton *)btn
 {

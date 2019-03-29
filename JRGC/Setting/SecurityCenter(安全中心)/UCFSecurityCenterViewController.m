@@ -46,6 +46,7 @@
 #import "UCFMineMyReceiptApi.h"
 #import "UCFMineMyReceiptModel.h"
 #import "UCFMineDimensionCodeViewController.h"
+#import "UCFMicroBankDepositoryAccountHomeViewController.h"
 
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
@@ -267,15 +268,6 @@
             [delegate.tabBarController setSelectedIndex:0];
             [delegate.tabBarController.tabBar hideBadgeOnItemIndex:4];
             [self.navigationController popToRootViewControllerAnimated:YES];
-            [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
-            
-            //退出时清cookis
-            [Common deleteCookies];
-            [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
-            //通知首页隐藏tipView
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
         }
 
     }else if(alertView.tag == 10005){
@@ -287,6 +279,17 @@
         if (buttonIndex == 1) {
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
             [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+    if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
+        }
+    }else if (alertView.tag == 8010) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
         }
     }
 }
@@ -910,19 +913,40 @@
         }
         if (indexPath.section == 1){
             
+            
             if ([item.title isEqualToString:@"微金存管账户"]) {
                 //微金存管账户
-                if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] > 0) {
-                    //已经开户
+                self.accoutType = SelectAccoutTypeP2P;
+                HSHelper *helper = [HSHelper new];
+                //检查企业老用户是否开户
+                NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+                if (![messageStr isEqualToString:@""]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
+                    return;
                 }
-                else{
-                    //未开户
+                
+                
+                if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+                    [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+                    return;
                 }
+                
+                if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+                    UCFMicroBankDepositoryAccountHomeViewController *accountHome = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
+                    accountHome.accoutType = SelectAccoutTypeP2P;
+                    [self.rt_navigationController pushViewController:accountHome animated:YES];
+                }
+                
             }
             else
             {
                 //尊享存管账户
+                UCFMicroBankDepositoryAccountHomeViewController *accountHome = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
+                accountHome.accoutType = SelectAccoutTypeHoner;
+                [self.rt_navigationController pushViewController:accountHome animated:YES];
             }
+           
         }
         if (indexPath.section == 2) {
             
@@ -956,6 +980,46 @@
         }
     }
 }
+- (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
+{
+    
+    NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
+    NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
+    
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+    
+    switch (openStatus)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            [self showHSAlert:tipStr1];
+            return NO;
+            break;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            if (isDetail) {
+                return YES;
+            }else
+            {
+                [self showHSAlert:tipStr2];
+                return NO;
+            }
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    alert.tag =  self.accoutType == SelectAccoutTypeP2P ? 8000 :8010;
+    [alert show];
+}
+
 - (BOOL) checkHSIsLegitimate {
     NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
     if(openStatus < 3){

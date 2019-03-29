@@ -54,81 +54,76 @@
 //    self.accoutStep = OpenAccoutPassWord;
     [self addLeftButton];
     
-    if (self.accoutType == SelectAccoutTypeP2P) {
-        baseTitleLabel.text = @"开通微金徽商存管账户";
-    } else {
-        baseTitleLabel.text = @"开通尊享徽商存管账户";
-    }
-
+    baseTitleLabel.text = @"开通微金徽商存管账户";
+//    if (self.accoutType == SelectAccoutTypeP2P) {
+//        baseTitleLabel.text = @"开通微金徽商存管账户";
+//    } else {
+//        baseTitleLabel.text = @"开通尊享徽商存管账户";
+//    }
+    [SingleUserInfo requestUserAllStatueWithView:self.view];
+    @PGWeakObj(self);
     SingleUserInfo.requestUserbackBlock = ^(BOOL requestFinsh)
     {
-        if (requestFinsh) {
-            //请求成功并刷新完数据
-            
-            if (SingleUserInfo.loginData.userInfo.isCompanyAgent)
-            {
-//                UCFCompanyNoOpenViewController * fullVC =[[UCFCompanyNoOpenViewController alloc]initWithNibName:@"UCFCompanyNoOpenViewController" bundle:nil];
-//                fullVC.baseTitleText = @"提示";
-//                if (kIS_IOS8) {
-//                    fullVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//                }
-//
-//                [self presentViewController:fullVC animated:NO completion:^{
-//                }];
-                HSHelper *helper = [HSHelper new];
-                BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:[helper checkCompanyIsOpen:SelectAccoutTypeP2P] cancelButtonTitle:nil clickButton:^(NSInteger index){
-                    [self.rt_navigationController popViewControllerAnimated:YES];
-                } otherButtonTitles:@"确认"];
-                [alert show];
-                return ;
-            }
-            
-            
-//            用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码
-            NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue]; //微金开户状态
-//            OpenAccoutMicroBank = 1, //存管开户
-//            OpenAccoutPassWord , //选择交易密码
-                //微金用户
-//                openStatus = 2;
-                [self.rootLayout addSubview:self.optionView];
-                if (openStatus >= 3)
-                {
-                    self.openAccountSucceed = YES;
-                }
-                
-                if (openStatus == 1)
-                {
-                    //微金未开户,走新的开户页面(开户+设置交易密码)
-                    self.optionView.myVisibility = MyVisibility_Gone;
-                    
-                    [self addChildViewController:self.theNewDepositView];
-                    self.currentVC = self.theNewDepositView;
-                    [self.rootLayout addSubview:self.theNewDepositView.view];
-                }
-                else if (openStatus == 2)
-                {
-                    //白名单用户.开户未绑卡
-                    [self addChildViewController:self.theWhiteListDepositView];
-                    [self addChildViewController:self.tradersPasswordView];
-                    [self.rootLayout addSubview:self.theWhiteListDepositView.view];
-                    self.currentVC = self.theWhiteListDepositView;
-                }
-                else if (openStatus == 3)
-                {
-                    //开户完成,未设置交易密码.走老的设置交易密码页面
-                    [self addChildViewController:self.depositView];
-                    [self addChildViewController:self.tradersPasswordView];
-                    [self.rootLayout addSubview:self.tradersPasswordView.view];
-                    self.currentVC = self.tradersPasswordView;
-                }
-        }
-        else
-        {
-            //请求失败
-            [self.rt_navigationController popViewControllerAnimated:YES];
-        }
+        [selfWeak requestAllStatueFinsh:requestFinsh];
     };
-    [SingleUserInfo requestUserAllStatueWithView:self.view];
+}
+- (void)requestAllStatueFinsh:(BOOL)requestFinsh
+{
+    if (requestFinsh)
+    {
+        //请求成功并刷新完数据
+        if (SingleUserInfo.loginData.userInfo.isCompanyAgent)
+        {
+            HSHelper *helper = [HSHelper new];
+            BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:[helper checkCompanyIsOpen:SelectAccoutTypeP2P] cancelButtonTitle:nil clickButton:^(NSInteger index){
+                [self.rt_navigationController popViewControllerAnimated:YES];
+            } otherButtonTitles:@"确认"];
+            [alert show];
+            return ;
+        }
+        //            用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码
+        NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue]; //微金开户状态
+        //            OpenAccoutMicroBank = 1, //存管开户
+        //            OpenAccoutPassWord , //选择交易密码
+        //微金用户
+        //                openStatus = 2;
+        [self.rootLayout addSubview:self.optionView];
+        if (openStatus >= 3)
+        {
+            self.openAccountSucceed = YES;
+        }
+        
+        if (openStatus == 1)
+        {
+            //微金未开户,走新的开户页面(开户+设置交易密码)
+            self.optionView.myVisibility = MyVisibility_Gone;
+            
+            [self addChildViewController:self.theNewDepositView];
+            self.currentVC = self.theNewDepositView;
+            [self.rootLayout addSubview:self.theNewDepositView.view];
+        }
+        else if (openStatus == 2)
+        {
+            //白名单用户.开户未绑卡
+            [self addChildViewController:self.theWhiteListDepositView];
+            [self addChildViewController:self.tradersPasswordView];
+            [self.rootLayout addSubview:self.theWhiteListDepositView.view];
+            self.currentVC = self.theWhiteListDepositView;
+        }
+        else if (openStatus == 3)
+        {
+            //开户完成,未设置交易密码.走老的设置交易密码页面
+            [self addChildViewController:self.depositView];
+            [self addChildViewController:self.tradersPasswordView];
+            [self.rootLayout addSubview:self.tradersPasswordView.view];
+            self.currentVC = self.tradersPasswordView;
+        }
+    }
+    else
+    {
+        //请求失败
+        [self.rt_navigationController popViewControllerAnimated:YES];
+    }
 }
 - (void)getToBack
 {
@@ -258,10 +253,21 @@
 - (void)setOpenAccountSucceed:(BOOL)openAccountSucceed
 {
     _openAccountSucceed = openAccountSucceed;
+   
     if (openAccountSucceed) {
         //开户成功
-        [self.optionView selectStep:OpenAccoutPassWord];
-        [self changeControllerFromOldController:self.currentVC toNewController:self.tradersPasswordView];
+        for (UCFBaseViewController *vc in self.childViewControllers) {
+            if ([vc isKindOfClass:[UCFMicroBankNewOpenAccountDepositViewController class]]) {
+                //是新开户页面
+                [self.rt_navigationController popToRootViewControllerAnimated:YES];
+            }
+            if ([vc isKindOfClass:[UCFMicroBankOpenAccountTradersPasswordViewController class]]) {
+                //老开户页面,开户和设置交易密码分开的
+                [self.optionView selectStep:OpenAccoutPassWord];
+                [self changeControllerFromOldController:self.currentVC toNewController:self.tradersPasswordView];
+            }
+        }
+        
     }
 }
 /*

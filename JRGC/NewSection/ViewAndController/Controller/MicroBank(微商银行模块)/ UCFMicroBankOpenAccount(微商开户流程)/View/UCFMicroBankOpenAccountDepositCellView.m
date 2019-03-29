@@ -47,7 +47,7 @@
 //        _contentField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _contentField.font = [Color gc_Font:15.0];
         _contentField.placeholder = @"   ";
-        _contentField.keyboardType =  UIKeyboardTypeNumberPad;
+//        _contentField.keyboardType =  UIKeyboardTypeNumberPad;
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
         NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_contentField.placeholder attributes:dict];

@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIButton *loginBtn; //登录按钮
 
+@property (nonatomic, strong) UIButton *forgetBtn;//忘记密码
+
 - (instancetype)initWithFrame:(CGRect)frame withUserType:(NSString *)userType; //个人和企业
 
 - (void)setLoginButtonState:(BOOL)isButtonState;

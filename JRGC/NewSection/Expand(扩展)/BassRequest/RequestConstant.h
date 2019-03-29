@@ -60,7 +60,9 @@ static NSString *OpenAccountApiURL = @"api/userInfo/v2/openAccount.json" ;      
 
 static NSString *ChangeBankCardApiURL = @"api/userInfo/v2/changeBankCard.json";  //更改绑定银行卡信息
 
-static NSString *OpenAccountIntoBankApiURL = @"api/userInfo/v2/openAccountIntoBank.json"; //***新徽商绑定银行卡接口
+static NSString *OpenAccountIntoBankApiURL = @"api/userInfo/v2/openAccountIntoBank.json"; //***徽商绑定银行卡接口,直接跳web页面开户,不能设置交易密码
+
+static NSString *OpenAccountCenterApiURL = @"api/accountCenter/v2/openAccount.json"; //新徽商绑定银行卡接口 ,直接跳web页面开户和设置交易密码
 
 static NSString *SetHsPwdReturnJsonApiURL = @"api/userAccount/v2/setHsPwdReturnJson.json";//设置、修改交易密码通用
 
