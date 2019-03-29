@@ -17,6 +17,9 @@
 #import "UCFMicroBankOpenAccountGetOpenAccountInfoModel.h"
 #import "FullWebViewController.h"
 #import "AccountWebView.h"
+#import "UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.h"
+#import "UCFMicroBankOpenAccountOpenAccountIntoBankInfoModel.h"
+
 
 @interface UCFMicroBankNewOpenAccountDepositViewController ()<UIScrollViewDelegate,UITextFieldDelegate,UCFHuiShangChooseBankViewControllerDelegate>
 
@@ -28,7 +31,7 @@
 
 @property (nonatomic, strong) UCFMicroBankOpenAccountDepositCellView *nameView; //姓名
 
-@property (nonatomic, strong) UCFMicroBankOpenAccountDepositCellView *phoneView; //身份证
+@property (nonatomic, strong) UCFMicroBankOpenAccountDepositCellView *phoneView; //手机号
 
 @property (nonatomic, strong) UCFMicroBankOpenAccountDepositBankListCellView *selectBankView;// 选择银行卡
 
@@ -184,6 +187,7 @@
         _agreementLabel.textAlignment = NSTextAlignmentLeft;
         _agreementLabel.font = [Color gc_Font:13.0];
         _agreementLabel.textColor = [Color color:PGColorOptionTitleGray];
+        _agreementLabel.userInteractionEnabled = YES;
         //自动折行设置
         _agreementLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _agreementLabel.numberOfLines = 0;
@@ -262,7 +266,7 @@
 }
 - (BOOL)inspectSelectBankView
 {
-    if (self.selectBankView.oaContentLabel.text.length >0 && ![self.selectBankView.oaContentLabel.text isEqualToString:@""] && ![self.bankId isEqualToString:@""]) {
+    if (self.bankId.length >0 && ![self.selectBankView.oaContentLabel.text isEqualToString:@""] && self.bankId != nil && ![self.bankId isEqualToString:@""]) {
         return YES;
     }
     else
@@ -281,51 +285,53 @@
 }
 - (void)chooseBankData:(NSDictionary *)data {
     //开户行名称
-    self.bankId = data[@"bankName"];
+    self.bankId  = [NSString stringWithFormat:@"%@",data[@"bankId"]];
     self.selectBankView.oaContentLabel.text = data[@"bankName"];
     [self.selectBankView sizeToFit];
     //银行logo
     NSURL *url = [NSURL URLWithString:data[@"logoUrl"]];
     [self.selectBankView.bankImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"bank_default"]];
+    [self inspectTextField];
 }
 
 - (void)enterButtoClick
 {
-//    UCFMicroBankOpenAccountOpenAccountIntoBankInfoAPI * request = [[UCFMicroBankOpenAccountOpenAccountIntoBankInfoAPI alloc] initWithRealName:self.nameView.contentField.text idCardNo:self.idView.contentField.text bankNo:self.bankId openStatus:self.GetOpenAccountModel.data.openStatus AccoutType:SelectAccoutTypeP2P];
-//    request.animatingView = self.view;
-//    //    request.tag =tag;
-//    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        // 你可以直接在这里使用 self
-//        DDLogDebug(@"---------%@",request.responseJSONModel);
-//        UCFMicroBankOpenAccountOpenAccountIntoBankInfoModel *model = [request.responseJSONModel copy];
-//        if (model.ret == YES)
-//        {
-//            SingleUserInfo.loginData.userInfo.realName = self.nameView.contentField.text;
-//            [SingleUserInfo setUserData:SingleUserInfo.loginData];
-//            AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
-//            webView.title = @"即将跳转";
-//            //            webView.isPresentViewController = self.db.isPresentViewController;
-//            webView.rootVc = @"UpgradeAccountVC";
-//            webView.url = model.data.url;
-//            NSString *SIGNStr = model.data.tradeReq.SIGN;
-//            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
-//            [data setValue: model.data.tradeReq.PARAMS  forKey:@"PARAMS"];
-//            [data setValue:[NSString  urlEncodeStr:SIGNStr] forKey:@"SIGN"];
-//            webView.webDataDic = data;
-//            //            if(self.db){
-//            //                [self.db.navigationController pushViewController:webView animated:YES];
-//            //            }else{
-//            [self.rt_navigationController pushViewController:webView animated:YES];
-//            //            }
-//        }
-//        else
-//        {
-//            ShowMessage(model.message);
-//        }
-//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        // 你可以直接在这里使用 self
-//
-//    }];
+//    UCFMicroBankONewpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankONewpenAccountGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text idCardNo:self.idView.contentField.text bankNo:self.bankId openStatus:self.GetOpenAccountModel.data.openStatus AccoutType:SelectAccoutTypeP2P];
+    UCFMicroBankONewpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankONewpenAccountGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text bankPhoneNum:self.phoneView.contentField.text bankNo:self.bankId];
+    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        DDLogDebug(@"---------%@",request.responseJSONModel);
+        UCFMicroBankOpenAccountOpenAccountIntoBankInfoModel *model = [request.responseJSONModel copy];
+        if (model.ret == YES)
+        {
+            SingleUserInfo.loginData.userInfo.realName = self.nameView.contentField.text;
+            [SingleUserInfo setUserData:SingleUserInfo.loginData];
+            AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
+            webView.title = @"即将跳转";
+            //            webView.isPresentViewController = self.db.isPresentViewController;
+            webView.rootVc = @"UpgradeAccountVC";
+            webView.url = model.data.url;
+            NSString *SIGNStr = model.data.tradeReq.SIGN;
+            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+            [data setValue: model.data.tradeReq.PARAMS  forKey:@"PARAMS"];
+            [data setValue:[NSString  urlEncodeStr:SIGNStr] forKey:@"SIGN"];
+            webView.webDataDic = data;
+            //            if(self.db){
+            //                [self.db.navigationController pushViewController:webView animated:YES];
+            //            }else{
+            [self.rt_navigationController pushViewController:webView animated:YES];
+            //            }
+        }
+        else
+        {
+            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
 }
 - (void)queryUserData
 {

@@ -8,7 +8,7 @@
 
 #import "UCFRequestSucceedDetection.h"
 #import "AppDelegate.h"
-@interface UCFRequestSucceedDetection()
+@interface UCFRequestSucceedDetection()<UIAlertViewDelegate>
 @property (nonatomic, assign) BOOL isShowAlert;
 
 @property (nonatomic, assign) BOOL isShowSingleAlert; //是否已经弹出单设备警告框

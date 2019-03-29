@@ -13,16 +13,29 @@
 #import "UCFLoginModel.h"
 #import "UCFRegisterInputPhoneNumViewController.h"
 #import "UCFNewFindPassWordViewController.h"
+#import "UCFUserAllStatueRequest.h"
 
-@interface UCFNewLoginViewController ()<UITextFieldDelegate>
+@interface UCFNewLoginViewController ()<UITextFieldDelegate,YTKChainRequestDelegate>
 
 @property (nonatomic, strong) NZLabel     *loginLabel;//注册
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
-@property (nonatomic, strong) UIButton *forgetBtn;//忘记密码
-
 @property (nonatomic, strong) UCFNewLoginInputView *loginInputView;
+
+@property (nonatomic, strong) NZLabel     *serviceLabel;
+
+@property (nonatomic, strong) UIView     *leftView;
+
+@property (nonatomic, strong) UIView     *rightView;
+
+@property (nonatomic, copy) NSString *username;
+
+@property (nonatomic, copy) NSString *pwd;
+
+@property (nonatomic, copy) NSString *isCompany;
+
+@property (nonatomic, strong)UCFLoginModel *model;
 
 @end
 
@@ -38,7 +51,9 @@
     
     [self.rootLayout addSubview:self.loginLabel];
     [self.rootLayout addSubview:self.loginInputView];
-    [self.rootLayout addSubview:self.forgetBtn];
+    [self.rootLayout addSubview:self.serviceLabel];
+    [self.rootLayout addSubview:self.leftView];
+    [self.rootLayout addSubview:self.rightView];
     
     [self addLeftButtons];
     [self addRightButton];
@@ -99,11 +114,65 @@
     }
     return _loginLabel;
 }
+- (NZLabel *)serviceLabel
+{
+    if (nil == _serviceLabel) {
+        _serviceLabel = [NZLabel new];
+        _serviceLabel.myBottom = 50;
+//        _serviceLabel.myLeft= 25;
+//        _serviceLabel.myRight= 25;
+        _serviceLabel.myCenterX = 0;
+        _serviceLabel.numberOfLines = 0;
+        _serviceLabel.textAlignment = NSTextAlignmentCenter;
+        _serviceLabel.font = [Color gc_Font:13.0];
+        _serviceLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        _serviceLabel.text = @"金融工场专业互联网金融信息服务机构";
+//        _serviceLabel.userInteractionEnabled = YES;
+//        [_serviceLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"400-0322-988"];
+        [_serviceLabel sizeToFit];
+        
+        
+        
+        
+        //        __weak typeof(self) weakSelf = self;
+//        [_serviceLabel addLinkString:@"400-0322-988" block:^(ZBLinkLabelModel *linkModel) {
+//            //拨打客服电话
+//            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+//        }];
+    }
+    return _serviceLabel;
+}
 
+- (UIView *)leftView
+{
+    if (nil == _leftView) {
+        _leftView = [UIView new];
+        _leftView.rightPos.equalTo(_serviceLabel.leftPos).offset(15);
+        _leftView.myLeft = 25;
+        _leftView.centerYPos.equalTo(_serviceLabel.centerYPos);
+        _leftView.myHeight = 1;
+        _leftView.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    }
+    return _leftView;
+}
+
+- (UIView *)rightView
+{
+    if (nil == _rightView) {
+        _rightView = [UIView new];
+        _rightView.leftPos.equalTo(_serviceLabel.rightPos).offset(15);
+        _rightView.myRight = 25;
+        _rightView.centerYPos.equalTo(_serviceLabel.centerYPos);
+        _rightView.myHeight = 1;
+        _rightView.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    }
+    return _rightView;
+}
 -(UCFNewLoginInputView *)loginInputView
 {
     if (_loginInputView == nil) {
-        _loginInputView = [[UCFNewLoginInputView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 258)];
+        _loginInputView = [[UCFNewLoginInputView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 318)];
         _loginInputView.topPos.equalTo(self.loginLabel.bottomPos);
         _loginInputView.myLeft = 0;
         _loginInputView.personalInput.userField.delegate = self;
@@ -112,6 +181,7 @@
         [_loginInputView.personalInput.passWordField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
         _loginInputView.personalInput.loginBtn.tag = 1000;
         [_loginInputView.personalInput.loginBtn addTarget:self action:@selector(loginBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+         [_loginInputView.personalInput.forgetBtn addTarget:self action:@selector(buttonforgetClick) forControlEvents:UIControlEventTouchUpInside];
         
         _loginInputView.enterpriseInput.userField.delegate = self;
         [_loginInputView.enterpriseInput.userField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -128,22 +198,23 @@
 
 - (void)loginBtnClick:(UIButton *)btn
 {
-    NSString *username ,*pwd , *isCompany;
     if (btn.tag == 1000) {
         //个人用户点击登录
-        username = self.loginInputView.personalInput.userField.text;
-        pwd      = self.loginInputView.personalInput.passWordField.text;
-        isCompany = @"个人";
+        self.username = self.loginInputView.personalInput.userField.text;
+        self.pwd      = self.loginInputView.personalInput.passWordField.text;
+        self.isCompany = @"个人";
     }
     else
     {
         //企业用户点击登录
-        username = self.loginInputView.enterpriseInput.userField.text;
-        pwd      = self.loginInputView.enterpriseInput.passWordField.text;
-        isCompany = @"企业";
+        self.username = self.loginInputView.enterpriseInput.userField.text;
+        self.pwd      = self.loginInputView.enterpriseInput.passWordField.text;
+        self.isCompany = @"企业";
     }
     
-    UCFLoginApi * request = [[UCFLoginApi alloc] initWithUsername:username andPwd:pwd andIsCompany:isCompany];
+    
+    
+    UCFLoginApi * request = [[UCFLoginApi alloc] initWithUsername:self.username andPwd:self.pwd andIsCompany:self.isCompany];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -151,10 +222,9 @@
         UCFLoginModel *model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
-            [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil]];
-            [Common  setHTMLCookies:model.data.userInfo.jg_ckie andCookieName:@"jg_nyscclnjsygjr"];//html免登录的cookies
-            [Common  setHTMLCookies:[UserInfoSingle sharedManager].wapSingature andCookieName:@"encryptParam"];//html免登录的cookies
-            [SingleUserInfo setUserData:model.data withPassWord:pwd];
+
+            [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:self.isCompany,@"isCompany",self.username,@"lastLoginName", nil]];
+            [SingleUserInfo setUserData:model.data withPassWord:self.pwd];
             [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES];
         }
         else{
@@ -162,27 +232,71 @@
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
-        
-    }];
-}
 
-- (UIButton*)forgetBtn{
+    }];
     
-    if(_forgetBtn == nil)
-    {
-        _forgetBtn = [UIButton buttonWithType:0];
-        _forgetBtn.topPos.equalTo(self.loginInputView.bottomPos).offset(15);
-        _forgetBtn.leftPos.equalTo(@25);
-        _forgetBtn.widthSize.equalTo(@70);
-        _forgetBtn.heightSize.equalTo(@30);
-        [_forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
-        _forgetBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        _forgetBtn.titleLabel.font= [Color gc_Font:13.0];
-        [_forgetBtn setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
-        [_forgetBtn addTarget:self action:@selector(buttonforgetClick) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _forgetBtn;
+    
+//    YTKChainRequest *chainReq = [[YTKChainRequest alloc] init];
+//    UCFLoginApi * request = [[UCFLoginApi alloc] initWithUsername:self.username andPwd:self.pwd andIsCompany:self.isCompany];
+//
+//    [chainReq addRequest:request callback:^(YTKChainRequest * _Nonnull chainRequest, YTKBaseRequest * _Nonnull baseRequest) {
+//        self.model = [request.responseJSONModel copy];
+//        DDLogDebug(@"---------%@",self.model);
+//        if (self.model.ret == YES) {
+//
+//            //登录成功就去查询账户数据,否则个别页面会因数据不对显示错误
+//            UCFUserAllStatueRequest *request1 = [[UCFUserAllStatueRequest alloc] initWithUserId:self.model.data.userInfo.userId];
+//            [chainRequest addRequest:request1 callback:nil];
+//        }
+//        else{
+//            ShowMessage(self.model.message);
+//        }
+//    }];
+//
+//    chainReq.delegate = self;
+//    // start to send request
+//    [chainReq start];
+//
+    
+    
+    
+    
 }
+//- (void)chainRequestFinished:(YTKChainRequest *)chainRequest {
+//    // all requests are done
+//
+//    for (YTKBaseRequest *request in chainRequest.requestArray)
+//    {
+//        if ([request isKindOfClass:[UCFUserAllStatueRequest class]])
+//        {
+//            NSDictionary *dic = request.responseObject;
+//            if ([dic[@"ret"] boolValue]) {
+//                NSDictionary *userDict = dic[@"data"][@"userSatus"];
+//
+//                [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:self.isCompany,@"isCompany",self.username,@"lastLoginName", nil]];
+//                self.model.data.userInfo.zxOpenStatus = [NSString stringWithFormat:@"%@",userDict[@"zxOpenStatus"]];
+//                self.model.data.userInfo.openStatus = [NSString stringWithFormat:@"%@",userDict[@"openStatus"]];
+//                self.model.data.userInfo.nmAuthorization = [userDict[@"nmGoldAuthStatus"] boolValue];
+//                self.model.data.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
+//                self.model.data.userInfo.isRisk = [userDict[@"isRisk"] boolValue];
+//                self.model.data.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
+//                self.model.data.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
+//                self.model.data.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
+////                [SingleUserInfo setUserData:SingleUserInfo.loginData];
+//                [SingleUserInfo setUserData:self.model.data withPassWord:self.pwd];
+//                [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES];
+//            }
+//            else
+//            {
+//                ShowMessage(dic[@"message"]);
+//            }
+//        }
+//    }
+//}
+//- (void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest*)request {
+//    // some one of request is failed
+//
+//}
 -(void)buttonforgetClick
 {
     UCFNewFindPassWordViewController *vc = [[UCFNewFindPassWordViewController alloc] init];

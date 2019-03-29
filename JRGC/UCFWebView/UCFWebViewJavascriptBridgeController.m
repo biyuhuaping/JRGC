@@ -300,7 +300,7 @@
     
     [_bridge registerHandler:@"nativeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         
-        weakSelf.isHideNativeNav = NO;
+//        weakSelf.isHideNativeNav = NO;
         NSDictionary *nativeData = data;
         
         if (nil == nativeData || [nativeData isKindOfClass:[NSNull class]] || nativeData.count == 0 || !nativeData[@"action"])

@@ -360,10 +360,6 @@
         else if(model.code == 3) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:model.message delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles:@"立即拨打", nil];
             [alertView show];
-        } else
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:model.message delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
-            [alertView show];
         }
 //        else{
 //            ShowMessage(model.message);

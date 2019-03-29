@@ -1063,8 +1063,6 @@
     
     NSDictionary *infoAgentDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@/%@/%@",userAgent,@"FinancialWorkshop",[Common getIOSVersion]],@"UserAgent",nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:infoAgentDic];
-    [Common setHTMLCookies:[[NSUserDefaults standardUserDefaults] objectForKey:DOPA] andCookieName:@"jg_nyscclnjsygjr"];
-    [Common setHTMLCookies:[UserInfoSingle sharedManager].wapSingature andCookieName:@"encryptParam"];//    #warning 灰度
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     //    测试重新加cookies

@@ -1247,6 +1247,10 @@
 		E3D3A1E5224A104300DA6185 /* RTRootNavigationAddPushController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D3A1E4224A104300DA6185 /* RTRootNavigationAddPushController.m */; };
 		E3D3A1E8224A273400DA6185 /* UCFGetBindingBankCardListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D3A1E7224A273400DA6185 /* UCFGetBindingBankCardListApi.m */; };
 		E3D6D520221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D6D51F221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m */; };
+		E3DE7403224B261500211A9F /* UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DE7402224B261500211A9F /* UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.m */; };
+		E3DE741A224B323700211A9F /* NSArray+HYBUnicodeReadable.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DE7412224B323700211A9F /* NSArray+HYBUnicodeReadable.m */; };
+		E3DE741B224B323700211A9F /* NSDictionary+HYBUnicodeReadable.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DE7413224B323700211A9F /* NSDictionary+HYBUnicodeReadable.m */; };
+		E3DE741C224B323700211A9F /* NSSet+HYBUnicodeReadable.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DE7415224B323700211A9F /* NSSet+HYBUnicodeReadable.m */; };
 		E3DEC72B22327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DEC72A22327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m */; };
 		E3DEC72E223276B5009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DEC72D223276B5009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel.m */; };
 		E3E05C5C1DD07D710066B65C /* UCFCouponExchangeToFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E05C5A1DD07D710066B65C /* UCFCouponExchangeToFriends.m */; };
@@ -3513,6 +3517,14 @@
 		E3D3A1E7224A273400DA6185 /* UCFGetBindingBankCardListApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGetBindingBankCardListApi.m; sourceTree = "<group>"; };
 		E3D6D51E221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryAccountHomeViewController.h; sourceTree = "<group>"; };
 		E3D6D51F221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryAccountHomeViewController.m; sourceTree = "<group>"; };
+		E3DE7401224B261500211A9F /* UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.h; sourceTree = "<group>"; };
+		E3DE7402224B261500211A9F /* UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.m; sourceTree = "<group>"; };
+		E3DE7412224B323700211A9F /* NSArray+HYBUnicodeReadable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HYBUnicodeReadable.m"; sourceTree = "<group>"; };
+		E3DE7413224B323700211A9F /* NSDictionary+HYBUnicodeReadable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HYBUnicodeReadable.m"; sourceTree = "<group>"; };
+		E3DE7415224B323700211A9F /* NSSet+HYBUnicodeReadable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HYBUnicodeReadable.m"; sourceTree = "<group>"; };
+		E3DE7416224B323700211A9F /* NSArray+HYBUnicodeReadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HYBUnicodeReadable.h"; sourceTree = "<group>"; };
+		E3DE7417224B323700211A9F /* NSDictionary+HYBUnicodeReadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HYBUnicodeReadable.h"; sourceTree = "<group>"; };
+		E3DE7418224B323700211A9F /* NSSet+HYBUnicodeReadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HYBUnicodeReadable.h"; sourceTree = "<group>"; };
 		E3DEC72922327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.h; sourceTree = "<group>"; };
 		E3DEC72A22327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m; sourceTree = "<group>"; };
 		E3DEC72C223276B5009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel.h; sourceTree = "<group>"; };
@@ -4285,6 +4297,7 @@
 		33813A2321BFB474004666E5 /* lib(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
+				E3DE7411224B323700211A9F /* HYBUnicodeReadable */,
 				E352FD9E21E4B08C00617AB7 /* YTKNetwork */,
 				E31BD51721C0C10100D3651F /* TYAlertController */,
 			);
@@ -8765,6 +8778,8 @@
 				E32D6975222E584A00803CE5 /* UCFMicroBankOpenAccountChangeBankCardInfoAPI.m */,
 				E32D6977222E588600803CE5 /* UCFMicroBankOpenAccountOpenAccountIntoBankInfoAPI.h */,
 				E32D6978222E588600803CE5 /* UCFMicroBankOpenAccountOpenAccountIntoBankInfoAPI.m */,
+				E3DE7401224B261500211A9F /* UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.h */,
+				E3DE7402224B261500211A9F /* UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.m */,
 				E3DEC72922327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.h */,
 				E3DEC72A22327699009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi.m */,
 			);
@@ -9187,6 +9202,19 @@
 				E34B5E8922253C080027718C /* UCFMicroBankUserAccountInfoAPI.m */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		E3DE7411224B323700211A9F /* HYBUnicodeReadable */ = {
+			isa = PBXGroup;
+			children = (
+				E3DE7412224B323700211A9F /* NSArray+HYBUnicodeReadable.m */,
+				E3DE7413224B323700211A9F /* NSDictionary+HYBUnicodeReadable.m */,
+				E3DE7415224B323700211A9F /* NSSet+HYBUnicodeReadable.m */,
+				E3DE7416224B323700211A9F /* NSArray+HYBUnicodeReadable.h */,
+				E3DE7417224B323700211A9F /* NSDictionary+HYBUnicodeReadable.h */,
+				E3DE7418224B323700211A9F /* NSSet+HYBUnicodeReadable.h */,
+			);
+			path = HYBUnicodeReadable;
 			sourceTree = "<group>";
 		};
 		E3E4D9B921F5A35C003D41E9 /* LoginAndRegister */ = {
@@ -10378,6 +10406,7 @@
 				333B42C821FC31AB00741A47 /* UCFBidDetailTopBoardCell.m in Sources */,
 				E30C799121F1BFD7000183FA /* UCFMineGetAccountBalanceListApi.m in Sources */,
 				FBB685881AE4A76800F222B6 /* MJRefreshLegendHeader.m in Sources */,
+				E3DE741C224B323700211A9F /* NSSet+HYBUnicodeReadable.m in Sources */,
 				74270C9F1EC58F6800F9419B /* UCFHomeListHeaderSectionView.m in Sources */,
 				4A231C541BE9B18400228C88 /* UITabBar+TabBarBadge.m in Sources */,
 				334B9E75223A573300E278D8 /* UCFCollectionBidListViewController.m in Sources */,
@@ -10992,6 +11021,7 @@
 				333548BD221153D100DE0BB8 /* InvestPageInfoApi.m in Sources */,
 				FBC234731B31678800C783A8 /* UCFBackMoneyCell1.m in Sources */,
 				4A8D5F741B0C1DCF0053F045 /* RechargeListViewController.m in Sources */,
+				E3DE7403224B261500211A9F /* UCFMicroBankONewpenAccountGetOpenAccountInfoAPI.m in Sources */,
 				7BE45C911ADF9C4C00B955A6 /* HMSegmentedControl.m in Sources */,
 				746BBEA41AF8AEC700EBA0E7 /* UCFSelectedView.m in Sources */,
 				74BDA99F1F09F8780054403F /* DIYCalendarCell.m in Sources */,
@@ -11031,6 +11061,7 @@
 				E32D6970222E578700803CE5 /* UCFMicroBankIdentifysendCodeInfoAPI.m in Sources */,
 				744A5FAA1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m in Sources */,
 				FB82B8CB1DD96A8E0080C099 /* UCFCouponAuxiliaryVC.m in Sources */,
+				E3DE741B224B323700211A9F /* NSDictionary+HYBUnicodeReadable.m in Sources */,
 				2526ADDC1DD08CB800114D9A /* UIView+FrameChange.m in Sources */,
 				E3355421223F8E97001FADEA /* UCFRechargeAndWithdrawalViewController.m in Sources */,
 				7BC8AA241AD4C74200BF4660 /* UCFTransterBidHeadDetail.m in Sources */,
@@ -11102,6 +11133,7 @@
 				4A0E074A1B218E8C0099AEC3 /* RedAlertView.m in Sources */,
 				749099AD1F7279B800C2AD6C /* UCFAttachModel.m in Sources */,
 				FB72B08D1D74233E00F4DC8E /* BaseNavigationViewController.m in Sources */,
+				E3DE741A224B323700211A9F /* NSArray+HYBUnicodeReadable.m in Sources */,
 				335BAC97221BF33C00F026BB /* UCFTransMoneyBoardView.m in Sources */,
 				E3D3A1E8224A273400DA6185 /* UCFGetBindingBankCardListApi.m in Sources */,
 				E3041D3821F7039C007B09B6 /* UCFRegisterGetRegisterInfoApi.m in Sources */,

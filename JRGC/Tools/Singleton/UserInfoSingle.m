@@ -45,7 +45,6 @@
     [self deleteUserData];
     //登录成功保存用户的资料
     [self setUserData:loginData];
-    
     [self generateWapSingature:loginData];
 
     
@@ -72,6 +71,8 @@
     [wapDict setValue:loginData.userInfo.userId forKey:@"userId"];
     NSString *encryptParam = [Common AESWithKeyWithNoTranscode2:AES_TESTKEY WithData:wapDict];
     self.wapSingature = encryptParam;
+    [Common  setHTMLCookies:loginData.userInfo.jg_ckie andCookieName:@"jg_nyscclnjsygjr"];//html免登录的cookies
+    [Common  setHTMLCookies:self.wapSingature andCookieName:@"encryptParam"];//html免登录的cookies
 }
 - (UCFLoginData *)getUserData
 {
@@ -186,15 +187,18 @@
                 [self updateUserData];
                 
                 self.requestUserbackBlock(YES);
+                self.requestUserbackBlock = nil;
             }
             else
             {
                 ShowMessage(dic[@"message"]);
                 self.requestUserbackBlock(NO);
+                self.requestUserbackBlock = nil;
             }
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             
             self.requestUserbackBlock(NO);
+            self.requestUserbackBlock = nil;
         }];
         [request1 start];
     }

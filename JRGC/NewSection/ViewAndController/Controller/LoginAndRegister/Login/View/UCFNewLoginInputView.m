@@ -15,9 +15,6 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
-@property (nonatomic, strong)MyRelativeLayout *scrollViewLayout;
-
-
 @end
 
 @implementation UCFNewLoginInputView
@@ -147,7 +144,7 @@
     if (nil == _scrollView) {
         _scrollView = [UIScrollView new];
         _scrollView.backgroundColor = [Color color:PGColorOptionThemeWhite];
-        _scrollView.contentSize = CGSizeMake(PGScreenWidth*2, 200);
+        _scrollView.contentSize = CGSizeMake(PGScreenWidth*2, 260);
         // 10. showsHorizontalScrollIndicator 是否显示水平滚动指示器
         _scrollView.showsHorizontalScrollIndicator = NO;
         // 8. pagingEnabled 按页滚动
@@ -156,7 +153,7 @@
         _scrollView.topPos.equalTo(self.underline.bottomPos);
         _scrollView.widthSize.equalTo(self.rootLayout.widthSize);
         _scrollView.myLeft = 0;
-        _scrollView.myHeight = 200;
+        _scrollView.myHeight = 260;
         [_scrollView addSubview:self.personalInput];
         [_scrollView addSubview:self.enterpriseInput];
     }
@@ -166,7 +163,7 @@
 - (UCFNewLoginInputNameAndPassWordView *)personalInput //个人用户界面
 {
     if (nil == _personalInput) {
-        _personalInput = [[UCFNewLoginInputNameAndPassWordView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 200) withUserType:@"个人"];
+        _personalInput = [[UCFNewLoginInputNameAndPassWordView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 260) withUserType:@"个人"];
         
     }
     return _personalInput;
@@ -175,7 +172,7 @@
 - (UCFNewLoginInputNameAndPassWordView *)enterpriseInput //企业用户界面
 {
     if (nil == _enterpriseInput) {
-        _enterpriseInput = [[UCFNewLoginInputNameAndPassWordView alloc] initWithFrame:CGRectMake(PGScreenWidth, 0, PGScreenWidth, 200) withUserType:@"企业"];
+        _enterpriseInput = [[UCFNewLoginInputNameAndPassWordView alloc] initWithFrame:CGRectMake(PGScreenWidth, 0, PGScreenWidth, 260) withUserType:@"企业"];
     }
     return _enterpriseInput;
 }
