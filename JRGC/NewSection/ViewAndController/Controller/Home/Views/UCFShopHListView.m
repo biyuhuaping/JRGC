@@ -18,7 +18,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.scrollView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-        self.scrollView.backgroundColor = UIColorWithRGB(0xebebee);
+        self.scrollView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         [self addSubview:self.scrollView];
     }
     return self;

@@ -44,6 +44,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong)NSArray      *mallBannerList;
 
+
+/**
+ 商城推荐查看更多URL
+ */
+@property(nonatomic, copy)NSString      *remcommendUrl;
+
+/**
+ 商城精选查看更多URL
+ */
+@property(nonatomic, copy)NSString      *boutiqueUrl;
+
+
 @property(nonatomic, weak) UIViewController *rootViewController;
 
 /**

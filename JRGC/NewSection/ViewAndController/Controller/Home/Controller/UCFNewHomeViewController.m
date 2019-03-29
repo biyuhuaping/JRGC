@@ -26,13 +26,23 @@
 #import "UCFMineIntoCoinPageModel.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "NSString+Misc.h"
-@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate>
+@interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate,UCFNewHomeSectionViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
 //@property(nonatomic, strong)UCFBannerViewModel*bannerViewModel;
 
 @property(nonatomic, strong)BaseTableView     *showTableView;
 @property(nonatomic, strong)NSMutableArray    *dataArray;
+
+/**
+ 商城推荐查看更多URL
+ */
+@property(nonatomic, copy)NSString      *remcommendUrl;
+
+/**
+ 商城精选查看更多URL
+ */
+@property(nonatomic, copy)NSString      *boutiqueUrl;
 @end
 
 @implementation UCFNewHomeViewController
@@ -116,7 +126,7 @@
 - (void)showView:(UCFHomeViewModel *)viewModel
 {
     @PGWeakObj(self);
-    [self.KVOController observe:viewModel keyPaths:@[@"modelListArray",] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:viewModel keyPaths:@[@"modelListArray",@"remcommendUrl",@"boutiqueUrl"] options:NSKeyValueObservingOptionNew  block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"modelListArray"]) {
             NSArray *modelListArray = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
@@ -125,6 +135,12 @@
                 selfWeak.dataArray = [NSMutableArray arrayWithArray:modelListArray];
                 [selfWeak.showTableView reloadData];
             }
+        }   else if ([keyPath isEqualToString:@"remcommendUrl"]) {
+            NSString *remcommendUrl = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            selfWeak.remcommendUrl = remcommendUrl;
+        } else if ([keyPath isEqualToString:@"boutiqueUrl"]) {
+            NSString *boutiqueUrl = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            selfWeak.boutiqueUrl = boutiqueUrl;
         }
     }];
 }
@@ -171,16 +187,30 @@
     CellConfig *data = sectionArr[0];
     if (data.title.length > 0) {
         UCFNewHomeSectionView *sectionView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 54)];
+        sectionView.section = section;
+        sectionView.delegate = self;
         NSArray *sectionArr = self.dataArray[section];
         CellConfig *data = sectionArr[0];
         if (data) {
             sectionView.titleLab.text = data.title;
+        }
+        if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"]) {
+            [sectionView showMore];
         }
         return sectionView;
     } else {
         return nil;
     }
 
+}
+
+- (void)showMoreViewSection:(NSInteger)section andTitle:(NSString *)title
+{
+    if ([title isEqualToString:@"商城精选"]) {
+        [self pushWebViewWithUrl:self.boutiqueUrl Title:@"商城精选"];
+    } else if([title isEqualToString:@"商城特惠"]){
+        [self pushWebViewWithUrl:self.remcommendUrl Title:@"商城特惠"];
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
@@ -289,9 +319,24 @@
                 }
             }
         }
-        
-
+    } else if ([model isKindOfClass:[UCFHomeMallrecommends class]]) {
+        UCFHomeMallrecommends *mallModel = model;
+        [self pushWebViewWithUrl:mallModel.bizUrl Title:mallModel.title];
+    } else if ([model isKindOfClass:[UCFhomeMallbannerlist class]]) {
+         UCFhomeMallbannerlist *mallModel = model;
+        [self pushWebViewWithUrl:mallModel.url Title:mallModel.title];
+    } else if ([model isKindOfClass:[UCFHomeMallsale class]]) {
+        UCFHomeMallsale *mallModel = model;
+        [self pushWebViewWithUrl:mallModel.bizUrl Title:mallModel.title];
     }
+}
+- (void)pushWebViewWithUrl:(NSString *)url Title:(NSString *)title
+{
+    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    web.url = url;
+    web.title = title;
+    web.isHidenNavigationbar = YES;
+    [self.navigationController pushViewController:web animated:YES];
 }
 - (void)homeViewDataBidClickModel:(UCFNewHomeListModel *)model type:(UCFNewHomeListType)type
 {

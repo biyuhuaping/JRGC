@@ -126,7 +126,7 @@
 - (void)getMallData
 {
     @PGWeakObj(self);
-    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"home"];
+    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"index"];
     mallRequest.animatingView = _loaingSuperView;
     [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         [selfWeak dealMallRequestData:request];
@@ -183,7 +183,7 @@
                     }
                     if (i == groupArr.count - 1) {
                         //添加促销广告banner
-                        CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:nil heightOfCell:((ScreenWidth - 30) * 6 /23)];
+                        CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
                         UCFCellDataModel *dataMode = [UCFCellDataModel new];
                         dataMode.modelType = @"coinArray";
                         dataMode.data1 = self.coinBannerArray;
@@ -206,7 +206,7 @@
                     
                     if (i == groupArr.count - 1) {
                         //添加促销广告banner
-                        CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:nil heightOfCell:((ScreenWidth - 30) * 6 /23)];
+                        CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
                         UCFCellDataModel *dataMode = [UCFCellDataModel new];
                         dataMode.modelType = @"coinArray";
                         dataMode.data1 = self.coinBannerArray;
@@ -229,9 +229,14 @@
 - (void)dealMallRequestData:(YTKBaseRequest *)request
 {
     UCFHomeMallDataModel *model = request.responseJSONModel;
+    
     SEL sel = NSSelectorFromString(@"reflectDataModel:");
     if (model.ret) {
-        CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(ScreenWidth - 30) * 6 /23 + 160];
+        
+        self.remcommendUrl = model.data.mallDiscountsUrl;
+        self.boutiqueUrl = model.data.mallSelectedUrl;
+        
+        CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(ScreenWidth - 30) * 6 /23  + (ScreenWidth - 30)/3 + 60];
         UCFCellDataModel *dataMode = [UCFCellDataModel new];
         dataMode.modelType = @"mall";
         NSMutableArray *arr = [NSMutableArray arrayWithCapacity:1];
@@ -239,7 +244,7 @@
             [arr addObject:bannerModel];
         }
         dataMode.data1 =  arr;
-        dataMode.data2 = model.data.mallRecommends;
+        dataMode.data2 = model.data.mallDiscounts;
         NSMutableArray *section3 = [NSMutableArray arrayWithCapacity:1];
         data3_0.dataModel = dataMode;
         [section3 addObject:data3_0];
@@ -247,10 +252,10 @@
         
         
         NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
-        CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:150];
-         UCFCellDataModel *dataMode1 = [UCFCellDataModel new];
+        CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:165];
+        UCFCellDataModel *dataMode1 = [UCFCellDataModel new];
         dataMode1.modelType = @"mallDiscounts";
-        dataMode1.data1 = model.data.mallSale;
+        dataMode1.data1 = model.data.mallSelected;
         data4_0.dataModel = dataMode1;
         [section4 addObject:data4_0];
         
