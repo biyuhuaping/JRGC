@@ -213,7 +213,7 @@
             [Common deleteCookies];
             //登录成功保存用户的资料
             [[UserInfoSingle sharedManager] setUserData:dic[@"data"][@"userInfo"]];
-            [Common setHTMLCookies:dic[@"data"][@"userInfo"][@"jg_ckie"]];//html免登录的cookies
+//            [Common setHTMLCookies:dic[@"data"][@"userInfo"][@"jg_ckie"]];//html免登录的cookies
             NSString *lastName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];
             if (lastName != nil) {
                 if (![lastName isEqualToString:[Common deleteStrHeadAndTailSpace:_loginView.userNameFieldText]]) {

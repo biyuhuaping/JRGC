@@ -366,6 +366,8 @@
             
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:@"个人",@"isCompany",self.phoneNo,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:self.passWordField.text];
+            [Common  setHTMLCookies:model.data.userInfo.jg_ckie andCookieName:@"jg_nyscclnjsygjr"];//html免登录的cookies
+            [Common  setHTMLCookies:[UserInfoSingle sharedManager].wapSingature andCookieName:@"encryptParam"];//html免登录的cookies
             [self.rt_navigationController popToRootViewControllerAnimated:YES];
             [self.rootLayout endEditing:YES];
         }

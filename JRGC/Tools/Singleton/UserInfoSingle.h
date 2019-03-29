@@ -29,6 +29,8 @@ typedef void(^requestUserAllStatueCallBackBlock)(BOOL);
 
 @property(nonatomic, copy) NSString *signatureStr;//验签串
 
+@property(nonatomic, copy) NSString *wapSingature;
+
 @property(nonatomic, copy) NSString *bankNumTip;
 
 @property(nonatomic, assign) NSInteger wrangGCodeNumber;  //输错手势密码的次数;
@@ -113,4 +115,8 @@ typedef void(^requestUserAllStatueCallBackBlock)(BOOL);
 
 - (NSDictionary *)getLoginAccount;
 - (NSString *)getlastLoginName;
+
+- (void)removeIsShare;
+- (void)saveIsShare:(NSDictionary *)dic;
+
 @end

@@ -204,6 +204,10 @@
     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ)]];
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
+        [[UserInfoSingle sharedManager] saveIsShare:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                     @"2",@"taskType",
+                                                     [NSString stringWithFormat:@"%zd",platformType],@"platformType",
+                                                     nil] ];
     }];
 }
 

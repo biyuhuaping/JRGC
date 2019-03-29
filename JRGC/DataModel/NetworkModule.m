@@ -1351,6 +1351,7 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagRecommendPrdClaim:
             parameter = [NEW_SERVER_IP stringByAppendingString:HOMEPAGERECOMMENDPRDCLAIMURL];
+            break;
         case kSXTagShowCouponTips:
             parameter = [NEW_SERVER_IP stringByAppendingString:HOMESHOWCOUPONTIPS];
             break;
@@ -1359,6 +1360,9 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagInvestCashTicktList:
             parameter = [NEW_SERVER_IP stringByAppendingString:InvestCouponTicktList];
+            break;
+        case kSXTagAppShareStyle:
+            parameter = [NEW_SERVER_IP stringByAppendingString:APPSHARETOTER];
             break;
     }
     //给原有参数字典添加公共参数

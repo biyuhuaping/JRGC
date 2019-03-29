@@ -82,15 +82,36 @@
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieuser];
     }
 }
-+ (void)setHTMLCookies:(NSString *)value
++ (void)setHTMLCookies:(NSString *)value andCookieName:(NSString *)cookieName
+
 {
     if(value == nil || [value isEqualToString:@""])
     {
         return;
     }
     
-    NSArray *arr = [NSArray arrayWithObjects:@".9888.cn",@"m.dougemall.com",@".9888keji.com",@".gongchangp2p.cn",@".gongchangzx.com",@".gongchangp2p.com",@"coin.9888keji.com", nil];
-    [self addWebViewCookie:value WithYUArr:arr];
+    [self addWebViewCookie:value andCookieName:cookieName];
+}
++ (void)addWebViewCookie:(NSString *)value andCookieName:(NSString *)cookieName //@"jg_nyscclnjsygjr"
+{
+    NSArray *arr = [NSArray arrayWithObjects:@".9888.cn",@"m.dougemall.com",@".9888keji.com",@".gongchangp2p.cn",@".gongchangzx.com",@".gongchangp2p.com", nil];
+    for (int i = 0; i < arr.count; i++) {
+        NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
+        [cookieProperties setObject:cookieName forKey:NSHTTPCookieName];
+        [cookieProperties setObject:value forKey:NSHTTPCookieValue];//dic[@"jg_ckie"]
+        [cookieProperties setObject:arr[i] forKey:NSHTTPCookieDomain];
+        [cookieProperties setObject:@"/" forKey:NSHTTPCookiePath];
+        [cookieProperties setObject:@"0" forKey:NSHTTPCookieVersion];
+        if ([arr[i] isEqualToString:@".9888keji.com"]) {
+            //            [cookieProperties setObject:@"false" forKey:@"HttpOnly"];
+        } else {
+            [cookieProperties setObject:@"true" forKey:@"HttpOnly"];
+        }
+        //zrc fixed
+        [cookieProperties setObject:[NSDate dateWithTimeIntervalSinceNow:60*60*24*365]forKey:NSHTTPCookieExpires];
+        NSHTTPCookie *cookieuser = [NSHTTPCookie cookieWithProperties:cookieProperties];
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieuser];
+    }
 }
 + (void)addTestCookies
 {

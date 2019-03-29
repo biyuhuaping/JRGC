@@ -102,7 +102,7 @@
     NSMutableArray *vcArray = [NSMutableArray array];
     NSArray *tabbarTitleArray = @[@"首页",
                                   @"投资",
-                                  @"发现",
+                                  @"奖励",
                                   @"商城",
                                   @"我的"];
     
@@ -126,18 +126,18 @@
             }
                 break;
             case 1:{
-//                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
-//                controller = invest;
-//                _AssignmentView = invest;
-                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
-                controller = mine;
-                _mineView = mine;
+                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
+                controller = invest;
+                _AssignmentView = invest;
+//                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
+//                controller = mine;
+//                _mineView = mine;
             }
                 break;
             case 2:{
                 UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 discoveryWeb.url = DISCOVERYURL;//请求地址;
-                discoveryWeb.navTitle = @"发现";
+                discoveryWeb.navTitle = @"奖励";
                 controller = discoveryWeb;
             }
                 break;

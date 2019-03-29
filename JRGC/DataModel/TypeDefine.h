@@ -229,7 +229,7 @@
 #define GETINFOFORONOFF @"api/dataDicItem/v2/getInfoForOnOff.json"    // 新手政策开关（0：关，1：开）
 #define GETSHAREMESSAGE  @"api/dataDicItem/v2/getShareMess.json" //首页2017新手政策分享注册链接
 
-#define DISCOVERYURL    @"https://m.9888.cn/static/wap/invest/index.html#/fa-xian"     //发现
+#define DISCOVERYURL    @"https://coin.9888keji.com/static/jh/index.html#/task"     //发现
 #define RegistCheckQdIsLimit @"newuserregist/checkQdIslimit"
 #define EASYLOAN_URL    @"https://m.easyloan888.com/static/loan/3rd/index.html#/jrgc-login" //借款URL
 #define DOWNLOADCONTRACT @"newprdOrder/downloadContract" 
@@ -309,6 +309,8 @@
 #define USERSTATUSINFO          @"api/prdClaims/v2/statusInfo.json"    //个人状态信息
 #define EXTRACTGOLDLIST         @"api/nmTrade/v2/pickUpGoldList.json"  //提金订单列表
 #define InvestCouponTicktList    @"api/discountCoupon/v2/queryInvestCouponList.json" //投资选择优惠券列表
+#define APPSHARETOTER         @"api/shareTask/v2/shareInvest.json"
+
 //预约的url
 #define NEWUSER_PRODUCTS_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/novice-bid/info"
 #define NEWUSER_APPLY_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/novice-bid/apply"
@@ -607,7 +609,8 @@ enum kSXTag
     kSXTagRecommendPrdClaim,            //推荐表列表
     kSXTagShowCouponTips,            //新券过期券提示接口
     kSXTagInvestCouponTicktList,            //投资选择优惠券列表(新)
-    kSXTagInvestCashTicktList
+    kSXTagInvestCashTicktList,
+    kSXTagAppShareStyle,                //app分享方式
 
 };
 

@@ -16,11 +16,11 @@ typedef NS_ENUM(NSInteger, PicType) {
 + (NSString *)getIOSVersion;
 
 + (NSString*)machineName;
-
 //清除cookies
 + (void)deleteCookies;
-//html免登录
-+ (void)setHTMLCookies:(NSString *)value;
+//清除cookies
++ (void)setHTMLCookies:(NSString *)value andCookieName:(NSString *)cookieName;
+
 //添加灰度测试的cookies值
 + (void)addTestCookies;
 // 获取机器类型

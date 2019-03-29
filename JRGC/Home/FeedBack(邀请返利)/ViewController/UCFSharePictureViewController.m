@@ -183,7 +183,10 @@
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
-    
+    [[UserInfoSingle sharedManager] saveIsShare:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                 @"2",@"taskType",
+                                                 [NSString stringWithFormat:@"%zd",platformType],@"platformType",
+                                                 nil] ];
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         if (error) {
