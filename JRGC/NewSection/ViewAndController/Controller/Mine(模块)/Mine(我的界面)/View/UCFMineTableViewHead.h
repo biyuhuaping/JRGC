@@ -23,6 +23,8 @@ typedef void(^tableHeadCallBack) (UIButton *btn);//1
 - (void)showMySimple:(UCFMineMySimpleInfoModel *)myModel;
 
 - (void)hiddenMoney:(BOOL )isHiddenMoney;
+
+- (void)removeHeadViewUserData;
 @end
 
 NS_ASSUME_NONNULL_END

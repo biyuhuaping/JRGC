@@ -40,17 +40,16 @@
     return self;
 }
 - (void)setUserData:(UCFLoginData *)loginData withPassWord:(NSString *)passWord{
-    
-    //注册成功后，先清cookies，把老账户的清除掉，然后再用新账户的信息
-    [self deleteUserData];
-    //登录成功保存用户的资料
-    NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getlastLoginName],[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]],loginData.userInfo.time];
-    self.signatureStr  = [UCFToolsMehod md5:yanQian];
-    [self setUserData:loginData];
-    [self generateWapSingature:loginData];
 
+    //注册成功后，先清cookies，把老账户的清除掉，然后再用新账户的信息
+    [self deleteOldUserData];
     
+    //登录成功保存用户的资料
     //保存验签串
+
+    [self generateSingature:loginData withPassWord:passWord];
+    [self setUserData:loginData];
+   
     [[NSUserDefaults standardUserDefaults] setValue:[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]] forKey:AWP];
     [[NSUserDefaults standardUserDefaults] synchronize];
     //注册通知self.loginData.userInfo
@@ -63,7 +62,45 @@
     [[NSUserDefaults standardUserDefaults] setValue:[loginData yy_modelToJSONString] forKey:LOGINDATA];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-- (void)generateWapSingature:(UCFLoginData *) loginData
+- (void)deleteOldUserData{
+    [self removeUserData];
+}
+- (void)deleteUserData{
+    [self removeUserData];
+    self.loginData = [UCFLoginData new];
+}
+
+- (void)removeUserData
+{
+    self.signatureStr = @"";
+    self.wapSingature = @"";
+    //清空数据
+    //退出时清cookis
+    [self removeUserCookies];
+    [self deleteUserDataUserDefaults];
+}
+
+- (void)removeUserCookies
+{
+    //    清cookis
+    [Common deleteCookies];
+}
+- (void)deleteUserDataUserDefaults
+{
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LOGINDATA];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:AWP];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
+}
+- (NSString *)getAwp
+{
+    return [[NSUserDefaults standardUserDefaults] valueForKey:AWP];
+}
+- (void)generateSingature:(UCFLoginData *) loginData withPassWord:(NSString *)passWord
 {
     //生成wap的登录加密串
     NSMutableDictionary *wapDict = [NSMutableDictionary dictionaryWithCapacity:4];
@@ -73,6 +110,11 @@
     [wapDict setValue:loginData.userInfo.userId forKey:@"userId"];
     NSString *encryptParam = [Common AESWithKeyWithNoTranscode2:AES_TESTKEY WithData:wapDict];
     self.wapSingature = encryptParam;
+    
+     //生成接口的登录加密串
+    NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getlastLoginName],[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]],loginData.userInfo.time];
+    self.signatureStr  = [UCFToolsMehod md5:yanQian];
+    
     [Common  setHTMLCookies:loginData.userInfo.jg_ckie andCookieName:@"jg_nyscclnjsygjr"];//html免登录的cookies
     [Common  setHTMLCookies:self.wapSingature andCookieName:@"encryptParam"];//html免登录的cookies
 }
@@ -81,8 +123,8 @@
     NSString *userData = [[NSUserDefaults standardUserDefaults] valueForKey:LOGINDATA];
     if (nil != userData && ![userData isEqualToString:@""] ) {
         UCFLoginData *data = [UCFLoginData yy_modelWithJSON:userData];
+        [self generateSingature:_loginData withPassWord:[self getAwp]];
         _loginData = [data copy];
-        [self generateWapSingature:_loginData];
         return _loginData;
     }
     else
@@ -131,42 +173,21 @@
 
 
 
-
-- (void)deleteUserData{
-    self.signatureStr = @"";
-    self.loginData = [UCFLoginData new];
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LOGINDATA];
-    
-    //清空数据
-    //退出时清cookis
-    
-    [Common deleteCookies];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
-}
+//- (NSString *)signatureStr
+//{
+//    if (self.loginData.userInfo.userId.length > 0) {
+//        if (!_signatureStr || [_signatureStr isEqualToString:@""] || _signatureStr.length <= 0) {
+//            //更新验签串
+//            NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getlastLoginName],[self getAwp],self.loginData.userInfo.time];
+//            NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
+//            _signatureStr = signatureStr;
+//        }
+//        return _signatureStr;
+//    }
+//    return @"";
+//}
 
 
-- (NSString *)signatureStr
-{
-    if (self.loginData.userInfo.userId.length > 0) {
-        if (!_signatureStr || [_signatureStr isEqualToString:@""] || _signatureStr.length <= 0) {
-            //更新验签串
-            NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getlastLoginName],[self getAwp],self.loginData.userInfo.time];
-            NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
-            _signatureStr = signatureStr;
-        }
-        return _signatureStr;
-    }
-    return @"";
-}
-
-- (NSString *)getAwp
-{
-    return [[NSUserDefaults standardUserDefaults] valueForKey:AWP];
-}
 
 
 - (void)requestUserAllStatueWithView:(UIView *)view

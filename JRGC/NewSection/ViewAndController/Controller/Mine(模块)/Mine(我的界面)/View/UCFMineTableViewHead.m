@@ -363,13 +363,19 @@
 {
     if (myModel == nil || ![myModel isKindOfClass:[UCFMineMyReceiptModel class]] || myModel.data.unReadMsgCount > 0)
     {
-         [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+         [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
         
     }else
     {
         [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
      
     }
+}
+
+- (void)removeHeadViewUserData
+{
+    [self showMySimple:nil];
+    [self showMyReceipt:nil];
 }
 - (void)hiddenMoney:(BOOL )isHiddenMoney
 {

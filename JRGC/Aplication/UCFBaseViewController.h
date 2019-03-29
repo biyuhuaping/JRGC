@@ -54,5 +54,7 @@
 //- (void)clickRightBtn;
 - (void)hideLeftButton;
 - (void)refresh;
+
+- (void)blindUserStatue;
 @end
 

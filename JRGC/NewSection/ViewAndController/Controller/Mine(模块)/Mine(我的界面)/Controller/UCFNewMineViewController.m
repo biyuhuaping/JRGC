@@ -80,7 +80,7 @@
  
     [self loadCellConfig];
     [self.tableView beginRefresh];
-    
+    [self blindUserStatue];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -745,8 +745,10 @@
 //退出登录，或者切换账户
 - (void)monitorUserGetOut
 {
-    [self.tableHead showMyReceipt:nil];
-    [self.tableHead showMySimple:nil];
+    //清空数据
+    [self.tableHead removeHeadViewUserData];
+    [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:[UCFMineMySimpleInfoModel new], nil]];
+    [self.tableView cyl_reloadData];
 }
 //用户在登录的情况下，更改用户状态的时候，请求数据
 - (void)monitorOpenStatueChange
