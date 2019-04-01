@@ -42,6 +42,9 @@
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfListView:)]) {
         _count = [self.dataSource numberOfListView:self];
         if (_count > 0) {
+            [self.scrollView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [obj removeFromSuperview];
+            }];
             for (int i = 0; i < _count; i++) {
                 if (self.delegate && [self.delegate respondsToSelector:@selector(shopHListView:)]) {
                     CGSize size = [self.delegate shopHListView:self];

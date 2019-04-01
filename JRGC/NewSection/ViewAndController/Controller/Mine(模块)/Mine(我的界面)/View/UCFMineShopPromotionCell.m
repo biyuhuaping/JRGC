@@ -13,12 +13,15 @@
 #import "UCFHomeMallDataModel.h"
 #import "UIImageView+WebCache.h"
 #import "UCFNewHomeSectionView.h"
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
 
 @interface UCFMineShopPromotionCell ()<UCFShopHListViewDataSource,UCFShopHListViewDelegate,UCFNewHomeSectionViewDelegate>
 @property(nonatomic, strong)UCFShopHListView *shopList;
 @property(nonatomic, strong)UCFNewHomeSectionView *sectionView;
+@property(nonatomic, strong) UIView *lineView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
 @property(nonatomic, strong)NSMutableArray  *cycleModelArray;
+@property(nonatomic, strong)UCFMallDataModel *modelData;
 
 @end
 @implementation UCFMineShopPromotionCell
@@ -29,8 +32,9 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 //        self.rootLayout.useFrame = YES;
+        [self.rootLayout addSubview:self.sectionView];
         [self.rootLayout addSubview:self.shopList];
-
+        [self.rootLayout addSubview:self.lineView];
         
     }
     return self;
@@ -38,44 +42,74 @@
 - (UCFNewHomeSectionView *)sectionView
 {
     if (nil == _sectionView) {
-        UCFNewHomeSectionView *sectionView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 54)];
-        sectionView.delegate = self;
-//        NSArray *sectionArr = self.dataArray[section];
-//        CellConfig *data = sectionArr[0];
-//        if (data) {
-//            sectionView.titleLab.text = data.title;
-//        }
-//        if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"]) {
-//            [sectionView showMore];
-//        }
-//        return sectionView;
-
+        _sectionView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 50)];
+//        _sectionView.useFrame = YES;
+        _sectionView.delegate = self;
+        _sectionView.myTop = 10;
+        [_sectionView showMore];
+        [_sectionView titlecenterYPos];
+        _sectionView.rootLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
     }
     return _sectionView;
 }
+- (void)showMoreViewSection:(NSInteger)section andTitle:(NSString *)title
+{
+    if ([self.sectionView.titleLab.text isEqualToString:@"为您精选"])
+    {
+        [self pushWebViewWithUrl:self.modelData.mallRecommendsUrl Title:@"为您精选"];
+        
+    } else if([self.sectionView.titleLab.text isEqualToString:@"折扣专区"])
+    {
+        [self pushWebViewWithUrl:self.modelData.mallSaleUrl Title:@"折扣专区"];
+    }
+}
+
+- (void)pushWebViewWithUrl:(NSString *)url Title:(NSString *)title
+{
+    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    web.url = url;
+    web.title = title;
+    web.isHidenNavigationbar = YES;
+    [((UCFBaseViewController *)self.bc).rt_navigationController pushViewController:web animated:YES];
+}
+
 - (UCFShopHListView *)shopList
 {
     if (nil == _shopList) {
-        _shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 165)];
-        _shopList.horizontalSpace = 1.0f;
+        _shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.sectionView.frame), PGScreenWidth, 165)];
         _shopList.dataSource = self;
         _shopList.delegate = self;
+//        _shopList.useFrame = YES;
         _shopList.myLeft = 0;
-        _shopList.myTop = 0;
+        _shopList.topPos.equalTo(self.sectionView.bottomPos);
     }
     return _shopList;
 }
+- (UIView *)lineView
+{
+    if (nil == _lineView) {
+        _lineView = [UIView new];
+        _lineView.topPos.equalTo(self.sectionView.bottomPos);
+        _lineView.myHeight = 0.5;
+        _lineView.myLeft = 0;
+        _lineView.myRight = 0;
+        _lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    }
+    return _lineView;
+}
 - (void)showInfo:(id)data
 {
-    UCFMallDataModel *modelData = data;
+    self.modelData = [data copy];
     
     if ([self.cellTitleString isEqualToString:@"mallRecommends"])
     {
-        self.dataArray = [NSMutableArray arrayWithArray:modelData.mallRecommends];
+        self.sectionView.titleLab.text = @"为您精选";
+        self.dataArray = [NSMutableArray arrayWithArray:self.modelData.mallRecommends];
     }
-    else if ([self.cellTitleString isEqualToString:@"mallSelected"])
+    else if ([self.cellTitleString isEqualToString:@"mallSale"])
     {
-        self.dataArray = [NSMutableArray arrayWithArray:modelData.mallSelected];
+        self.sectionView.titleLab.text = @"折扣专区";
+        self.dataArray = [NSMutableArray arrayWithArray:self.modelData.mallSale];
     }
     else
     {
@@ -111,7 +145,7 @@
         score = model.score;
         price = model.price;
     }
-    else if ([self.cellTitleString isEqualToString:@"mallSelected"])
+    else if ([self.cellTitleString isEqualToString:@"mallSale"])
     {
         UCFHomeMallsale *model = self.dataArray[index];
         img = model.img;
@@ -130,16 +164,20 @@
     NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:showStr attributes:attribtDic];
     view.shopOrginalValue.attributedText = attribtStr;
     
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(view.frame.size.width -0.5, 0, 0.5, view.frame.size.height)];
+    lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    [view addSubview:lineView];
+    
     return view;
 }
 
 - (void)shopHListView:(UCFShopHListView *)shopListView didSelectRowAtIndex:(NSInteger)index
 {
     UCFHomeMallrecommends *model = self.dataArray[index];
-    if (self.deleage && [self.deleage respondsToSelector:@selector(baseTableViewCell:buttonClick:withModel:)]) {
-        [self.deleage baseTableViewCell:self buttonClick:nil withModel:model];
-    }
-    
+//    if (self.deleage && [self.deleage respondsToSelector:@selector(baseTableViewCell:buttonClick:withModel:)]) {
+//        [self.deleage baseTableViewCell:self buttonClick:nil withModel:model];
+//    }
+    [self pushWebViewWithUrl:model.bizUrl Title:model.title];
 }
 
 

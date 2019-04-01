@@ -63,7 +63,7 @@
 }
 - (CGSize)sizeForPageFlowView:(RCFFlowView *)viwe
 {
-    return CGSizeMake([UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.width - 30) * 6 /23);
+    return CGSizeMake([UIScreen mainScreen].bounds.size.width, ([UIScreen mainScreen].bounds.size.width - 30) * 6 /23);
 }
 - (void)showInfo:(id)data
 {
