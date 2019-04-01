@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) UIButton *headImageBtn;//头像
 
+@property (nonatomic, strong) UIButton *memberLeverBtn;//用户等级
+
 @property (nonatomic, strong) UIButton *messageImageBtn;//消息
 
 @property (nonatomic, strong) NZLabel     *totalAssetsLabel;//总资产
@@ -62,6 +64,7 @@
         // 初始化视图对象
         [self.rootLayout addSubview:self.userMesageLayout];
         [self.userMesageLayout addSubview:self.bkImageView];
+        [self.userMesageLayout addSubview:self.memberLeverBtn];
         [self.userMesageLayout addSubview:self.headImageBtn];
         [self.userMesageLayout addSubview:self.messageImageBtn];
         [self.userMesageLayout addSubview:self.totalAssetsLabel];
@@ -128,14 +131,38 @@
         _headImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _headImageBtn.topPos.equalTo(self.userMesageLayout.topPos).offset(30);//(@30);
         _headImageBtn.leftPos.equalTo(@15);
-        _headImageBtn.myHeight = 40;
-        _headImageBtn.myWidth = 40;
+        _headImageBtn.myHeight = 38;
+        _headImageBtn.myWidth = 37;
         _headImageBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [_headImageBtn setImage:[UIImage imageNamed:@"MineUserHead.png"] forState:UIControlStateNormal];
+        [_headImageBtn setImage:[UIImage imageNamed:@"mine_icon_head"] forState:UIControlStateNormal];
         _headImageBtn.tag = 10001;
         [_headImageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _headImageBtn;
+}
+
+- (UIButton *)memberLeverBtn
+{
+    if (nil == _memberLeverBtn) {
+        _memberLeverBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _memberLeverBtn.titleLabel.font = [Color gc_Font:15.0];
+        [_memberLeverBtn setBackgroundColor:[Color color:PGColorOpttonMyVipBackgroundColor]];
+        [_memberLeverBtn setTitleColor:[Color color:PGColorOptionThemeWhite] forState:UIControlStateNormal];
+        _memberLeverBtn.centerYPos.equalTo(self.headImageBtn.centerYPos);
+        _memberLeverBtn.leftPos.equalTo(self.headImageBtn.rightPos).offset(6);
+        _memberLeverBtn.myHeight = 24;
+        _memberLeverBtn.myWidth = 75;
+        _memberLeverBtn.tag = 10005;
+        [_memberLeverBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        _memberLeverBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
+        { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
+            //设置圆角的半径
+            sbv.layer.cornerRadius = 12;
+            //切割超出圆角范围的子视图
+            sbv.layer.masksToBounds = YES;
+        };
+    }
+    return _memberLeverBtn;
 }
 - (UIButton *)messageImageBtn
 {
@@ -341,7 +368,7 @@
         self.totalAssetsMoneyLabel.text = @"   ";//总资产
         self.expectedInterestMoneyLabel.text = @"";//总待收利息
         self.accountBalanceMoneyLabel.text = @"";//余额
-        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+//        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
     }
     else
     {
@@ -361,14 +388,43 @@
 }
 - (void)showMySimple:(UCFMineMySimpleInfoModel *)myModel
 {
-    if (myModel == nil || ![myModel isKindOfClass:[UCFMineMyReceiptModel class]] || myModel.data.unReadMsgCount > 0)
+    if (myModel != nil && [myModel isKindOfClass:[UCFMineMySimpleInfoModel class]])
     {
-         [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
         
-    }else
+        if (myModel.data.unReadMsgCount > 0) {
+             [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+        }
+        if ([myModel.data.memberLever integerValue] <= 1)
+        {
+            [self.memberLeverBtn setTitle:@"普通用户" forState:UIControlStateNormal];
+        }
+        else
+        {
+//            self.memberLeverBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+            [self.memberLeverBtn setImage:[UIImage imageNamed:@"icon_vip"] forState:UIControlStateNormal];
+            [self.memberLeverBtn setTitle:[NSString stringWithFormat:@"VIP%ld",(long)[myModel.data.memberLever integerValue] - 1] forState:UIControlStateNormal];
+//            typedef struct UIEdgeInsets {
+//                CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
+//            } UIEdgeInsets
+
+            CGFloat gap = 10.f;
+            self.memberLeverBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -gap / 2 +5 , 0, gap / 2);
+            self.memberLeverBtn.titleEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0 ,  gap / 2 );
+            self.memberLeverBtn.contentEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0, gap / 2);
+        }
+    }
+    else
     {
-        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
-     
+        if ([self.memberLeverBtn superview]) {
+            [self.memberLeverBtn removeFromSuperview];
+            self.memberLeverBtn = nil;
+            [self.rootLayout addSubview:self.memberLeverBtn];
+        }
+        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
     }
 }
 
