@@ -20,6 +20,7 @@
 @property (nonatomic, weak) id bc;
 @property (nonatomic, weak) id <BaseTableViewCellDelegate>deleage;
 @property (nonatomic, assign, getter = isLastRowInSection) BOOL lastRowInSection;
+@property (nonatomic, copy) NSString *cellTitleString;
 
 - (void)refreshCellData:(id)data;
 
