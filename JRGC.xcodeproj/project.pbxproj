@@ -1041,6 +1041,8 @@
 		E3041D4121F71C3F007B09B6 /* HWTFCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3041D3F21F71C3F007B09B6 /* HWTFCursorView.m */; };
 		E30429B2224E2E55005015E5 /* UCFNewModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30429B1224E2E55005015E5 /* UCFNewModifyPasswordViewController.m */; };
 		E30429BA224E3D64005015E5 /* UCFNewBindPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30429B9224E3D64005015E5 /* UCFNewBindPhoneNumViewController.m */; };
+		E30429BD224E411E005015E5 /* UCFMineShopPromotionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E30429BC224E411E005015E5 /* UCFMineShopPromotionCell.m */; };
+		E30429C0224E4C18005015E5 /* UCFMinePromotionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E30429BF224E4C18005015E5 /* UCFMinePromotionCell.m */; };
 		E3046C4022310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3046C3F22310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m */; };
 		E309F647224872F800FFE9B9 /* UCFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E309F646224872F800FFE9B9 /* UCFLoginViewController.m */; };
 		E309F64A2248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = E309F6492248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m */; };
@@ -3118,6 +3120,10 @@
 		E30429B1224E2E55005015E5 /* UCFNewModifyPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewModifyPasswordViewController.m; sourceTree = "<group>"; };
 		E30429B8224E3D64005015E5 /* UCFNewBindPhoneNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewBindPhoneNumViewController.h; sourceTree = "<group>"; };
 		E30429B9224E3D64005015E5 /* UCFNewBindPhoneNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewBindPhoneNumViewController.m; sourceTree = "<group>"; };
+		E30429BB224E411E005015E5 /* UCFMineShopPromotionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineShopPromotionCell.h; sourceTree = "<group>"; };
+		E30429BC224E411E005015E5 /* UCFMineShopPromotionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineShopPromotionCell.m; sourceTree = "<group>"; };
+		E30429BE224E4C18005015E5 /* UCFMinePromotionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMinePromotionCell.h; sourceTree = "<group>"; };
+		E30429BF224E4C18005015E5 /* UCFMinePromotionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMinePromotionCell.m; sourceTree = "<group>"; };
 		E3046C3E22310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.h; sourceTree = "<group>"; };
 		E3046C3F22310F85004517C1 /* UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.m; sourceTree = "<group>"; };
 		E309F645224872F700FFE9B9 /* UCFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoginViewController.h; sourceTree = "<group>"; };
@@ -9153,6 +9159,10 @@
 				E3C1EF2621EDE2200014658E /* UCFMineItemCell.m */,
 				E337444A2216616700003FEF /* UCFMineTableViewHead.h */,
 				E337444B2216616700003FEF /* UCFMineTableViewHead.m */,
+				E30429BB224E411E005015E5 /* UCFMineShopPromotionCell.h */,
+				E30429BC224E411E005015E5 /* UCFMineShopPromotionCell.m */,
+				E30429BE224E4C18005015E5 /* UCFMinePromotionCell.h */,
+				E30429BF224E4C18005015E5 /* UCFMinePromotionCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -10548,6 +10558,7 @@
 				4A6FAFC51D743CF300AD4DF8 /* CJLabel.m in Sources */,
 				745B8A561FB5ADC7007BFF05 /* UCFExtractGoldDetailController.m in Sources */,
 				A851F34E1F132D2C003DE8B8 /* UCFGoldTransCell.m in Sources */,
+				E30429C0224E4C18005015E5 /* UCFMinePromotionCell.m in Sources */,
 				74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */,
 				74C7A0D41FE10A8C00217ABB /* UCFCalculateTypeCell.m in Sources */,
 				E31BD53621C0C10100D3651F /* TYAlertFadeAnimation.m in Sources */,
@@ -10759,6 +10770,7 @@
 				7477BF9A1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m in Sources */,
 				E352FD5B21E4AF0B00617AB7 /* UCFSectionHeadView.m in Sources */,
 				83CD84301F13A50800227704 /* UCFOrdinaryBidController.m in Sources */,
+				E30429BD224E411E005015E5 /* UCFMineShopPromotionCell.m in Sources */,
 				8346B2751F71246800219D41 /* UCFAccoutCardModel.m in Sources */,
 				A830DE811F8DC91A003855B9 /* UCFCalendarModularDayCell.m in Sources */,
 				E3C117AE1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.m in Sources */,

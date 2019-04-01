@@ -9,6 +9,7 @@
 #import "UCFNewHomeSectionView.h"
 @interface UCFNewHomeSectionView()
 @property(nonatomic, strong)UIImageView *arrowView;
+@property(nonatomic, strong)UIImageView *iconView;
 @end
 @implementation UCFNewHomeSectionView
 
@@ -27,6 +28,7 @@
         iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         iconView.clipsToBounds = YES;
         iconView.layer.cornerRadius = 2;
+        self.iconView = iconView;
         [self.rootLayout addSubview:iconView];
         
         UILabel *label = [[UILabel alloc] init];
@@ -66,6 +68,12 @@
 {
     self.arrowView.hidden = NO;
     self.checkMoreBtn.hidden = NO;
+}
+- (void)titlecenterYPos
+{
+     self.iconView.centerYPos.equalTo(self.rootLayout.centerYPos);
+    self.titleLab.centerYPos.equalTo(self.iconView.centerYPos);
+     self.checkMoreBtn.centerYPos.equalTo(self.iconView.centerYPos);
 }
 - (void)checkMore:(UIButton *)button
 {

@@ -17,6 +17,7 @@
 #import "UCFMineIntoCoinPageModel.h"
 #import "UCFMineIntoCoinPageApi.h"
 #import "UCFGetBindingBankCardListApi.h"
+#import "UCFMallProductApi.h"
 
 #import "UCFMineTableViewHead.h"
 #import "UCFMineActivitiesCell.h"
@@ -35,6 +36,8 @@
 #import "UCFMyFacBeanViewController.h"
 #import "UCFCalendarViewController.h"
 #import "UCFCalendarModularViewController.h"
+#import "UCFMineShopPromotionCell.h"
+#import "UCFMinePromotionCell.h"
 
 #import "BaseNavigationViewController.h"
 #import "UCFP2POrHonerAccoutViewController.h"
@@ -113,6 +116,7 @@
 {
     [self requestMyReceipt];
     [self requestMySimpleInfo];
+    [self getMallData];
 }
 - (UCFMineTableViewHead *)tableHead
 {
@@ -146,6 +150,7 @@
     // 拿到对应cell并根据模型显示
     UITableViewCell *cell = [cellConfig cellOfCellConfigWithTableView:tableView dataModel:self.arryData[indexPath.section][indexPath.row] isNib:NO];
     ((BaseTableViewCell *)cell).bc = self;
+    ((BaseTableViewCell *)cell).cellTitleString = cellConfig.title;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -558,6 +563,10 @@
              [self.tableHead showMySimple:model];
              [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:model, nil]];
          }
+         if ([model isKindOfClass:[UCFHomeMallDataModel class]]) {
+             
+             [self showShopUrl:model];
+         }
      }
     [self.tableView cyl_reloadData];
 }
@@ -720,6 +729,101 @@
     }];
     
 }
+- (void)getMallData
+{
+//    @PGWeakObj(self);
+    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"home"];
+    [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+        [self.tableView endRefresh];
+        UCFHomeMallDataModel *model = request.responseJSONModel;
+//        SEL sel = NSSelectorFromString(@"reflectDataModel:");
+        if (model.ret) {
+            
+            [self setTableViewArrayWithData:model];
+//            self.remcommendUrl = model.data.mallDiscountsUrl;
+//            self.boutiqueUrl = model.data.mallSelectedUrl;
+//
+//            CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(ScreenWidth - 30) * 6 /23  + (ScreenWidth - 30)/3 + 60];
+//            UCFCellDataModel *dataMode = [UCFCellDataModel new];
+//            dataMode.modelType = @"mall";
+//            NSMutableArray *arr = [NSMutableArray arrayWithCapacity:1];
+//            for (UCFhomeMallbannerlist *bannerModel in model.data.mallBannerList) {
+//                [arr addObject:bannerModel];
+//            }
+//            dataMode.data1 =  arr;
+//            dataMode.data2 = model.data.mallDiscounts;
+//            NSMutableArray *section3 = [NSMutableArray arrayWithCapacity:1];
+//            data3_0.dataModel = dataMode;
+//            [section3 addObject:data3_0];
+//            [self.dataArray addObject:section3];
+//
+//
+//            NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
+//            CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:165];
+//            UCFCellDataModel *dataMode1 = [UCFCellDataModel new];
+//            dataMode1.modelType = @"mallDiscounts";
+//            dataMode1.data1 = model.data.mallSelected;
+//            data4_0.dataModel = dataMode1;
+//            [section4 addObject:data4_0];
+//
+//            [self.dataArray addObject:section4];
+        } else {
+            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        [self.tableView endRefresh];
+    }];
+    [mallRequest start];
+}
+
+- (void)showShopUrl:(UCFHomeMallDataModel *)model
+{
+    NSArray *cellArrayData = [self.cellConfigData lastObject];
+    CellConfig *cellConfig = [cellArrayData firstObject];
+    
+    //当前没有活动内容
+    NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:5];
+    NSMutableArray *cellArray = [NSMutableArray arrayWithCapacity:5];
+    if (model.data.mallBannerList.count >0)
+    {
+        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMinePromotionCell class]) title:@"banner" showInfoMethod:@selector(showInfo:) heightOfCell:98];
+        [cellArray addObject:cellConfigCentre];
+        [dataArray addObject:model.data];
+    }
+    if (model.data.mallRecommends.count >0)
+    {
+        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineShopPromotionCell class]) title:@"mallRecommends" showInfoMethod:@selector(showInfo:) heightOfCell:225];
+        [cellArray addObject:cellConfigCentre];
+        [dataArray addObject:model.data];
+    }
+    if (model.data.mallSale.count >0)
+    {
+        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineShopPromotionCell class]) title:@"mallSale" showInfoMethod:@selector(showInfo:) heightOfCell:225];
+        [cellArray addObject:cellConfigCentre];
+        [dataArray addObject:model.data];
+    }
+    
+    if ([cellConfig.title isEqualToString:@"banner"] || [cellConfig.title isEqualToString:@"mallRecommends"] || [cellConfig.title isEqualToString:@"mallSale"]) {
+        //说明当前是有活动这组内容
+        [self.arryData replaceObjectAtIndex:3 withObject:[dataArray copy]];
+        [self.cellConfigData replaceObjectAtIndex:3 withObject:[cellArray copy]];
+    }
+    else
+    {
+       //没有活动这组数据,就直接插入
+        [self.arryData addObject:dataArray];
+        [self.cellConfigData addObject:cellArray];
+    }
+    [self.tableView cyl_reloadData];
+    
+//    [self.cellConfigData enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+////        NSLog(@"%@----%@",array[idx],[NSThread currentThread]);
+//
+//
+//    }];
+}
+
 //登录或者注册
 - (void)monitorUserLogin
 {

@@ -104,12 +104,12 @@
 //        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
         
-        if (SingleUserInfo.superviseSwitch && [SingleUserInfo.loginData.userLevel integerValue] < 2) {
-            group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode]];//qyy
-        }
-        else {
+//        if (SingleUserInfo.superviseSwitch && [SingleUserInfo.loginData.userLevel integerValue] < 2) {
+//            group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode]];//qyy
+//        }
+//        else {
             group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
-        }
+//        }
 
         UCFSettingItem *weijinAccount  = [UCFSettingArrowItem itemWithIcon:@"vjin_account_icon" title:@"微金存管账户" destVcClass:[BindPhoneNumViewController class]];
         UCFSettingItem *zunxiangAccount  = [UCFSettingArrowItem itemWithIcon:@"zunxiang_account_icon" title:@"尊享存管账户" destVcClass:[BindPhoneNumViewController class]];
@@ -404,7 +404,7 @@
                         break;
                     
                     case 2:{
-                        if ([memberLever isEqualToString:@"1"]) {
+                        if ( [memberLever integerValue] <= 1) {
                             _userLevelImage.image =[UIImage imageNamed:@"no_vip_icon.png"];
                             
                         }else{
@@ -869,7 +869,9 @@
             }
                 break;
             case 2:{
-                if ([SingleUserInfo.loginData.userLevel integerValue] < 2 && SingleUserInfo.superviseSwitch) {
+//                if ([SingleUserInfo.loginData.userLevel integerValue] < 2 && SingleUserInfo.superviseSwitch)
+                if ([item.title isEqualToString:@"工场码"])
+                {
 //                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
 //                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",SingleUserInfo.loginData.userInfo.promotionCode,self.sex];
                     UCFMineDimensionCodeViewController *subVC = [[UCFMineDimensionCodeViewController alloc] init];

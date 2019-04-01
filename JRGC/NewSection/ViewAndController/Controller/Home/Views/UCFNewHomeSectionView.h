@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showMore;
 
+- (void)titlecenterYPos;
 @end
 
 NS_ASSUME_NONNULL_END
