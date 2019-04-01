@@ -46,11 +46,11 @@
     
     //登录成功保存用户的资料
     //保存验签串
-
-    [self generateSingature:loginData withPassWord:passWord];
+    NSString *pwd = [UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]];
+    [self generateSingature:loginData withPassWord:pwd];
     [self setUserData:loginData];
    
-    [[NSUserDefaults standardUserDefaults] setValue:[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]] forKey:AWP];
+    [[NSUserDefaults standardUserDefaults] setValue:pwd forKey:AWP];
     [[NSUserDefaults standardUserDefaults] synchronize];
     //注册通知self.loginData.userInfo
     [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
@@ -112,7 +112,7 @@
     self.wapSingature = encryptParam;
     
      //生成接口的登录加密串
-    NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getlastLoginName],[UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]],loginData.userInfo.time];
+    NSString *yanQian = [NSString stringWithFormat:@"%@%@%lld",[self getlastLoginName],passWord,loginData.userInfo.time];
     self.signatureStr  = [UCFToolsMehod md5:yanQian];
     
     [Common  setHTMLCookies:loginData.userInfo.jg_ckie andCookieName:@"jg_nyscclnjsygjr"];//html免登录的cookies
@@ -123,7 +123,7 @@
     NSString *userData = [[NSUserDefaults standardUserDefaults] valueForKey:LOGINDATA];
     if (nil != userData && ![userData isEqualToString:@""] ) {
         UCFLoginData *data = [UCFLoginData yy_modelWithJSON:userData];
-        [self generateSingature:_loginData withPassWord:[self getAwp]];
+        [self generateSingature:data withPassWord:[self getAwp]];
         _loginData = [data copy];
         return _loginData;
     }
