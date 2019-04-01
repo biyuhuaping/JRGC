@@ -74,5 +74,5 @@ static NSString *UserStatusInfoForCacheApiURL = @"api/homePage/v2/statusInfoForC
 
 static NSString *GetBindingBankCardListApiURL = @"api/userAccount/v2/getBindingBankCardList.json";//我的-->>充值接口
 
-static NSString *DougeMallOrderListURL = @"https://m.dougemall.com/static/mall/order-list/index.html#all";//商城订单
+static NSString *DougeMallOrderListURL = @"https://m.dougemall.com/static/mall/order-list/index.html#all?closeView=true";//商城订单
 #endif /* RequestConstant_h */

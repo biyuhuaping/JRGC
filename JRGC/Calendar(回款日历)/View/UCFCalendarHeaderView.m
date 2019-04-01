@@ -14,19 +14,21 @@
 #import "NetworkModule.h"
 #import "JSONKit.h"
 #import "UCFCalendarDayInfo.h"
-
+#import "UIImage+Compression.h"
 @interface UCFCalendarHeaderView () <UICollectionViewDataSource, UICollectionViewDelegate, NetworkModuleDelegate, UCFCalendarCollectionViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *calendarView;
+@property (weak, nonatomic) IBOutlet UIImageView *baseImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *myPaymentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *waitPrincipalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *waitInterestLabel;
 @property (weak, nonatomic) IBOutlet UILabel *repayMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *paidMoneyLabel;
+@property (weak, nonatomic) IBOutlet UIView *moneyBaseView;
 
 
 @property (strong, nonatomic) NSMutableArray *months;
-@property (weak, nonatomic) IBOutlet UIView *currentDayView;
+//@property (weak, nonatomic) IBOutlet UIView *currentDayView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarH;
 @property (strong, nonatomic) NSMutableArray *days;
 
@@ -82,10 +84,10 @@
 {
     if (nil == _weekView) {
         _weekView = [[UIView alloc] initWithFrame:CGRectZero];
-        _weekView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+        _weekView.backgroundColor = [UIColor whiteColor];
         for (int i=0; i<7; i++) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-            label.textColor = UIColorWithRGB(0x333333);
+            label.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
             label.font = [UIFont systemFontOfSize:12];
             label.tag = i;
             label.textAlignment = NSTextAlignmentCenter;
@@ -99,12 +101,18 @@ static NSString *const cellId = @"cellId";
 
 + (CGFloat)viewHeight
 {
-    return 537;
+    if (SingleUserInfo.loginData.userInfo.zxIsNew) {
+        return 610;
+    }
+    return 620;
 }
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    UIImage *image = [UIImage gc_styleImageSize:CGSizeMake(_baseImageView.frame.size.width, _baseImageView.frame.size.height)];
+    _baseImageView.image = image;
+    
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc]init];
     //同一行相邻两个cell的最小间距
     layout.minimumInteritemSpacing = 0;
@@ -122,7 +130,7 @@ static NSString *const cellId = @"cellId";
     self.calendar = collectionView;
     
     UILabel *monthLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    monthLabel.textColor = UIColorWithRGB(0x333333);
+    monthLabel.textColor = [Color color:PGColorOptionTitleBlack];
     monthLabel.font = [UIFont systemFontOfSize:15];
     monthLabel.textAlignment = NSTextAlignmentCenter;
     monthLabel.backgroundColor = [UIColor whiteColor];
@@ -151,10 +159,10 @@ static NSString *const cellId = @"cellId";
     [self addSubview:nextButton];
     self.nextButton = nextButton;
     
-    UIView *upLine = [[UIView alloc] initWithFrame:CGRectZero];
-    upLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    [self addSubview:upLine];
-    self.upLine = upLine;
+//    UIView *upLine = [[UIView alloc] initWithFrame:CGRectZero];
+//    upLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//    [self addSubview:upLine];
+//    self.upLine = upLine;
     
     UIView *downLine1 = [[UIView alloc] initWithFrame:CGRectZero];
     [downLine1 setBackgroundColor:UIColorWithRGB(0xe9eaee)];
@@ -162,14 +170,14 @@ static NSString *const cellId = @"cellId";
     self.downLine1 = downLine1;
     
     UIView *downLine2 = [[UIView alloc] initWithFrame:CGRectZero];
-    [downLine2 setBackgroundColor:UIColorWithRGB(0xe9eaee)];
+    [downLine2 setBackgroundColor:[Color color:PGColorOptionCellSeparatorGray]];
     [self addSubview:downLine2];
     self.downLine2 = downLine2;
     
-    UIView *downLine = [[UIView alloc] initWithFrame:CGRectZero];
-    [downLine setBackgroundColor:UIColorWithRGB(0xe9eaee)];
-    [self addSubview:downLine];
-    self.downLine = downLine;
+//    UIView *downLine = [[UIView alloc] initWithFrame:CGRectZero];
+//    [downLine setBackgroundColor:[Color color:PGColorOptionCellSeparatorGray]];
+//    [self addSubview:downLine];
+//    self.downLine = downLine;
     
     [self addSubview:self.weekView];
     
@@ -217,30 +225,33 @@ static NSString *const cellId = @"cellId";
 {
     [super layoutSubviews];
     self.calendar.frame = self.calendarView.bounds;
-    CGRect frame = self.frame;
-    frame.size.height = CGRectGetMaxY(_currentDayView.frame);
+//    CGRect frame = self.frame;
+//    frame.size.height = CGRectGetMaxY(_currentDayView.frame);
 //    self.frame = frame;
 //
-    self.preButton.frame = CGRectMake(0, _calendarView.y, 80, 44);
+    CGFloat offY = CGRectGetMaxY(self.moneyBaseView.frame) + 10;
+    self.preButton.frame = CGRectMake(0,offY , 80, 51);
     [self.preButton setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, _preButton.width - 20- _preButton.imageView.width)];
-    self.nextButton.frame = CGRectMake(self.width - 80, _calendarView.y, 80, 44);
-    [self.nextButton setImageEdgeInsets:UIEdgeInsetsMake(0, _nextButton.width - 20- _nextButton.imageView.width, 0, 20)];
-    self.monthLabel.frame = CGRectMake(0, _calendarView.y + 0.5, ScreenWidth, 43);
+    self.nextButton.frame = CGRectMake(self.width - 80, offY, 80, 51);
+    [self.nextButton setImageEdgeInsets:UIEdgeInsetsMake(0, _nextButton.width - 20 - _nextButton.imageView.width, 0, 20)];
+    self.monthLabel.frame = CGRectMake(0, offY, ScreenWidth, 51);
     
-    self.upLine.frame = CGRectMake(0, _calendarView.y, ScreenWidth, 0.5);
-    self.downLine1.frame = CGRectMake(0, _calendarView.y + 43.5, ScreenWidth, 0.5);
+    self.downLine1.frame = CGRectMake(0, offY + 50.5, ScreenWidth, 0.5);
     
-    self.downLine2.frame = CGRectMake(0, _calendarView.y + 44 + 29.5, ScreenWidth, 0.5);
+
     
-    self.weekView.frame = CGRectMake(0, _calendarView.y + 44, ScreenWidth, 29.5);
+    self.weekView.frame = CGRectMake(0, offY + 51, ScreenWidth, 51);
     
-    self.downLine.frame = CGRectMake(0, _calendarView.bottom - 0.5, ScreenWidth, 0.5);
+    self.downLine2.frame = CGRectMake(0, CGRectGetMaxY(self.weekView.frame) - 0.5, ScreenWidth, 0.5);
+    [self bringSubviewToFront:self.downLine2];
     
-    self.headerButton.frame = CGRectMake(0, _calendarView.y + 0.5, ScreenWidth, 43);
+    self.headerButton.frame = CGRectMake(0, offY + 0.5, ScreenWidth, 51);
+    
+    self.calendar.frame = CGRectMake(0, 0, ScreenWidth, 276);
     
     CGFloat weekLabelWidth = ScreenWidth / 7.0;
     for (UILabel *label in _weekView.subviews) {
-        label.frame = CGRectMake(weekLabelWidth * label.tag, 0, weekLabelWidth, 29.5);
+        label.frame = CGRectMake(weekLabelWidth * label.tag, 0, weekLabelWidth, 51);
         switch (label.tag) {
             case 0:
                 label.text = @"日";
@@ -296,7 +307,7 @@ static NSString *const cellId = @"cellId";
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.calendarView.bounds.size;
+    return CGSizeMake(ScreenWidth, 275);
 }
 
 #pragma mark - 接受数据

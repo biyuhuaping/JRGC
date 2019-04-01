@@ -74,6 +74,7 @@
 
         _aiBidistController =[[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
         _aiBidistController.isHideNativeNav = YES;
+        _aiBidistController.url = @"https://m.9888.cn/static/wap/p2p/#/mixed-order/records?type=1";
     }
     return _aiBidistController;
 }
@@ -82,6 +83,7 @@
     if (!_reservationBidistController) {
         _reservationBidistController =[[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
         _reservationBidistController.isHideNativeNav = YES;
+        _reservationBidistController.url = @"https://m.9888.cn/static/wap/p2p/#/mixed-order/records?type=2";
     }
     return _reservationBidistController;
 }

@@ -161,26 +161,9 @@
     if (indexPath.section == 1) {
         if ([cellConfig.title isEqualToString:@"回款日历"])
         {
-            if ([UserInfoSingle sharedManager].superviseSwitch) {
-                if (!SingleUserInfo.loginData.userInfo.zxIsNew) {
-                    UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
-                    //        backMoneyDetailVC.superViewController = self;
-                    //    backMoneyCalendarVC.accoutType = self.accoutType;
-                    [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
-                }
-                else {
-                    UCFCalendarModularViewController *backMoneyCalendarVC = [[UCFCalendarModularViewController alloc] initWithNibName:@"UCFCalendarModularViewController" bundle:nil];
-                    backMoneyCalendarVC.accoutType = self.accoutType;
-                    backMoneyCalendarVC.baseTitleText = @"回款日历";
-                    [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
-                }
-            }
-            else {
-                UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
-                //        backMoneyDetailVC.superViewController = self;
-                //    backMoneyCalendarVC.accoutType = self.accoutType;
-                [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
-            }
+
+            UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
+            [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
         }
         else if ([cellConfig.title isEqualToString:@"优质债权"])
         {
