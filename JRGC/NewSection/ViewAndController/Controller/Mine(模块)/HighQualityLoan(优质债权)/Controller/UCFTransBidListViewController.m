@@ -192,7 +192,7 @@
     NSDictionary *dict = self.dataArray[indexPath.row];
     UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
     controller.billId = dict[@"prdOrderId"];
-    controller.accoutType = SelectAccoutTypeP2P;
+    controller.accoutType = self.accoutType;
     controller.detailType = @"2";
     [self.navigationController pushViewController:controller animated:YES];
 }
