@@ -362,7 +362,7 @@
 }
 
 #pragma mark - 数据重新加载
-- (void)showMyReceipt:(UCFMineMyReceiptModel *)myModel
+- (void)showMyReceipt:(UCFMineMyReceiptModel *__nonnull)myModel
 {
     if (myModel == nil || ![myModel isKindOfClass:[UCFMineMyReceiptModel class]]) {
         self.totalAssetsMoneyLabel.text = @"   ";//总资产
@@ -386,7 +386,8 @@
     [self.accountBalanceMoneyLabel sizeToFit];
     
 }
-- (void)showMySimple:(UCFMineMySimpleInfoModel *)myModel
+
+- (void)showMySimple:(UCFMineMySimpleInfoModel *__nonnull)myModel
 {
     if (myModel != nil && [myModel isKindOfClass:[UCFMineMySimpleInfoModel class]])
     {

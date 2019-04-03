@@ -87,4 +87,10 @@ _Pragma("clang diagnostic pop")\
 
 #define  SingleUserInfo [UserInfoSingle sharedManager]
 #define  SingGlobalView [GlobalView sharedManager]
+
+typedef NS_ENUM(NSInteger, POPWINDOWS) {
+    POPOpenAccountWindow = 1, //开户弹框
+    POPRegisterVerifyPhoneNum,
+    
+};
 #endif /* Macro_h */

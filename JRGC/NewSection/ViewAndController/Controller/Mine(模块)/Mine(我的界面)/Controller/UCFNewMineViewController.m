@@ -84,6 +84,8 @@
     [self loadCellConfig];
     [self.tableView beginRefresh];
     [self blindUserStatue];
+    
+//    [[UCFPublicPopupWindow sharedManager] showPopViewInController:nil andType:1];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

@@ -128,7 +128,7 @@
     if (nil == _bkLayout) {
         _bkLayout = [MyRelativeLayout new];
         _bkLayout.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
-        _tipsLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
+        _bkLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _bkLayout.myHeight = 661;
         _bkLayout.myTop = 0;
         _bkLayout.myLeft = 0;

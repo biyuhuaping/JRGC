@@ -53,6 +53,8 @@
 
 #import "Image.h"
 
+#import "UCFPublicPopupWindow.h"
+
 //导航
 //#import "UINavigationController+FDFullscreenPopGesture.h"
 //#import "RTRootNavigationController.h"

@@ -1208,6 +1208,8 @@
 		E3951B5121F95F5300D7E999 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = E3951B4F21F95F5300D7E999 /* Timer.m */; };
 		E3951B5421F9993A00D7E999 /* UCFRegisterInputPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3951B5321F9993A00D7E999 /* UCFRegisterInputPassWordViewController.m */; };
 		E3951B5721F9BCFD00D7E999 /* UCFNewLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3951B5621F9BCFD00D7E999 /* UCFNewLoginViewController.m */; };
+		E3980E0B22522258006936C4 /* UCFPublicPopupWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = E3980E0A22522258006936C4 /* UCFPublicPopupWindow.m */; };
+		E3980E0E225234A9006936C4 /* UCFPublicPopupWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3980E0D225234A9006936C4 /* UCFPublicPopupWindowView.m */; };
 		E399627D2237E90A00C5B96C /* UCFMicroBankDepositoryChangeBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E399627C2237E90A00C5B96C /* UCFMicroBankDepositoryChangeBankCardViewController.m */; };
 		E39962802237ECCA00C5B96C /* UCFMicroBankDepositoryBankCardInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E399627F2237ECCA00C5B96C /* UCFMicroBankDepositoryBankCardInfoView.m */; };
 		E39962832237ECFE00C5B96C /* UCFMicroBankDepositoryBankCardCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E39962822237ECFE00C5B96C /* UCFMicroBankDepositoryBankCardCellView.m */; };
@@ -3450,6 +3452,10 @@
 		E3951B5321F9993A00D7E999 /* UCFRegisterInputPassWordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterInputPassWordViewController.m; sourceTree = "<group>"; };
 		E3951B5521F9BCFD00D7E999 /* UCFNewLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewLoginViewController.h; sourceTree = "<group>"; };
 		E3951B5621F9BCFD00D7E999 /* UCFNewLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewLoginViewController.m; sourceTree = "<group>"; };
+		E3980E0922522258006936C4 /* UCFPublicPopupWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFPublicPopupWindow.h; sourceTree = "<group>"; };
+		E3980E0A22522258006936C4 /* UCFPublicPopupWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFPublicPopupWindow.m; sourceTree = "<group>"; };
+		E3980E0C225234A9006936C4 /* UCFPublicPopupWindowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFPublicPopupWindowView.h; sourceTree = "<group>"; };
+		E3980E0D225234A9006936C4 /* UCFPublicPopupWindowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFPublicPopupWindowView.m; sourceTree = "<group>"; };
 		E399627B2237E90A00C5B96C /* UCFMicroBankDepositoryChangeBankCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryChangeBankCardViewController.h; sourceTree = "<group>"; };
 		E399627C2237E90A00C5B96C /* UCFMicroBankDepositoryChangeBankCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryChangeBankCardViewController.m; sourceTree = "<group>"; };
 		E399627E2237ECCA00C5B96C /* UCFMicroBankDepositoryBankCardInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryBankCardInfoView.h; sourceTree = "<group>"; };
@@ -8563,6 +8569,7 @@
 		E352FD2821E4AF0B00617AB7 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				E3980E0822522217006936C4 /* New Group */,
 				E34B5E8E222541DC0027718C /* Scrollview */,
 				33E3032921F1830200FD657C /* ViewModel */,
 				33480A2221E6E5E4007C8AAA /* Controler */,
@@ -8926,6 +8933,17 @@
 				E3951B5021F95F5300D7E999 /* Timer.h */,
 			);
 			path = timer;
+			sourceTree = "<group>";
+		};
+		E3980E0822522217006936C4 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				E3980E0922522258006936C4 /* UCFPublicPopupWindow.h */,
+				E3980E0A22522258006936C4 /* UCFPublicPopupWindow.m */,
+				E3980E0C225234A9006936C4 /* UCFPublicPopupWindowView.h */,
+				E3980E0D225234A9006936C4 /* UCFPublicPopupWindowView.m */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		E39962712237E79F00C5B96C /* UCFMicroBankDepositoryChangePassWord（修改交易密码） */ = {
@@ -10684,6 +10702,7 @@
 				FB377F841CCE480400F5DAF2 /* UCFExchangeModel.m in Sources */,
 				E352FDC721E4B08D00617AB7 /* YTKChainRequestAgent.m in Sources */,
 				74F291221AE0DBFC003E0E86 /* UCFCashViewController.m in Sources */,
+				E3980E0E225234A9006936C4 /* UCFPublicPopupWindowView.m in Sources */,
 				74FD355B1ADF58710083D52C /* UCFSettingMainCell.m in Sources */,
 				E3A71E1E21F0694E0062D7FC /* UCFMineMySimpleInfoApi.m in Sources */,
 				FB88C90D1AF9F92E00D2EE93 /* YcArray.m in Sources */,
@@ -10912,6 +10931,7 @@
 				E3364E302241EF520021694D /* UCFUserStatusInfoModel.m in Sources */,
 				E352FD5D21E4AF0B00617AB7 /* CellConfig.m in Sources */,
 				74877CD21FB2AC2400F32428 /* UCFTakingDeliveryViewController.m in Sources */,
+				E3980E0B22522258006936C4 /* UCFPublicPopupWindow.m in Sources */,
 				4AFAA8A71B0D76AB005C9BEC /* UCFSelectPayBackController.m in Sources */,
 				7BA6E4C31AD6731900FE8C37 /* UIImage+MultiFormat.m in Sources */,
 				FBE265DA1B26CAB100240A79 /* UCFMyClaimCtrl.m in Sources */,

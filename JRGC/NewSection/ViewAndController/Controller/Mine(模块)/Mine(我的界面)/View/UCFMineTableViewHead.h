@@ -18,9 +18,9 @@ typedef void(^tableHeadCallBack) (UIButton *btn);//1
 
 @property (nonatomic,copy) tableHeadCallBack callBack;//2
 
-- (void)showMyReceipt:(UCFMineMyReceiptModel *)myModel;
+- (void)showMyReceipt:(UCFMineMyReceiptModel *__nonnull)myModel;
 
-- (void)showMySimple:(UCFMineMySimpleInfoModel *)myModel;
+- (void)showMySimple:(UCFMineMySimpleInfoModel *__nonnull)myModel;
 
 - (void)hiddenMoney:(BOOL )isHiddenMoney;
 
