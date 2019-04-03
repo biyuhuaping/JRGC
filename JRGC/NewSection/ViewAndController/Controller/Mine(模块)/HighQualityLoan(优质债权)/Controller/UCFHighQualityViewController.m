@@ -63,7 +63,7 @@
 {
     if (SingleUserInfo.loginData.userInfo.userId) {
         NSString *strParameters = [NSString stringWithFormat:@"userId=%@",SingleUserInfo.loginData.userInfo.userId];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:SelectAccoutTypeP2P];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:self.accoutType];
     }
 }
 - (void)beginPost:(kSXTag)tag
@@ -146,7 +146,7 @@
     NSArray *tempArr = @[@"3",@"100",@"4"];
     NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     NSString *strParameters = [NSString stringWithFormat:@"page=%ld&rows=20&userId=%@&flag=%@&typeFlag=", (long)_currentPage,userId,tempArr[_index]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderUinvest owner:self Type:SelectAccoutTypeP2P];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderUinvest owner:self Type:self.accoutType];
     
     
     
@@ -185,7 +185,7 @@
     NSDictionary *dict = [self.dataArray objectAtIndex:indexPath.row];
     UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
     controller.billId = dict[@"id"];
-    controller.accoutType = SelectAccoutTypeP2P;
+    controller.accoutType = self.accoutType;
     controller.detailType = @"1";
     [self.navigationController pushViewController:controller animated:YES];
 }

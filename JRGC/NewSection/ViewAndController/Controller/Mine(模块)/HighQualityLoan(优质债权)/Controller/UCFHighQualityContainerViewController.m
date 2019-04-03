@@ -66,6 +66,7 @@
     if (!_hightQualityController) {
         _hightQualityController = [[UCFHighQualityViewController alloc] init];
     }
+    _hightQualityController.accoutType = self.accoutType;
     return _hightQualityController;
 }
 - (UCFTransBidListViewController *)transBidListController
@@ -73,6 +74,7 @@
     if (!_transBidListController) {
         _transBidListController = [[UCFTransBidListViewController alloc] init];
     }
+    _transBidListController.accoutType = self.accoutType;
     return _transBidListController;
 }
 @end

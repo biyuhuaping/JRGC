@@ -168,30 +168,15 @@
     if (indexPath.section == 1) {
         if ([cellConfig.title isEqualToString:@"回款日历"])
         {
-            if ([UserInfoSingle sharedManager].superviseSwitch) {
-                if (!SingleUserInfo.loginData.userInfo.zxIsNew) {
-                    UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
-                    //        backMoneyDetailVC.superViewController = self;
-                    //    backMoneyCalendarVC.accoutType = self.accoutType;
-                    [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
-                }
-                else {
-                    UCFCalendarModularViewController *backMoneyCalendarVC = [[UCFCalendarModularViewController alloc] initWithNibName:@"UCFCalendarModularViewController" bundle:nil];
-                    backMoneyCalendarVC.accoutType = self.accoutType;
-                    backMoneyCalendarVC.baseTitleText = @"回款日历";
-                    [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
-                }
-            }
-            else {
-                UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
-                //        backMoneyDetailVC.superViewController = self;
-                //    backMoneyCalendarVC.accoutType = self.accoutType;
-                [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
-            }
+
+            UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
+            [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
         }
         else if ([cellConfig.title isEqualToString:@"优质债权"])
         {
             UCFHighQualityContainerViewController *vc = [[UCFHighQualityContainerViewController alloc] init];
+            vc.accoutType = SelectAccoutTypeP2P;
+
             [self.navigationController pushViewController:vc animated:YES];
         }
         else if ([cellConfig.title isEqualToString:@"智能出借"])
@@ -201,7 +186,9 @@
         }
         else if ([cellConfig.title isEqualToString:@"尊享项目"])
         {
-            
+            UCFHighQualityContainerViewController *vc = [[UCFHighQualityContainerViewController alloc] init];
+            vc.accoutType = SelectAccoutTypeHoner;
+            [self.navigationController pushViewController:vc animated:YES];
         }
         else if ([cellConfig.title isEqualToString:@"持有黄金"])
         {
@@ -586,8 +573,9 @@
              
              [self showShopUrl:model];
          }
+           [self.tableView cyl_reloadData];
      }
-    [self.tableView cyl_reloadData];
+
 }
 
 #pragma mark -   CellConfig
@@ -684,7 +672,7 @@
         UCFMineCellAccountModel *cellAccountRespect = [[UCFMineCellAccountModel alloc]init];//尊享项目
         cellAccountRespect.cellAccountTitle = @"尊享项目";
         cellAccountRespect.cellAccountImage = @"mine_icon_gold.png";
-        [accountCellData insertObject:cellConfigRespect atIndex:accountCellData.count -2];
+        [accountCellData insertObject:cellAccountRespect atIndex:accountCellData.count -2];
     }
     if (model.data.nmAccountIsShow) {
         //黄金账户是否显示
@@ -699,6 +687,7 @@
     //新的数据直接替换第二组内容
     [self.cellConfigData replaceObjectAtIndex:1 withObject:[accountCellConfigArray copy]];
     [self.arryData replaceObjectAtIndex:1 withObject:[accountCellData copy]];
+    
 }
 
 - (void)requestMyCoin//请求我的工贝

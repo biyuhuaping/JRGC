@@ -13,4 +13,5 @@
 @property (strong, nonatomic) UCFCalendarGroup *group;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (weak, nonatomic) UITableView *tableview;
+@property (weak, nonatomic) IBOutlet UILabel *currentDataLab;
 @end
