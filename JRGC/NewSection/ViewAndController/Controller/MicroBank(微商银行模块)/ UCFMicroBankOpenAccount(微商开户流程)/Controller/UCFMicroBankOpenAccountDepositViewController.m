@@ -274,9 +274,9 @@
         _agreementLabel.textAlignment = NSTextAlignmentLeft;
         _agreementLabel.font = [Color gc_Font:13.0];
         _agreementLabel.textColor = [Color color:PGColorOptionTitleGray];
-        //自动折行设置
-        _agreementLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        _agreementLabel.numberOfLines = 0;
+    //自动折行设置
+    _agreementLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    _agreementLabel.numberOfLines = 0;
 //        _agreementLabel.text = @"查看支持银行";
 //        [_agreementLabel sizeToFit];
         

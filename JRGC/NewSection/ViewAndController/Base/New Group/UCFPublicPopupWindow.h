@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showPopViewInController:(UIViewController *__nonnull)controller andType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr;//带内容的弹窗
 
+- (void)showPopViewInController:(UIViewController *__nonnull)controller andType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr withTitle:(NSString *__nonnull)titleStr;//带标题和内容的弹窗
+
 - (void)closePopupWindowView;//手动b关闭弹框,一般不要去调
 @end
 

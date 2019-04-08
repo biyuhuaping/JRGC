@@ -1205,6 +1205,19 @@
 		E37086BB1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086B91D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.xib */; };
 		E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */; };
 		E37086C81D61E3030041D293 /* UCFOldUserGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */; };
+		E37210B02255A632007EC931 /* UCFAssetAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210AF2255A632007EC931 /* UCFAssetAccountViewController.m */; };
+		E37210B32255A68E007EC931 /* UCFAssetAccountViewTotalController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210B22255A68E007EC931 /* UCFAssetAccountViewTotalController.m */; };
+		E37210B62255A6BE007EC931 /* UCFAssetAccountViewEarningsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210B52255A6BE007EC931 /* UCFAssetAccountViewEarningsController.m */; };
+		E37210B92255B00F007EC931 /* UCFAccountCenterAssetsOverViewApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210B82255B00F007EC931 /* UCFAccountCenterAssetsOverViewApi.m */; };
+		E37210BC2255B02C007EC931 /* UCFAccountCenterAlreadyProfitApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210BB2255B02C007EC931 /* UCFAccountCenterAlreadyProfitApi.m */; };
+		E37210BF2255B0A0007EC931 /* UCFAccountCenterAlreadyProfitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210BE2255B0A0007EC931 /* UCFAccountCenterAlreadyProfitModel.m */; };
+		E37210C22255B0B1007EC931 /* UCFAccountCenterAssetsOverViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210C12255B0B1007EC931 /* UCFAccountCenterAssetsOverViewModel.m */; };
+		E37210C82255BD1D007EC931 /* UCFAssetAccountViewTotalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210C72255BD1D007EC931 /* UCFAssetAccountViewTotalHeaderView.m */; };
+		E37210CE2255F455007EC931 /* PieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210CA2255F455007EC931 /* PieModel.m */; };
+		E37210CF2255F455007EC931 /* PieView.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210CD2255F455007EC931 /* PieView.m */; };
+		E37210D22256024C007EC931 /* UCFAssetAccountViewTotalHeaderAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210D12256024C007EC931 /* UCFAssetAccountViewTotalHeaderAccountView.m */; };
+		E37210D522560DAF007EC931 /* UCFAssetAccountViewTotalListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210D422560DAF007EC931 /* UCFAssetAccountViewTotalListView.m */; };
+		E37210D82256102B007EC931 /* UCFAssetAccountViewTotalTitleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E37210D72256102B007EC931 /* UCFAssetAccountViewTotalTitleListView.m */; };
 		E3951B5121F95F5300D7E999 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = E3951B4F21F95F5300D7E999 /* Timer.m */; };
 		E3951B5421F9993A00D7E999 /* UCFRegisterInputPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3951B5321F9993A00D7E999 /* UCFRegisterInputPassWordViewController.m */; };
 		E3951B5721F9BCFD00D7E999 /* UCFNewLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3951B5621F9BCFD00D7E999 /* UCFNewLoginViewController.m */; };
@@ -3445,6 +3458,32 @@
 		E37086C11D61E3030041D293 /* UCFOldUserGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOldUserGuideViewController.h; sourceTree = "<group>"; };
 		E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOldUserGuideViewController.m; sourceTree = "<group>"; };
 		E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFOldUserGuideViewController.xib; sourceTree = "<group>"; };
+		E37210AE2255A632007EC931 /* UCFAssetAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetAccountViewController.h; sourceTree = "<group>"; };
+		E37210AF2255A632007EC931 /* UCFAssetAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetAccountViewController.m; sourceTree = "<group>"; };
+		E37210B12255A68E007EC931 /* UCFAssetAccountViewTotalController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetAccountViewTotalController.h; sourceTree = "<group>"; };
+		E37210B22255A68E007EC931 /* UCFAssetAccountViewTotalController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetAccountViewTotalController.m; sourceTree = "<group>"; };
+		E37210B42255A6BE007EC931 /* UCFAssetAccountViewEarningsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetAccountViewEarningsController.h; sourceTree = "<group>"; };
+		E37210B52255A6BE007EC931 /* UCFAssetAccountViewEarningsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetAccountViewEarningsController.m; sourceTree = "<group>"; };
+		E37210B72255B00F007EC931 /* UCFAccountCenterAssetsOverViewApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAccountCenterAssetsOverViewApi.h; sourceTree = "<group>"; };
+		E37210B82255B00F007EC931 /* UCFAccountCenterAssetsOverViewApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAccountCenterAssetsOverViewApi.m; sourceTree = "<group>"; };
+		E37210BA2255B02C007EC931 /* UCFAccountCenterAlreadyProfitApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAccountCenterAlreadyProfitApi.h; sourceTree = "<group>"; };
+		E37210BB2255B02C007EC931 /* UCFAccountCenterAlreadyProfitApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAccountCenterAlreadyProfitApi.m; sourceTree = "<group>"; };
+		E37210BD2255B0A0007EC931 /* UCFAccountCenterAlreadyProfitModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAccountCenterAlreadyProfitModel.h; sourceTree = "<group>"; };
+		E37210BE2255B0A0007EC931 /* UCFAccountCenterAlreadyProfitModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAccountCenterAlreadyProfitModel.m; sourceTree = "<group>"; };
+		E37210C02255B0B1007EC931 /* UCFAccountCenterAssetsOverViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAccountCenterAssetsOverViewModel.h; sourceTree = "<group>"; };
+		E37210C12255B0B1007EC931 /* UCFAccountCenterAssetsOverViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAccountCenterAssetsOverViewModel.m; sourceTree = "<group>"; };
+		E37210C62255BD1D007EC931 /* UCFAssetAccountViewTotalHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetAccountViewTotalHeaderView.h; sourceTree = "<group>"; };
+		E37210C72255BD1D007EC931 /* UCFAssetAccountViewTotalHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetAccountViewTotalHeaderView.m; sourceTree = "<group>"; };
+		E37210CA2255F455007EC931 /* PieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieModel.m; sourceTree = "<group>"; };
+		E37210CB2255F455007EC931 /* PieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieView.h; sourceTree = "<group>"; };
+		E37210CC2255F455007EC931 /* PieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieModel.h; sourceTree = "<group>"; };
+		E37210CD2255F455007EC931 /* PieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieView.m; sourceTree = "<group>"; };
+		E37210D02256024C007EC931 /* UCFAssetAccountViewTotalHeaderAccountView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetAccountViewTotalHeaderAccountView.h; sourceTree = "<group>"; };
+		E37210D12256024C007EC931 /* UCFAssetAccountViewTotalHeaderAccountView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetAccountViewTotalHeaderAccountView.m; sourceTree = "<group>"; };
+		E37210D322560DAF007EC931 /* UCFAssetAccountViewTotalListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetAccountViewTotalListView.h; sourceTree = "<group>"; };
+		E37210D422560DAF007EC931 /* UCFAssetAccountViewTotalListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetAccountViewTotalListView.m; sourceTree = "<group>"; };
+		E37210D62256102B007EC931 /* UCFAssetAccountViewTotalTitleListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetAccountViewTotalTitleListView.h; sourceTree = "<group>"; };
+		E37210D72256102B007EC931 /* UCFAssetAccountViewTotalTitleListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetAccountViewTotalTitleListView.m; sourceTree = "<group>"; };
 		E38039641DE5682100C031FF /* JRGC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JRGC-Bridging-Header.h"; sourceTree = "<group>"; };
 		E3951B4F21F95F5300D7E999 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
 		E3951B5021F95F5300D7E999 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
@@ -8926,6 +8965,77 @@
 			path = olduserguide;
 			sourceTree = "<group>";
 		};
+		E37210A92255A5DE007EC931 /* AssetAccount(资产账户) */ = {
+			isa = PBXGroup;
+			children = (
+				E3AE9570225B37760023871D /* CapitalFlow(资金流水) */,
+				E3AE956F225B36FC0023871D /* home */,
+			);
+			path = "AssetAccount(资产账户)";
+			sourceTree = "<group>";
+		};
+		E37210AA2255A5DE007EC931 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E37210AE2255A632007EC931 /* UCFAssetAccountViewController.h */,
+				E37210AF2255A632007EC931 /* UCFAssetAccountViewController.m */,
+				E37210B12255A68E007EC931 /* UCFAssetAccountViewTotalController.h */,
+				E37210B22255A68E007EC931 /* UCFAssetAccountViewTotalController.m */,
+				E37210B42255A6BE007EC931 /* UCFAssetAccountViewEarningsController.h */,
+				E37210B52255A6BE007EC931 /* UCFAssetAccountViewEarningsController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E37210AB2255A5DE007EC931 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E37210BD2255B0A0007EC931 /* UCFAccountCenterAlreadyProfitModel.h */,
+				E37210BE2255B0A0007EC931 /* UCFAccountCenterAlreadyProfitModel.m */,
+				E37210C02255B0B1007EC931 /* UCFAccountCenterAssetsOverViewModel.h */,
+				E37210C12255B0B1007EC931 /* UCFAccountCenterAssetsOverViewModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E37210AC2255A5DE007EC931 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E37210C92255F455007EC931 /* PieView(饼图) */,
+				E37210C62255BD1D007EC931 /* UCFAssetAccountViewTotalHeaderView.h */,
+				E37210C72255BD1D007EC931 /* UCFAssetAccountViewTotalHeaderView.m */,
+				E37210D02256024C007EC931 /* UCFAssetAccountViewTotalHeaderAccountView.h */,
+				E37210D12256024C007EC931 /* UCFAssetAccountViewTotalHeaderAccountView.m */,
+				E37210D322560DAF007EC931 /* UCFAssetAccountViewTotalListView.h */,
+				E37210D422560DAF007EC931 /* UCFAssetAccountViewTotalListView.m */,
+				E37210D62256102B007EC931 /* UCFAssetAccountViewTotalTitleListView.h */,
+				E37210D72256102B007EC931 /* UCFAssetAccountViewTotalTitleListView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E37210AD2255A5DE007EC931 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				E37210B72255B00F007EC931 /* UCFAccountCenterAssetsOverViewApi.h */,
+				E37210B82255B00F007EC931 /* UCFAccountCenterAssetsOverViewApi.m */,
+				E37210BA2255B02C007EC931 /* UCFAccountCenterAlreadyProfitApi.h */,
+				E37210BB2255B02C007EC931 /* UCFAccountCenterAlreadyProfitApi.m */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		E37210C92255F455007EC931 /* PieView(饼图) */ = {
+			isa = PBXGroup;
+			children = (
+				E37210CA2255F455007EC931 /* PieModel.m */,
+				E37210CB2255F455007EC931 /* PieView.h */,
+				E37210CC2255F455007EC931 /* PieModel.h */,
+				E37210CD2255F455007EC931 /* PieView.m */,
+			);
+			path = "PieView(饼图)";
+			sourceTree = "<group>";
+		};
 		E3951B4E21F95F5300D7E999 /* timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -9061,6 +9171,56 @@
 			path = workpoints;
 			sourceTree = "<group>";
 		};
+		E3AE956F225B36FC0023871D /* home */ = {
+			isa = PBXGroup;
+			children = (
+				E37210AD2255A5DE007EC931 /* Api */,
+				E37210AC2255A5DE007EC931 /* View */,
+				E37210AB2255A5DE007EC931 /* Model */,
+				E37210AA2255A5DE007EC931 /* Controller */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		E3AE9570225B37760023871D /* CapitalFlow(资金流水) */ = {
+			isa = PBXGroup;
+			children = (
+				E3AE9571225B37760023871D /* Controller */,
+				E3AE9572225B37760023871D /* Model */,
+				E3AE9573225B37760023871D /* View */,
+				E3AE9574225B37760023871D /* Api */,
+			);
+			path = "CapitalFlow(资金流水)";
+			sourceTree = "<group>";
+		};
+		E3AE9571225B37760023871D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E3AE9572225B37760023871D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E3AE9573225B37760023871D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E3AE9574225B37760023871D /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		E3AF0766221BFDC0005CC653 /* UCFMineIdentityCertification(身份认证界面) */ = {
 			isa = PBXGroup;
 			children = (
@@ -9111,6 +9271,7 @@
 		E3B76E6D21EC6E89009C9021 /* Mine(模块) */ = {
 			isa = PBXGroup;
 			children = (
+				E37210A92255A5DE007EC931 /* AssetAccount(资产账户) */,
 				E30429B3224E3D3F005015E5 /* BindPhoneNum(修改绑定手机号) */,
 				E30429AB224E2E1F005015E5 /* ModifyPassword(修改登录密码) */,
 				334DE85F2240E9280043A864 /* HighQualityLoan(优质债权) */,
@@ -10347,9 +10508,11 @@
 				A830DE841F8DDAF1003855B9 /* UCFCalendarModularDetailHeaderView.xib in Sources */,
 				334DDF47224389D90096EED4 /* UCFMyBtachBidRoot.m in Sources */,
 				E34B5E99222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m in Sources */,
+				E37210BC2255B02C007EC931 /* UCFAccountCenterAlreadyProfitApi.m in Sources */,
 				E3145440224373CD00E883E3 /* UCFWJSetAndRestHsPwdModel.m in Sources */,
 				A830DE831F8DDA6A003855B9 /* UCFCalendarModularHeaderView.xib in Sources */,
 				74877CC81FB2AB8900F32428 /* UCFHandingInViewController.m in Sources */,
+				E37210B32255A68E007EC931 /* UCFAssetAccountViewTotalController.m in Sources */,
 				A8FF32E41F1666D000066A80 /* UCFGoldBidSuccessViewController.m in Sources */,
 				742D50F21F75146900951AE2 /* UCFUserBenefitModel.m in Sources */,
 				83FCCA6B1F1711A6002921C5 /* UCFMyGoldInvestInfoViewController.m in Sources */,
@@ -10455,6 +10618,7 @@
 				E352FD7021E4AF2600617AB7 /* ModelTransition.m in Sources */,
 				83AB49691F6A772400C4231F /* UCFTotalRevenuePieChartViewController.m in Sources */,
 				FBB6858B1AE4A76800F222B6 /* UIView+MJExtension.m in Sources */,
+				E37210BF2255B0A0007EC931 /* UCFAccountCenterAlreadyProfitModel.m in Sources */,
 				74270C9B1EC58F6800F9419B /* UCFHomeViewController.m in Sources */,
 				FB1E7F831D8E4230009CBE2C /* UCFProjectDetailViewController.m in Sources */,
 				7BCE01FD1AC8FC260084C15C /* ASINSStringAdditions.m in Sources */,
@@ -10527,6 +10691,7 @@
 				FBB685881AE4A76800F222B6 /* MJRefreshLegendHeader.m in Sources */,
 				E3DE741C224B323700211A9F /* NSSet+HYBUnicodeReadable.m in Sources */,
 				74270C9F1EC58F6800F9419B /* UCFHomeListHeaderSectionView.m in Sources */,
+				E37210D522560DAF007EC931 /* UCFAssetAccountViewTotalListView.m in Sources */,
 				4A231C541BE9B18400228C88 /* UITabBar+TabBarBadge.m in Sources */,
 				334B9E75223A573300E278D8 /* UCFCollectionBidListViewController.m in Sources */,
 				74270D361EC595FA00F9419B /* UCFMyRebateViewCtrl.m in Sources */,
@@ -10727,6 +10892,7 @@
 				74270C931EC58F6800F9419B /* UCFHomeListGroup.m in Sources */,
 				74B98C901F70C2C100CB6A9F /* UCFMineViewController.m in Sources */,
 				E352FD4421E4AF0B00617AB7 /* HUDManager.m in Sources */,
+				E37210D82256102B007EC931 /* UCFAssetAccountViewTotalTitleListView.m in Sources */,
 				E311A6631D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m in Sources */,
 				334790C921E83DB9005131A5 /* UIButton+Gradient.m in Sources */,
 				FBB685851AE4A76800F222B6 /* MJRefreshGifHeader.m in Sources */,
@@ -10734,6 +10900,7 @@
 				7BCE01F51AC8FC260084C15C /* ASIAuthenticationDialog.m in Sources */,
 				A851F3531F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m in Sources */,
 				E352FD4921E4AF0B00617AB7 /* UCFCouponPopupCell.m in Sources */,
+				E37210D22256024C007EC931 /* UCFAssetAccountViewTotalHeaderAccountView.m in Sources */,
 				E309F64A2248AC2D00FFE9B9 /* UCFRequestSucceedDetection.m in Sources */,
 				74B98C9A1F70FF5F00CB6A9F /* UCFMineCell.m in Sources */,
 				833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */,
@@ -10886,6 +11053,7 @@
 				25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */,
 				E352FD4521E4AF0B00617AB7 /* PageControlView.m in Sources */,
 				8346B26C1F70F2B400219D41 /* UCFRechargeOrCashViewController.m in Sources */,
+				E37210B02255A632007EC931 /* UCFAssetAccountViewController.m in Sources */,
 				83FCCA751F1745A2002921C5 /* UCFGoldInvestmentDetailViewController.m in Sources */,
 				E352FD5F21E4AF0B00617AB7 /* BaseTableView.m in Sources */,
 				74ED020D1FDAA80900CAFED3 /* UCFProfitCalculateResult.m in Sources */,
@@ -10962,6 +11130,7 @@
 				7BA6E4BD1AD6731900FE8C37 /* SDWebImageDownloader.m in Sources */,
 				7BDD8FC81AE0DD67007A5CE8 /* MDRadialProgressTheme.m in Sources */,
 				25F445C31D66E276006813BB /* UCFChoseBankViewController.m in Sources */,
+				E37210C82255BD1D007EC931 /* UCFAssetAccountViewTotalHeaderView.m in Sources */,
 				748D77A41ADE6D5A00910FF7 /* UCFSettingArrowItem.m in Sources */,
 				748A3D081AF219BD00D7FAF1 /* FundsDetailGroup.m in Sources */,
 				74E140491F1C575200B17A96 /* UCFGoldCashHistoryController.m in Sources */,
@@ -11085,6 +11254,7 @@
 				FBB685861AE4A76800F222B6 /* MJRefreshHeader.m in Sources */,
 				84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */,
 				74D9B8541FD793650076F733 /* KTUpDownAnimationController.m in Sources */,
+				E37210CE2255F455007EC931 /* PieModel.m in Sources */,
 				331089D621E74EB80073F71B /* SDCollectionViewCell.m in Sources */,
 				334790C521E82F28005131A5 /* UCFHomeViewModel.m in Sources */,
 				334DE8662240EA0F0043A864 /* UCFNewAiLoanViewController.m in Sources */,
@@ -11164,6 +11334,7 @@
 				E3951B5121F95F5300D7E999 /* Timer.m in Sources */,
 				74931A301B1326FE00143424 /* NSTextCheckingResult+ExtendedURL.m in Sources */,
 				74270C921EC58F6800F9419B /* UCFHomeListCellModel.m in Sources */,
+				E37210CF2255F455007EC931 /* PieView.m in Sources */,
 				7BC7C0B81ADCEDB6003799B0 /* JSONKit.m in Sources */,
 				74BDA9861F09F6C60054403F /* FSCalendarAppearance.m in Sources */,
 				74E535ED1AE5FD6400DAABFC /* UCFAboutUsViewController.m in Sources */,
@@ -11181,6 +11352,7 @@
 				333B5DD3222E1BC200B9D11A /* UCFNewCashParentViewController.m in Sources */,
 				4AEA750A1B03764D00B03A46 /* UCFPurchaseTranBidViewController.m in Sources */,
 				4A14F68A1BA94A84002BD5DF /* LockFlagSingle.m in Sources */,
+				E37210B62255A6BE007EC931 /* UCFAssetAccountViewEarningsController.m in Sources */,
 				8335BF081FF5E39C00E62833 /* UCFGoldRewardTableViewCell.m in Sources */,
 				E32D6970222E578700803CE5 /* UCFMicroBankIdentifysendCodeInfoAPI.m in Sources */,
 				744A5FAA1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m in Sources */,
@@ -11215,6 +11387,7 @@
 				7BC8AA201AD4C74200BF4660 /* UCFNormalBid.m in Sources */,
 				7BCE01F81AC8FC260084C15C /* ASIDownloadCache.m in Sources */,
 				74BDA98D1F09F6C60054403F /* FSCalendarDelegationProxy.m in Sources */,
+				E37210B92255B00F007EC931 /* UCFAccountCenterAssetsOverViewApi.m in Sources */,
 				334DDF4A22438B4A0096EED4 /* UCFMyBatchInvestDetailRequest.m in Sources */,
 				E32D697F222E599A00803CE5 /* UCFMicroBankIdentifysendCodeInfoModel.m in Sources */,
 				E36BD5D92229310000ED32E3 /* UCFMicroBankOpenAccountOptionView.m in Sources */,
@@ -11289,6 +11462,7 @@
 				83F669F61FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.m in Sources */,
 				74677C661F165022003768EB /* UCFGoldRechargeViewController.m in Sources */,
 				E3AF076D221BFDF7005CC653 /* UCFMineIdentityCertificationViewController.m in Sources */,
+				E37210C22255B0B1007EC931 /* UCFAccountCenterAssetsOverViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

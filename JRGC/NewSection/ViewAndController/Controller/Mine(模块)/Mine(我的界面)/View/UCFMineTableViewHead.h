@@ -16,6 +16,8 @@ typedef void(^tableHeadCallBack) (UIButton *btn);//1
 
 @interface UCFMineTableViewHead : BaseView
 
+@property (nonatomic, strong) MyRelativeLayout *userMesageLayout;// 用户信息
+
 @property (nonatomic,copy) tableHeadCallBack callBack;//2
 
 - (void)showMyReceipt:(UCFMineMyReceiptModel *__nonnull)myModel;

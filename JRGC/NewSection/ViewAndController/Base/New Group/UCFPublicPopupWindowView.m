@@ -13,10 +13,36 @@
 ({\
     PGScreenWidth < 375? width -10 : width;\
 })
+//一个按钮的高度
+#define ContentButtonHeight 170
+//两个按钮的高度
+#define ContentBothButtonHeight 203
 static NSString *TextTitleHint = @"提示";
+static NSString *TextButtonTitleEnter = @"确定";
+static NSString *TextButtonTitleLogin = @"去登录";
+static NSString *TextButtonTitleLoginAgain = @"重新输入";
 static NSString *TextButtonOpenAccount = @"立即开户";
+static NSString *TextButtonSettingPassWordEnter = @"继续设置";
+static NSString *TextButtonRegisterEnter = @"继续注册";
+static NSString *TextButtonDontCancel = @"我不要了";
+static NSString *TextButtonRiskEnter = @"风险评测";
+static NSString *TextButtonMomentCancel = @"一会再说";
+static NSString *TextButtonIKnowEnter = @"知道了";
+static NSString *TextButtonStartEnter = @"开启";
+static NSString *TextButtonCancelEnter = @"取消";
+
 static NSString *TextOpenAccountHint = @"您尚未开通\n徽商银行微金存管账户";
-//static NSString *TextopenAccountFailure = @"您尚未开通\n徽商银行微金存管账户";
+static NSString *TextOpenAccountPassWordHint = @"未设置微金交易密码不能\n投标、提现、充值";
+static NSString *TextOpenAccountRiskHint = @"出借前需完成风险测评";
+static NSString *TextRegisterRenounceTitle = @"完成注册奖励";
+static NSString *TextRegisterRenounceContent = @"200元优惠券";
+static NSString *TextRegisterSucceedRenounceContent = @"未开通微金徽商存管不能\n投标、提现、充值";
+static NSString *TextLoginSucceedGestureContent = @"手势密码设置成功！";
+static NSString *TextLoginSucceedFaceIDContent = @"是否启用Face ID面容解锁";
+static NSString *TextLoginSucceedTouchIDContent = @"是否启用Touch ID指纹解锁";
+static NSString *TextLoginSucceedVerifyTouchIDTitle = @"金融工场”的触控ID";
+static NSString *TextLoginSucceedVerifyTouchIDContent = @"通过home键验证已有手机指纹";
+
 
 @interface UCFPublicPopupWindowView ()
 
@@ -32,15 +58,28 @@ static NSString *TextOpenAccountHint = @"您尚未开通\n徽商银行微金存�
 
 @property (nonatomic, copy)   NSString  *contentStr;
 
+@property (nonatomic, copy)   NSString  *titleStr;
+
+
+@property (nonatomic, assign) CGFloat *contentHeight;
+
 @end
 @implementation UCFPublicPopupWindowView
-
+- (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr withTitle:(NSString *__nonnull)titleStr
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        [self loadPopViewWithType:type withContent:contentStr withTitle:titleStr];
+    }
+    return self;
+}
 - (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr
 {
     self = [super initWithFrame:frame];
     if (self) {
        
-        [self loadPopViewWithType:type withContent:contentStr];
+        [self loadPopViewWithType:type withContent:contentStr withTitle:nil];
     }
     return self;
 }
@@ -48,36 +87,97 @@ static NSString *TextOpenAccountHint = @"您尚未开通\n徽商银行微金存�
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self loadPopViewWithType:type withContent:nil];
+        [self loadPopViewWithType:type withContent:nil withTitle:nil];
     }
     return self;
 }
-- (void)loadPopViewWithType:(POPWINDOWS)type withContent:(NSString *)contentStr
+- (void)loadPopViewWithType:(POPWINDOWS)type withContent:(NSString *)contentStr withTitle:(NSString *__nonnull)titleStr
 {
     //        self.userInteractionEnabled = NO;
     //        self.rootLayout.userInteractionEnabled = NO;
     self.type = type;
-    if (!contentStr && contentStr.length >0 && [contentStr isKindOfClass:[NSString class]]) {
+    if (contentStr && contentStr.length >0 && [contentStr isKindOfClass:[NSString class]]) {
         self.contentStr = contentStr;
     }
+    else
+    {
+        self.contentStr = @"";
+    }
+    if (titleStr && titleStr.length >0 && [titleStr isKindOfClass:[NSString class]]) {
+        self.titleStr = titleStr;
+    }
+    else
+    {
+        self.titleStr = @"";
+    }
+    
+    [self.rootLayout addSubview:self.bkLayout];
     self.rootLayout.backgroundColor = [UIColor clearColor];
     self.backgroundColor = [UIColor clearColor];
-    self.rootLayout.userInteractionEnabled = NO;
-    [self.rootLayout addSubview:self.bkLayout];
+//    self.rootLayout.userInteractionEnabled = NO;
+//    self.bkLayout.userInteractionEnabled = NO;
     
-    //         [self.bkLayout addSubview:self.cancelButton];
     if (type == POPOpenAccountWindow)
     {
         [self addPOPOpenAccountWindow];
     }
-    else if (type == POPRegisterVerifyPhoneNum){
-        
+    else if (type == POPMessageWindow)
+    {
+        [self addPOPMessageWindow];
+    }
+    else if (type == POPRegisterVerifyPhoneNum)
+    {
+        [self addPOPRegisterVerifyPhoneNum];
+    }
+    else if (type == POPRegisterRenounce)
+    {
+        [self addPOPRegisterRenounce];
+    }
+    else if (type == POPRegisterSucceedRenounce)
+    {
+        [self addPOPRegisterSucceedRenounce];
+    }
+    else if (type == POPLoginVerifyPhoneNum)
+    {
+        [self addPOPLoginVerifyPhoneNum];
+    }
+    else if (type == POPOpenAccountRenounce)
+    {
+        [self addPOPOpenAccountRenounce];
+    }
+    else if (type == POPOpenAccountPassWordRenounce)
+    {
+        [self addPOPOpenAccountPassWordRenounce];
+    }
+    else if (type == POPOpenAccountRiskRenounce)
+    {
+        [self addPOPOpenAccountRiskRenounce];
+    }
+    else if (type == POPMessageIKnowWindow)
+    {
+        [self addPOPMessageIKnowWindow];
+    }
+    else if (type == POPLoginSucceedTouchID)
+    {
+        [self addPOPLoginSucceedTouchID];
+    }
+    else if (type == POPLoginSucceedFaceID)
+    {
+        [self addPOPLoginSucceedFaceID];
+    }
+    else if (type == POPLoginSucceedVerifyTouchID)
+    {
+        [self addPOPLoginSucceedVerifyTouchID];
+    }
+    else if (type == POPMessageIKnowWindowButton)
+    {
+        [self addPOPMessageIKnowWindowButton];
     }
 }
 #pragma mark - add Gesture
 - (void)addSingleGesture
 {
-    self.rootLayout.userInteractionEnabled = YES;
+//    self.rootLayout.userInteractionEnabled = YES;
     //单指单击
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     singleTap.enabled = YES;
@@ -122,16 +222,11 @@ static NSString *TextOpenAccountHint = @"您尚未开通\n徽商银行微金存�
 {
     if (nil == _titleLabel) {
         _titleLabel = [NZLabel new];
-        // linear.widthSize.equalTo(@(screenWidth)).multiply(0.24).min(90.0f);
-        _titleLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
-        _titleLabel.myLeft= 25;
-        _titleLabel.myRight= 25;
         _titleLabel.numberOfLines = 0;
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [Color gc_Font:15.0];
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.font = [Color gc_Font:25.0];
         _titleLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _titleLabel.userInteractionEnabled = YES;
-        [_titleLabel sizeToFit];
+//        [_titleLabel sizeToFit];
     }
     return _titleLabel;
 }
@@ -140,13 +235,14 @@ static NSString *TextOpenAccountHint = @"您尚未开通\n徽商银行微金存�
 {
     if (nil == _contentLabel) {
         _contentLabel = [NZLabel new];
+        _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
         _contentLabel.numberOfLines = 0;
-        _contentLabel.textAlignment = NSTextAlignmentCenter;
-        _contentLabel.font = [Color gc_Font:15.0];
+        _contentLabel.preferredMaxLayoutWidth = getWidth(310);
+        _contentLabel.textAlignment = NSTextAlignmentLeft;
+        _contentLabel.wrapContentHeight = YES;   //高度自动计算。
         _contentLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _contentLabel.userInteractionEnabled = YES;
 //        [_contentLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"《金融工场用户服务协议》"];
-        [_contentLabel sizeToFit];
+//        [_contentLabel sizeToFit];
 //        __weak typeof(self) weakSelf = self;
 //        [_registerAgreeLabel addLinkString:@"《金融工场用户服务协议》" block:^(ZBLinkLabelModel *linkModel) {
 //            //注册协议 加载本地文件
@@ -184,14 +280,15 @@ static NSString *TextOpenAccountHint = @"您尚未开通\n徽商银行微金存�
     if(nil == _cancelButton)
     {
         _cancelButton = [UIButton buttonWithType:0];
-//        _cancelButton.topPos.equalTo(self.passWordLine.bottomPos).offset(25);
-        _cancelButton.rightPos.equalTo(@25);
-        _cancelButton.leftPos.equalTo(@25);
+        _cancelButton.topPos.equalTo(self.enterButton.bottomPos).offset(7);
+//        _cancelButton.rightPos.equalTo(self.enterButton.rightPos);
+//        _cancelButton.leftPos.equalTo(self.enterButton.leftPos);
+        _cancelButton.myLeft = 0;
+        _cancelButton.myRight = 0;
         _cancelButton.heightSize.equalTo(@40);
-        [_cancelButton setTitle:@"登录" forState:UIControlStateNormal];
         _cancelButton.titleLabel.font= [Color gc_Font:15.0];
-        [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_cancelButton setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
+        [_cancelButton setBackgroundColor:[Color color:PGColorOptionThemeWhite]];
         _cancelButton.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
             //设置圆角的半径
@@ -224,7 +321,9 @@ static NSString *TextOpenAccountHint = @"您尚未开通\n徽商银行微金存�
     self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
     self.contentLabel.myLeft= 25;
     self.contentLabel.myRight= 25;
+    self.contentLabel.font = [Color gc_Font:15.0];
     self.contentLabel.text = TextOpenAccountHint;
+    self.contentLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentLabel sizeToFit];
     
     self.enterButton.myBottom = 25;
@@ -236,24 +335,515 @@ static NSString *TextOpenAccountHint = @"您尚未开通\n徽商银行微金存�
     [self addSingleGesture];
 }
 
-- (void)addPOPRegisterVerifyPhoneNum
+- (void)addPOPMessageWindow
 {
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
     
+    self.bkLayout.myHeight = 347;
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    self.bkLayout.myWidth = getWidth(310);
+    
+    self.bkImageView.myTop = 30;
+    self.bkImageView.myWidth = 288;
+    self.bkImageView.myHeight = 184;
+    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
+    
+    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
+    self.contentLabel.myLeft= 25;
+    self.contentLabel.myRight= 25;
+    self.contentLabel.text = TextOpenAccountHint;
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.myBottom = 25;
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [_enterButton setTitle:TextButtonOpenAccount forState:UIControlStateNormal];
+    
+    [self addSingleGesture];
 } 
 
+- (void)addPOPRegisterVerifyPhoneNum
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextTitleHint;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    self.contentLabel.text = self.contentStr;
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.myBottom = 25;
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonTitleLogin forState:UIControlStateNormal];
+    
+    [self addSingleGesture];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentButtonHeight;
+}
+
+- (void)addPOPRegisterRenounce
+{
+    [self.bkLayout addSubview:self.bkImageView];
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    self.bkLayout.myHeight = 393;
+    
+    self.bkImageView.myTop = 0;
+    self.bkImageView.widthSize.equalTo(self.bkLayout.widthSize);
+    self.bkImageView.myHeight = 188;
+    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
+
+    self.titleLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(16);
+    self.titleLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.titleLabel.text = TextRegisterRenounceTitle;
+    self.titleLabel.font = [Color gc_Font:18.0];
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(8);
+    self.contentLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.contentLabel.text = TextRegisterRenounceContent;
+    self.contentLabel.font = [Color gc_Font:29.0];
+    self.contentLabel.textAlignment = NSTextAlignmentCenter;
+    self.contentLabel.textColor = [Color color:PGColorOptionTitlerRead];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(14);
+    self.enterButton.rightPos.equalTo(@20);
+    self.enterButton.leftPos.equalTo(@20);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonRegisterEnter forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonDontCancel forState:UIControlStateNormal];
+    
+    UIView *leftLineView = [UIView new];
+    leftLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    leftLineView.myHeight = 1;
+    leftLineView.myLeft = 47;
+    leftLineView.rightPos.equalTo(self.titleLabel.leftPos).offset(5);
+    leftLineView.centerYPos.equalTo(self.titleLabel.centerYPos);
+    [self.bkLayout addSubview:leftLineView];
+    
+    UIView *rightLineView = [UIView new];
+    rightLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    rightLineView.myHeight = 1;
+    rightLineView.myRight = 47;
+    rightLineView.leftPos.equalTo(self.titleLabel.rightPos).offset(5);
+    rightLineView.centerYPos.equalTo(self.titleLabel.centerYPos);
+    [self.bkLayout addSubview:rightLineView];
+//    [self addSingleGesture];
+}
+
+- (void)addPOPRegisterSucceedRenounce
+{
+    [self.bkLayout addSubview:self.bkImageView];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    self.bkLayout.myHeight = 382;
+    
+    self.bkImageView.myTop = 30;
+    self.bkImageView.myWidth = 288;
+    self.bkImageView.myHeight = 184;
+    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
+    
+    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
+    self.contentLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.contentLabel.text = TextRegisterSucceedRenounceContent;
+    self.contentLabel.font = [Color gc_Font:15.0];
+    self.contentLabel.textAlignment = NSTextAlignmentCenter;
+    self.contentLabel.textColor = [Color color:PGColorOpttonPopcContentTextColor];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(15);
+    self.enterButton.rightPos.equalTo(@20);
+    self.enterButton.leftPos.equalTo(@20);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonRegisterEnter forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonDontCancel forState:UIControlStateNormal];
+    //    [self addSingleGesture];
+}
+
+- (void)addPOPLoginVerifyPhoneNum
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+     [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextTitleHint;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(22);
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonTitleLoginAgain forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonTitleLogin forState:UIControlStateNormal];
+    
+    [self addSingleGesture];
+    ;
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentBothButtonHeight;
+//    self.contentLabel.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2];
+}
+
+- (void)addPOPOpenAccountRenounce
+{
+    [self.bkLayout addSubview:self.bkImageView];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    self.bkLayout.myHeight = 382;
+    
+    self.bkImageView.myTop = 30;
+    self.bkImageView.myWidth = 288;
+    self.bkImageView.myHeight = 184;
+    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
+    
+    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
+    self.contentLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.contentLabel.text = TextRegisterSucceedRenounceContent;
+    self.contentLabel.font = [Color gc_Font:15.0];
+    self.contentLabel.textAlignment = NSTextAlignmentCenter;
+    self.contentLabel.textColor = [Color color:PGColorOptionTitleBlack];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(15);
+    self.enterButton.rightPos.equalTo(@20);
+    self.enterButton.leftPos.equalTo(@20);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonRegisterEnter forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonDontCancel forState:UIControlStateNormal];
+    //    [self addSingleGesture];
+}
+
+- (void)addPOPOpenAccountPassWordRenounce
+{
+    [self.bkLayout addSubview:self.bkImageView];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    self.bkLayout.myHeight = 382;
+    
+    self.bkImageView.myTop = 30;
+    self.bkImageView.myWidth = 288;
+    self.bkImageView.myHeight = 184;
+    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.bkImageView.image = [UIImage imageNamed:@"set_transaction_password"];
+    
+    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
+    self.contentLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.contentLabel.text = TextOpenAccountPassWordHint;
+    self.contentLabel.font = [Color gc_Font:15.0];
+    self.contentLabel.textAlignment = NSTextAlignmentCenter;
+    self.contentLabel.textColor = [Color color:PGColorOptionTitleBlack];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(15);
+    self.enterButton.rightPos.equalTo(@20);
+    self.enterButton.leftPos.equalTo(@20);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonSettingPassWordEnter forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonDontCancel forState:UIControlStateNormal];
+    //    [self addSingleGesture];
+}
+
+- (void)addPOPOpenAccountRiskRenounce
+{
+    [self.bkLayout addSubview:self.bkImageView];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    self.bkLayout.myHeight = 375;
+    
+    self.bkImageView.myTop = 30;
+    self.bkImageView.myWidth = 288;
+    self.bkImageView.myHeight = 184;
+    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.bkImageView.image = [UIImage imageNamed:@"risk_assessment"];
+    
+    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
+    self.contentLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.contentLabel.text = TextOpenAccountRiskHint;
+    self.contentLabel.font = [Color gc_Font:15.0];
+    self.contentLabel.textAlignment = NSTextAlignmentCenter;
+    self.contentLabel.textColor = [Color color:PGColorOptionTitleBlack];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(30);
+    self.enterButton.rightPos.equalTo(@20);
+    self.enterButton.leftPos.equalTo(@20);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonRiskEnter forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonMomentCancel forState:UIControlStateNormal];
+    //    [self addSingleGesture];
+}
+
+- (void)addPOPMessageIKnowWindow
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextTitleHint;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.myBottom = 25;
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonIKnowEnter forState:UIControlStateNormal];
+    
+    [self addSingleGesture];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentButtonHeight;
+}
+
+- (void)addPOPLoginSucceedTouchID
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextLoginSucceedGestureContent;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = TextLoginSucceedTouchIDContent;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(22);
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonStartEnter forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonCancelEnter forState:UIControlStateNormal];
+    
+    [self addSingleGesture];
+    ;
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentBothButtonHeight;
+    //    self.contentLabel.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2];
+}
+
+- (void)addPOPLoginSucceedFaceID
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextLoginSucceedGestureContent;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = TextLoginSucceedFaceIDContent;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(22);
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonStartEnter forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonCancelEnter forState:UIControlStateNormal];
+    
+    [self addSingleGesture];
+    ;
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentBothButtonHeight;
+    //    self.contentLabel.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2];
+}
+
+- (void)addPOPLoginSucceedVerifyTouchID
+{
+    [self.bkLayout addSubview:self.bkImageView];
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myHeight = 207;
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.bkImageView.myTop = 30;
+    self.bkImageView.myWidth = 45;
+    self.bkImageView.myHeight = 45;
+    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.bkImageView.image = [UIImage imageNamed:@"bg_fingerprint"];
+    
+    self.titleLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(13);
+    self.titleLabel.myCenterX = 0;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.text = TextLoginSucceedVerifyTouchIDTitle;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(8);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = TextLoginSucceedVerifyTouchIDContent;
+    self.contentLabel.textAlignment = NSTextAlignmentCenter;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+
+    self.cancelButton.topPos.equalTo(self.contentLabel.bottomPos).offset(7);
+    [self.cancelButton setTitle:TextButtonCancelEnter forState:UIControlStateNormal];
+    
+//    [self addSingleGesture];
+}
 
 
+- (void)addPOPMessageIKnowWindowButton
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = self.titleStr;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.myBottom = 25;
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonIKnowEnter forState:UIControlStateNormal];
+    
+    [self addSingleGesture];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentButtonHeight;
+}
+- (CGFloat )labelHeight:(UILabel *)contentLabel withPopViewWidth:(CGFloat )popWidth
+{
+    // 设置文字属性 要和label的一致
+    NSDictionary *attrs = @{NSFontAttributeName : contentLabel.font};
+    CGSize maxSize = CGSizeMake(popWidth, MAXFLOAT);
+    // 计算文字占据的高度
+    CGSize size = [contentLabel.text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+    return size.height;
+    
+    
+//    CGSize size = CGSizeMake(popWidth, 1000000000000.0);
+//
+//   NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:contentLabel.font,NSFontAttributeName ,nil];
+//
+//   size = [contentLabel.text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
 
-
-
-
-
-
-
-
-
-
-
+}
 
 //- (void)layoutSubviews {
 //    // 确定子控件的frame（这里得到的self的frame/bounds才是准确的）

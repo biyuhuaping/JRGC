@@ -13,7 +13,6 @@
 #import "UCFMineMySimpleInfoModel.h"
 
 @interface UCFMineTableViewHead ()
-@property (nonatomic, strong) MyRelativeLayout *userMesageLayout;// 用户信息
 
 @property (nonatomic, strong) UIImageView *bkImageView;//背景图
 

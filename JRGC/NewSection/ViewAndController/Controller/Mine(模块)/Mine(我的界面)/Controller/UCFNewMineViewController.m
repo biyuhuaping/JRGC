@@ -38,6 +38,7 @@
 #import "UCFCalendarModularViewController.h"
 #import "UCFMineShopPromotionCell.h"
 #import "UCFMinePromotionCell.h"
+#import "UCFAssetAccountViewController.h"
 
 #import "BaseNavigationViewController.h"
 #import "UCFP2POrHonerAccoutViewController.h"
@@ -67,6 +68,10 @@
 
 @property (nonatomic, strong) NSMutableArray *cellConfigData;
 
+@property (nonatomic, assign) BOOL nmAccountIsShow;//黄金账户是否显示
+
+@property (nonatomic, assign) BOOL zxAccountIsShow;//尊享账户是否显示
+
 @end
 
 @implementation UCFNewMineViewController
@@ -80,12 +85,14 @@
     self.view = self.rootLayout;
     
     [self.rootLayout addSubview:self.tableView];
- 
+
     [self loadCellConfig];
     [self.tableView beginRefresh];
     [self blindUserStatue];
     
-//    [[UCFPublicPopupWindow sharedManager] showPopViewInController:nil andType:1];
+//    [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPRegisterVerifyPhoneNum withContent:@"该手机号已被注册，如需帮助请拨打客服电话。111111111111111111111111111111111111111111111111111111111111111"];
+//    [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPLoginSucceedVerifyTouchID];
+//     [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPMessageIKnowWindow withContent:@"1.返现券和返息券可在一笔出借中公用；\n 2.返现券可叠加使用; \n3.返息券只能使用一张，不可叠加。"];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -129,6 +136,8 @@
             DDLogInfo(@"text is %@",btn);
             [selfWeak headCellButtonClick:btn];
         };
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
+        [_tableHead.userMesageLayout addGestureRecognizer:tapGesturRecognizer];
     }
     return _tableHead;
 }
@@ -243,6 +252,16 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)layoutClick:(UIGestureRecognizer *)sender
+{
+//    if ([self.bc isKindOfClass:[UCFNewMineViewController class]]) {
+//        [(UCFNewMineViewController *)self.bc signInButtonClick:sender.view.tag];
+//    }
+    UCFAssetAccountViewController *vc = [[UCFAssetAccountViewController alloc] init];
+    vc.zxAccountIsShow = self.zxAccountIsShow;
+    vc.nmAccountIsShow = self.nmAccountIsShow;
+    [self.rt_navigationController pushViewController:vc animated:YES];
+}
 - (void)headCellButtonClick:(UIButton *)btn
 {
     if (btn.tag == 10001) {
@@ -507,6 +526,8 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
         UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
+        self.zxAccountIsShow = model.data.zxAccountIsShow;
+        self.nmAccountIsShow = model.data.nmAccountIsShow;
         [self.tableView endRefresh];
         //        DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
