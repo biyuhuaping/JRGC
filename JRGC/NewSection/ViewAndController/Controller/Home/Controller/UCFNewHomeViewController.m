@@ -26,6 +26,7 @@
 #import "UCFMineIntoCoinPageModel.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "NSString+Misc.h"
+#import "UCFLockHandleViewController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate,UCFNewHomeSectionViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -251,6 +252,12 @@
 #pragma mark BaseTableViewCellDelegate
 - (void)baseTableViewCell:(BaseTableViewCell *)cell buttonClick:(UIButton *)button withModel:(id)model
 {
+    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
+    lockVc.nLockViewType = LLLockViewTypeCreate;
+    lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [SingGlobalView.rootNavController pushViewController:lockVc animated:YES];
+    return;
+    
     if ([model isKindOfClass:[UCFNewHomeListPrdlist class]]) {
         [UCFBidDetailAndInvestPageLogic bidDetailAndInvestPageLogicUseDataModel:model detail:NO rootViewController:self];
     } else if ([model isKindOfClass:[NSString class]]) {

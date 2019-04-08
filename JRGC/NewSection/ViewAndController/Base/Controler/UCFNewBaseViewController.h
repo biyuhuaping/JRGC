@@ -93,7 +93,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)monitorRiskStatueChange;
 
+/**
+ 禁用返回手势
 
+ @param setNavgationPopDisabled YES 为禁用
+ */
+- (void)setSetNavgationPopDisabled:(BOOL)setNavgationPopDisabled;
 @end
 
 NS_ASSUME_NONNULL_END

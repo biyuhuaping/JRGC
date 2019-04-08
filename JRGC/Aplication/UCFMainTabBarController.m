@@ -142,12 +142,12 @@
             }
                 break;
             case 3:{
-//                UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//                mallController.url      = @"https://m.dougemall.com";//请求地址;
-//                mallController.navTitle = @"商城";
-//                controller = mallController;//
-                UIViewController *contro = [[UIViewController alloc] init];
-                controller = contro;
+                UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                mallController.url      = @"https://m.dougemall.com?fromAppBar=true";//请求地址;
+                mallController.navTitle = @"商城";
+                controller = mallController;//
+//                UIViewController *contro = [[UIViewController alloc] init];
+//                controller = contro;
             }
                 break;
             case 4:{
@@ -266,20 +266,20 @@
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
         } else {
-            [[NSURLCache sharedURLCache] removeAllCachedResponses];
-            NSURLCache * cache = [NSURLCache sharedURLCache];
-            [cache removeAllCachedResponses];
-            [cache setDiskCapacity:0];
-            [cache setMemoryCapacity:0];
-            
-            UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-            mallController.url      = @"https://m.dougemall.com";//请求地址;
-            mallController.navTitle = @"商城";
-            mallController.isFromBarMall = YES;
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mallController];
-            [self.view.window.layer addAnimation:[self presentAnimation] forKey:nil];//添加Animation
-            [self presentViewController:nav animated:NO completion:nil];
-            return NO;
+//            [[NSURLCache sharedURLCache] removeAllCachedResponses];
+//            NSURLCache * cache = [NSURLCache sharedURLCache];
+//            [cache removeAllCachedResponses];
+//            [cache setDiskCapacity:0];
+//            [cache setMemoryCapacity:0];
+//
+//            UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+//            mallController.url      = @"https://m.dougemall.com";//请求地址;
+//            mallController.navTitle = @"商城";
+//            mallController.isFromBarMall = YES;
+//            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mallController];
+//            [self.view.window.layer addAnimation:[self presentAnimation] forKey:nil];//添加Animation
+//            [self presentViewController:nav animated:NO completion:nil];
+//            return NO;
         }
         
         return YES;

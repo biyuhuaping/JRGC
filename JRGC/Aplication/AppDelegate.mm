@@ -141,12 +141,13 @@
         //统计用户数量
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
     } else {
-        NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
         [self showTabbarController];
+        NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
         //使用手势密码 显示
         if (useLockView == 1) {
             [self showGCode];
         }
+
     }
 }
 - (void)changeRootView:(GuideViewController *)controller
@@ -528,22 +529,16 @@
 #pragma mark - 弹出手势解锁密码输入框
 - (void)showLLLockViewController:(LLLockViewType)type
 {
-    if(self.window.rootViewController.presentingViewController == nil){
-        LLLog(@"root = %@", self.window.rootViewController.class);
-        LLLog(@"lockVc isBeingPresented = %d", [self.lockVc isBeingPresented]);
-        if (self.lockVc) {
-            self.lockVc = nil;
-        }
+
         self.lockVc = [[UCFLockHandleViewController alloc] init];
 
         self.lockVc.nLockViewType = type;
 
         self.lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 
-        [self.window.rootViewController presentViewController:self.lockVc animated:NO completion:^{
-        }];
+        [SingGlobalView.rootNavController pushViewController:self.lockVc animated:NO complete:nil];
         LLLog(@"创建了一个pop=%@", self.lockVc);
-    }
+    
 }
 
 #pragma mark GuideViewContlerDelegate

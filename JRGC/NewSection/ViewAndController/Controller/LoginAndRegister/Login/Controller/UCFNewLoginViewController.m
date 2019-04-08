@@ -14,7 +14,7 @@
 #import "UCFRegisterInputPhoneNumViewController.h"
 #import "UCFNewFindPassWordViewController.h"
 #import "UCFUserAllStatueRequest.h"
-
+#import "UCFLockHandleViewController.h"
 @interface UCFNewLoginViewController ()<UITextFieldDelegate,YTKChainRequestDelegate>
 
 @property (nonatomic, strong) NZLabel     *loginLabel;//注册
@@ -225,7 +225,10 @@
 
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:self.isCompany,@"isCompany",self.username,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:self.pwd];
-            [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES];
+            [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:LLLockViewTypeCreate] animated:YES complete:^(BOOL finished) {
+                [SingGlobalView.rootNavController removeViewController:self];
+            }];
+            
         }
         else{
             ShowMessage(model.message);
@@ -261,6 +264,12 @@
     
     
     
+}
+- (UCFLockHandleViewController *)cretateLockViewWithType:(LLLockViewType)type
+{
+    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] initWithType:type];
+    lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    return lockVc;
 }
 //- (void)chainRequestFinished:(YTKChainRequest *)chainRequest {
 //    // all requests are done
