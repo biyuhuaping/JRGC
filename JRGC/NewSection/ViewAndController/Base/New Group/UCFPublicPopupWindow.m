@@ -39,9 +39,15 @@
 
 - (void)showPopViewInController:(UIViewController *__nonnull)controller andType:(POPWINDOWS)type
 {
-    [self showPopViewInController:controller andType:type withContent:nil];
+    [self showPopViewInController:controller andType:type withContent:nil withTitle:nil];
 }
+
 - (void)showPopViewInController:(UIViewController *__nonnull)controller andType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr
+{
+    [self showPopViewInController:controller andType:type withContent:contentStr withTitle:nil];
+}
+
+- (void)showPopViewInController:(UIViewController *__nonnull)controller andType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr withTitle:(NSString *__nonnull)titleStr//带标题和内容的弹窗
 {
     if (self.isPopShow) {
         return;
@@ -54,7 +60,14 @@
         }
         else
         {
-            self.fir = [[UCFPublicPopupWindowView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, PGScreenHeight) withType:type withContent:contentStr];
+            
+            if (!titleStr) {
+                self.fir = [[UCFPublicPopupWindowView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, PGScreenHeight) withType:type withContent:contentStr];
+            }
+            else
+            {
+                 self.fir = [[UCFPublicPopupWindowView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, PGScreenHeight) withType:type withContent:contentStr withTitle:titleStr];
+            }
         }
         
         // use UIView Category
@@ -71,33 +84,37 @@
         }
     }
 }
+
 - (void)popClickCloseBackgroundView
 {
     [self closePopupWindowView];
 }
 - (void)enterButtonClick
 {
+    [self closePopupWindowView];
     //当代理响应sendValue方法时，把_tx.text中的值传到VCA
     if ([self.delegate respondsToSelector:@selector(popEnterClick)]) {
-        [self closePopupWindowView];
+        
         [self.delegate popEnterClick];
     }
 }
 - (void)cancelButtonClick
 {
+    [self closePopupWindowView];
     //当代理响应sendValue方法时，把_tx.text中的值传到VCA
     if ([self.delegate respondsToSelector:@selector(popCancelClick)]) {
         
-        [self closePopupWindowView];
+        
         [self.delegate popCancelClick];
     }
 }
 - (void)closeButtonClick
 {
+     [self closePopupWindowView];
     //当代理响应sendValue方法时，把_tx.text中的值传到VCA
     if ([self.delegate respondsToSelector:@selector(popCloseClick)]) {
         
-        [self closePopupWindowView];
+       
         [self.delegate popCloseClick];
     }
 }

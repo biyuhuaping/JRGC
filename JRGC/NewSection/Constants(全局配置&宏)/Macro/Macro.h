@@ -88,9 +88,27 @@ _Pragma("clang diagnostic pop")\
 #define  SingleUserInfo [UserInfoSingle sharedManager]
 #define  SingGlobalView [GlobalView sharedManager]
 
+#define PNBlue          UIColorWithRGB(0x8A9FF9)
+#define PNLightBlue     UIColorWithRGB(0x74C3FF)
+#define PNOrange        UIColorWithRGB(0xFF7D51)
+#define PNYellow        UIColorWithRGB(0xFFCA6D)
+#define PNPinkRed       UIColorWithRGB(0xFC6992)
+#define PNLightGreen    UIColorWithRGB(0x63C799)
+
 typedef NS_ENUM(NSInteger, POPWINDOWS) {
     POPOpenAccountWindow = 1, //开户弹框
-    POPRegisterVerifyPhoneNum,
-    
+    POPRegisterVerifyPhoneNum, //注册检测手机号提示
+    POPRegisterRenounce,//放弃注册提示
+    POPMessageWindow,//带提示信息的
+    POPRegisterSucceedRenounce,//注册成功,放弃开户
+    POPLoginVerifyPhoneNum,//登录检测手机号提示
+    POPOpenAccountRenounce,//放弃开户
+    POPOpenAccountPassWordRenounce,//放弃设置交易密码
+    POPOpenAccountRiskRenounce,//放弃风险评估
+    POPMessageIKnowWindow,//带提示信息的,按钮我知道了
+    POPLoginSucceedTouchID,//登录成功,是否设置指纹
+    POPLoginSucceedFaceID,//登录成功,是否设置指纹
+    POPLoginSucceedVerifyTouchID,//验证指纹
+    POPMessageIKnowWindowButton,//带提示信息titleg和cintent的,按钮我知道了
 };
 #endif /* Macro_h */

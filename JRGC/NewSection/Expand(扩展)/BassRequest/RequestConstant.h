@@ -72,7 +72,12 @@ static NSString *AccountCashWithDrawalApiURL = @"api/withdraw/v2/getWithdrawInfo
 
 static NSString *UserStatusInfoForCacheApiURL = @"api/homePage/v2/statusInfoForCache.json";//查询当前用户状态信息
 
+static NSString *AccountCenterAlreadyProfitApiURL = @"api/accountCenter/v2/alreadyProfit.json";//资产总览-已收收益
+
+static NSString *AccountCenterAssetsOverViewApiURL = @"api/accountCenter/v2/assetsOverView.json";//资产总览-总资产
+
 static NSString *GetBindingBankCardListApiURL = @"api/userAccount/v2/getBindingBankCardList.json";//我的-->>充值接口
 
 static NSString *DougeMallOrderListURL = @"https://m.dougemall.com/static/mall/order-list/index.html#all?closeView=true";//商城订单
+
 #endif /* RequestConstant_h */

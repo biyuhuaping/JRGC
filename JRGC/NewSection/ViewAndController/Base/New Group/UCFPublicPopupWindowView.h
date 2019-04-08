@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type;
 
 - (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr;
+
+- (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr withTitle:(NSString *__nonnull)titletStr;
 @end
 
 NS_ASSUME_NONNULL_END
