@@ -69,8 +69,7 @@
     // Do any additional setup after loading the view from its nib.
 
     [self setController];    //初始化当前控制器的一些属性
-//    [self addRefresh];       //添加下拉刷新
-    [self tableViewAddTouch];//去掉长按手势
+
     [self setWebView];       //初始化webView 并加入js
     [self subErrorView];     //添加404页
 

@@ -38,6 +38,10 @@
 		3307E22621A3B153009FFF6D /* QuickRechargeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22521A3B153009FFF6D /* QuickRechargeHeadView.xib */; };
 		3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */; };
 		3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */; };
+		3308E6A6225C7B4900F71B2D /* UCFNewMallWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3308E6A4225C7B4800F71B2D /* UCFNewMallWebViewController.m */; };
+		3308E6A7225C7B4900F71B2D /* UCFNewMallWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3308E6A5225C7B4800F71B2D /* UCFNewMallWebViewController.xib */; };
+		3308E6AB225C81D700F71B2D /* UCFNewSubMallWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3308E6A9225C81D700F71B2D /* UCFNewSubMallWebViewController.m */; };
+		3308E6AC225C81D700F71B2D /* UCFNewSubMallWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3308E6AA225C81D700F71B2D /* UCFNewSubMallWebViewController.xib */; };
 		331089D421E74EB80073F71B /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331089C821E74EB80073F71B /* SDCycleScrollView.m */; };
 		331089D521E74EB80073F71B /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 331089C921E74EB80073F71B /* UIView+SDExtension.m */; };
 		331089D621E74EB80073F71B /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331089CA21E74EB80073F71B /* SDCollectionViewCell.m */; };
@@ -1444,6 +1448,12 @@
 		3307E22721A3D7B6009FFF6D /* QuickIntroduceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickIntroduceTableViewCell.h; sourceTree = "<group>"; };
 		3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickIntroduceTableViewCell.m; sourceTree = "<group>"; };
 		3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickIntroduceTableViewCell.xib; sourceTree = "<group>"; };
+		3308E6A3225C7B4800F71B2D /* UCFNewMallWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewMallWebViewController.h; sourceTree = "<group>"; };
+		3308E6A4225C7B4800F71B2D /* UCFNewMallWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewMallWebViewController.m; sourceTree = "<group>"; };
+		3308E6A5225C7B4800F71B2D /* UCFNewMallWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFNewMallWebViewController.xib; sourceTree = "<group>"; };
+		3308E6A8225C81D700F71B2D /* UCFNewSubMallWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewSubMallWebViewController.h; sourceTree = "<group>"; };
+		3308E6A9225C81D700F71B2D /* UCFNewSubMallWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewSubMallWebViewController.m; sourceTree = "<group>"; };
+		3308E6AA225C81D700F71B2D /* UCFNewSubMallWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFNewSubMallWebViewController.xib; sourceTree = "<group>"; };
 		331089C521E74EB80073F71B /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		331089C621E74EB80073F71B /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
 		331089C721E74EB80073F71B /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
@@ -9396,6 +9406,12 @@
 				4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */,
 				4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */,
 				4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */,
+				3308E6A3225C7B4800F71B2D /* UCFNewMallWebViewController.h */,
+				3308E6A4225C7B4800F71B2D /* UCFNewMallWebViewController.m */,
+				3308E6A5225C7B4800F71B2D /* UCFNewMallWebViewController.xib */,
+				3308E6A8225C81D700F71B2D /* UCFNewSubMallWebViewController.h */,
+				3308E6A9225C81D700F71B2D /* UCFNewSubMallWebViewController.m */,
+				3308E6AA225C81D700F71B2D /* UCFNewSubMallWebViewController.xib */,
 			);
 			path = UCFWebView;
 			sourceTree = "<group>";
@@ -10218,6 +10234,7 @@
 				83974FDA1F14AC4300C2252F /* UCFGoldPurchaseViewController.xib in Resources */,
 				E311A6761D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib in Resources */,
 				FB3A80221CC612B8004B56C3 /* UCFCouponReturn.xib in Resources */,
+				3308E6A7225C7B4900F71B2D /* UCFNewMallWebViewController.xib in Resources */,
 				7443C7381F1F3E64009669C0 /* UCFGoldRechargeRecordCell.xib in Resources */,
 				8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */,
 				7436F2D41F3C2EC6003B77CA /* UCFGoldRechargeFourthCell.xib in Resources */,
@@ -10234,6 +10251,7 @@
 				A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */,
 				83CD84291F13A50800227704 /* UCFBatchBidController.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
+				3308E6AC225C81D700F71B2D /* UCFNewSubMallWebViewController.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A2484B921A3AD85001B0703 /* UCFTransRechargeViewController.xib in Resources */,
 				744A5FAB1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib in Resources */,
@@ -11008,6 +11026,7 @@
 				E34B5E8A22253C080027718C /* UCFMicroBankUserAccountInfoAPI.m in Sources */,
 				749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */,
 				74673BC01FEB8C1400AF3727 /* UCFMineFuncView.m in Sources */,
+				3308E6A6225C7B4900F71B2D /* UCFNewMallWebViewController.m in Sources */,
 				E31BD53A21C0C10100D3651F /* TYShowAlertView.m in Sources */,
 				E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */,
 				E352FD5821E4AF0B00617AB7 /* UCFFundsInvestButton.m in Sources */,
@@ -11358,6 +11377,7 @@
 				744A5FAA1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m in Sources */,
 				FB82B8CB1DD96A8E0080C099 /* UCFCouponAuxiliaryVC.m in Sources */,
 				E3DE741B224B323700211A9F /* NSDictionary+HYBUnicodeReadable.m in Sources */,
+				3308E6AB225C81D700F71B2D /* UCFNewSubMallWebViewController.m in Sources */,
 				2526ADDC1DD08CB800114D9A /* UIView+FrameChange.m in Sources */,
 				E3355421223F8E97001FADEA /* UCFRechargeAndWithdrawalViewController.m in Sources */,
 				7BC8AA241AD4C74200BF4660 /* UCFTransterBidHeadDetail.m in Sources */,

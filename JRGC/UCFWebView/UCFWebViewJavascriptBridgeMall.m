@@ -191,11 +191,9 @@
 - (void)refreshBackBtnClicked:(id)sender fatherView:(UIView *)fhView
 {
     [self dismissViewControllerAnimated:YES completion:^{
-//        if(self.isTabbarfrom){
-//            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//            [app.tabBarController  setSelectedViewController:self.rootVc];
-//        }
+
     }];
 
 }
+
 @end
