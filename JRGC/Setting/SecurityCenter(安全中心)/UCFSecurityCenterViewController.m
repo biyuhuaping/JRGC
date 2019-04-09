@@ -101,15 +101,9 @@
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"gesture_account_icon" title:@"启用手势密码"];
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"password_account_icon" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
 
-//        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
-        
-//        if (SingleUserInfo.superviseSwitch && [SingleUserInfo.loginData.userLevel integerValue] < 2) {
-//            group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode]];//qyy
-//        }
-//        else {
-            group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
-//        }
+
+        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
 
         UCFSettingItem *weijinAccount  = [UCFSettingArrowItem itemWithIcon:@"vjin_account_icon" title:@"微金存管账户" destVcClass:[BindPhoneNumViewController class]];
         UCFSettingItem *zunxiangAccount  = [UCFSettingArrowItem itemWithIcon:@"zunxiang_account_icon" title:@"尊享存管账户" destVcClass:[BindPhoneNumViewController class]];
@@ -954,10 +948,6 @@
         if (indexPath.section == 2) {
             
             if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"ModifyPasswordViewController"]){//修改登录密码
-//                ModifyPasswordViewController * modifyPasswordVC = [[ModifyPasswordViewController alloc]initWithNibName:@"ModifyPasswordViewController" bundle:nil];
-//                modifyPasswordVC.title = arrowItem.title;
-//                modifyPasswordVC.hidesBottomBarWhenPushed = YES;
-//                [self.navigationController pushViewController:modifyPasswordVC  animated:YES];
                 UCFNewModifyPasswordViewController *vc= [[UCFNewModifyPasswordViewController alloc] init];
                 [self.rt_navigationController pushViewController:vc animated:YES];
             } else if([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"TradePasswordVC"]){ //设置交易密码或修改交易密码

@@ -121,9 +121,10 @@
         [self.navigationController popViewControllerAnimated:YES];
         self.navigationController.navigationBarHidden = YES;
     }else {
-        [self dismissViewControllerAnimated:NO completion:^{
-            [self showGestureCode];
-        }];
+//        [self dismissViewControllerAnimated:NO completion:^{
+//            [self showGestureCode];
+//        }];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 
 //    [self.view endEditing:YES];

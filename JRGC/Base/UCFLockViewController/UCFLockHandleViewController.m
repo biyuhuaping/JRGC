@@ -26,6 +26,7 @@
 #import "MongoliaLayerCenter.h"
 #import "UCFCouponPopup.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
+#import "UCFNewModifyPasswordViewController.h"
 #define kTipColorNormal [UIColor blackColor]
 #define kTipColorError [UIColor redColor]
 @interface UCFLockHandleViewController ()
@@ -65,6 +66,7 @@
 @property (strong, nonatomic) UILabel *touchIDTipLab;
 
 @property (strong, nonatomic) UIScrollView      *baseScrollView;
+@property (assign, nonatomic) BOOL              isFaceID;
 @end
 
 @implementation UCFLockHandleViewController
@@ -167,8 +169,6 @@
     } else {
         [self initLockView];
     }
-
-
 }
 
 - (BOOL)checkTouchIdIsOpen
@@ -178,6 +178,17 @@
     NSError *error = nil;
     //TODO:TOUCHID是否存在
     if ([lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]){
+        
+        NSString *localizedReason = @"指纹登录";
+        if (@available(iOS 11.0, *)) {
+            if (lol.biometryType == LABiometryTypeTouchID) {
+                _isFaceID = NO;
+            }else if (lol.biometryType == LABiometryTypeFaceID){
+                localizedReason = @"人脸识别";
+                _isFaceID = YES;
+            }
+        }
+        
         return YES;
     } else {
         return NO;
@@ -195,7 +206,7 @@
     LAContext *lol = [[LAContext alloc] init];
     lol.localizedFallbackTitle = @"";
     NSError *error = nil;
-    NSString *showStr = @"通过home键验证已有手机指纹";
+    NSString *showStr = _isFaceID ? @"面对前置摄像头进行验证" : @"通过home键验证已有手机指纹";
     [lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error];
     if (error.code == LAErrorTouchIDLockout && kIS_IOS9) {
         [lol evaluatePolicy:LAPolicyDeviceOwnerAuthentication localizedReason:@"重新开启TouchID功能" reply:^(BOOL success, NSError * _Nullable error) {
@@ -216,7 +227,7 @@
                      [[NSUserDefaults standardUserDefaults] synchronize];
                      [self hide];
                      if (_nLockViewType == LLLockViewTypeCreate) {
-                         [MBProgressHUD displayHudError:@"您已成功开启指纹解锁" withShowTimes:2];
+                         [MBProgressHUD displayHudError:_isFaceID ? @"您已成功开启面容解锁" : @"您已成功开启指纹解锁" withShowTimes:2];
                      }
             
                  } else {
@@ -515,25 +526,8 @@
     [changeVerificationBtn addTarget:self action:@selector(changeScrollViewOffSet:) forControlEvents:UIControlEventTouchUpInside];
     [_baseScrollView addSubview:changeVerificationBtn];
 
-    self.reminderButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _reminderButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-    _reminderButton.frame = CGRectMake(CGRectGetMinX(self.lockview.frame),CGRectGetMaxY(self.lockview.frame) + 100, 80, 25);
-    [_reminderButton setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [_reminderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_reminderButton setBackgroundColor:[UIColor clearColor]];
-    [_reminderButton addTarget:self action:@selector(dealWithPassword:) forControlEvents:UIControlEventTouchUpInside];
-    [_baseScrollView addSubview:_reminderButton];
-    _reminderButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    
-    // 切换账户按钮
-    self.changeAccountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _changeAccountBtn.frame = CGRectMake(CGRectGetMaxX(self.lockview.frame) - 80,CGRectGetMinY(_reminderButton.frame) , 80, 25);
-    [_changeAccountBtn setTitle:@"切换账户" forState:UIControlStateNormal];
-    [_changeAccountBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_changeAccountBtn setBackgroundColor:[UIColor clearColor]];
-    [_changeAccountBtn addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_baseScrollView addSubview:_changeAccountBtn];
-    _changeAccountBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+
+
     
     //第二屏 指纹解锁
     UILabel *zhiWenTipLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth,10, ScreenWidth, 60)];
@@ -545,10 +539,23 @@
     zhiWenTipLab.backgroundColor = [UIColor clearColor];
     [_baseScrollView addSubview:zhiWenTipLab];
     
-    UIImageView *touchIDAmition = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth + (ScreenWidth - 120)/2, CGRectGetMaxY(zhiWenTipLab.frame) + 60, 120, 120)];
-    touchIDAmition.image = [UIImage sd_animatedGIFNamed:@"touch_id"];
+    UIImageView *touchIDAmition = [[UIImageView alloc] init];
+    if (_isFaceID) {
+        touchIDAmition.frame = CGRectMake(ScreenWidth + (ScreenWidth - 230)/2, CGRectGetMaxY(zhiWenTipLab.frame) + 60, 230, 230);
+        touchIDAmition.image = [UIImage imageNamed:@"face_bg_round"];
+        
+        UIImageView *centerImageView = [[UIImageView alloc] init];
+        centerImageView.frame = CGRectMake((230 - 100)/2, (230 - 100)/2, 100, 100);
+        centerImageView.image = [UIImage imageNamed:@"face_bg_head"];
+        [touchIDAmition addSubview:centerImageView];
+    } else {
+        touchIDAmition.frame = CGRectMake(ScreenWidth + (ScreenWidth - 120)/2, CGRectGetMaxY(zhiWenTipLab.frame) + 60, 120, 120);
+        touchIDAmition.image = [UIImage imageNamed:@"touch_id"];
+    }
+
     [_baseScrollView addSubview:touchIDAmition];
     
+
     UIButton *restartTouchId = [UIButton buttonWithType:UIButtonTypeCustom];
     restartTouchId.frame = touchIDAmition.frame;
     restartTouchId.backgroundColor = [UIColor clearColor];
@@ -556,23 +563,43 @@
     [_baseScrollView addSubview:restartTouchId];
     
     UIButton *changeVerificationBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    changeVerificationBtn1.frame  =CGRectMake(ScreenWidth + (ScreenWidth - 180)/2, CGRectGetMaxY(self.lockview.frame) , 180, 25);
+    changeVerificationBtn1.frame  =CGRectMake(ScreenWidth  + (ScreenWidth - 180)/2,CGRectGetMaxY(self.lockview.frame), 180, 25);
     changeVerificationBtn1.backgroundColor = [UIColor clearColor];
     changeVerificationBtn1.titleLabel.font = [UIFont systemFontOfSize:17];
     [changeVerificationBtn1 setTitle:@"切换至手势解锁" forState:UIControlStateNormal];
     [changeVerificationBtn1 addTarget:self action:@selector(changeScrollViewOffSet:) forControlEvents:UIControlEventTouchUpInside];
-    [_baseScrollView addSubview:changeVerificationBtn1];
     [changeVerificationBtn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_baseScrollView addSubview:changeVerificationBtn1];
+
+    self.reminderButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _reminderButton.titleLabel.textAlignment = NSTextAlignmentLeft;
     
+    _reminderButton.frame = CGRectMake(CGRectGetMinX(self.lockview.frame) + 25,statBarHeight > 20 ? ScreenHeight - 110 : ScreenHeight - 70, 80, 25);
+    [_reminderButton setTitle:@"忘记密码" forState:UIControlStateNormal];
+    [_reminderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_reminderButton setBackgroundColor:[UIColor clearColor]];
+    [_reminderButton addTarget:self action:@selector(dealWithPassword:) forControlEvents:UIControlEventTouchUpInside];
+    _reminderButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.view addSubview:_reminderButton];
     
-    UIButton *changeAccountButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    changeAccountButton.frame = CGRectMake(ScreenWidth + CGRectGetMaxX(self.lockview.frame) - 80,CGRectGetMinY(_reminderButton.frame) , 80, 25);
-    changeAccountButton.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
-    [changeAccountButton setTitle:@"切换账户" forState:UIControlStateNormal];
-    [changeAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [changeAccountButton setBackgroundColor:[UIColor clearColor]];
-    [changeAccountButton addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_baseScrollView addSubview:changeAccountButton];
+    // 切换账户按钮
+    self.changeAccountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _changeAccountBtn.frame = CGRectMake(CGRectGetMaxX(self.lockview.frame) - 100,CGRectGetMinY(_reminderButton.frame) , 80, 25);
+    [_changeAccountBtn setTitle:@"切换账户" forState:UIControlStateNormal];
+    [_changeAccountBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_changeAccountBtn setBackgroundColor:[UIColor clearColor]];
+    [_changeAccountBtn addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    _changeAccountBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.view addSubview:_changeAccountBtn];
+    
+//    UIButton *changeAccountButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    changeAccountButton.frame = CGRectMake(ScreenWidth + CGRectGetMaxX(self.lockview.frame) - 80,CGRectGetMinY(_reminderButton.frame) , 80, 25);
+//    changeAccountButton.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
+//    [changeAccountButton setTitle:@"切换账户" forState:UIControlStateNormal];
+//    [changeAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [changeAccountButton setBackgroundColor:[UIColor clearColor]];
+//    [changeAccountButton addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [_baseScrollView addSubview:changeAccountButton];
     
     _baseScrollView.contentOffset = CGPointMake(ScreenWidth, 0);
 }
@@ -600,10 +627,6 @@
                 firstInstValue = [[userInfoDict objectForKey:@"firstInvestmentValue"] intValue];//绑定银行卡奖励
                 firstInstType = [userInfoDict objectForKey:@"firstInvestmentType"];
             }
-//            RegisterSuccessAlert *alert = [[RegisterSuccessAlert alloc] init];
-            //[alert setAlertTitle:[NSString stringWithFormat:@"%d",regReward] cetiAmout:[NSString stringWithFormat:@"%d",certiReward] titleType:regType certifiType:cetiType bdAmout:[NSString stringWithFormat:@"%d",bdReward] bdType:bdType];
-//            [alert setAlertTitle:[NSString stringWithFormat:@"%d",regReward] firstInstAmout:[NSString stringWithFormat:@"%d",firstInstValue] titleType:regType firstInstType:firstInstType];
-            
             
             UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
             VC.isPresentViewController = YES;
@@ -620,7 +643,6 @@
                 }];
             });
             
-            //注册成功调用一次，tab上是否有红点
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
         } else {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"leapGestureLock" object:nil];
@@ -663,16 +685,8 @@
 - (void)dealWithPassword : (id)sender
 {
     isClickCgAndCertiBtn = YES;
-    UCFVerifyLoginViewController *loginViewController = [[UCFVerifyLoginViewController alloc] init];
-     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self dismissViewControllerAnimated:NO completion:^{
-        [LockFlagSingle sharedManager].disappearType = DisDefault;
-        [LockFlagSingle sharedManager].showSection = LockGesture;
-    }];
-    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate.tabBarController presentViewController:loginNaviController animated:NO completion:^{
-        
-    }];
+    UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
+    [self.rt_navigationController pushViewController:controller animated:YES];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
 }
 /**
@@ -692,18 +706,6 @@
 {
     [self checkGoBackShowGestureOrFingerprint];
     isClickCgAndCertiBtn = YES;
-//    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-//    loginViewController.sourceVC = @"changeUser";
-//    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-//    [self dismissViewControllerAnimated:NO completion:^{
-//        [LockFlagSingle sharedManager].disappearType = DisDefault;
-//    }];
-//    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [delegate.tabBarController presentViewController:loginNaviController animated:NO completion:^{
-//
-//    }];
-//    //[[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
     [SingleUserInfo loadLoginViewController];
 }
 
@@ -916,9 +918,7 @@
             
             [LLLockPassword saveLockPassword:string];
             if ([self checkTouchIdIsOpen]) {
-                [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPLoginSucceedTouchID];
-                [UCFPublicPopupWindow sharedManager].delegate = self;
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手势密码设置成功!" message:@"是否启用Touch ID指纹解锁" delegate:self cancelButtonTitle:nil otherButtonTitles:@"取消",@"开启", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手势密码设置成功!" message:[NSString stringWithFormat:@"%@",_isFaceID ?@"是否启用Face ID面容解锁" : @"是否启用Touch ID指纹解锁"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"取消",@"开启", nil];
                 [alert show];
             } else {
                 [self hide];
