@@ -67,12 +67,6 @@
         if (item1.switchType == 1) {
             BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
             self.switchView.on = isOpen;
-//            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//            if ([defaults boolForKey:@"useLockView"]) {
-//                self.userInteractionEnabled = YES;
-//            } else {
-//                self.userInteractionEnabled = YES;
-//            }
             
         } else if (item1.switchType == 2) {
             // 设置刷脸]开关的状态

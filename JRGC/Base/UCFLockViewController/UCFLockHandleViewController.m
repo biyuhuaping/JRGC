@@ -159,7 +159,8 @@
         statusBarDiffrrent = YES;
     }
     BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
-
+    
+    
     //系统touchID开启 和 处于解锁页面 和 用户打开指纹解锁 三者缺一不可
     if ([self checkTouchIdIsOpen] && _nLockViewType == LLLockViewTypeCheck && isOpen) {
         [self prepareTouchID];
@@ -526,8 +527,6 @@
     [changeVerificationBtn addTarget:self action:@selector(changeScrollViewOffSet:) forControlEvents:UIControlEventTouchUpInside];
     [_baseScrollView addSubview:changeVerificationBtn];
 
-
-
     
     //第二屏 指纹解锁
     UILabel *zhiWenTipLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth,10, ScreenWidth, 60)];
@@ -571,6 +570,11 @@
     [changeVerificationBtn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_baseScrollView addSubview:changeVerificationBtn1];
 
+    NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+    if (useLockView == 1) {
+        changeVerificationBtn1.hidden = YES;
+    }
+    
     self.reminderButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _reminderButton.titleLabel.textAlignment = NSTextAlignmentLeft;
     
@@ -591,15 +595,6 @@
     [_changeAccountBtn addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _changeAccountBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:_changeAccountBtn];
-    
-//    UIButton *changeAccountButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    changeAccountButton.frame = CGRectMake(ScreenWidth + CGRectGetMaxX(self.lockview.frame) - 80,CGRectGetMinY(_reminderButton.frame) , 80, 25);
-//    changeAccountButton.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
-//    [changeAccountButton setTitle:@"切换账户" forState:UIControlStateNormal];
-//    [changeAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [changeAccountButton setBackgroundColor:[UIColor clearColor]];
-//    [changeAccountButton addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [_baseScrollView addSubview:changeAccountButton];
     
     _baseScrollView.contentOffset = CGPointMake(ScreenWidth, 0);
 }
