@@ -28,6 +28,14 @@
     [super pushViewController:viewController animated:animated];
 
 }
+//- (nullable UIViewController *)popViewControllerAnimated:(BOOL)animated
+//{
+//    return self;
+//}
+//- (nullable NSArray<__kindof UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated
+//{
+//    return @[self];
+//}
 /*
 #pragma mark - Navigation
 
