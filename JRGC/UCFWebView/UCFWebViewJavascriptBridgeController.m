@@ -493,14 +493,23 @@
         }
         else if ([nativeData[@"action"] isEqualToString:@"shareWeChat"]) {//工力工贝 分享
             [weakSelf goToShareWeChat:nativeData];
-        }
-        
-        else if ([nativeData[@"action"] isEqualToString:@"gotoGB"]) {//工力工贝 分享
+        }else if ([nativeData[@"action"] isEqualToString:@"gotoGB"]) {//工力工贝 分享
             [weakSelf goToShareWeChat:nativeData];
+        } else if ([nativeData[@"action"] isEqualToString:@"isOtherView"]) {//订单页面是否导航栏根视图
+            [weakSelf isRootViewController];
         }
 //     */
     }];
      
+}
+- (void)isRootViewController
+{
+    RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.selectedViewController;
+    NSInteger currentIndex = [nav.viewControllers indexOfObject:self];
+
+    [_bridge callHandler:@"jsHandler" data:@{@"type": @"isOtherView",@"value":[NSNumber numberWithBool:currentIndex]} responseCallback:^(id responseData) {
+        DDLogDebug(@"是否首页");
+    }];
 }
 - (void)getContractContent:(NSString *)value
 {
@@ -908,13 +917,13 @@
 }
 - (void)jsClose
 {
-    if (_isFromBarMall) {
-        [self.view.window.layer addAnimation:[self popAnimation] forKey:nil];
-        [self dismissViewControllerAnimated:NO completion:nil];
-    } else {
+//    if (_isFromBarMall) {
+//        [self.view.window.layer addAnimation:[self popAnimation] forKey:nil];
+//        [self dismissViewControllerAnimated:NO completion:nil];
+//    } else {
         [self.navigationController popViewControllerAnimated:NO];
 
-    }
+//    }
 }
 - (CATransition *)popAnimation{
     

@@ -572,7 +572,10 @@
 
     NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
     if (useLockView == 1) {
+        changeVerificationBtn1.hidden = NO;
+    } else {
         changeVerificationBtn1.hidden = YES;
+
     }
     
     self.reminderButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -654,12 +657,11 @@
 
 - (void)dealWithCancelBtn:(id)sender
 {
-    //设置成功之后返回安全中心页
-    [self dismissViewControllerAnimated:NO completion:^{
-        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        UINavigationController *navController = delegate.tabBarController.selectedViewController;
-        [navController popViewControllerAnimated:YES];
-    }];
+    if ([_souceVc isEqualToString:@"securityCenter"]) {
+        //设置成功之后返回安全中心页
+        [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
+    }
+
 }
 
 - (void)setBtnHide:(BOOL)hide
@@ -911,12 +913,17 @@
             LLLog(@"两次密码一致");
             
             [LLLockPassword saveLockPassword:string];
-            if ([self checkTouchIdIsOpen]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手势密码设置成功!" message:[NSString stringWithFormat:@"%@",_isFaceID ?@"是否启用Face ID面容解锁" : @"是否启用Touch ID指纹解锁"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"取消",@"开启", nil];
-                [alert show];
-            } else {
+            if ([_souceVc isEqualToString:@"securityCenter"]) {
                 [self hide];
+            } else {
+                if ([self checkTouchIdIsOpen]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手势密码设置成功!" message:[NSString stringWithFormat:@"%@",_isFaceID ?@"是否启用Face ID面容解锁" : @"是否启用Touch ID指纹解锁"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"取消",@"开启", nil];
+                    [alert show];
+                } else {
+                    [self hide];
+                }
             }
+
             
         } else {
             

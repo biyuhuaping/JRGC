@@ -78,8 +78,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSecurityCenterNetData) name:@"getPersonalCenterNetData" object:nil];
-//       // 更新人脸识别开关状态查询网络请求 通知
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFaceSwitchSwipNetData) name:@"updateFaceSwitchSwip" object:nil];
+
     }
     return self;
 }
@@ -228,8 +227,6 @@
             NSString *useridstr = [NSString stringWithFormat:@"%@",SingleUserInfo.loginData.userInfo.userId];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:useridstr,@"userId",nil];
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
-            
-//            [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
             [SingleUserInfo deleteUserData];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];

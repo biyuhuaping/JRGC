@@ -164,8 +164,17 @@
     if (tag.intValue == kSXTagValidBindedPhone) {
         NSMutableDictionary *dic = [data objectFromJSONString];
         if ([dic[@"ret"] boolValue]) {
-            [LLLockPassword saveLockPassword:nil];
-            [self loginSuccess:dic];
+//            if ([_sourceVC isEqualToString:@"securityCenter_touchID"]) {
+//
+//            } else if ([_sourceVC isEqualToString:@"securityCenter"]) {
+//
+//            } else {
+//
+//            }
+            
+//            [LLLockPassword saveLockPassword:nil];
+//            [self loginSuccess:dic];
+            [self gesturePage];
         } else {
             NSString *rsttext =  dic[@"message"];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil];
@@ -184,26 +193,21 @@
 
 
 /** 登录成功*/
-- (void)loginSuccess:(NSDictionary *)dict
-{
-    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:dict];
-    NSArray *allObj = [tempDic allKeys];
-    for (int i = 0; i < allObj.count; i ++) {
-        id obj = [tempDic objectForKey:allObj[i]];
-        if ([obj isKindOfClass:[NSNull class]]) {
-            [tempDic removeObjectForKey:allObj[i]];
-        }
-    }
-    [[NSUserDefaults standardUserDefaults] setObject:tempDic forKey:@"loginUserMsg"];
-    
-    //刷脸
-    if ([_sourceVC isEqualToString:@"validFaceLogin"]) {
-
-        
-    } else{
-        [self gesturePage];
-    }
-}
+//- (void)loginSuccess:(NSDictionary *)dict
+//{
+//    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:dict];
+//    NSArray *allObj = [tempDic allKeys];
+//    for (int i = 0; i < allObj.count; i ++) {
+//        id obj = [tempDic objectForKey:allObj[i]];
+//        if ([obj isKindOfClass:[NSNull class]]) {
+//            [tempDic removeObjectForKey:allObj[i]];
+//        }
+//    }
+//    [[NSUserDefaults standardUserDefaults] setObject:tempDic forKey:@"loginUserMsg"];
+//
+//
+//    [self gesturePage];
+//}
 - (BOOL)checkTouchIdIsOpen
 {
     LAContext *lol = [[LAContext alloc] init];
@@ -321,13 +325,14 @@
 {
     //从安全中心过来的直接显示手势密码
     if ([_sourceVC isEqualToString:@"securityCenter"]) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] == YES) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] == YES) { //关闭手势密码
+            [LLLockPassword saveLockPassword:nil];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"useLockView"];
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.navigationController popViewControllerAnimated:YES];
-        } else {
-            [self showGestureCode];
+        } else { //开启手势密码
+//            [self showGestureCode];
+              [self showLLLockViewController:LLLockViewTypeCreate];
         }
     } else if ([_sourceVC isEqualToString:@"securityCenter_touchID"]) {
         //这个是从个人信息页面 开启指纹解锁进来的
@@ -336,7 +341,8 @@
     }
     else {
         //这个是从手势密码页面点击忘记密码进来的
-        [self showGestureCode];
+//        [self showGestureCode];
+          [self showLLLockViewController:LLLockViewTypeCreate];
     }
 }
 
@@ -356,11 +362,11 @@
 
     UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
     lockVc.nLockViewType = type;
-    if ([_sourceVC isEqualToString:@"securityCenter"]) {
+    if ([_sourceVC isEqualToString:@"securityCenter"] || [_sourceVC isEqualToString:@"securityCenter_touchID"]) {
         lockVc.souceVc = @"securityCenter";
     }
-    lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [SingGlobalView.rootNavController pushViewController:lockVc animated:YES complete:nil];
+    [self.rt_navigationController removeViewController:self];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

@@ -7,7 +7,7 @@
 //
 
 #import "UCFRegisterUserBaseMessRegisterApi.h"
-
+#import "MD5Util.h"
 @implementation UCFRegisterUserBaseMessRegisterApi
 {
     NSString* _factoryCode;
@@ -28,7 +28,8 @@
         
         _factoryCode= factoryCode;
         _phoneNo= phoneNo;
-        _pwd= pwd;
+        
+        _pwd= [MD5Util MD5Pwd:pwd];
         _registTicket = registTicket;
     }
     return self;

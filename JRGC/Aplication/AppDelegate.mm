@@ -143,8 +143,10 @@
     } else {
         [self showTabbarController];
         NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+        BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
+
         //使用手势密码 显示
-        if (useLockView == 1) {
+        if (useLockView == 1 || isOpen) {
             [self showGCode];
         }
 
@@ -430,10 +432,11 @@
             _backgroundUpdateTask = UIBackgroundTaskInvalid;
         }
     NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
-    if (useLockView == 1) {
+    BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
+
+    if (useLockView == 1 || isOpen) {
         if (_backTime > 60) {
             [[ToolSingleTon sharedManager] hideAlertAction:nil];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"guaguakaHide" object:nil];
             [self showGCode];
         }
     }
@@ -516,13 +519,8 @@
 //显示手势密码
 - (void)showGCode
 {
-    NSString* pswd = [LLLockPassword loadLockPassword];
     if (SingleUserInfo.loginData.userInfo.userId) {
-        if (pswd) {
-            [self showLLLockViewController:LLLockViewTypeCheck];
-        } else {
-            [self showLLLockViewController:LLLockViewTypeCreate];
-        }
+        [self showLLLockViewController:LLLockViewTypeCheck];
     }
 }
 
