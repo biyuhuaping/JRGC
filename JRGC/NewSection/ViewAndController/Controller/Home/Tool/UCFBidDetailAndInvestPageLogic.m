@@ -296,7 +296,7 @@
             HSHelper *helper = [HSHelper new];
             [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:control.navigationController];
         }
-    } otherButtonTitles:@"测试"];
+    } otherButtonTitles:@"确定"];
     [alert show];
 }
 + (void)dealInvestInfoData:(UCFBidModel *)model andControl:(UIViewController *)controller

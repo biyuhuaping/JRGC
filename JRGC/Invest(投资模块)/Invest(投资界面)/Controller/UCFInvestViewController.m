@@ -21,11 +21,9 @@
 
 }
 @property (weak, nonatomic) UCFSelectedView *itemSelectedView;
-//@property (strong, nonatomic) UCFHonorInvestViewController *honorInvest;
 @property (strong, nonatomic) UCFOrdinaryBidController *honorInvest;
 
 @property (strong, nonatomic) UCFMicroMoneyViewController *microMoney;
-//@property (strong, nonatomic) UCFGoldenViewController *golden;
 @property (strong, nonatomic) UCFInvestTransferViewController *investTransfer;
 
 @property (strong, nonatomic) UCFBaseViewController *currentViewController;
@@ -38,7 +36,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-//    [self.rt_navigationController  setNavigationBarHidden:YES];
     [self.navigationController setNavigationBarHidden:YES];
 }
 - (void)viewDidLoad {
@@ -136,12 +133,11 @@
 #pragma mark - 设置界面
 - (void)addChildViewControllers
 {
-        UCFHomeListPresenter *homeList = [[UCFHomeListPresenter alloc]init];
-        [homeList getUserStateData];
-        [self addHonor];//添加优质债权
-        [self addMicroMoney];//添加智能出借
-        [self addTransfer];//添加债权转让
-    
+    UCFHomeListPresenter *homeList = [[UCFHomeListPresenter alloc]init];
+    [homeList getUserStateData];
+    [self addHonor];//添加优质债权
+    [self addMicroMoney];//添加智能出借
+    [self addTransfer];//添加债权转让
 }
 
 - (UCFMicroMoneyViewController *)microMoney
@@ -178,10 +174,7 @@
     [self addChildViewController:self.honorInvest];
 }
 
-//- (void)addGolden {
-//    self.golden.rootVc = self;
-//    [self addChildViewController:self.golden];
-//}
+
 
 - (void)addTransfer {
     self.investTransfer.rootVc = self;
@@ -190,11 +183,10 @@
 
 - (void)newCreateUI
 {
-//    [GlobalView sharedManager].rootNavController.navigationBar.tintColor = [UIColor blueColor];
-//    [[GlobalView sharedManager].rootNavController setNavigationBarHidden:NO];
+
     NSMutableArray *titleArray = [[NSMutableArray alloc] init];
 
-     [titleArray addObject:@"优质债权"];
+    [titleArray addObject:@"优质债权"];
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     
@@ -238,15 +230,6 @@
             [_pagerView setSelectIndex:0];
         }
     }
-//    else if ([self.selectedType isEqualToString:@"Gold"]) {
-//        self.currentViewController = self.golden;
-//        if ([self.childViewControllers containsObject:self.golden]) {
-//            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
-//        }
-//        else {
-//            [_pagerView setSelectIndex:0];
-//        }
-//    }
 }
 
 - (void)dealloc

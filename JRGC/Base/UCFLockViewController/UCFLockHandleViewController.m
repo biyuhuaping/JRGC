@@ -868,12 +868,11 @@
         } else {
             
             // 强制注销该账户，并清除手势密码，以便重设
-            [self dismissViewControllerAnimated:NO completion:^{
-                [SingleUserInfo loadLoginViewController];
-                [LockFlagSingle sharedManager].disappearType = DisDefault;
-            }]; // 由于是强制登录，这里必须以NO ani的方式才可
+            [SingleUserInfo deleteUserData];
+            [SingleUserInfo loadLoginViewController];
+            [LockFlagSingle sharedManager].disappearType = DisDefault;
             [LLLockPassword saveLockPassword:nil];
-
+            [SingGlobalView.rootNavController removeViewController:self];
         }
         
     } else {
@@ -1017,7 +1016,6 @@
 - (void)hide
 {
     [LockFlagSingle sharedManager].disappearType = DisDefault;
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
     switch (_nLockViewType) {
         case LLLockViewTypeCheck:
         {

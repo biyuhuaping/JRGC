@@ -15,6 +15,7 @@
 @interface UCFBoutiqueCell ()<UCFShopHListViewDataSource,UCFShopHListViewDelegate>
 @property(nonatomic, strong)UCFShopHListView *shopList;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
+@property(nonatomic, assign)CGFloat     shopBottomSectionHeight;
 @end
 
 @implementation UCFBoutiqueCell
@@ -26,8 +27,8 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-        
-        UCFShopHListView *shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(15, 0, [[UIScreen mainScreen] bounds].size.width - 15, 165)];
+        _shopBottomSectionHeight = 45;
+        UCFShopHListView *shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(15, 0, [[UIScreen mainScreen] bounds].size.width - 15, 105 + _shopBottomSectionHeight)];
         shopList.horizontalSpace = 5.0f;
         shopList.dataSource = self;
         shopList.delegate = self;
@@ -51,23 +52,31 @@
 }
 - (CGSize)shopHListView:(UCFShopHListView *)shopListViewCommodityImageSize
 {
-    return CGSizeMake(105, 165);
+    return CGSizeMake(105, 105 + _shopBottomSectionHeight);
 }
 
 - (UIView *)shopHListView:(UCFShopHListView *)shopListView cellForRowAtIndex:(NSInteger)index
 {
     UCFHomeMallsale *model = self.dataArray[index];
-    UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, 105, 165) withHeightOfCommodity:105];
+    UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, 105, 105 + _shopBottomSectionHeight) withHeightOfCommodity:105];
     view.clipsToBounds = YES;
     view.layer.cornerRadius = 5.0f;
     
     [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:nil];
     view.shopName.text = model.title;
-    view.shopValue.text = [NSString stringWithFormat:@"%@工贝",model.score];
-    NSString *showStr =  [NSString stringWithFormat:@"%@工贝",model.price];
-    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:showStr attributes:attribtDic];
-    view.shopOrginalValue.attributedText = attribtStr;
+    NSString *showValue = model.score;
+    if (model.price.length > 0 && model.score.length > 0) {
+        showValue = model.score;
+    } else if (model.price.length > 0 && model.score.length == 0) {
+        showValue = model.price;
+    } else if (model.price.length == 0 && model.score.length > 0) {
+        showValue = model.score;
+    }
+    CGRect react = view.shopValue.frame;
+    react.origin.y += 3;
+    view.shopValue.frame = react;
+    view.shopValue.text = [NSString stringWithFormat:@"%@工贝",showValue];
+    view.shopOrginalValue.hidden = YES;
     return view;
 }
 

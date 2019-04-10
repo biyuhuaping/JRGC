@@ -124,18 +124,12 @@
             case 0:{
                 _LatestView = [[UCFNewHomeViewController alloc] init];
                 controller = _LatestView;
-                UCFAssetAccountViewController *vc = [[UCFAssetAccountViewController alloc] init];
-//                _LatestView = [[UCFAssetAccountViewController alloc] init];
-//                controller = _LatestView;
             }
                 break;
             case 1:{
-//                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
-//                controller = invest;
-//                _AssignmentView = invest;
-                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
-                controller = mine;
-                _mineView = mine;
+                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
+                controller = invest;
+                _AssignmentView = invest;
             }
                 break;
             case 2:{
@@ -209,7 +203,6 @@
         [self checkTapMineNum];
     }
 }
-
 - (void)checkTapMineNum {
     NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if(nil != userId) {
@@ -260,32 +253,7 @@
       topView = [contrl.viewControllers objectAtIndex:0];
     }
 
-    if ([self.viewControllers indexOfObject:viewController] == 3) {
-        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
-        if(nil == userId) {
-            [SingleUserInfo loadLoginViewController];
-            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
-            return NO;
-        } else {
-//            [[NSURLCache sharedURLCache] removeAllCachedResponses];
-//            NSURLCache * cache = [NSURLCache sharedURLCache];
-//            [cache removeAllCachedResponses];
-//            [cache setDiskCapacity:0];
-//            [cache setMemoryCapacity:0];
-//
-//            UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//            mallController.url      = @"https://m.dougemall.com";//请求地址;
-//            mallController.navTitle = @"商城";
-//            mallController.isFromBarMall = YES;
-//            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mallController];
-//            [self.view.window.layer addAnimation:[self presentAnimation] forKey:nil];//添加Animation
-//            [self presentViewController:nav animated:NO completion:nil];
-//            return NO;
-        }
-        
-        return YES;
-    }
-    if ([self.viewControllers indexOfObject:viewController] == 4) {
+    if ([self.viewControllers indexOfObject:viewController] == 4 || [self.viewControllers indexOfObject:viewController] == 2) {
         NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if(nil == userId) {
             [SingleUserInfo loadLoginViewController];

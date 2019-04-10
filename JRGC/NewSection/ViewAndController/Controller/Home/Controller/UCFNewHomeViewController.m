@@ -26,7 +26,8 @@
 #import "UCFMineIntoCoinPageModel.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "NSString+Misc.h"
-#import "UCFLockHandleViewController.h"
+#import "UCFInvestViewController.h"
+#import "RTRootNavigationAddPushController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate,UCFNewHomeSectionViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -195,8 +196,12 @@
         if (data) {
             sectionView.titleLab.text = data.title;
         }
-        if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"]) {
+        if (SingleUserInfo.loginData.userInfo.isRisk && ![data.title isEqualToString:@"推荐内容"]) {
             [sectionView showMore];
+        } else {
+            if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"]) {
+                [sectionView showMore];
+            }
         }
         return sectionView;
     } else {
@@ -211,6 +216,27 @@
         [self pushWebViewWithUrl:self.boutiqueUrl Title:@"商城精选"];
     } else if([title isEqualToString:@"商城特惠"]){
         [self pushWebViewWithUrl:self.remcommendUrl Title:@"商城特惠"];
+    } else if ([title isEqualToString:@"智能出借"]) {
+        
+        RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.viewControllers[1];
+        RTContainerController *container = nav.viewControllers[0];
+        UCFInvestViewController *vc  = container.contentViewController;
+        vc.selectedType  = @"IntelligentLoan";
+        if ([vc isViewLoaded]) {
+            [vc changeView];
+        }
+        [SingGlobalView.tabBarController setSelectedIndex:1];
+        
+    } else if ([title isEqualToString:@"优质债权"]) {
+        RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.viewControllers[1];
+        RTContainerController *container = nav.viewControllers[0];
+        UCFInvestViewController *vc  = container.contentViewController;
+        vc.selectedType  = @"QualityClaims";
+        if ([vc isViewLoaded]) {
+            [vc changeView];
+        }
+        [SingGlobalView.tabBarController setSelectedIndex:1];
+        
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -252,11 +278,7 @@
 #pragma mark BaseTableViewCellDelegate
 - (void)baseTableViewCell:(BaseTableViewCell *)cell buttonClick:(UIButton *)button withModel:(id)model
 {
-    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
-    lockVc.nLockViewType = LLLockViewTypeCreate;
-    lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [SingGlobalView.rootNavController pushViewController:lockVc animated:YES];
-    return;
+
     
     if ([model isKindOfClass:[UCFNewHomeListPrdlist class]]) {
         [UCFBidDetailAndInvestPageLogic bidDetailAndInvestPageLogicUseDataModel:model detail:NO rootViewController:self];
@@ -275,7 +297,7 @@
                 [cache setMemoryCapacity:0];
                 
                 UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                mallController.url      = @"https://m.dougemall.com";//请求地址;
+                mallController.url      = @"https://m.dougemall.com?fromGb=true";//请求地址;
                 mallController.navTitle = @"商城";
                 mallController.isFromBarMall = NO;
                 [self.navigationController pushViewController:mallController animated:YES];
