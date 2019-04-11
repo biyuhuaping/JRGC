@@ -85,6 +85,9 @@
 }
 
 - (void)stepData:(NSArray *)ary{
+    if (nil == ary || ary.count == 0) {
+        return;
+    }
     _model_Ary = [NSMutableArray arrayWithArray:ary];
     CGFloat sumCount = 0;
     
@@ -92,6 +95,16 @@
     for (PieModel *model in _model_Ary) {
         sumCount += model.count;
     }
+    if (sumCount <= 0.00) {
+        //都没数据时,被除数不能为0
+        PieModel *model = [[PieModel alloc] init];
+        model.count = 100;
+        model.color = [Color color:PGColorOptionButtonBackgroundColorGray];
+        _model_Ary = [NSMutableArray arrayWithObjects:model, nil];
+        
+        sumCount = 100;
+    }
+    
     //计算所占百分百
     for (int i = 0; i<_model_Ary.count; i++) {
         PieModel *model = _model_Ary[i];

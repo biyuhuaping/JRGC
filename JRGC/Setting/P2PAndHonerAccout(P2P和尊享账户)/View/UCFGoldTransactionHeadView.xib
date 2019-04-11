@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,57 +17,49 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Le1-hl-hUy">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="10"/>
-                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="Mgv-fW-xuS"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJb-9G-2Qw">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
                     <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="1RF-ia-Mk1"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1f-h4-M1A">
-                    <rect key="frame" x="0.0" y="10" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="9.5" width="375" height="0.5"/>
                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="BZd-2L-tMc"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUU-wb-eJz">
-                    <rect key="frame" x="0.0" y="11" width="375" height="29"/>
+                    <rect key="frame" x="0.0" y="10" width="375" height="30"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31j-gf-sxI">
-                            <rect key="frame" x="0.0" y="28" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="29.5" width="375" height="0.5"/>
                             <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="TDR-B8-njC"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gold_transaction_icon" translatesAutoresizingMaskIntoConstraints="NO" id="8Ht-a3-4zx">
-                            <rect key="frame" x="15" y="7" width="15" height="15"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="15" id="Dsh-3f-leD"/>
-                                <constraint firstAttribute="height" constant="15" id="sb2-hh-fHI"/>
-                            </constraints>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-06-15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOf-j7-M66">
-                            <rect key="frame" x="40" y="7" width="72.5" height="16"/>
+                            <rect key="frame" x="16" y="8" width="72.5" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="31j-gf-sxI" secondAttribute="trailing" id="Lfy-Dr-hYd"/>
                         <constraint firstAttribute="bottom" secondItem="31j-gf-sxI" secondAttribute="bottom" id="NMv-CR-Luv"/>
-                        <constraint firstItem="8Ht-a3-4zx" firstAttribute="leading" secondItem="gUU-wb-eJz" secondAttribute="leading" constant="15" id="OU9-CG-7VH"/>
-                        <constraint firstItem="8Ht-a3-4zx" firstAttribute="centerY" secondItem="gUU-wb-eJz" secondAttribute="centerY" id="Vhj-XQ-eh6"/>
-                        <constraint firstItem="sOf-j7-M66" firstAttribute="leading" secondItem="8Ht-a3-4zx" secondAttribute="trailing" constant="10" id="XpD-Pg-nEb"/>
+                        <constraint firstItem="sOf-j7-M66" firstAttribute="leading" secondItem="gUU-wb-eJz" secondAttribute="leading" constant="16" id="NuC-i2-MaP"/>
                         <constraint firstItem="31j-gf-sxI" firstAttribute="leading" secondItem="gUU-wb-eJz" secondAttribute="leading" id="kAT-uf-YpA"/>
-                        <constraint firstItem="sOf-j7-M66" firstAttribute="centerY" secondItem="8Ht-a3-4zx" secondAttribute="centerY" id="lTW-P2-9WP"/>
+                        <constraint firstItem="31j-gf-sxI" firstAttribute="top" secondItem="sOf-j7-M66" secondAttribute="bottom" constant="5.5" id="w0D-re-PrF"/>
                     </constraints>
                 </view>
             </subviews>
@@ -97,10 +89,7 @@
                 <outlet property="topLineView" destination="oJb-9G-2Qw" id="rXT-f8-ea7"/>
                 <outlet property="topSectionView" destination="Le1-hl-hUy" id="US3-QB-MSq"/>
             </connections>
-            <point key="canvasLocation" x="219.5" y="91"/>
+            <point key="canvasLocation" x="127" y="91"/>
         </view>
     </objects>
-    <resources>
-        <image name="gold_transaction_icon" width="15" height="15"/>
-    </resources>
 </document>

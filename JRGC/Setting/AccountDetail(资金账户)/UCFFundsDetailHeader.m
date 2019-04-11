@@ -33,7 +33,8 @@
 {
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
-        [self.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+//        [self.contentView setBackgroundColor:UIColorWithRGB(0xf5f5f5)];
+        [self.contentView setBackgroundColor:[UIColor redColor]];
         UILabel *timeLabel = [[UILabel alloc] init];
         timeLabel.textColor = UIColorWithRGB(0x333000);
         timeLabel.font = [UIFont systemFontOfSize:12];
@@ -42,7 +43,9 @@
         
         UIView * topView = [[UIView alloc] init];
         [self.contentView addSubview:topView];
-        [topView setBackgroundColor:UIColorWithRGB(0xebebee)];
+        
+        [topView setBackgroundColor:UIColorWithRGB(0xf5f5f5)];
+        topView.backgroundColor = [UIColor redColor];
         self.topView = topView;
     }
     return self;

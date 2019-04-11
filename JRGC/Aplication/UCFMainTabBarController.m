@@ -124,18 +124,18 @@
             case 0:{
                 _LatestView = [[UCFNewHomeViewController alloc] init];
                 controller = _LatestView;
-                UCFAssetAccountViewController *vc = [[UCFAssetAccountViewController alloc] init];
+//                UCFAssetAccountViewController *vc = [[UCFAssetAccountViewController alloc] init];
 //                _LatestView = [[UCFAssetAccountViewController alloc] init];
 //                controller = _LatestView;
             }
                 break;
             case 1:{
-//                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
-//                controller = invest;
-//                _AssignmentView = invest;
-                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
-                controller = mine;
-                _mineView = mine;
+                UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
+                controller = invest;
+                _AssignmentView = invest;
+//                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
+//                controller = mine;
+//                _mineView = mine;
             }
                 break;
             case 2:{
