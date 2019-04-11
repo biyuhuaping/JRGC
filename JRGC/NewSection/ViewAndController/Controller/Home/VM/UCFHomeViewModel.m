@@ -26,7 +26,7 @@
     self.isFetchDataLoading = YES;
     [self.dataArray removeAllObjects];
     [self getBannerData];
-    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
+    if (SingleUserInfo.loginData.userInfo.userId.length > 0 && !SingleUserInfo.loginData.userInfo.isRisk) {
         [self getUserAllStatue];
     } else {
         [self addUserGuideData];
@@ -102,7 +102,7 @@
         [section1 addObject:data1];
     } else {
         //新手引导
-        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:185];
+        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:SingleUserInfo.loginData.userInfo.isRisk ? 185 - 55: 185];
         [section1 addObject:data1];
     }
     
@@ -236,7 +236,7 @@
         self.remcommendUrl = model.data.mallDiscountsUrl;
         self.boutiqueUrl = model.data.mallSelectedUrl;
         
-        CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(ScreenWidth - 30) * 6 /23  + (ScreenWidth - 30)/3 + 60];
+        CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(ScreenWidth - 30) * 6 /23  + (ScreenWidth - 30)/3 + 45];
         UCFCellDataModel *dataMode = [UCFCellDataModel new];
         dataMode.modelType = @"mall";
         NSMutableArray *arr = [NSMutableArray arrayWithCapacity:1];
@@ -252,7 +252,7 @@
         
         
         NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
-        CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:165];
+        CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:105 + 45];
         UCFCellDataModel *dataMode1 = [UCFCellDataModel new];
         dataMode1.modelType = @"mallDiscounts";
         dataMode1.data1 = model.data.mallSelected;
@@ -263,7 +263,7 @@
     } else {
         ShowMessage(model.message);
     }
-    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"推荐内容" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
+    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"内容推荐" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
     UCFCellDataModel *mallDataMode = [UCFCellDataModel new];
     mallDataMode.modelType = @"recommend";
     mallDataMode.data1 = self.recommendBannerArray;

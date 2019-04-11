@@ -13,5 +13,5 @@
 @interface LLLockIndicator : UIView
 
 - (void)setPasswordString:(NSString*)string;
-
+- (void)showErrorCircles:(NSString*)string;
 @end

@@ -25,6 +25,8 @@
 #import "UCFRegisterFinshViewController.h"
 #import "MongoliaLayerCenter.h"
 #import "UCFCouponPopup.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
+#import "UCFNewModifyPasswordViewController.h"
 #define kTipColorNormal [UIColor blackColor]
 #define kTipColorError [UIColor redColor]
 @interface UCFLockHandleViewController ()
@@ -58,12 +60,13 @@
 @property (strong, nonatomic) UILabel *errorLabel;//错误提示
 @property (strong, nonatomic) UILabel *titleLabel;//设置手势
 @property (strong, nonatomic) UIButton *runButton;//跳过按钮
-@property (strong, nonatomic) UILabel *runLabel;
+//@property (strong, nonatomic) UILabel *runLabel;
 @property (strong, nonatomic) UIButton *cancelButton;//取消按钮
 @property (strong, nonatomic) UILabel *cancelLabel;
-
+@property (strong, nonatomic) UILabel *touchIDTipLab;
 
 @property (strong, nonatomic) UIScrollView      *baseScrollView;
+@property (assign, nonatomic) BOOL              isFaceID;
 @end
 
 @implementation UCFLockHandleViewController
@@ -139,33 +142,36 @@
 - (UIViewController *)childViewControllerForStatusBarStyle{
     return self;
 }
-
+- (UIBarButtonItem *)rt_customBackItemWithTarget:(id)target action:(SEL)action
+{
+    return nil;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    ((RTContainerController *) (self.rt_navigationController.viewControllers.lastObject)).fd_interactivePopDisabled = YES;
+    
     self.view.backgroundColor = [UIColor whiteColor];
+    
     if ([UIApplication sharedApplication].statusBarStyle == UIStatusBarStyleDefault) {
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         statusBarDiffrrent = YES;
     }
     BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
+    
+    
     //系统touchID开启 和 处于解锁页面 和 用户打开指纹解锁 三者缺一不可
     if ([self checkTouchIdIsOpen] && _nLockViewType == LLLockViewTypeCheck && isOpen) {
         [self prepareTouchID];
         //绘制有touchID的界面
         [self initTouchIDLockView];
         [self openTouchId:nil];
-    } else { 
+    } else {
         [self initLockView];
     }
-
-
 }
-//Error Domain=com.apple.LocalAuthentication Code=-5 "Passcode not set." UserInfo=0x155b1ec0 {NSLocalizedDescription=Passcode not set.}
-//Error Domain=com.apple.LocalAuthentication Code=-5 "Passcode not set." UserInfo=0x17427bd80 {NSLocalizedDescription=Passcode not set.}8.0.2
-//Error Domain=com.apple.LocalAuthentication Code=-6 "Biometry is not available on this device." UserInfo={NSLocalizedDescription=Biometry is not available on this device.}
-//在7上没有效果，为空数据
-//判断touchid 是否打开
+
 - (BOOL)checkTouchIdIsOpen
 {
     LAContext *lol = [[LAContext alloc] init];
@@ -173,6 +179,17 @@
     NSError *error = nil;
     //TODO:TOUCHID是否存在
     if ([lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]){
+        
+        NSString *localizedReason = @"指纹登录";
+        if (@available(iOS 11.0, *)) {
+            if (lol.biometryType == LABiometryTypeTouchID) {
+                _isFaceID = NO;
+            }else if (lol.biometryType == LABiometryTypeFaceID){
+                localizedReason = @"人脸识别";
+                _isFaceID = YES;
+            }
+        }
+        
         return YES;
     } else {
         return NO;
@@ -190,7 +207,7 @@
     LAContext *lol = [[LAContext alloc] init];
     lol.localizedFallbackTitle = @"";
     NSError *error = nil;
-    NSString *showStr = @"通过home键验证已有手机指纹";
+    NSString *showStr = _isFaceID ? @"面对前置摄像头进行验证" : @"通过home键验证已有手机指纹";
     [lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error];
     if (error.code == LAErrorTouchIDLockout && kIS_IOS9) {
         [lol evaluatePolicy:LAPolicyDeviceOwnerAuthentication localizedReason:@"重新开启TouchID功能" reply:^(BOOL success, NSError * _Nullable error) {
@@ -211,7 +228,7 @@
                      [[NSUserDefaults standardUserDefaults] synchronize];
                      [self hide];
                      if (_nLockViewType == LLLockViewTypeCreate) {
-                         [MBProgressHUD displayHudError:@"您已成功开启指纹解锁" withShowTimes:2];
+                         [MBProgressHUD displayHudError:_isFaceID ? @"您已成功开启面容解锁" : @"您已成功开启指纹解锁" withShowTimes:2];
                      }
             
                  } else {
@@ -287,36 +304,62 @@
 
 - (void)initLockView
 {
-    float marinToTop = kIS_Iphone4?[Common calculateNewSizeBaseMachine:63]:38;
-//    //没有打开的情况下，默认关闭
-//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    CGFloat statBarHeight = StatusBarHeight1;
     
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,kIS_Iphone4?[Common calculateNewSizeBaseMachine:65]:50, ScreenWidth, [Common calculateNewSizeBaseMachine:24])];
-    _titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:24]];
-    _titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,statBarHeight, ScreenWidth, 44)];
+    _titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:18]];
+    _titleLabel.textColor = [Color color:PGColorOptionTitleBlack];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.text = @"设置手势";
     [self.view addSubview:_titleLabel];
     
-    self.runLabel = [[UILabel alloc] initWithFrame:CGRectMake(kIS_Iphone4?ScreenWidth - [Common calculateNewSizeBaseMachine:80]:ScreenWidth - 92,kIS_Iphone4?[Common calculateNewSizeBaseMachine:55]:41, [Common calculateNewSizeBaseMachine:50], [Common calculateNewSizeBaseMachine:43])];
-    _runLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
-    _runLabel.textColor = [UIColor whiteColor];
-    _runLabel.textAlignment = NSTextAlignmentRight;
-    _runLabel.text = @"跳过";
-    _runLabel.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_runLabel];
-    
     self.runButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _runButton.frame = CGRectMake(_runLabel.frame.origin.x, _runLabel.frame.origin.y, _runLabel.frame.size.width*1.5, 30);
+    _runButton.frame = CGRectMake(15 ,StatusBarHeight1 , 44, 44);
+    _runButton.imageEdgeInsets = UIEdgeInsetsMake(-8, 0, 0, 0);
     [_runButton addTarget:self action:@selector(dealWithrunBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_runButton setImage:[UIImage imageNamed:@"calculator_gray_close"] forState:UIControlStateNormal];
     [self.view addSubview:_runButton];
     
-    //取消按钮
+    self.tipLable = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.titleLabel.frame) + 45, ScreenWidth, 23)];
+    _tipLable.font = [UIFont systemFontOfSize:23];
+    _tipLable.textColor = [Color color:PGColorOptionTitleBlack];
+    _tipLable.textAlignment = NSTextAlignmentCenter;
+    _tipLable.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_tipLable];
+    
+    self.indecator = [[LLLockIndicator alloc] initWithFrame:CGRectMake((ScreenWidth - 50) / 2, CGRectGetMaxY(self.tipLable.frame) + 30, 50, 50)];
+    [self.view addSubview:_indecator];
+    
+    
+    self.errorLabel = [[UILabel alloc] init];
+    _errorLabel.frame = CGRectMake(0, CGRectGetMaxY(_indecator.frame) + 25, ScreenWidth, 18);
+    _errorLabel.font = [UIFont systemFontOfSize:16];
+    _errorLabel.textColor = [Color color:PGColorOpttonTextRedColor];
+    _errorLabel.textAlignment = NSTextAlignmentCenter;
+    _errorLabel.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_errorLabel];
+    
+    
+    self.lockview = [[LLLockView alloc] initWithFrame:CGRectMake((ScreenWidth - [Common calculateNewSizeBaseMachine:320]) / 2,CGRectGetMaxY(self.indecator.frame) + 30, [Common calculateNewSizeBaseMachine:320], [Common calculateNewSizeBaseMachine:320])];
+    [self.view addSubview:_lockview];
+    
+    
+    self.clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _clearButton.frame = CGRectMake((ScreenWidth - 120)/2,CGRectGetMaxY(_lockview.frame) + 25,120, 33);
+    _clearButton.titleLabel.font = [Color gc_Font:19];
+    [_clearButton setTitle:@"重新绘制" forState:UIControlStateNormal];
+    [_clearButton setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
+    [_clearButton setBackgroundColor:[UIColor clearColor]];
+    [_clearButton addTarget:self action:@selector(clearPassword:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_clearButton];
+
+    
+    //取消按钮  安全中心进来会有 暂时先放着
     self.cancelLabel = [[UILabel alloc] initWithFrame:CGRectMake(kIS_Iphone4?[Common calculateNewSizeBaseMachine:36]:36,kIS_Iphone4?[Common calculateNewSizeBaseMachine:70]:56, [Common calculateNewSizeBaseMachine:50], [Common calculateNewSizeBaseMachine:13])];
     _cancelLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
-    _cancelLabel.textColor = [UIColor whiteColor];
+    _cancelLabel.textColor = [Color color:PGColorOptionTitleBlack];
     _cancelLabel.textAlignment = NSTextAlignmentLeft;
     _cancelLabel.text = @"取消";
     _cancelLabel.backgroundColor = [UIColor clearColor];
@@ -327,31 +370,24 @@
     [_cancelButton addTarget:self action:@selector(dealWithCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_cancelButton];
     
-    self.headImageView = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth/2.0 - 40, marinToTop, 80, 80)];
-    //_headImageView.backgroundColor = [UIColor whiteColor];
+    self.headImageView = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth/2.0 - 85/2, statBarHeight + 44 + 6, 85, 85)];
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginUserMsg"];
     NSString *headUrl = nil;
     if (dict) {
         headUrl = [dict objectForKey:@"headurl"];
     }
-    
     _headImageView.image = [UIImage imageNamed:@"password_head.png"];
-    
     [self.view addSubview:_headImageView];
     
-    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_headImageView.frame) + (kIS_Iphone4?[Common calculateNewSizeBaseMachine:15]:3), ScreenWidth, [Common calculateNewSizeBaseMachine:18])];
+    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_headImageView.frame) + 18, ScreenWidth, [Common calculateNewSizeBaseMachine:18])];
     _nameLabel.numberOfLines = 1;
-    _nameLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15]];
-    _nameLabel.textColor = [UIColor whiteColor];
+    _nameLabel.font = [UIFont systemFontOfSize:14];
+    _nameLabel.textColor = [Color color:PGColorOptionTitleBlack];
     _nameLabel.textAlignment = NSTextAlignmentCenter;
     _nameLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_nameLabel];
     
-    self.indecator = [[LLLockIndicator alloc] initWithFrame:CGRectMake((ScreenWidth - (kIS_Iphone4?[Common calculateNewSizeBaseMachine:50]:47)) / 2, CGRectGetMaxY(_titleLabel.frame) + (kIS_Iphone4?[Common calculateNewSizeBaseMachine:28]:15), kIS_Iphone4?[Common calculateNewSizeBaseMachine:51]:47, kIS_Iphone4?[Common calculateNewSizeBaseMachine:51]:47)];
-    [self.view addSubview:_indecator];
-    
-    self.lockview = [[LLLockView alloc] initWithFrame:CGRectMake((ScreenWidth - [Common calculateNewSizeBaseMachine:320]) / 2,kIS_Iphone4?[Common calculateNewSizeBaseMachine:215]:200-45, [Common calculateNewSizeBaseMachine:320], [Common calculateNewSizeBaseMachine:320])];
-    [self.view addSubview:_lockview];
+
     
     self.preSnapImageView = [[UIImageView alloc] init];
     self.currentSnapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -361,54 +397,33 @@
     
     UIView *baseBkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     baseBkView.userInteractionEnabled = YES;
-    baseBkView.backgroundColor = UIColorWithRGB(0x2b3b52);
+    baseBkView.backgroundColor = [UIColor whiteColor];
+
     [self.view insertSubview:baseBkView atIndex:0];
     
     self.lockview.delegate = self;
     
-    self.tipLable = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_indecator.frame) + (kIS_Iphone4?[Common calculateNewSizeBaseMachine:28]:15), ScreenWidth, [Common calculateNewSizeBaseMachine:18])];
-    _tipLable.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:18]];
-    _tipLable.textColor = kTipColorError;
-    _tipLable.textAlignment = NSTextAlignmentCenter;
-    _tipLable.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_tipLable];
-    
-    self.errorLabel = [[UILabel alloc] init];
-    _errorLabel.frame = CGRectMake(0, CGRectGetMaxY(_tipLable.frame) + (kIS_Iphone4?[Common calculateNewSizeBaseMachine:10]:0), ScreenWidth, [Common calculateNewSizeBaseMachine:12]);
-    _errorLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:12]];
-    _errorLabel.textColor = kTipColorError;
-    _errorLabel.textAlignment = NSTextAlignmentCenter;
-    _errorLabel.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_errorLabel];
-    
     self.reminderButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _reminderButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-    _reminderButton.frame = CGRectMake(kIS_Iphone4?[Common calculateNewSizeBaseMachine:30]:35,kIS_Iphone4?ScreenHeight-[Common calculateNewSizeBaseMachine:45]:ScreenHeight-35, [Common calculateNewSizeBaseMachine:80], [Common calculateNewSizeBaseMachine:25]);
+    _reminderButton.frame = CGRectMake(CGRectGetMinX(self.lockview.frame),statBarHeight > 20 ? ScreenHeight - 100 : ScreenHeight - 60, 80, 25);
     [_reminderButton setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [_reminderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_reminderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_reminderButton setBackgroundColor:[UIColor clearColor]];
     [_reminderButton addTarget:self action:@selector(dealWithPassword:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_reminderButton];
-    _reminderButton.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
+    _reminderButton.titleLabel.font = [UIFont systemFontOfSize:15];
     
     // 切换账户按钮
     self.changeAccountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _changeAccountBtn.frame = CGRectMake(kIS_Iphone4?ScreenWidth-[Common calculateNewSizeBaseMachine:(30+80)]:ScreenWidth-35-80,kIS_Iphone4?ScreenHeight-[Common calculateNewSizeBaseMachine:45]:ScreenHeight-35, [Common calculateNewSizeBaseMachine:80], [Common calculateNewSizeBaseMachine:25]);
+    _changeAccountBtn.frame = CGRectMake(CGRectGetMaxX(self.lockview.frame) - 80,CGRectGetMinY(_reminderButton.frame) , 80, 25);
     [_changeAccountBtn setTitle:@"切换账户" forState:UIControlStateNormal];
-    [_changeAccountBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_changeAccountBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_changeAccountBtn setBackgroundColor:[UIColor clearColor]];
     [_changeAccountBtn addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_changeAccountBtn];
-    _changeAccountBtn.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
+    _changeAccountBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     
-    self.clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _clearButton.frame = CGRectMake((ScreenWidth - 120)/2,CGRectGetMaxY(_lockview.frame) + (kIS_Iphone4?-25:-35),120, 33);
-    [_clearButton setTitle:@"重新输入" forState:UIControlStateNormal];
-    [_clearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_clearButton setBackgroundColor:[UIColor clearColor]];
-    [_clearButton addTarget:self action:@selector(clearPassword:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_clearButton];
-    _clearButton.titleLabel.font = [UIFont systemFontOfSize:15.8f];
+
 }
 - (void)openTouchidAlert
 {
@@ -430,24 +445,19 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    if (!_isFromRegister) {
-//        [[MongoliaLayerCenter sharedManager] showLogic];
-//    }
-   
 }
 // 绘制有touchID 的界面
 - (void)initTouchIDLockView
 {
     //注册升起touch_id 系统的默认提醒框
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openTouchidAlert:) name:@"openTouchIdAlert" object:nil];
     [LockFlagSingle sharedManager].disappearType = DisHome;
-//    [LockFlagSingle sharedManager].showSection = LockFingerprint;
-    float marinToTop = [Common calculateNewSizeBaseMachine:56];
+    
+    CGFloat statBarHeight = StatusBarHeight1;
+
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isUserShowTouchIdLockView"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     //头像
-    self.headImageView = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth/2.0 - 40, marinToTop, 80, 80)];
-    //_headImageView.backgroundColor = [UIColor whiteColor];
+    self.headImageView = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth/2.0 - 85/2, statBarHeight + 44 + 6, 85, 85)];
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginUserMsg"];
     NSString *headUrl = nil;
     if (dict) {
@@ -457,37 +467,40 @@
     [self.view addSubview:_headImageView];
     
     
-    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_headImageView.frame) + [Common calculateNewSizeBaseMachine:5], ScreenWidth, [Common calculateNewSizeBaseMachine:18])];
+    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_headImageView.frame) + 18, ScreenWidth, [Common calculateNewSizeBaseMachine:18])];
     _nameLabel.numberOfLines = 1;
-    _nameLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15]];
-    _nameLabel.textColor = [UIColor whiteColor];
+    _nameLabel.font = [UIFont systemFontOfSize:14];
+    _nameLabel.textColor = [Color color:PGColorOptionTitleBlack];
     _nameLabel.textAlignment = NSTextAlignmentCenter;
     _nameLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_nameLabel];
     
-    _baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_nameLabel.frame), ScreenWidth, ScreenHeight - CGRectGetMaxY(_nameLabel.frame))];
+    _baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_nameLabel.frame), ScreenWidth, ScreenHeight - CGRectGetMaxY(_tipLable.frame))];
     _baseScrollView.scrollEnabled = NO;
     _baseScrollView.backgroundColor = [UIColor clearColor];
     _baseScrollView.contentSize = CGSizeMake(ScreenWidth * 2, ScreenHeight - CGRectGetMaxY(_nameLabel.frame));
     [self.view addSubview:_baseScrollView];
     
     //第一屏 手势解锁
-    self.tipLable = [[UILabel alloc] initWithFrame:CGRectMake(0, ([Common calculateNewSizeBaseMachine:10]), ScreenWidth, [Common calculateNewSizeBaseMachine:18])];
-    _tipLable.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:18]];
-    _tipLable.textColor = kTipColorError;
+    self.tipLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 25)];
+    _tipLable.font = [UIFont systemFontOfSize:23];
+    _tipLable.textColor = [Color color:PGColorOptionTitleBlack];
     _tipLable.textAlignment = NSTextAlignmentCenter;
     _tipLable.backgroundColor = [UIColor clearColor];
     [_baseScrollView addSubview:_tipLable];
     
     self.errorLabel = [[UILabel alloc] init];
-    _errorLabel.frame = CGRectMake(0, CGRectGetMaxY(_tipLable.frame) + ([Common calculateNewSizeBaseMachine:10]), ScreenWidth, [Common calculateNewSizeBaseMachine:12]);
-    _errorLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:12]];
-    _errorLabel.textColor = kTipColorError;
+    _errorLabel.frame = CGRectMake(0,CGRectGetMaxY(_tipLable.frame) + 10, ScreenWidth, 18);
+    _errorLabel.font = [UIFont systemFontOfSize:16];
+    _errorLabel.textColor = [Color color:PGColorOpttonTextRedColor];
     _errorLabel.textAlignment = NSTextAlignmentCenter;
     _errorLabel.backgroundColor = [UIColor clearColor];
     [_baseScrollView addSubview:_errorLabel];
     
-    self.lockview = [[LLLockView alloc] initWithFrame:CGRectMake((ScreenWidth - [Common calculateNewSizeBaseMachine:320])/2, CGRectGetMaxY(_errorLabel.frame) - [Common calculateNewSizeBaseMachine:25], [Common calculateNewSizeBaseMachine:320], [Common calculateNewSizeBaseMachine:320])];
+
+    
+    
+    self.lockview = [[LLLockView alloc] initWithFrame:CGRectMake((ScreenWidth - [Common calculateNewSizeBaseMachine:320])/2, CGRectGetMaxY(_errorLabel.frame) - [Common calculateNewSizeBaseMachine:5], [Common calculateNewSizeBaseMachine:320], [Common calculateNewSizeBaseMachine:320])];
     [_baseScrollView addSubview:_lockview];
     
     self.preSnapImageView = [[UIImageView alloc] init];
@@ -497,58 +510,49 @@
     
     UIView *baseBkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     baseBkView.userInteractionEnabled = YES;
-    baseBkView.backgroundColor = UIColorWithRGB(0x2b3b52);
+    baseBkView.backgroundColor = [Color color:PGColorOptionThemeWhite];
     [self.view insertSubview:baseBkView atIndex:0];
     
     self.lockview.delegate = self;
     
     UIButton *changeVerificationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    changeVerificationBtn.frame  = CGRectMake((ScreenWidth - 180)/2, CGRectGetMaxY(self.lockview.frame) - [Common calculateNewSizeBaseMachine:18.7], 180, [Common calculateNewSizeBaseMachine:25]);
+    changeVerificationBtn.frame  = CGRectMake((ScreenWidth - 180)/2, CGRectGetMaxY(self.lockview.frame) , 180, 25);
     changeVerificationBtn.backgroundColor = [UIColor clearColor];
-    if (ScreenHeight ==  667.0f) {
-        changeVerificationBtn.frame  = CGRectMake((ScreenWidth - 180)/2, CGRectGetMaxY(self.lockview.frame) - [Common calculateNewSizeBaseMachine:18.7] + 13, 180, [Common calculateNewSizeBaseMachine:25]);
-    } else if (ScreenHeight == 736.0f) {
-        changeVerificationBtn.frame  = CGRectMake((ScreenWidth - 180)/2, CGRectGetMaxY(self.lockview.frame) - [Common calculateNewSizeBaseMachine:18.7] + 20, 180, [Common calculateNewSizeBaseMachine:25]);
-    }
-    changeVerificationBtn.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15]];
+    changeVerificationBtn.frame = CGRectMake(0, CGRectGetMaxY(self.lockview.frame), ScreenWidth, 30);
+    changeVerificationBtn.titleLabel.font = [UIFont systemFontOfSize:17];
     [changeVerificationBtn setTitle:@"切换至指纹解锁" forState:UIControlStateNormal];
+    [changeVerificationBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [changeVerificationBtn addTarget:self action:@selector(changeScrollViewOffSet:) forControlEvents:UIControlEventTouchUpInside];
     [_baseScrollView addSubview:changeVerificationBtn];
 
-    self.reminderButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _reminderButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-    _reminderButton.frame = CGRectMake([Common calculateNewSizeBaseMachine:30],CGRectGetHeight(_baseScrollView.frame)-[Common calculateNewSizeBaseMachine:45], [Common calculateNewSizeBaseMachine:80], [Common calculateNewSizeBaseMachine:25]);
-    [_reminderButton setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [_reminderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_reminderButton setBackgroundColor:[UIColor clearColor]];
-    [_reminderButton addTarget:self action:@selector(dealWithPassword:) forControlEvents:UIControlEventTouchUpInside];
-    [_baseScrollView addSubview:_reminderButton];
-    _reminderButton.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
-    
-    // 切换账户按钮
-    self.changeAccountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _changeAccountBtn.frame = CGRectMake(ScreenWidth-[Common calculateNewSizeBaseMachine:(30+80)],CGRectGetHeight(_baseScrollView.frame)-[Common calculateNewSizeBaseMachine:45], [Common calculateNewSizeBaseMachine:80], [Common calculateNewSizeBaseMachine:25]);
-    [_changeAccountBtn setTitle:@"切换账户" forState:UIControlStateNormal];
-    [_changeAccountBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_changeAccountBtn setBackgroundColor:[UIColor clearColor]];
-    [_changeAccountBtn addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_baseScrollView addSubview:_changeAccountBtn];
-    _changeAccountBtn.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
     
     //第二屏 指纹解锁
-    UILabel *zhiWenTipLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth,([Common calculateNewSizeBaseMachine:10]), ScreenWidth, [Common calculateNewSizeBaseMachine:18] * 2 + 10)];
-    zhiWenTipLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:18]];
-    zhiWenTipLab.textColor = [UIColor whiteColor];
+    UILabel *zhiWenTipLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth,10, ScreenWidth, 60)];
+    zhiWenTipLab.font = [UIFont systemFontOfSize:22];
+    zhiWenTipLab.textColor = [UIColor blackColor];
     zhiWenTipLab.text = @"点击扫描区域进行\n指纹解锁";
     zhiWenTipLab.numberOfLines = 0;
     zhiWenTipLab.textAlignment = NSTextAlignmentCenter;
     zhiWenTipLab.backgroundColor = [UIColor clearColor];
     [_baseScrollView addSubview:zhiWenTipLab];
     
-    UIImageView *touchIDAmition = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth + (ScreenWidth - [Common calculateNewSizeBaseMachine:145])/2, CGRectGetMaxY(zhiWenTipLab.frame) + [Common calculateNewSizeBaseMachine:50], [Common calculateNewSizeBaseMachine:145], [Common calculateNewSizeBaseMachine:145])];
-    touchIDAmition.image = [UIImage sd_animatedGIFNamed:@"touch_id"];
+    UIImageView *touchIDAmition = [[UIImageView alloc] init];
+    if (_isFaceID) {
+        touchIDAmition.frame = CGRectMake(ScreenWidth + (ScreenWidth - 230)/2, CGRectGetMaxY(zhiWenTipLab.frame) + 60, 230, 230);
+        touchIDAmition.image = [UIImage imageNamed:@"face_bg_round"];
+        
+        UIImageView *centerImageView = [[UIImageView alloc] init];
+        centerImageView.frame = CGRectMake((230 - 100)/2, (230 - 100)/2, 100, 100);
+        centerImageView.image = [UIImage imageNamed:@"face_bg_head"];
+        [touchIDAmition addSubview:centerImageView];
+    } else {
+        touchIDAmition.frame = CGRectMake(ScreenWidth + (ScreenWidth - 120)/2, CGRectGetMaxY(zhiWenTipLab.frame) + 60, 120, 120);
+        touchIDAmition.image = [UIImage imageNamed:@"touch_id"];
+    }
+
     [_baseScrollView addSubview:touchIDAmition];
     
+
     UIButton *restartTouchId = [UIButton buttonWithType:UIButtonTypeCustom];
     restartTouchId.frame = touchIDAmition.frame;
     restartTouchId.backgroundColor = [UIColor clearColor];
@@ -556,33 +560,47 @@
     [_baseScrollView addSubview:restartTouchId];
     
     UIButton *changeVerificationBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    changeVerificationBtn1.frame  = CGRectMake(ScreenWidth + (ScreenWidth - 180)/2, CGRectGetMaxY(self.lockview.frame) - [Common calculateNewSizeBaseMachine:18.7], 180, [Common calculateNewSizeBaseMachine:25]);
+    changeVerificationBtn1.frame  =CGRectMake(ScreenWidth  + (ScreenWidth - 180)/2,CGRectGetMaxY(self.lockview.frame), 180, 25);
     changeVerificationBtn1.backgroundColor = [UIColor clearColor];
-    changeVerificationBtn1.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15]];
+    changeVerificationBtn1.titleLabel.font = [UIFont systemFontOfSize:17];
     [changeVerificationBtn1 setTitle:@"切换至手势解锁" forState:UIControlStateNormal];
-    if (ScreenHeight ==  667.0f) {
-        changeVerificationBtn1.frame  = CGRectMake(ScreenWidth + (ScreenWidth - 180)/2, CGRectGetMaxY(self.lockview.frame) - [Common calculateNewSizeBaseMachine:18.7] + 13, 180, [Common calculateNewSizeBaseMachine:25]);
-    } else if (ScreenHeight == 736.0f) {
-        changeVerificationBtn1.frame  = CGRectMake(ScreenWidth + (ScreenWidth - 180)/2, CGRectGetMaxY(self.lockview.frame) - [Common calculateNewSizeBaseMachine:18.7] + 20, 180, [Common calculateNewSizeBaseMachine:25]);
-    }
     [changeVerificationBtn1 addTarget:self action:@selector(changeScrollViewOffSet:) forControlEvents:UIControlEventTouchUpInside];
+    [changeVerificationBtn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_baseScrollView addSubview:changeVerificationBtn1];
+
+    NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+    if (useLockView == 1) {
+        changeVerificationBtn1.hidden = NO;
+    } else {
+        changeVerificationBtn1.hidden = YES;
+
+    }
     
+    self.reminderButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _reminderButton.titleLabel.textAlignment = NSTextAlignmentLeft;
     
-    UIButton *changeAccountButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    changeAccountButton.frame = CGRectMake(ScreenWidth + (ScreenWidth - [Common calculateNewSizeBaseMachine:80])/2,CGRectGetHeight(_baseScrollView.frame)-[Common calculateNewSizeBaseMachine:45], [Common calculateNewSizeBaseMachine:80], [Common calculateNewSizeBaseMachine:25]);
-    changeAccountButton.titleLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
-    [changeAccountButton setTitle:@"切换账户" forState:UIControlStateNormal];
-    [changeAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [changeAccountButton setBackgroundColor:[UIColor clearColor]];
-    [changeAccountButton addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_baseScrollView addSubview:changeAccountButton];
+    _reminderButton.frame = CGRectMake(CGRectGetMinX(self.lockview.frame) + 25,statBarHeight > 20 ? ScreenHeight - 110 : ScreenHeight - 70, 80, 25);
+    [_reminderButton setTitle:@"忘记密码" forState:UIControlStateNormal];
+    [_reminderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_reminderButton setBackgroundColor:[UIColor clearColor]];
+    [_reminderButton addTarget:self action:@selector(dealWithPassword:) forControlEvents:UIControlEventTouchUpInside];
+    _reminderButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.view addSubview:_reminderButton];
+    
+    // 切换账户按钮
+    self.changeAccountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _changeAccountBtn.frame = CGRectMake(CGRectGetMaxX(self.lockview.frame) - 100,CGRectGetMinY(_reminderButton.frame) , 80, 25);
+    [_changeAccountBtn setTitle:@"切换账户" forState:UIControlStateNormal];
+    [_changeAccountBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_changeAccountBtn setBackgroundColor:[UIColor clearColor]];
+    [_changeAccountBtn addTarget:self action:@selector(changeAccountBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    _changeAccountBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.view addSubview:_changeAccountBtn];
     
     _baseScrollView.contentOffset = CGPointMake(ScreenWidth, 0);
 }
 - (void)dealWithrunBtn:(id)sender
 {
-    [self dismissViewControllerAnimated:NO completion:^{
         if (_isFromRegister) {
             userInfoDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"regUserMsg"];
             int regReward;
@@ -605,10 +623,6 @@
                 firstInstValue = [[userInfoDict objectForKey:@"firstInvestmentValue"] intValue];//绑定银行卡奖励
                 firstInstType = [userInfoDict objectForKey:@"firstInvestmentType"];
             }
-//            RegisterSuccessAlert *alert = [[RegisterSuccessAlert alloc] init];
-            //[alert setAlertTitle:[NSString stringWithFormat:@"%d",regReward] cetiAmout:[NSString stringWithFormat:@"%d",certiReward] titleType:regType certifiType:cetiType bdAmout:[NSString stringWithFormat:@"%d",bdReward] bdType:bdType];
-//            [alert setAlertTitle:[NSString stringWithFormat:@"%d",regReward] firstInstAmout:[NSString stringWithFormat:@"%d",firstInstValue] titleType:regType firstInstType:firstInstType];
-            
             
             UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
             VC.isPresentViewController = YES;
@@ -625,31 +639,27 @@
                 }];
             });
             
-            //注册成功调用一次，tab上是否有红点
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
         } else {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"leapGestureLock" object:nil];
-            if ([self.delegate respondsToSelector:@selector(lockHandleViewController:didClickLeapWithSign:)]) {
-                [self.delegate lockHandleViewController:self didClickLeapWithSign:NO];
-            }
             [UCFCouponPopup startQueryCouponPopup];
             
         }
-    }];
+    
     //状态为0则表示不使用手势密码 1 则是使用
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"useLockView"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
 }
 
 - (void)dealWithCancelBtn:(id)sender
 {
-    //设置成功之后返回安全中心页
-    [self dismissViewControllerAnimated:NO completion:^{
-        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        UINavigationController *navController = delegate.tabBarController.selectedViewController;
-        [navController popViewControllerAnimated:YES];
-    }];
+    if ([_souceVc isEqualToString:@"securityCenter"]) {
+        //设置成功之后返回安全中心页
+        [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
+    }
+
 }
 
 - (void)setBtnHide:(BOOL)hide
@@ -670,16 +680,8 @@
 - (void)dealWithPassword : (id)sender
 {
     isClickCgAndCertiBtn = YES;
-    UCFVerifyLoginViewController *loginViewController = [[UCFVerifyLoginViewController alloc] init];
-     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self dismissViewControllerAnimated:NO completion:^{
-        [LockFlagSingle sharedManager].disappearType = DisDefault;
-        [LockFlagSingle sharedManager].showSection = LockGesture;
-    }];
-    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate.tabBarController presentViewController:loginNaviController animated:NO completion:^{
-        
-    }];
+    UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
+    [self.rt_navigationController pushViewController:controller animated:YES];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
 }
 /**
@@ -699,18 +701,6 @@
 {
     [self checkGoBackShowGestureOrFingerprint];
     isClickCgAndCertiBtn = YES;
-//    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-//    loginViewController.sourceVC = @"changeUser";
-//    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-//    [self dismissViewControllerAnimated:NO completion:^{
-//        [LockFlagSingle sharedManager].disappearType = DisDefault;
-//    }];
-//    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [delegate.tabBarController presentViewController:loginNaviController animated:NO completion:^{
-//
-//    }];
-//    //[[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
     [SingleUserInfo loadLoginViewController];
 }
 
@@ -734,12 +724,11 @@
     
     [super viewWillAppear:animated];
     
-//    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
-    
     if ([UIApplication sharedApplication].statusBarStyle == UIStatusBarStyleDefault) {
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         statusBarDiffrrent = YES;
     }
+    [self.navigationController setNavigationBarHidden:YES];
     [_errorLabel setHidden:YES];
     [_headImageView setHidden:YES];
     [_clearButton setHidden:YES];
@@ -750,37 +739,42 @@
     //从安全中心过来 跳过按钮隐藏
     if ([_souceVc isEqualToString:@"securityCenter"]) {
         [_runButton setHidden:YES];
-        [_runLabel setHidden:YES];
         [_cancelButton setHidden:NO];
         [_cancelLabel setHidden:NO];
     } else {
-        [_runLabel setHidden:NO];
         [_runButton setHidden:NO];
         [_cancelButton setHidden:YES];
         [_cancelLabel setHidden:YES];
     }
-    _tipLable.textColor = [UIColor whiteColor];
+    _tipLable.textColor = [Color color:PGColorOptionTitleBlack];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setIndecatorBtn:) name:@"setindecatorbtnnofication" object:nil];
     // 初始化内容
     switch (_nLockViewType) {
         case LLLockViewTypeCheck:
         {
-            _tipLable.text = @"请绘制解锁密码";
-            _errorLabel.frame = CGRectMake(0,kIS_Iphone4?CGRectGetMaxY(_tipLable.frame) + [Common calculateNewSizeBaseMachine:12] : CGRectGetMaxY(_tipLable.frame) + 10, ScreenWidth, [Common calculateNewSizeBaseMachine:12]);
             [_headImageView setHidden:NO];
+            _nameLabel.frame = CGRectMake(0, CGRectGetMaxY(_headImageView.frame) + 18, ScreenWidth, 15);
+            _nameLabel.text = [NSString stringWithFormat:@"hi %@",SingleUserInfo.loginData.userInfo.mobile];
+            BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
+            //系统touchID开启 和 处于解锁页面 和 用户打开指纹解锁 三者缺一不可
+            
+            if ([self checkTouchIdIsOpen] && _nLockViewType == LLLockViewTypeCheck && isOpen) {
+                _tipLable.frame = CGRectMake(0, 10, ScreenWidth, 23);
+            } else {
+                _tipLable.frame = CGRectMake(0, CGRectGetMaxY(_nameLabel.frame) + 20, ScreenWidth, 23);
+            }
+            _tipLable.text = @"请绘制解锁密码";
+            
+            self.indecator.hidden = YES;
             [_titleLabel setHidden:YES];
             [_runButton setHidden:YES];
-            [_runLabel setHidden:YES];
             [_cancelButton setHidden:YES];
             [_cancelLabel setHidden:YES];
             [self setBtnHide:NO];
-            self.indecator.hidden = YES;
-            _nameLabel.text = [NSString stringWithFormat:@"hi %@",[[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM]];
         }
             break;
         case LLLockViewTypeCreate:
         {
-            _errorLabel.frame = CGRectMake(0,kIS_Iphone4?CGRectGetMaxY(_tipLable.frame) + [Common calculateNewSizeBaseMachine:12] : CGRectGetMaxY(_tipLable.frame) + 10, ScreenWidth, [Common calculateNewSizeBaseMachine:12]);
             _tipLable.text = @"请绘制解锁密码";
             self.indecator.hidden = NO;
         }
@@ -814,10 +808,8 @@
     if (_baseScrollView != nil) {
         if ([LockFlagSingle sharedManager].showSection == LockFingerprint) {
             _baseScrollView.contentOffset = CGPointMake(ScreenWidth, 0);
-//            [LockFlagSingle sharedManager].showSection = LockFingerprint;
         } else  if([LockFlagSingle sharedManager].showSection == LockGesture){
             _baseScrollView.contentOffset = CGPointMake(0, 0);
-//            [LockFlagSingle sharedManager].showSection = LockGesture;
         }
     }
 }
@@ -859,14 +851,14 @@
         nRetryTimesRemain--;
         [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:nRetryTimesRemain] forKey:@"nRetryTimesRemain"];
         if (nRetryTimesRemain > 0) {
-            NSDictionary *normalStrDict = @{NSFontAttributeName : [UIFont systemFontOfSize:12],
+            NSDictionary *normalStrDict = @{NSFontAttributeName : [UIFont systemFontOfSize:16],
                                             NSForegroundColorAttributeName : UIColorWithRGB(0x94bde4)
                                             };
             NSString *str = [NSString stringWithFormat:@"密码输入错误，您还可以尝试 %d 次", nRetryTimesRemain];
             NSRange strRg = [str rangeOfString:[NSString stringWithFormat:@"%d",nRetryTimesRemain]];
             NSMutableAttributedString *StrAttri = [[NSMutableAttributedString alloc] initWithString:str attributes:normalStrDict];
 
-            NSDictionary *redStrDict = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
+            NSDictionary *redStrDict = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:16],
                                               NSForegroundColorAttributeName : UIColorWithRGB(0xfd4d4c)
                                               };
             [StrAttri addAttributes:redStrDict range:strRg];
@@ -876,12 +868,11 @@
         } else {
             
             // 强制注销该账户，并清除手势密码，以便重设
-            [self dismissViewControllerAnimated:NO completion:^{
-                [SingleUserInfo loadLoginViewController];
-                [LockFlagSingle sharedManager].disappearType = DisDefault;
-            }]; // 由于是强制登录，这里必须以NO ani的方式才可
+            [SingleUserInfo deleteUserData];
+            [SingleUserInfo loadLoginViewController];
+            [LockFlagSingle sharedManager].disappearType = DisDefault;
             [LLLockPassword saveLockPassword:nil];
-
+            [SingGlobalView.rootNavController removeViewController:self];
         }
         
     } else {
@@ -895,8 +886,8 @@
     if ([self.passwordNew isEqualToString:@""] && [self.passwordconfirm isEqualToString:@""]) {
         if ([string length] < 4) {
             [self setTip:self.tip1];
-            NSDictionary *redStrDict = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
-                                         NSForegroundColorAttributeName : UIColorWithRGB(0xfd4d4c)
+            NSDictionary *redStrDict = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
+                                         NSForegroundColorAttributeName : [Color color:PGColorOpttonTextRedColor]
                                          };
             NSString *str = [NSString stringWithFormat:@"密码长度不能短于4位"];
             NSMutableAttributedString *strAttri = [[NSMutableAttributedString alloc] initWithString:str attributes:redStrDict];
@@ -920,24 +911,27 @@
             LLLog(@"两次密码一致");
             
             [LLLockPassword saveLockPassword:string];
-            if ([self checkTouchIdIsOpen]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手势密码设置成功!" message:@"是否启用Touch ID指纹解锁" delegate:self cancelButtonTitle:nil otherButtonTitles:@"取消",@"开启", nil];
-                [alert show];
-            } else {
+            if ([_souceVc isEqualToString:@"securityCenter"]) {
                 [self hide];
+            } else {
+                if ([self checkTouchIdIsOpen]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手势密码设置成功!" message:[NSString stringWithFormat:@"%@",_isFaceID ?@"是否启用Face ID面容解锁" : @"是否启用Touch ID指纹解锁"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"取消",@"开启", nil];
+                    [alert show];
+                } else {
+                    [self hide];
+                }
             }
+
             
         } else {
             
             self.passwordconfirm = @"";
-            [self setTip:@"两次绘制的密码不一致"];
-//            NSDictionary *redStrDict = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
-//                                         NSForegroundColorAttributeName : UIColorWithRGB(0xfd4d4c)
-//                                         };
-//            NSString *str = [NSString stringWithFormat:@"与上一次绘制不一致，请重新绘制"];
-//            NSMutableAttributedString *strAttri = [[NSMutableAttributedString alloc] initWithString:str attributes:redStrDict];
-            //[self setErrorTip:strAttri errorPswd:string];
+            [self setTip:@"请再次绘制解锁密码"];
             
+             [_errorLabel setHidden:NO];
+            _errorLabel.text = @"两次绘制的密码不一致";
+            [self shakeAnimationForView:_errorLabel];
+
         }
     } else {
         NSAssert(1, @"设置密码意外");
@@ -956,7 +950,7 @@
 - (void)setTip:(NSString*)tip
 {
     [_tipLable setText:tip];
-    [_tipLable setTextColor:[UIColor whiteColor]];
+    [_tipLable setTextColor:[Color color:PGColorOptionTitleBlack]];
     
     
     _tipLable.alpha = 0;
@@ -973,11 +967,10 @@
 {
     // 显示错误点点
     [self.lockview showErrorCircles:string];
-    
+    [self.indecator showErrorCircles:string];
     // 直接_变量的坏处是
     [_errorLabel setHidden:NO];
     _errorLabel.attributedText = tip;
-    //[_errorLabel setTextColor:kTipColorError];
     
     [self shakeAnimationForView:_errorLabel];
 }
@@ -1028,15 +1021,10 @@
 - (void)hide
 {
     [LockFlagSingle sharedManager].disappearType = DisDefault;
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
     switch (_nLockViewType) {
         case LLLockViewTypeCheck:
         {
-            //应用在后台运行超过60秒后有锁，从3DTouch进入时需要重新请求接口。
-            if ([Touch3DSingle sharedTouch3DSingle].isShowLock) {// && [[Touch3DSingle sharedTouch3DSingle].type isEqualToString:@"0"]) {
-                [Touch3DSingle sharedTouch3DSingle].isShowLock = NO;
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"responds3DTouchClick" object:nil];
-            }
+
         }
             break;
         case LLLockViewTypeCreate:
@@ -1045,9 +1033,7 @@
             [LLLockPassword saveLockPassword:self.passwordNew];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            if ([self.delegate respondsToSelector:@selector(lockHandleViewController:didClickLeapWithSign:)]) {
-                [self.delegate lockHandleViewController:self didClickLeapWithSign:YES];
-            }
+            
             
         }
             break;
@@ -1061,28 +1047,29 @@
         [UCFCouponPopup startQueryCouponPopup];
     }
     // 在这里可能需要回调上个页面做一些刷新什么的动作
-    
-#ifdef LLLockAnimationOn
-    [self captureCurrentSnap];
-    // 隐藏控件
-    for (UIView* v in self.view.subviews) {
-        if (v.tag > 10000) continue;
-        v.hidden = YES;
-    }
-    // 动画解锁
-    [self animateUnlock];
-    
-    //设置成功之后返回安全中心页
-    if ([_souceVc isEqualToString:@"securityCenter"]) {
-        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        UINavigationController *navController = delegate.tabBarController.selectedViewController;
-        [navController popViewControllerAnimated:YES];
-    }
-#else
-    [self dismissViewControllerAnimated:NO completion:^{
-        [AuxiliaryFunc showAlertViewWithMessage:@"恭喜您注册成功!" delegate:self];
-    }];
-#endif
+    [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
+//#ifdef LLLockAnimationOn
+//    [self captureCurrentSnap];
+//    // 隐藏控件
+//    for (UIView* v in self.view.subviews) {
+//        if (v.tag > 10000) continue;
+//        v.hidden = YES;
+//    }
+//    // 动画解锁
+//    [self animateUnlock];
+//
+//    //设置成功之后返回安全中心页
+//    if ([_souceVc isEqualToString:@"securityCenter"]) {
+//        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        UINavigationController *navController = delegate.tabBarController.selectedViewController;
+//        [navController popViewControllerAnimated:YES];
+//    }
+//#else
+//
+//    [self dismissViewControllerAnimated:NO completion:^{
+//        [AuxiliaryFunc showAlertViewWithMessage:@"恭喜您注册成功!" delegate:self];
+//    }];
+//#endif
 }
 
 #pragma mark - delegate 每次划完手势后
@@ -1112,15 +1099,6 @@
             self.tip2 = @"请再次绘制解锁密码";
             self.tip3 = @"解锁密码创建成功";
             [self createPassword:string];
-//            if ([self.passwordOld isEqualToString:@""]) {
-//                self.tip1 = @"请输入原来的密码";
-//                [self checkPassword:string];
-//            } else {
-//                self.tip1 = @"请输入新的密码";
-//                self.tip2 = @"请再次输入密码";
-//                self.tip3 = @"密码修改成功";
-//                [self createPassword:string];
-//            }
         }
             break;
         case LLLockViewTypeClean:

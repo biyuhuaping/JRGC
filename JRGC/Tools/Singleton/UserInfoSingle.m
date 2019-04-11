@@ -251,7 +251,7 @@
 
 - (void)loadLoginViewController
 {
-    UCFNewLoginViewController *vc = [[UCFNewLoginViewController alloc]init];
+    UCFNewLoginViewController *vc = [[UCFNewLoginViewController alloc] init];
     [SingGlobalView.rootNavController pushViewController:vc animated:YES];
 }
 

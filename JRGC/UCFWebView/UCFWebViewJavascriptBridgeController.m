@@ -69,8 +69,7 @@
     // Do any additional setup after loading the view from its nib.
 
     [self setController];    //初始化当前控制器的一些属性
-//    [self addRefresh];       //添加下拉刷新
-    [self tableViewAddTouch];//去掉长按手势
+
     [self setWebView];       //初始化webView 并加入js
     [self subErrorView];     //添加404页
 
@@ -494,14 +493,23 @@
         }
         else if ([nativeData[@"action"] isEqualToString:@"shareWeChat"]) {//工力工贝 分享
             [weakSelf goToShareWeChat:nativeData];
-        }
-        
-        else if ([nativeData[@"action"] isEqualToString:@"gotoGB"]) {//工力工贝 分享
+        }else if ([nativeData[@"action"] isEqualToString:@"gotoGB"]) {//工力工贝 分享
             [weakSelf goToShareWeChat:nativeData];
+        } else if ([nativeData[@"action"] isEqualToString:@"isOtherView"]) {//订单页面是否导航栏根视图
+            [weakSelf isRootViewController];
         }
 //     */
     }];
      
+}
+- (void)isRootViewController
+{
+    RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.selectedViewController;
+    NSInteger currentIndex = [nav.viewControllers indexOfObject:self];
+
+    [_bridge callHandler:@"jsHandler" data:@{@"type": @"isOtherView",@"value":[NSNumber numberWithBool:currentIndex]} responseCallback:^(id responseData) {
+        DDLogDebug(@"是否首页");
+    }];
 }
 - (void)getContractContent:(NSString *)value
 {
@@ -909,13 +917,13 @@
 }
 - (void)jsClose
 {
-    if (_isFromBarMall) {
-        [self.view.window.layer addAnimation:[self popAnimation] forKey:nil];
-        [self dismissViewControllerAnimated:NO completion:nil];
-    } else {
+//    if (_isFromBarMall) {
+//        [self.view.window.layer addAnimation:[self popAnimation] forKey:nil];
+//        [self dismissViewControllerAnimated:NO completion:nil];
+//    } else {
         [self.navigationController popViewControllerAnimated:NO];
 
-    }
+//    }
 }
 - (CATransition *)popAnimation{
     

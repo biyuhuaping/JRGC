@@ -27,7 +27,7 @@
 #import "UCFNewLoginViewController.h"
 #import "RTRootNavigationAddPushController.h"
 #import "UCFAssetAccountViewController.h"
-
+#import "UCFNewMallWebViewController.h"
 @interface UCFMainTabBarController ()
 
 
@@ -124,40 +124,31 @@
             case 0:{
                 _LatestView = [[UCFNewHomeViewController alloc] init];
                 controller = _LatestView;
-//                UCFAssetAccountViewController *vc = [[UCFAssetAccountViewController alloc] init];
-//                _LatestView = [[UCFAssetAccountViewController alloc] init];
-//                controller = _LatestView;
             }
                 break;
             case 1:{
                 UCFInvestViewController *invest = [[UCFInvestViewController alloc] init];
                 controller = invest;
                 _AssignmentView = invest;
-//                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
-//                controller = mine;
-//                _mineView = mine;
             }
                 break;
             case 2:{
-                UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFDiscoveryViewController" bundle:nil];
                 discoveryWeb.url = DISCOVERYURL;//请求地址;
                 discoveryWeb.navTitle = @"奖励";
                 controller = discoveryWeb;
             }
                 break;
             case 3:{
-//                UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//                mallController.url      = @"https://m.dougemall.com";//请求地址;
-//                mallController.navTitle = @"商城";
-//                controller = mallController;//
-                UIViewController *contro = [[UIViewController alloc] init];
-                controller = contro;
+                UCFNewMallWebViewController *mallController = [[UCFNewMallWebViewController alloc] initWithNibName:@"UCFNewMallWebViewController" bundle:nil];
+                mallController.url = @"https://m.dougemall.com?fromAppBar=true";//请求地址;
+                mallController.navTitle = @"商城";
+                controller = mallController;//
             }
                 break;
             case 4:{
                 
                 UCFNewMineViewController *mine = [[UCFNewMineViewController alloc] init];
-//                UCFMineViewController *mine = [[UCFMineViewController alloc] init];
                 controller = mine;
                 _mineView = mine;
             }
@@ -167,7 +158,7 @@
                 break;
         }
         if (controller) {
-            [vcArray addObject:[[RTRootNavigationAddPushController alloc] initWithRootViewController:controller]];
+            [vcArray addObject:(i == 3 ?[[BaseNavigationViewController alloc] initWithRootViewController:controller] :[[RTRootNavigationAddPushController alloc] initWithRootViewController:controller])];
             UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:tabbarTitleArray[i] image:[[UIImage imageNamed:tabbarNormalArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:tabbarHighlightArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
             item.tag = i;
             controller.tabBarItem = item;
@@ -212,7 +203,6 @@
         [self checkTapMineNum];
     }
 }
-
 - (void)checkTapMineNum {
     NSString *userId = SingleUserInfo.loginData.userInfo.userId;
     if(nil != userId) {
@@ -263,32 +253,7 @@
       topView = [contrl.viewControllers objectAtIndex:0];
     }
 
-    if ([self.viewControllers indexOfObject:viewController] == 3) {
-        NSString *userId = SingleUserInfo.loginData.userInfo.userId;
-        if(nil == userId) {
-            [SingleUserInfo loadLoginViewController];
-            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
-            return NO;
-        } else {
-            [[NSURLCache sharedURLCache] removeAllCachedResponses];
-            NSURLCache * cache = [NSURLCache sharedURLCache];
-            [cache removeAllCachedResponses];
-            [cache setDiskCapacity:0];
-            [cache setMemoryCapacity:0];
-            
-            UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-            mallController.url      = @"https://m.dougemall.com";//请求地址;
-            mallController.navTitle = @"商城";
-            mallController.isFromBarMall = YES;
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mallController];
-            [self.view.window.layer addAnimation:[self presentAnimation] forKey:nil];//添加Animation
-            [self presentViewController:nav animated:NO completion:nil];
-            return NO;
-        }
-        
-        return YES;
-    }
-    if ([self.viewControllers indexOfObject:viewController] == 4) {
+    if ([self.viewControllers indexOfObject:viewController] == 4 || [self.viewControllers indexOfObject:viewController] == 2) {
         NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if(nil == userId) {
             [SingleUserInfo loadLoginViewController];
@@ -391,30 +356,43 @@
 }
 - (void)showTabBar
 {
+//    if (self.tabBar.hidden == NO)
+//    {
+//        return;
+//    }
+//    UIView *contentView;
+//    if ([[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]]) {
+//        contentView = [self.view.subviews objectAtIndex:1];
+//    } else {
+//        contentView = [self.view.subviews objectAtIndex:0];
+//        contentView.frame = CGRectMake(contentView.bounds.origin.x, contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height - self.tabBar.frame.size.height);
+//        self.tabBarController.tabBar.hidden = NO;
+//    }
     if (self.tabBar.frame.origin.y == ScreenHeight - CGRectGetHeight(self.tabBar.frame)) {
         return;
     }
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0 animations:^{
         self.tabBar.frame = CGRectMake(0, ScreenHeight - CGRectGetHeight(self.tabBar.frame), CGRectGetWidth(self.tabBar.frame), CGRectGetHeight(self.tabBar.frame));
     }];
 }
 - (void)hideTabBar
 {
+//    if (self.tabBar.hidden == YES) {
+//        return;
+//    }
+//    UIView *contentView;
+//    if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
+//        contentView = [self.view.subviews objectAtIndex:1];
+//    else
+//        contentView = [self.view.subviews objectAtIndex:0];
+//    contentView.frame = CGRectMake(contentView.bounds.origin.x,  contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height + self.tabBar.frame.size.height);
+//    self.tabBar.hidden = YES;
+//    return;
     if (self.tabBar.frame.origin.y == ScreenHeight) {
         return;
     }
     self.tabBar.frame = CGRectMake(0, ScreenHeight, CGRectGetWidth(self.tabBar.frame), CGRectGetHeight(self.tabBar.frame));
-    UINavigationController *nav = [self.viewControllers objectAtIndex:3];
-    UCFWebViewJavascriptBridgeMall *mallWeb = [nav.viewControllers objectAtIndex:0];
-    mallWeb.isTabbarfrom = YES;
-    mallWeb.preSelectIndex = self.selectedIndex;
-    [UIView transitionWithView:self.view
-                      duration:1.0f
-                       options:UIViewAnimationOptionTransitionFlipFromRight
-                    animations:^{
-                        [self setSelectedIndex:3];
-                    }
-                    completion:nil];
+
 }
 - (void)viewWillLayoutSubviews
 {

@@ -67,6 +67,8 @@
 
 @property (nonatomic,assign)int sex;//性别
 @property (nonatomic, copy) NSString *userCenterTicket;
+
+@property (nonatomic, assign)BOOL isFaceID;
 @end
 
 @implementation UCFSecurityCenterViewController
@@ -76,8 +78,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSecurityCenterNetData) name:@"getPersonalCenterNetData" object:nil];
-       // 更新人脸识别开关状态查询网络请求 通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFaceSwitchSwipNetData) name:@"updateFaceSwitchSwip" object:nil];
+
     }
     return self;
 }
@@ -99,17 +100,13 @@
         self.userLevel.isShowOrHide = YES;//不显示
 
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"gesture_account_icon" title:@"启用手势密码"];
+        
+        
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"password_account_icon" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
 
-//        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
-        
-//        if (SingleUserInfo.superviseSwitch && [SingleUserInfo.loginData.userLevel integerValue] < 2) {
-//            group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode]];//qyy
-//        }
-//        else {
-            group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
-//        }
+
+        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
 
         UCFSettingItem *weijinAccount  = [UCFSettingArrowItem itemWithIcon:@"vjin_account_icon" title:@"微金存管账户" destVcClass:[BindPhoneNumViewController class]];
         UCFSettingItem *zunxiangAccount  = [UCFSettingArrowItem itemWithIcon:@"zunxiang_account_icon" title:@"尊享存管账户" destVcClass:[BindPhoneNumViewController class]];
@@ -126,7 +123,12 @@
         UCFSettingGroup *group3 = [[UCFSettingGroup alloc] init];//账户安全
         
         if ([self checkTouchIdIsOpen]) {
-            UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"fingerprint_account_icon" title:@"启用指纹解锁" withSwitchType:1];
+            NSString *showStr = @"启用指纹解锁";
+            if (_isFaceID) {
+                showStr = @"启用面部解锁";
+            }
+            
+            UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"fingerprint_account_icon" title:showStr withSwitchType:1];
              group3.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith,modifyPassword]];
         } else {
              group3.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,modifyPassword]];
@@ -136,40 +138,7 @@
     }
     return _itemsData;
 }
-//- (void)requestMyReceipt//请求总资产信息
-//{
-//    UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
-//
-//    request.animatingView = self.view;
-//    //    request.tag =tag;
-//    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        // 你可以直接在这里使用 self
-//        UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
-//        DDLogDebug(@"---------%@",model);
-//        if (model.ret == YES) {
-//
-//            UCFSettingItem *weijinAccount  = [UCFSettingArrowItem itemWithIcon:@"vjin_account_icon" title:@"微金存管账户" destVcClass:[BindPhoneNumViewController class]];
-//            UCFSettingItem *zunxiangAccount  = [UCFSettingArrowItem itemWithIcon:@"zunxiang_account_icon" title:@"尊享存管账户" destVcClass:[BindPhoneNumViewController class]];
-//             UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
-//            if (model.data.zxAccountIsShow) {
-//                group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount,zunxiangAccount]];
-//            }
-//            else
-//            {
-//                group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount]];
-//            }
-//            [self.itemsData replaceObjectAtIndex:1 withObject:group2];
-//            [self.tableview reloadData];
-//        }
-//        else{
-//            ShowMessage(model.message);
-//        }
-//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        // 你可以直接在这里使用 self
-//
-//    }];
-//
-//}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -258,8 +227,6 @@
             NSString *useridstr = [NSString stringWithFormat:@"%@",SingleUserInfo.loginData.userInfo.userId];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:useridstr,@"userId",nil];
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
-            
-//            [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
             [SingleUserInfo deleteUserData];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];
@@ -348,9 +315,6 @@
     DDLogDebug(@"个人信息数据：%@",data);
     
     NSMutableDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
-//    NSString *rsttext = dic[@"statusdes"];
-    
     if (tag.intValue == kSXTagAccountSafe) {
         
         BOOL ret = dic[@"ret"];
@@ -373,13 +337,6 @@
             }
             NSString *realName = [result objectForKey:@"realName"];
             self.userGradeSwitch = [dic[@"data"][@"isOpen"]  boolValue];
-            //保存 刷脸登录开关
-          
-//            if( [[dic[@"data"] objectSafeForKey:@"faceIsOpen"] isEqualToString:@"0"]){
-//                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACESWITCHSTATUS];
-//            }else{
-//                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
-//            }
             
             if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 4) {
                 _setChangePassword.title = @"修改交易密码";
@@ -585,13 +542,14 @@
             [self.navigationController pushViewController:controller animated:YES];
         }
         else {
+            @PGWeakObj(self);
             //关闭手势密码
             BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"取消设置手势密码会增加账户信息安全风险，确认关闭吗？" message:@"" cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
                 if (index == 0) {
                     //关闭手势密码
                     UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
                     controller.sourceVC = @"securityCenter";
-                    [self.navigationController pushViewController:controller animated:YES];
+                    [selfWeak.navigationController pushViewController:controller animated:YES];
                 }
                 else{
                     //不做任何操作 并设置开启状态
@@ -600,30 +558,10 @@
             } otherButtonTitles:@"取消"];
             [alert show];
         }
-    } else if ([securityCell.itemNameLabel.text isEqualToString:@"启用刷脸登录"]) {
-        [self validFaceLogin:gestureState WithCell:securityCell];
-    } else if (([securityCell.itemNameLabel.text isEqualToString:@"启用指纹解锁"])) {
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([defaults boolForKey:@"useLockView"]) {
-            [self touchIDVerificationSwitchState:gestureState WithCell:securityCell];
-        } else {
-            //关闭手势密码
-            BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"启用指纹解锁前需先启用手势密码" cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
-                if (index == 0) {
-//                    //关闭手势密码
-                    UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
-                    controller.sourceVC = @"securityCenter";
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
-                else{
-                    //不做任何操作 并设置开启状态
-                    [securityCell.switchView setOn:NO animated:YES];
-                }
-            } otherButtonTitles:@"取消"];
-            [alert show];
-            
-        }
+    } else if (([securityCell.itemNameLabel.text isEqualToString:@"启用指纹解锁"] || [securityCell.itemNameLabel.text isEqualToString:@"启用面部解锁"])) {
+        UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
+        controller.sourceVC = @"securityCenter_touchID";
+        [self.navigationController pushViewController:controller animated:YES];
     }
 }
 
@@ -666,9 +604,9 @@
     NSError *error = nil;
     NSString *showStr = @"";
     if (gestureState) {
-        showStr = @"验证并开启指纹解锁";
+        showStr =  _isFaceID ? @"验证并开启面部解锁" : @"验证并开启指纹解锁";
     } else {
-        showStr = @"验证并关闭指纹解锁";
+        showStr = _isFaceID ? @"验证并关闭面部解锁" : @"验证并关闭指纹解锁";
     }
     
     //TODO:TOUCHID是否存在
@@ -756,6 +694,15 @@
     NSError *error = nil;
     //TODO:TOUCHID是否存在
     if ([lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]){
+        NSString *localizedReason = @"指纹登录";
+        if (@available(iOS 11.0, *)) {
+            if (lol.biometryType == LABiometryTypeTouchID) {
+                _isFaceID = NO;
+            }else if (lol.biometryType == LABiometryTypeFaceID){
+                localizedReason = @"人脸识别";
+                _isFaceID = YES;
+            }
+        }
         return YES;
     } else {
         return NO;
@@ -954,10 +901,6 @@
         if (indexPath.section == 2) {
             
             if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"ModifyPasswordViewController"]){//修改登录密码
-//                ModifyPasswordViewController * modifyPasswordVC = [[ModifyPasswordViewController alloc]initWithNibName:@"ModifyPasswordViewController" bundle:nil];
-//                modifyPasswordVC.title = arrowItem.title;
-//                modifyPasswordVC.hidesBottomBarWhenPushed = YES;
-//                [self.navigationController pushViewController:modifyPasswordVC  animated:YES];
                 UCFNewModifyPasswordViewController *vc= [[UCFNewModifyPasswordViewController alloc] init];
                 [self.rt_navigationController pushViewController:vc animated:YES];
             } else if([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"TradePasswordVC"]){ //设置交易密码或修改交易密码

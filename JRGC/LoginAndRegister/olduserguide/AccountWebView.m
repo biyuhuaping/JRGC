@@ -21,7 +21,10 @@
     self = [super initWithNibName:NSStringFromClass([self.superclass class]) bundle:nibBundleOrNil];
     return self;
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -48,12 +51,8 @@
     if (!self.errorView.hidden) {
         self.errorView.hidden = YES;
     }
-    
-    
-    
-    
-    
-    
+    //不知道干啥的，为啥加载完成就返回？
+    return;
     for (UCFMicroBankOpenAccountViewController *vc in self.navigationController.viewControllers) {
         if ([vc isKindOfClass:[UCFMicroBankOpenAccountViewController class]]) {
             vc.openAccountSucceed = YES;

@@ -141,12 +141,15 @@
         //统计用户数量
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
     } else {
-        NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
         [self showTabbarController];
+        NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+        BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
+
         //使用手势密码 显示
-        if (useLockView == 1) {
+        if (useLockView == 1 || isOpen) {
             [self showGCode];
         }
+
     }
 }
 - (void)changeRootView:(GuideViewController *)controller
@@ -429,10 +432,11 @@
             _backgroundUpdateTask = UIBackgroundTaskInvalid;
         }
     NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
-    if (useLockView == 1) {
+    BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
+
+    if (useLockView == 1 || isOpen) {
         if (_backTime > 60) {
             [[ToolSingleTon sharedManager] hideAlertAction:nil];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"guaguakaHide" object:nil];
             [self showGCode];
         }
     }
@@ -515,35 +519,24 @@
 //显示手势密码
 - (void)showGCode
 {
-    NSString* pswd = [LLLockPassword loadLockPassword];
     if (SingleUserInfo.loginData.userInfo.userId) {
-        if (pswd) {
-            [self showLLLockViewController:LLLockViewTypeCheck];
-        } else {
-            [self showLLLockViewController:LLLockViewTypeCreate];
-        }
+        [self showLLLockViewController:LLLockViewTypeCheck];
     }
 }
 
 #pragma mark - 弹出手势解锁密码输入框
 - (void)showLLLockViewController:(LLLockViewType)type
 {
-    if(self.window.rootViewController.presentingViewController == nil){
-        LLLog(@"root = %@", self.window.rootViewController.class);
-        LLLog(@"lockVc isBeingPresented = %d", [self.lockVc isBeingPresented]);
-        if (self.lockVc) {
-            self.lockVc = nil;
-        }
+
         self.lockVc = [[UCFLockHandleViewController alloc] init];
 
         self.lockVc.nLockViewType = type;
 
         self.lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 
-        [self.window.rootViewController presentViewController:self.lockVc animated:NO completion:^{
-        }];
+        [SingGlobalView.rootNavController pushViewController:self.lockVc animated:NO complete:nil];
         LLLog(@"创建了一个pop=%@", self.lockVc);
-    }
+    
 }
 
 #pragma mark GuideViewContlerDelegate

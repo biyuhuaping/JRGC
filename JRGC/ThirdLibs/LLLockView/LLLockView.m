@@ -13,9 +13,9 @@
 #define kCircleMargin 35.0              // 圆点离屏幕左边距
 #define kCircleDiameter 60.0            // 圆点直径
 #define kLLCircleAlpha 1.0              // 圆点透明度
-#define kLLLineWidth 5.0               // 线条宽
-#define kLLLineColor UIColorWithRGB(0x4775ff) // 线条色蓝
-#define kLLLineColorWrong UIColorWithRGB(0xfc7070) // 线条色红
+#define kLLLineWidth 15.0               // 线条宽
+#define kLLLineColor UIColorWithRGB(0xC2D0F7) // 线条色蓝
+#define kLLLineColorWrong UIColorWithRGB(0xFFD1CD) // 线条色红
 
 @interface LLLockView ()
 {
@@ -192,10 +192,6 @@
         CGFloat ydiff=point.y - thisbutton.center.y;
         
         if (fabsf(xdiff) <36 &&fabsf (ydiff) <36){
-            
-//            LLLog(@"now point is %d th",thisbutton.tag-kLLBaseCircleNumber);
-            //             LLLog(@"%@", [resulttext.text stringByAppendingString:resulttext.text]);
-            
             // 未选中的才能加入
             if (!thisbutton.selected) {
                 thisbutton.selected = YES;

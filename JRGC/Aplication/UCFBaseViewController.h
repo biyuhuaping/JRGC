@@ -56,5 +56,12 @@
 - (void)refresh;
 
 - (void)blindUserStatue;
+
+/**
+ 禁用手势
+
+ @param setNavgationPopDisabled YES 为禁用
+ */
+- (void)setSetNavgationPopDisabled:(BOOL)setNavgationPopDisabled;
 @end
 

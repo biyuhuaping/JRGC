@@ -38,6 +38,10 @@
 		3307E22621A3B153009FFF6D /* QuickRechargeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22521A3B153009FFF6D /* QuickRechargeHeadView.xib */; };
 		3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */; };
 		3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */; };
+		3308E6A6225C7B4900F71B2D /* UCFNewMallWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3308E6A4225C7B4800F71B2D /* UCFNewMallWebViewController.m */; };
+		3308E6A7225C7B4900F71B2D /* UCFNewMallWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3308E6A5225C7B4800F71B2D /* UCFNewMallWebViewController.xib */; };
+		3308E6AB225C81D700F71B2D /* UCFNewSubMallWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3308E6A9225C81D700F71B2D /* UCFNewSubMallWebViewController.m */; };
+		3308E6AC225C81D700F71B2D /* UCFNewSubMallWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3308E6AA225C81D700F71B2D /* UCFNewSubMallWebViewController.xib */; };
 		331089D421E74EB80073F71B /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331089C821E74EB80073F71B /* SDCycleScrollView.m */; };
 		331089D521E74EB80073F71B /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 331089C921E74EB80073F71B /* UIView+SDExtension.m */; };
 		331089D621E74EB80073F71B /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331089CA21E74EB80073F71B /* SDCollectionViewCell.m */; };
@@ -127,6 +131,8 @@
 		337BB2E722154C8A001ACDE6 /* UCFTransBidInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2E622154C8A001ACDE6 /* UCFTransBidInfoModel.m */; };
 		337BB2EA22154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2E922154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m */; };
 		337BB2ED22155D71001ACDE6 /* UCFTransBidDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2EC22155D71001ACDE6 /* UCFTransBidDetailViewModel.m */; };
+		337F4281225B8336009AFF49 /* touch_id@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F427F225B8334009AFF49 /* touch_id@3x.png */; };
+		337F4282225B8336009AFF49 /* touch_id@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F4280225B8335009AFF49 /* touch_id@2x.png */; };
 		3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D20B21A25BD900104CCD /* UCFTransferTableView.m */; };
 		3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */; };
 		3382D21621A267CE00104CCD /* BankTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21421A267CE00104CCD /* BankTransferTableViewCell.xib */; };
@@ -1325,8 +1331,6 @@
 		FB4F9E7F1D62A83000CCB492 /* AccountWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB4F9E7D1D62A83000CCB492 /* AccountWebView.xib */; };
 		FB51491A1D6438A700C26E7B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB5149191D6438A700C26E7B /* Images.xcassets */; };
 		FB5149341D64403100C26E7B /* gif@3x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB51491B1D64403000C26E7B /* gif@3x.gif */; };
-		FB5149491D64403100C26E7B /* touch_id@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB5149321D64403100C26E7B /* touch_id@2x.gif */; };
-		FB51494A1D64403100C26E7B /* touch_id@3x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB5149331D64403100C26E7B /* touch_id@3x.gif */; };
 		FB5149521D64441F00C26E7B /* guideImage6_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494C1D64441F00C26E7B /* guideImage6_1.png */; };
 		FB5149551D64441F00C26E7B /* guideImage7_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494F1D64441F00C26E7B /* guideImage7_1.png */; };
 		FB5555331BCE37570013894F /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5555301BCE37570013894F /* libMobClickLibrary.a */; };
@@ -1448,6 +1452,12 @@
 		3307E22721A3D7B6009FFF6D /* QuickIntroduceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickIntroduceTableViewCell.h; sourceTree = "<group>"; };
 		3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickIntroduceTableViewCell.m; sourceTree = "<group>"; };
 		3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickIntroduceTableViewCell.xib; sourceTree = "<group>"; };
+		3308E6A3225C7B4800F71B2D /* UCFNewMallWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewMallWebViewController.h; sourceTree = "<group>"; };
+		3308E6A4225C7B4800F71B2D /* UCFNewMallWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewMallWebViewController.m; sourceTree = "<group>"; };
+		3308E6A5225C7B4800F71B2D /* UCFNewMallWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFNewMallWebViewController.xib; sourceTree = "<group>"; };
+		3308E6A8225C81D700F71B2D /* UCFNewSubMallWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewSubMallWebViewController.h; sourceTree = "<group>"; };
+		3308E6A9225C81D700F71B2D /* UCFNewSubMallWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewSubMallWebViewController.m; sourceTree = "<group>"; };
+		3308E6AA225C81D700F71B2D /* UCFNewSubMallWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFNewSubMallWebViewController.xib; sourceTree = "<group>"; };
 		331089C521E74EB80073F71B /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		331089C621E74EB80073F71B /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
 		331089C721E74EB80073F71B /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1625,6 +1635,8 @@
 		337BB2E922154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransInvestPageInfoApi.m; sourceTree = "<group>"; };
 		337BB2EB22155D71001ACDE6 /* UCFTransBidDetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransBidDetailViewModel.h; sourceTree = "<group>"; };
 		337BB2EC22155D71001ACDE6 /* UCFTransBidDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransBidDetailViewModel.m; sourceTree = "<group>"; };
+		337F427F225B8334009AFF49 /* touch_id@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "touch_id@3x.png"; sourceTree = "<group>"; };
+		337F4280225B8335009AFF49 /* touch_id@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "touch_id@2x.png"; sourceTree = "<group>"; };
 		3382D20A21A25BD900104CCD /* UCFTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransferTableView.h; sourceTree = "<group>"; };
 		3382D20B21A25BD900104CCD /* UCFTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransferTableView.m; sourceTree = "<group>"; };
 		3382D21221A267CE00104CCD /* BankTransferTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTransferTableViewCell.h; sourceTree = "<group>"; };
@@ -3680,8 +3692,6 @@
 		FB4F9E7D1D62A83000CCB492 /* AccountWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccountWebView.xib; path = olduserguide/AccountWebView.xib; sourceTree = "<group>"; };
 		FB5149191D6438A700C26E7B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FB51491B1D64403000C26E7B /* gif@3x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "gif@3x.gif"; path = "Images/gif@3x.gif"; sourceTree = "<group>"; };
-		FB5149321D64403100C26E7B /* touch_id@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "touch_id@2x.gif"; path = "Images/touch_id@2x.gif"; sourceTree = "<group>"; };
-		FB5149331D64403100C26E7B /* touch_id@3x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "touch_id@3x.gif"; path = "Images/touch_id@3x.gif"; sourceTree = "<group>"; };
 		FB51494C1D64441F00C26E7B /* guideImage6_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_1.png; sourceTree = "<group>"; };
 		FB51494F1D64441F00C26E7B /* guideImage7_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_1.png; sourceTree = "<group>"; };
 		FB5555301BCE37570013894F /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
@@ -7081,6 +7091,8 @@
 		7BFE3EB01AC56356002A53A2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				337F4280225B8335009AFF49 /* touch_id@2x.png */,
+				337F427F225B8334009AFF49 /* touch_id@3x.png */,
 				83E68C5C212EC7A4003BA282 /* appleLogin_bg_default.png */,
 				83E68C5D212EC7A5003BA282 /* appleLogin_bg_iphone4_default.png */,
 				83E68C5E212EC7A5003BA282 /* appleLogin_bg_iphoneX.png */,
@@ -7095,8 +7107,6 @@
 				A8F783021F8CCB8500685B4D /* login_bg_default.png */,
 				A8F783031F8CCB8500685B4D /* login_bg_phone4_default.png */,
 				FB51491B1D64403000C26E7B /* gif@3x.gif */,
-				FB5149321D64403100C26E7B /* touch_id@2x.gif */,
-				FB5149331D64403100C26E7B /* touch_id@3x.gif */,
 				FB51494B1D64441F00C26E7B /* guiviewImage */,
 			);
 			name = Images;
@@ -9416,6 +9426,12 @@
 				4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */,
 				4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */,
 				4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */,
+				3308E6A3225C7B4800F71B2D /* UCFNewMallWebViewController.h */,
+				3308E6A4225C7B4800F71B2D /* UCFNewMallWebViewController.m */,
+				3308E6A5225C7B4800F71B2D /* UCFNewMallWebViewController.xib */,
+				3308E6A8225C81D700F71B2D /* UCFNewSubMallWebViewController.h */,
+				3308E6A9225C81D700F71B2D /* UCFNewSubMallWebViewController.m */,
+				3308E6AA225C81D700F71B2D /* UCFNewSubMallWebViewController.xib */,
 			);
 			path = UCFWebView;
 			sourceTree = "<group>";
@@ -10064,7 +10080,7 @@
 				TargetAttributes = {
 					7BFE3E7F1AC55C98002A53A2 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = MHG97AJ3LK;
+						DevelopmentTeam = EZRWM7P5C6;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -10238,6 +10254,7 @@
 				83974FDA1F14AC4300C2252F /* UCFGoldPurchaseViewController.xib in Resources */,
 				E311A6761D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib in Resources */,
 				FB3A80221CC612B8004B56C3 /* UCFCouponReturn.xib in Resources */,
+				3308E6A7225C7B4900F71B2D /* UCFNewMallWebViewController.xib in Resources */,
 				7443C7381F1F3E64009669C0 /* UCFGoldRechargeRecordCell.xib in Resources */,
 				8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */,
 				7436F2D41F3C2EC6003B77CA /* UCFGoldRechargeFourthCell.xib in Resources */,
@@ -10254,6 +10271,7 @@
 				A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */,
 				83CD84291F13A50800227704 /* UCFBatchBidController.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
+				3308E6AC225C81D700F71B2D /* UCFNewSubMallWebViewController.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A2484B921A3AD85001B0703 /* UCFTransRechargeViewController.xib in Resources */,
 				744A5FAB1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib in Resources */,
@@ -10338,6 +10356,7 @@
 				A8E02DB31F0E0A7800FC2260 /* GoldTransactionRecordViewController.xib in Resources */,
 				4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */,
 				8347A6CB1FAFFFB500E68DFD /* UCFExtractViewCell.xib in Resources */,
+				337F4281225B8336009AFF49 /* touch_id@3x.png in Resources */,
 				83DAEFB51F16113400D7948F /* UCFGoldCalculatorView.xib in Resources */,
 				83D42A8E1FCE619D004C96EF /* UCFShareBaseView.xib in Resources */,
 				740586D21F41B10900E2DE01 /* UCFGoldRaiseCell.xib in Resources */,
@@ -10410,10 +10429,10 @@
 				745D37D11F3AE95900897F1A /* UCFGoldChargeOneCell.xib in Resources */,
 				74877CC91FB2AB8900F32428 /* UCFHandingInViewController.xib in Resources */,
 				A86FC5791F6A2A7200A18182 /* AD_View.xib in Resources */,
-				FB51494A1D64403100C26E7B /* touch_id@3x.gif in Resources */,
 				E3C1179B1D40CFCC0053A052 /* UCFContributionValueCell.xib in Resources */,
 				FB4F9E461D62A6B600CCB492 /* OpeningMerchantsVC.xib in Resources */,
 				AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */,
+				337F4282225B8336009AFF49 /* touch_id@2x.png in Resources */,
 				33B66168215C80B30027325F /* Contract of guarantee.pdf in Resources */,
 				4A675E3F1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib in Resources */,
 				74A2C0D91F4306A000EDF0FA /* UCFGoldCashThirdCell.xib in Resources */,
@@ -10438,7 +10457,6 @@
 				3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */,
 				FBAEDA021C191AFE000C0AA1 /* PushConfig.plist in Resources */,
 				74270CF91EC5943200F9419B /* UCFInvitationRebateViewController.xib in Resources */,
-				FB5149491D64403100C26E7B /* touch_id@2x.gif in Resources */,
 				74270CA31EC58F6800F9419B /* UCFHomeUserInfoCell.xib in Resources */,
 				748ED7981CC7304100690215 /* UCFCashAndTopUp.xib in Resources */,
 				74EC4B8A1F4AF5FE00E4ACB0 /* UCFGoldIncreListCell.xib in Resources */,
@@ -11031,6 +11049,7 @@
 				E34B5E8A22253C080027718C /* UCFMicroBankUserAccountInfoAPI.m in Sources */,
 				749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */,
 				74673BC01FEB8C1400AF3727 /* UCFMineFuncView.m in Sources */,
+				3308E6A6225C7B4900F71B2D /* UCFNewMallWebViewController.m in Sources */,
 				E31BD53A21C0C10100D3651F /* TYShowAlertView.m in Sources */,
 				E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */,
 				E352FD5821E4AF0B00617AB7 /* UCFFundsInvestButton.m in Sources */,
@@ -11382,6 +11401,7 @@
 				744A5FAA1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m in Sources */,
 				FB82B8CB1DD96A8E0080C099 /* UCFCouponAuxiliaryVC.m in Sources */,
 				E3DE741B224B323700211A9F /* NSDictionary+HYBUnicodeReadable.m in Sources */,
+				3308E6AB225C81D700F71B2D /* UCFNewSubMallWebViewController.m in Sources */,
 				2526ADDC1DD08CB800114D9A /* UIView+FrameChange.m in Sources */,
 				E3355421223F8E97001FADEA /* UCFRechargeAndWithdrawalViewController.m in Sources */,
 				7BC8AA241AD4C74200BF4660 /* UCFTransterBidHeadDetail.m in Sources */,
@@ -11609,7 +11629,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = MHG97AJ3LK;
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11654,7 +11674,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -11680,7 +11700,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MHG97AJ3LK;
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11725,7 +11745,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

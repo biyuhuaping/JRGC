@@ -18,6 +18,8 @@
 #import "AppDelegate.h"
 #import "BaseAlertView.h"
 #import "MD5Util.h"
+#import <LocalAuthentication/LocalAuthentication.h>
+#import <Security/Security.h>
 //#import "CloudwalkFaceSDK.h"
 //#import "NewFaceViewController.h"
 //#import "CWLivessViewController.h"//---qyy0815
@@ -29,13 +31,14 @@
     UIButton *_loginBtn;//验证登录按钮
     BOOL _sameUser;
 }
-
+@property(nonatomic, assign)BOOL isFaceID;
 @end
 
 @implementation UCFVerifyLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self checkTouchIdIsOpen];
     self.navigationController.navigationBarHidden = NO;
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
      baseTitleLabel.text = @"验证登录密码";
@@ -121,17 +124,8 @@
         [self.navigationController popViewControllerAnimated:YES];
         self.navigationController.navigationBarHidden = YES;
     }else {
-        [self dismissViewControllerAnimated:NO completion:^{
-            [self showGestureCode];
-        }];
+        [self.navigationController popViewControllerAnimated:YES];
     }
-
-//    [self.view endEditing:YES];
-//    AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-//    UCFMainTabBarController *tabBarController = [[UCFMainTabBarController alloc] init];
-//    [tabBarController setSelectedIndex:0];
-//    del.window.rootViewController = tabBarController;
-//    [self showGestureCode];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -147,8 +141,7 @@
         [_passWordTfd becomeFirstResponder];
         return;
     }
-//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&username=%@&pwd=%@",SingleUserInfo.loginData.userInfo.userId,[[NSUserDefaults standardUserDefaults] objectForKey:LOGINNAME],_passWordTfd.text];
-//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagValidLogin owner:self Type:SelectAccoutDefault];
+
     
     
     NSString* phoneNumberStr = [_passWordTfd.text stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -171,15 +164,22 @@
     if (tag.intValue == kSXTagValidBindedPhone) {
         NSMutableDictionary *dic = [data objectFromJSONString];
         if ([dic[@"ret"] boolValue]) {
-            [LLLockPassword saveLockPassword:nil];
-            [self loginSuccess:dic];
+//            if ([_sourceVC isEqualToString:@"securityCenter_touchID"]) {
+//
+//            } else if ([_sourceVC isEqualToString:@"securityCenter"]) {
+//
+//            } else {
+//
+//            }
+            
+//            [LLLockPassword saveLockPassword:nil];
+//            [self loginSuccess:dic];
+            [self gesturePage];
         } else {
             NSString *rsttext =  dic[@"message"];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil];
             [alertView show];
         }
-    }else if(tag.integerValue == kSXTagUserLogout){
-        
     }
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -190,73 +190,159 @@
     }
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-//    if (buttonIndex == 0) {
-//        if (SingleUserInfo.loginData.userInfo.userId) {
-//            AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-//            [del.tabBarController setSelectedIndex:3];
-//        }
-//        [self dismissViewControllerAnimated:NO completion:^{
-//            [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_PERSON_CENTER object:nil];
-//            [self showGestureCode];
-//        }];
-//    }
-}
+
 
 /** 登录成功*/
-- (void)loginSuccess:(NSDictionary *)dict
+//- (void)loginSuccess:(NSDictionary *)dict
+//{
+//    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:dict];
+//    NSArray *allObj = [tempDic allKeys];
+//    for (int i = 0; i < allObj.count; i ++) {
+//        id obj = [tempDic objectForKey:allObj[i]];
+//        if ([obj isKindOfClass:[NSNull class]]) {
+//            [tempDic removeObjectForKey:allObj[i]];
+//        }
+//    }
+//    [[NSUserDefaults standardUserDefaults] setObject:tempDic forKey:@"loginUserMsg"];
+//
+//
+//    [self gesturePage];
+//}
+- (BOOL)checkTouchIdIsOpen
 {
-    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:dict];
-    NSArray *allObj = [tempDic allKeys];
-    for (int i = 0; i < allObj.count; i ++) {
-        id obj = [tempDic objectForKey:allObj[i]];
-        if ([obj isKindOfClass:[NSNull class]]) {
-            [tempDic removeObjectForKey:allObj[i]];
+    LAContext *lol = [[LAContext alloc] init];
+    lol.localizedFallbackTitle = @"";
+    NSError *error = nil;
+    //TODO:TOUCHID是否存在
+    if ([lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]){
+        NSString *localizedReason = @"指纹登录";
+        if (@available(iOS 11.0, *)) {
+            if (lol.biometryType == LABiometryTypeTouchID) {
+                _isFaceID = NO;
+            }else if (lol.biometryType == LABiometryTypeFaceID){
+                localizedReason = @"人脸识别";
+                _isFaceID = YES;
+            }
+        }
+        return YES;
+    } else {
+        return NO;
+    }
+    return NO;
+}
+- (void)touchIDVerificationSwitchState:(BOOL)gestureState
+{
+    
+    LAContext *lol = [[LAContext alloc] init];
+    lol.localizedFallbackTitle = @"";
+    NSError *error = nil;
+    NSString *showStr = @"";
+    if (gestureState) {
+        showStr =  _isFaceID ? @"验证并开启面部解锁" : @"验证并开启指纹解锁";
+    } else {
+        showStr = _isFaceID ? @"验证并关闭面部解锁" : @"验证并关闭指纹解锁";
+    }
+    
+    //TODO:TOUCHID是否存在
+    if ([lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+        //TODO:TOUCHID开始运作
+        [lol evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:showStr reply:^(BOOL succes, NSError *error)
+         {
+             if (succes) {
+                 NSLog(@"指纹验证成功");
+                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                     //打开指纹手势
+                     [[NSUserDefaults standardUserDefaults] setBool:gestureState forKey:@"isUserShowTouchIdLockView"];
+                     [[NSUserDefaults standardUserDefaults] synchronize];
+                     [self.rt_navigationController popViewControllerAnimated:YES];
+                 }];
+             }
+             else
+             {
+                 NSLog(@"%@",error.localizedDescription);
+                 switch (error.code) {
+                     case LAErrorSystemCancel:
+                     {
+                         NSLog(@"Authentication was cancelled by the system");
+                         //切换到其他APP，系统取消验证Touch ID
+                         break;
+                     }
+                     case LAErrorUserCancel:
+                     {
+                         NSLog(@"Authentication was cancelled by the user");
+                         //用户取消验证Touch ID
+                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                         }];
+                         break;
+                     }
+                     case LAErrorUserFallback:
+                     {
+                         NSLog(@"User selected to enter custom password");
+                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                             //用户选择输入密码，切换主线程处理
+                         }];
+                         break;
+                     }
+                     default:
+                     {
+                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                             //其他情况，切换主线程处理
+                         }];
+                         break;
+                     }
+                 }
+             }
+         }];
+        
+    }
+    else
+    {
+        switch (error.code) {
+            case LAErrorTouchIDNotEnrolled:
+            {
+                NSLog(@"TouchID is not enrolled");
+                break;
+            }
+            case LAErrorPasscodeNotSet:
+            {
+                //没有touchID 的报错
+                NSLog(@"A passcode has not been set");
+                break;
+            }
+            default:
+            {
+                NSLog(@"TouchID not available");
+                break;
+            }
         }
     }
-    [[NSUserDefaults standardUserDefaults] setObject:tempDic forKey:@"loginUserMsg"];
     
-    //刷脸
-    if ([_sourceVC isEqualToString:@"validFaceLogin"]) {
-       
-        
-        
-        
-        
-//        CWLivessViewController *nfvctrl = [[CWLivessViewController alloc]initWithNibName:@"CWLivessViewController" bundle:nil];
-//         nfvctrl.flagway = 0;
-//         nfvctrl.delegate = self;
-//        [nfvctrl setLivessParam:AuthCodeString livessNumber:3 livessLevel:CWLiveDetectLow isShowResultView:YES isFaceCompare:NO];
-//
-//        [self.navigationController pushViewController:nfvctrl animated:YES];//---qyy0815
-        
-    } else if ([_sourceVC isEqualToString:@"validFaceSwitchSwip"]) {//刷脸登录开关 由开---->>>关 的密码验证
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"updateFaceSwitchSwip" object:nil];
-            [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        [self gesturePage];
-    }
+    
+    
 }
 // 手势代码界面处理
 - (void)gesturePage
 {
     //从安全中心过来的直接显示手势密码
     if ([_sourceVC isEqualToString:@"securityCenter"]) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] == YES) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] == YES) { //关闭手势密码
+            [LLLockPassword saveLockPassword:nil];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"useLockView"];
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.navigationController popViewControllerAnimated:YES];
-        } else {
-            [self showGestureCode];
+        } else { //开启手势密码
+//            [self showGestureCode];
+              [self showLLLockViewController:LLLockViewTypeCreate];
         }
-    } else {
-        AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-        [del.tabBarController setSelectedIndex:0];
-        [del.tabBarController dismissViewControllerAnimated:NO completion:^{
-            [self showGestureCode];
-        }];
+    } else if ([_sourceVC isEqualToString:@"securityCenter_touchID"]) {
+        //这个是从个人信息页面 开启指纹解锁进来的
+        BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
+        [self touchIDVerificationSwitchState:!isOpen];
+    }
+    else {
+        //这个是从手势密码页面点击忘记密码进来的
+//        [self showGestureCode];
+          [self showLLLockViewController:LLLockViewTypeCreate];
     }
 }
 
@@ -273,17 +359,14 @@
 #pragma mark - 弹出手势解锁密码输入框
 - (void)showLLLockViewController:(LLLockViewType)type
 {
-    AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    if(del.window.rootViewController.presentingViewController == nil){
-        UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
-        lockVc.nLockViewType = type;
-        if ([_sourceVC isEqualToString:@"securityCenter"]) {
-            lockVc.souceVc = @"securityCenter";
-        }
-        lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [del.window.rootViewController presentViewController:lockVc animated:NO completion:^{
-        }];
+
+    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
+    lockVc.nLockViewType = type;
+    if ([_sourceVC isEqualToString:@"securityCenter"] || [_sourceVC isEqualToString:@"securityCenter_touchID"]) {
+        lockVc.souceVc = @"securityCenter";
     }
+    [SingGlobalView.rootNavController pushViewController:lockVc animated:YES complete:nil];
+    [self.rt_navigationController removeViewController:self];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

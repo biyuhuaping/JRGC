@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "UCFLoginModel.h"
+#import "UCFMainTabBarController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GlobalView : NSObject
 + (GlobalView *)sharedManager;
-@property(nonatomic,weak) UITabBarController *tabBarController;
+@property(nonatomic,weak) UCFMainTabBarController *tabBarController;
 @property(nonatomic,strong) RTRootNavigationController *rootNavController;
 @end
 

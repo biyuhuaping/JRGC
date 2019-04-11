@@ -31,7 +31,9 @@
 }
 - (void)createSubviews
 {
-    RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 180)];
+    CGFloat height =  ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
+
+    RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, height)];
     view.delegate = self;
     self.adCycleScrollView = view;
     [self addSubview:view];

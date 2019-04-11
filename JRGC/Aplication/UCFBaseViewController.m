@@ -8,7 +8,10 @@
 
 #import "UCFBaseViewController.h"
 #import "Common.h"
-
+#import "RTRootNavigationController.h"
+#import "UIViewController+RTRootNavigationController.h"
+#import "RTRootNavigationController.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 @interface UCFBaseViewController ()
 
 @end
@@ -275,5 +278,9 @@
 - (void)monitorRiskStatueChange
 {
     
+}
+- (void)setSetNavgationPopDisabled:(BOOL)setNavgationPopDisabled
+{
+    ((RTContainerController *) (self.rt_navigationController.viewControllers.lastObject)).fd_interactivePopDisabled = setNavgationPopDisabled;
 }
 @end

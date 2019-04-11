@@ -26,6 +26,8 @@
 #import "UCFMineIntoCoinPageModel.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "NSString+Misc.h"
+#import "UCFInvestViewController.h"
+#import "RTRootNavigationAddPushController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate,UCFNewHomeSectionViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -57,28 +59,7 @@
 {
     [super loadView];
     
-    [self addLeftButtonTitle:@"首页"];
-    [self addRightbuttonImageName:@"home_icon_news"];
-    
-    HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
-    homeHeadView.myTop = 0;
-    homeHeadView.myHeight = ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
-    homeHeadView.myHorzMargin = 0;
-    [homeHeadView createSubviews];
-    homeHeadView.delegate = self;
-    self.homeHeadView = homeHeadView;
-    
-    self.showTableView.myVertMargin = 0;
-    self.showTableView.myHorzMargin = 0;
-    [self.rootLayout addSubview:self.showTableView];
-    self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-    self.showTableView.tableHeaderView = self.homeHeadView;
-    
-    HomeFootView *homefootView = [HomeFootView new];
-    homefootView.myHeight = 181;
-    homefootView.myHorzMargin = 0;
-    [homefootView createSubviews];
-    self.showTableView.tableFooterView = homefootView;
+
 
 }
 - (void)rightBarClicked:(UIButton *)button
@@ -95,6 +76,36 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self addLeftButtonTitle:@"首页"];
+    [self addRightbuttonImageName:@"home_icon_news"];
+    
+    self.showTableView.myVertMargin = 0;
+    self.showTableView.myHorzMargin = 0;
+    [self.rootLayout addSubview:self.showTableView];
+    self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    
+    
+    HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
+    homeHeadView.myTop = 0;
+    CGFloat height =  ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
+    homeHeadView.heightSize.equalTo([NSNumber numberWithFloat:height]);
+    homeHeadView.leftPos.equalTo(@0);
+    homeHeadView.rightPos.equalTo(@0);
+    [homeHeadView createSubviews];
+    homeHeadView.delegate = self;
+    self.homeHeadView = homeHeadView;
+    
+
+    self.showTableView.tableHeaderView = self.homeHeadView;
+    
+    HomeFootView *homefootView = [HomeFootView new];
+    homefootView.myHeight = 181;
+    homefootView.myHorzMargin = 0;
+    [homefootView createSubviews];
+    self.showTableView.tableFooterView = homefootView;
+    
+    
     [self blindVM];
     [self fetchData];
     [self blindUserStatue];
@@ -194,8 +205,12 @@
         if (data) {
             sectionView.titleLab.text = data.title;
         }
-        if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"]) {
+        if (SingleUserInfo.loginData.userInfo.isRisk && ![data.title isEqualToString:@"内容推荐"]) {
             [sectionView showMore];
+        } else {
+            if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"]) {
+                [sectionView showMore];
+            }
         }
         return sectionView;
     } else {
@@ -210,6 +225,27 @@
         [self pushWebViewWithUrl:self.boutiqueUrl Title:@"商城精选"];
     } else if([title isEqualToString:@"商城特惠"]){
         [self pushWebViewWithUrl:self.remcommendUrl Title:@"商城特惠"];
+    } else if ([title isEqualToString:@"智能出借"]) {
+        
+        RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.viewControllers[1];
+        RTContainerController *container = nav.viewControllers[0];
+        UCFInvestViewController *vc  = container.contentViewController;
+        vc.selectedType  = @"IntelligentLoan";
+        if ([vc isViewLoaded]) {
+            [vc changeView];
+        }
+        [SingGlobalView.tabBarController setSelectedIndex:1];
+        
+    } else if ([title isEqualToString:@"优质债权"]) {
+        RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.viewControllers[1];
+        RTContainerController *container = nav.viewControllers[0];
+        UCFInvestViewController *vc  = container.contentViewController;
+        vc.selectedType  = @"QualityClaims";
+        if ([vc isViewLoaded]) {
+            [vc changeView];
+        }
+        [SingGlobalView.tabBarController setSelectedIndex:1];
+        
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -251,6 +287,8 @@
 #pragma mark BaseTableViewCellDelegate
 - (void)baseTableViewCell:(BaseTableViewCell *)cell buttonClick:(UIButton *)button withModel:(id)model
 {
+
+    
     if ([model isKindOfClass:[UCFNewHomeListPrdlist class]]) {
         [UCFBidDetailAndInvestPageLogic bidDetailAndInvestPageLogicUseDataModel:model detail:NO rootViewController:self];
     } else if ([model isKindOfClass:[NSString class]]) {
@@ -268,7 +306,7 @@
                 [cache setMemoryCapacity:0];
                 
                 UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                mallController.url      = @"https://m.dougemall.com";//请求地址;
+                mallController.url      = @"https://m.dougemall.com?fromGb=true";//请求地址;
                 mallController.navTitle = @"商城";
                 mallController.isFromBarMall = NO;
                 [self.navigationController pushViewController:mallController animated:YES];

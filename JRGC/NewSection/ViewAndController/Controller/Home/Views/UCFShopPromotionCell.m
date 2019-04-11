@@ -20,6 +20,7 @@
 @property(nonatomic, strong)UCFShopHListView *shopList;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
 @property(nonatomic, strong)NSMutableArray  *cycleModelArray;
+@property(nonatomic, assign)CGFloat     shopBottomSectionHeight;
 @end
 @implementation UCFShopPromotionCell
 
@@ -30,9 +31,9 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         self.rootLayout.useFrame = YES;
-
+        _shopBottomSectionHeight = 45;
         UIView *whitBaseView = [UIView new];
-        CGFloat shopHeight = (ScreenWidth - 30)/3.0f + 60;
+        CGFloat shopHeight = (ScreenWidth - 30)/3.0f + _shopBottomSectionHeight;
         whitBaseView.frame = CGRectMake(15, 0,  ScreenWidth - 30, (ScreenWidth - 30) * 6 /23 + shopHeight);
         whitBaseView.layer.cornerRadius = 5.0f;
         whitBaseView.clipsToBounds = YES;
@@ -43,8 +44,6 @@
         adCycleScrollView.delegate = self;
         adCycleScrollView.isHideImageCorner = YES;
         [whitBaseView addSubview:adCycleScrollView];
-        
-        
         
         [adCycleScrollView reloadCycleView];
         self.adCycleScrollView = adCycleScrollView;
@@ -88,20 +87,34 @@
 }
 - (CGSize)shopHListView:(UCFShopHListView *)shopListViewCommodityImageSize
 {
-    return CGSizeMake((ScreenWidth - 30)/3, (ScreenWidth - 30)/3 + 60);
+    return CGSizeMake((ScreenWidth - 30)/3, (ScreenWidth - 30)/3 + _shopBottomSectionHeight);
 }
 
 - (UIView *)shopHListView:(UCFShopHListView *)shopListView cellForRowAtIndex:(NSInteger)index
 {
     UCFHomeMallrecommends *model = self.dataArray[index];
-    UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, (ScreenWidth - 30)/3, (ScreenWidth - 30)/3 + 60) withHeightOfCommodity:(ScreenWidth - 30)/3];
+    UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, (ScreenWidth - 30)/3, (ScreenWidth - 30)/3 + _shopBottomSectionHeight) withHeightOfCommodity:(ScreenWidth - 30)/3];
     [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:nil];
     view.shopName.text = model.title;
-    view.shopValue.text = [NSString stringWithFormat:@"%@工贝",model.score];
-    NSString *showStr =  [NSString stringWithFormat:@"%@工贝",model.price];
-    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:showStr attributes:attribtDic];
-    view.shopOrginalValue.attributedText = attribtStr;
+//    NSString *priceValue = model.price;
+//    NSString *scoreValue = model.score;
+    NSString *showValue = model.score;
+    if (model.price.length > 0 && model.score.length > 0) {
+        showValue = model.score;
+    } else if (model.price.length > 0 && model.score.length == 0) {
+        showValue = model.price;
+    } else if (model.price.length == 0 && model.score.length > 0) {
+        showValue = model.score;
+    }
+    CGRect react = view.shopValue.frame;
+    react.origin.y += 3;
+    view.shopValue.frame = react;
+    view.shopValue.text = [NSString stringWithFormat:@"%@工贝",showValue];
+    view.shopOrginalValue.hidden = YES;
+//    NSString *showStr =  [NSString stringWithFormat:@"%@工贝",model.price];
+//    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+//    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:showStr attributes:attribtDic];
+//    view.shopOrginalValue.attributedText = attribtStr;
     
     return view;
 }
