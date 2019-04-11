@@ -37,8 +37,8 @@
         [self.couponTypeLayout addSubview:self.remarkLabel];
         [self.couponTypeLayout addSubview:self.overdueTimeLabel];
 
-        [self.couponTypeLayout addSubview:self.unUseReasonMarkLab];
-        [self.couponTypeLayout addSubview:self.detailReasonLab];
+//        [self.couponTypeLayout addSubview:self.unUseReasonMarkLab];
+//        [self.couponTypeLayout addSubview:self.detailReasonLab];
         [self.couponTypeLayout addSubview:self.willExpireLayout];
 //
         [self.couponTypeLayout addSubview:self.investMultipLabel];
@@ -175,35 +175,35 @@
     }
     return _overdueTimeLabel;
 }
-- (UILabel *)unUseReasonMarkLab
-{
-    if (nil == _unUseReasonMarkLab) {
-        _unUseReasonMarkLab = [UILabel new];
-        _unUseReasonMarkLab.bottomPos.equalTo(self.detailReasonLab.topPos).offset(5);
-        _unUseReasonMarkLab.rightPos.equalTo(@15);
-        _unUseReasonMarkLab.textAlignment = NSTextAlignmentRight;
-        _unUseReasonMarkLab.font = self.remarkLabel.font;
-        _unUseReasonMarkLab.textColor = self.remarkLabel.textColor;
-        _unUseReasonMarkLab.text = @"不可用原因";
-        [_unUseReasonMarkLab sizeToFit];
-    }
-    return _unUseReasonMarkLab;
-}
-- (UILabel *)detailReasonLab
-{
-    if (nil == _detailReasonLab) {
-        _detailReasonLab = [UILabel new];
-        _detailReasonLab.bottomPos.equalTo(self.overdueTimeLabel.topPos).offset(13);
-        _detailReasonLab.rightPos.equalTo(@15);
-        _detailReasonLab.textAlignment = NSTextAlignmentRight;
-        _detailReasonLab.font = self.remarkLabel.font;
-        _detailReasonLab.textColor = self.remarkLabel.textColor;
-        _detailReasonLab.text = @"出借金额小于优惠券的最低使用金额";
-        [_detailReasonLab sizeToFit];
-
-    }
-    return _detailReasonLab;
-}
+//- (UILabel *)unUseReasonMarkLab
+//{
+//    if (nil == _unUseReasonMarkLab) {
+//        _unUseReasonMarkLab = [UILabel new];
+//        _unUseReasonMarkLab.bottomPos.equalTo(self.detailReasonLab.topPos).offset(5);
+//        _unUseReasonMarkLab.rightPos.equalTo(@15);
+//        _unUseReasonMarkLab.textAlignment = NSTextAlignmentRight;
+//        _unUseReasonMarkLab.font = self.remarkLabel.font;
+//        _unUseReasonMarkLab.textColor = self.remarkLabel.textColor;
+//        _unUseReasonMarkLab.text = @"不可用原因";
+//        [_unUseReasonMarkLab sizeToFit];
+//    }
+//    return _unUseReasonMarkLab;
+//}
+//- (UILabel *)detailReasonLab
+//{
+//    if (nil == _detailReasonLab) {
+//        _detailReasonLab = [UILabel new];
+//        _detailReasonLab.bottomPos.equalTo(self.overdueTimeLabel.topPos).offset(13);
+//        _detailReasonLab.rightPos.equalTo(@15);
+//        _detailReasonLab.textAlignment = NSTextAlignmentRight;
+//        _detailReasonLab.font = self.remarkLabel.font;
+//        _detailReasonLab.textColor = self.remarkLabel.textColor;
+//        _detailReasonLab.text = @"出借金额小于优惠券的最低使用金额";
+//        [_detailReasonLab sizeToFit];
+//
+//    }
+//    return _detailReasonLab;
+//}
 //@property (nonatomic, strong) UILabel     *unUseReasonMarkLab;
 //@property (nonatomic, strong) UILabel     *detailReasonLab;
 
@@ -280,14 +280,14 @@
         [self.selectCouponsBtn setImage:image forState:UIControlStateNormal];
         self.selectCouponsBtn.userInteractionEnabled = YES;
         self.couponAmounLabel.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
-        self.unUseReasonMarkLab.myVisibility = MyVisibility_Invisible;
-        self.detailReasonLab.myVisibility = MyVisibility_Invisible;
+//        self.unUseReasonMarkLab.myVisibility = MyVisibility_Invisible;
+//        self.detailReasonLab.myVisibility = MyVisibility_Invisible;
     } else {
         [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
         self.selectCouponsBtn.userInteractionEnabled = NO;
         self.couponAmounLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
-        self.unUseReasonMarkLab.myVisibility = MyVisibility_Visible;
-        self.detailReasonLab.myVisibility = MyVisibility_Visible;
+//        self.unUseReasonMarkLab.myVisibility = MyVisibility_Visible;
+//        self.detailReasonLab.myVisibility = MyVisibility_Visible;
     }
     
     [self.couponAmounLabel sizeToFit];

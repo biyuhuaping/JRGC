@@ -255,7 +255,7 @@
             [self.dataArray addObject:section3];
         }
         
-        CGFloat boutiqueHeight = model.data.mallSelected.count == 0 ? 105 + 45 : 0;
+        CGFloat boutiqueHeight = model.data.mallSelected.count != 0 ? 105 + 45 : 0;
         NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
         CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:boutiqueHeight];
         UCFCellDataModel *dataMode1 = [UCFCellDataModel new];

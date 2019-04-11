@@ -74,8 +74,10 @@
                 selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:repayCouponStr WithTotalString:allText];
                 
                 [selfWeak.couponLab sizeToFit];
-            } else {
+                selfWeak.couponBtn.myVisibility = MyVisibility_Gone;
 
+            } else {
+                
             }
         } else if ([keyPath isEqualToString:@"repayCash"]) {
             //返现券返的金额
@@ -86,6 +88,8 @@
                 selfWeak.cashLab.text = allText;
                 selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:cashStr WithTotalString:allText];
                 [selfWeak.cashLab sizeToFit];
+                selfWeak.cashBtn.myVisibility = MyVisibility_Gone;
+
             } else {
 
             }
@@ -96,6 +100,7 @@
             } else {
                 selfWeak.couponLab.text = @"0张可用";
             }
+            selfWeak.couponBtn.myVisibility = MyVisibility_Visible;
             [selfWeak.couponLab sizeToFit];
 
 
@@ -106,6 +111,7 @@
             } else {
                 selfWeak.cashLab.text = @"0张可用";
             }
+            selfWeak.cashBtn.myVisibility = MyVisibility_Visible;
             [selfWeak.cashLab sizeToFit];
 
         }

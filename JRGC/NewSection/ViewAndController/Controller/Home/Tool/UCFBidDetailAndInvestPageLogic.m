@@ -24,7 +24,7 @@
 @implementation UCFBidDetailAndInvestPageLogic
 + (void)bidDetailAndInvestPageLogicUseDataModel:(id)bidmodel detail:(BOOL)isDetail rootViewController:(UIViewController *)controler
 {
-    if (isDetail) {
+   if (isDetail) {
         if ([bidmodel isKindOfClass:[UCFNewHomeListPrdlist class]]) {
             if (!SingleUserInfo.loginData.userInfo.userId) {
                 [SingleUserInfo loadLoginViewController];
