@@ -188,7 +188,12 @@
                 if ([tmpModel.groupType isEqualToString:@"1"]) {
                     facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", NEWUSER_APPLY_URL, tmpModel.ID,tmpModel.status];
                 } else {
-                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", PRERESERVE_APPLY_URL, tmpModel.ID,tmpModel.status];
+//                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", PRERESERVE_APPLY_URL, tmpModel.ID,tmpModel.status];
+                    if (type == 0) {
+                        facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", RESERVEINVEST_APPLY_URL, tmpModel.ID,tmpModel.status];
+                    } else {
+                        facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", INTELLIGENTLOAN_APPLY_URL, tmpModel.ID,tmpModel.status];
+                    }
                 }
                 facReservedWeb.hidesBottomBarWhenPushed = YES;
                 [controler.navigationController pushViewController:facReservedWeb animated:YES];

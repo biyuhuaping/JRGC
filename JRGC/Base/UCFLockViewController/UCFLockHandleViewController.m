@@ -315,10 +315,8 @@
     _titleLabel.text = @"设置手势";
     [self.view addSubview:_titleLabel];
     
-
-    
     self.runButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _runButton.frame = CGRectMake(15 ,StatusBarHeight1 , 45, 45);
+    _runButton.frame = CGRectMake(15 ,StatusBarHeight1 , 44, 44);
     _runButton.imageEdgeInsets = UIEdgeInsetsMake(-8, 0, 0, 0);
     [_runButton addTarget:self action:@selector(dealWithrunBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_runButton setImage:[UIImage imageNamed:@"calculator_gray_close"] forState:UIControlStateNormal];

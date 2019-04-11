@@ -102,7 +102,7 @@
         [section1 addObject:data1];
     } else {
         //新手引导
-        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:185];
+        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:SingleUserInfo.loginData.userInfo.isRisk ? 185 - 55: 185];
         [section1 addObject:data1];
     }
     
@@ -263,7 +263,7 @@
     } else {
         ShowMessage(model.message);
     }
-    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"推荐内容" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
+    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"内容推荐" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
     UCFCellDataModel *mallDataMode = [UCFCellDataModel new];
     mallDataMode.modelType = @"recommend";
     mallDataMode.data1 = self.recommendBannerArray;

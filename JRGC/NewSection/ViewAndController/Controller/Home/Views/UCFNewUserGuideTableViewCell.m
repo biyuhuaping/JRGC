@@ -18,6 +18,8 @@
 @property(nonatomic, strong)UIButton    *rightTopbutton;
 @property(nonatomic, strong)UIButton    *leftBottombutton;
 @property(nonatomic, strong)UIButton    *rightBottombutton;
+@property(nonatomic, strong)UIButton    *bottomButton;
+@property(nonatomic, strong)MyRelativeLayout *bottonBaseView;
 
 @end
 @implementation UCFNewUserGuideTableViewCell
@@ -36,16 +38,26 @@
         whitBaseView.leftPos.equalTo(@15);
         whitBaseView.rightPos.equalTo(@15);
         whitBaseView.topPos.equalTo(@0);
-        whitBaseView.bottomPos.equalTo(@55);
+        whitBaseView.heightSize.equalTo(@130);
         whitBaseView.backgroundColor = [UIColor whiteColor];
         [self.rootLayout addSubview:whitBaseView];
       
-        
         [self creatContentView:whitBaseView];
+        
         [whitBaseView setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
             v.layer.cornerRadius = 5.0f;
             v.clipsToBounds = YES;
         }];
+        
+        MyRelativeLayout *bottonBaseView = [MyRelativeLayout new];
+        bottonBaseView.backgroundColor = [UIColor clearColor];
+        bottonBaseView.heightSize.equalTo(@55);
+        bottonBaseView.bottomPos.equalTo(@0);
+        bottonBaseView.leftPos.equalTo(@0);
+        bottonBaseView.rightPos.equalTo(@0);
+        self.bottonBaseView = bottonBaseView;
+        [self.rootLayout addSubview:bottonBaseView];
+
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.leftPos.equalTo(@45);
         button.rightPos.equalTo(@45);
@@ -53,7 +65,6 @@
         button.heightSize.equalTo(@40);
         [button setBackgroundColor:[UIColor blueColor]];
         button.clipsToBounds = YES;
-        [self.rootLayout addSubview:button];
         [button setTitle:@"注册领优惠券" forState:UIControlStateNormal];
         button.titleLabel.font = [Color gc_Font:16];
         [button addTarget:self action:@selector(buttonclick:) forControlEvents:UIControlEventTouchUpInside];
@@ -63,6 +74,8 @@
             UIImage *image = [(UIButton *)v buttonImageFromColors:colorArray ByGradientType:leftToRight];
             [(UIButton *)v setBackgroundImage:image forState:UIControlStateNormal];
         }];
+        [bottonBaseView addSubview:button];
+        self.bottomButton = button;
     }
     return self;
 }
@@ -188,6 +201,7 @@
                 self.rightTopbutton.enabled = YES;
                 self.leftBottombutton.enabled = YES;
                 self.rightBottombutton.enabled = YES;
+
                 break;
             case 2:
             case 3:
@@ -205,11 +219,24 @@
         } else {
             self.leftBottombutton.enabled = YES;
         }
+        if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 4) {
+            [self.bottomButton setTitle:@"开通存管账户" forState:UIControlStateNormal];
+            self.bottonBaseView.myVisibility = MyVisibility_Visible;
+        } else {
+            if (SingleUserInfo.loginData.userInfo.isRisk) {
+                self.bottonBaseView.myVisibility = MyVisibility_Gone;
+            } else {
+                [self.bottomButton setTitle:@"进行风险评测" forState:UIControlStateNormal];
+                self.bottonBaseView.myVisibility = MyVisibility_Visible;
+            }
+        }
     } else {
         self.leftTopbutton.enabled = YES;
         self.rightTopbutton.enabled = YES;
         self.leftBottombutton.enabled = YES;
         self.rightBottombutton.enabled = YES;
+        [self.bottomButton setTitle:@"注册领优惠券" forState:UIControlStateNormal];
+
     }
 
     

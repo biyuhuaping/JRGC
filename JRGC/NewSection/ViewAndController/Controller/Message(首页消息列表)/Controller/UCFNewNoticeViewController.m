@@ -46,16 +46,13 @@
     [self.showTableView beginRefresh];
 
 }
+- (void)leftBar1Clicked
+{
+    [self.rt_navigationController popToRootViewControllerAnimated:YES complete:nil];
+}
 - (void)fetchData
 {
-//    for (int i = 0; i < 10; i++) {
-//        NoticeResult *model = [NoticeResult new];
-//        model.title = @"豆哥商城|关于豆哥商城春节期间物流停 止发货时间的通知";
-//        model.sendTime = @"2018-09-09";
-//        [self.dataArray addObject:model];
-//    }
-//    [self.showTableView reloadData];
-//    return;
+
     UCFNoticeCenterApi *api = [[UCFNoticeCenterApi alloc] initWithPageSize:@"20" PageIndex:[NSString stringWithFormat:@"%ld",_pageIndex]];
     api.animatingView = [UIApplication sharedApplication].keyWindow;
     @PGWeakObj(self);
@@ -145,14 +142,12 @@
 {
     NoticeResult*model = [self.dataArray objectAtIndex:indexPath.row];
     if (model.noviceUrl.length > 0) {
-        UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+        UCFWebViewJavascriptBridgeController *webView = [[UCFWebViewJavascriptBridgeController alloc]initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];
         webView.rootVc = self;
         webView.url = model.noviceUrl;
         webView.navTitle = model.title;
-        webView.hidesBottomBarWhenPushed = YES;
         [self.rt_navigationController pushViewController:webView animated:YES];
     }
-
 }
 /*
 #pragma mark - Navigation

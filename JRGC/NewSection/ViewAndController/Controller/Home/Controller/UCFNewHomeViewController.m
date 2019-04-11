@@ -59,28 +59,7 @@
 {
     [super loadView];
     
-    [self addLeftButtonTitle:@"首页"];
-    [self addRightbuttonImageName:@"home_icon_news"];
-    
-    HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
-    homeHeadView.myTop = 0;
-    homeHeadView.myHeight = ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
-    homeHeadView.myHorzMargin = 0;
-    [homeHeadView createSubviews];
-    homeHeadView.delegate = self;
-    self.homeHeadView = homeHeadView;
-    
-    self.showTableView.myVertMargin = 0;
-    self.showTableView.myHorzMargin = 0;
-    [self.rootLayout addSubview:self.showTableView];
-    self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-    self.showTableView.tableHeaderView = self.homeHeadView;
-    
-    HomeFootView *homefootView = [HomeFootView new];
-    homefootView.myHeight = 181;
-    homefootView.myHorzMargin = 0;
-    [homefootView createSubviews];
-    self.showTableView.tableFooterView = homefootView;
+
 
 }
 - (void)rightBarClicked:(UIButton *)button
@@ -97,6 +76,36 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self addLeftButtonTitle:@"首页"];
+    [self addRightbuttonImageName:@"home_icon_news"];
+    
+    self.showTableView.myVertMargin = 0;
+    self.showTableView.myHorzMargin = 0;
+    [self.rootLayout addSubview:self.showTableView];
+    self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    
+    
+    HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
+    homeHeadView.myTop = 0;
+    CGFloat height =  ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
+    homeHeadView.heightSize.equalTo([NSNumber numberWithFloat:height]);
+    homeHeadView.leftPos.equalTo(@0);
+    homeHeadView.rightPos.equalTo(@0);
+    [homeHeadView createSubviews];
+    homeHeadView.delegate = self;
+    self.homeHeadView = homeHeadView;
+    
+
+    self.showTableView.tableHeaderView = self.homeHeadView;
+    
+    HomeFootView *homefootView = [HomeFootView new];
+    homefootView.myHeight = 181;
+    homefootView.myHorzMargin = 0;
+    [homefootView createSubviews];
+    self.showTableView.tableFooterView = homefootView;
+    
+    
     [self blindVM];
     [self fetchData];
     [self blindUserStatue];
@@ -196,7 +205,7 @@
         if (data) {
             sectionView.titleLab.text = data.title;
         }
-        if (SingleUserInfo.loginData.userInfo.isRisk && ![data.title isEqualToString:@"推荐内容"]) {
+        if (SingleUserInfo.loginData.userInfo.isRisk && ![data.title isEqualToString:@"内容推荐"]) {
             [sectionView showMore];
         } else {
             if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"]) {

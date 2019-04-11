@@ -51,10 +51,6 @@
     if (!self.errorView.hidden) {
         self.errorView.hidden = YES;
     }
-    
-    
-    
-    
     //不知道干啥的，为啥加载完成就返回？
     return;
     for (UCFMicroBankOpenAccountViewController *vc in self.navigationController.viewControllers) {
