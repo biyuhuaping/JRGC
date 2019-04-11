@@ -28,6 +28,8 @@
 #import "NSString+Misc.h"
 #import "UCFInvestViewController.h"
 #import "RTRootNavigationAddPushController.h"
+#import "HSHelper.h"
+#import "RiskAssessmentViewController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate,UCFNewHomeSectionViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -306,7 +308,7 @@
                 [cache setMemoryCapacity:0];
                 
                 UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                mallController.url      = @"https://m.dougemall.com?fromGb=true";//请求地址;
+                mallController.url      = @"https://m.dougemall.com";//请求地址;
                 mallController.navTitle = @"商城";
                 mallController.isFromBarMall = NO;
                 [self.navigationController pushViewController:mallController animated:YES];
@@ -385,34 +387,28 @@
 {
     
 }
+#pragma mark 新手引导cell的点击事件
 - (void)userGuideCellClickButton:(UIButton *)button
 {
-    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
-        UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
-        webView.rootVc = self;
-        webView.baseTitleType = @"lunbotuhtml";
-        webView.url = @"https://www.9888keji.com/static/wap/invest/index.html#/new-guide/guide";
-        webView.navTitle = @"新手入门引导";
-        [self.rt_navigationController pushViewController:webView animated:YES];
-    } else {
-        [SingleUserInfo loadLoginViewController];
-    }
-    
     NSString *title = [button titleForState:UIControlStateNormal];
-    if ([title isEqualToString:@"注册领券"]) {
-        
-    } else if ([title isEqualToString:@"存管开户"]) {
-        
-    } else if ([title isEqualToString:@"风险评测"]) {
-        
-    } else if ([title isEqualToString:@"新人专享"]) {
-        
-    } else {
-        
+    if ([title isEqualToString:@"注册领券"] || [title isEqualToString:@"存管开户"] || [title isEqualToString:@"风险评测"] || [title isEqualToString:@"新人专享"]) {
+        [self skipNewUserGuideWebPageTitle:@"新手入门引导" URL:@"https://www.9888keji.com/static/wap/invest/index.html#/new-guide/guide"];
+    } else if ([title isEqualToString:@"注册领优惠券"]) {
+        [SingleUserInfo loadLoginViewController];
+    } else if ([title isEqualToString:@"开通存管账户"]){
+        [HSHelper  goToWeijinOpenAccount:self.rt_navigationController];
+    } else if ([title isEqualToString:@"进行风险评测"]) {
+        RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+        vc.accoutType = SelectAccoutTypeP2P;
+        [self.rt_navigationController pushViewController:vc animated:YES];
     }
-    
-
 }
-
-
+- (void)skipNewUserGuideWebPageTitle:(NSString *)title URL:(NSString *)url
+{
+    UCFWebViewJavascriptBridgeController *webView = [[UCFWebViewJavascriptBridgeController alloc]initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];
+    webView.rootVc = self;
+    webView.url = url;
+    webView.navTitle = title;
+    [self.rt_navigationController pushViewController:webView animated:YES];
+}
 @end

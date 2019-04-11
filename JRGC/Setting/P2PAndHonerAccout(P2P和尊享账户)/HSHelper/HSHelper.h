@@ -20,4 +20,9 @@
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
 //isPrensentView 视图是否是模态出来的 默认是NO 
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav isPresentView:(BOOL)isPresent;
+
+/**
+ 微金开户
+ */
++ (void)goToWeijinOpenAccount:(UINavigationController *)nav;
 @end

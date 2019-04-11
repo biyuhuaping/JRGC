@@ -17,6 +17,8 @@
 #import "UCFProjectSafetyGuaranteeViewController.h"
 #import "UCFProjectBasicDetailViewController.h"
 #import "UCFNewInvestBtnView.h"
+#import "RiskAssessmentViewController.h"
+#import "HSHelper.h"
 @interface UCFNewProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate,UCFBidDetailNavViewDelegate>
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
@@ -154,7 +156,7 @@
         vc.bidDetaiModel = model;
         [self.navigationController pushViewController:vc animated:YES];
     } else if (code == 21 || code == 22){
-//        [self checkUserCanInvest];
+        [self checkUserCanInvest];
     } else if (code == 15) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
@@ -173,6 +175,71 @@
     } else {
         [MBProgressHUD displayHudError:model.message withShowTimes:3];
     }
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 7000) {
+        [self topLeftButtonClick:nil];
+    } else if (alertView.tag == 7001) {
+        [self topLeftButtonClick:nil];
+    } else if (alertView.tag == 9000) {
+        if(buttonIndex == 1){
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.accoutType = self.accoutType;
+            vc.sourceVC = @"ProjectDetailVC";
+            [self.rt_navigationController pushViewController:vc animated:YES];
+        }
+    } else if(alertView.tag == 9001){
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+        }
+    } else if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            BOOL isP2P = [self.model.data.type intValue] == 1 ? YES : NO;
+            NSInteger step = isP2P  ? [SingleUserInfo.loginData.userInfo.openStatus intValue]: [SingleUserInfo.loginData.userInfo.zxOpenStatus intValue];
+            SelectAccoutType type = isP2P ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
+            [helper pushOpenHSType:type Step:step nav:self.rt_navigationController];
+        }
+    }
+}
+- (BOOL)checkUserCanInvest
+{
+    BOOL isP2P = [self.model.data.type intValue] == 1 ? YES : NO;
+
+    NSInteger step = isP2P  ? [SingleUserInfo.loginData.userInfo.openStatus intValue]: [SingleUserInfo.loginData.userInfo.zxOpenStatus intValue];
+    switch (step)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            [self showHSAlert:isP2P ? P2PTIP1 : ZXTIP1];
+            return NO;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            [self showHSAlert:isP2P ? P2PTIP2 : ZXTIP2];
+            return NO;
+        }
+            break;
+        case 5://特殊用户
+        {
+            //            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:[NSString stringWithFormat:@"%@staticRe/remind/withdraw.jsp",SERVER_IP] title:@""];
+            //            webController.baseTitleType = @"specialUser";
+            //            [self.navigationController pushViewController:webController animated:YES];
+            return YES;
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 8000;
+    [alert show];
 }
 - (void)blindData
 {

@@ -72,7 +72,11 @@
 {
     [self pushGoldAuthorizationType:type nav:nav sourceVC:@""];
 }
-
++ (void)goToWeijinOpenAccount:(UINavigationController *)nav
+{
+    UCFMicroBankOpenAccountViewController *vc= [[UCFMicroBankOpenAccountViewController alloc] init];
+    [nav pushViewController:vc animated:YES];
+}
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
 {
     [self pushOpenHSType:type Step:step nav:nav isPresentView:NO];
