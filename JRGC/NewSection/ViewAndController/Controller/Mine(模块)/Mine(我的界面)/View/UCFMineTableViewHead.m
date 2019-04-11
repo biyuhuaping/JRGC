@@ -128,10 +128,16 @@
 {
     if (nil == _headImageBtn) {
         _headImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _headImageBtn.topPos.equalTo(self.userMesageLayout.topPos).offset(30);//(@30);
-        _headImageBtn.leftPos.equalTo(@15);
-        _headImageBtn.myHeight = 38;
-        _headImageBtn.myWidth = 37;
+        _headImageBtn.myTop = 0;//(@30);
+        _headImageBtn.myLeft = 0;
+        _headImageBtn.myHeight = 63;
+        _headImageBtn.myWidth = 67;
+//        表示 上 左 下 右的偏移量;解释下,这四个量的含义:
+//        top : 为正数的时候,是往下偏移,为负数的时候往上偏移;
+//        left : 为正数的时候往右偏移,为负数的时候往左偏移;
+//        bottom : 为正数的时候往上偏移,为负数的时候往下偏移;
+//        right :为正数的时候往左偏移,为负数的时候往右偏移;
+        _headImageBtn.imageEdgeInsets = UIEdgeInsetsMake(30,16, 0, 0);
         _headImageBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [_headImageBtn setImage:[UIImage imageNamed:@"mine_icon_head"] forState:UIControlStateNormal];
         _headImageBtn.tag = 10001;
@@ -147,11 +153,11 @@
         _memberLeverBtn.titleLabel.font = [Color gc_Font:15.0];
         [_memberLeverBtn setBackgroundColor:[Color color:PGColorOpttonMyVipBackgroundColor]];
         [_memberLeverBtn setTitleColor:[Color color:PGColorOptionThemeWhite] forState:UIControlStateNormal];
-        _memberLeverBtn.centerYPos.equalTo(self.headImageBtn.centerYPos);
-        _memberLeverBtn.leftPos.equalTo(self.headImageBtn.rightPos).offset(6);
+        _memberLeverBtn.bottomPos.equalTo(self.headImageBtn.bottomPos).offset(5);
+        _memberLeverBtn.leftPos.equalTo(self.headImageBtn.rightPos).offset(0);
         _memberLeverBtn.myHeight = 24;
         _memberLeverBtn.myWidth = 75;
-        _memberLeverBtn.tag = 10005;
+        _memberLeverBtn.tag = 10006;
         [_memberLeverBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         _memberLeverBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
@@ -400,7 +406,7 @@
         }
         if ([myModel.data.memberLever integerValue] <= 1)
         {
-            [self.memberLeverBtn setTitle:@"普通用户" forState:UIControlStateNormal];
+            [self.memberLeverBtn setTitle:@"普通会员" forState:UIControlStateNormal];
         }
         else
         {

@@ -13,6 +13,8 @@
 #import "UCFAccountAssetsProofViewController.h"
 #import "NZLabel.h"
 #import "BaseScrollview.h"
+#import "PieModel.h"
+#import "UCFAssetAccountViewEarningsListView.h"
 
 @interface UCFAssetAccountViewEarningsController ()
 
@@ -26,6 +28,7 @@
 
 @property (nonatomic, strong) UCFAccountCenterAlreadyProfitModel *model;
 
+@property (nonatomic, strong) UCFAssetAccountViewEarningsListView *listView;
 @end
 
 @implementation UCFAssetAccountViewEarningsController
@@ -40,6 +43,7 @@
     [self.rootLayout addSubview: self.scrollView];
     [self.scrollView addSubview:self.scrollLayout];
     [self.scrollLayout addSubview:self.headView];
+    [self.scrollLayout addSubview:self.listView];
     [self request];
 }
 - (BaseScrollview *)scrollView
@@ -47,7 +51,7 @@
     if (nil == _scrollView) {
         _scrollView = [BaseScrollview new];
         _scrollView.scrollEnabled = YES;
-        _scrollView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        _scrollView.backgroundColor = [Color color:PGColorOptionThemeWhite];
         _scrollView.leftPos.equalTo(@0);
         _scrollView.rightPos.equalTo(@0);
         _scrollView.topPos.equalTo(@0);
@@ -60,7 +64,7 @@
 {
     if (nil == _scrollLayout) {
         _scrollLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
-        _scrollLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        _scrollLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
         _scrollLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _scrollLayout.myHorzMargin = 0;                          //同时指定左右边距为0表示宽度和父视图一样宽
         _scrollLayout.heightSize.lBound(self.scrollView.heightSize, 10, 1); //高度虽然是wrapContentHeight的。但是最小的高度不能低于父视图的高度加10.
@@ -79,6 +83,23 @@
         _headView.myLeft = 0;
     }
     return _headView;
+}
+
+- (UCFAssetAccountViewEarningsListView *)listView
+{
+    if (nil == _listView) {
+        
+        _listView = [[UCFAssetAccountViewEarningsListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 279)];//不带标题,只显示列表
+        _listView.myTop =0;
+        _listView.myLeft = 0;
+        if (!self.zxAccountIsShow) {
+            _listView.zxProfitLayout.myVisibility = MyVisibility_Gone;
+        }
+        if (!self.nmAccountIsShow) {
+            _listView.goldProfitLayout.myVisibility = MyVisibility_Gone;
+        }
+    }
+    return _listView;
 }
 /*
 #pragma mark - Navigation
@@ -112,71 +133,46 @@
 }
 - (void)reloadView:(UCFAccountCenterAlreadyProfitModel *)model
 {
-//    if (model.data.assetList.count <= 1) {
-//
-//        UCFAccountCenterAssetsOverViewAssetlist *list = model.data.assetList.firstObject;
-//
-//        PieModel *availBalanceModel = [[PieModel alloc]init];
-//        availBalanceModel.count = [list.availBalance floatValue];
-//        availBalanceModel.color = PNBlue;
-//
-//        PieModel *waitPrincipalModel = [[PieModel alloc]init];
-//        waitPrincipalModel.count = [list.waitPrincipal floatValue];
-//        waitPrincipalModel.color = PNOrange;
-//
-//        PieModel *waitInterestModel = [[PieModel alloc]init];
-//        waitInterestModel.count = [list.waitInterest floatValue];
-//        waitInterestModel.color = PNYellow;
-//
-//        PieModel *frozenBalanceModel = [[PieModel alloc]init];
-//        frozenBalanceModel.count = [list.frozenBalance floatValue];
-//        frozenBalanceModel.color = PNPinkRed;
-//
-//        [self.headView reloadPieView:@[availBalanceModel,waitPrincipalModel,waitInterestModel,frozenBalanceModel] andTotalAssets:model.data.totalAsset];
-//        self.headerAccountView.myVisibility = MyVisibility_Gone;
-//        [self.listScrollLayout addSubview:self.listView];
-//        [self.listView reloadAccountContent:model];
-//        [self.listView.enterButton addTarget:self action:@selector(jumpAccountCapital:) forControlEvents:UIControlEventTouchUpInside];
-//
-//    }
-//    else
-//    {
-//        self.listScrollLayout.myWidth = self.model.data.assetList.count *PGScreenWidth;
-//        NSMutableArray *pieArray = [NSMutableArray array];
-//        @PGWeakObj(self);
-//        [model.data.assetList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//            //            NSLog(@"顺序遍历array：%zi-->%@", idx, obj);
-//            //“P2P” :微金账户 “ZX”：尊享账户 "GOLD":黄金账户
-//            UCFAccountCenterAssetsOverViewAssetlist *asset = [model.data.assetList objectAtIndex:idx];
-//            PieModel *availBalanceModel = [[PieModel alloc]init];
-//            availBalanceModel.count = [asset.availBalance floatValue];
-//
-//            if ([asset.type isEqualToString:@"P2P"]) {
-//                availBalanceModel.color = PNBlue;
-//            }
-//            else if ([asset.type isEqualToString:@"ZX"]) {
-//                availBalanceModel.color = PNOrange;
-//            }
-//            else if ([asset.type isEqualToString:@"GOLD"]) {
-//                availBalanceModel.color = PNYellow;
-//            }
-//
-//            [pieArray addObject: availBalanceModel];
-//
-//            UCFAssetAccountViewTotalTitleListView *titleListView = [[UCFAssetAccountViewTotalTitleListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 265)];//带账户标题
-//            titleListView.myTop = 0;
-//            titleListView.myLeft = idx *PGScreenWidth;
-//            [titleListView reloadAccountContent:asset];
-//            [titleListView.enterButton addTarget:self action:@selector(jumpAccountCapital:) forControlEvents:UIControlEventTouchUpInside];
-//            [selfWeak.listScrollLayout addSubview:titleListView];
-//        }];
-//
-//        [self.headView reloadPieView:pieArray andTotalAssets:model.data.totalAsset];
-//        self.headerAccountView.myVisibility = MyVisibility_Visible;
-//        [self.headerAccountView reloadAccountLayout:model];
+    NSMutableArray *array = [NSMutableArray array];
+    PieModel *wjProfitModel = [[PieModel alloc]init];
+    wjProfitModel.count = [model.data.wjProfit floatValue];
+    wjProfitModel.color = PNBlue;
+    [array addObject:wjProfitModel];
     
-        
-//    }
+    PieModel *zxProfitModel = [[PieModel alloc]init];
+    zxProfitModel.count = [model.data.zxProfit floatValue];
+    zxProfitModel.color = PNOrange;
+    if (self.zxAccountIsShow) {
+        [array addObject:zxProfitModel];
+    }
+    
+    PieModel *goldProfitModel = [[PieModel alloc]init];
+    goldProfitModel.count = [model.data.goldProfit floatValue];
+    goldProfitModel.color = PNYellow;
+    if (self.nmAccountIsShow) {
+        [array addObject:goldProfitModel];
+    }
+    
+    PieModel *couponProfitModel = [[PieModel alloc]init];
+    couponProfitModel.count = [model.data.couponProfit floatValue];
+    couponProfitModel.color = PNLightBlue;
+    [array addObject:couponProfitModel];
+    
+    
+    PieModel *beanProfitModel = [[PieModel alloc]init];
+    beanProfitModel.count = [model.data.beanProfit floatValue];
+    beanProfitModel.color = PNPinkRed;
+    [array addObject:beanProfitModel];
+    
+    PieModel *balanceProfitModel = [[PieModel alloc]init];
+    balanceProfitModel.count = [model.data.balanceProfit floatValue];
+    balanceProfitModel.color = PNLightGreen;
+    [array addObject:balanceProfitModel];
+    
+    [self.headView reloadPieView:[array copy] andTotalAssets:model.data.totalProfit];
+    
+    [self.listView reloadAccountContent:self.model];
+    
 }
 - (void)jumpAccountCapital:(UIButton *)btn
 {

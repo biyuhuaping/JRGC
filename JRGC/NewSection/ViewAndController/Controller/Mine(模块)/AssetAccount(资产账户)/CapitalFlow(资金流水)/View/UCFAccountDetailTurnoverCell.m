@@ -1,18 +1,21 @@
 //
-//  UCFAssetAccountViewTotalTitleListView.m
+//  UCFAccountDetailTurnoverCell.m
 //  JRGC
 //
-//  Created by kuangzhanzhidian on 2019/4/4.
+//  Created by kuangzhanzhidian on 2019/4/9.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "UCFAssetAccountViewTotalTitleListView.h"
+#import "UCFAccountDetailTurnoverCell.h"
 #import "NZLabel.h"
 #import "UCFAccountCenterAssetsOverViewModel.h"
 #define LabelLeft 25
-#define LayoutHeight 34
+#define LayoutHeight 37
+#import "FundsDetailFrame.h"
+#import "FundsDetailModel.h"
+@interface UCFAccountDetailTurnoverCell ()
 
-@interface UCFAssetAccountViewTotalTitleListView ()
+@property (nonatomic, strong) MyRelativeLayout *bkLayout;// v背景
 
 @property (nonatomic, strong) UIView      *titleVerticalView;
 
@@ -60,47 +63,75 @@
 
 @property (nonatomic, strong) UIView      *frozenBalanceLinView;
 @end
+@implementation UCFAccountDetailTurnoverCell
 
-@implementation UCFAssetAccountViewTotalTitleListView
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
 
-- (id)initWithFrame:(CGRect)frame
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        // 初始化视图对象
         
-        [self.rootLayout addSubview:self.titleVerticalView];
-        [self.rootLayout addSubview:self.titleLabel];
-        [self.rootLayout addSubview:self.contentLabel];
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         
-        [self.rootLayout addSubview:self.availBalanceLayout];
-//        [self.availBalanceLayout addSubview:self.availBalanceRound];
+        [self.rootLayout addSubview:self.bkLayout];
+        
+        [self.bkLayout addSubview:self.titleVerticalView];
+        [self.bkLayout addSubview:self.titleLabel];
+        [self.bkLayout addSubview:self.contentLabel];
+        
+        [self.bkLayout addSubview:self.availBalanceLayout];
+        //        [self.availBalanceLayout addSubview:self.availBalanceRound];
         [self.availBalanceLayout addSubview:self.availBalanceLabel];
         [self.availBalanceLayout addSubview:self.availBalanceContentLabel];
-//        [self.availBalanceLayout addSubview:self.availBalanceLinView];
+        //        [self.availBalanceLayout addSubview:self.availBalanceLinView];
         
-        [self.rootLayout addSubview:self.waitPrincipalLayout];
-//        [self.waitPrincipalLayout addSubview:self.waitPrincipalRound];
+        [self.bkLayout addSubview:self.waitPrincipalLayout];
+        //        [self.waitPrincipalLayout addSubview:self.waitPrincipalRound];
         [self.waitPrincipalLayout addSubview:self.waitPrincipalLabel];
         [self.waitPrincipalLayout addSubview:self.waitPrincipalContentLabel];
-//        [self.waitPrincipalLayout addSubview:self.waitPrincipalLinView];
+        //        [self.waitPrincipalLayout addSubview:self.waitPrincipalLinView];
         
-        [self.rootLayout addSubview:self.waitInterestLayout];
-//        [self.waitInterestLayout addSubview:self.waitInterestRound];
+        [self.bkLayout addSubview:self.waitInterestLayout];
+        //        [self.waitInterestLayout addSubview:self.waitInterestRound];
         [self.waitInterestLayout addSubview:self.waitInterestLabel];
         [self.waitInterestLayout addSubview:self.waitInterestContentLabel];
-//        [self.waitInterestLayout addSubview:self.waitInterestLinView];
+        //        [self.waitInterestLayout addSubview:self.waitInterestLinView];
         
-        [self.rootLayout addSubview:self.frozenBalanceLayout];
-//        [self.frozenBalanceLayout addSubview:self.frozenBalanceRound];
+        [self.bkLayout addSubview:self.frozenBalanceLayout];
+        //        [self.frozenBalanceLayout addSubview:self.frozenBalanceRound];
         [self.frozenBalanceLayout addSubview:self.frozenBalanceLabel];
         [self.frozenBalanceLayout addSubview:self.frozenBalanceContentLabel];
-//        [self.frozenBalanceLayout addSubview:self.frozenBalanceLinView];
+        //        [self.frozenBalanceLayout addSubview:self.frozenBalanceLinView];
         
-        [self.rootLayout addSubview:self.enterButton];
     }
     return self;
 }
 
+
+- (MyRelativeLayout *)bkLayout
+{
+    if (nil == _bkLayout){
+        _bkLayout = [MyRelativeLayout new];
+        _bkLayout.backgroundColor = [UIColor whiteColor];
+        _bkLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
+        _bkLayout.myLeft = 0;
+        _bkLayout.myRight = 0;
+        _bkLayout.myBottom = 0;
+        _bkLayout.myTop = 10;
+        //        _wjLayout.myCenterX = - 70;
+    }
+    return _bkLayout;
+}
 -(UIView *)titleVerticalView
 {
     if (nil == _titleVerticalView) {
@@ -121,8 +152,8 @@
         _contentLabel.textAlignment = NSTextAlignmentRight;
         _contentLabel.font = [Color gc_Font:18.0];
         _contentLabel.textColor = [Color color:PGColorOptionTitleBlack];
-//        _titleLabel.text = @"可用余额";
-//        [_titleLabel sizeToFit];
+        //        _titleLabel.text = @"可用余额";
+        //        [_titleLabel sizeToFit];
     }
     return _contentLabel;
 }
@@ -140,29 +171,7 @@
     }
     return _titleLabel;
 }
-- (UIButton*)enterButton
-{
-    
-    if(nil == _enterButton)
-    {
-        _enterButton = [UIButton buttonWithType:0];
-        _enterButton.myLeft = 25;
-        _enterButton.myRight = 25;
-        _enterButton.myHeight = 40;
-        _enterButton.topPos.equalTo(self.frozenBalanceLayout.bottomPos).offset(25);
-        _enterButton.titleLabel.font= [Color gc_Font:15.0];
-        [_enterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_enterButton setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
-        _enterButton.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
-        { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
-            //设置圆角的半径
-            sbv.layer.cornerRadius = 20;
-            //切割超出圆角范围的子视图
-            sbv.layer.masksToBounds = YES;
-        };
-    }
-    return _enterButton;
-}
+
 - (MyRelativeLayout *)availBalanceLayout
 {
     if (nil == _availBalanceLayout){
@@ -205,7 +214,7 @@
         _availBalanceLabel.textAlignment = NSTextAlignmentLeft;
         _availBalanceLabel.font = [Color gc_Font:15.0];
         _availBalanceLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _availBalanceLabel.text = @"可用余额";
+        _availBalanceLabel.text = @"金额";
         [_availBalanceLabel sizeToFit];
     }
     return _availBalanceLabel;
@@ -283,7 +292,7 @@
         _waitPrincipalLabel.textAlignment = NSTextAlignmentLeft;
         _waitPrincipalLabel.font = [Color gc_Font:15.0];
         _waitPrincipalLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _waitPrincipalLabel.text = @"待收本金";
+        _waitPrincipalLabel.text = @"冻结资金";
         [_waitPrincipalLabel sizeToFit];
     }
     return _waitPrincipalLabel;
@@ -359,7 +368,7 @@
         _waitInterestLabel.textAlignment = NSTextAlignmentLeft;
         _waitInterestLabel.font = [Color gc_Font:15.0];
         _waitInterestLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _waitInterestLabel.text = @"预期利息";
+        _waitInterestLabel.text = @"发生时间";
         [_waitInterestLabel sizeToFit];
     }
     return _waitInterestLabel;
@@ -435,7 +444,7 @@
         _frozenBalanceLabel.textAlignment = NSTextAlignmentLeft;
         _frozenBalanceLabel.font = [Color gc_Font:15.0];
         _frozenBalanceLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _frozenBalanceLabel.text = @"冻结金额";
+        _frozenBalanceLabel.text = @"备注";
         [_frozenBalanceLabel sizeToFit];
     }
     return _frozenBalanceLabel;
@@ -468,42 +477,67 @@
     }
     return _frozenBalanceLinView;
 }
-- (void)reloadAccountContent:(UCFAccountCenterAssetsOverViewAssetlist *)model{
-    
-    UCFAccountCenterAssetsOverViewAssetlist *ass = model;
-    self.availBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.availBalance];
-    self.waitPrincipalContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.waitPrincipal];
-    self.waitInterestContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.waitInterest];
-    self.frozenBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.frozenBalance];
-    
+
+//- (void)reloadAccountContent:(UCFAccountCenterAssetsOverViewAssetlist *)model{
+//
+//    UCFAccountCenterAssetsOverViewAssetlist *ass = model;
+//    self.availBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.availBalance];
+//    self.waitPrincipalContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.waitPrincipal];
+//    self.waitInterestContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.waitInterest];
+//    self.frozenBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.frozenBalance];
+//
+//    [self.availBalanceContentLabel sizeToFit] ;
+//    [self.waitPrincipalContentLabel sizeToFit];
+//    [self.waitInterestContentLabel sizeToFit];
+//    [self.frozenBalanceContentLabel sizeToFit];
+//
+//    //    “P2P” :微金账户 “ZX”：尊享账户 "GOLD":黄金账户
+//    if ([ass.type isEqualToString:@"P2P"]) {
+//        self.titleVerticalView.backgroundColor = PNBlue;
+//        self.titleLabel.text = @"微金资金流水";
+//        [self.enterButton setTitle:@"微金资金流水" forState:UIControlStateNormal];
+//        self.enterButton.tag = 1000;
+//    }
+//    else if ([ass.type isEqualToString:@"ZX"]) {
+//        self.titleVerticalView.backgroundColor = PNOrange;
+//        self.titleLabel.text = @"尊享账户总资产";
+//        [self.enterButton setTitle:@"尊享资金流水" forState:UIControlStateNormal];
+//        self.enterButton.tag = 1001;
+//    }
+//    else if ([ass.type isEqualToString:@"GOLD"]) {
+//        self.titleVerticalView.backgroundColor = PNYellow;
+//        self.titleLabel.text = @"黄金账户总资产";
+//        [self.enterButton setTitle:@"黄金交易记录" forState:UIControlStateNormal];
+//        self.enterButton.tag = 1002;
+//
+//        self.waitInterestLayout.myVisibility = MyVisibility_Invisible;// 预期利息
+//        self.frozenBalanceLayout.myVisibility = MyVisibility_Invisible;// 冻结金额
+//    }
+//    [self.titleLabel sizeToFit];
+//}
+
+
+#pragma mark - 数据重新加载
+- (void)showInfo:(id)model
+{
+    if (nil == model || ![model isKindOfClass:[FundsDetailFrame class]]) {
+        return;
+    }
+//    FAccountDetailWZAndZXViewController: 0x10ef06ad0>请求返回数据:{"status":"1","pageData":{"result":[{"waterTypeName":"成功放款，扣除冻结资金","createTime":"2017-10-11 18:07:17","cashValue":"0.00","frozen":"-100.00","actType":"","remark":"消费贷-掌0002","yearMonth":"2017年10月"}
+    self.titleVerticalView.backgroundColor = [Color color:PGColorOptionTitlerRead];
+    FundsDetailFrame *newModel = model;
+    FundsDetailModel *ass = newModel.fundsDetailModel;
+    self.availBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.cashValue];
+    self.waitPrincipalContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.frozen];
+    self.waitInterestContentLabel.text = ass.createTime;
+    self.frozenBalanceContentLabel.text = ass.remark;
+
     [self.availBalanceContentLabel sizeToFit] ;
     [self.waitPrincipalContentLabel sizeToFit];
     [self.waitInterestContentLabel sizeToFit];
     [self.frozenBalanceContentLabel sizeToFit];
     
-//    “P2P” :微金账户 “ZX”：尊享账户 "GOLD":黄金账户
-    if ([ass.type isEqualToString:@"P2P"]) {
-        self.titleVerticalView.backgroundColor = PNBlue;
-        self.titleLabel.text = @"微金资金流水";
-        [self.enterButton setTitle:@"微金资金流水" forState:UIControlStateNormal];
-        self.enterButton.tag = 1000;
-    }
-    else if ([ass.type isEqualToString:@"ZX"]) {
-        self.titleVerticalView.backgroundColor = PNOrange;
-        self.titleLabel.text = @"尊享账户总资产";
-        [self.enterButton setTitle:@"尊享资金流水" forState:UIControlStateNormal];
-        self.enterButton.tag = 1001;
-    }
-    else if ([ass.type isEqualToString:@"GOLD"]) {
-        self.titleVerticalView.backgroundColor = PNYellow;
-        self.titleLabel.text = @"黄金账户总资产";
-        [self.enterButton setTitle:@"黄金交易记录" forState:UIControlStateNormal];
-        self.enterButton.tag = 1002;
-    
-        self.waitInterestLayout.myVisibility = MyVisibility_Invisible;// 预期利息
-        self.frozenBalanceLayout.myVisibility = MyVisibility_Invisible;// 冻结金额
-    }
+    self.titleLabel.text = ass.waterTypeName;
     [self.titleLabel sizeToFit];
 }
-
 @end

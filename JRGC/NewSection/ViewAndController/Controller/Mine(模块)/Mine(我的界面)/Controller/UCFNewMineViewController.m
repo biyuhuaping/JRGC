@@ -279,17 +279,6 @@
     else if (btn.tag == 10003){
         //是否展示用户资金,关闭都是*****
         btn.selected = !btn.selected;
-//        if (btn.selected)
-//        {
-//            [btn setImage:[UIImage imageNamed:@"mine_icon_ exhibition"] forState:UIControlStateNormal];
-//            self.contentField.secureTextEntry = NO;
-//            
-//        }
-//        else
-//        {
-//            [btn setImage:[UIImage imageNamed:@"icon_invisible_bule"] forState:UIControlStateNormal];
-//            self.contentField.secureTextEntry = YES;
-//        }
         [self.tableHead hiddenMoney:btn.selected];
     }
     else if (btn.tag == 10004){
@@ -303,8 +292,6 @@
             [alert show];
             return;
         }
-        
-        
         if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
             [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
             return;
@@ -317,47 +304,24 @@
             vc.uperViewController = self;
             [self.navigationController pushViewController:vc animated:YES];
         }
-//        if([UserInfoSingle sharedManager].superviseSwitch)
-//        {
-//            self.accoutType = SelectAccoutTypeP2P;
-//            HSHelper *helper = [HSHelper new];
-//            //检查企业老用户是否开户
-//            NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
-//            if (![messageStr isEqualToString:@""]) {
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
-//                [alert show];
-//                return;
-//            }
-//
-//
-//            if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
-//                [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
-//                return;
-//            }
-//
-//            if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
-//
-//                UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
-//                vc.accoutType = SelectAccoutTypeP2P;
-//                vc.uperViewController = self;
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//        }
-//        else{
-//            if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
-//
-//                UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
-//                vc.accoutType = SelectAccoutTypeP2P;
-//                vc.uperViewController = self;
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//
-//        }
     }
     else if (btn.tag == 10005){
         //各个账户的充值与提现,尊享、黄金账户已经不允许充值,只能提现
         UCFRechargeAndWithdrawalViewController *vc = [[UCFRechargeAndWithdrawalViewController alloc] init];
         [self.rt_navigationController pushViewController:vc animated:YES];
+    }
+    else if (btn.tag == 10006){
+        //个人等级页面
+        if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
+        {//吐司：此活动暂时未对企业用户开放
+            [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
+        }
+        else{
+            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])//判断是否开户
+            {
+               [self requestMyCoin:@"vip"];//请求工贝地址
+            }
+        }
     }
 }
 //- (void)getRecharngeBindingBankCardNet
@@ -469,7 +433,7 @@
     }
     else if (tag == 1002){
         //我的工贝
-        [self requestMyCoin];//请求工贝地址
+        [self requestMyCoin:nil];//请求工贝地址
         
 //        UCFRegisterdSucceedViewController *vc= [[UCFRegisterdSucceedViewController alloc] init];
 //        [self.rt_navigationController pushViewController:vc animated:YES];
@@ -711,43 +675,33 @@
     
 }
 
-- (void)requestMyCoin//请求我的工贝
+- (void)requestMyCoin:(NSString *)vip//请求我的工贝
 {
-    UCFMineIntoCoinPageApi * request = [[UCFMineIntoCoinPageApi alloc] initWithPageType:@""];
-    
-    //    request.animatingView = self.view;
+    UCFMineIntoCoinPageApi * request = [[UCFMineIntoCoinPageApi alloc] initWithPageType:vip];
+    request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
         UCFMineIntoCoinPageModel *model = [request.responseJSONModel copy];
         //        DDLogDebug(@"---------%@",model);
-        if (model.ret == YES) {
-       
-//            NSDictionary *coinRequestDicData = [dataDict objectSafeDictionaryForKey:@"coinRequest"];
+        if (model.ret == YES)
+        {
             UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-//            NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
             NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
             [data setValue:[NSString urlEncodeStr:model.data.coinRequest.param.encryptParam ] forKey:@"encryptParam"];
             [data setObject:[NSString stringWithFormat:@"%zd",model.data.coinRequest.param.fromApp] forKey:@"fromApp"];
             [data setObject:model.data.coinRequest.param.userId forKey:@"userId"];
             NSString * requestStr = [Common getParameterByDictionary:data];
-            web.url  = [NSString stringWithFormat:@"%@/#/?%@",model.data.coinRequest.urlPath,requestStr];
+            if ([vip isEqualToString:@"vip"])
+            {
+                web.url  = [NSString stringWithFormat:@"%@?%@",model.data.coinRequest.urlPath,requestStr];
+            }
+            else
+            {
+                 web.url  = [NSString stringWithFormat:@"%@/#/?%@",model.data.coinRequest.urlPath,requestStr];
+            }
             web.isHidenNavigationbar = YES;
             [self.navigationController pushViewController:web animated:YES];
-           
-            //进vip页面
-//                NSDictionary *coinRequestDicData = [dataDict objectSafeDictionaryForKey:@"coinRequest"];
-//                UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-//                NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
-//                NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
-//                [data setValue:[NSString urlEncodeStr:[paramDict objectSafeForKey:@"encryptParam"]] forKey:@"encryptParam"];
-//                [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
-//                [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
-//                NSString * requestStr = [Common getParameterByDictionary:data];
-//                web.url  = [NSString stringWithFormat:@"%@?%@",[coinRequestDicData objectSafeForKey:@"urlPath"],requestStr];
-//                web.isHideNativeNav = YES;
-//                web.rootVc = @"UCFSecurityCenterVC";
-//                [self.navigationController pushViewController:web animated:YES];
         }
         else{
             ShowMessage(model.message);

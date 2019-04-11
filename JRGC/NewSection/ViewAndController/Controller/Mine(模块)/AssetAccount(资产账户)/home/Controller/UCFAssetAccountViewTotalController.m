@@ -19,6 +19,9 @@
 #import "UCFAssetAccountViewTotalListView.h"
 #import "UCFAssetAccountViewTotalTitleListView.h"
 #import "UCFAccountAssetsProofViewController.h"
+#import "GoldTransactionRecordViewController.h"
+#import "UCFAccountDetailViewController.h"
+#import "UCFAccountDetailWZAndZXViewController.h"
 @interface UCFAssetAccountViewTotalController ()
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -273,12 +276,21 @@
 {
     if (btn.tag == 1000) {
         //微金流水
+        UCFAccountDetailWZAndZXViewController *accountDetailVC = [[UCFAccountDetailWZAndZXViewController alloc] init];
+        accountDetailVC.accoutType = SelectAccoutTypeP2P;
+        [self.rt_navigationController pushViewController:accountDetailVC animated:YES];
     }
     else if (btn.tag == 1001) {
         //尊享流水
+        UCFAccountDetailViewController *accountDetailVC = [[UCFAccountDetailViewController alloc] initWithNibName:@"UCFAccountDetailViewController" bundle:nil];
+        accountDetailVC.selectedSegmentIndex = 1;
+        accountDetailVC.accoutType = SelectAccoutTypeP2P;
+        [self.rt_navigationController pushViewController:accountDetailVC animated:YES];
     }
     else if (btn.tag == 1002) {
-        //黄金流水
+        //黄金交易记录
+        GoldTransactionRecordViewController *vc1 = [[GoldTransactionRecordViewController alloc] initWithNibName:@"GoldTransactionRecordViewController" bundle:nil];
+        [self.rt_navigationController pushViewController:vc1 animated:YES];
     }
     else if (btn.tag == 1003) {
         //资产证明

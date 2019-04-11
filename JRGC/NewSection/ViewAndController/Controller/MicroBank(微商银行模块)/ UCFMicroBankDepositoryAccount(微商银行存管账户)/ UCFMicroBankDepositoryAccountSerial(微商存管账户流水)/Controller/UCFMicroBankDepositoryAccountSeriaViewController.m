@@ -58,12 +58,12 @@
 - (BaseTableView *)tableView
 {
     if (nil == _tableView) {
-        _tableView = [[BaseTableView alloc]init];
+        _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, PGScreenWidth, 0) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _tableView.delegate = self;
         _tableView.dataSource =self;
         _tableView.tableRefreshDelegate= self;
-        _tableView.enableRefreshFooter = NO;
+//        _tableView.enableRefreshFooter = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.topPos.equalTo(@10);
         _tableView.leftPos.equalTo(@0);
@@ -74,17 +74,43 @@
     return _tableView;
 }
 #pragma mark--tableView delegate
+//第section分区一共有多少行
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
     return self.arryData.count;
 }
+// 一共有多少个分区
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 0;
+}
 
-
+//第section分区的头部标题
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    
+    return @"";
+}
+//某一行的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     return 65;
 }
+//第section分区头部的高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 43;
+}
+
+//第section分区尾部的高度
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+
+//第section分区头部显示的视图
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+
+//第section分区尾部显示的视图
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+
 //-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 //{
 //    return [[self.arryData objectAtIndex:section] count];

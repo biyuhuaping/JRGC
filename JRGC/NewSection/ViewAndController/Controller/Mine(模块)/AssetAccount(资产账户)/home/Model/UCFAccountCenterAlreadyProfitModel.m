@@ -11,3 +11,7 @@
 @implementation UCFAccountCenterAlreadyProfitModel
 
 @end
+
+@implementation UCFAccountCenterAlreadyProfitData
+
+@end
