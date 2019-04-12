@@ -16,7 +16,7 @@
 #import "UCFToolsMehod.h"
 #import "MD5Util.h"
 #import "FMDeviceManager.h"
-
+#import "UCFLockHandleViewController.h"
 @interface UCFRegisterInputPassWordViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -366,8 +366,12 @@
             
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:@"个人",@"isCompany",self.phoneNo,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:self.passWordField.text];
-            [self.rt_navigationController popToRootViewControllerAnimated:YES];
             [self.rootLayout endEditing:YES];
+            [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:LLLockViewTypeCreate] animated:YES complete:^(BOOL finished) {
+                //                [SingGlobalView.tabBarController.selectedViewController.navigationController popToRootViewControllerAnimated:NO];
+                //                [SingGlobalView.tabBarController setSelectedIndex:0];
+                [SingGlobalView.rootNavController removeViewController:self];
+            }];            
         }
         else{
             if(model.code == 2) {
@@ -387,7 +391,12 @@
         
     }];
 }
-
+- (UCFLockHandleViewController *)cretateLockViewWithType:(LLLockViewType)type
+{
+    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] initWithType:type];
+    lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    return lockVc;
+}
 //- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 //    [self.rootLayout endEditing:YES];
 //}

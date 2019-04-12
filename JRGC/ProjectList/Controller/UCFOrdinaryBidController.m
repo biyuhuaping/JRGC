@@ -317,15 +317,8 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
-        HSHelper *helper = [HSHelper new];
-        if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
-            [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
-            return;
-        }
-        
         _microMoneyModel = [self.dataArray objectAtIndex:indexPath.row];
         NSString *userid = [UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId];
-//        NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
         NSInteger isOrder = [_microMoneyModel.isOrder integerValue];
         NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",_microMoneyModel.Id];
         NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};

@@ -47,20 +47,12 @@
     } else {
 
         showTabBar = NO;
-//        UCFNewSubMallWebViewController *mall = [[UCFNewSubMallWebViewController alloc] initWithNibName:@"UCFNewSubMallWebViewController" bundle:nil];
-//        mall.url = requetRUL;
-//        [self.rt_navigationController pushViewController:mall animated:YES complete:nil];
-//        return NO;
+
     }
     [self.view setNeedsLayout];
     return result;
 }
-//- (void)viewWillLayoutSubviews{
-//    //    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    //    [delegate makeTabbarHeight];//隐藏tabbar
-//    self.tabBarController.tabBar.hidden = YES;
-//    self.edgesForExtendedLayout = UIRectEdgeBottom;;
-//}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     if (showTabBar) {
@@ -73,8 +65,8 @@
         self.webView.frame = CGRectMake(0, StatusBarHeight1, ScreenWidth, CGRectGetHeight(self.view.frame));
     } else {
         SingGlobalView.tabBarController.tabBar.hidden = YES;
-        self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight );
-        self.webView.frame = CGRectMake(0, StatusBarHeight1, ScreenWidth, CGRectGetHeight(self.view.frame));
+        self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        self.webView.frame = CGRectMake(0, StatusBarHeight1, ScreenWidth, CGRectGetHeight(self.view.frame) - StatusBarHeight1);
     }
     [super webViewDidFinishLoad:webView];
 }

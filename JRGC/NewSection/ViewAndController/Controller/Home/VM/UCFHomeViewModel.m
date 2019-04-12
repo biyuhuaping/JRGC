@@ -236,7 +236,10 @@
         self.remcommendUrl = model.data.mallDiscountsUrl;
         self.boutiqueUrl = model.data.mallSelectedUrl;
         
-        CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(ScreenWidth - 30) * 6 /23  + (ScreenWidth - 30)/3 + 45];
+        CGFloat bannerHegit = model.data.mallBannerList.count != 0 ? (ScreenWidth - 30) * 6 /23 : 0;
+        CGFloat shopHeight = model.data.mallDiscounts.count != 0 ? (ScreenWidth - 30)/3 + 45 : 0 ;
+        
+        CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(bannerHegit  + shopHeight)];
         UCFCellDataModel *dataMode = [UCFCellDataModel new];
         dataMode.modelType = @"mall";
         NSMutableArray *arr = [NSMutableArray arrayWithCapacity:1];
@@ -247,19 +250,22 @@
         dataMode.data2 = model.data.mallDiscounts;
         NSMutableArray *section3 = [NSMutableArray arrayWithCapacity:1];
         data3_0.dataModel = dataMode;
-        [section3 addObject:data3_0];
-        [self.dataArray addObject:section3];
+        if (shopHeight > 0.01) {
+            [section3 addObject:data3_0];
+            [self.dataArray addObject:section3];
+        }
         
-        
+        CGFloat boutiqueHeight = model.data.mallSelected.count != 0 ? 105 + 45 : 0;
         NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
-        CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:105 + 45];
+        CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:boutiqueHeight];
         UCFCellDataModel *dataMode1 = [UCFCellDataModel new];
         dataMode1.modelType = @"mallDiscounts";
         dataMode1.data1 = model.data.mallSelected;
         data4_0.dataModel = dataMode1;
         [section4 addObject:data4_0];
-        
-        [self.dataArray addObject:section4];
+        if (boutiqueHeight > 0.01) {
+            [self.dataArray addObject:section4];
+        }
     } else {
         ShowMessage(model.message);
     }

@@ -227,6 +227,8 @@
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:self.isCompany,@"isCompany",self.username,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:self.pwd];
             [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:LLLockViewTypeCreate] animated:YES complete:^(BOOL finished) {
+//                [SingGlobalView.tabBarController.selectedViewController.navigationController popToRootViewControllerAnimated:NO];
+//                [SingGlobalView.tabBarController setSelectedIndex:0];
                 [SingGlobalView.rootNavController removeViewController:self];
             }];
             

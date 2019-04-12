@@ -506,9 +506,10 @@
 {
     RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.selectedViewController;
     NSInteger currentIndex = [nav.viewControllers indexOfObject:self];
-
-    [_bridge callHandler:@"jsHandler" data:@{@"type": @"isOtherView",@"value":[NSNumber numberWithBool:currentIndex]} responseCallback:^(id responseData) {
-        DDLogDebug(@"是否首页");
+    NSString *str = [NSString stringWithFormat:@"%@",currentIndex == 0 ? @"0" : @"1"];
+    
+    [_bridge callHandler:@"jsHandler" data:[Common dictionaryToJson:@{@"action": @"isOtherView",@"value":str}] responseCallback:^(id responseData) {
+        DDLogDebug(@"%@",responseData);
     }];
 }
 - (void)getContractContent:(NSString *)value
