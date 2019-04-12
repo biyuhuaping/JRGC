@@ -17,7 +17,7 @@ typedef void(^requestUserAllStatueCallBackBlock)(BOOL);
 
 //SingleUserInfo.loginData.userInfo
 
-
+@property (nonatomic, assign) BOOL webCloseUpdatePrePage;
 
 @property (nonatomic ,strong) UCFLoginData *loginData;
 
@@ -119,4 +119,8 @@ typedef void(^requestUserAllStatueCallBackBlock)(BOOL);
 - (void)removeIsShare;
 - (void)saveIsShare:(NSDictionary *)dic;
 
+/**
+ 重置用户状态
+ */
+//- (void)updataCurrentUserStatue;
 @end

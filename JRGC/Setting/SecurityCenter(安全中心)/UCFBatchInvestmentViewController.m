@@ -716,7 +716,6 @@
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUserState" object:nil];
 }
 /*
 #pragma mark - Navigation

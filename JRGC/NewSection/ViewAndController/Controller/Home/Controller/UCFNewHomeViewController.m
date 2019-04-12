@@ -112,22 +112,7 @@
     [self fetchData];
     [self blindUserStatue];
 }
-- (void)monitorUserLogin
-{
-    [self fetchData];
-}
-- (void)monitorUserGetOut
-{
-    [self fetchData];
-}
-- (void)monitorOpenStatueChange
-{
-    [self fetchData];
-}
-- (void)monitorRiskStatueChange
-{
-    [self fetchData];
-}
+
 - (void)blindVM
 {
     self.homeListViewModel = [UCFHomeViewModel new];
@@ -227,22 +212,12 @@
         [self pushWebViewWithUrl:self.boutiqueUrl Title:@"商城精选"];
     } else if([title isEqualToString:@"商城特惠"]){
         [self pushWebViewWithUrl:self.remcommendUrl Title:@"商城特惠"];
-    } else if ([title isEqualToString:@"智能出借"]) {
+    } else if ([title isEqualToString:@"智能出借"] || [title isEqualToString:@"优质债权"]) {
         
         RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.viewControllers[1];
         RTContainerController *container = nav.viewControllers[0];
         UCFInvestViewController *vc  = container.contentViewController;
-        vc.selectedType  = @"IntelligentLoan";
-        if ([vc isViewLoaded]) {
-            [vc changeView];
-        }
-        [SingGlobalView.tabBarController setSelectedIndex:1];
-        
-    } else if ([title isEqualToString:@"优质债权"]) {
-        RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.viewControllers[1];
-        RTContainerController *container = nav.viewControllers[0];
-        UCFInvestViewController *vc  = container.contentViewController;
-        vc.selectedType  = @"QualityClaims";
+        vc.selectedType  = [title isEqualToString:@"智能出借"] ? @"IntelligentLoan" : @"QualityClaims";
         if ([vc isViewLoaded]) {
             [vc changeView];
         }
@@ -288,9 +263,7 @@
 }
 #pragma mark BaseTableViewCellDelegate
 - (void)baseTableViewCell:(BaseTableViewCell *)cell buttonClick:(UIButton *)button withModel:(id)model
-{
-
-    
+{    
     if ([model isKindOfClass:[UCFNewHomeListPrdlist class]]) {
         [UCFBidDetailAndInvestPageLogic bidDetailAndInvestPageLogicUseDataModel:model detail:NO rootViewController:self];
     } else if ([model isKindOfClass:[NSString class]]) {
@@ -390,6 +363,7 @@
 #pragma mark 新手引导cell的点击事件
 - (void)userGuideCellClickButton:(UIButton *)button
 {
+
     NSString *title = [button titleForState:UIControlStateNormal];
     if ([title isEqualToString:@"注册领券"] || [title isEqualToString:@"存管开户"] || [title isEqualToString:@"风险评测"] || [title isEqualToString:@"新人专享"]) {
         [self skipNewUserGuideWebPageTitle:@"新手入门引导" URL:@"https://www.9888keji.com/static/wap/invest/index.html#/new-guide/guide"];
@@ -410,5 +384,26 @@
     webView.url = url;
     webView.navTitle = title;
     [self.rt_navigationController pushViewController:webView animated:YES];
+}
+- (void)monitorUserLogin
+{
+    [self fetchData];
+}
+- (void)monitorUserGetOut
+{
+    [self fetchData];
+}
+- (void)monitorOpenStatueChange
+{
+    [self fetchData];
+}
+- (void)monitorRiskStatueChange
+{
+    [self fetchData];
+}
+- (void)refreshPageData
+{
+    [self fetchData];
+
 }
 @end

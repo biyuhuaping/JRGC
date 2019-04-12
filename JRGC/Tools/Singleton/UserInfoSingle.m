@@ -132,7 +132,11 @@
         return nil;
     }
 }
-
+//- (void)updataCurrentUserStatue
+//{
+//   UCFLoginData *newUserData = [self.loginData mutableCopy];
+//    self.loginData = newUserData;
+//}
 - (void)saveLoginAccount:(NSDictionary *)account;
 {
     [[NSUserDefaults standardUserDefaults] setValue:account forKey:@"lastLoginName"];

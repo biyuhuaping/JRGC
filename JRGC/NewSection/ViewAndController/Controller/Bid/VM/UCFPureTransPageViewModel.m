@@ -13,9 +13,12 @@
 #import "JSONKit.h"
 #import "UCFNewRechargeViewController.h"
 #import "UCFTopUpViewController.h"
+#import "UCFTransCalculatorRequest.h"
+#import "HWWeakTimer.h"
 @interface UCFPureTransPageViewModel ()
 {
     double  needToRechare;
+    
 }
 
 @end
@@ -24,6 +27,7 @@
 @property(nonatomic, strong)UCFPureTransBidRootModel *model;
 @property (nonatomic, strong)UCFContractTypleModel *contractTmpModel;
 @property (nonatomic, strong)NSString       *investMoeny;
+@property (nonatomic, strong)NSTimer        *timer;
 @end
 
 @implementation UCFPureTransPageViewModel
@@ -140,16 +144,48 @@
 - (void)calculate:(NSString *)currentText
 {
     self.investMoeny = currentText;
-    NSString *annualRate = self.model.data.transfereeYearRate;
-    NSString *timeLimitText = self.model.data.lastDays;
-    double value  = ([annualRate doubleValue]/100.0f) * ([timeLimitText integerValue]/360.0) * [currentText doubleValue];
     
-    CGFloat discountRate = self.model.data.discountRate;
-    double value1  = (discountRate/100.0f) * ([timeLimitText integerValue]/360.0) * [currentText doubleValue];
-    self.expectedInterestStr = [NSString stringWithFormat:@"¥%.2f+¥%.2f工豆",value,value1];
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    if ([currentText doubleValue] > 0) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerfire:) userInfo:nil repeats:NO];
+    }
+//    CGFloat discountRate = self.model.data.discountRate;
+//    double value1  = (discountRate/100.0f) * ([timeLimitText integerValue]/360.0) * [currentText doubleValue];
+    
 
 }
-
+- (void)timerfire:(NSTimer *)timer
+{
+    NSString *annualRate = self.model.data.transfereeYearRate;
+    NSString *repayMode = self.model.data.repayMode;
+    NSString *repayPeriod = self.model.data.lastDays;
+    NSString *prdClaimsId = self.model.data.ID;
+    NSMutableDictionary *parmDict = [NSMutableDictionary dictionaryWithCapacity:5];
+    [parmDict setValue:annualRate forKey:@"annualRate"];
+    [parmDict setValue:repayMode forKey:@"repayMode"];
+    [parmDict setValue:repayPeriod forKey:@"repayPeriod"];
+    [parmDict setValue:self.investMoeny forKey:@"investAmt"];
+    [parmDict setValue:prdClaimsId forKey:@"transferId"];
+    @PGWeakObj(self);
+    UCFTransCalculatorRequest *request = [[UCFTransCalculatorRequest alloc] initWithParmDict:parmDict];
+    [request setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        UCFCalulatorModel *model = request.responseJSONModel;
+        if ([model.taotalIntrest doubleValue] >= 0.01 && model.extraBeanCount > 0) {
+            selfWeak.expectedInterestStr = [NSString stringWithFormat:@"¥%@+¥%.2f工豆",model.taotalIntrest,model.extraBeanCount/100.0f];
+        } else {
+            selfWeak.expectedInterestStr = [NSString stringWithFormat:@"¥%@",model.taotalIntrest];
+        }
+        NSLog(@"%@",model);
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+    [request start];
+    [self.timer invalidate];
+    self.timer = nil;
+}
 - (void)dealMyContract
 {
     NSString *cfcaContractNameStr =  self.model.cfcaContractName;
@@ -389,6 +425,10 @@
             
         }
     }
+    
+}
+- (void)dealloc
+{
     
 }
 @end
