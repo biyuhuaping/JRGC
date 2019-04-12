@@ -169,8 +169,9 @@
     if (nil == _serviceLabel) {
         _serviceLabel = [NZLabel new];
         _serviceLabel.topPos.equalTo(self.nextBtn.bottomPos).offset(20);
-        _serviceLabel.myLeft= 25;
-        _serviceLabel.myRight= 25;
+//        _serviceLabel.myLeft= 25;
+//        _serviceLabel.myRight= 25;
+        _serviceLabel.myCenterX = 0;
         _serviceLabel.numberOfLines = 0;
         _serviceLabel.textAlignment = NSTextAlignmentCenter;
         _serviceLabel.font = [Color gc_Font:13.0];

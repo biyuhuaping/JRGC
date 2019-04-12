@@ -18,6 +18,7 @@
 #import "UCFNewFindPassWordRetrievePwdModel.h"
 #import "UCFNewFindPassWordRetrievePwdApi.h"
 #import "BaseAlertView.h"
+#import "UCFNewLoginViewController.h"
 
 @interface UCFNewResetPassWordViewController ()<UIScrollViewDelegate,UITextFieldDelegate>
 
@@ -65,8 +66,11 @@
     [self.rootLayout addSubview:self.enterButton];
     [self.rootLayout addSubview:self.serviceLabel];
     
+    
     [self statVerifyCodeRequest:@"SMS"];
     [self addLeftButton];
+    
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -149,6 +153,7 @@
         //自动折行设置
         _resetPassWordSMSLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _resetPassWordSMSLabel.numberOfLines = 0;
+        _resetPassWordSMSLabel.wrapContentHeight = YES;
 //        /**视图可见，等价于hidden = false*/
 //        MyVisibility_Visible,
 //        /**视图隐藏，等价于hidden = true, 但是会在父布局视图中占位空白区域*/
@@ -219,8 +224,9 @@
     if (nil == _serviceLabel) {
         _serviceLabel = [NZLabel new];
         _serviceLabel.topPos.equalTo(self.enterButton.bottomPos).offset(20);
-        _serviceLabel.myLeft= 25;
-        _serviceLabel.myRight= 25;
+//        _serviceLabel.myLeft= 25;
+//        _serviceLabel.myRight= 25;
+        _serviceLabel.myCenterX = 0;
         _serviceLabel.numberOfLines = 0;
         _serviceLabel.textAlignment = NSTextAlignmentCenter;
         _serviceLabel.font = [Color gc_Font:13.0];
@@ -251,7 +257,8 @@
         if (model.ret == YES)
         {
             [[BaseAlertView getShareBaseAlertView] showStringOnTop:model.message];
-            [self.rt_navigationController popToRootViewControllerAnimated:YES];
+            [self.rt_navigationController removeViewControllerOnTheFormer];
+            [self.rt_navigationController popViewControllerAnimated:YES];
         }
         else
         {

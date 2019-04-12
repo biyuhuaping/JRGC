@@ -159,7 +159,7 @@
         _passWordField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _passWordField.font = [Color font:15.0 andFontName:nil];
         _passWordField.textAlignment = NSTextAlignmentLeft;
-        _passWordField.placeholder = @"6-16位密码，数字、字母组合";
+        _passWordField.placeholder = @"登录密码";
         _passWordField.secureTextEntry = YES;
         //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];

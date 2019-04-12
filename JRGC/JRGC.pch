@@ -72,6 +72,7 @@
 #import "NSObject+FBKVOController.h"
 #import "NSString+Tool.h"
 #import "RTRootNavigationAddPushController.h"
+#import "RTRootNavigationController+RTRootNavigationControllerMethod.h"
 
 #define XPOS 15
 #define YPOS 25
