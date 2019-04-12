@@ -55,6 +55,7 @@
     [self.rootLayout addSubview:self.leftView];
     [self.rootLayout addSubview:self.rightView];
     
+    [self setSetNavgationPopDisabled:YES];
     [self addLeftButtons];
     [self addRightButton];
 }

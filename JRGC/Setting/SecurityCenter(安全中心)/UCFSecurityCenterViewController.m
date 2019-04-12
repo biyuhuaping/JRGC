@@ -48,6 +48,8 @@
 #import "UCFMineDimensionCodeViewController.h"
 #import "UCFMicroBankDepositoryAccountHomeViewController.h"
 #import "UCFNewModifyPasswordViewController.h"
+#import "UCFNewBindPhoneNumViewController.h"
+#import "UCFNewBindPhoneNumSMSViewController.h"
 
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
@@ -93,7 +95,7 @@
     if (_itemsData == nil) {
         
         UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"idcard_icon" title:@"身份认证" destVcClass:[UCFMineIdentityCertificationViewController class]];
-        UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"bind_phone_icon" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
+        UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"bind_phone_icon" title:@"绑定手机号" destVcClass:[UCFNewBindPhoneNumViewController class]];
         UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"gongchang_code_icon" title:@"工场码" destVcClass:[UCFMineDimensionCodeViewController class]];
        
         self.userLevel = [UCFSettingArrowItem itemWithIcon:@"membership_level_icon" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
@@ -766,7 +768,7 @@
         if (arrowItem.destVcClass == nil) return;
         
         UCFBaseViewController *vc ;
-        //如果集成UCFWebViewJavascriptBridgeController 需要在这里添加
+        //如果集成UCFWebViewJavascriptBridgeController 需要在这里添加  UCFNewBindPhoneNumViewController
         if (!([NSStringFromClass(arrowItem.destVcClass) isEqualToString:@"UCFWebViewJavascriptBridgeLevel"] || [NSStringFromClass(arrowItem.destVcClass) isEqualToString:@"RiskAssessmentViewController"]))
         {
             vc = [[arrowItem.destVcClass alloc] init];
@@ -805,14 +807,20 @@
                     [alert show];
                     return;
                 }
-                BindPhoneNumViewController *v = (BindPhoneNumViewController *)vc;
+//                BindPhoneNumViewController *v = (BindPhoneNumViewController *)vc;
+//                v.authedPhone = item.subtitle;
+//                v.uperViewController = self;
+//                if ([item.subtitle isEqualToString:@"未绑定"]) {
+//                    
+//                    vc = [[UCFModifyPhoneViewController alloc] initWithNibName:@"UCFModifyPhoneViewController" bundle:nil];
+//                }
+//                v.rootVc = self;
+                UCFNewBindPhoneNumViewController *v = (UCFNewBindPhoneNumViewController *)vc;
                 v.authedPhone = item.subtitle;
-                v.uperViewController = self;
                 if ([item.subtitle isEqualToString:@"未绑定"]) {
-                    
-                    vc = [[UCFModifyPhoneViewController alloc] initWithNibName:@"UCFModifyPhoneViewController" bundle:nil];
+
+                    vc = [[UCFNewBindPhoneNumSMSViewController alloc] init];
                 }
-                v.rootVc = self;
             }
                 break;
             case 2:{

@@ -581,8 +581,23 @@
 - (void)reloadAccountContent:(UCFAccountCenterAlreadyProfitModel *)model
 {
     self.wjProfitContentLabel.text = [NSString stringWithFormat:@"￥%@",model.data.wjProfit];
-    self.zxProfitContentLabel.text =[NSString stringWithFormat:@"￥%@",model.data.zxProfit];
-    self.goldProfitContentLabel.text = [NSString stringWithFormat:@"￥%@",model.data.goldProfit];
+    if ([model.data.zxProfit floatValue] == 0) {
+        self.zxProfitContentLabel.myVisibility = MyVisibility_Gone;
+    }
+    else
+    {
+        self.zxProfitContentLabel.text =[NSString stringWithFormat:@"￥%@",model.data.zxProfit];
+        self.zxProfitContentLabel.myVisibility = MyVisibility_Visible;
+    }
+    if ([model.data.goldProfit floatValue] == 0) {
+         self.goldProfitContentLabel.myVisibility = MyVisibility_Gone;
+    }
+    else
+    {
+        self.goldProfitContentLabel.text = [NSString stringWithFormat:@"￥%@",model.data.goldProfit];
+         self.goldProfitContentLabel.myVisibility = MyVisibility_Visible;
+    }
+    
     self.couponProfitContentLabel.text = [NSString stringWithFormat:@"￥%@",model.data.couponProfit];
     self.beanProfitContentLabel.text = [NSString stringWithFormat:@"￥%@",model.data.beanProfit];
     self.balanceProfitContentLabel.text = [NSString stringWithFormat:@"￥%@",model.data.balanceProfit];
