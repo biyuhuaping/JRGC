@@ -16,6 +16,11 @@ typedef NS_ENUM(NSUInteger, RequestState) {
 @interface BaseRequest : YTKRequest
 
 /**
+ 是否老接口形式
+ */
+@property(nonatomic, assign)BOOL    oldGCApi;
+
+/**
 接口类型 p2p 或者 尊享
  */
 @property(nonatomic, assign)SelectAccoutType apiType;

@@ -210,11 +210,11 @@
 }
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
-    NSString *prdclaimid = [self.viewModel getDataModelBidID];
+//    NSString *prdclaimid = [self.viewModel getDataModelBidID];
     NSString *investAmt = [self.viewModel getTextFeildInputMoeny];
-    if (prdclaimid == nil || [prdclaimid isEqualToString:@""] || investAmt == nil || [investAmt isEqualToString:@""]) {
-        return;
-    }
+//    if (prdclaimid == nil || [prdclaimid isEqualToString:@""] || investAmt == nil || [investAmt isEqualToString:@""]) {
+//        return;
+//    }
     if (button.tag == 100) {
         NSMutableArray *canUseCashArr = [NSMutableArray arrayWithCapacity:1];
         NSMutableArray *unCanUseCashArr = [NSMutableArray arrayWithCapacity:1];
@@ -373,14 +373,13 @@
                 NSString *urlStr = dic[@"data"][@"url"];
                 UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
                 webView.url = urlStr;
-                webView.rootVc = weakSelf.rootVc;
+//                webView.rootVc = weakSelf.rootVc;
                 webView.webDataDic =dataDict;
                 webView.navTitle = @"即将跳转";
                 webView.accoutType = SelectAccoutTypeP2P;
-                [weakSelf.navigationController pushViewController:webView animated:YES];
-                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:weakSelf.navigationController.viewControllers];
-                [navVCArray removeObjectAtIndex:navVCArray.count-2];
-                [weakSelf.navigationController setViewControllers:navVCArray animated:NO];
+                [weakSelf.rt_navigationController pushViewController:webView animated:YES complete:^(BOOL finished) {
+                    [weakSelf.rt_navigationController removeViewController:weakSelf];
+                }];
             }
         } else if ([keyPath isEqualToString:@"rechargeStr"]) {
             NSString *str = [change objectSafeForKey:NSKeyValueChangeNewKey];

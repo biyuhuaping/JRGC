@@ -91,7 +91,6 @@
     for (UIView *view in self.tipBaseView.subviews) {
         [view removeFromSuperview];
     }
-    
     NSString *tipStr = tipString;
     CGFloat strWidth = [Common getStrWitdth:tipStr Font:13].width;
     CGFloat baseRoundViewWidth = strWidth + 30 * 2;
@@ -183,12 +182,14 @@
     label1.font = [Color gc_Font:13];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:13 AndWidth:ScreenWidth - 30];
     label1.numberOfLines = 0;
-    label1.frame = CGRectMake(15, CGRectGetMaxY(submitBtn1.frame) + 15, ScreenWidth - 30, size.height);
+    label1.frame = CGRectMake(15, CGRectGetMaxY(submitBtn1.frame) + 15, ScreenWidth - 30, size.height + 5);
     label1.text = totalStr;
-    label1.textAlignment = NSTextAlignmentCenter;
+    label1.textAlignment = NSTextAlignmentLeft;
     label1.userInteractionEnabled = YES;
     label1.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
-    
+    label1.lineBreakMode = NSLineBreakByCharWrapping;
+    label1.wrapContentHeight = YES;   //高度自动计算。
+    [label1 sizeToFit];
     __weak typeof(self) weakSelf = self;
     [label1 addLinkString:@"《批量出借咨询与服务协议》" block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf showHeTong];
@@ -716,7 +717,6 @@
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUserState" object:nil];
 }
 /*
 #pragma mark - Navigation

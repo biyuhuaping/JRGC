@@ -472,10 +472,6 @@
     }
     else if (tag == 1005){
         //邀请返利
-//        UCFMicroBankDepositoryAccountHomeViewController *ccc = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
-//        ccc.accoutType = SelectAccoutTypeP2P;
-//        [self.rt_navigationController pushViewController:ccc animated:YES];
-        
         UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
         feedBackVC.title = @"邀请获利";
         feedBackVC.accoutType = SelectAccoutTypeP2P;

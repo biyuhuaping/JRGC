@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)pageHeadView:(UCFPageHeadView *)pageView noticeScroViewScrollToPoint:(CGPoint)point;
 
+- (void)pageHeadView:(UCFPageHeadView *)pageView selectIndex:(NSInteger)index;
 @end
 
 

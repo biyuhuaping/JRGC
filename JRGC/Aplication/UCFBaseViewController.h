@@ -63,5 +63,16 @@
  @param setNavgationPopDisabled YES 为禁用
  */
 - (void)setSetNavgationPopDisabled:(BOOL)setNavgationPopDisabled;
+
+
+- (void)monitorUserLogin;
+
+- (void)monitorUserGetOut;
+
+- (void)monitorOpenStatueChange;
+
+- (void)monitorRiskStatueChange;
+
+- (void)refreshPageData;
 @end
 

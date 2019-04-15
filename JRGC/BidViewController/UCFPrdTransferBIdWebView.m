@@ -23,7 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.translucent = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
     [self gotoURLWithSignature:self.url];
+    [self addLeftButton];
 }
 - (void)jsInvestSuc:(BOOL)isSuc
 {
@@ -54,9 +57,6 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)getToBack{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshHomeData" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerTransferData" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PTransferData" object:nil];
     
     UCFBaseViewController *vc = self.rootVc;
     if (vc) {

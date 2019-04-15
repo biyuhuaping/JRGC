@@ -64,11 +64,11 @@
 }
 
 
-- (NSDictionary *)filterParameters:(NSDictionary *)originParameters withRequest:(YTKBaseRequest *)request
+- (NSDictionary *)filterParameters:(NSDictionary *)originParameters withRequest:(BaseRequest *)request
 {
     return [self parametersStringWithOriginParametersString:originParameters appendParameters:_arguments withRequest:request];
 }
-- (NSDictionary *)parametersStringWithOriginParametersString:(NSDictionary *)originParameters appendParameters:(NSDictionary *)parameters withRequest:(YTKBaseRequest *)request{
+- (NSDictionary *)parametersStringWithOriginParametersString:(NSDictionary *)originParameters appendParameters:(NSDictionary *)parameters withRequest:(BaseRequest *)request{
     
     NSMutableDictionary *tempParametersDic = [NSMutableDictionary dictionary];
     [tempParametersDic addEntriesFromDictionary:originParameters];
@@ -78,10 +78,15 @@
         [tempParametersDic setValue:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
         parametersDic = [Encryption getSinaturDictWithOrginalDict:tempParametersDic];
     }
-    NSString *encryptParam  = [Encryption AESWithKey:AES_TESTKEY WithDic:parametersDic];
-    NSDictionary *postDict = [NSDictionary dictionaryWithObject:encryptParam forKey:@"encryptParam"];
-    DDLogInfo(@"---%@请求参数未加密 -----%@",request,parametersDic);
-    return postDict;
+    if (request.oldGCApi) {
+        return parametersDic;
+    } else {
+        NSString *encryptParam  = [Encryption AESWithKey:AES_TESTKEY WithDic:parametersDic];
+        NSDictionary *postDict = [NSDictionary dictionaryWithObject:encryptParam forKey:@"encryptParam"];
+        DDLogInfo(@"---%@请求参数未加密 -----%@",request,parametersDic);
+        return postDict;
+    }
+
 }
 
 @end

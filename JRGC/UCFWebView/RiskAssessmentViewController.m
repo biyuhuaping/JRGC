@@ -8,6 +8,7 @@
 
 #import "RiskAssessmentViewController.h"
 #import "UCFMicroBankDepositoryAccountHomeViewController.h"
+#import "UCFNewHomeViewController.h"
 @interface RiskAssessmentViewController ()
 
 @end
@@ -21,6 +22,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
     if ([self.sourceVC isEqualToString:@"ProjectDetailVC"]) {
          [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     }
@@ -41,54 +43,31 @@
         self.url = USEREVALUATEP2P;
         baseTitleLabel.text = @"微金风险承担能力";
     }
-//    baseTitleLabel.text = self.title;
     [self addErrorViewButton];
     [self gotoURL:self.url];
-    // Do any additional setup after loading the view from its nib.
 }
-//只要是豆哥商城的都去掉导航栏
-//- (void)viewWillAppear:(BOOL)animated {
-//    [self.navigationController setNavigationBarHidden:YES animated:animated];
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-//}
+
 -(void)getToBack{
     [self jsClose];
 }
 - (void)jsClose
 {
-//    if ([_sourceVC isEqualToString:@"P2POrHonerAccoutVC"]) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
-//    }
-    
-    for (UCFMicroBankDepositoryAccountHomeViewController *vc in self.navigationController.viewControllers) {
+    for (UIViewController *vc in self.navigationController.viewControllers) {
         if ([vc isKindOfClass:[UCFMicroBankDepositoryAccountHomeViewController class]]) {
-            [vc refresh];
+            [(UCFMicroBankDepositoryAccountHomeViewController *)vc refresh];
         }
+//        if ([vc isKindOfClass:[UCFNewHomeViewController class]]) {
+//            [(UCFNewHomeViewController *)vc monitorRiskStatueChange];
+            
+//        }
     }
+    SingleUserInfo.webCloseUpdatePrePage = YES;
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)dealloc
 {
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-//    if ([_sourceVC isEqualToString:@"P2POrHonerAccoutVC"]) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
-//    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUserState" object:nil];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

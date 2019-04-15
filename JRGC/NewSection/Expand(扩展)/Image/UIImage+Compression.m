@@ -106,6 +106,11 @@
     NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
     return [self imageGradientByColorArray:colorArray ImageSize:size gradientType:leftToRight];
 }
++ (UIImage *)gc_styleGrayImageSize:(CGSize)size
+{
+    NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xCACBD9),UIColorWithRGB(0xCACBD9), nil];
+    return [self imageGradientByColorArray:colorArray ImageSize:size gradientType:leftToRight];
+}
 + (UIImage*) imageWithUIView:(UIView*) view{
     
     // 创建一个bitmap的context

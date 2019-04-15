@@ -170,20 +170,26 @@
                 NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
                 NSString *urlStr = dic[@"data"][@"url"];
                 UCFPrdTransferBIdWebView *webView = [[UCFPrdTransferBIdWebView alloc]initWithNibName:@"UCFPrdTransferBIdWebView" bundle:nil];
-                webView.rootVc = weakSelf;
                 webView.url = urlStr;
                 webView.webDataDic = dataDict;
                 webView.navTitle = @"即将跳转";
                 webView.accoutType = weakSelf.accoutType;
-                [weakSelf.navigationController pushViewController:webView animated:YES];
-                
-                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:weakSelf.navigationController.viewControllers];
-                [navVCArray removeObjectAtIndex:navVCArray.count-2];
-                [weakSelf.navigationController setViewControllers:navVCArray animated:NO];
+                [weakSelf.rt_navigationController pushViewController:webView animated:YES complete:^(BOOL finished) {
+                    [weakSelf.rt_navigationController removeViewController:weakSelf];
+                }];
+//                [weakSelf.rt_navigationController pushViewController:webView animated:YES];
+//
+//                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:weakSelf.navigationController.viewControllers];
+//                [navVCArray removeObjectAtIndex:navVCArray.count-2];
+//                [weakSelf.navigationController setViewControllers:navVCArray animated:NO];
             }
         }
 
     }];
+}
+- (void)dealloc
+{
+    
 }
 - (UCFPureTransPageViewModel *)VM
 {

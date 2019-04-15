@@ -233,7 +233,7 @@
 - (void)blindUserStatue
 {
     @PGWeakObj(self);
-    [self.KVOController observe:[UserInfoSingle sharedManager] keyPaths:@[@"loginData"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:[UserInfoSingle sharedManager] keyPaths:@[@"loginData",@"webCloseUpdatePrePage"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"loginData"]) {
             UCFLoginData *oldUserData = [change objectSafeForKey:NSKeyValueChangeOldKey];
@@ -256,8 +256,14 @@
             if (oldUserData.userInfo.isRisk != newUserData.userInfo.isRisk) {
                 [selfWeak monitorRiskStatueChange];
             }
+        }else if ([keyPath isEqualToString:@"webCloseUpdatePrePage"]) {
+            [selfWeak refreshPageData];
         }
     }];
+}
+- (void)refreshPageData
+{
+    
 }
 //登录或者注册
 - (void)monitorUserLogin

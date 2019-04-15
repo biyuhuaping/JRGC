@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "YTKNetworkConfig.h"
 #import "YTKBaseRequest.h"
-
+#import "BaseRequest.h"
 @interface RequestUrlArgumentsFilter : NSObject<YTKUrlFilterProtocol>
 
 /**
@@ -20,6 +20,6 @@
 
 - (NSString *)filterUrl:(NSString *)originUrl withRequest:(YTKBaseRequest *)request;
 
-- (NSString *)filterParameters:(NSDictionary *)originParameters withRequest:(YTKBaseRequest *)request;
+- (NSString *)filterParameters:(NSDictionary *)originParameters withRequest:(BaseRequest *)request;
 
 @end

@@ -24,5 +24,5 @@
 
 - (void)setButtonTitleWithColor:(UIColor *)color;
 
-- (void)setButtonBackgroundImage:(UIImage *)backImage;
+- (void)setButtonBackgroundImage:(UIImage *)backImage forState:(UIControlState)statue;
 @end

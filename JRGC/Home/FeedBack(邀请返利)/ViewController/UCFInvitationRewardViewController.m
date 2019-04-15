@@ -31,7 +31,7 @@
 @property (strong, nonatomic) NSString *shareTitle;
 @property (strong, nonatomic) NSString *shareContent;
 @property (strong, nonatomic) NSString *shareUrl;
-@property (weak, nonatomic) IBOutlet UIImageView *baseimageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottonConstart;
 
 @property (strong, nonatomic) NSString *beansCount;	//奖励工豆金额	string
 - (IBAction)gotoInvitationRecordVC:(UIControl *)sender;
@@ -52,12 +52,24 @@
     layer.locations = @[@0.0f,@1.0f];//渐变颜色的区间分布，locations的数组长度和color一致，这个值一般不用管它，默认是nil，会平均分布
     layer.frame = CGRectMake(0, 0, PGScreenWidth, 95);
     [self.bkview.layer insertSublayer:layer atIndex:0];
-    
+    adjustsScrollViewInsets(self.tableview);
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
-    UIImage *bgShadowImage= [UIImage imageNamed:@"tabbar_shadow.png"];
-    self.baseimageView.image = [bgShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeTile];
     [self getMyInvestDataList];
     [self getAppSetting];
+
+    if (@available(iOS 11.0, *)) {
+        if (StatusBarHeight1 < 21) {
+            _bottonConstart.constant = 0;
+        } else {
+            _bottonConstart.constant = 34;
+        }
+        NSLog(@"11");
+    }
+}
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+
 }
 #pragma mark - 请求网络及回调
 - (void)getMyInvestDataList

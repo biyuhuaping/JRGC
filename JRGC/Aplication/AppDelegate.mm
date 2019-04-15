@@ -66,9 +66,7 @@
     
     [self startGLobalRealReachability]; //开启网络监测
     [self startNetConfig];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+
     //请求开关状态
     [self checkNovicePoliceOnOff];
     [self luachNormalCode:launchOptions];
@@ -78,10 +76,13 @@
     RTRootNavigationController *nav = [[RTRootNavigationController alloc] initWithRootViewController:lanchVC];
     self.rootNavigationController = nav;
     [GlobalView sharedManager].rootNavController = nav;
-
+    
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     self.window.rootViewController = nav;
-    
-    
+
 //    今天测试软件的时候，发现在iOS12.1系统上push控制器后，点击返回键或者滑动返回时，底部tabbar出现了偏移，经过排查发现为定义了 self.navigationItem.leftBarButtonItem
 //    后经过网络搜索，当 UITabBar 设置为透明，且 push viewController 为 hidesBottomBarWhenPushed = YES 返回的时候就会触发。
 //    出现这个现象的直接原因是 tabBar 内的按钮 UITabBarButton 被设置了错误的 frame，frame.size 变为 (0, 0) 导致的。

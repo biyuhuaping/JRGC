@@ -40,6 +40,7 @@
 #import "QLHeaderViewController.h"
 #import "UCFNewRechargeViewController.h"
 #import "UCFSharePictureViewController.h"
+#import "RiskAssessmentViewController.h"
 #define MALLTIME  12.0
 #define SIGNATURETIME 30.0
 
@@ -497,10 +498,18 @@
             [weakSelf goToShareWeChat:nativeData];
         } else if ([nativeData[@"action"] isEqualToString:@"isOtherView"]) {//订单页面是否导航栏根视图
             [weakSelf isRootViewController];
+        } else if ([nativeData[@"action"] isEqualToString:@"risk_report"]) {//订单页面是否导航栏根视图
+            [weakSelf pushToRiskPage];
         }
 //     */
     }];
      
+}
+- (void)pushToRiskPage
+{
+    RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+    vc.accoutType = SelectAccoutTypeP2P;
+    [self.rt_navigationController pushViewController:vc animated:YES];
 }
 - (void)isRootViewController
 {

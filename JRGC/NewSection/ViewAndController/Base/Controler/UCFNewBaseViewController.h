@@ -99,6 +99,11 @@ NS_ASSUME_NONNULL_BEGIN
  @param setNavgationPopDisabled YES 为禁用
  */
 - (void)setSetNavgationPopDisabled:(BOOL)setNavgationPopDisabled;
+
+/**
+ web页面关闭需要刷新某页面的数据
+ */
+- (void)refreshPageData;
 @end
 
 NS_ASSUME_NONNULL_END

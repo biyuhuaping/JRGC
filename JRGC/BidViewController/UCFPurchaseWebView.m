@@ -25,11 +25,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib
+    self.navigationController.navigationBar.translucent = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
     self.flagInvestSuc = NO;
     self.fd_interactivePopDisabled = YES;
     [self removeRefresh];
     [self gotoURLWithSignature:self.url];
+
 }
 
 - (void)didReceiveMemoryWarning {

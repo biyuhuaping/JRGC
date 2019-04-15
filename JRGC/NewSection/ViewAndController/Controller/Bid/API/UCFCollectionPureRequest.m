@@ -32,4 +32,5 @@
     //    添加新model
     return @"UCFCollectRootModel";
 }
+
 @end

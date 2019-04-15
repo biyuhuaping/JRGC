@@ -33,7 +33,6 @@
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
     self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
-//    adjustsScrollViewInsets(self.webView);
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {

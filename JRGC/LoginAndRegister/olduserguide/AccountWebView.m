@@ -125,6 +125,7 @@
 
 - (void)closeWebView
 {
+    SingleUserInfo.webCloseUpdatePrePage = YES;
     if ([baseTitleLabel.text hasSuffix:@"账户开立"] || [baseTitleLabel.text hasSuffix:@"开户失败"])
     {
         //微商开户页面.点击关闭,返回开户页面

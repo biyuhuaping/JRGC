@@ -152,6 +152,8 @@
 		33AF83A521F5C2060035ED53 /* UCFInvestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF83A421F5C2060035ED53 /* UCFInvestTableViewCell.m */; };
 		33AF83CA21F6C9650035ED53 /* UCFNewAITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF83C921F6C9650035ED53 /* UCFNewAITableViewCell.m */; };
 		33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B17642215A14F4007D1F91 /* LMJScrollTextView.m */; };
+		33B5011222607226008CC3F4 /* UCFTransCalculatorRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B5011122607226008CC3F4 /* UCFTransCalculatorRequest.m */; };
+		33B5011522609CFE008CC3F4 /* UCFCalulatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B5011422609CFE008CC3F4 /* UCFCalulatorModel.m */; };
 		33B66151215C7FB70027325F /* UCFZiZHIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */; };
 		33B66152215C7FB70027325F /* UCFZiZHIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33B6614F215C7FB60027325F /* UCFZiZHIViewController.xib */; };
 		33B66156215C803A0027325F /* UCFZIZhiWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33B66154215C80390027325F /* UCFZIZhiWebViewViewController.xib */; };
@@ -1673,6 +1675,10 @@
 		33AF83C921F6C9650035ED53 /* UCFNewAITableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewAITableViewCell.m; sourceTree = "<group>"; };
 		33B17642215A14F4007D1F91 /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
 		33B17643215A14F4007D1F91 /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
+		33B5011022607226008CC3F4 /* UCFTransCalculatorRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransCalculatorRequest.h; sourceTree = "<group>"; };
+		33B5011122607226008CC3F4 /* UCFTransCalculatorRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransCalculatorRequest.m; sourceTree = "<group>"; };
+		33B5011322609CFE008CC3F4 /* UCFCalulatorModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCalulatorModel.h; sourceTree = "<group>"; };
+		33B5011422609CFE008CC3F4 /* UCFCalulatorModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCalulatorModel.m; sourceTree = "<group>"; };
 		33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFZiZHIViewController.m; sourceTree = "<group>"; };
 		33B6614F215C7FB60027325F /* UCFZiZHIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFZiZHIViewController.xib; sourceTree = "<group>"; };
 		33B66150215C7FB70027325F /* UCFZiZHIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFZiZHIViewController.h; sourceTree = "<group>"; };
@@ -4366,6 +4372,8 @@
 				336AA939221D61CA00F14236 /* UCFTransPureBidApi.m */,
 				338A558F223F98D300B5A31A /* UCFCollectionPureRequest.h */,
 				338A5590223F98D300B5A31A /* UCFCollectionPureRequest.m */,
+				33B5011022607226008CC3F4 /* UCFTransCalculatorRequest.h */,
+				33B5011122607226008CC3F4 /* UCFTransCalculatorRequest.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -8616,6 +8624,8 @@
 				E352FD0D21E4AF0B00617AB7 /* UCFContractTypleModel.m */,
 				338A5595223FA62E00B5A31A /* UCFCollectRootModel.h */,
 				338A5596223FA62E00B5A31A /* UCFCollectRootModel.m */,
+				33B5011322609CFE008CC3F4 /* UCFCalulatorModel.h */,
+				33B5011422609CFE008CC3F4 /* UCFCalulatorModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -10937,6 +10947,7 @@
 				7482A5911F4C0622006A9964 /* UCFGoldIncreTransListModel.m in Sources */,
 				2526ADDA1DD08CB800114D9A /* MLMOptionSelectView.m in Sources */,
 				7421DFCF1FDFC69000E758C1 /* UCFInputTextField.m in Sources */,
+				33B5011522609CFE008CC3F4 /* UCFCalulatorModel.m in Sources */,
 				7BC789091B04555F00D50494 /* UCFXieYiViewController.m in Sources */,
 				74931A2D1B1326FE00143424 /* CoreTextUtils.m in Sources */,
 				E352FD4D21E4AF0B00617AB7 /* UCFInvestmentCouponModel.m in Sources */,
@@ -10962,6 +10973,7 @@
 				7B5B8E4A1B141C6E0098042E /* UCF404ErrorView.m in Sources */,
 				7443C7281F1EFF61009669C0 /* UCFGoldCashTwoCell.m in Sources */,
 				FB377F841CCE480400F5DAF2 /* UCFExchangeModel.m in Sources */,
+				33B5011222607226008CC3F4 /* UCFTransCalculatorRequest.m in Sources */,
 				E352FDC721E4B08D00617AB7 /* YTKChainRequestAgent.m in Sources */,
 				74F291221AE0DBFC003E0E86 /* UCFCashViewController.m in Sources */,
 				E3980E0E225234A9006936C4 /* UCFPublicPopupWindowView.m in Sources */,

@@ -51,6 +51,7 @@
         UIViewController *target = [arr objectAtIndex:arr.count - 3];
         [self.navigationController popToViewController:target animated:YES];
     }
+    SingleUserInfo.webCloseUpdatePrePage = YES;
     
 }
 - (void)jsClose

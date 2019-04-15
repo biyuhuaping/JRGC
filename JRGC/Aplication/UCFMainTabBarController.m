@@ -50,8 +50,6 @@
 {   
     [super viewDidLoad];
     
-    
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redbag_toLend:) name:@"UCFRedBagViewController_to_lend" object:nil];
     [self initAllTabbarItems];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
@@ -147,7 +145,6 @@
             }
                 break;
             case 4:{
-                
                 UCFNewMineViewController *mine = [[UCFNewMineViewController alloc] init];
                 controller = mine;
                 _mineView = mine;

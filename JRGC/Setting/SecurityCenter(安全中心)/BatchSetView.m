@@ -38,7 +38,7 @@
     _titleLab.textColor =  [Color color:PGColorOpttonBatchTextColor];
     [self addSubview:_titleLab];
     
-    _desLabe = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 12, CGRectGetMaxY(_titleLab.frame) + 5, CGRectGetWidth(_titleLab.frame), 40)];
+    _desLabe = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 12, CGRectGetMaxY(_titleLab.frame) + 5, CGRectGetWidth(_titleLab.frame), 55)];
     _desLabe.font = [UIFont systemFontOfSize:14.0f];
     _desLabe.numberOfLines = 0;
     _desLabe.textColor = [Color color:PGColorOptionTitleGray];
