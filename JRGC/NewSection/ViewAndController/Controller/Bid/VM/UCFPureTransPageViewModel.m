@@ -344,7 +344,7 @@
         }else{
             
         }
-    }  else if (tag.intValue == kSXTagInvestSubmit){
+    }  else if (tag.intValue == kSXTagTraClaimsSubmit){
         
         NSString *data = (NSString *)result;
         NSMutableDictionary *dic = [data objectFromJSONString];

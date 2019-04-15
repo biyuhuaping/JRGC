@@ -26,7 +26,7 @@
     self.isFetchDataLoading = YES;
     [self.dataArray removeAllObjects];
     [self getBannerData];
-    if (SingleUserInfo.loginData.userInfo.userId.length > 0 && !SingleUserInfo.loginData.userInfo.isRisk) {
+    if ((SingleUserInfo.loginData.userInfo.userId.length > 0 && !SingleUserInfo.loginData.userInfo.isRisk ) ||!SingleUserInfo.loginData.userInfo.isAutoBid) {
         [self getUserAllStatue];
     } else {
         [self addUserGuideData];
@@ -95,7 +95,7 @@
 - (void)addUserGuideData
 {
     NSMutableArray *section1 = [NSMutableArray arrayWithCapacity:1];
-    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] >= 4 && SingleUserInfo.loginData.userInfo.isRisk) {
+    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] >= 4 && SingleUserInfo.loginData.userInfo.isRisk && !SingleUserInfo.loginData.userInfo.isNewUser) {
         SEL sel = NSSelectorFromString(@"reflectDataModel:");
         CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFOldUserNoticeCell" title:@"" showInfoMethod:sel heightOfCell:140];
         data1.dataModel = self.bannerModel.data.siteNoticeMap;

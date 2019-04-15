@@ -44,6 +44,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (UIImage *)gc_styleImageSize:(CGSize)size;
 
+/**
+ 工场按钮禁用背景y
+
+ @param size 获取渐变图片的大小
+ @return 灰色图片
+ */
++ (UIImage *)gc_styleGrayImageSize:(CGSize)size;
 
 + (UIImage*) imageWithUIView:(UIView*) view;
 @end

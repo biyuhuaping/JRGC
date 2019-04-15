@@ -98,8 +98,8 @@
 {
     self.projectionView.hidden = hidden;
 }
-- (void)setButtonBackgroundImage:(UIImage *)backImage
+- (void)setButtonBackgroundImage:(UIImage *)backImage forState:(UIControlState)statue
 {
-    [self.enterButton setBackgroundImage:backImage forState:UIControlStateNormal];
+    [self.enterButton setBackgroundImage:backImage forState:statue];
 }
 @end

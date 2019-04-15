@@ -39,7 +39,7 @@
 
 //        [self.couponTypeLayout addSubview:self.unUseReasonMarkLab];
 //        [self.couponTypeLayout addSubview:self.detailReasonLab];
-        [self.couponTypeLayout addSubview:self.willExpireLayout];
+//        [self.couponTypeLayout addSubview:self.willExpireLayout];
 //
         [self.couponTypeLayout addSubview:self.investMultipLabel];
         [self.couponTypeLayout addSubview:self.inverstPeriodLabel];
