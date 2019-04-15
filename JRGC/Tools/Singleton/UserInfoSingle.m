@@ -50,6 +50,7 @@
     [self generateSingature:loginData withPassWord:pwd];
     [self setUserData:loginData];
    
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:5] forKey:@"nRetryTimesRemain"];
     [[NSUserDefaults standardUserDefaults] setValue:pwd forKey:AWP];
     [[NSUserDefaults standardUserDefaults] synchronize];
     //注册通知self.loginData.userInfo

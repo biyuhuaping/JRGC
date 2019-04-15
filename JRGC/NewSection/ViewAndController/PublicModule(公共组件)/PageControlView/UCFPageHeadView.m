@@ -95,6 +95,9 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(pageHeadView:noticeScroViewScrollToPoint:)]) {
         [self.delegate pageHeadView:self noticeScroViewScrollToPoint:CGPointMake(ScreenWidth * (button.tag - 100), 0)];
     }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(pageHeadView:selectIndex:)]) {
+        [self.delegate pageHeadView:self selectIndex:button.tag - 100];
+    }
 }
 - (void)headViewSetSelectIndex:(NSInteger)index
 {

@@ -210,11 +210,11 @@
 }
 - (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
 {
-    NSString *prdclaimid = [self.viewModel getDataModelBidID];
+//    NSString *prdclaimid = [self.viewModel getDataModelBidID];
     NSString *investAmt = [self.viewModel getTextFeildInputMoeny];
-    if (prdclaimid == nil || [prdclaimid isEqualToString:@""] || investAmt == nil || [investAmt isEqualToString:@""]) {
-        return;
-    }
+//    if (prdclaimid == nil || [prdclaimid isEqualToString:@""] || investAmt == nil || [investAmt isEqualToString:@""]) {
+//        return;
+//    }
     if (button.tag == 100) {
         NSMutableArray *canUseCashArr = [NSMutableArray arrayWithCapacity:1];
         NSMutableArray *unCanUseCashArr = [NSMutableArray arrayWithCapacity:1];
