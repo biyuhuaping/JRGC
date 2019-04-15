@@ -191,7 +191,7 @@
     //银行logo
     NSURL *url = [NSURL URLWithString:data[@"logoUrl"]];
     [self.selectBankView.bankImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"bank_default"]];
-
+    [self inspectTextField];
     //开户行id
 //    _bankId = [NSString stringWithFormat:@"%@",data[@"bankId"]];
 

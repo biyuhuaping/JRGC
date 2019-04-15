@@ -58,6 +58,7 @@
 
 #import "UCFHighQualityContainerViewController.h"
 
+
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -96,8 +97,9 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];    
 }
+
 - (BaseTableView *)tableView
 {
     if (nil == _tableView) {
@@ -776,13 +778,13 @@
     }
     if (model.data.mallRecommends.count >0)
     {
-        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineShopPromotionCell class]) title:@"mallRecommends" showInfoMethod:@selector(showInfo:) heightOfCell:225];
+        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineShopPromotionCell class]) title:@"mallRecommends" showInfoMethod:@selector(showInfo:) heightOfCell:215];
         [cellArray addObject:cellConfigCentre];
         [dataArray addObject:model.data];
     }
     if (model.data.mallSale.count >0)
     {
-        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineShopPromotionCell class]) title:@"mallSale" showInfoMethod:@selector(showInfo:) heightOfCell:225];
+        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineShopPromotionCell class]) title:@"mallSale" showInfoMethod:@selector(showInfo:) heightOfCell:215];
         [cellArray addObject:cellConfigCentre];
         [dataArray addObject:model.data];
     }

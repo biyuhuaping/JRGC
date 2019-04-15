@@ -190,7 +190,13 @@
         {
             
            //已收收益 包括金融工场平台的所有已回款项目的利息，以及已起息项目中的返现券利息、已使用工豆利息和余额生息利息。
-            [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPMessageIKnowWindow withContent:@"包括金融工场平台的所有已回款项目的利息，以及已起息项目中的返现券利息、已使用工豆利息和余额生息利息。" withTitle:@"已收收益"];
+            UCFPopViewWindow *pop = [UCFPopViewWindow new];
+            pop.contentStr = @"包括金融工场平台的所有已回款项目的利息，以及已起息项目中的返现券利息、已使用工豆利息和余额生息利息。";
+            pop.type = POPMessageIKnowWindowButton;
+            pop.titletStr = @"已收收益";
+            pop.controller = self;
+            [pop startPopView];
+            
         }
     }
 }

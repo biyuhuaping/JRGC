@@ -306,17 +306,34 @@
             if (self.model.data.assetList.count == 1) {
                 //        有微金账户，无尊享黄金账户
                 //        总资产=可用余额+待收本金+预期利息+冻结金额
-                [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPMessageIKnowWindowButton withContent:@"总资产=可用余额+待收本金+预期利息+冻结金额"withTitle:@"总资产"];
+                UCFPopViewWindow *pop = [UCFPopViewWindow new];
+                pop.contentStr = @"总资产=可用余额+待收本金+预期利息+冻结金额";
+                pop.type = POPMessageIKnowWindowButton;
+                pop.titletStr = @"总资产";
+                pop.controller = self;
+                [pop startPopView];
             }
             if (self.model.data.assetList.count == 2) {
                 //        有微金、尊享账户，无黄金账户
                 //        总资产=微金账户总资产+尊享账户总资产
-                [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPMessageIKnowWindowButton withContent:@"总资产=微金账户总资产+尊享账户总资产"withTitle:@"总资产"];
+
+                UCFPopViewWindow *pop = [UCFPopViewWindow new];
+                pop.contentStr = @"总资产=微金账户总资产+尊享账户总资产";
+                pop.type = POPMessageIKnowWindowButton;
+                pop.titletStr = @"总资产";
+                pop.controller = self;
+                [pop startPopView];
             }
             if (self.model.data.assetList.count == 3) {
                 //        有微金、尊享、黄金账户
                 //        总资产=微金账户总资产+尊享账户总资产+黄金账户总资产
-                [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPMessageIKnowWindowButton withContent:@"总资产=微金账户总资产+尊享账户总资产+黄金账户总资产" withTitle:@"总资产"];
+
+                UCFPopViewWindow *pop = [UCFPopViewWindow new];
+                pop.contentStr = @"总资产=微金账户总资产+尊享账户总资产+黄金账户总资产";
+                pop.type = POPMessageIKnowWindowButton;
+                pop.titletStr = @"总资产";
+                pop.controller = self;
+                [pop startPopView];
             }
         }
     }

@@ -30,6 +30,10 @@ static NSString *TextButtonMomentCancel = @"一会再说";
 static NSString *TextButtonIKnowEnter = @"知道了";
 static NSString *TextButtonStartEnter = @"开启";
 static NSString *TextButtonCancelEnter = @"取消";
+static NSString *TextButtonVersionEnter = @"更新";
+static NSString *TextButtonAgainCancel = @"下次再说";
+static NSString *TextButtonAgainLogin = @"重新登录";
+static NSString *TextButtonContactService = @"联系客服";
 
 static NSString *TextOpenAccountHint = @"您尚未开通\n徽商银行微金存管账户";
 static NSString *TextOpenAccountPassWordHint = @"未设置微金交易密码不能\n投标、提现、充值";
@@ -42,11 +46,22 @@ static NSString *TextLoginSucceedFaceIDContent = @"是否启用Face ID面容解�
 static NSString *TextLoginSucceedTouchIDContent = @"是否启用Touch ID指纹解锁";
 static NSString *TextLoginSucceedVerifyTouchIDTitle = @"金融工场”的触控ID";
 static NSString *TextLoginSucceedVerifyTouchIDContent = @"通过home键验证已有手机指纹";
+static NSString *TextVersionUpdatingTitle = @"发现新版本";
 
+
+static BOOL isLoginOut = NO;//退出登录
+
+static BOOL isForcedUpdating = NO;//强制更新
 
 @interface UCFPublicPopupWindowView ()
 
 @property (nonatomic, strong) MyRelativeLayout *bkLayout;
+
+@property (nonatomic, strong) UIButton *enterButton;
+
+@property (nonatomic, strong) UIButton *cancelButton;
+
+@property (nonatomic, strong) UIButton *closeButton;
 
 @property (nonatomic, strong) UIImageView *bkImageView;
 
@@ -60,120 +75,240 @@ static NSString *TextLoginSucceedVerifyTouchIDContent = @"通过home键验证已
 
 @property (nonatomic, copy)   NSString  *titleStr;
 
+@property (nonatomic, copy)   NSString *PopContent;
+
+@property (nonatomic, copy)   NSString *PopTitle;
 
 @property (nonatomic, assign) CGFloat *contentHeight;
 
+@property (nonatomic ,assign) NSInteger popViewTag;
+
 @end
 @implementation UCFPublicPopupWindowView
+
+
+
+
+
+
++ (void)loadPopupWindowWithType:(POPWINDOWS)type
+                    withContent:(NSString *__nullable)contentStr
+                      withTitle:(NSString *__nullable)titletStr
+               withInController:(UIViewController *__nullable)controller
+                   withDelegate:(id __nullable)delegate
+                 withPopViewTag:(NSInteger )viewTag
+{
+
+    if ([UCFPublicPopupWindowView checkPopupWindowView])
+    {
+        //如果有退出登录或者强制更新,则不让弹框出现
+    }
+    else
+    {
+        UCFPublicPopupWindowView *popup = [[UCFPublicPopupWindowView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, PGScreenHeight) withType:type withContent:contentStr withTitle:titletStr];
+        if (type == POPMessageLoginOut) {
+            [popup setLoginOut:YES];
+        }
+        if (type == POPMessageForcedUpdating) {
+            [popup setForcedUpdating:YES];
+        }
+        
+        if (delegate != nil) {
+            popup.delegate = delegate;
+        }
+        if (viewTag != 0) {
+            popup.popViewTag = viewTag;
+        }
+        if (controller == nil || ![controller isKindOfClass:[UIViewController class]]) {
+            [popup showInWindow];
+        }
+        else{
+            [popup showInController:controller ];
+        }
+    }
+}
+
+- (void)closePopupWindowView//手动b关闭弹框,一般不要去调
+{
+    [self clearPopupWindowView];
+}
+
++ (BOOL)checkPopupWindowView
+{
+    //主线程中
+    NSLock *lock = [[NSLock alloc] init];
+    [lock lock];
+    BOOL tempBl;
+    if (isForcedUpdating || isLoginOut )
+    {
+        tempBl = YES;
+    }
+    else
+    {
+        tempBl = NO;
+    }
+    [lock unlock];
+    return tempBl;
+}
+
+- (void)setForcedUpdating:(BOOL)forcedUpdating
+{
+    //主线程中
+    NSLock *lock = [[NSLock alloc] init];
+    [lock lock];
+    isForcedUpdating = forcedUpdating;
+    [lock unlock];
+}
+
+- (void)setLoginOut:(BOOL)loginOut
+{
+    //主线程中
+    NSLock *lock = [[NSLock alloc] init];
+    [lock lock];
+    isLoginOut = loginOut;
+    [lock unlock];
+}
+
+
+
+
+- (void)buttonClick
+{
+    if (self.type == POPMessageForcedUpdating) {
+        //如果是强制更新,则不做操作,不让强制更新的弹框消失
+    }
+    else
+    {
+        if (self.type == POPMessageLoginOut ) {
+            [self setLoginOut:NO];
+        }
+        [self clearPopupWindowView];
+    }
+}
+- (void)enterButtonClick:(UIButton *)btn
+{
+    [self buttonClick];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(popEnterButtonClick:)]) {
+        [self.delegate popEnterButtonClick:btn];
+    }
+}
+-(void)cancelButtonClick:(UIButton *)btn
+{
+    [self buttonClick];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(popCancelButtonClick:)]) {
+        [self.delegate popCancelButtonClick:btn];
+    }
+}
+
+- (void)clearPopupWindowView
+{
+    [self hideView];
+    if ([self superview]) {
+        [self removeFromSuperview];
+    }
+}
+
 - (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr withTitle:(NSString *__nonnull)titleStr
 {
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self loadPopViewWithType:type withContent:contentStr withTitle:titleStr];
+        //        self.userInteractionEnabled = NO;
+        //        self.rootLayout.userInteractionEnabled = NO;
+        self.type = type;
+        if (contentStr && contentStr.length >0 && [contentStr isKindOfClass:[NSString class]]) {
+            self.contentStr = contentStr;
+        }
+        else
+        {
+            self.contentStr = @"";
+        }
+        if (titleStr && titleStr.length >0 && [titleStr isKindOfClass:[NSString class]]) {
+            self.titleStr = titleStr;
+        }
+        else
+        {
+            self.titleStr = @"";
+        }
+        
+        [self.rootLayout addSubview:self.bkLayout];
+        self.rootLayout.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
+        //    self.rootLayout.userInteractionEnabled = NO;
+        //    self.bkLayout.userInteractionEnabled = NO;
+        
+        if (type == POPOpenAccountWindow)
+        {
+            [self addPOPOpenAccountWindow];
+        }
+        else if (type == POPMessageWindow)
+        {
+            [self addPOPMessageWindow];
+        }
+        else if (type == POPRegisterVerifyPhoneNum)
+        {
+            [self addPOPRegisterVerifyPhoneNum];
+        }
+        else if (type == POPRegisterRenounce)
+        {
+            [self addPOPRegisterRenounce];
+        }
+        else if (type == POPRegisterSucceedRenounce)
+        {
+            [self addPOPRegisterSucceedRenounce];
+        }
+        else if (type == POPLoginVerifyPhoneNum)
+        {
+            [self addPOPLoginVerifyPhoneNum];
+        }
+        else if (type == POPOpenAccountRenounce)
+        {
+            [self addPOPOpenAccountRenounce];
+        }
+        else if (type == POPOpenAccountPassWordRenounce)
+        {
+            [self addPOPOpenAccountPassWordRenounce];
+        }
+        else if (type == POPOpenAccountRiskRenounce)
+        {
+            [self addPOPOpenAccountRiskRenounce];
+        }
+        else if (type == POPMessageIKnowWindow)
+        {
+            [self addPOPMessageIKnowWindow];
+        }
+        else if (type == POPLoginSucceedTouchID)
+        {
+            [self addPOPLoginSucceedTouchID];
+        }
+        else if (type == POPLoginSucceedFaceID)
+        {
+            [self addPOPLoginSucceedFaceID];
+        }
+        else if (type == POPLoginSucceedVerifyTouchID)
+        {
+            [self addPOPLoginSucceedVerifyTouchID];
+        }
+        else if (type == POPMessageIKnowWindowButton)
+        {
+            [self addPOPMessageIKnowWindowButton];
+        }
+        else if (type == POPMessageLoginOut)
+        {
+            [self addPOPMessageLoginOut];
+        }
+        else if (type == POPMessageForcedUpdating)
+        {
+            [self addPOPMessageForcedUpdating];
+        }
+        else if (type == POPMessageNormalUpdating)
+        {
+            [self addPOPMessageNormalUpdating];
+        }
     }
     return self;
 }
-- (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-       
-        [self loadPopViewWithType:type withContent:contentStr withTitle:nil];
-    }
-    return self;
-}
-- (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self loadPopViewWithType:type withContent:nil withTitle:nil];
-    }
-    return self;
-}
-- (void)loadPopViewWithType:(POPWINDOWS)type withContent:(NSString *)contentStr withTitle:(NSString *__nonnull)titleStr
-{
-    //        self.userInteractionEnabled = NO;
-    //        self.rootLayout.userInteractionEnabled = NO;
-    self.type = type;
-    if (contentStr && contentStr.length >0 && [contentStr isKindOfClass:[NSString class]]) {
-        self.contentStr = contentStr;
-    }
-    else
-    {
-        self.contentStr = @"";
-    }
-    if (titleStr && titleStr.length >0 && [titleStr isKindOfClass:[NSString class]]) {
-        self.titleStr = titleStr;
-    }
-    else
-    {
-        self.titleStr = @"";
-    }
-    
-    [self.rootLayout addSubview:self.bkLayout];
-    self.rootLayout.backgroundColor = [UIColor clearColor];
-    self.backgroundColor = [UIColor clearColor];
-//    self.rootLayout.userInteractionEnabled = NO;
-//    self.bkLayout.userInteractionEnabled = NO;
-    
-    if (type == POPOpenAccountWindow)
-    {
-        [self addPOPOpenAccountWindow];
-    }
-    else if (type == POPMessageWindow)
-    {
-        [self addPOPMessageWindow];
-    }
-    else if (type == POPRegisterVerifyPhoneNum)
-    {
-        [self addPOPRegisterVerifyPhoneNum];
-    }
-    else if (type == POPRegisterRenounce)
-    {
-        [self addPOPRegisterRenounce];
-    }
-    else if (type == POPRegisterSucceedRenounce)
-    {
-        [self addPOPRegisterSucceedRenounce];
-    }
-    else if (type == POPLoginVerifyPhoneNum)
-    {
-        [self addPOPLoginVerifyPhoneNum];
-    }
-    else if (type == POPOpenAccountRenounce)
-    {
-        [self addPOPOpenAccountRenounce];
-    }
-    else if (type == POPOpenAccountPassWordRenounce)
-    {
-        [self addPOPOpenAccountPassWordRenounce];
-    }
-    else if (type == POPOpenAccountRiskRenounce)
-    {
-        [self addPOPOpenAccountRiskRenounce];
-    }
-    else if (type == POPMessageIKnowWindow)
-    {
-        [self addPOPMessageIKnowWindow];
-    }
-    else if (type == POPLoginSucceedTouchID)
-    {
-        [self addPOPLoginSucceedTouchID];
-    }
-    else if (type == POPLoginSucceedFaceID)
-    {
-        [self addPOPLoginSucceedFaceID];
-    }
-    else if (type == POPLoginSucceedVerifyTouchID)
-    {
-        [self addPOPLoginSucceedVerifyTouchID];
-    }
-    else if (type == POPMessageIKnowWindowButton)
-    {
-        [self addPOPMessageIKnowWindowButton];
-    }
-}
+
 #pragma mark - add Gesture
 - (void)addSingleGesture
 {
@@ -264,6 +399,8 @@ static NSString *TextLoginSucceedVerifyTouchIDContent = @"通过home键验证已
         _enterButton.titleLabel.font= [Color gc_Font:15.0];
         [_enterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_enterButton setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
+        _enterButton.tag = self.popViewTag;
+        [_enterButton addTarget:self action:@selector(enterButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         _enterButton.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
             //设置圆角的半径
@@ -289,6 +426,8 @@ static NSString *TextLoginSucceedVerifyTouchIDContent = @"通过home键验证已
         _cancelButton.titleLabel.font= [Color gc_Font:15.0];
         [_cancelButton setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
         [_cancelButton setBackgroundColor:[Color color:PGColorOptionThemeWhite]];
+        _cancelButton.tag = self.popViewTag;
+        [_cancelButton addTarget:self action:@selector(cancelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         _cancelButton.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
             //设置圆角的半径
@@ -827,6 +966,109 @@ static NSString *TextLoginSucceedVerifyTouchIDContent = @"通过home键验证已
     
     self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentButtonHeight;
 }
+
+- (void)addPOPMessageLoginOut
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextTitleHint;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(22);
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonAgainLogin forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonCancelEnter forState:UIControlStateNormal];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentBothButtonHeight;
+}
+- (void)addPOPMessageForcedUpdating
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextVersionUpdatingTitle;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.myBottom = 25;
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonVersionEnter forState:UIControlStateNormal];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentButtonHeight;
+}
+
+- (void)addPOPMessageNormalUpdating
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextVersionUpdatingTitle;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(22);
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonVersionEnter forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonAgainCancel forState:UIControlStateNormal];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentBothButtonHeight;
+}
+
+
 - (CGFloat )labelHeight:(UILabel *)contentLabel withPopViewWidth:(CGFloat )popWidth
 {
     // 设置文字属性 要和label的一致

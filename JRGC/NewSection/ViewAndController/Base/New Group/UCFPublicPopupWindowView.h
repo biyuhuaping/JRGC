@@ -14,24 +14,23 @@
 
 - (void)popClickCloseBackgroundView; //声明协议方法
 
+- (void)popEnterButtonClick:(UIButton *)btn; //声明协议方法
+
+- (void)popCancelButtonClick:(UIButton *)btn;
 @end
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFPublicPopupWindowView : BaseView
 
-@property (nonatomic, strong) UIButton *enterButton;
-
-@property (nonatomic, strong) UIButton *cancelButton;
-
-@property (nonatomic, strong) UIButton *closeButton;
-
 @property (nonatomic, weak)id<PublicPopupWindowViewDelegate> delegate; //声明协议变量
 
-- (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type;
++ (void)loadPopupWindowWithType:(POPWINDOWS)type
+                    withContent:(NSString *__nullable)contentStr
+                      withTitle:(NSString *__nullable)titletStr
+               withInController:(UIViewController *__nullable)controller
+                   withDelegate:(id __nullable)delegate
+                 withPopViewTag:(NSInteger )viewTag;
 
-- (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr;
-
-- (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr withTitle:(NSString *__nonnull)titletStr;
 @end
 
 NS_ASSUME_NONNULL_END

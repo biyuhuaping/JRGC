@@ -22,6 +22,7 @@
 @property(nonatomic, strong)NSMutableArray  *dataArray;
 @property(nonatomic, strong)NSMutableArray  *cycleModelArray;
 @property(nonatomic, strong)UCFMallDataModel *modelData;
+@property(nonatomic, assign)CGFloat     shopBottomSectionHeight;
 
 @end
 @implementation UCFMineShopPromotionCell
@@ -76,7 +77,7 @@
 - (UCFShopHListView *)shopList
 {
     if (nil == _shopList) {
-        _shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.sectionView.frame), PGScreenWidth, 165)];
+        _shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.sectionView.frame), PGScreenWidth, 155)];
         _shopList.dataSource = self;
         _shopList.delegate = self;
 //        _shopList.useFrame = YES;
@@ -167,7 +168,7 @@
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(view.frame.size.width -0.5, 0, 0.5, view.frame.size.height)];
     lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     [view addSubview:lineView];
-    
+    view.shopOrginalValue.hidden = YES;
     return view;
 }
 
