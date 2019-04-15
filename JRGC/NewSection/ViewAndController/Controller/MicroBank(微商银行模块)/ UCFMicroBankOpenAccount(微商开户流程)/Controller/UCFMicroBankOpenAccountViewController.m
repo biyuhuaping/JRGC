@@ -17,7 +17,7 @@
 
 #define HEADVIEWHEIGHT 60
 
-@interface UCFMicroBankOpenAccountViewController ()
+@interface UCFMicroBankOpenAccountViewController ()<PublicPopupWindowViewDelegate>
 
 @property (nonatomic, strong) UCFMicroBankOpenAccountOptionView *optionView;
 
@@ -129,22 +129,30 @@
 {
     if (self.openAccountSucceed) {
         //开户成功了,给提示去设置交易密码
-        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"未开通微金徽商存管不能 投标、提现、充值" cancelButtonTitle:@"我不要了" clickButton:^(NSInteger index){
-            if (index == 1) {
-                [self.rt_navigationController popViewControllerAnimated:YES];
-            }
-        } otherButtonTitles:@"继续开户"];
-        [alert show];
+        UCFPopViewWindow *popView = [UCFPopViewWindow new];
+        popView.delegate = self;
+        popView.type = POPOpenAccountPassWordRenounce;
+        popView.controller = self;
+        popView.popViewTag = 10002;
+        [popView startPopView];
     }
     else{
         //提示去开户
-        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"未设置微金交易密码不能 投标、提现、充值" cancelButtonTitle:@"我不要了" clickButton:^(NSInteger index){
-            if (index == 1) {
-                [self.rt_navigationController popViewControllerAnimated:YES];
-            }
-        } otherButtonTitles:@"继续设置"];
-        [alert show];
+        UCFPopViewWindow *popView = [UCFPopViewWindow new];
+        popView.delegate = self;
+        popView.type = POPOpenAccountRenounce;
+        popView.controller = self;
+        popView.popViewTag = 10001;
+        [popView startPopView];
     }
+}
+-(void)popEnterButtonClick:(UIButton *)btn
+{
+    [self.rt_navigationController popViewControllerAnimated:YES];
+}
+-(void)popCancelButtonClick:(UIButton *)btn
+{
+    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 - (UCFMicroBankOpenAccountDepositViewController *)depositView
 {

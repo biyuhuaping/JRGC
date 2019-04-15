@@ -12,18 +12,17 @@
 {
     SelectAccoutType _accoutType;
     NSString *_realName;
-    NSString *_bankPhoneNum;
+//    NSString *_bankPhoneNum;
     NSString *_bankNo;
 }
 
 - (id)initWithRealName :(NSString *)realName
-           bankPhoneNum:(NSString *)bankPhoneNum
                  bankNo:(NSString *)bankNo
 {
     self = [super init];
     if (self) {
         _realName = realName;
-        _bankPhoneNum = bankPhoneNum;
+//        _bankPhoneNum = bankPhoneNum;
         _bankNo = bankNo;
     }
     return self;
@@ -48,7 +47,6 @@
 - (id)requestArgument {
     return @{
              @"realName": _realName,
-             @"bankPhoneNum" : _bankPhoneNum,
              @"bankNo" : _bankNo,
              };
 }

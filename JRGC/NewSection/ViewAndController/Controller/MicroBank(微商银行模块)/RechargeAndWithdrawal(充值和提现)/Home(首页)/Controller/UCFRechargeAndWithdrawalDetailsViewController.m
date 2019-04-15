@@ -23,8 +23,9 @@
 #import "UCFCashWithdrawalRequest.h"
 #import "UCFCashViewController.h"
 #import "ToolSingleTon.h"
+#import "UCFMicroBankOpenAccountViewController.h"
 
-@interface UCFRechargeAndWithdrawalDetailsViewController ()
+@interface UCFRechargeAndWithdrawalDetailsViewController ()<PublicPopupWindowViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
@@ -430,7 +431,13 @@
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
         {
-            [self showHSAlert:tipStr1];
+//            [self showHSAlert:tipStr1];
+            UCFPopViewWindow *popView = [UCFPopViewWindow new];
+            popView.delegate = self;
+            popView.type = POPOpenAccountWindow;
+            popView.controller = self;
+            popView.popViewTag = 10001;
+            [popView startPopView];
             return NO;
             break;
         }
@@ -440,7 +447,13 @@
                 return YES;
             }else
             {
-                [self showHSAlert:tipStr2];
+//                [self showHSAlert:tipStr2];
+                UCFPopViewWindow *popView = [UCFPopViewWindow new];
+                popView.delegate = self;
+                popView.type = POPOpenAccountPassWord;
+                popView.controller = self;
+                popView.popViewTag = 10002;
+                [popView startPopView];
                 return NO;
             }
         }
@@ -449,6 +462,12 @@
             return YES;
             break;
     }
+}
+- (void)popEnterButtonClick:(UIButton *)btn
+{
+    //去开户,去设置交易密码都是走一样的流程
+    UCFMicroBankOpenAccountViewController *open = [[UCFMicroBankOpenAccountViewController alloc] init];
+    [self.rt_navigationController pushViewController:open animated:YES];
 }
 - (void)showHSAlert:(NSString *)alertMessage
 {

@@ -22,6 +22,8 @@ static NSString *TextButtonTitleEnter = @"确定";
 static NSString *TextButtonTitleLogin = @"去登录";
 static NSString *TextButtonTitleLoginAgain = @"重新输入";
 static NSString *TextButtonOpenAccount = @"立即开户";
+static NSString *TextButtonOpenAccountPassWord = @"立即设置";
+static NSString *TextButtonOpenAccountAgain = @"继续开户";
 static NSString *TextButtonSettingPassWordEnter = @"继续设置";
 static NSString *TextButtonRegisterEnter = @"继续注册";
 static NSString *TextButtonDontCancel = @"我不要了";
@@ -241,6 +243,11 @@ static BOOL isForcedUpdating = NO;//强制更新
         {
             [self addPOPOpenAccountWindow];
         }
+        
+        else if (type == POPOpenAccountPassWord)
+        {
+            [self addPOPOpenAccountPassWord];
+        }
         else if (type == POPMessageWindow)
         {
             [self addPOPMessageWindow];
@@ -322,10 +329,10 @@ static BOOL isForcedUpdating = NO;//强制更新
 #pragma mark 手指点击事件
 - (void)singleTap:(UITapGestureRecognizer *)sender
 {
-//    [self hide];
-    if ([self.delegate respondsToSelector:@selector(popClickCloseBackgroundView)]) {
-        [self.delegate popClickCloseBackgroundView];
-    }
+    [self hideView];
+//    if ([self.delegate respondsToSelector:@selector(popClickCloseBackgroundView)]) {
+//        [self.delegate popClickCloseBackgroundView];
+//    }
 }
 - (MyRelativeLayout *)bkLayout
 {
@@ -473,7 +480,39 @@ static BOOL isForcedUpdating = NO;//强制更新
     
     [self addSingleGesture];
 }
-
+- (void)addPOPOpenAccountPassWord
+{
+    [self.bkLayout addSubview:self.bkImageView];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    
+    self.bkLayout.myHeight = 347;
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    self.bkLayout.myWidth = getWidth(310);
+    
+    self.bkImageView.myTop = 30;
+    self.bkImageView.myWidth = 288;
+    self.bkImageView.myHeight = 184;
+    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
+    self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
+    
+    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
+    self.contentLabel.myLeft= 25;
+    self.contentLabel.myRight= 25;
+    self.contentLabel.font = [Color gc_Font:15.0];
+    self.contentLabel.text = TextOpenAccountPassWordHint;
+    self.contentLabel.textAlignment = NSTextAlignmentCenter;
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.myBottom = 25;
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [_enterButton setTitle:TextButtonOpenAccountPassWord forState:UIControlStateNormal];
+    
+    [self addSingleGesture];
+}
 - (void)addPOPMessageWindow
 {
     [self.bkLayout addSubview:self.titleLabel];
@@ -704,7 +743,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.enterButton.rightPos.equalTo(@20);
     self.enterButton.leftPos.equalTo(@20);
     self.enterButton.heightSize.equalTo(@40);
-    [self.enterButton setTitle:TextButtonRegisterEnter forState:UIControlStateNormal];
+    [self.enterButton setTitle:TextButtonOpenAccountAgain forState:UIControlStateNormal];
     
     [self.cancelButton setTitle:TextButtonDontCancel forState:UIControlStateNormal];
     //    [self addSingleGesture];

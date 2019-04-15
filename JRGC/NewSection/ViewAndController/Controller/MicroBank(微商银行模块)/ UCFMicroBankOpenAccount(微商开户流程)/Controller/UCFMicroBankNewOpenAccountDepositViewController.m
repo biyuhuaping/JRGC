@@ -31,7 +31,7 @@
 
 @property (nonatomic, strong) UCFMicroBankOpenAccountDepositCellView *nameView; //姓名
 
-@property (nonatomic, strong) UCFMicroBankOpenAccountDepositCellView *phoneView; //手机号
+//@property (nonatomic, strong) UCFMicroBankOpenAccountDepositCellView *phoneView; //手机号
 
 @property (nonatomic, strong) UCFMicroBankOpenAccountDepositBankListCellView *selectBankView;// 选择银行卡
 
@@ -39,7 +39,7 @@
 
 @property (nonatomic, strong) NZLabel *agreementLabel; //协议
 
-@property (nonatomic, strong) NZLabel *attentionsLabel; //协议
+//@property (nonatomic, strong) NZLabel *attentionsLabel; //协议
 
 @property (nonatomic, copy)   NSString *bankId;
 
@@ -63,8 +63,8 @@
 - (void)loadLayoutView{
     [self.scrollLayout addSubview:self.nameView];
     [self.scrollLayout addSubview:self.selectBankView];
-    [self.scrollLayout addSubview:self.phoneView];
-    [self.scrollLayout addSubview:self.attentionsLabel];
+//    [self.scrollLayout addSubview:self.phoneView];
+//    [self.scrollLayout addSubview:self.attentionsLabel];
     [self.scrollLayout addSubview:self.enterButton];
     [self.scrollLayout addSubview:self.agreementLabel];
 }
@@ -122,41 +122,41 @@
     }
     return _selectBankView;
 }
-- (UCFMicroBankOpenAccountDepositCellView *)phoneView
-{
-    if (nil == _phoneView) {
-        _phoneView = [[UCFMicroBankOpenAccountDepositCellView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
-        _phoneView.topPos.equalTo(self.selectBankView.bottomPos);
-        _phoneView.myLeft = 0;
-        _phoneView.titleImageView.image = [UIImage imageNamed:@"list_icon_phone"];
-        _phoneView.contentField.delegate = self;
-        _phoneView.contentField.placeholder = @"请输入手机号码";
-//        _phoneView.contentField.enabled = NO;
-        _phoneView.itemLineView.hidden = YES;
-        [_phoneView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
-    }
-    return _phoneView;
-}
-- (NZLabel *)attentionsLabel
-{
-    if (nil == _attentionsLabel) {
-        _attentionsLabel = [NZLabel new];
-        _attentionsLabel.myLeft = 15;
-        _attentionsLabel.topPos.equalTo(self.phoneView.bottomPos).offset(15);
-        _attentionsLabel.textAlignment = NSTextAlignmentLeft;
-        _attentionsLabel.font = [Color gc_Font:13.0];
-        _attentionsLabel.textColor = [Color color:PGColorOptionTitleGray];
-        _attentionsLabel.text = @"手机号需与所绑银行卡预留手机号一致";
-        [_attentionsLabel sizeToFit];
-    }
-    return _attentionsLabel;
-}
+//- (UCFMicroBankOpenAccountDepositCellView *)phoneView
+//{
+//    if (nil == _phoneView) {
+//        _phoneView = [[UCFMicroBankOpenAccountDepositCellView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
+//        _phoneView.topPos.equalTo(self.selectBankView.bottomPos);
+//        _phoneView.myLeft = 0;
+//        _phoneView.titleImageView.image = [UIImage imageNamed:@"list_icon_phone"];
+//        _phoneView.contentField.delegate = self;
+//        _phoneView.contentField.placeholder = @"请输入手机号码";
+////        _phoneView.contentField.enabled = NO;
+//        _phoneView.itemLineView.hidden = YES;
+//        [_phoneView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+//    }
+//    return _phoneView;
+//}
+//- (NZLabel *)attentionsLabel
+//{
+//    if (nil == _attentionsLabel) {
+//        _attentionsLabel = [NZLabel new];
+//        _attentionsLabel.myLeft = 15;
+//        _attentionsLabel.topPos.equalTo(self.phoneView.bottomPos).offset(15);
+//        _attentionsLabel.textAlignment = NSTextAlignmentLeft;
+//        _attentionsLabel.font = [Color gc_Font:13.0];
+//        _attentionsLabel.textColor = [Color color:PGColorOptionTitleGray];
+//        _attentionsLabel.text = @"手机号需与所绑银行卡预留手机号一致";
+//        [_attentionsLabel sizeToFit];
+//    }
+//    return _attentionsLabel;
+//}
 - (UIButton*)enterButton
 {
     if(nil == _enterButton)
     {
         _enterButton = [UIButton buttonWithType:0];
-        _enterButton.topPos.equalTo(self.attentionsLabel.bottomPos).offset(20);
+        _enterButton.topPos.equalTo(self.selectBankView.bottomPos).offset(20);
         _enterButton.rightPos.equalTo(@25);
         _enterButton.leftPos.equalTo(@25);
         _enterButton.heightSize.equalTo(@40);
@@ -223,16 +223,19 @@
     if (textField == self.nameView.contentField && [self.nameView.contentField.text isEqualToString:@""] ) {//&& ![Common isChinese:_textField1.text]
         [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
         return;
-    }else if(textField == self.phoneView.contentField && ![self inspectPhoneView]){
-        [AuxiliaryFunc showToastMessage:@"请输入正确的手机号码" withView:self.view];
-        return;
     }
+//    else if(textField == self.phoneView.contentField && ![self inspectPhoneView]){
+//        [AuxiliaryFunc showToastMessage:@"请输入正确的手机号码" withView:self.view];
+//        return;
+//    }
     
 }
 
 - (void)inspectTextField
 {
-    if ([self inspectNameViewInPut] && [self inspectPhoneView] && [self inspectSelectBankView]) {
+    if ([self inspectNameViewInPut] &&  [self inspectSelectBankView])
+//    if ([self inspectNameViewInPut] && [self inspectPhoneView] && [self inspectSelectBankView])
+    {
         //输入正常,按钮可点击
         self.enterButton.userInteractionEnabled = YES;
         [self.enterButton setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
@@ -254,16 +257,16 @@
         return NO;
     }
 }
-- (BOOL)inspectPhoneView
-{
-    if (self.phoneView.contentField.text.length == 11 && [Common isOnlyNumber:self.phoneView.contentField.text] ) {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-}
+//- (BOOL)inspectPhoneView
+//{
+//    if (self.phoneView.contentField.text.length == 11 && [Common isOnlyNumber:self.phoneView.contentField.text] ) {
+//        return YES;
+//    }
+//    else
+//    {
+//        return NO;
+//    }
+//}
 - (BOOL)inspectSelectBankView
 {
     if (self.bankId.length >0 && ![self.selectBankView.oaContentLabel.text isEqualToString:@""] && self.bankId != nil && ![self.bankId isEqualToString:@""]) {
@@ -297,7 +300,7 @@
 - (void)enterButtoClick
 {
 //    UCFMicroBankONewpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankONewpenAccountGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text idCardNo:self.idView.contentField.text bankNo:self.bankId openStatus:self.GetOpenAccountModel.data.openStatus AccoutType:SelectAccoutTypeP2P];
-    UCFMicroBankONewpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankONewpenAccountGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text bankPhoneNum:self.phoneView.contentField.text bankNo:self.bankId];
+    UCFMicroBankONewpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankONewpenAccountGetOpenAccountInfoAPI alloc] initWithRealName:self.nameView.contentField.text  bankNo:self.bankId];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -368,11 +371,11 @@
                 self.nameView.contentField.text = self.GetOpenAccountModel.data.userInfo.realName;
                 SingleUserInfo.loginData.userInfo.realName = self.GetOpenAccountModel.data.userInfo.realName;
             }
-            if (self.GetOpenAccountModel.data.userInfo.phoneNum.length > 0)
-            {
-        
-                self.phoneView.contentField.text   = self.GetOpenAccountModel.data.userInfo.phoneNum;
-            }
+//            if (self.GetOpenAccountModel.data.userInfo.phoneNum.length > 0)
+//            {
+//        
+//                self.phoneView.contentField.text   = self.GetOpenAccountModel.data.userInfo.phoneNum;
+//            }
             if (self.GetOpenAccountModel.data.userInfo.bankCard.length > 0) {
                 //将银行卡（textField3）要显示的文字四位分隔
                 self.selectBankView.oaContentLabel.text = [NSString bankIdSeparate:self.GetOpenAccountModel.data.userInfo.bankCard];

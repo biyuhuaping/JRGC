@@ -97,6 +97,7 @@ _Pragma("clang diagnostic pop")\
 
 typedef NS_ENUM(NSInteger, POPWINDOWS) {
     POPOpenAccountWindow = 1, //开户弹框
+    POPOpenAccountPassWord,//设置交易密码
     POPRegisterVerifyPhoneNum, //注册检测手机号提示
     POPRegisterRenounce,//放弃注册提示
     POPMessageWindow,//带提示信息的

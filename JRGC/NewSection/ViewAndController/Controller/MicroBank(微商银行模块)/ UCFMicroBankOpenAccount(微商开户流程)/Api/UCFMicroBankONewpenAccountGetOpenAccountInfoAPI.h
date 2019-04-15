@@ -13,8 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UCFMicroBankONewpenAccountGetOpenAccountInfoAPI : BaseRequest
 
 - (id)initWithRealName :(NSString *)realName
-           bankPhoneNum:(NSString *)bankPhoneNum
                  bankNo:(NSString *)bankNo;
+
+//- (id)initWithRealName :(NSString *)realName
+//           bankPhoneNum:(NSString *)bankPhoneNum
+//                 bankNo:(NSString *)bankNo;
 
 //{@"realName":realName,             //真实姓名
 //    @"bankPhoneNum":_bankPhoneNum,   //银行预留手机号
