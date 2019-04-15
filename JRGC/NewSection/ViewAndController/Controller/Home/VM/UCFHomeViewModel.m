@@ -26,7 +26,8 @@
     self.isFetchDataLoading = YES;
     [self.dataArray removeAllObjects];
     [self getBannerData];
-    if ((SingleUserInfo.loginData.userInfo.userId.length > 0 && !SingleUserInfo.loginData.userInfo.isRisk ) ||!SingleUserInfo.loginData.userInfo.isAutoBid) {
+    
+    if (SingleUserInfo.loginData.userInfo.userId.length > 0 && (SingleUserInfo.loginData.userInfo.isRisk == NO || SingleUserInfo.loginData.userInfo.isAutoBid == NO)) {
         [self getUserAllStatue];
     } else {
         [self addUserGuideData];
