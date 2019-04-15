@@ -143,11 +143,11 @@
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
     } else {
         [self showTabbarController];
-        NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+        BOOL useLockView = [[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] ;
         BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
 
         //使用手势密码 显示
-        if (useLockView == 1 || isOpen) {
+        if (useLockView || isOpen) {
             [self showGCode];
         }
 
@@ -432,10 +432,10 @@
             [application endBackgroundTask:_backgroundUpdateTask];
             _backgroundUpdateTask = UIBackgroundTaskInvalid;
         }
-    NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+    BOOL useLockView = [[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"];
     BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
 
-    if (useLockView == 1 || isOpen) {
+    if (useLockView || isOpen) {
         if (_backTime > 5) {
             [[ToolSingleTon sharedManager] hideAlertAction:nil];
             [self showGCode];

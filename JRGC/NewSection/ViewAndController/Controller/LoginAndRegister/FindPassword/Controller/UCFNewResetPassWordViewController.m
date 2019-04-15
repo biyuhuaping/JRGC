@@ -19,7 +19,7 @@
 #import "UCFNewFindPassWordRetrievePwdApi.h"
 #import "BaseAlertView.h"
 #import "UCFNewLoginViewController.h"
-
+#import "MD5Util.h"
 @interface UCFNewResetPassWordViewController ()<UIScrollViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -247,7 +247,7 @@
 
 - (void)enterButtoClick
 {
-    UCFNewFindPassWordRetrievePwdApi * request = [[UCFNewFindPassWordRetrievePwdApi alloc] initWithPhoneNum:self.phoneNum andValidateCode:self.smsCodeView.contentField.text andPwd:self.passWordView.contentField.text];
+    UCFNewFindPassWordRetrievePwdApi * request = [[UCFNewFindPassWordRetrievePwdApi alloc] initWithPhoneNum:self.phoneNum andValidateCode:self.smsCodeView.contentField.text andPwd:[MD5Util MD5Pwd:self.passWordView.contentField.text]];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {

@@ -54,17 +54,7 @@
 
 - (void)setIsHideNativeNav:(BOOL)isHideNativeNav
 {
-    if (isHideNativeNav) {
-        if ([self.rootVc isKindOfClass:[UCFHomeViewController class]]) {
-            ((UCFHomeViewController *)self.rootVc).desVCStr = @"bannar_hide_return";
-        }
-        else {
-            ((UCFHomeViewController *)self.rootVc).desVCStr = nil;
-        }
-    }
-    else {
-        ((UCFHomeViewController *)self.rootVc).desVCStr = nil;
-    }
+
     [super setIsHideNativeNav:isHideNativeNav];
     
 }

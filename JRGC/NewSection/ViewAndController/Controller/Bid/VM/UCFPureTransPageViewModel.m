@@ -107,6 +107,7 @@
     }
     self.investMoeny = allMoneyInputNum;
     self.allMoneyInputNum = allMoneyInputNum;
+    [self calculate:self.investMoeny];
     
 }
 -(NSString*)getHonerDefaultText{

@@ -807,14 +807,7 @@
                     [alert show];
                     return;
                 }
-//                BindPhoneNumViewController *v = (BindPhoneNumViewController *)vc;
-//                v.authedPhone = item.subtitle;
-//                v.uperViewController = self;
-//                if ([item.subtitle isEqualToString:@"未绑定"]) {
-//                    
-//                    vc = [[UCFModifyPhoneViewController alloc] initWithNibName:@"UCFModifyPhoneViewController" bundle:nil];
-//                }
-//                v.rootVc = self;
+
                 UCFNewBindPhoneNumViewController *v = (UCFNewBindPhoneNumViewController *)vc;
                 v.authedPhone = item.subtitle;
                 if ([item.subtitle isEqualToString:@"未绑定"]) {
@@ -824,43 +817,17 @@
             }
                 break;
             case 2:{
-//                if ([SingleUserInfo.loginData.userLevel integerValue] < 2 && SingleUserInfo.superviseSwitch)
-                if ([item.title isEqualToString:@"工场码"])
-                {
-//                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-//                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",SingleUserInfo.loginData.userInfo.promotionCode,self.sex];
-                    UCFMineDimensionCodeViewController *subVC = [[UCFMineDimensionCodeViewController alloc] init];
-                    vc = subVC;
-                }
-                else {
-//                    vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-//                    vc.title = arrowItem.title;
-//                    ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
-//                    ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
-                    
                     if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
                     {//吐司：此活动暂时未对企业用户开放
                         [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
                     }
                     else{
-                        
-                        NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue];
-                        if(openStatus < 3){
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-                            alert.tag = 10005;
-                            [alert show];
-                        }else{
-                            [self getUserIntoGoCoinPageHTTP];
-                        }
+                        [self getUserIntoGoCoinPageHTTP];
                     }
-                    
                 }
-            }
                 break;
             case 3:
                 {
-//                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-//                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE],self.sex];
                     UCFMineDimensionCodeViewController *subVC = [[UCFMineDimensionCodeViewController alloc] init];
                     vc = subVC;
                 }

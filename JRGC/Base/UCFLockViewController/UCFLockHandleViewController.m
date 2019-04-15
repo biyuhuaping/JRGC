@@ -568,8 +568,8 @@
     [changeVerificationBtn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_baseScrollView addSubview:changeVerificationBtn1];
 
-    NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
-    if (useLockView == 1) {
+    NSInteger useLockView = [[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] ;
+    if (useLockView) {
         changeVerificationBtn1.hidden = NO;
     } else {
         changeVerificationBtn1.hidden = YES;
@@ -602,27 +602,7 @@
 - (void)dealWithrunBtn:(id)sender
 {
         if (_isFromRegister) {
-            userInfoDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"regUserMsg"];
-            int regReward;
-            NSString*regType;
-            int certiReward;
-            NSString*cetiType;
-            int bdReward;
-            NSString*bdType;
-            
-            NSString *firstInstType;
-            int firstInstValue;
-            if (userInfoDict) {
-                regReward = [[userInfoDict objectForKey:@"resvalue"] intValue];
-                regType = [userInfoDict objectForKey:@"restype"];
-                certiReward = [[userInfoDict objectForKey:@"rzvalue"] intValue];//身份认证奖励
-                cetiType = [userInfoDict objectForKey:@"rztype"];
-                bdReward = [[userInfoDict objectForKey:@"bdvalue"] intValue];//绑定银行卡奖励
-                bdType = [userInfoDict objectForKey:@"bdtype"];
-                
-                firstInstValue = [[userInfoDict objectForKey:@"firstInvestmentValue"] intValue];//绑定银行卡奖励
-                firstInstType = [userInfoDict objectForKey:@"firstInvestmentType"];
-            }
+           
             
             UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
             VC.isPresentViewController = YES;
@@ -641,7 +621,6 @@
             
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
         } else {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"leapGestureLock" object:nil];
             [UCFCouponPopup startQueryCouponPopup];
             
         }
@@ -651,6 +630,8 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
+    [SingGlobalView.tabBarController.selectedViewController.rt_navigationController popToRootViewControllerAnimated:NO];
+    [SingGlobalView.tabBarController setSelectedIndex:0];
 }
 
 - (void)dealWithCancelBtn:(id)sender
@@ -682,7 +663,6 @@
     isClickCgAndCertiBtn = YES;
     UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
     [self.rt_navigationController pushViewController:controller animated:YES];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
 }
 /**
  *  切换账户有返回按钮，点击返回按钮加一个标示符，判断返回的时候显示手势还是指纹
@@ -1048,28 +1028,12 @@
     }
     // 在这里可能需要回调上个页面做一些刷新什么的动作
     [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
-//#ifdef LLLockAnimationOn
-//    [self captureCurrentSnap];
-//    // 隐藏控件
-//    for (UIView* v in self.view.subviews) {
-//        if (v.tag > 10000) continue;
-//        v.hidden = YES;
-//    }
-//    // 动画解锁
-//    [self animateUnlock];
-//
-//    //设置成功之后返回安全中心页
-//    if ([_souceVc isEqualToString:@"securityCenter"]) {
-//        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//        UINavigationController *navController = delegate.tabBarController.selectedViewController;
-//        [navController popViewControllerAnimated:YES];
-//    }
-//#else
-//
-//    [self dismissViewControllerAnimated:NO completion:^{
-//        [AuxiliaryFunc showAlertViewWithMessage:@"恭喜您注册成功!" delegate:self];
-//    }];
-//#endif
+    if (_souceVc.length != 0) {
+        
+    } else {
+        [SingGlobalView.tabBarController.selectedViewController.rt_navigationController popToRootViewControllerAnimated:NO];
+        [SingGlobalView.tabBarController setSelectedIndex:0];
+    }
 }
 
 #pragma mark - delegate 每次划完手势后
