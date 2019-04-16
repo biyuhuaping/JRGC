@@ -218,17 +218,18 @@
             
             [self.bottomButton setTitle:[SingleUserInfo.loginData.userInfo.openStatus intValue] > 2 ?@"设置交易密码" : @"开通存管账户" forState:UIControlStateNormal];
             self.bottonBaseView.myVisibility = MyVisibility_Visible;
-        }
-        if (SingleUserInfo.loginData.userInfo.isRisk) {
-            self.bottonBaseView.myVisibility = MyVisibility_Gone;
-            self.leftBottombutton.enabled = NO;
-
         } else {
-            [self.bottomButton setTitle:@"进行风险评测" forState:UIControlStateNormal];
-            self.bottonBaseView.myVisibility = MyVisibility_Visible;
-            self.leftBottombutton.enabled = YES;
-
+            if (SingleUserInfo.loginData.userInfo.isRisk) {
+                self.bottonBaseView.myVisibility = MyVisibility_Gone;
+                self.leftBottombutton.enabled = NO;
+                
+            } else {
+                [self.bottomButton setTitle:@"进行风险评测" forState:UIControlStateNormal];
+                self.bottonBaseView.myVisibility = MyVisibility_Visible;
+                self.leftBottombutton.enabled = YES;
+            }
         }
+
     } else {
         self.leftTopbutton.enabled = YES;
         self.rightTopbutton.enabled = YES;
