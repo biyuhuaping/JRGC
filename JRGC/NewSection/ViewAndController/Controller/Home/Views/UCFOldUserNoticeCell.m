@@ -79,6 +79,7 @@
     if ([dataModel isKindOfClass:[Sitenoticemap class]]) {
         self.mapModel = dataModel;
         self.notiView.titleLab.text = self.mapModel.siteNotice;
+        [self.notiView.titleLab sizeToFit];
     }
 }
 - (void)noticeSiteClick

@@ -27,6 +27,7 @@
 #import "UCFCouponPopup.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "UCFNewModifyPasswordViewController.h"
+#import "UCFNewVerificationLoginPassWordViewController.h"
 #define kTipColorNormal [UIColor blackColor]
 #define kTipColorError [UIColor redColor]
 @interface UCFLockHandleViewController ()
@@ -568,7 +569,7 @@
     [changeVerificationBtn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_baseScrollView addSubview:changeVerificationBtn1];
 
-    NSInteger useLockView = [[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] ;
+    BOOL useLockView = [[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] ;
     if (useLockView) {
         changeVerificationBtn1.hidden = NO;
     } else {
@@ -661,8 +662,12 @@
 - (void)dealWithPassword : (id)sender
 {
     isClickCgAndCertiBtn = YES;
-    UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
+    UCFNewVerificationLoginPassWordViewController *controller = [[UCFNewVerificationLoginPassWordViewController alloc] init];
+    controller.titleString = [NSString stringWithFormat:@""];
     [self.rt_navigationController pushViewController:controller animated:YES];
+    
+//    UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
+//    [self.rt_navigationController pushViewController:controller animated:YES];
 }
 /**
  *  切换账户有返回按钮，点击返回按钮加一个标示符，判断返回的时候显示手势还是指纹

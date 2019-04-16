@@ -32,7 +32,7 @@
         
         lab.font =[Color gc_Font:12];
         lab.textColor = [Color color:PGColorOptionTitleBlack];
-        lab.text = @"公告公告公告公告公告公告公告公告公告公告公告";
+        lab.text = @"";
         [lab sizeToFit];
         self.titleLab = lab;
         

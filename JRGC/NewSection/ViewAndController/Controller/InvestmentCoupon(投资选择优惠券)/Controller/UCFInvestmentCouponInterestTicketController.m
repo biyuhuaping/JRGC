@@ -79,13 +79,13 @@
     } else {
         _useEnterBtn.enterButton.enabled = YES;
     }
-    [self.tableView reloadData];
+    [self.tableView cyl_reloadData];
 }
 
 - (BaseTableView *)tableView
 {
     if (nil == _tableView) {
-        _tableView = [[BaseTableView alloc]init];
+        _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, TableViewHeight)];
         _tableView.backgroundColor = UIColorWithRGB(0xebebee);
         _tableView.delegate = self;
         _tableView.dataSource =self;
