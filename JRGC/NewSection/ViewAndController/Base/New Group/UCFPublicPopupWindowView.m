@@ -55,6 +55,7 @@ static BOOL isLoginOut = NO;//退出登录
 
 static BOOL isForcedUpdating = NO;//强制更新
 
+
 @interface UCFPublicPopupWindowView ()
 
 @property (nonatomic, strong) MyRelativeLayout *bkLayout;
@@ -107,8 +108,8 @@ static BOOL isForcedUpdating = NO;//强制更新
     }
     else
     {
-        UCFPublicPopupWindowView *popup = [[UCFPublicPopupWindowView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, PGScreenHeight) withType:type withContent:contentStr withTitle:titletStr];
-        if (type == POPMessageLoginOut) {
+        UCFPublicPopupWindowView *popup = [[UCFPublicPopupWindowView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, PGScreenHeight) withType:type withContent:contentStr withTitle:titletStr withPopViewTag:viewTag];
+        if (type == POPMessageLoginOut || type == POPMessageLoginOutService) {
             [popup setLoginOut:YES];
         }
         if (type == POPMessageForcedUpdating) {
@@ -117,9 +118,6 @@ static BOOL isForcedUpdating = NO;//强制更新
         
         if (delegate != nil) {
             popup.delegate = delegate;
-        }
-        if (viewTag != 0) {
-            popup.popViewTag = viewTag;
         }
         if (controller == nil || ![controller isKindOfClass:[UIViewController class]]) {
             [popup showInWindow];
@@ -181,7 +179,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     }
     else
     {
-        if (self.type == POPMessageLoginOut ) {
+        if (self.type == POPMessageLoginOut  || self.type == POPMessageLoginOutService) {
             [self setLoginOut:NO];
         }
         [self clearPopupWindowView];
@@ -210,7 +208,11 @@ static BOOL isForcedUpdating = NO;//强制更新
     }
 }
 
-- (id)initWithFrame:(CGRect)frame withType:(POPWINDOWS)type withContent:(NSString *__nonnull)contentStr withTitle:(NSString *__nonnull)titleStr
+- (id)initWithFrame:(CGRect)frame
+           withType:(POPWINDOWS)type
+        withContent:(NSString *__nonnull)contentStr
+          withTitle:(NSString *__nonnull)titleStr
+     withPopViewTag:(NSInteger )viewTag
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -232,7 +234,9 @@ static BOOL isForcedUpdating = NO;//强制更新
         {
             self.titleStr = @"";
         }
-        
+        if (viewTag != 0 && viewTag) {
+            self.popViewTag = viewTag;
+        }
         [self.rootLayout addSubview:self.bkLayout];
         self.rootLayout.backgroundColor = [UIColor clearColor];
         self.backgroundColor = [UIColor clearColor];
@@ -304,6 +308,11 @@ static BOOL isForcedUpdating = NO;//强制更新
         {
             [self addPOPMessageLoginOut];
         }
+        else if (type == POPMessageLoginOutService)
+        {
+            [self addPOPMessageLoginOutService];
+        }
+        
         else if (type == POPMessageForcedUpdating)
         {
             [self addPOPMessageForcedUpdating];
@@ -312,6 +321,11 @@ static BOOL isForcedUpdating = NO;//强制更新
         {
             [self addPOPMessageNormalUpdating];
         }
+        else if (type == POPMessageNormalEnter)
+        {
+            [self addPOPMessageNormalEnter];
+        }
+        
     }
     return self;
 }
@@ -1040,6 +1054,42 @@ static BOOL isForcedUpdating = NO;//强制更新
     
     self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentBothButtonHeight;
 }
+
+- (void)addPOPMessageLoginOutService
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextTitleHint;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(22);
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonAgainLogin forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonContactService forState:UIControlStateNormal];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentBothButtonHeight;
+}
+
 - (void)addPOPMessageForcedUpdating
 {
     [self.bkLayout addSubview:self.titleLabel];
@@ -1108,6 +1158,39 @@ static BOOL isForcedUpdating = NO;//强制更新
 }
 
 
+- (void)addPOPMessageNormalEnter
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextTitleHint;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.myBottom = 25;
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonTitleEnter forState:UIControlStateNormal];
+    
+//    [self addSingleGesture];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentButtonHeight;
+}
 - (CGFloat )labelHeight:(UILabel *)contentLabel withPopViewWidth:(CGFloat )popWidth
 {
     // 设置文字属性 要和label的一致

@@ -493,11 +493,17 @@
         [self.tableView endRefresh];
         //        DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
-            
-            if (SingleUserInfo.loginData.userInfo.zxIsNew != !model.data.zxAccountIsShow) {
+//
+//            if (SingleUserInfo.loginData.userInfo.zxIsNew != !model.data.zxAccountIsShow) {
+//                SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
+//                [SingleUserInfo setUserData:SingleUserInfo.loginData];
+//            }
+            if (SingleUserInfo.loginData.userInfo.zxIsNew == !model.data.zxAccountIsShow)
+            {
                 SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
                 [SingleUserInfo setUserData:SingleUserInfo.loginData];
             }
+            
             [self setTableViewArrayWithData:model];
         }
         else{

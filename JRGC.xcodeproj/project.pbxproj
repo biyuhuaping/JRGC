@@ -9134,10 +9134,10 @@
 		E3980E0822522217006936C4 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
-				E3980E0C225234A9006936C4 /* UCFPublicPopupWindowView.h */,
-				E3980E0D225234A9006936C4 /* UCFPublicPopupWindowView.m */,
 				E30B07662264991E0090BFB8 /* UCFPopViewWindow.h */,
 				E30B07672264991E0090BFB8 /* UCFPopViewWindow.m */,
+				E3980E0C225234A9006936C4 /* UCFPublicPopupWindowView.h */,
+				E3980E0D225234A9006936C4 /* UCFPublicPopupWindowView.m */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";

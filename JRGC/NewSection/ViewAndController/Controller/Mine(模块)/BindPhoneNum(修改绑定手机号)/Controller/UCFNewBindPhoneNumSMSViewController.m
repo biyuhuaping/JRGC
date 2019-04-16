@@ -53,6 +53,8 @@
     [self.rootLayout addSubview:self.smsCodeView];
     [self.rootLayout addSubview:self.enterButton];
     
+    [self addLeftButton];
+    
 }
 - (NZLabel *)titleLabel
 {
@@ -74,7 +76,7 @@
     if (nil == _moddifyPhoneImageView) {
         _moddifyPhoneImageView = [[UIImageView alloc] init];
         _moddifyPhoneImageView.topPos.equalTo(self.titleLabel.bottomPos).offset(38);
-        _moddifyPhoneImageView.myLeft = 30;
+        _moddifyPhoneImageView.myLeft = 33;
         _moddifyPhoneImageView.myWidth = 25;
         _moddifyPhoneImageView.myHeight = 25;
         _moddifyPhoneImageView.image = [UIImage imageNamed:@"sign_icon_phone.png"];
@@ -90,8 +92,7 @@
         _moddifyPhoneTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _moddifyPhoneTextField.font = [Color font:15.0 andFontName:nil];
         _moddifyPhoneTextField.textAlignment = NSTextAlignmentLeft;
-        _moddifyPhoneTextField.placeholder = @"请输入原密码";
-        _moddifyPhoneTextField.secureTextEntry = YES;
+        _moddifyPhoneTextField.placeholder = @"请输入新绑定手机号";
         _moddifyPhoneTextField.delegate = self;
         //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -208,7 +209,7 @@
 }
 - (BOOL)inspectPhoneNum
 {
-    if (!self.moddifyPhoneTextField.text && self.moddifyPhoneTextField.text.length == 11) {
+    if (self.moddifyPhoneTextField.text && self.moddifyPhoneTextField.text.length == 11) {
         return YES;
     }
     else

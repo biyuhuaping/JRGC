@@ -202,7 +202,12 @@
             self.nameLabel.text = @"姓名";
             self.nameContentLabel.text = myModel.data.realName;
             self.detailsLabel.text = @"性别";
-            self.detailsContentLabel.text = myModel.data.sex;
+            if ([myModel.data.sex isEqualToString:@"1"]) {
+                self.detailsContentLabel.text = @"男";
+            }
+            else{
+                self.detailsContentLabel.text = @"女";
+            }
             self.credentialsLabel.text = @"证件号";
             self.credentialsContentLabel.text = myModel.data.idno;
         }

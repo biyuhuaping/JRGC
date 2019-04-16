@@ -48,7 +48,7 @@
 #import "RequestUrlArgumentsFilter.h"
 #import "BaseRequest.h"
 #import "GuideViewController.h"
-@interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate,GuideViewContlerDelegate>
+@interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate,GuideViewContlerDelegate,PublicPopupWindowViewDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
 @property (assign, nonatomic) NSInteger backTime;
@@ -650,18 +650,33 @@
                 if (versionMark == 0) {
                     if (_isComeForceUpdate) {
                         //服务器版本和appstore版本一致
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:nil otherButtonTitles:@"更新", nil];
-                        alert.tag = 102;
-                        [alert show];
+//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:nil otherButtonTitles:@"更新", nil];
+//                        alert.tag = 102;
+//                        [alert show];
                         _isComeForceUpdate = NO;
+                        
+                        UCFPopViewWindow *popView = [UCFPopViewWindow new];
+                        popView.delegate = self;
+                        popView.contentStr = des;
+                        popView.type = POPMessageForcedUpdating;
+                        popView.popViewTag = 10003;
+                        [popView startPopView];
                     }
                 } else if (versionMark == 1) {
                     if ([PraiseAlert isShouldWarnUserUpdate:netVersion]) {
                         //可选择性更新
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"更新", nil];
-                        alert.tag = 101;
-                        NSLog(@"%lf",alert.window.windowLevel);
-                        [alert show];
+//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"更新", nil];
+//                        alert.tag = 101;
+//                        NSLog(@"%lf",alert.window.windowLevel);
+//                        [alert show];
+                        
+                        
+                        UCFPopViewWindow *popView = [UCFPopViewWindow new];
+                        popView.delegate = self;
+                        popView.contentStr = des;
+                        popView.type = POPMessageNormalUpdating;
+                        popView.popViewTag = 10004;
+                        [popView startPopView];
                     }
                 } else if (versionMark == 2) {
                     DDLogDebug(@"升级期内");
@@ -1109,6 +1124,70 @@
     DDLogWarn(@"Warn");
     DDLogError(@"Error");
 }
+
+- (void)popEnterButtonClick:(UIButton *)btn
+{
+    if (btn.tag == 10001 || btn.tag == 10002) //退出登录 10002取消是联系客服
+    {
+        [SingleUserInfo loadLoginViewController];
+    }
+    else if (btn.tag == 10003) //强更
+    {
+        // 升级新版本 退出应用
+        NSURL *url = [NSURL URLWithString:APP_RATING_URL];
+        [[UIApplication sharedApplication] openURL:url];
+        [self exitApplication];
+    }
+    else if (btn.tag == 10004) //普更
+    {
+        // 有更新,去查看
+        [[SDImageCache sharedImageCache] clearDisk];
+        NSURL *url = [NSURL URLWithString:APP_RATING_URL];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+-(void)popCancelButtonClick:(UIButton *)btn
+{
+    if (btn.tag == 10001)
+    {
+        NSUInteger selectedIndex = self.tabBarController.selectedIndex;
+        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:selectedIndex];
+        [nav popToRootViewControllerAnimated:NO];
+        if (self.tabBarController.selectedIndex != 0)
+        {
+            [self.tabBarController setSelectedIndex:0];
+        }
+    }
+    else if (btn.tag == 10002)
+    {
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        
+        NSUInteger selectedIndex = self.tabBarController.selectedIndex;
+        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:selectedIndex];
+//        if (self.tabBarController.presentedViewController)
+//        {
+//            NSString *className =  [NSString stringWithUTF8String:object_getClassName(self.tabBarController.presentedViewController)];
+//            if ([className hasSuffix:@"UINavigationController"]) {
+//                [self.tabBarController dismissViewControllerAnimated:NO completion:^{
+//                    [nav popToRootViewControllerAnimated:NO];
+//                    [self.tabBarController setSelectedIndex:0];
+//                }];
+//            }
+//        }
+//        else
+//        {
+            [nav popToRootViewControllerAnimated:NO];
+        if (self.tabBarController.selectedIndex != 0)
+        {
+            [self.tabBarController setSelectedIndex:0];
+        }
+//        }
+    }
+}
+
+
+
 
 @end
 // iOS10.2 之后如果info.plist里面的ATS 为YES 的情况下，也需要加这个
