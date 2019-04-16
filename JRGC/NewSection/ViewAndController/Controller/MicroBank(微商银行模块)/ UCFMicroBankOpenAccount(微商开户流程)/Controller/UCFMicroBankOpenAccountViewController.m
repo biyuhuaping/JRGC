@@ -148,7 +148,7 @@
 }
 -(void)popEnterButtonClick:(UIButton *)btn
 {
-    [self.rt_navigationController popViewControllerAnimated:YES];
+//    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 -(void)popCancelButtonClick:(UIButton *)btn
 {

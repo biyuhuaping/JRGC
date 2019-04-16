@@ -35,7 +35,7 @@
     if (nil == _titleImageView) {
         _titleImageView = [[UIImageView alloc] init];
         _titleImageView.centerYPos.equalTo(self.rootLayout.centerYPos);
-        _titleImageView.myLeft = 15;
+        _titleImageView.myLeft = 33;
         _titleImageView.myWidth = 22;
         _titleImageView.myHeight = 22;
         _titleImageView.image = [UIImage imageNamed:@"sign_icon_code"];
@@ -85,7 +85,7 @@
         _itemLineView = [UIView new];
         _itemLineView.myBottom = 1;
         _itemLineView.myHeight = 0.5;
-        _itemLineView.leftPos.equalTo(self.contentField.leftPos);
+        _itemLineView.myLeft = 25;
         _itemLineView.myRight = 0;
         _itemLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         _itemLineView.hidden = NO;
