@@ -225,6 +225,7 @@
     }
     */
 }
+//没用上，用的老方法
 - (void)dealClickAction:(NSString *)title
 {
     InvestPageInfoApi *api = [[InvestPageInfoApi alloc] initWithProjectId:self.model.data.ID type:SelectAccoutTypeP2P];

@@ -13,6 +13,7 @@
 @property(nonatomic, weak)UCFBidViewModel *myVM;
 @property(nonatomic, weak)UCFPureTransPageViewModel *mytransVM;
 @property(nonatomic, weak)UCFCollectionViewModel    *myCollectionVM;
+@property(nonatomic, strong)UIButton *investmentButton;
 @end
 
 @implementation UCFFundsInvestButton
@@ -20,10 +21,43 @@
 {
     self.myVM = viewModel;
     
+    @PGWeakObj(self);
+    
+    [self.KVOController observe:viewModel keyPaths:@[@"investMoeny"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"investMoeny"]) {
+            NSString *investMoney = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (investMoney.length == 0) {
+                selfWeak.investmentButton.enabled = NO;
+                
+            } else {
+                selfWeak.investmentButton.enabled = YES;
+                
+            }
+        }
+    }];
+    
 }
 - (void)showTransView:(UCFPureTransPageViewModel *)viewModel
 {
     self.mytransVM = viewModel;
+    @PGWeakObj(self);
+    
+    [self.KVOController observe:viewModel keyPaths:@[@"investMoeny"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"investMoeny"]) {
+            NSString *investMoney = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (investMoney.length == 0) {
+                selfWeak.investmentButton.enabled = NO;
+                
+            } else {
+                selfWeak.investmentButton.enabled = YES;
+                
+            }
+        }
+    }];
+    
+    
 }
 - (void)blindBaseVM:(BaseViewModel *)viewModel
 {
@@ -36,25 +70,15 @@
     investmentButton.myTop = 0;
     investmentButton.myHeight = 50;
     investmentButton.layer.masksToBounds = YES;
-//    [investmentButton setBackgroundColor:UIColorWithRGB(0xFD4D4C)];
-//    investmentButton.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *v) {
-//        v.layer.cornerRadius = 2.0;
-//    } ;
+
     [investmentButton addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
     [investmentButton setTitle:@"立即出借" forState:UIControlStateNormal];
     [self addSubview:investmentButton];
-    
+    self.investmentButton = investmentButton;
     [investmentButton setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(ScreenWidth, 50)] forState:UIControlStateNormal];
-    
-//    UIImageView *shadowView = [[UIImageView alloc] init];
-//    shadowView.myHeight = 10;
-//    shadowView.myTop = -10;
-//    shadowView.myHorzMargin = 0;
-//    shadowView.tag = TABIMAGEVIEWTAG;
-//    UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
-//    shadowView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
-    
-//    [self addSubview:shadowView];
+    [investmentButton setBackgroundImage:[UIImage gc_styleGrayImageSize:CGSizeMake(ScreenWidth, 50)] forState:UIControlStateDisabled];
+
+
 }
 - (void)click:(UIButton *)button
 {

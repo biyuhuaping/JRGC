@@ -64,7 +64,7 @@
 {
     if (SingleUserInfo.loginData.userInfo.userId) {
         NSString *strParameters = [NSString stringWithFormat:@"userId=%@",SingleUserInfo.loginData.userInfo.userId];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:SelectAccoutTypeP2P];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:self.accoutType];
     }
 }
 - (void)beginPost:(kSXTag)tag

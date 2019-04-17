@@ -31,7 +31,7 @@
         [principalMarkLab sizeToFit];
         
         UILabel *principalValueLab = [UILabel new];
-        principalValueLab.text = @"¥50000";
+        principalValueLab.text = @"";
         principalValueLab.textColor = [Color color:PGColorOptionThemeWhite];
         principalValueLab.font = [Color gc_Font:32];
         principalValueLab.leftPos.equalTo(@15);
@@ -50,7 +50,7 @@
         [interestMarkLab sizeToFit];
 
         UILabel *interestValueLab = [UILabel new];
-        interestValueLab.text = @"¥19.08";
+        interestValueLab.text = @"";
         interestValueLab.textColor = [Color color:PGColorOptionThemeWhite];
         interestValueLab.font = [Color gc_Font:15];
         interestValueLab.leftPos.equalTo(interestMarkLab.rightPos).offset(10);

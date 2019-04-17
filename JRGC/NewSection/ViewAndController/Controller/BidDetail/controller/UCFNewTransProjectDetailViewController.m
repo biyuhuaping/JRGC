@@ -20,6 +20,8 @@
 #import "UCFNewPureTransBidViewController.h"
 #import "UCFPureTransBidRootModel.h"
 #import "UCFNewPureTransBidViewController.h"
+#import "HSHelper.h"
+#import "RiskAssessmentViewController.h"
 @interface UCFNewTransProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate,UCFBidDetailNavViewDelegate,UCFNewInvestBtnViewDelegate>
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
@@ -339,18 +341,54 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     if(tag.intValue == kSXTagDealTransferBid) {
         UCFPureTransBidRootModel *model = [UCFPureTransBidRootModel yy_modelWithJSON:(NSString *)result];
-        if ([model.status boolValue])
+        int statue = [model.status intValue];
+        if (statue == 1)
         {
             UCFNewPureTransBidViewController *view = [[UCFNewPureTransBidViewController alloc] init];
             view.model = model;
             [self.navigationController pushViewController:view animated:YES];
-        } else {
-//            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        } else if (statue == 21){
+            HSHelper *helper = [HSHelper new];
+            NSInteger step = self.accoutType == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]: [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+            [helper pushOpenHSType:self.accoutType Step:step nav:self.navigationController];
+        }else if (statue == 3 || statue == 4) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: model.statusdes delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
+            alert.tag =7001;
+            [alert show];
+        }else if (statue == 30) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: model.statusdes delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+            alert.tag = 9000;
+            [alert show];
+        }else if (statue == 40) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: model.statusdes delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
+            alert.tag = 9001;
+            [alert show];
+        }
+        else {
+            [AuxiliaryFunc showAlertViewWithMessage: model.statusdes];
         }
     }
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 7001 || alertView.tag == 7000) {
+        [self topLeftButtonClick:nil];
+    } else if (alertView.tag == 9000) {
+        if(buttonIndex == 1){
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.accoutType = self.accoutType;
+            vc.sourceVC = @"ProjectDetailVC";
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else if(alertView.tag == 9001){
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+        }
+    }
     
 }
 - (void)dealloc

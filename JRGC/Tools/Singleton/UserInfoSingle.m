@@ -20,6 +20,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
+#import "UCFRegisterInputPhoneNumViewController.h"
 @implementation UserInfoSingle
 
 + (UserInfoSingle *)sharedManager
@@ -259,7 +260,11 @@
     UCFNewLoginViewController *vc = [[UCFNewLoginViewController alloc] init];
     [SingGlobalView.rootNavController pushViewController:vc animated:YES];
 }
-
+- (void)loadRegistViewController
+{
+    UCFRegisterInputPhoneNumViewController *vc = [[UCFRegisterInputPhoneNumViewController alloc] init];
+    [SingGlobalView.rootNavController pushViewController:vc animated:YES];
+}
 
 - (void)removeIsShare
 {

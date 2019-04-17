@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *cfcaContractName;
 
+@property (nonatomic, copy) NSString *statusdes;
+
 @end
 @interface UCFTransPureDataModel : BaseModel
 

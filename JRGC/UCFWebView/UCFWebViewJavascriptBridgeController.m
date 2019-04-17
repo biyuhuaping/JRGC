@@ -41,6 +41,7 @@
 #import "UCFNewRechargeViewController.h"
 #import "UCFSharePictureViewController.h"
 #import "RiskAssessmentViewController.h"
+#import "HSHelper.h"
 #define MALLTIME  12.0
 #define SIGNATURETIME 30.0
 
@@ -1229,10 +1230,11 @@
     else if ([controllerName isEqualToString:@"app_register"])
     {
         //跳转到注册页
-        UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
-        registerControler.sourceVC = @"webView";
-        UINavigationController *regNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler];
-        [self presentViewController:regNaviController animated:YES completion:nil];
+//        UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
+//        registerControler.sourceVC = @"webView";
+//        UINavigationController *regNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler];
+//        [self presentViewController:regNaviController animated:YES completion:nil];
+        [SingleUserInfo loadRegistViewController];
     }
     //----------因nativeData[@"action"]值等于@"toNative"，需要重新写sToNative:方法。需要等鸿龙处理，故暂且放在此处------------------qyy
     else if ([controllerName isEqualToString:@"app_fanxiCoupon"]) //跳到反息券界面
@@ -1268,33 +1270,24 @@
         UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
         batchInvestment.isStep = 1;
         batchInvestment.accoutType = self.accoutType;
-        //            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
         [self.navigationController pushViewController:batchInvestment animated:YES];
     }
-    else if ([controllerName isEqualToString:@"auto_bid_second"]) //投标成功 跳转到 投资详情
+    else if ([controllerName isEqualToString:@"auto_bid_second"]) //开通批量投标
     {
         UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
         batchInvestment.isStep = 2;
         batchInvestment.accoutType = self.accoutType;
-        //            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
         [self.navigationController pushViewController:batchInvestment animated:YES];
     }
     else if ([controllerName isEqualToString:@"app_open_account"]) //开户失败 跳转到 开户页面
     {
-        if([NSStringFromClass(self.class) isEqualToString:@"UCFDiscoveryViewController"])
-        {
-            [self gotoOpenAccout];
-            
-        }else{
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-      
+        [self gotoOpenAccout];
     }
     else if ([controllerName isEqualToString:@"gotoGB"]) //跳转到工贝页面
     {
         
     }
-    else if ([controllerName isEqualToString:@"risk_report"]) //跳转到工贝页面
+    else if ([controllerName isEqualToString:@"risk_report"]) //跳转到风险测评
     {
         [self pushToRiskPage];
     }
@@ -1306,7 +1299,11 @@
 }
 -(void)gotoOpenAccout
 {
-    
+    if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
+        [[HSHelper new] pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus intValue] nav:self.navigationController];
+    } else {
+        [SingleUserInfo loadLoginViewController];
+    }
 }
 - (void)jsSetTitle:(NSString *)title
 {

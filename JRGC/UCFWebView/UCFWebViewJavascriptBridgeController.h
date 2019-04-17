@@ -67,4 +67,5 @@
 - (void)addRefresh;
 - (void)jumpLogin;
 -(void)gotoOpenAccout;
+- (void)jsToNative:(NSString *)controllerName;
 @end

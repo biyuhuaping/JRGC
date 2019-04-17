@@ -62,12 +62,15 @@
 //***无验签跳转页面走该方法
 - (void)jsToNative:(NSString *)controllerName
 {
+    BOOL isLoad = NO;
     if ([controllerName isEqualToString:@"app_open_account"]) //开户失败 跳转到 开户页面
     {
+        isLoad = YES;
         [self.navigationController popViewControllerAnimated:YES];
     }
     else if ([controllerName isEqualToString:@"app_setHSPwd"]) //开户成功 跳转到 设置交易密码页面
     {
+        isLoad = YES;
         if (self.accoutType == SelectAccoutTypeP2P)
         {
             SingleUserInfo.loginData.userInfo.openStatus = @"3";
@@ -82,6 +85,9 @@
                                           @"userId": SingleUserInfo.loginData.userInfo.userId                 //用户id
                                           };
         [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagAccountSetHsPwdIntoBank owner:self signature:YES Type:self.accoutType];
+    }
+    if (!isLoad) {
+        [super jsToNative:controllerName];
     }
 }
 //开始请求

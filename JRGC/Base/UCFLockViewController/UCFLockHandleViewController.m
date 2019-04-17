@@ -28,6 +28,7 @@
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "UCFNewModifyPasswordViewController.h"
 #import "UCFNewVerificationLoginPassWordViewController.h"
+#import "UCFRegisterdSucceedViewController.h"
 #define kTipColorNormal [UIColor blackColor]
 #define kTipColorError [UIColor redColor]
 @interface UCFLockHandleViewController ()
@@ -603,22 +604,22 @@
 - (void)dealWithrunBtn:(id)sender
 {
         if (_isFromRegister) {
-           
-            
-            UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
-            VC.isPresentViewController = YES;
-            AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-            VC.rootVc = delegate.tabBarController;
-            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
-            NSInteger personInt = [[[NSUserDefaults standardUserDefaults] valueForKey:@"personCenterClick"] integerValue];
-            if (personInt == 1) {
-                [delegate.tabBarController setSelectedIndex:4];
-                [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
-            }
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [delegate.tabBarController presentViewController:nav animated:NO completion:^{
-                }];
-            });
+            UCFRegisterdSucceedViewController *vc = [[UCFRegisterdSucceedViewController alloc] init];
+            [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
+//            UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
+//            VC.isPresentViewController = YES;
+//            AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//            VC.rootVc = delegate.tabBarController;
+//            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
+//            NSInteger personInt = [[[NSUserDefaults standardUserDefaults] valueForKey:@"personCenterClick"] integerValue];
+//            if (personInt == 1) {
+//                [delegate.tabBarController setSelectedIndex:4];
+//                [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
+//            }
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [delegate.tabBarController presentViewController:nav animated:NO completion:^{
+//                }];
+//            });
             
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
         } else {
@@ -835,6 +836,7 @@
         
         nRetryTimesRemain--;
         [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:nRetryTimesRemain] forKey:@"nRetryTimesRemain"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         if (nRetryTimesRemain > 0) {
             NSDictionary *normalStrDict = @{NSFontAttributeName : [UIFont systemFontOfSize:16],
                                             NSForegroundColorAttributeName : UIColorWithRGB(0x94bde4)
@@ -1204,21 +1206,22 @@
 //            [alert showAlert:delegate.tabBarController];
             
             //设置手势密码后弹出徽商流程
-            UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
-            VC.isPresentViewController = YES;
-            AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-            VC.rootVc = delegate.tabBarController;
-            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
-            NSInteger personInt = [[[NSUserDefaults standardUserDefaults] valueForKey:@"personCenterClick"] integerValue];
-            if (personInt == 1) {
-                [delegate.tabBarController setSelectedIndex:4];
-                [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
-            }
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [delegate.tabBarController presentViewController:nav animated:YES completion:^{
-                }];
-            });
-            
+//            UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
+//            VC.isPresentViewController = YES;
+//            AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//            VC.rootVc = delegate.tabBarController;
+//            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
+//            NSInteger personInt = [[[NSUserDefaults standardUserDefaults] valueForKey:@"personCenterClick"] integerValue];
+//            if (personInt == 1) {
+//                [delegate.tabBarController setSelectedIndex:4];
+//                [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
+//            }
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [delegate.tabBarController presentViewController:nav animated:YES completion:^{
+//                }];
+//            });
+            UCFRegisterdSucceedViewController *vc = [[UCFRegisterdSucceedViewController alloc] init];
+            [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
             //注册成功调用一次，tab上是否有红点
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
         }];

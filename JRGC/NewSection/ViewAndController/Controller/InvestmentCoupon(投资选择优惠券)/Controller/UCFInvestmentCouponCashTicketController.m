@@ -76,7 +76,7 @@
 - (BaseTableView *)tableView
 {
     if (nil == _tableView) {
-        _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, TableViewHeight)];
+        _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1 + 50)];
         _tableView.backgroundColor = UIColorWithRGB(0xebebee);
         _tableView.delegate = self;
         _tableView.dataSource =self;

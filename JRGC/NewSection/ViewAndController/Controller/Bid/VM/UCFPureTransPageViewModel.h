@@ -107,6 +107,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, weak)UIViewController *parentViewController;
 
+
+/**
+ 输入框金额
+ */
+@property (nonatomic, strong)NSString       *investMoeny;
 @end
 
 NS_ASSUME_NONNULL_END

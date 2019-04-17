@@ -182,6 +182,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy)NSString          *allMoneyInputNum;
 
+
+/**
+ 输入框金额
+ */
+@property (nonatomic, strong)NSString       *investMoeny;
+
 - (void)dealMyfundsNumWithBeansSwitch:(UIButton *)switchView;
 - (void)calculate:(NSString *)investMoney;
 - (void)calculateTotalMoney;
