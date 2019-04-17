@@ -210,9 +210,19 @@
 - (void)showMoreViewSection:(NSInteger)section andTitle:(NSString *)title
 {
     if ([title isEqualToString:@"商城精选"]) {
-        [self pushWebViewWithUrl:self.boutiqueUrl Title:@"商城精选"];
+        if ([self.boutiqueUrl containsString:@"http"]) {
+            [self pushWebViewWithUrl:self.boutiqueUrl Title:@"商城精选"];
+        } else {
+            [SingGlobalView.tabBarController setSelectedIndex:3];
+        }
+        
     } else if([title isEqualToString:@"商城特惠"]){
-        [self pushWebViewWithUrl:self.remcommendUrl Title:@"商城特惠"];
+        if ([self.remcommendUrl containsString:@"http"]) {
+            [self pushWebViewWithUrl:self.remcommendUrl Title:@"商城特惠"];
+        } else {
+            [SingGlobalView.tabBarController setSelectedIndex:3];
+        }
+        
     } else if ([title isEqualToString:@"智能出借"] || [title isEqualToString:@"优质债权"]) {
         
         RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.viewControllers[1];
@@ -372,7 +382,10 @@
         [SingleUserInfo loadLoginViewController];
     } else if ([title isEqualToString:@"开通存管账户"]){
         [HSHelper  goToWeijinOpenAccount:self.rt_navigationController];
-    } else if ([title isEqualToString:@"进行风险评测"]) {
+    }  else if ([title isEqualToString:@"设置交易密码"]){
+        [HSHelper  goToWeijinOpenAccount:self.rt_navigationController];
+    }
+    else if ([title isEqualToString:@"进行风险评测"]) {
         RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
         vc.accoutType = SelectAccoutTypeP2P;
         [self.rt_navigationController pushViewController:vc animated:YES];

@@ -65,7 +65,6 @@
                 [imgsArr addObject:bannermodel.thumb];
             }
             selfWeak.imagesArr = imgsArr;
-            
         } else {
             
         }
@@ -89,6 +88,16 @@
             }
             selfWeak.coinBannerArray = coinBannerArr;
         }
+        if (selfWeak.dataArray.count > 0) {
+           
+            CellConfig *data1 =  [[selfWeak.dataArray objectSafeAtIndex:0] objectSafeAtIndex:0];
+            if ([data1.className isEqualToString:@"UCFOldUserNoticeCell"]) {
+                data1.dataModel = selfWeak.bannerModel.data.siteNoticeMap;
+            }
+            //给反射标识赋值
+//            selfWeak.modelListArray = self.dataArray;
+        }
+
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
     }];
     [api start];

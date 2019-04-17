@@ -64,7 +64,7 @@
             }
         }];
     }];
-    [self.tableView reloadData];
+    [self.tableView cyl_reloadData];
     if (self.db.cashSelectArr.count == 0) {
         self.useEnterBtn.enterButton.enabled = NO;
     } else {
@@ -76,11 +76,10 @@
 - (BaseTableView *)tableView
 {
     if (nil == _tableView) {
-        _tableView = [[BaseTableView alloc]init];
+        _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, TableViewHeight)];
         _tableView.backgroundColor = UIColorWithRGB(0xebebee);
         _tableView.delegate = self;
         _tableView.dataSource =self;
-//        _tableView.tableRefreshDelegate= self;
         _tableView.enableRefreshHeader = NO;
         _tableView.enableRefreshFooter = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

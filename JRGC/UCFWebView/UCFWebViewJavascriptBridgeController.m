@@ -498,8 +498,6 @@
             [weakSelf goToShareWeChat:nativeData];
         } else if ([nativeData[@"action"] isEqualToString:@"isOtherView"]) {//订单页面是否导航栏根视图
             [weakSelf isRootViewController];
-        } else if ([nativeData[@"action"] isEqualToString:@"risk_report"]) {//订单页面是否导航栏根视图
-            [weakSelf pushToRiskPage];
         }
 //     */
     }];
@@ -1295,6 +1293,10 @@
     else if ([controllerName isEqualToString:@"gotoGB"]) //跳转到工贝页面
     {
         
+    }
+    else if ([controllerName isEqualToString:@"risk_report"]) //跳转到工贝页面
+    {
+        [self pushToRiskPage];
     }
     //----------------------------------------------------------------------------------------------------qyy
     else

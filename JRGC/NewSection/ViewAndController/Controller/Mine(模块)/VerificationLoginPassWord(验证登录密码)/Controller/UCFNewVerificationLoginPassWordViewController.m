@@ -13,7 +13,8 @@
 #import "NZLabel.h"
 #import "AppDelegate.h"
 #import "UCFNewFindPassWordViewController.h"
-
+#import <LocalAuthentication/LocalAuthentication.h>
+#import <Security/Security.h>
 @interface UCFNewVerificationLoginPassWordViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -232,9 +233,6 @@
         [self.oldPasswordTextField becomeFirstResponder];
         return;
     }
-    
-    
-    
     NSString* phoneNumberStr = [self.oldPasswordTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *isCompanyStr  = [NSString stringWithFormat:@"%d",SingleUserInfo.loginData.userInfo.isCompanyAgent];
     NSDictionary *param = @{@"username":SingleUserInfo.loginData.userInfo.loginName, @"pwd": [MD5Util MD5Pwd:phoneNumberStr],@"isCompany":isCompanyStr};
@@ -253,17 +251,21 @@
     if (tag.intValue == kSXTagValidBindedPhone) {
         NSMutableDictionary *dic = [data objectFromJSONString];
         if ([dic[@"ret"] boolValue]) {
-            //            if ([_sourceVC isEqualToString:@"securityCenter_touchID"]) {
-            //
-            //            } else if ([_sourceVC isEqualToString:@"securityCenter"]) {
-            //
-            //            } else {
-            //
-            //            }
-            
-            //            [LLLockPassword saveLockPassword:nil];
-            //            [self loginSuccess:dic];
-//            [self gesturePage];
+            if ([_titleString isEqualToString:@"启用手势密码需验证"]) {
+                [self showLLLockViewController:LLLockViewTypeCreate];
+            } else if ([_titleString isEqualToString:@"关闭手势密码需验证"]) {
+                [LLLockPassword saveLockPassword:nil];
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"useLockView"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [self.navigationController popViewControllerAnimated:YES];
+            } else if ([_titleString isEqualToString:@"启用指纹解锁需验证"] || [_titleString isEqualToString:@"关闭指纹解锁需验证"]) {
+                [self touchIDVerificationSwitchState:[_titleString containsString:@"启用"] ? YES : NO];
+            } else if ([_titleString isEqualToString:@"启用面部解锁需验证"] || [_titleString isEqualToString:@"关闭面部解锁需验证"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"进行人脸识别" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
+                [alert show];
+            } else {
+                [self showLLLockViewController:LLLockViewTypeCreate];
+            }
         } else {
             NSString *rsttext =  dic[@"message"];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil];
@@ -310,6 +312,114 @@
     {
         return YES;
     }
+}
+- (void)showLLLockViewController:(LLLockViewType)type
+{
+    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
+    lockVc.nLockViewType = type;
+    NSInteger currentIndex = [self.navigationController.viewControllers indexOfObject:self];
+    UIViewController *contro  = self.navigationController.viewControllers[currentIndex-1];
+    if ([NSStringFromClass(contro.class) isEqualToString:@"UCFSecurityCenterViewController"]) {
+        lockVc.souceVc = @"securityCenter";
+    }
+    [SingGlobalView.rootNavController pushViewController:lockVc animated:YES complete:nil];
+    [self.rt_navigationController removeViewController:self];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self touchIDVerificationSwitchState:[_titleString containsString:@"启用"] ? YES : NO];
+    }
+}
+- (void)touchIDVerificationSwitchState:(BOOL)gestureState
+{
+    
+    LAContext *lol = [[LAContext alloc] init];
+    lol.localizedFallbackTitle = @"";
+    NSError *error = nil;
+    NSString *showStr = @"";
+    if (gestureState) {
+        showStr =  [_titleString containsString:@"面部"] ? @"验证并开启面部解锁" : @"验证并开启指纹解锁";
+    } else {
+        showStr = [_titleString containsString:@"面部"] ? @"验证并关闭面部解锁" : @"验证并关闭指纹解锁";
+    }
+    
+    //TODO:TOUCHID是否存在
+    if ([lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+        //TODO:TOUCHID开始运作
+        [lol evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:showStr reply:^(BOOL succes, NSError *error)
+         {
+             if (succes) {
+                 NSLog(@"指纹验证成功");
+                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                     //打开指纹手势
+                     [[NSUserDefaults standardUserDefaults] setBool:gestureState forKey:@"isUserShowTouchIdLockView"];
+                     [[NSUserDefaults standardUserDefaults] synchronize];
+                     [self.rt_navigationController popViewControllerAnimated:YES];
+                 }];
+             }
+             else
+             {
+                 NSLog(@"%@",error.localizedDescription);
+                 switch (error.code) {
+                     case LAErrorSystemCancel:
+                     {
+                         NSLog(@"Authentication was cancelled by the system");
+                         //切换到其他APP，系统取消验证Touch ID
+                         break;
+                     }
+                     case LAErrorUserCancel:
+                     {
+                         NSLog(@"Authentication was cancelled by the user");
+                         //用户取消验证Touch ID
+                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                         }];
+                         break;
+                     }
+                     case LAErrorUserFallback:
+                     {
+                         NSLog(@"User selected to enter custom password");
+                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                             //用户选择输入密码，切换主线程处理
+                         }];
+                         break;
+                     }
+                     default:
+                     {
+                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                             //其他情况，切换主线程处理
+                         }];
+                         break;
+                     }
+                 }
+             }
+         }];
+        
+    }
+    else
+    {
+        switch (error.code) {
+            case LAErrorTouchIDNotEnrolled:
+            {
+                NSLog(@"TouchID is not enrolled");
+                break;
+            }
+            case LAErrorPasscodeNotSet:
+            {
+                //没有touchID 的报错
+                NSLog(@"A passcode has not been set");
+                break;
+            }
+            default:
+            {
+                NSLog(@"TouchID not available");
+                break;
+            }
+        }
+    }
+    
+    
+    
 }
 /*
 #pragma mark - Navigation

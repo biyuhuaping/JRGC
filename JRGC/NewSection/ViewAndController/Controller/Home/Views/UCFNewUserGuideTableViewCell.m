@@ -214,27 +214,28 @@
             default:
                 break;
         }
-        if (SingleUserInfo.loginData.userInfo.isRisk) {
-            self.leftBottombutton.enabled = NO;
-        } else {
-            self.leftBottombutton.enabled = YES;
-        }
         if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 4) {
-            [self.bottomButton setTitle:@"开通存管账户" forState:UIControlStateNormal];
+            
+            [self.bottomButton setTitle:[SingleUserInfo.loginData.userInfo.openStatus intValue] > 2 ?@"设置交易密码" : @"开通存管账户" forState:UIControlStateNormal];
             self.bottonBaseView.myVisibility = MyVisibility_Visible;
         } else {
             if (SingleUserInfo.loginData.userInfo.isRisk) {
                 self.bottonBaseView.myVisibility = MyVisibility_Gone;
+                self.leftBottombutton.enabled = NO;
+                
             } else {
                 [self.bottomButton setTitle:@"进行风险评测" forState:UIControlStateNormal];
                 self.bottonBaseView.myVisibility = MyVisibility_Visible;
+                self.leftBottombutton.enabled = YES;
             }
         }
+
     } else {
         self.leftTopbutton.enabled = YES;
         self.rightTopbutton.enabled = YES;
         self.leftBottombutton.enabled = YES;
         self.rightBottombutton.enabled = YES;
+        self.bottonBaseView.myVisibility = MyVisibility_Visible;
         [self.bottomButton setTitle:@"注册领优惠券" forState:UIControlStateNormal];
 
     }
