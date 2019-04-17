@@ -155,7 +155,7 @@
         NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
         vc.bidDetaiModel = model;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (code == 21 || code == 22){
+    } else if (code == 21 || code == 22 || code == 23){
         [self checkUserCanInvest];
     } else if (code == 15) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];

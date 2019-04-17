@@ -20,7 +20,7 @@
 }
 @property (nonatomic, strong)UCFBidModel *model;
 @property (nonatomic, strong)UCFContractTypleModel *contractTmpModel;
-@property (nonatomic, strong)NSString       *investMoeny;
+
 @property (nonatomic, strong)NSString       *recommendCode;
 
 
@@ -340,8 +340,11 @@
                 a++;
             }
         }
-
-       self.availableCashNum = [NSString stringWithFormat:@"%d张可用",a];
+        if (a > 0) {
+            self.availableCashNum = [NSString stringWithFormat:@"%d张可用",a];
+        } else {
+            self.availableCashNum = @"暂无可用";
+        }
 
         int b = 0;
 
@@ -350,7 +353,11 @@
                 b++;
             }
         }
-       self.availableCouponNum = [NSString stringWithFormat:@"%d张可用",b];
+    if (b > 0) {
+        self.availableCouponNum = [NSString stringWithFormat:@"%d张可用",b];
+    } else {
+        self.availableCouponNum = @"暂无可用";
+    }
     
 }
 

@@ -109,7 +109,7 @@ typedef void(^requestUserAllStatueCallBackBlock)(BOOL);
 - (UCFLoginData *)getUserData;
 
 - (void)loadLoginViewController;
-
+- (void)loadRegistViewController;
 //保存上次登录名字
 - (void)saveLoginAccount:(NSDictionary *)account;
 

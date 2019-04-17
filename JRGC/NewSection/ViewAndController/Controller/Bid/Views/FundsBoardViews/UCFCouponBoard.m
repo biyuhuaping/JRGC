@@ -98,7 +98,7 @@
             if (availableCouponNum.length > 0) {
                 selfWeak.couponLab.text = availableCouponNum;
             } else {
-                selfWeak.couponLab.text = @"0张可用";
+                selfWeak.couponLab.text = @"暂无可用";
             }
             selfWeak.couponBtn.myVisibility = MyVisibility_Visible;
             [selfWeak.couponLab sizeToFit];
@@ -109,7 +109,7 @@
             if (availableCashNum.length > 0) {
                 selfWeak.cashLab.text = availableCashNum;
             } else {
-                selfWeak.cashLab.text = @"0张可用";
+                selfWeak.cashLab.text = @"暂无可用";
             }
             selfWeak.cashBtn.myVisibility = MyVisibility_Visible;
             [selfWeak.cashLab sizeToFit];

@@ -61,12 +61,12 @@
             
 //        }
     }
-    SingleUserInfo.webCloseUpdatePrePage = YES;
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)dealloc
 {
-    
+    SingleUserInfo.webCloseUpdatePrePage = YES;
+
 }
 
 

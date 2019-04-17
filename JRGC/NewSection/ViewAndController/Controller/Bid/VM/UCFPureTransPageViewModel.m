@@ -26,7 +26,7 @@
 @interface UCFPureTransPageViewModel ()<NetworkModuleDelegate>
 @property(nonatomic, strong)UCFPureTransBidRootModel *model;
 @property (nonatomic, strong)UCFContractTypleModel *contractTmpModel;
-@property (nonatomic, strong)NSString       *investMoeny;
+
 @property (nonatomic, strong)NSTimer        *timer;
 @end
 
@@ -152,6 +152,8 @@
     }
     if ([currentText doubleValue] > 0) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerfire:) userInfo:nil repeats:NO];
+    } else {
+        self.expectedInterestStr = @"¥0.00";
     }
 //    CGFloat discountRate = self.model.data.discountRate;
 //    double value1  = (discountRate/100.0f) * ([timeLimitText integerValue]/360.0) * [currentText doubleValue];

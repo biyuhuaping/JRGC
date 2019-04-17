@@ -125,7 +125,7 @@
         
         if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
             
-            
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             //            NSInteger status = [_transferModel.status integerValue];
             NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",model.Id,[UCFToolsMehod isNullOrNilWithString:SingleUserInfo.loginData.userInfo.userId]];
             //            if (status == 0 && [_transferModel.stopStatus intValue] != 0) {
@@ -276,7 +276,7 @@
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     NSMutableDictionary *dic = [result objectFromJSONString];
-    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (tag.intValue == kSXTagPrdTransferList) {
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
