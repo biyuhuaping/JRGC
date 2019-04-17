@@ -418,11 +418,12 @@
         if (existedLength - selectedLength + replaceLength > 16) {
             return NO;
         }
-    } else if (textField == self.recommendField) {
-        if (existedLength - selectedLength + replaceLength > 6) {
-            return NO;
-        }
     }
+//    else if (textField == self.recommendField) {
+//        if (existedLength - selectedLength + replaceLength > 6) {
+//            return NO;
+//        }
+//    }
     return YES;
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField

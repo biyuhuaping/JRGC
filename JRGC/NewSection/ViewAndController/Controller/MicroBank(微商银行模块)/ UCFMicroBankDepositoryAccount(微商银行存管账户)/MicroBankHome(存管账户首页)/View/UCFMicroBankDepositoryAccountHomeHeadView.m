@@ -65,6 +65,7 @@
         _bankCardNumberLabel.font = [Color gc_Font:25.0];
         _bankCardNumberLabel.textColor = [Color color:PGColorOptionThemeWhite];
         _bankCardNumberLabel.text = @"     ";
+        _bankCardNumberLabel.adjustsFontSizeToFitWidth = YES;
         [_bankCardNumberLabel sizeToFit];
         
     }
@@ -91,10 +92,12 @@
         _bankDepositNameLabel = [NZLabel new];
         _bankDepositNameLabel.centerYPos.equalTo(self.bankDepositLabel.centerYPos);
         _bankDepositNameLabel.leftPos.equalTo(self.bankDepositLabel.rightPos).offset(3);
+        _bankDepositNameLabel.rightPos.equalTo(self.bankCardBKImageView.rightPos).offset(29);
         _bankDepositNameLabel.textAlignment = NSTextAlignmentLeft;
         _bankDepositNameLabel.font = self.bankDepositLabel.font;
         _bankDepositNameLabel.textColor = self.bankDepositLabel.textColor;
         _bankDepositNameLabel.text = @" ";
+        _bankDepositNameLabel.adjustsFontSizeToFitWidth = YES;
         [_bankDepositNameLabel sizeToFit];
         
     }

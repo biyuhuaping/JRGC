@@ -10,5 +10,6 @@
 
 @interface UCFSecurityCenterViewController : UCFBaseViewController<UIAlertViewDelegate>
 //检测系统touchID 开关是否开启，退到后台，启动的时候调用
+@property (nonatomic ,assign) BOOL zxAccountIsShow;
 - (void)checkSystemTouchIdisOpen;
 @end

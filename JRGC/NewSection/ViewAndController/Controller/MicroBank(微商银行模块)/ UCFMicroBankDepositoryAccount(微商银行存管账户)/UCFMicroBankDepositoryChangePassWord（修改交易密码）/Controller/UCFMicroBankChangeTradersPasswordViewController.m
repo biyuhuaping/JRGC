@@ -1,12 +1,12 @@
 //
-//  UCFMicroBankOpenAccountTradersPasswordViewController.m
+//  UCFMicroBankChangeTradersPasswordViewController.m
 //  JRGC
 //
-//  Created by kuangzhanzhidian on 2019/3/4.
+//  Created by kuangzhanzhidian on 2019/4/16.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "UCFMicroBankOpenAccountTradersPasswordViewController.h"
+#import "UCFMicroBankChangeTradersPasswordViewController.h"
 #import "BaseScrollview.h"
 #import "UCFMicroBankOpenAccountDepositCellView.h"
 #import "UCFMicroBankOpenAccountDepositSMSCodeCellView.h"
@@ -29,7 +29,8 @@
 #import "AccountWebView.h"
 #import "AccountSuccessVC.h"
 #import "UCFMicroBankOpenAccountDepositWhiteListAndZXSucceedView.h"
-@interface UCFMicroBankOpenAccountTradersPasswordViewController ()<UIScrollViewDelegate,UITextFieldDelegate,UCFHuiShangChooseBankViewControllerDelegate>
+@interface UCFMicroBankChangeTradersPasswordViewController ()
+<UIScrollViewDelegate,UITextFieldDelegate,UCFHuiShangChooseBankViewControllerDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
@@ -52,17 +53,19 @@
 @property (nonatomic, strong) UCFMicroBankOpenAccountGetOpenAccountInfoModel *GetOpenAccountModel;
 
 @property (nonatomic, assign) BOOL isCompanyAgent; //是否是企业用户
-
 @end
 
-@implementation UCFMicroBankOpenAccountTradersPasswordViewController
+@implementation UCFMicroBankChangeTradersPasswordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    baseTitleLabel.text = @"验证身份";
+    [self addLeftButton];
+    
     self.isCompanyAgent = SingleUserInfo.loginData.userInfo.isCompanyAgent;
-   
+    
     self.rootLayout = [MyRelativeLayout new];
     self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -71,7 +74,8 @@
     [self.scrollView addSubview:self.scrollLayout];
     
     [self loadLayoutView];
-    
+    [self queryUserData];
+  
 }
 - (void)loadLayoutView
 {
@@ -118,7 +122,8 @@
         _nameView.myLeft = 0;
         _nameView.titleImageView.image = [UIImage imageNamed:@"list_icon_name"];
         _nameView.contentField.delegate = self;
-        _nameView.contentField.placeholder = @"请输入真实姓名";
+//        _nameView.contentField.placeholder = @"请输入真实姓名";
+        _nameView.contentField.enabled = NO;
         [_nameView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _nameView;
@@ -140,9 +145,6 @@
         {
             _idView.contentField.placeholder = @"请输入身份证号";
         }
-        if (nil != self.idCardNo && self.idCardNo.length == 18) {
-            _idView.contentField.text = self.idCardNo;
-        }
         [_idView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _idView;
@@ -156,7 +158,8 @@
         _phoneView.myLeft = 0;
         _phoneView.titleImageView.image = [UIImage imageNamed:@"list_icon_phone"];
         _phoneView.contentField.delegate = self;
-        _phoneView.contentField.placeholder = @"请输入手机号码";
+//        _phoneView.contentField.placeholder = @"请输入手机号码";
+        _phoneView.contentField.enabled = NO;
         [_phoneView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _phoneView;
@@ -193,7 +196,7 @@
         _enterButton.rightPos.equalTo(@25);
         _enterButton.leftPos.equalTo(@25);
         _enterButton.heightSize.equalTo(@40);
-        [_enterButton setTitle:@"设置交易密码" forState:UIControlStateNormal];
+        [_enterButton setTitle:@"修改交易密码" forState:UIControlStateNormal];
         _enterButton.titleLabel.font= [Color gc_Font:15.0];
         [_enterButton setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
         _enterButton.userInteractionEnabled = NO;
@@ -212,7 +215,7 @@
 
 - (void)enterButtoClick
 {
-    UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi * request = [[UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi alloc] initWithIdCardNo:self.idView.contentField.text validateCode:self.smsView.contentField.text AccoutType: SelectAccoutTypeP2P];
+    UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi * request = [[UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonApi alloc] initWithIdCardNo:self.idView.contentField.text validateCode:self.smsView.contentField.text AccoutType: self.accoutType];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -236,7 +239,7 @@
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
-
+        
     }];
 }
 - (void)changeTransactionPassword
@@ -296,10 +299,11 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField == self.nameView.contentField && ![self inspectNameViewInPut]) {//&& ![Common isChinese:_textField1.text]
-        [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
-        return;
-    }else if (textField == self.idView.contentField && ![self inspectIdViewInPut])
+//    if (textField == self.nameView.contentField && ![self inspectNameViewInPut]) {//&& ![Common isChinese:_textField1.text]
+//        [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
+//        return;
+//    }
+    if (textField == self.idView.contentField && ![self inspectIdViewInPut])
     {
         if (self.isCompanyAgent || [SingleUserInfo.loginData.userInfo.openStatus integerValue]== 5) {
             [AuxiliaryFunc showToastMessage:@"请输入正确的证件号" withView:self.view];
@@ -309,10 +313,10 @@
         }
         return;
     }
-    else if(textField == self.phoneView.contentField && ![self inspectPhoneView]){
-        [AuxiliaryFunc showToastMessage:@"请输入正确的手机号码" withView:self.view];
-        return;
-    }
+//    else if(textField == self.phoneView.contentField && ![self inspectPhoneView]){
+//        [AuxiliaryFunc showToastMessage:@"请输入正确的手机号码" withView:self.view];
+//        return;
+//    }
     else if (textField == self.smsView.contentField && ![self inspectSmsView]){
         [AuxiliaryFunc showToastMessage:@"请输入正确的短信验证码" withView:self.view];
         return;
@@ -324,7 +328,7 @@
 
 - (void)inspectTextField
 {
-    if ([self inspectNameViewInPut] && [self inspectIdViewInPut]  && [self inspectSmsView] && [self inspectPhoneView]) {
+    if ([self inspectIdViewInPut]  && [self inspectSmsView]) {
         //输入正常,按钮可点击
         self.enterButton.userInteractionEnabled = YES;
         [self.enterButton setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
@@ -357,29 +361,29 @@
         return NO;
     }
     
-//    if (self.isCompanyAgent)
-//    {
-//        //如果是机构用户
-//        if (![Common isEnglishAndNumbers:self.idView.contentField.text]) {
-//            [AuxiliaryFunc showToastMessage:@"请输入正确的证件号" withView:self.view];
-//            return NO;
-//        }
-//        else
-//        {
-//            return YES;
-//        }
-//    }
-//    else
-//    {
-//        //个人用户  //排除机构、和特殊用户(港澳台)
-//        if (![self.idView.contentField.text isEqualToString:@""] && self.idView.contentField.text.length > 0 ) {
-//            return YES;
-//        }
-//        else
-//        {
-//            return NO;
-//        }
-//    }
+    //    if (self.isCompanyAgent)
+    //    {
+    //        //如果是机构用户
+    //        if (![Common isEnglishAndNumbers:self.idView.contentField.text]) {
+    //            [AuxiliaryFunc showToastMessage:@"请输入正确的证件号" withView:self.view];
+    //            return NO;
+    //        }
+    //        else
+    //        {
+    //            return YES;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        //个人用户  //排除机构、和特殊用户(港澳台)
+    //        if (![self.idView.contentField.text isEqualToString:@""] && self.idView.contentField.text.length > 0 ) {
+    //            return YES;
+    //        }
+    //        else
+    //        {
+    //            return NO;
+    //        }
+    //    }
 }
 - (BOOL)inspectPhoneView
 {
@@ -410,7 +414,7 @@
         [AuxiliaryFunc showToastMessage:@"请输入正确的手机号" withView:self.view];
         return;
     }
-
+    
     UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:self.phoneView.contentField.text isVms:isVmsNew type:@"5" AccoutType:self.accoutType];
     request.animatingView = self.view;
     //    request.tag =tag;
@@ -446,15 +450,56 @@
         
     }];
 }
+- (void)queryUserData
+{
+    UCFMicroBankOpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountGetOpenAccountInfoAPI alloc] initWithAccoutType:SelectAccoutTypeP2P];
+    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        DDLogDebug(@"---------%@",request.responseJSONModel);
+        self.GetOpenAccountModel = [request.responseJSONModel copy];
+        if (self.GetOpenAccountModel.ret == YES)
+        {
+            //获取徽商开户页面信息
+            SingleUserInfo.loginData.userInfo.openStatus = self.GetOpenAccountModel.data.openStatus;
+            
+            
+            
+            //            _nameView.contentField.enabled=NO;
+            
+            if (self.GetOpenAccountModel.data.userInfo.realName.length > 0)
+            {
+                //                用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码
+                self.nameView.contentField.text = self.GetOpenAccountModel.data.userInfo.realName;
+                SingleUserInfo.loginData.userInfo.realName = self.GetOpenAccountModel.data.userInfo.realName;
+            }
+            if (self.GetOpenAccountModel.data.userInfo.phoneNum.length > 0)
+            {
+                //                NSString *asteriskIdCardNo = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.idCardNo startLocation:3 lenght:self.GetOpenAccountModel.data.userInfo.idCardNo.length -7];
+                //                self.idView.contentField.text   = asteriskIdCardNo;
+                NSString *str = self.GetOpenAccountModel.data.userInfo.phoneNum;
+                if (str.length < 7) {
+                    return ;
+                }
+                self.phoneView.contentField.text   = [str stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];;
+            }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+            if (self.GetOpenAccountModel.data.userInfo.notSupportDes.length > 0)
+            {
+                BlockUIAlertView *alert = [[BlockUIAlertView alloc]initWithTitle:@"提示" message:self.GetOpenAccountModel.data.userInfo.notSupportDes cancelButtonTitle:nil clickButton:^(NSInteger index) {} otherButtonTitles:@"确定"];
+                [alert show];
+            }
+            [SingleUserInfo setUserData:SingleUserInfo.loginData];
+            [self inspectTextField];//查询是否全部都已经填写
+        }
+        else
+        {
+            ShowMessage(self.GetOpenAccountModel.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
 }
-*/
-
 @end

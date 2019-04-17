@@ -15,8 +15,9 @@
 #import "RiskAssessmentViewController.h"
 #import "UCFMicroBankDepositoryChangeBankCardViewController.h"
 #import "AccountWebView.h"
-#import "UCFMicroBankOpenAccountTradersPasswordViewController.h"
+#import "UCFMicroBankChangeTradersPasswordViewController.h"
 #import "UCFBankCardInfoViewController.h"
+#import "UCFBatchInvestmentViewController.h"
 
 #import "UCFMicroBankUserAccountInfoAPI.h"
 #import "UCFMicroBankGetHSAccountInfoAPI.h"
@@ -297,11 +298,14 @@
 }
 -(void)layoutClick:(UIGestureRecognizer *)sender
 {
-    if (sender.view.tag == 1001) {
+    if (sender.view.tag == 1001)
+    {
         UCFMicroBankDepositoryAccountSeriaViewController *vc = [[UCFMicroBankDepositoryAccountSeriaViewController alloc] init];
         vc.accoutType = self.accoutType;
         [self.rt_navigationController pushViewController:vc animated:YES];
-    }else if (sender.view.tag == 1002){
+    }
+    else if (sender.view.tag == 1002)
+    {
 //        修改银行卡
 //        UCFMicroBankDepositoryChangeBankCardViewController *vc = [[UCFMicroBankDepositoryChangeBankCardViewController alloc] init];
 //        [self.rt_navigationController pushViewController:vc animated:YES];
@@ -310,7 +314,8 @@
         bankCardInfoVC.accoutType = self.accoutType;
         [self.rt_navigationController pushViewController:bankCardInfoVC animated:YES];
     }
-    else if (sender.view.tag == 1003){
+    else if (sender.view.tag == 1003)
+    {
 //        修改交易密码
         if (self.accoutType != SelectAccoutTypeP2P) {
 
@@ -338,11 +343,12 @@
                 
             }];
 //            
-        } else {
+        }
+        else
+        {
             //修改交易密码
-            UCFMicroBankOpenAccountTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankOpenAccountTradersPasswordViewController alloc] init];
+            UCFMicroBankChangeTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankChangeTradersPasswordViewController alloc] init];
             tradePasswordVC.accoutType = self.accoutType;
-            tradePasswordVC.updatePassWorld = YES;
             [self.rt_navigationController pushViewController:tradePasswordVC  animated:YES];
         }
     }
@@ -362,6 +368,11 @@
     }
     else if (sender.view.tag == 1005){
         //        批量出借
+        UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+        batchInvestment.isStep = 2;
+        batchInvestment.accoutType = SelectAccoutTypeP2P;
+        batchInvestment.hidesBottomBarWhenPushed = YES;
+        [self.rt_navigationController pushViewController:batchInvestment animated:YES];
     }
 }
 /*
@@ -378,5 +389,7 @@
     [self reuqestCell];
     [self reuqestHead];
 }
+
+
 
 @end

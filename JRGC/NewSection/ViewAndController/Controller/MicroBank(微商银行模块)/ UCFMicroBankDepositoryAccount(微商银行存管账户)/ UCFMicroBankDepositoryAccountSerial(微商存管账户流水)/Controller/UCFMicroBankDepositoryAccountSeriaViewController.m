@@ -11,7 +11,7 @@
 #import "UCFMicroBankDepositoryAccountSeriaCell.h"
 #import "UCFMicroBankDepositoryGetHSAccountInfoBillModel.h"
 #import "UCFMicroBankDepositoryGetHSAccountInfoBillApi.h"
-
+#import "FullWebViewController.h"
 @interface UCFMicroBankDepositoryAccountSeriaViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -50,10 +50,10 @@
 - (void)clickRightBtn
 {
     NSString *urlStr = self.accoutType == SelectAccoutTypeP2P ? P2PHSAccountIllustrationURL:HSAccountIllustrationURL;
-//    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:urlStr title:@"说明"];
-//    webController.sourceVc = @"huishangAccout";
-//    webController.baseTitleType = @"specialUser";
-//    [self.navigationController pushViewController:webController animated:YES];
+    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:urlStr title:@"说明"];
+    webController.sourceVc = @"huishangAccout";
+    webController.baseTitleType = @"specialUser";
+    [self.navigationController pushViewController:webController animated:YES];
 }
 - (BaseTableView *)tableView
 {

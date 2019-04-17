@@ -150,7 +150,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fradeTextField)];
     tap.delegate = self;
     [_baseScrollView addGestureRecognizer:tap];
-    self.view.backgroundColor = UIColorWithRGBA(230, 230, 234, 1);
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)];
     tap1.delegate = self;

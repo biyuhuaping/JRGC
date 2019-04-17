@@ -46,7 +46,10 @@
     
 //    icon_left_white
 }
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
 - (UIButton*)backBtn{
     
     if(_backBtn == nil)

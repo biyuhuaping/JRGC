@@ -270,6 +270,7 @@
         //个人账户信息
         UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
         personMessageVC.title = @"基础详情";
+        personMessageVC.zxAccountIsShow = self.zxAccountIsShow;
         [self.rt_navigationController pushViewController:personMessageVC animated:YES];
     }
     else if (btn.tag == 10002){
@@ -488,22 +489,18 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
         UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
-        self.zxAccountIsShow = model.data.zxAccountIsShow;
-        self.nmAccountIsShow = model.data.nmAccountIsShow;
+       
         [self.tableView endRefresh];
         //        DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
-//
-//            if (SingleUserInfo.loginData.userInfo.zxIsNew != !model.data.zxAccountIsShow) {
+
+//            if (SingleUserInfo.loginData.userInfo.zxIsNew == !model.data.zxAccountIsShow)
+//            {
 //                SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
 //                [SingleUserInfo setUserData:SingleUserInfo.loginData];
 //            }
-            if (SingleUserInfo.loginData.userInfo.zxIsNew == !model.data.zxAccountIsShow)
-            {
-                SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
-                [SingleUserInfo setUserData:SingleUserInfo.loginData];
-            }
-            
+            self.zxAccountIsShow = model.data.zxAccountIsShow;
+            self.nmAccountIsShow = model.data.nmAccountIsShow;
             [self setTableViewArrayWithData:model];
         }
         else{
@@ -724,37 +721,10 @@
         
         [self.tableView endRefresh];
         UCFHomeMallDataModel *model = request.responseJSONModel;
-//        SEL sel = NSSelectorFromString(@"reflectDataModel:");
         if (model.ret) {
             
             [self setTableViewArrayWithData:model];
-//            self.remcommendUrl = model.data.mallDiscountsUrl;
-//            self.boutiqueUrl = model.data.mallSelectedUrl;
-//
-//            CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(ScreenWidth - 30) * 6 /23  + (ScreenWidth - 30)/3 + 60];
-//            UCFCellDataModel *dataMode = [UCFCellDataModel new];
-//            dataMode.modelType = @"mall";
-//            NSMutableArray *arr = [NSMutableArray arrayWithCapacity:1];
-//            for (UCFhomeMallbannerlist *bannerModel in model.data.mallBannerList) {
-//                [arr addObject:bannerModel];
-//            }
-//            dataMode.data1 =  arr;
-//            dataMode.data2 = model.data.mallDiscounts;
-//            NSMutableArray *section3 = [NSMutableArray arrayWithCapacity:1];
-//            data3_0.dataModel = dataMode;
-//            [section3 addObject:data3_0];
-//            [self.dataArray addObject:section3];
-//
-//
-//            NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
-//            CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:165];
-//            UCFCellDataModel *dataMode1 = [UCFCellDataModel new];
-//            dataMode1.modelType = @"mallDiscounts";
-//            dataMode1.data1 = model.data.mallSelected;
-//            data4_0.dataModel = dataMode1;
-//            [section4 addObject:data4_0];
-//
-//            [self.dataArray addObject:section4];
+
         } else {
             ShowMessage(model.message);
         }
@@ -821,6 +791,8 @@
 {
     //清空数据
     [self.tableHead removeHeadViewUserData];
+    self.zxAccountIsShow = NO;
+    self.nmAccountIsShow = NO;
     [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:[UCFMineMySimpleInfoModel new], nil]];
     [self.tableView cyl_reloadData];
 }

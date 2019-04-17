@@ -391,7 +391,6 @@
                 else if (self.accoutType == SelectAccoutTypeHoner){
                     UCFMicroBankOpenAccountTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankOpenAccountTradersPasswordViewController alloc] init];
                     tradePasswordVC.accoutType = self.accoutType;
-                    tradePasswordVC.updatePassWorld = YES;
                     [self.rt_navigationController pushViewController:tradePasswordVC  animated:YES];
                 }
             }

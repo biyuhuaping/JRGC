@@ -114,12 +114,13 @@
         UCFSettingItem *zunxiangAccount  = [UCFSettingArrowItem itemWithIcon:@"zunxiang_account_icon" title:@"尊享存管账户" destVcClass:[BindPhoneNumViewController class]];
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
         
-        if (SingleUserInfo.loginData.userInfo.zxIsNew) {
-            group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount]];
+        if (self.zxAccountIsShow) {
+            
+            group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount,zunxiangAccount]];
         }
         else
         {
-            group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount,zunxiangAccount]];
+            group2.items = [[NSMutableArray alloc]initWithArray: @[weijinAccount]];
         }
         
         UCFSettingGroup *group3 = [[UCFSettingGroup alloc] init];//账户安全
@@ -168,7 +169,8 @@
     [self addLeftButton];
 //    [self addRightButtonWithName:@"每日签到"];
 
-    baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";
+//    baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";账户设置
+    baseTitleLabel.text = @"账户设置";
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableview.separatorInset = UIEdgeInsetsMake(0,45, 0, 0);
@@ -373,7 +375,7 @@
                         break;
                     case 3:
                     {
-                        userItem.subtitle = [[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE];
+                        userItem.subtitle = SingleUserInfo.loginData.userInfo.promotionCode;
                     }
                         break;
                     default:
@@ -783,7 +785,7 @@
                 if ([item.subtitle isEqualToString:@"未认证"]) {
                     HSHelper *helper = [HSHelper new];
                     if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeP2P]) {//先授权
-                        [helper pushP2POrWJAuthorizationType:SelectAccoutTypeP2P nav:self.navigationController];
+                        [helper pushP2POrWJAuthorizationType:SelectAccoutTypeP2P nav:self.rt_navigationController];
                         return;
                     }
                     if (openStatus < 3) {
@@ -792,6 +794,7 @@
                         [alert show];
                         return;
                      }
+                    return;
                  }
                 else{
                     vc = [[UCFMineIdentityCertificationViewController alloc] init];

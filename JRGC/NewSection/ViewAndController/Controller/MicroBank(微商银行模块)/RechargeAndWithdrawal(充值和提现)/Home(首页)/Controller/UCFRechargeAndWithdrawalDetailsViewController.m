@@ -106,7 +106,7 @@
         _accoutLabel.textAlignment = NSTextAlignmentCenter;
         _accoutLabel.font = [Color gc_Font:40.0];
         _accoutLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _accoutLabel.text = [NSString stringWithFormat:@"¥%f",self.accoutBalance];
+        _accoutLabel.text = [NSString stringWithFormat:@"¥%0.2f", self.accoutBalance];
         [_accoutLabel sizeToFit];
     }
     return _accoutLabel;

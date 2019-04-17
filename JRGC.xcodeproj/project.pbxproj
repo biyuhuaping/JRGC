@@ -1288,6 +1288,7 @@
 		E3E05C5D1DD07D710066B65C /* UCFCouponExchangeToFriends.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E05C5B1DD07D710066B65C /* UCFCouponExchangeToFriends.xib */; };
 		E3E4D9C621F5A418003D41E9 /* UCFRegisterInputPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4D9C521F5A418003D41E9 /* UCFRegisterInputPhoneNumViewController.m */; };
 		E3ED83E122018913000F8F50 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ED83E022018913000F8F50 /* Image.m */; };
+		E3F0325F226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F0325E226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.m */; };
 		E3FB6691225C7BDB00792FDC /* UCFAccountDetailWZAndZXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3FB6690225C7BDB00792FDC /* UCFAccountDetailWZAndZXViewController.m */; };
 		E3FB6694225C9FE800792FDC /* UCFAccountDetailTurnoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3FB6693225C9FE800792FDC /* UCFAccountDetailTurnoverCell.m */; };
 		E3FB6697225CA5D100792FDC /* UCFAccountDetailWZAndZXModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3FB6696225CA5D100792FDC /* UCFAccountDetailWZAndZXModel.m */; };
@@ -3626,6 +3627,8 @@
 		E3E4D9C521F5A418003D41E9 /* UCFRegisterInputPhoneNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterInputPhoneNumViewController.m; sourceTree = "<group>"; };
 		E3ED83DF22018913000F8F50 /* Image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		E3ED83E022018913000F8F50 /* Image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		E3F0325D226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankChangeTradersPasswordViewController.h; sourceTree = "<group>"; };
+		E3F0325E226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankChangeTradersPasswordViewController.m; sourceTree = "<group>"; };
 		E3FB668F225C7BDB00792FDC /* UCFAccountDetailWZAndZXViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAccountDetailWZAndZXViewController.h; sourceTree = "<group>"; };
 		E3FB6690225C7BDB00792FDC /* UCFAccountDetailWZAndZXViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAccountDetailWZAndZXViewController.m; sourceTree = "<group>"; };
 		E3FB6692225C9FE800792FDC /* UCFAccountDetailTurnoverCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAccountDetailTurnoverCell.h; sourceTree = "<group>"; };
@@ -9156,6 +9159,8 @@
 		E39962722237E79F00C5B96C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E3F0325D226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.h */,
+				E3F0325E226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -11155,6 +11160,7 @@
 				E35BB6CF22608C0400FF136D /* UCFNewVerificationLoginPassWordViewController.m in Sources */,
 				83CD84281F13A50800227704 /* UCFBatchBidController.m in Sources */,
 				33793F4E21ECB3D6001065D9 /* UCFCommodityView.m in Sources */,
+				E3F0325F226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.m in Sources */,
 				E337444C2216616700003FEF /* UCFMineTableViewHead.m in Sources */,
 				74E140441F1C573000B17A96 /* UCFGoldRechargeHistoryController.m in Sources */,
 				E352FDC621E4B08D00617AB7 /* YTKNetworkAgent.m in Sources */,
