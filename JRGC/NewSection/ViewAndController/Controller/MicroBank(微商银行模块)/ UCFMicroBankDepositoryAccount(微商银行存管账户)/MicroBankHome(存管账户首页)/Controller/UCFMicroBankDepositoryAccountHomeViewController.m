@@ -267,9 +267,15 @@
             [self.modifyBankCard.microBankContentLabel sizeToFit];
             //微金风险承担能力
             self.otherNum = model.data.otherNum;
-            self.riskTolerance.microBankSubtitleLabel.text = [NSString stringWithFormat:@"(剩%ld次)",(long)model.data.otherNum];
+            if (!model.data.riskLevel || [model.data.riskLevel isEqualToString:@""]) {
+                self.riskTolerance.microBankSubtitleLabel.text = @"";
+                self.riskTolerance.microBankContentLabel.text = @"未评估";
+            }
+            else{
+                self.riskTolerance.microBankContentLabel.text = model.data.riskLevel;
+                self.riskTolerance.microBankSubtitleLabel.text = [NSString stringWithFormat:@"(剩%ld次)",(long)model.data.otherNum];
+            }
             [self.riskTolerance.microBankSubtitleLabel sizeToFit];
-            self.riskTolerance.microBankContentLabel.text = model.data.riskLevel;
             [self.riskTolerance.microBankContentLabel sizeToFit];
             
             //批量出借
@@ -369,7 +375,13 @@
     else if (sender.view.tag == 1005){
         //        批量出借
         UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-        batchInvestment.isStep = 2;
+        if ([self.batchLend.microBankContentLabel.text isEqualToString: @"未开启"]) {
+            batchInvestment.isStep = 1;
+        }
+        else
+        {
+            batchInvestment.isStep = 2;
+        }
         batchInvestment.accoutType = SelectAccoutTypeP2P;
         batchInvestment.hidesBottomBarWhenPushed = YES;
         [self.rt_navigationController pushViewController:batchInvestment animated:YES];

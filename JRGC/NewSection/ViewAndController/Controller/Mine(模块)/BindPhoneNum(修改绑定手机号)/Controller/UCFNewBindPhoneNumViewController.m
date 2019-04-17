@@ -11,6 +11,7 @@
 #import "MD5Util.h"
 #import "NZLabel.h"
 #import "UCFNewBindPhoneNumSMSViewController.h"
+#import "UIImageView+NetImageView.h"
 @interface UCFNewBindPhoneNumViewController() <UITextFieldDelegate, UIAlertViewDelegate>{
     NSString    *previousTextFieldContent;
     UITextRange *previousSelection;
@@ -165,7 +166,7 @@
         _loginPwdTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _loginPwdTextField.font = [Color font:15.0 andFontName:nil];
         _loginPwdTextField.textAlignment = NSTextAlignmentLeft;
-        _loginPwdTextField.placeholder = @"请输入新密码";
+        _loginPwdTextField.placeholder = @"请输入登录密码";
         _loginPwdTextField.secureTextEntry = YES;
         _loginPwdTextField.delegate = self;
         //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;

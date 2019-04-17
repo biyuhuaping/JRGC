@@ -482,17 +482,24 @@
     __weak typeof(self) weakSelf = self;
     if (step <= 3) {
         NSString *message = type == SelectAccoutTypeHoner ? ZXTIP2:P2PTIP2;
-        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
-            if (index == 1) {
-                HSHelper *helper = [HSHelper new];
-                [helper pushOpenHSType:type Step:step nav:weakSelf.navigationController];
-            }
-        } otherButtonTitles:@"确认"];
-        [alert show];
+//        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+//            if (index == 1) {
+//                HSHelper *helper = [HSHelper new];
+//                [helper pushOpenHSType:type Step:step nav:weakSelf.navigationController];
+//            }
+//        } otherButtonTitles:@"确认"];
+//        [alert show];
+        UCFPopViewWindow *popView = [UCFPopViewWindow new];
+        popView.delegate = self;
+//        popView.contentStr = message;
+        popView.type = POPOpenAccountPassWord;
+        popView.controller = self;
+        [popView startPopView];
         return NO;
     }
     return YES;
 }
+
 
 //充值请求
 - (void)getRecharngeBindingBankCardNet

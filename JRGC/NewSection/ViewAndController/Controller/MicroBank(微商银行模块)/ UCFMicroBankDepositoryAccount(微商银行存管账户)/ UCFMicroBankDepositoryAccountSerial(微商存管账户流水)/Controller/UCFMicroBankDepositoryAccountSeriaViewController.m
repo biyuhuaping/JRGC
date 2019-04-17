@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.rootLayout = [MyRelativeLayout new];
-    self.rootLayout.backgroundColor = [UIColor whiteColor];
+    self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     [self.rootLayout addSubview:self.tableView];
@@ -58,7 +58,7 @@
 - (BaseTableView *)tableView
 {
     if (nil == _tableView) {
-        _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, PGScreenWidth, 0) style:UITableViewStyleGrouped];
+        _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, PGScreenWidth, 0) style:UITableViewStylePlain];
         _tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _tableView.delegate = self;
         _tableView.dataSource =self;
@@ -82,14 +82,14 @@
 // 一共有多少个分区
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 0;
+    return 1;
 }
-
-//第section分区的头部标题
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    
-    return @"";
-}
+//
+////第section分区的头部标题
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//
+//    return @"";
+//}
 //某一行的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -99,7 +99,7 @@
 //第section分区头部的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 43;
+    return 0.001;
 }
 
 //第section分区尾部的高度

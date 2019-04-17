@@ -87,7 +87,7 @@
     [self.scrollLayout addSubview:self.enterButton];
     [self.scrollLayout addSubview:self.agreementLabel];
     [self.scrollLayout addSubview:self.smsLabel];
-    
+    [self addLeftButton];
     [self queryUserData];
     //    用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码
     //    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 1) {

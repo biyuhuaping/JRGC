@@ -82,6 +82,8 @@
         _microBankSubtitleLabel = [NZLabel new];
         _microBankSubtitleLabel.centerYPos.equalTo(self.rootLayout.centerYPos);
         _microBankSubtitleLabel.leftPos.equalTo(self.microBankTitleLabel.rightPos).offset(6);
+        _microBankSubtitleLabel.rightPos.equalTo(self.microBankContentLabel.leftPos);
+        _microBankSubtitleLabel.adjustsFontSizeToFitWidth = YES;
         _microBankSubtitleLabel.textAlignment = NSTextAlignmentCenter;
         _microBankSubtitleLabel.font = [Color gc_Font:13.0];
         _microBankSubtitleLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];

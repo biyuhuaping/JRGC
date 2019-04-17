@@ -161,7 +161,7 @@
 //        /**视图隐藏，等价于hidden = true, 但是不会在父视图中占位空白区域*/
 //        MyVisibility_Gone
         _resetPassWordSMSLabel.myVisibility = MyVisibility_Gone;
-        
+        _resetPassWordSMSLabel.userInteractionEnabled = YES;
     }
     return _resetPassWordSMSLabel;
 }

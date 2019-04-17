@@ -325,6 +325,10 @@ static BOOL isForcedUpdating = NO;//强制更新
         {
             [self addPOPMessageNormalEnter];
         }
+        else if (type == POPMessageNormalEvenEnter)
+        {
+            [self addPOPMessageNormalEvenEnter];
+        }
         
     }
     return self;
@@ -1190,6 +1194,40 @@ static BOOL isForcedUpdating = NO;//强制更新
 //    [self addSingleGesture];
     
     self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentButtonHeight;
+}
+- (void)addPOPMessageNormalEvenEnter
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    [self.bkLayout addSubview:self.cancelButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextVersionUpdatingTitle;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.topPos.equalTo(self.contentLabel.bottomPos).offset(22);
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonTitleEnter forState:UIControlStateNormal];
+    
+    [self.cancelButton setTitle:TextButtonCancelEnter forState:UIControlStateNormal];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentBothButtonHeight;
 }
 - (CGFloat )labelHeight:(UILabel *)contentLabel withPopViewWidth:(CGFloat )popWidth
 {

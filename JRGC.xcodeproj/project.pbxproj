@@ -1289,6 +1289,7 @@
 		E3E4D9C621F5A418003D41E9 /* UCFRegisterInputPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4D9C521F5A418003D41E9 /* UCFRegisterInputPhoneNumViewController.m */; };
 		E3ED83E122018913000F8F50 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ED83E022018913000F8F50 /* Image.m */; };
 		E3F0325F226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F0325E226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.m */; };
+		E3F0FF5222670BBB00A9180A /* UCFNewBindPhoneNumSMSView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F0FF5122670BBB00A9180A /* UCFNewBindPhoneNumSMSView.m */; };
 		E3FB6691225C7BDB00792FDC /* UCFAccountDetailWZAndZXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3FB6690225C7BDB00792FDC /* UCFAccountDetailWZAndZXViewController.m */; };
 		E3FB6694225C9FE800792FDC /* UCFAccountDetailTurnoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3FB6693225C9FE800792FDC /* UCFAccountDetailTurnoverCell.m */; };
 		E3FB6697225CA5D100792FDC /* UCFAccountDetailWZAndZXModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3FB6696225CA5D100792FDC /* UCFAccountDetailWZAndZXModel.m */; };
@@ -3629,6 +3630,8 @@
 		E3ED83E022018913000F8F50 /* Image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		E3F0325D226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankChangeTradersPasswordViewController.h; sourceTree = "<group>"; };
 		E3F0325E226602070062C6C3 /* UCFMicroBankChangeTradersPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankChangeTradersPasswordViewController.m; sourceTree = "<group>"; };
+		E3F0FF5022670BBB00A9180A /* UCFNewBindPhoneNumSMSView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UCFNewBindPhoneNumSMSView.h; path = "JRGC/NewSection/ViewAndController/Controller/MicroBank(微商银行模块)/ UCFMicroBankDepositoryAccount(微商银行存管账户)/UCFMicroBankDepositoryChangePassWord（修改交易密码）/Controller/UCFNewBindPhoneNumSMSView.h"; sourceTree = SOURCE_ROOT; };
+		E3F0FF5122670BBB00A9180A /* UCFNewBindPhoneNumSMSView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UCFNewBindPhoneNumSMSView.m; path = "JRGC/NewSection/ViewAndController/Controller/MicroBank(微商银行模块)/ UCFMicroBankDepositoryAccount(微商银行存管账户)/UCFMicroBankDepositoryChangePassWord（修改交易密码）/Controller/UCFNewBindPhoneNumSMSView.m"; sourceTree = SOURCE_ROOT; };
 		E3FB668F225C7BDB00792FDC /* UCFAccountDetailWZAndZXViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAccountDetailWZAndZXViewController.h; sourceTree = "<group>"; };
 		E3FB6690225C7BDB00792FDC /* UCFAccountDetailWZAndZXViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAccountDetailWZAndZXViewController.m; sourceTree = "<group>"; };
 		E3FB6692225C9FE800792FDC /* UCFAccountDetailTurnoverCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAccountDetailTurnoverCell.h; sourceTree = "<group>"; };
@@ -8019,6 +8022,8 @@
 		E30429B6224E3D3F005015E5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E3F0FF5022670BBB00A9180A /* UCFNewBindPhoneNumSMSView.h */,
+				E3F0FF5122670BBB00A9180A /* UCFNewBindPhoneNumSMSView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -10953,6 +10958,7 @@
 				2526ADDA1DD08CB800114D9A /* MLMOptionSelectView.m in Sources */,
 				7421DFCF1FDFC69000E758C1 /* UCFInputTextField.m in Sources */,
 				33B5011522609CFE008CC3F4 /* UCFCalulatorModel.m in Sources */,
+				E3F0FF5222670BBB00A9180A /* UCFNewBindPhoneNumSMSView.m in Sources */,
 				7BC789091B04555F00D50494 /* UCFXieYiViewController.m in Sources */,
 				74931A2D1B1326FE00143424 /* CoreTextUtils.m in Sources */,
 				E352FD4D21E4AF0B00617AB7 /* UCFInvestmentCouponModel.m in Sources */,

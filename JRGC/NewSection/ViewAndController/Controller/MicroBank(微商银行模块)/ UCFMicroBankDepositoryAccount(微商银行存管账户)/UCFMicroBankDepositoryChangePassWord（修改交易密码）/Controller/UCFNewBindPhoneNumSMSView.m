@@ -1,20 +1,20 @@
 //
-//  UCFNewResetPassWordInPutView.m
+//  UCFNewBindPhoneNumSMSView.m
 //  JRGC
 //
-//  Created by kuangzhanzhidian on 2019/3/12.
+//  Created by kuangzhanzhidian on 2019/4/17.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
-#import "UCFNewResetPassWordInPutView.h"
-@interface UCFNewResetPassWordInPutView()
+#import "UCFNewBindPhoneNumSMSView.h"
+@interface UCFNewBindPhoneNumSMSView()
 @property (nonatomic, strong) UIImageView *titleImageView;
 
 @property (nonatomic, strong) UIView *itemLineView;//下划线
 
 @property (nonatomic, strong) UIButton *showPassWordBtn;
 @end
-@implementation UCFNewResetPassWordInPutView
+@implementation UCFNewBindPhoneNumSMSView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -35,7 +35,7 @@
     if (nil == _titleImageView) {
         _titleImageView = [[UIImageView alloc] init];
         _titleImageView.centerYPos.equalTo(self.rootLayout.centerYPos);
-        _titleImageView.myLeft = 33;
+        _titleImageView.myLeft = 15;
         _titleImageView.myWidth = 22;
         _titleImageView.myHeight = 22;
         _titleImageView.image = [UIImage imageNamed:@"sign_icon_password.png"];
@@ -111,7 +111,7 @@
         _itemLineView = [UIView new];
         _itemLineView.myBottom = 1;
         _itemLineView.myHeight = 0.5;
-        _itemLineView.myLeft = 25;
+        _itemLineView.leftPos.equalTo(self.contentField.leftPos);
         _itemLineView.myRight = 0;
         _itemLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         //
