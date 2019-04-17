@@ -134,7 +134,7 @@
         return NO;
     }
     if (_showHeadView.mobileTextField.text.length != 11) {
-        [MBProgressHUD displayHudError:@"请输入正确手机号"];
+        [MBProgressHUD displayHudError:@"请输入银行预留手机号"];
         return NO;
     }
     return YES;

@@ -111,6 +111,7 @@ typedef NS_ENUM(NSInteger, POPWINDOWS) {
     POPLoginSucceedFaceID,//登录成功,是否设置指纹
     POPLoginSucceedVerifyTouchID,//验证指纹
     POPMessageIKnowWindowButton,//带提示信息titleg和cintent的,按钮我知道了
+    POPMessageLoginInvalid,//无效请求,也需要退出
     POPMessageLoginOut,//退出登录
     POPMessageLoginOutService,//退出登录,联系客服
     POPMessageForcedUpdating,//强制更新

@@ -109,7 +109,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     else
     {
         UCFPublicPopupWindowView *popup = [[UCFPublicPopupWindowView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, PGScreenHeight) withType:type withContent:contentStr withTitle:titletStr withPopViewTag:viewTag];
-        if (type == POPMessageLoginOut || type == POPMessageLoginOutService) {
+        if (type == POPMessageLoginOut || type == POPMessageLoginOutService || type == POPMessageLoginInvalid) {
             [popup setLoginOut:YES];
         }
         if (type == POPMessageForcedUpdating) {
@@ -179,7 +179,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     }
     else
     {
-        if (self.type == POPMessageLoginOut  || self.type == POPMessageLoginOutService) {
+        if (self.type == POPMessageLoginOut  || self.type == POPMessageLoginOutService || self.type == POPMessageLoginInvalid) {
             [self setLoginOut:NO];
         }
         [self clearPopupWindowView];
@@ -303,6 +303,10 @@ static BOOL isForcedUpdating = NO;//强制更新
         else if (type == POPMessageIKnowWindowButton)
         {
             [self addPOPMessageIKnowWindowButton];
+        }
+        else if (type == POPMessageLoginInvalid)
+        {
+            [self addPOPMessageLoginInvalid];
         }
         else if (type == POPMessageLoginOut)
         {
@@ -1024,6 +1028,39 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentButtonHeight;
 }
 
+- (void)addPOPMessageLoginInvalid
+{
+    [self.bkLayout addSubview:self.titleLabel];
+    [self.bkLayout addSubview:self.contentLabel];
+    [self.bkLayout addSubview:self.enterButton];
+    
+    self.bkLayout.myWidth = getWidth(310);
+    self.bkLayout.myCenterX = 0;
+    self.bkLayout.myCenterY = 0;
+    
+    self.titleLabel.myTop = 26;
+    self.titleLabel.myLeft= 22;
+    self.titleLabel.text = TextTitleHint;
+    self.titleLabel.font = [Color gc_Font:25.0];
+    [self.titleLabel sizeToFit];
+    
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.myLeft= 22;
+    self.contentLabel.myRight= 22;
+    self.contentLabel.text = self.contentStr;
+    self.contentLabel.font = [Color gc_Font:14.0];
+    [self.contentLabel sizeToFit];
+    
+    self.enterButton.myBottom = 25;
+    self.enterButton.rightPos.equalTo(@25);
+    self.enterButton.leftPos.equalTo(@25);
+    self.enterButton.heightSize.equalTo(@40);
+    [self.enterButton setTitle:TextButtonAgainLogin forState:UIControlStateNormal];
+    
+    //    [self addSingleGesture];
+    
+    self.bkLayout.myHeight = [self labelHeight:self.contentLabel withPopViewWidth:getWidth(310) - 22*2] + ContentButtonHeight;
+}
 - (void)addPOPMessageLoginOut
 {
     [self.bkLayout addSubview:self.titleLabel];

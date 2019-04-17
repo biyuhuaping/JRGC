@@ -597,7 +597,7 @@
 - (void)saveChangeTelCode
 {
     if ([Common deleteStrSpace:telTextField.text].length != 11) {
-        [MBProgressHUD displayHudError:@"请输入银行预留手机号"];
+        [MBProgressHUD displayHudError:@"请输入正确的手机号"];
         return;
     }
     if ([Common deleteStrSpace:codeTextField.text].length == 0) {

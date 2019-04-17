@@ -43,12 +43,20 @@
     [self addLeftButton];
     baseTitleLabel.text = @"我的余额";
 
-    
-    @PGWeakObj(self);
-    SingleUserInfo.requestUserbackBlock = ^(BOOL requestFinsh)
+    if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 4 || [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 4) {
+        [SingleUserInfo requestUserAllStatueWithView:self.view];
+        @PGWeakObj(self);
+        SingleUserInfo.requestUserbackBlock = ^(BOOL requestFinsh)
+        {
+            [selfWeak requestAllStatueFinsh:requestFinsh];
+        };
+    }
+    else
     {
-        [selfWeak requestAllStatueFinsh:requestFinsh];
-    };
+        [self requetAccount];
+    }
+    
+   
 }
 - (void)requestAllStatueFinsh:(BOOL)requestFinsh
 {

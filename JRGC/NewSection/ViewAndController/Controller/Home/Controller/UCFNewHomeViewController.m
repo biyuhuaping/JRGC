@@ -313,7 +313,7 @@
                 } else {
                     UCFMineIntoCoinPageApi * request = [[UCFMineIntoCoinPageApi alloc] initWithPageType:@""];
                     
-                    //    request.animatingView = self.view;
+                    request.animatingView = self.view;
                     //    request.tag =tag;
                     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
                         // 你可以直接在这里使用 self

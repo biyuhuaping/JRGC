@@ -13,7 +13,7 @@
 #import "UCFMicroBankIdentifysendCodeInfoAPI.h"
 #import "UCFMicroBankIdentifysendCodeInfoModel.h"
 #import "UCFToolsMehod.h"
-
+#import "UCFSecurityCenterViewController.h"
 @interface UCFNewBindPhoneNumSMSViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -318,8 +318,14 @@
 //            [[NSUserDefaults standardUserDefaults] synchronize];
             SingleUserInfo.loginData.userInfo.mobile = mobile;
             [SingleUserInfo setUserData:SingleUserInfo.loginData];
-            [self.rt_navigationController removeViewControllerToRootanimated:NO];
-            [self.rt_navigationController popViewControllerAnimated:YES];
+//            [self.rt_navigationController removeViewControllerToRootanimated:NO];
+//            [self.rt_navigationController popViewControllerAnimated:YES];
+            for (UCFBaseViewController *vc in self.rt_navigationController.rt_viewControllers) {
+                if ([vc isKindOfClass:[UCFSecurityCenterViewController class]]) {
+                    [self.rt_navigationController popToViewController:vc animated:YES];
+                    return;
+                }
+            }
         }else {
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }

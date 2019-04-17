@@ -39,7 +39,7 @@
         UCFPopViewWindow *popView = [UCFPopViewWindow new];
         popView.delegate = appDelegate;
         popView.contentStr = dic[@"message"];
-        popView.type = POPMessageNormalEnter;
+        popView.type = POPMessageLoginInvalid;
         popView.popViewTag = 10001;
         [popView startPopView];
     }
