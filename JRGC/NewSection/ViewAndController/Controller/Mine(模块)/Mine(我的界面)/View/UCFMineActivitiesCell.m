@@ -226,6 +226,7 @@
         _cowryContentLabel.font = self.signInContentLabel.font;
         _cowryContentLabel.textColor = self.signInContentLabel.textColor;
         _cowryContentLabel.text = @"0.00";
+        _cowryContentLabel.adjustsFontSizeToFitWidth = YES;
         [_cowryContentLabel sizeToFit];
         
     }
@@ -283,6 +284,7 @@
         _beanContentLabel.font = self.signInContentLabel.font;
         _beanContentLabel.textColor = self.signInContentLabel.textColor;
         _beanContentLabel.text = @"¥0.00";
+        _beanContentLabel.adjustsFontSizeToFitWidth = YES;
         [_beanContentLabel sizeToFit];
         
     }
@@ -408,15 +410,15 @@
     if (myModel != nil && [myModel isKindOfClass:[UCFMineMySimpleInfoModel class]] && myModel.ret) {
         
         
-        self.cowryContentLabel.text = [NSString stringWithFormat:@"%zd",myModel.data.coinNum];//工贝
-        self.beanContentLabel.text = myModel.data.beanAmount;// 工豆
+        self.cowryContentLabel.text = [NSString stringWithFormat:@"%.2f",myModel.data.coinNum];//工贝
+        self.beanContentLabel.text = [NSString stringWithFormat:@"¥%@",myModel.data.beanAmount];// 工豆
         self.couponContentLabel.text = [NSString stringWithFormat:@"%zd",myModel.data.couponNumber];// 优惠券
         self.inviteContentLabel.text = myModel.data.promotionCode; // 邀请返利
     }
     else
     {
-        self.cowryContentLabel.text = @"0";//工贝
-        self.beanContentLabel.text = @"0";// 工豆
+        self.cowryContentLabel.text = @"0.00";//工贝
+        self.beanContentLabel.text = @"¥0.00";// 工豆
         self.couponContentLabel.text = @"0";// 优惠券
         self.inviteContentLabel.text = @""; // 邀请返利
     }

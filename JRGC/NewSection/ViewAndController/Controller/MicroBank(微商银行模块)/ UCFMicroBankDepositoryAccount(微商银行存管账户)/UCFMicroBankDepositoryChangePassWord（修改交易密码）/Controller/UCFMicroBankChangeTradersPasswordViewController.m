@@ -415,7 +415,7 @@
         return;
     }
     
-    UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:self.phoneView.contentField.text isVms:isVmsNew type:@"5" AccoutType:self.accoutType];
+    UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:self.GetOpenAccountModel.data.userInfo.phoneNum isVms:isVmsNew type:@"5" AccoutType:self.accoutType];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {

@@ -35,12 +35,12 @@
     NSInteger rstcode = [dic[@"code"] integerValue];
     if (rstcode == -1) {
         
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
-//        [alertView show];
+//  无效的请求,也需要退出
         UCFPopViewWindow *popView = [UCFPopViewWindow new];
         popView.delegate = appDelegate;
         popView.contentStr = dic[@"message"];
         popView.type = POPMessageNormalEnter;
+        popView.popViewTag = 10001;
         [popView startPopView];
     }
     else if (rstcode == -2 || rstcode == -3 || rstcode == -4 || rstcode == -6)

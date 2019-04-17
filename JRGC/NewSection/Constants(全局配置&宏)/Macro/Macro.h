@@ -116,5 +116,6 @@ typedef NS_ENUM(NSInteger, POPWINDOWS) {
     POPMessageForcedUpdating,//强制更新
     POPMessageNormalUpdating,//普通更新
     POPMessageNormalEnter,//普通弹框
+    POPMessageNormalEvenEnter,//普通弹框带确认和取消
 };
 #endif /* Macro_h */

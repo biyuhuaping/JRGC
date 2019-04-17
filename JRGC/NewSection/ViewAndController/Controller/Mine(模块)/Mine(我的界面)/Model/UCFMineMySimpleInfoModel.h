@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *memberLever;//用户等级
 
-@property (nonatomic, assign) NSInteger coinNum;//可用工贝数
+@property (nonatomic, assign) CGFloat coinNum;//可用工贝数
 
 @property (nonatomic, copy) NSString *realName; //用户称呼
 

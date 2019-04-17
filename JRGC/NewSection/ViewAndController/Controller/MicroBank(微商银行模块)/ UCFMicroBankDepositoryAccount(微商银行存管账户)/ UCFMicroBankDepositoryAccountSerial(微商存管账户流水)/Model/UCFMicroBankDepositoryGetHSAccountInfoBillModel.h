@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL ret;
 
 @end
-
 @interface UCFMicroBankDepositoryGetHSAccountInfoBillData : BaseModel
 
 @property (nonatomic, strong) UCFMicroBankDepositoryGetHSAccountInfoBillPagedata *pageData;
@@ -59,5 +58,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *desc;
 
 @end
+
 
 NS_ASSUME_NONNULL_END

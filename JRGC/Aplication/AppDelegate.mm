@@ -1130,6 +1130,10 @@
     if (btn.tag == 10001 || btn.tag == 10002) //退出登录 10002取消是联系客服
     {
         [SingleUserInfo loadLoginViewController];
+        NSUInteger selectedIndex = self.tabBarController.selectedIndex;
+        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:selectedIndex];
+        [nav popToRootViewControllerAnimated:NO];
+        [self.tabBarController setSelectedIndex:0];
     }
     else if (btn.tag == 10003) //强更
     {

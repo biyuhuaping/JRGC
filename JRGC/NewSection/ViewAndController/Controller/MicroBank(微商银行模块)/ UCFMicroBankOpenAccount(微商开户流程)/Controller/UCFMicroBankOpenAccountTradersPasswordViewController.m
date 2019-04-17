@@ -71,7 +71,7 @@
     [self.scrollView addSubview:self.scrollLayout];
     
     [self loadLayoutView];
-    
+    [self queryUserData];
 }
 - (void)loadLayoutView
 {
@@ -446,7 +446,58 @@
         
     }];
 }
-
+- (void)queryUserData
+{
+    UCFMicroBankOpenAccountGetOpenAccountInfoAPI * request = [[UCFMicroBankOpenAccountGetOpenAccountInfoAPI alloc] initWithAccoutType:SelectAccoutTypeP2P];
+    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        DDLogDebug(@"---------%@",request.responseJSONModel);
+        self.GetOpenAccountModel = [request.responseJSONModel copy];
+        if (self.GetOpenAccountModel.ret == YES)
+        {
+            //获取徽商开户页面信息
+            SingleUserInfo.loginData.userInfo.openStatus = self.GetOpenAccountModel.data.openStatus;
+            
+            
+            
+            //            _nameView.contentField.enabled=NO;
+            
+            if (self.GetOpenAccountModel.data.userInfo.realName.length > 0)
+            {
+                //                用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码
+                self.nameView.contentField.text = self.GetOpenAccountModel.data.userInfo.realName;
+                SingleUserInfo.loginData.userInfo.realName = self.GetOpenAccountModel.data.userInfo.realName;
+            }
+            if (self.GetOpenAccountModel.data.userInfo.phoneNum.length > 0)
+            {
+                //                NSString *asteriskIdCardNo = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.idCardNo startLocation:3 lenght:self.GetOpenAccountModel.data.userInfo.idCardNo.length -7];
+                //                self.idView.contentField.text   = asteriskIdCardNo;
+                NSString *str = self.GetOpenAccountModel.data.userInfo.phoneNum;
+                if (str.length < 7) {
+                    return ;
+                }
+                self.phoneView.contentField.text   = [str stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];;
+            }
+            
+            if (self.GetOpenAccountModel.data.userInfo.notSupportDes.length > 0)
+            {
+                BlockUIAlertView *alert = [[BlockUIAlertView alloc]initWithTitle:@"提示" message:self.GetOpenAccountModel.data.userInfo.notSupportDes cancelButtonTitle:nil clickButton:^(NSInteger index) {} otherButtonTitles:@"确定"];
+                [alert show];
+            }
+            [SingleUserInfo setUserData:SingleUserInfo.loginData];
+            [self inspectTextField];//查询是否全部都已经填写
+        }
+        else
+        {
+            ShowMessage(self.GetOpenAccountModel.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
+}
 /*
 #pragma mark - Navigation
 

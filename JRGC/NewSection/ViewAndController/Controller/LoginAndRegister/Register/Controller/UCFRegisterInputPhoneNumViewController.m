@@ -16,6 +16,7 @@
 #import "UCFNewLoginViewController.h"
 #import "IQKeyboardManager.h"
 #import "UCFRegisterInputVerificationCodeViewController.h"
+#import "UIImageView+NetImageView.h"
 
 @interface UCFRegisterInputPhoneNumViewController ()<YTKChainRequestDelegate,UITextFieldDelegate>
 
@@ -190,6 +191,7 @@
         _registerImageView.leftPos.equalTo(self.registerLabel.leftPos);
         _registerImageView.myRight = 25;
         _registerImageView.myHeight = 160;
+        [_registerImageView getBannerImageStyle:UserRegistration];
     }
     return _registerImageView;
 }

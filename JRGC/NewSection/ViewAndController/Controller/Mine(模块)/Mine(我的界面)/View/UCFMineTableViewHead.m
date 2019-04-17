@@ -173,7 +173,7 @@
 {
     if (nil == _messageImageBtn) {
         _messageImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _messageImageBtn.centerYPos.equalTo(self.headImageBtn.centerYPos);
+        _messageImageBtn.centerYPos.equalTo(self.memberLeverBtn.centerYPos);
         _messageImageBtn.rightPos.equalTo(@15);
         _messageImageBtn.heightSize.equalTo(self.headImageBtn.heightSize);
         _messageImageBtn.widthSize.equalTo(self.headImageBtn.widthSize);
@@ -381,9 +381,9 @@
         self.totalDueIn = myModel.data.totalDueIn;//总待收利息
         self.cashBalance = myModel.data.cashBalance;//余额
         
-        self.totalAssetsMoneyLabel.text = self.total;//总资产
-        self.expectedInterestMoneyLabel.text = self.totalDueIn;//总待收利息
-        self.accountBalanceMoneyLabel.text = self.cashBalance;//余额
+        self.totalAssetsMoneyLabel.text = [NSString stringWithFormat:@"¥%@",self.total];//总资产
+        self.expectedInterestMoneyLabel.text = [NSString stringWithFormat:@"¥%@",self.totalDueIn];//总待收利息
+        self.accountBalanceMoneyLabel.text = [NSString stringWithFormat:@"¥%@",self.cashBalance];//余额
 
     }
     [self.totalAssetsMoneyLabel sizeToFit];

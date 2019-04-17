@@ -51,7 +51,6 @@
     self.view = self.rootLayout;
     
     self.viewHeight = PGStatusBarHeight + self.navigationController.navigationBar.frame.size.height + HEADVIEWHEIGHT;
-//    self.accoutStep = OpenAccoutPassWord;
     [self addLeftButton];
     
     baseTitleLabel.text = @"开通微金徽商存管账户";
@@ -87,12 +86,18 @@
         //            OpenAccoutPassWord , //选择交易密码
         //微金用户
         //                openStatus = 2;
-        [self.rootLayout addSubview:self.optionView];
+       
+       
         if (openStatus >= 3)
         {
             self.openAccountSucceed = YES;
+            self.accoutStep = OpenAccoutPassWord;
         }
-        
+        else
+        {
+            self.accoutStep = OpenAccoutMicroBank;
+        }
+        [self.rootLayout addSubview:self.optionView];
         if (openStatus == 1)
         {
             //微金未开户,走新的开户页面(开户+设置交易密码)

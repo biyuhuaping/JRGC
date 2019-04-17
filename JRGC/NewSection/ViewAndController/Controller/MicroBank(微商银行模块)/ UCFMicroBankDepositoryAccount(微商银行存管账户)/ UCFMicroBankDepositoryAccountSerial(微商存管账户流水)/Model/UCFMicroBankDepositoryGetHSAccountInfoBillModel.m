@@ -11,6 +11,7 @@
 @implementation UCFMicroBankDepositoryGetHSAccountInfoBillModel
 
 @end
+
 @implementation UCFMicroBankDepositoryGetHSAccountInfoBillData
 
 

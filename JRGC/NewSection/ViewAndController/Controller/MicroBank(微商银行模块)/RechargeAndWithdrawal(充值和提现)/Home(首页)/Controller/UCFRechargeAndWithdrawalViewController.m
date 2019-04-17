@@ -43,9 +43,25 @@
     [self addLeftButton];
     baseTitleLabel.text = @"我的余额";
 
-    [self requetAccount];
+    
+    @PGWeakObj(self);
+    SingleUserInfo.requestUserbackBlock = ^(BOOL requestFinsh)
+    {
+        [selfWeak requestAllStatueFinsh:requestFinsh];
+    };
 }
-
+- (void)requestAllStatueFinsh:(BOOL)requestFinsh
+{
+    if (requestFinsh)
+    {
+        [self requetAccount];
+    }
+    else
+    {
+        //请求失败
+        [self.rt_navigationController popViewControllerAnimated:YES];
+    }
+}
 - (UCFPageHeadView *)pageHeadView
 {
     if (nil == _pageHeadView) {
