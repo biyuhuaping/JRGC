@@ -403,5 +403,17 @@
 }
 
 
-
+//- (void)dealloc
+//{
+//
+//}
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    for (UIViewController *vc in self.navigationController.viewControllers) {
+//        if ([vc isKindOfClass:[UCFMicroBankDepositoryAccountHomeViewController class]]) {
+//            [(UCFMicroBankDepositoryAccountHomeViewController *)vc refresh];
+//        }
+//    }
+//}
 @end

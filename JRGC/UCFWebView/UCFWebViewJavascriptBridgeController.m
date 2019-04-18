@@ -42,6 +42,8 @@
 #import "UCFSharePictureViewController.h"
 #import "RiskAssessmentViewController.h"
 #import "HSHelper.h"
+#import "UCFHighQualityContainerViewController.h"
+#import "UCFNewAiLoanViewController.h"
 #define MALLTIME  12.0
 #define SIGNATURETIME 30.0
 
@@ -499,10 +501,18 @@
             [weakSelf goToShareWeChat:nativeData];
         } else if ([nativeData[@"action"] isEqualToString:@"isOtherView"]) {//订单页面是否导航栏根视图
             [weakSelf isRootViewController];
+        } else if ([nativeData[@"action"] isEqualToString:@"loan_list"]) {
+            [weakSelf skipToMyLoanListController];
         }
 //     */
     }];
      
+}
+- (void)skipToMyLoanListController
+{
+    UCFNewAiLoanViewController *vc = [[UCFNewAiLoanViewController alloc] init];
+    vc.selectIndex = 1;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)pushToRiskPage
 {
@@ -1275,7 +1285,11 @@
     else if ([controllerName isEqualToString:@"auto_bid_second"]) //开通批量投标
     {
         UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-        batchInvestment.isStep = 2;
+        if (SingleUserInfo.loginData.userInfo.isAutoBid) {
+            batchInvestment.isStep = 2;
+        } else {
+            batchInvestment.isStep = 1;
+        }
         batchInvestment.accoutType = self.accoutType;
         [self.navigationController pushViewController:batchInvestment animated:YES];
     }

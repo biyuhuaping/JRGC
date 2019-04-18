@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL  isHiddenHeadView; //当只有数组中只有一个数据的时候,是否需要隐藏头
 
-
+- (void)setSelectIndex:(NSInteger)index;
 
 - (void)pageHeadView:(UCFPageHeadView *)pageView chiliControllerSelectIndex:(CGFloat)index;
 

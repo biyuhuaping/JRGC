@@ -193,7 +193,7 @@
         if (data) {
             sectionView.titleLab.text = data.title;
         }
-        if (SingleUserInfo.loginData.userInfo.isRisk && ![data.title isEqualToString:@"内容推荐"]) {
+        if (SingleUserInfo.loginData.userInfo.isRisk && !([data.title isEqualToString:@"内容推荐"] || [data.title isEqualToString:@"新手入门"])) {
             [sectionView showMore];
         } else {
             if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"]) {
