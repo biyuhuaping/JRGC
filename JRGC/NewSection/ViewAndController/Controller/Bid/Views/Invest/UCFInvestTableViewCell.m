@@ -21,6 +21,7 @@
 @property(strong, nonatomic)UIImageView *imageView3;
 @property(strong, nonatomic)UIImageView *imageView4;
 @property(strong, nonatomic)UILabel    *tiplabel;
+@property(strong, nonatomic)UIImageView *iconView;
 
 @property(nonatomic, strong) ZZCircleProgress  *progressView;
 @property(nonatomic, strong) UILabel *rateLab;              //利率
@@ -60,7 +61,7 @@
         iconView.clipsToBounds = YES;
         iconView.layer.cornerRadius = 2;
         [whitBaseView addSubview:iconView];
-        
+        self.iconView = iconView;
         UILabel *label = [[UILabel alloc] init];
         label.leftPos.equalTo(iconView.rightPos).offset(8);
         label.centerYPos.equalTo(iconView.centerYPos);
@@ -182,7 +183,11 @@
     NSArray *statusArr = @[@"未审核",@"等待确认",showStr,@"流标",@"满标",@"回款中",@"已回款"];
     if (status>2) {
         self.progressView.progressText = @"已售罄";
-        self.progressView.textColor = UIColorWithRGB(0x909dae);
+        self.progressView.textColor = [Color color:PGColorOptionTitleGray];
+        self.timeLimitLab.textColor = [Color color:PGColorOptionTitleGray];
+        self.rateLab.textColor = [Color color:PGColorOptionTitleGray];
+        self.iconView.backgroundColor = [Color color:PGColorOptionTitleGray];;
+
     }
     else {
         self.progressView.textColor = UIColorWithRGB(0x555555);
@@ -190,7 +195,12 @@
             self.progressView.progressText = @"批量出借";
         }
         else {
+            self.progressView.textColor = [Color color:PGColorOptionTitleOrange];
+            self.timeLimitLab.textColor = [Color color:PGColorOptionTitleBlack];
+            self.rateLab.textColor = [Color color:PGColorOptionTitleOrange];
             self.progressView.progressText = [statusArr objectAtIndex:status];
+            self.iconView.backgroundColor = [Color color:PGColorOptionTitleOrange];;
+
         }
     }
     if (microMoneyModel.prdLabelsList.count > 0) {
@@ -311,7 +321,7 @@
 {
     if (!_rateTipLab) {
         _rateTipLab = [[UILabel alloc] init];
-        _rateTipLab.textColor = UIColorWithRGB(0x777777);
+        _rateTipLab.textColor = [Color color:PGColorOptionTitleGray];
         _rateTipLab.font = [UIFont systemFontOfSize:12.0f];
         _rateTipLab.text = @"预期年化利率";
         [_rateTipLab sizeToFit];
@@ -333,7 +343,7 @@
 {
     if (!_timeLimitTipLab) {
         _timeLimitTipLab = [[UILabel alloc] init];
-        _timeLimitTipLab.textColor = UIColorWithRGB(0x777777);
+        _timeLimitTipLab.textColor = [Color color:PGColorOptionTitleGray];
         _timeLimitTipLab.font = [UIFont systemFontOfSize:12.0f];
         _timeLimitTipLab.text = @"出借期限";
         [_timeLimitTipLab sizeToFit];

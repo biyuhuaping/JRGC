@@ -257,6 +257,10 @@
 
 - (void)loadLoginViewController
 {
+    RTContainerController *controller = [SingGlobalView.rootNavController.viewControllers lastObject];
+    if ([controller.contentViewController isKindOfClass:[UCFNewLoginViewController class]]) {
+        return;
+    }
     UCFNewLoginViewController *vc = [[UCFNewLoginViewController alloc] init];
     [SingGlobalView.rootNavController pushViewController:vc animated:YES];
 }
