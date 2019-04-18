@@ -435,6 +435,11 @@
         {
             UCFProjectBasicDetailViewController *basicDetailVC = [[UCFProjectBasicDetailViewController alloc]initWithNibName:@"UCFProjectBasicDetailViewController" bundle:nil];
             basicDetailVC.dataDic = dataDic;
+            if ([self.model.data.busType isEqualToString:@"1"]) {
+                _detailType = PROJECTDETAILTYPERIGHTINTEREST;
+            } else {
+                _detailType = PROJECTDETAILTYPENORMAL;
+            }
             basicDetailVC.detailType = _detailType;
             basicDetailVC.accoutType = self.accoutType;
             basicDetailVC.projectId = [NSString stringWithFormat:@"%@",self.model.data.ID];

@@ -7,14 +7,16 @@
 //
 
 #import "UCFNewUserBidCell.h"
-#import "UIButton+Gradient.h"
+//#import "UIButton+Gradient.h"
 #import "UCFNewHomeListModel.h"
+#import "UIImage+Compression.h"
 @interface UCFNewUserBidCell()
 
 @property(nonatomic, strong)UILabel *termValueLab;
 @property(nonatomic, strong)UILabel *rateValueLab;
 @property(nonatomic, strong)UILabel *repayModelValueLab;
 @property(nonatomic, weak)  UCFNewHomeListPrdlist *dataModel;
+@property(nonatomic, strong)UIButton    *bidBtn;
 @end
 
 @implementation UCFNewUserBidCell
@@ -43,14 +45,17 @@
         button.clipsToBounds = YES;
         [whitBaseView addSubview:button];
         [button setTitle:@"立即出借" forState:UIControlStateNormal];
+        [button setTitle:@"已满标" forState:UIControlStateDisabled];
+
         button.titleLabel.font = [Color gc_Font:16];
         [button setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
             v.layer.cornerRadius = CGRectGetHeight(v.frame)/2;
-            NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
-            UIImage *image = [(UIButton *)v buttonImageFromColors:colorArray ByGradientType:leftToRight];
-            [(UIButton *)v setBackgroundImage:image forState:UIControlStateNormal];
+            
+            [(UIButton *)v setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(v.frame.size.width, v.frame.size.height)] forState:UIControlStateNormal];
+            [(UIButton *)v setBackgroundImage:[UIImage gc_styleGrayImageSize:CGSizeMake(v.frame.size.width, v.frame.size.height)] forState:UIControlStateDisabled];
         }];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        self.bidBtn = button;
         
         UILabel *termMarkLab = [[UILabel alloc] init];
         termMarkLab.text = @"出借期限";
@@ -121,6 +126,11 @@
     [self.rateValueLab sizeToFit];
     self.repayModelValueLab.text = self.dataModel .repayModeText;
     [self.repayModelValueLab sizeToFit];
+    if ([self.dataModel.status isEqualToString:@"2"]) {
+        self.bidBtn.enabled = YES;
+    } else {
+        self.bidBtn.enabled = NO;
+    }
 }
 - (void)buttonClick:(UIButton *)button
 {

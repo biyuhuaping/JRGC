@@ -102,7 +102,7 @@
         _selectCouponsBtn.leftPos.equalTo(@0);
         _selectCouponsBtn.widthSize.equalTo(@50);
         _selectCouponsBtn.heightSize.equalTo(@50 );
-        [_selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateSelected];
+        [_selectCouponsBtn setImage:[UIImage imageNamed:@"coupon_btn_selected"] forState:UIControlStateSelected];
         [_selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
     }
     return _selectCouponsBtn;
