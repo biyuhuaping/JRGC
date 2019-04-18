@@ -167,8 +167,8 @@
     [self.tabBar setClipsToBounds:YES];
     self.tabBar.barTintColor = [UIColor whiteColor];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorWithRGB(0x536f95), NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorWithRGB(0xfd4d4c), NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorWithRGB(0x333333), NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorWithRGB(0xff4133), NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6){
         [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];

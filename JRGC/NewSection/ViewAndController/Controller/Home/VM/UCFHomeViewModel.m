@@ -279,14 +279,16 @@
     } else {
         ShowMessage(model.message);
     }
-    CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"内容推荐" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
-    UCFCellDataModel *mallDataMode = [UCFCellDataModel new];
-    mallDataMode.modelType = @"recommend";
-    mallDataMode.data1 = self.recommendBannerArray;
-    data5_0.dataModel = mallDataMode;
-    NSMutableArray *section5 = [NSMutableArray arrayWithCapacity:1];
-    [section5 addObject:data5_0];
-    [self.dataArray addObject:section5];
+    if (self.recommendBannerArray.count > 0) {
+        CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"内容推荐" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
+        UCFCellDataModel *mallDataMode = [UCFCellDataModel new];
+        mallDataMode.modelType = @"recommend";
+        mallDataMode.data1 = self.recommendBannerArray;
+        data5_0.dataModel = mallDataMode;
+        NSMutableArray *section5 = [NSMutableArray arrayWithCapacity:1];
+        [section5 addObject:data5_0];
+        [self.dataArray addObject:section5];
+    }
     self.modelListArray = self.dataArray;
 }
 

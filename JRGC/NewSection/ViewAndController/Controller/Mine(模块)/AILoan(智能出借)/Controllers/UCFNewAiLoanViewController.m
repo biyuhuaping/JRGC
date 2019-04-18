@@ -29,6 +29,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    [_pageHeadView setSelectIndex:_selectIndex];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

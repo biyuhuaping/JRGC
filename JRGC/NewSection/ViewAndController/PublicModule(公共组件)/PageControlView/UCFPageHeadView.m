@@ -99,6 +99,13 @@
         [self.delegate pageHeadView:self selectIndex:button.tag - 100];
     }
 }
+- (void)setSelectIndex:(NSInteger)index
+{
+    UIButton *button = [self viewWithTag:100 +index];
+    if (button) {
+        [self click:button];
+    }
+}
 - (void)headViewSetSelectIndex:(NSInteger)index
 {
     for (UIView *view in self.subviews) {

@@ -101,10 +101,13 @@
             BOOL hasNextPage = [dic[@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
             if (hasNextPage) {
                 _currentPage++;
+                self.showTableView.enableRefreshFooter = YES;
+            } else {
+                self.showTableView.enableRefreshFooter = NO;
             }
             NSArray *dataArr = dic[@"pageData"][@"result"];
             [self.dataArray addObjectsFromArray:dataArr];
-            [self.showTableView reloadData];
+            [self.showTableView cyl_reloadData];
         } else {
             ShowMessage(rsttext);
         }
@@ -192,13 +195,12 @@
 - (BaseTableView *)showTableView
 {
     if (!_showTableView) {
-        _showTableView = [[BaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _showTableView = [[BaseTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 188 - NavigationBarHeight1) style:UITableViewStyleGrouped];
         _showTableView.delegate = self;
         _showTableView.dataSource = self;
         _showTableView.tableRefreshDelegate = self;
         _showTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        //        _showTableView.estimatedRowHeight = 60;
-        //        _showTableView.rowHeight = UITableViewAutomaticDimension;
+
     }
     return _showTableView;
 }

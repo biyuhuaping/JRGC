@@ -187,7 +187,6 @@
         {
             UCFHighQualityContainerViewController *vc = [[UCFHighQualityContainerViewController alloc] init];
             vc.accoutType = SelectAccoutTypeP2P;
-
             [self.navigationController pushViewController:vc animated:YES];
         }
         else if ([cellConfig.title isEqualToString:@"智能出借"])

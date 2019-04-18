@@ -12,6 +12,7 @@
 #import "UCFBatchSetNumWebViewController.h"
 #import "FullWebViewController.h"
 #import "UIImage+Compression.h"
+#import "UCFMicroBankDepositoryAccountHomeViewController.h"
 #define TITLEHEIGHT 50
 #define TITLEWIDTH  SCREEN_WIDTH/3
 #define IMAGEVIEWWIDTH 16
@@ -197,10 +198,6 @@
     [label1 setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"《批量出借咨询与服务协议》"];
     
     [_baseScrollView addSubview:label1];
-    
-
-        
-    
 }
 - (void)showHeTong
 {
@@ -224,14 +221,14 @@
 }
 - (void)initThirdSectionView
 {
-    CGFloat imgWidth = CGRectGetWidth(_baseScrollView.frame) - 43 * 2;
-    CGFloat imgHeight = imgWidth * 37 / 58;
+    CGFloat imgWidth = CGRectGetWidth(_baseScrollView.frame) - 36 * 2;
+    CGFloat imgHeight = imgWidth * 158 / 247;
     
-    UIImageView *sucessImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * 2 + 43, 40, imgWidth, imgHeight)];
+    UIImageView *sucessImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * 2 + 35, 35, imgWidth, imgHeight)];
     sucessImageView.image = [UIImage imageNamed:@"automatic_success"];
     [_baseScrollView addSubview:sucessImageView];
     
-    UILabel *tipLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2 , CGRectGetMaxY(sucessImageView.frame) + 21, ScreenWidth, 20)];
+    UILabel *tipLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2 , CGRectGetMaxY(sucessImageView.frame) + 18, ScreenWidth, 20)];
     tipLab.textColor = [Color color:PGColorOptionTitleBlack];
     tipLab.textAlignment = NSTextAlignmentCenter;
     tipLab.font = [Color gc_Font:18];
@@ -239,7 +236,7 @@
     [_baseScrollView addSubview:tipLab];
     
     
-    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(tipLab.frame) + 10, ScreenWidth, 16)];
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(tipLab.frame) + 5, ScreenWidth, 16)];
     tipLabel.text = [NSString stringWithFormat:@"批量出借单次最高限额：%@",[selectButton titleForState:UIControlStateNormal]];
     tipLabel.textAlignment = NSTextAlignmentCenter;
     tipLabel.font = [UIFont systemFontOfSize:15.0f];
@@ -247,6 +244,21 @@
     [_baseScrollView addSubview:tipLabel];
     
     
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(CGRectGetMinX(sucessImageView.frame), CGRectGetMaxY(tipLab.frame) + 30, CGRectGetWidth(sucessImageView.frame), 34);
+    [backBtn setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(CGRectGetWidth(sucessImageView.frame), 34)] forState:UIControlStateNormal];
+    backBtn.layer.cornerRadius = 17;
+    backBtn.clipsToBounds = YES;
+    backBtn.titleLabel.font = [Color gc_Font:16];
+    [backBtn setTitle:@"返回" forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [_baseScrollView addSubview:backBtn];
+    
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)initSecondBtnView:(CGFloat)offY
 {
@@ -710,12 +722,15 @@
 }
 - (void)dealloc
 {
-    if ([self.sourceType isEqualToString:@"personCenter"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-    } else if([self.sourceType isEqualToString:@"P2POrHonerAccoutVC"]){
-                [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
-    }else{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[UCFMicroBankDepositoryAccountHomeViewController class]]) {
+            [(UCFMicroBankDepositoryAccountHomeViewController *)vc refresh];
+        }
     }
 }
 /*

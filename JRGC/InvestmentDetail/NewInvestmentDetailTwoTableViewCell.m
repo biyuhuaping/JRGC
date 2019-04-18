@@ -216,7 +216,7 @@
         [self.rateValueLab sizeToFit];
         
         if ([[UCFToolsMehod isNullOrNilWithString:model.repayPeriod] isEqualToString:@""]) {
-            self.bidPeriodValueLab.text = @"标的期限：-";
+            self.bidPeriodValueLab.text = @"-";
         } else {
             self.bidPeriodValueLab.text = model.repayPeriod;
         }
