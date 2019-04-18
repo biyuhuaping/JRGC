@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView *unreadOrReadVIew;
 
 @property (weak,nonatomic) UITableView * tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bkViewTrailing;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageDetailTrilingSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageDateTrilingSpace;
@@ -28,8 +29,8 @@
 
 @implementation UCFMessageCenterCell
 - (void)setFrame:(CGRect)frame{
-    frame.origin.y += 11;
-    frame.size.height -= 11;
+//    frame.origin.y += 11;
+//    frame.size.height -= 11;
     [super setFrame:frame];
 }
 + (instancetype)cellWithTableView:(UITableView *)tableView
@@ -39,19 +40,20 @@
     
     if (!cell) {
         cell = [[UCFMessageCenterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, -0.5, ScreenWidth+32, 0.5)];
-        topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell.middleView addSubview:topLine];
-        
-        UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(cell.middleView.frame)-1, ScreenWidth+32, 0.5)];
-        midLine.backgroundColor = UIColorWithRGB(0xeff0f3);
-        [cell.middleView addSubview:midLine];
-        
-        UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(cell.downView.frame)-0.5, ScreenWidth+32, 0.5)];
-        bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell.downView addSubview:bottomLine];
-        cell.messageDateTrilingSpace.constant = 15;
-        cell.messageDetailTrilingSpace.constant = 15;
+        cell.backgroundColor = [Color  color:PGColorOpttonTabeleViewBackgroundColor];
+//        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, -0.5, ScreenWidth+32, 0.5)];
+//        topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//        [cell.middleView addSubview:topLine];
+//        
+//        UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(cell.middleView.frame)-1, ScreenWidth+32, 0.5)];
+//        midLine.backgroundColor = UIColorWithRGB(0xeff0f3);
+//        [cell.middleView addSubview:midLine];
+//        
+//        UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(cell.downView.frame)-0.5, ScreenWidth+32, 0.5)];
+//        bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//        [cell.downView addSubview:bottomLine];
+//        cell.messageDateTrilingSpace.constant = 15;
+//        cell.messageDetailTrilingSpace.constant = 15;
     }
     cell.tableView = tableView;
     return cell;
@@ -63,9 +65,9 @@
         self = [[[NSBundle mainBundle] loadNibNamed:@"UCFMessageCenterCell" owner:self options:nil] lastObject];
         self.selectionStyle = 0;
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(-21,49, 25,25);
-        [button setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateSelected];
+        button.frame = CGRectMake(-22,63, 22,22);
+        [button setImage:[UIImage imageNamed:@"coupon_btn_unselected"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"coupon_btn_selected"] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(clickEditButton:) forControlEvents:UIControlEventTouchUpInside];
         _editButton = button;
         [self addSubview:_editButton];
@@ -97,13 +99,14 @@
 - (void)starEditCell {
     [UIView animateWithDuration:0.25 animations:^{
         CGRect rect = self.contentView.frame;
-        rect.origin.x = 32;
+        rect.origin.x = 30;
         self.contentView.frame = rect;
         CGRect editButtonRect = _editButton.frame;
         editButtonRect.origin.x = 11;
         _editButton.frame = editButtonRect;
         self.messageDateTrilingSpace.constant = 47;
         self.messageDetailTrilingSpace.constant = 47;
+        self.bkViewTrailing.constant = 45;
     }];
 }
 #pragma mark -cell结束编辑状态，恢复原来状态
@@ -119,6 +122,7 @@
         _editButton.selected = NO;
         self.messageDateTrilingSpace.constant = 15;
         self.messageDetailTrilingSpace.constant = 15;
+        self.bkViewTrailing.constant = 15;
     }];
     
 }

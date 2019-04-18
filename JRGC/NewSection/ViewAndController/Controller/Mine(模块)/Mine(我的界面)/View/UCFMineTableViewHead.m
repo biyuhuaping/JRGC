@@ -373,7 +373,6 @@
         self.totalAssetsMoneyLabel.text = @"   ";//总资产
         self.expectedInterestMoneyLabel.text = @"";//总待收利息
         self.accountBalanceMoneyLabel.text = @"";//余额
-//        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
     }
     else
     {
@@ -425,11 +424,8 @@
     }
     else
     {
-        if ([self.memberLeverBtn superview]) {
-            [self.memberLeverBtn removeFromSuperview];
-            self.memberLeverBtn = nil;
-            [self.rootLayout addSubview:self.memberLeverBtn];
-        }
+        [self.memberLeverBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [self.memberLeverBtn setTitle:@"" forState:UIControlStateNormal];
         [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
     }
 }

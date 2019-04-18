@@ -412,14 +412,14 @@
         
         self.cowryContentLabel.text = [NSString stringWithFormat:@"%.2f",myModel.data.coinNum];//工贝
         self.beanContentLabel.text = [NSString stringWithFormat:@"¥%@",myModel.data.beanAmount];// 工豆
-        self.couponContentLabel.text = [NSString stringWithFormat:@"%zd",myModel.data.couponNumber];// 优惠券
+        self.couponContentLabel.text = [NSString stringWithFormat:@"%zd张可用",myModel.data.couponNumber];// 优惠券
         self.inviteContentLabel.text = myModel.data.promotionCode; // 邀请返利
     }
     else
     {
         self.cowryContentLabel.text = @"0.00";//工贝
         self.beanContentLabel.text = @"¥0.00";// 工豆
-        self.couponContentLabel.text = @"0";// 优惠券
+        self.couponContentLabel.text = @"0张可用";// 优惠券
         self.inviteContentLabel.text = @""; // 邀请返利
     }
     [self.cowryContentLabel sizeToFit];

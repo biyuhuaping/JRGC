@@ -18,7 +18,7 @@
 #import "UCFRegisterInputVerificationCodeViewController.h"
 #import "UIImageView+NetImageView.h"
 
-@interface UCFRegisterInputPhoneNumViewController ()<YTKChainRequestDelegate,UITextFieldDelegate>
+@interface UCFRegisterInputPhoneNumViewController ()<YTKChainRequestDelegate,UITextFieldDelegate,PublicPopupWindowViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
@@ -118,6 +118,16 @@
     self.navigationItem.leftBarButtonItem = leftItem;
 }
 - (void)getToBack
+{
+    
+    UCFPopViewWindow *popView = [UCFPopViewWindow new];
+    popView.delegate = self;
+    popView.type = POPRegisterRenounce;
+    popView.controller = self;
+    [popView startPopView];
+}
+
+- (void)popCancelButtonClick:(UIButton *)btn
 {
     [SingGlobalView.rootNavController popViewControllerAnimated:YES];
 }
@@ -322,6 +332,7 @@
         _registerAgreeLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
         _registerAgreeLabel.text = @"*注册即视为本人已阅读并同意《金融工场用户服务协议》";
         _registerAgreeLabel.userInteractionEnabled = YES;
+        _registerAgreeLabel.wrapContentHeight = YES;
         [_registerAgreeLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"《金融工场用户服务协议》"];
         [_registerAgreeLabel sizeToFit];
         __weak typeof(self) weakSelf = self;

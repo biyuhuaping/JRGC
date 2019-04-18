@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4H4-IL-vcc">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pvx-kl-tRy">
                                                 <rect key="frame" x="0.0" y="10" width="375" height="65"/>
@@ -287,17 +287,6 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sQK-8C-lQv">
-                                                <rect key="frame" x="0.0" y="369" width="375" height="144"/>
-                                                <color key="backgroundColor" red="0.89019607840000003" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="144" id="Kuj-6E-IhO"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="3AR-Rt-IIC" id="9nN-gX-aE3"/>
-                                                    <outlet property="delegate" destination="3AR-Rt-IIC" id="3Tf-pY-GCJ"/>
-                                                </connections>
-                                            </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRA-n7-USF">
                                                 <rect key="frame" x="25" y="528" width="325" height="40"/>
                                                 <constraints>
@@ -431,6 +420,17 @@
                                                     <constraint firstItem="O9U-EW-Grl" firstAttribute="leading" secondItem="dAd-dv-3ZG" secondAttribute="leading" constant="15" id="poi-py-79B"/>
                                                 </constraints>
                                             </view>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sQK-8C-lQv">
+                                                <rect key="frame" x="0.0" y="369" width="375" height="144"/>
+                                                <color key="backgroundColor" red="0.89019607840000003" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="144" id="Kuj-6E-IhO"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="3AR-Rt-IIC" id="9nN-gX-aE3"/>
+                                                    <outlet property="delegate" destination="3AR-Rt-IIC" id="3Tf-pY-GCJ"/>
+                                                </connections>
+                                            </tableView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -450,7 +450,7 @@
                                             <constraint firstItem="fRA-n7-USF" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" constant="25" id="MVe-8G-fIH"/>
                                             <constraint firstAttribute="trailing" secondItem="pDj-fU-5d2" secondAttribute="trailing" constant="15" id="Nr2-Fs-Xjm"/>
                                             <constraint firstItem="msM-Ky-E98" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" id="OWP-1T-IYF"/>
-                                            <constraint firstAttribute="height" constant="600" id="PkO-dp-HWp"/>
+                                            <constraint firstAttribute="height" constant="667" id="PkO-dp-HWp"/>
                                             <constraint firstAttribute="trailing" secondItem="2aF-9T-lnY" secondAttribute="trailing" constant="15" id="QOf-c6-g0b"/>
                                             <constraint firstItem="IwO-yI-fVn" firstAttribute="left" secondItem="4H4-IL-vcc" secondAttribute="left" constant="15" id="YdT-tn-Oxd"/>
                                             <constraint firstAttribute="right" secondItem="IwO-yI-fVn" secondAttribute="right" constant="15" id="fLz-re-u7p"/>
@@ -484,7 +484,7 @@
                                 <constraints>
                                     <constraint firstItem="4H4-IL-vcc" firstAttribute="top" secondItem="6ji-TQ-eRP" secondAttribute="top" id="27x-Dx-ppG"/>
                                     <constraint firstAttribute="centerX" secondItem="4H4-IL-vcc" secondAttribute="centerX" id="Dpw-ad-T93"/>
-                                    <constraint firstAttribute="bottom" secondItem="4H4-IL-vcc" secondAttribute="bottom" constant="10" id="KAo-yU-lHl"/>
+                                    <constraint firstAttribute="bottom" secondItem="4H4-IL-vcc" secondAttribute="bottom" id="KAo-yU-lHl"/>
                                     <constraint firstItem="4H4-IL-vcc" firstAttribute="leading" secondItem="6ji-TQ-eRP" secondAttribute="leading" id="ULZ-g7-IXO"/>
                                     <constraint firstAttribute="trailing" secondItem="4H4-IL-vcc" secondAttribute="trailing" id="trl-KA-beS"/>
                                 </constraints>

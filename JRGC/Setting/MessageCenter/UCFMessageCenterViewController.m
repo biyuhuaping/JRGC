@@ -63,7 +63,23 @@
     [self addLeftButton];
     [self createUI];//初始化页面
     //初始化下拉菜单
-    [self addRightButtonWithImage:[UIImage imageNamed:@"message_btn_setting"]];
+//    [self addRightButtonWithImage:[UIImage imageNamed:@"message_btn_setting"]];
+    [self addRightButtonWithName:@"更多操作"];
+}
+- (void)addRightButtonWithName:(NSString *)rightButtonName
+{
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.frame = CGRectMake(0, 0, 44, 44);
+    rightbutton.backgroundColor = [UIColor clearColor];
+    [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
+    rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+//    rightbutton.titleLabel.textColor = [UIColor blackColor];
+    [rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 #pragma mark 初始化页面
 -(void)createUI
@@ -76,10 +92,10 @@
     __weak typeof(self) weakSelf = self;
     //下拉刷新
     
-    _messageTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,1,ScreenWidth,ScreenHeight - NavigationBarHeight-1) style:UITableViewStylePlain];
+    _messageTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0,ScreenWidth,ScreenHeight - NavigationBarHeight-1) style:UITableViewStylePlain];
     _messageTableView.delegate = self;
     _messageTableView.dataSource = self;
-    _messageTableView.backgroundColor = UIColorWithRGB(0xEBEBEE);
+    _messageTableView.backgroundColor = UIColorWithRGB(0xf5f5f5);
     [self.view addSubview:_messageTableView];
     
     
@@ -87,10 +103,10 @@
     _deleteBaseView.tag = 999999;
     [_deleteBaseView setBackgroundColor:[UIColor whiteColor]];
     self.allChooseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _allChooseBtn.frame = CGRectMake(11,16,25, 25);
+    _allChooseBtn.frame = CGRectMake(16,16,22, 22);
     _allChooseBtn.layer.cornerRadius = 5.0f;
-    [_allChooseBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
-    [_allChooseBtn setImage:[UIImage imageNamed:@"invest_btn_select_highlight"] forState:UIControlStateSelected];
+    [_allChooseBtn setImage:[UIImage imageNamed:@"coupon_btn_unselected"] forState:UIControlStateNormal];
+    [_allChooseBtn setImage:[UIImage imageNamed:@"coupon_btn_selected"] forState:UIControlStateSelected];
     [_allChooseBtn addTarget:self action:@selector(ClickAllChoose:) forControlEvents:UIControlEventTouchUpInside];
     [_deleteBaseView addSubview:_allChooseBtn];
     
@@ -105,8 +121,10 @@
     [_deleteMessageBtn setTitle:@"删除" forState:UIControlStateNormal];
     _deleteMessageBtn.frame = CGRectMake(CGRectGetMaxX(allChooseLab.frame)+8,10,ScreenWidth - CGRectGetMaxX(allChooseLab.frame)- 8 - 15, 37);
     _deleteMessageBtn.userInteractionEnabled = NO;
-    _deleteMessageBtn.layer.cornerRadius = 2.0f;
-    [_deleteMessageBtn setBackgroundColor:UIColorWithRGB(0xd4d4d4)];
+    _deleteMessageBtn.layer.cornerRadius = 20.0f;
+    _deleteMessageBtn.layer.masksToBounds = YES;
+//    [_deleteMessageBtn setBackgroundColor:UIColorWithRGB(0xd4d4d4)];
+    [_deleteMessageBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
     [_deleteMessageBtn addTarget:self action:@selector(clickDeleteChooseMessage:) forControlEvents:UIControlEventTouchUpInside];
     [_deleteBaseView addSubview:_deleteMessageBtn];
     UIImage *bgShadowImage= [UIImage imageNamed:@"tabbar_shadow.png"];
@@ -208,13 +226,13 @@
 #pragma mark - 右边设置按钮点击
 - (void)clickRightBtn{
     [self customCell];
-    _selectMenuView.arrow_offset = 0.9;
+    _selectMenuView.arrow_offset = 0.0;
     _selectMenuView.vhShow = NO;
     _selectMenuView.hightIMAGThanTABLE = 4;
-    _selectMenuView.tablviewBGname = @"messageCenter_option_bg";
+//    _selectMenuView.tablviewBGname = @"messageCenter_option_bg";
     
     _selectMenuView.optionType = MLMOptionSelectViewTypeCustom;
-    [_selectMenuView setBackColor:[UIColor clearColor]];
+    [_selectMenuView setBackColor:[Color color:PGColorOptionThemeWhite]];
     _selectMenuView.maxLine = 3;
     
     
@@ -229,15 +247,15 @@
     [_selectMenuView registerNib:[UINib nibWithNibName:@"JRGCCustomGroupCell" bundle:nil] forCellReuseIdentifier:@"CustomCell"];
     _selectMenuView.cell = ^(NSIndexPath *indexPath){
         JRGCCustomGroupCell *cell = [weakSelf.selectMenuView dequeueReusableCellWithIdentifier:@"CustomCell"];
-          cell.lineUp.hidden = YES;
+          cell.lineUp.hidden = NO;
         cell.label1.text = weaklistArray[indexPath.row];
         if ([indexPath row] == 0 && !weakSelf.isFirstClick)
         {
-           cell.label1.textColor = UIColorWithRGB(0x7c8ab0);
+           cell.label1.textColor = [UIColor blackColor];
         } else if([indexPath row] == 1 && !weakSelf.isSecondClick){
-            cell.label1.textColor = UIColorWithRGB(0x7c8ab0);
+            cell.label1.textColor = [UIColor blackColor];
         }else{
-            cell.label1.textColor = [UIColor whiteColor];
+            cell.label1.textColor = [UIColor blackColor];
         }
         cell.label1.font = [UIFont systemFontOfSize:12.f];
 
@@ -336,7 +354,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 96;
+    return 132;
 }
 #pragma mark -
 #pragma mark cell代理方法 是否左侧滑
@@ -386,7 +404,8 @@
 -(void)cancelMutableDelete:(UIButton *)cancelButton{
     [self cancelEditTableView];
     
-    [self addRightButtonWithImage:[UIImage imageNamed:@"message_btn_setting"]];
+//    [self addRightButtonWithImage:[UIImage imageNamed:@"message_btn_setting"]];
+    [self addRightButtonWithName:@"更多操作"];
     self.messageTableView.header.hidden = NO;
     self.deleteBaseView.hidden = YES;
 }
@@ -497,9 +516,11 @@
     if (chooseCells.count == 0) {
         _deleteMessageBtn.userInteractionEnabled = NO;
         [_deleteMessageBtn setBackgroundColor:UIColorWithRGB(0xd4d4d4)];
+        [_deleteMessageBtn setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
     }else{
         _deleteMessageBtn.userInteractionEnabled = YES;
-        [_deleteMessageBtn setBackgroundColor:UIColorWithRGB(0xfd4d4c)];
+//        [_deleteMessageBtn setBackgroundColor:UIColorWithRGB(0xfd4d4c)];
+        [_deleteMessageBtn setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
     }
 
     if (chooseCells.count == self.messageDataArray.count && self.messageDataArray.count!=0) {

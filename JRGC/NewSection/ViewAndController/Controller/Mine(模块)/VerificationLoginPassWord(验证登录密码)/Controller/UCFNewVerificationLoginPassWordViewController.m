@@ -124,7 +124,7 @@
         _oldPasswordTextField.textColor = [Color color:PGColorOptionTitleBlack];
         _oldPasswordTextField.heightSize.equalTo(@25);
         _oldPasswordTextField.leftPos.equalTo(self.oldPassWordImageView.rightPos).offset(9);
-        _oldPasswordTextField.myRight = 25;
+        _oldPasswordTextField.rightPos.equalTo(self.showPassWordBtn.leftPos).offset(20);
         _oldPasswordTextField.centerYPos.equalTo(self.oldPassWordImageView.centerYPos);
         _oldPasswordTextField.userInteractionEnabled = YES;
         [_oldPasswordTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];

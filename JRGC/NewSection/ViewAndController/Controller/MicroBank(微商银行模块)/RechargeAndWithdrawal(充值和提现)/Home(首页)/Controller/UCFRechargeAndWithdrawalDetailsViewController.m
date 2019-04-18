@@ -77,7 +77,16 @@
         _bkImageView.myTop = 80;
         _bkImageView.myWidth = 180;
         _bkImageView.myHeight = 97;
-        _bkImageView.image = [UIImage imageNamed:@"my_ account_balance"];
+        if (self.accoutType == SelectAccoutTypeP2P) {
+            _bkImageView.image = [UIImage imageNamed:@"my_ account_balance"];
+        }
+        else if (self.accoutType == SelectAccoutTypeHoner){
+            _bkImageView.image = [UIImage imageNamed:@"zunxiang_ account_balance"];
+        }
+        else if (self.accoutType == SelectAccoutTypeGold){
+            _bkImageView.image = [UIImage imageNamed:@"gold_ account_balance"];
+        }
+        
     }
     return _bkImageView;
 }
@@ -305,8 +314,9 @@
         [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
         return;
     }
-    if( [self checkIDAAndBankBlindState:self.accoutType])
-    { //判断是否设置交易密码
+//    if( [self checkIDAAndBankBlindState:self.accoutType])
+    if ([self checkUserCanInvestIsDetail:NO type:self.accoutType])//判断是否设置交易密码
+    {
         NSMutableDictionary *parmDict = [NSMutableDictionary dictionaryWithCapacity:2];
         [parmDict setValue:[NSString stringWithFormat:@"%@",SingleUserInfo.loginData.userInfo.openStatus] forKey:@"userSatues"];
         [parmDict setValue:@"1" forKey:@"fromSite"];

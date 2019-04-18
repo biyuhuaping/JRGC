@@ -74,16 +74,20 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-     [_textContextView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#F9F9F9'"];
+     [_textContextView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#000000'"];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView*)webView{
     //字体大小
-    [_textContextView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '80%'"];
+//    [_textContextView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '80%'"];
+     float fontSize = 16;
+     NSString *jsString = [[NSString alloc] initWithFormat:@"document.body.style.fontSize=%f;",fontSize];
+     [webView stringByEvaluatingJavaScriptFromString:jsString];
+ 
     //字体颜色
 //    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#555555'"];
     //页面背景色
-    [_textContextView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#F9F9F9'"];
+    [_textContextView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#FFFFFF'"];
 }
 
 #pragma mark - 网络请求
