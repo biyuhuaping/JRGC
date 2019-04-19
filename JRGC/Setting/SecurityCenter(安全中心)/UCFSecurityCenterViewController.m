@@ -885,4 +885,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getPersonalCenterNetData" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateFaceSwitchSwip" object:nil];
 }
+-(void)refresh
+{
+    [self getSecurityCenterNetData];
+}
 @end

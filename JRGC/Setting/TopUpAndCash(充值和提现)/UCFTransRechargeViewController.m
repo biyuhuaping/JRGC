@@ -36,7 +36,7 @@
     } else if (button.tag == 102) {
         rechargeLimiteUrl = @"https://static.9888.cn/pages/transferNotice/zs_notice.html";
     }
-    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:rechargeLimiteUrl title:@"银行充值限额"];
+    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:rechargeLimiteUrl title:@"转账充值流程"];
     webController.sourceVc = @"topUpVC";//充值页面
     webController.baseTitleType = @"specialUser";
     [((UIViewController *)self.rootVc).navigationController pushViewController:webController animated:YES];

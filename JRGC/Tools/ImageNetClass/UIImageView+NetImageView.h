@@ -10,7 +10,7 @@
 typedef enum {
     CustomerService = 0,    //客服信息
     BidSuccess,             //投标成功
-    UserRegistration,       //用户注册
+    UserRegistration = 31,       //用户注册
     BidTransfer             //债券转让首页
 } BannerStyle;
 @interface UIImageView (NetImageView)

@@ -156,7 +156,7 @@
         _memberLeverBtn.bottomPos.equalTo(self.headImageBtn.bottomPos).offset(5);
         _memberLeverBtn.leftPos.equalTo(self.headImageBtn.rightPos).offset(0);
         _memberLeverBtn.myHeight = 24;
-        _memberLeverBtn.myWidth = 75;
+        _memberLeverBtn.myWidth = 80;
         _memberLeverBtn.tag = 10006;
         [_memberLeverBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         _memberLeverBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
