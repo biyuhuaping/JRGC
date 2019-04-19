@@ -8,7 +8,7 @@
 
 #import "RCFFlowView.h"
 #import "HQFlowView.h"
-#import "HQImagePageControl.h"
+
 #import "UIImageView+WebCache.h"
 #define JkScreenHeight [UIScreen mainScreen].bounds.size.height
 #define JkScreenWidth [UIScreen mainScreen].bounds.size.width
@@ -17,7 +17,6 @@
 /**
  *  轮播图
  */
-@property (nonatomic, strong) HQImagePageControl *pageC;
 @property (nonatomic, strong) HQFlowView         *pageFlowView;
 @property (nonatomic, strong) UIScrollView       *scrollView; // 轮播图容器
 @end

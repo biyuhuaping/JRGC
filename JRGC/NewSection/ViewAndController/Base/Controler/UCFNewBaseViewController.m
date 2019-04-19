@@ -81,11 +81,11 @@
 - (void)addRightbuttonImageName:(NSString *)name
 {
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [rightButton setFrame:CGRectMake(0, 0, 26, 26)];
     [rightButton setBackgroundColor:[UIColor clearColor]];
     [rightButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [rightButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
-    [rightButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
+    [rightButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0, 0.0, 0.0)];
     [rightButton setImage:[UIImage imageNamed:name]forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(rightBarClicked:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
@@ -97,6 +97,7 @@
     [btn1 addTarget:self action:@selector(leftBar1Clicked) forControlEvents:UIControlEventTouchUpInside];
     [btn1 setTitle:title forState:UIControlStateNormal];
     [btn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn1.titleLabel.font = [Color gc_Font:17];
     [btn1 sizeToFit];
     UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithCustomView:btn1];
     self.navigationItem.leftBarButtonItem = item1;

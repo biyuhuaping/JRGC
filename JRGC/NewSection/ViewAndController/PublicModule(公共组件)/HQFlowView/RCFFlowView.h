@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HQImagePageControl.h"
 NS_ASSUME_NONNULL_BEGIN
 @class RCFFlowView;
 @protocol RCFFlowViewDelegate <NSObject>
@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property (nonatomic, assign) BOOL isHideImageCorner;
+
+@property (nonatomic, strong) HQImagePageControl *pageC;
 
 - (void)reloadCycleView;
 

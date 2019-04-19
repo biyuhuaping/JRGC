@@ -24,6 +24,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.webView reload];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

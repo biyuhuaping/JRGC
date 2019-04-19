@@ -210,9 +210,6 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
-//    else {
-//        [self setZeroForTapMineNum];
-//    }
 }
 
 - (void)setZeroForTapMineNum {

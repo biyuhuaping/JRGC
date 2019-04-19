@@ -27,7 +27,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-        _shopBottomSectionHeight = 45;
+        _shopBottomSectionHeight = 48;
         UCFShopHListView *shopList = [[UCFShopHListView alloc] initWithFrame:CGRectMake(15, 0, [[UIScreen mainScreen] bounds].size.width - 15, 105 + _shopBottomSectionHeight)];
         shopList.horizontalSpace = 5.0f;
         shopList.dataSource = self;

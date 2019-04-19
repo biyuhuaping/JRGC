@@ -104,9 +104,9 @@
     [self.leftTopbutton setImage:[UIImage imageNamed:@"regist_coupon_icon"] forState:UIControlStateNormal];
     [self.leftTopbutton setImage:[UIImage imageNamed:@"home_icon_sign_finish"] forState:UIControlStateDisabled];
     [self.leftTopbutton setTitle:@"注册领券" forState:UIControlStateNormal];
-    [self.leftTopbutton setTitle:@"已注册" forState:UIControlStateDisabled];
+    [self.leftTopbutton setTitle:@"已注册   " forState:UIControlStateDisabled];
     [self.leftTopbutton addTarget:self action:@selector(buttonclick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.leftTopbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
+    [self.leftTopbutton setTitleColor:[Color color:PGColorOptionTitleBlack] forState:UIControlStateNormal];
     [self.leftTopbutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateDisabled];
     [self.leftTopbutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
 
@@ -117,7 +117,7 @@
     [self.rightTopbutton setImage:[UIImage imageNamed:@"hs_account_icon"] forState:UIControlStateNormal];
     [self.rightTopbutton setImage:[UIImage imageNamed:@"home_icon_account_finish"] forState:UIControlStateDisabled];
     [self.rightTopbutton setTitle:@"存管开户" forState:UIControlStateNormal];
-    [self.rightTopbutton setTitle:@"已开户" forState:UIControlStateDisabled];
+    [self.rightTopbutton setTitle:@"已开户   " forState:UIControlStateDisabled];
     [self.rightTopbutton layoutButtonWithEdgeInsetsStyle:GLButtonEdgeInsetsStyleLeft imageTitleSpace:10];
     self.rightTopbutton.titleLabel.font = [Color gc_Font:17];
     [self.rightTopbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
@@ -134,7 +134,7 @@
     [self.leftBottombutton setImage:[UIImage imageNamed:@"home_risk_account"] forState:UIControlStateDisabled];
 
     [self.leftBottombutton setTitle:@"风险评测" forState:UIControlStateNormal];
-    [self.leftBottombutton setTitle:@"已评测" forState:UIControlStateDisabled];
+    [self.leftBottombutton setTitle:@"已评测   " forState:UIControlStateDisabled];
     [self.leftBottombutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [self.leftBottombutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateDisabled];
     

@@ -61,7 +61,7 @@
         [whitBaseView addSubview:shopList];
         
         UIView *lineView = [[UIView alloc] init];
-        lineView.frame = CGRectMake(0, 75, ScreenWidth - 30, 1);
+        lineView.frame = CGRectMake(0, 75, ScreenWidth - 30, 0.5);
         lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         [whitBaseView addSubview:lineView];
         
@@ -131,7 +131,7 @@
     button.frame = CGRectMake(0, 0,(ScreenWidth - 30)/4.0f, 75);
     [button setBackgroundColor:[Color color:PGColorOptionThemeWhite]];
     button.titleLabel.font = [Color gc_Font:12];
-    [button setTitleColor:[Color color:PGColorOptionTitleBlackGray] forState:UIControlStateNormal];
+    [button setTitleColor:[Color color:PGColorOptionTitleBlack] forState:UIControlStateNormal];
     return button;
 }
 - (void)layoutSubviews

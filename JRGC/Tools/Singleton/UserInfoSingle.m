@@ -211,7 +211,7 @@
                 self.loginData.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
                 self.loginData.userInfo.isRisk = [userDict[@"isRisk"] boolValue];
                 self.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
-                self.loginData.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
+                self.loginData.userInfo.zxAuthorization = [userDict[@"zxAuthorization"] boolValue];
                 self.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
                 [self updateUserData];
                 
@@ -238,21 +238,6 @@
     [[NSUserDefaults standardUserDefaults] setValue:[self.loginData yy_modelToJSONString] forKey:LOGINDATA];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 - (void)loadLoginViewController

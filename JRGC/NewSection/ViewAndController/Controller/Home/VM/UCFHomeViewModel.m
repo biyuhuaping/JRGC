@@ -247,7 +247,7 @@
         self.boutiqueUrl = model.data.mallSelectedUrl;
         
         CGFloat bannerHegit = model.data.mallBannerList.count != 0 ? (ScreenWidth - 30) * 6 /23 : 0;
-        CGFloat shopHeight = model.data.mallDiscounts.count != 0 ? (ScreenWidth - 30)/3 + 45 : 0 ;
+        CGFloat shopHeight = model.data.mallDiscounts.count != 0 ? (ScreenWidth - 30)/3 + 48 : 0 ;
         
         CellConfig *data3_0 = [CellConfig cellConfigWithClassName:@"UCFShopPromotionCell" title:@"商城特惠" showInfoMethod:sel heightOfCell:(bannerHegit  + shopHeight)];
         UCFCellDataModel *dataMode = [UCFCellDataModel new];
@@ -265,7 +265,7 @@
             [self.dataArray addObject:section3];
         }
         
-        CGFloat boutiqueHeight = model.data.mallSelected.count != 0 ? 105 + 45 : 0;
+        CGFloat boutiqueHeight = model.data.mallSelected.count != 0 ? 105 + 48 : 0;
         NSMutableArray *section4 = [NSMutableArray arrayWithCapacity:1];
         CellConfig *data4_0 = [CellConfig cellConfigWithClassName:@"UCFBoutiqueCell" title:@"商城精选" showInfoMethod:sel heightOfCell:boutiqueHeight];
         UCFCellDataModel *dataMode1 = [UCFCellDataModel new];

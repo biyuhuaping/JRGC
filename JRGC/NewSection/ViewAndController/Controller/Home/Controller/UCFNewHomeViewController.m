@@ -88,7 +88,6 @@
     [self.rootLayout addSubview:self.showTableView];
     self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     
-    
     HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
     homeHeadView.myTop = 0;
     CGFloat height =  ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
@@ -99,15 +98,12 @@
     homeHeadView.delegate = self;
     self.homeHeadView = homeHeadView;
     
-
     self.showTableView.tableHeaderView = self.homeHeadView;
-    
     HomeFootView *homefootView = [HomeFootView new];
     homefootView.myHeight = 181;
     homefootView.myHorzMargin = 0;
     [homefootView createSubviews];
     self.showTableView.tableFooterView = homefootView;
-    
     
     [self blindVM];
     [self fetchData];
@@ -357,7 +353,7 @@
 - (void)pushWebViewWithUrl:(NSString *)url Title:(NSString *)title
 {
     UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-    web.url = [NSString stringWithFormat:@"%@?closeView=true",url];
+//    web.url = [NSString stringWithFormat:@"%@?closeView=true",url];
     web.title = title;
     web.isHidenNavigationbar = YES;
     [self.navigationController pushViewController:web animated:YES];

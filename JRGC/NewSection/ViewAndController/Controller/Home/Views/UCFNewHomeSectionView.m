@@ -33,8 +33,9 @@
         
         UILabel *label = [[UILabel alloc] init];
         label.leftPos.equalTo(iconView.rightPos).offset(8);
-        label.myBottom = 10;
+        label.centerYPos.equalTo(iconView.centerYPos).offset(-1);
         label.text = @"新手专享";
+        label.font = [Color gc_Font:18];
         [self.rootLayout addSubview:label];
         [label sizeToFit];
         self.titleLab = label;
