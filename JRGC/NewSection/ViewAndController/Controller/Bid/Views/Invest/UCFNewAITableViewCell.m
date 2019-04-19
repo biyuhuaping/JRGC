@@ -195,6 +195,7 @@
             }else{
                 self.investButton.userInteractionEnabled = NO;
                 [self.investButton setTitle:@"已售罄" forState:UIControlStateNormal];
+
                 
             }
         }
@@ -222,7 +223,7 @@
         self.timeLimitLab.textColor = [Color color:PGColorOptionTitleBlackGray];
         NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
         UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
-        self.iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+        self.iconView.backgroundColor = [Color color:PGColorOptionTitleOrange];;
         [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
         
     } else {

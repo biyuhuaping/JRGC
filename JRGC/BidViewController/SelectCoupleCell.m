@@ -24,7 +24,7 @@
 {
     _selectedBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"invest_btn_select_normal.png"] forState:UIControlStateNormal];
-    [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"invest_btn_select_highlight.png"] forState:UIControlStateSelected];
+    [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"coupon_btn_selected.png"] forState:UIControlStateSelected];
     _selectedBtn.frame = CGRectMake(12, (82- 25)/2.0, 25, 25);
     [_selectedBtn addTarget:self action:@selector(changeSelectedStatue:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_selectedBtn];
@@ -122,7 +122,7 @@
             [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"invest_btn_choice_highlight.png"] forState:UIControlStateSelected];
         } else {
             [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"invest_btn_select_normal.png"] forState:UIControlStateNormal];
-            [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"invest_btn_select_highlight.png"] forState:UIControlStateSelected];
+            [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"coupon_btn_selected.png"] forState:UIControlStateSelected];
         }
         if (![[self.dataDict objectForKey:@"inverstPeriod"] isEqual:[NSNull null]]) {
             NSInteger inverstPeriod = [[self.dataDict objectForKey:@"inverstPeriod"] integerValue];

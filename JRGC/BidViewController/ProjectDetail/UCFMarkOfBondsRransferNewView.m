@@ -1120,7 +1120,7 @@
                     [cell.contentView addSubview:renzhengLabel];
                     
                     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(renzhengLabel.frame.origin.x - 5 - 14, imgYPos, 14, 14)];
-                    imageView.image = [UIImage imageNamed:@"particular_icon_certification.png"];
+                    imageView.image = [UIImage imageNamed:@"coupon_btn_selected.png"];
                     imageView.tag = 104;
                     [cell.contentView addSubview:imageView];
                     
@@ -1389,7 +1389,7 @@
                     [cell.contentView addSubview:renzhengLabel];
                     
                     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(renzhengLabel.frame.origin.x - 5 - 14, imgYPos, 14, 14)];
-                    imageView.image = [UIImage imageNamed:@"particular_icon_certification.png"];
+                    imageView.image = [UIImage imageNamed:@"coupon_btn_selected.png"];
                     imageView.tag = 104;
                     [cell.contentView addSubview:imageView];
                     

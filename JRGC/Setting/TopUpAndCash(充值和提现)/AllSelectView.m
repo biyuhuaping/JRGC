@@ -27,7 +27,7 @@
     
     _selectedBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"invest_btn_select_normal.png"] forState:UIControlStateNormal];
-    [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"invest_btn_select_highlight.png"] forState:UIControlStateSelected];
+    [_selectedBtn setBackgroundImage:[UIImage imageNamed:@"coupon_btn_selected.png"] forState:UIControlStateSelected];
     _selectedBtn.frame = CGRectMake(12, (37.5 - 25)/2.0, 25, 25);
     _selectedBtn.tag = 1000;
     [_selectedBtn addTarget:self action:@selector(allSelected:) forControlEvents:UIControlEventTouchUpInside];

@@ -9,7 +9,7 @@
 #import "UCFNoPermissionViewController.h"
 #import "UILabel+Misc.h"
 #import "UIImage+Misc.h"
-
+#import "UIImage+Compression.h"
 @interface UCFNoPermissionViewController ()
 {
     NSString *_title;
@@ -57,25 +57,22 @@
     UIView *bkView = [[UIView alloc] initWithFrame:CGRectMake(0, (ScreenHeight - 64 - 296) / 2 , ScreenWidth, 296)];
 
     baseTitleLabel.text = _title;
-    UIImageView *logoImageVW = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 234)/2, 0, 234, 178)];
+    UIImageView *logoImageVW = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 246)/2, 0, 246, 157)];
     logoImageVW.image = [UIImage imageNamed:@"invisible_bg.png"];
     [bkView addSubview:logoImageVW];
     
-    UILabel *infoLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(logoImageVW.frame) + 33, ScreenWidth, 18) text:_infoStr textColor:UIColorWithRGB(0x8591b3) font:[UIFont systemFontOfSize:18]];
+    UILabel *infoLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(logoImageVW.frame) + 33, ScreenWidth, 15) text:_infoStr textColor:[Color color:PGColorOptionTitleGray] font:[UIFont systemFontOfSize:13]];
     [bkView addSubview:infoLabel];
     
     UIButton *lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    lookBtn.frame = CGRectMake((ScreenWidth - 137) / 2,CGRectGetMaxY(infoLabel.frame) + 30, 137, 37);
+    lookBtn.frame = CGRectMake((ScreenWidth - 246) / 2,CGRectGetMaxY(infoLabel.frame) + 30, 246, 37);
     [lookBtn addTarget:self action:@selector(lookBtn:) forControlEvents:UIControlEventTouchUpInside];
     [lookBtn setTitle:@"再去转转" forState:UIControlStateNormal];
-    lookBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-    lookBtn.layer.cornerRadius = 4.0f;
+    lookBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    lookBtn.layer.cornerRadius = 37/2.0f;
+    lookBtn.clipsToBounds = YES;
     lookBtn.titleLabel.textColor = [UIColor whiteColor];
-    
-    UIImage *normalImageForTopUp = [[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5];
-    UIImage *highlightImageForTopUp = [[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5];
-    [lookBtn setBackgroundImage:normalImageForTopUp forState:UIControlStateNormal];
-    [lookBtn setBackgroundImage:highlightImageForTopUp forState:UIControlStateHighlighted];
+    [lookBtn setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(288, 37)] forState:UIControlStateNormal];
     [bkView addSubview:lookBtn];
     
     [self.view addSubview:bkView];

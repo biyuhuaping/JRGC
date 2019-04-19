@@ -211,7 +211,7 @@
                 self.loginData.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
                 self.loginData.userInfo.isRisk = [userDict[@"isRisk"] boolValue];
                 self.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
-                self.loginData.userInfo.zxAuthorization = [NSString stringWithFormat:@"%@",userDict[@"zxAuthorization"]];
+                self.loginData.userInfo.zxAuthorization = [userDict[@"zxAuthorization"] boolValue];
                 self.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
                 [self updateUserData];
                 
@@ -240,23 +240,12 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 - (void)loadLoginViewController
 {
+    RTContainerController *controller = [SingGlobalView.rootNavController.viewControllers lastObject];
+    if ([controller.contentViewController isKindOfClass:[UCFNewLoginViewController class]]) {
+        return;
+    }
     UCFNewLoginViewController *vc = [[UCFNewLoginViewController alloc] init];
     [SingGlobalView.rootNavController pushViewController:vc animated:YES];
 }

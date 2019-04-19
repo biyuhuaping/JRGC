@@ -31,7 +31,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         self.rootLayout.useFrame = YES;
-        _shopBottomSectionHeight = 45;
+        _shopBottomSectionHeight = 48;
         UIView *whitBaseView = [UIView new];
         CGFloat shopHeight = (ScreenWidth - 30)/3.0f + _shopBottomSectionHeight;
         whitBaseView.frame = CGRectMake(15, 0,  ScreenWidth - 30, (ScreenWidth - 30) * 6 /23 + shopHeight);
@@ -42,6 +42,7 @@
         
         RCFFlowView *adCycleScrollView = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 30,([UIScreen mainScreen].bounds.size.width - 30) * 6 /23)];
         adCycleScrollView.delegate = self;
+        adCycleScrollView.pageC.frame = CGRectMake(CGRectGetMinX(adCycleScrollView.pageC.frame), CGRectGetMinY(adCycleScrollView.pageC.frame) + 5, CGRectGetWidth(adCycleScrollView.pageC.frame), CGRectGetHeight(adCycleScrollView.pageC.frame));
         adCycleScrollView.isHideImageCorner = YES;
         [whitBaseView addSubview:adCycleScrollView];
         
