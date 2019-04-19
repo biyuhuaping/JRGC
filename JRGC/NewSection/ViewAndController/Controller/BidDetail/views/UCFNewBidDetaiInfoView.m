@@ -40,13 +40,13 @@
         baseimageView.image = [UIImage gc_styleImageSize:CGSizeMake(frame.size.width, frame.size.height)];
         [self.rootLayout addSubview:baseimageView];
         
-        CGFloat progressWidth = 90;
+        CGFloat progressWidth = 85;
         
         _circleProgress = [[MDRadialProgressView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) - progressWidth - 25,10, progressWidth, progressWidth)];
         _circleProgress.progressTotal = 100;
         _circleProgress.progressCounter = 10;
         _circleProgress.theme.sliceDividerHidden = YES;
-        _circleProgress.theme.thickness = 13;
+        _circleProgress.theme.thickness = 14;
         _circleProgress.theme.centerColor = [UIColor clearColor];
         _circleProgress.theme.incompletedColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
         _circleProgress.theme.completedColor =  [UIColor whiteColor];
@@ -56,12 +56,29 @@
         _circleProgress.label.font = [Color gc_ANC_font:23];
         _circleProgress.label.text = @"75%";
         [baseimageView addSubview:_circleProgress];
-        
+
         _proressView = [[SDLoopProgressView alloc] initWithFrame:_circleProgress.frame];
         _proressView.center = _circleProgress.center;
         _proressView.completedColor = [UIColor whiteColor];
-        _proressView.completedLineWidth = 4.5;
+//        _proressView.completedLineWidth = 4.5;
         [baseimageView addSubview:_proressView];
+
+        
+//        _circleProgress = [[MDRadialProgressView alloc] initWithFrame:frame];
+//        _circleProgress.progressTotal = 100;
+//        _circleProgress.progressCounter = 10;
+//        _circleProgress.theme.sliceDividerHidden = YES;
+//        _circleProgress.theme.thickness = 14;
+//        _circleProgress.theme.centerColor = UIColorWithRGB(0x28335c);
+//        _circleProgress.theme.incompletedColor = UIColorWithRGB(0x162138);
+//        _circleProgress.theme.completedColor = UIColorWithRGB(0xfff100);
+//        _circleProgress.label.hidden = YES;
+//        [baseimageView addSubview:_circleProgress];
+//
+//        _proressView = [[SDLoopProgressView alloc] initWithFrame:frame];
+//        _proressView.center = _circleProgress.center;
+//        _proressView.progress = 0;
+//        [baseimageView addSubview:_proressView];
         
         UILabel *rateLab = [[UILabel alloc] init];
         rateLab.textColor = [Color color:PGColorOptionThemeWhite];
@@ -118,8 +135,7 @@
         totalMoneyLab.text = @"¥100,000.00";
         totalMoneyLab.textColor = [Color color:PGColorOptionThemeWhite];
         totalMoneyLab.font = [Color gc_ANC_font:13.0f];
-        [totalMoneyLab sizeToFit];
-        totalMoneyLab.frame = CGRectMake(CGRectGetMaxX(totalMoneyTipLab.frame) + 10, 0, totalMoneyLab.size.width, CGRectGetHeight(bottomView.frame));
+        totalMoneyLab.frame = CGRectMake(CGRectGetMaxX(totalMoneyTipLab.frame) + 10, 1, 200, CGRectGetHeight(bottomView.frame));
         [bottomView addSubview:totalMoneyLab];
         self.totalMoneyLab = totalMoneyLab;
         
@@ -142,8 +158,8 @@
         availableMoneyLab.text = @"¥100,000.00";
         availableMoneyLab.textColor = [Color color:PGColorOptionThemeWhite];
         availableMoneyLab.font = [Color gc_ANC_font:13.0f];
-        [availableMoneyLab sizeToFit];
-        availableMoneyLab.frame = CGRectMake(CGRectGetMaxX(availableMoneyTipLab.frame) + 10, 0, availableMoneyLab.size.width, CGRectGetHeight(bottomView.frame));
+//        [availableMoneyLab sizeToFit];
+        availableMoneyLab.frame = CGRectMake(CGRectGetMaxX(availableMoneyTipLab.frame) + 10, 1, 200, CGRectGetHeight(bottomView.frame));
         [bottomView addSubview:availableMoneyLab];
         self.availableMoneyLab = availableMoneyLab;
 
@@ -159,15 +175,16 @@
             NSString *borrowAmount = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (borrowAmount.length > 0) {
                 selfWeak.totalMoneyLab.text = borrowAmount;
-                [selfWeak.totalMoneyLab sizeToFit];
-                selfWeak.totalMoneyLab.centerY = selfWeak.totalMoneyLab.superview.size.height/2;
+//                [selfWeak.totalMoneyLab sizeToFit];
+        
+//                selfWeak.totalMoneyLab.centerY = selfWeak.totalMoneyLab.superview.size.height/2;
             }
         } else if ([keyPath isEqualToString:@"remainMoney"]) {
             NSString *remainMoney = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (remainMoney.length > 0) {
                 selfWeak.availableMoneyLab.text = remainMoney;
-                [selfWeak.availableMoneyLab sizeToFit];
-                selfWeak.availableMoneyLab.centerY = selfWeak.totalMoneyLab.superview.size.height/2;
+//                [selfWeak.availableMoneyLab sizeToFit];
+//                selfWeak.availableMoneyLab.centerY = selfWeak.totalMoneyLab.superview.size.height/2;
             }
         } else if ([keyPath isEqualToString:@"annualRate"]) {
             NSString *annualRate = [change objectSafeForKey:NSKeyValueChangeNewKey];

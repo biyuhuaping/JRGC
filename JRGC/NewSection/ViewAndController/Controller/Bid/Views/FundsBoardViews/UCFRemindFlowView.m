@@ -90,7 +90,8 @@
                 selfWeak.heightSize.equalTo(@40);
                 selfWeak.myVisibility = MyVisibility_Visible;
             } else {
-                selfWeak.myVisibility = MyVisibility_Gone;
+                selfWeak.heightSize.equalTo(@10);
+                selfWeak.myVisibility = MyVisibility_Visible;
             }
         }
     }];
