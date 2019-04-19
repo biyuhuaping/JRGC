@@ -13,6 +13,7 @@
 #import "Common.h"
 #import "UCFToolsMehod.h"
 #import "UCFCashRecordCell.h"
+#import "UCFNewCashRecordCell.h"
 @interface UCFCashRecordListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     int pageNum;
@@ -126,51 +127,61 @@
     NSDictionary *dataDict = [group.items objectAtIndex:indexPath.row];
     NSString *withdrawModeStr = [dataDict objectSafeForKey:@"withdrawMode"];
     if ([withdrawModeStr isEqualToString:@""]) {
-        return 129-27;
+        return 170 -37;
     }else{
-        return 129;
+        return 170;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return 30;
+        return 33;
     }
-    return 40;
+    return 43;
+
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     // 1.创建头部控件
     
-    UIView *headerView = [[UIView alloc]init];
-    headerView.backgroundColor = UIColorWithRGB(0xebebee) ;
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
-    UILabel *headTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 8, 100, 15)];
-    headTitleLab.font = [UIFont systemFontOfSize:13];
-    headTitleLab.textColor = UIColorWithRGB(0x333333);
-    [view addSubview:headTitleLab];
-    [headerView addSubview:view];
-    
-    if (section == 0) {
-        headerView.frame = CGRectMake(0, 0, ScreenWidth, 30);
-        
-    }else{
-        headerView.frame = CGRectMake(0, 0, ScreenWidth, 40);
-        view.frame = CGRectMake(0, 10, ScreenWidth, 30);
-    }
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 33)];
+    headerView.backgroundColor = UIColorWithRGB(0xf5f5f5) ;
+//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+//    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    UILabel *headTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, ScreenWidth -30, 33)];
+    headTitleLab.font = [UIFont systemFontOfSize:14];
+    headTitleLab.textColor = UIColorWithRGB(0xB1B5C2);
+//    [view addSubview:headTitleLab];
+//    [headerView addSubview:view];
+    [headerView addSubview:headTitleLab];
+//    if (section == 0) {
+//        headerView.frame = CGRectMake(0, 0, ScreenWidth, 30);
+//
+//    }else{
+//        headerView.frame = CGRectMake(0, 0, ScreenWidth, 40);
+//        view.frame = CGRectMake(0, 10, ScreenWidth, 30);
+//    }
     UCFSettingGroup *group = self.sectionItemArray[section];
     headTitleLab.text = [[group.headTitle stringByReplacingOccurrencesOfString:@"-" withString:@"年"] stringByAppendingString:@"月"];
     return headerView;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellStr = @"UCFCashRecordCell";
-    UCFCashRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+    static NSString *cellStr = @"UCFNewCashRecordCell";
+//    UCFCashRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+//    if (cell == nil) {
+//        cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFCashRecordCell" owner:nil options:nil]firstObject];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    }
+//    UCFSettingGroup *group = self.sectionItemArray[indexPath.section];
+//    cell.dataDict = [group.items objectAtIndex:indexPath.row];
+    
+    UCFNewCashRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFCashRecordCell" owner:nil options:nil]firstObject];
+//        cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFNewCashRecordCell" owner:nil options:nil]firstObject];
+        cell = [[UCFNewCashRecordCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     UCFSettingGroup *group = self.sectionItemArray[indexPath.section];
-    cell.dataDict = [group.items objectAtIndex:indexPath.row];
+    [cell showInfo:[group.items objectAtIndex:indexPath.row]];
     return cell;
 }
 //更新分组

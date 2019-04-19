@@ -11,6 +11,8 @@
 
 static NSString *SourceType = @"1"; //app来源1为ios
 
+static NSString *CmsSeverIP = @"https://www.9888keji.com/webfile/";
+
 #pragma mark --- 注册登录模块
 static NSString *VerificationMobileApiURL = @"api/user/v2/verificationMobile.json";   //注册--验证手机号
 

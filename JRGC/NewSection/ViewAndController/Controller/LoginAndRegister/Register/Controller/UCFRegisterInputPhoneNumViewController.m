@@ -67,6 +67,8 @@
     [self.rootLayout addSubview:self.registerAgreeLabel];
     [self addLeftButtons];
     [self addRightButton];
+    
+    [self setSetNavgationPopDisabled:YES];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -167,7 +169,7 @@
 {
     if (nil == _registerLabel) {
         _registerLabel = [NZLabel new];
-        _registerLabel.topPos.equalTo(self.closeBtn.bottomPos).offset(40);
+        _registerLabel.topPos.equalTo(self.closeBtn.bottomPos).offset(0);
         _registerLabel.leftPos.equalTo(self.closeBtn.leftPos);
         _registerLabel.textAlignment = NSTextAlignmentLeft;
         _registerLabel.font = [Color gc_Font:30.0];

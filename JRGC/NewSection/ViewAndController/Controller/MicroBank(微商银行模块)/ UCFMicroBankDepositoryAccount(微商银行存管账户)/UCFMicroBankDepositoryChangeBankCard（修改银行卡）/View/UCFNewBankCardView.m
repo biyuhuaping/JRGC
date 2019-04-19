@@ -143,6 +143,8 @@
         _cardNoLabel.leftPos.equalTo(self.bankImageView.leftPos).offset(42);
         _cardNoLabel.centerYPos.equalTo(self.quickPayImageView.centerYPos);
         _cardNoLabel.textAlignment = NSTextAlignmentLeft;
+        _cardNoLabel.rightPos.equalTo(self.quickPayImageView.leftPos).offset(10);
+        _cardNoLabel.adjustsFontSizeToFitWidth = YES;
         _cardNoLabel.font = [Color gc_Font:25.0];
         _cardNoLabel.textColor = [Color color:PGColorOptionTitleBlack];
         _cardNoLabel.text = @"     ";

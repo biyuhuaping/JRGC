@@ -69,7 +69,7 @@
 - (void)addRightButtonWithName:(NSString *)rightButtonName
 {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 44, 44);
+    rightbutton.frame = CGRectMake(0, 0, 65, 44);
     rightbutton.backgroundColor = [UIColor clearColor];
     [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
     rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];

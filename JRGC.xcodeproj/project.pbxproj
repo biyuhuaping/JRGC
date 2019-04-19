@@ -1144,6 +1144,8 @@
 		E34B5E8D222540A90027718C /* UCFMicroBankDepositoryAccountHomeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E34B5E8C222540A90027718C /* UCFMicroBankDepositoryAccountHomeCellView.m */; };
 		E34B5E91222541DC0027718C /* BaseScrollview.m in Sources */ = {isa = PBXBuildFile; fileRef = E34B5E90222541DC0027718C /* BaseScrollview.m */; };
 		E34B5E99222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E34B5E98222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m */; };
+		E3520B1522698106003D3510 /* UCFNewCashRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3520B1422698106003D3510 /* UCFNewCashRecordCell.m */; };
+		E3520B182269B60A003D3510 /* UCFNewRechargeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3520B172269B60A003D3510 /* UCFNewRechargeListCell.m */; };
 		E352FD4321E4AF0B00617AB7 /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCE721E4AF0A00617AB7 /* Toast.m */; };
 		E352FD4421E4AF0B00617AB7 /* HUDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCE821E4AF0A00617AB7 /* HUDManager.m */; };
 		E352FD4521E4AF0B00617AB7 /* PageControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = E352FCEC21E4AF0A00617AB7 /* PageControlView.m */; };
@@ -3345,6 +3347,10 @@
 		E34B5E90222541DC0027718C /* BaseScrollview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseScrollview.m; sourceTree = "<group>"; };
 		E34B5E97222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryAccountSeriaViewController.h; sourceTree = "<group>"; };
 		E34B5E98222578A20027718C /* UCFMicroBankDepositoryAccountSeriaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryAccountSeriaViewController.m; sourceTree = "<group>"; };
+		E3520B1322698106003D3510 /* UCFNewCashRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewCashRecordCell.h; sourceTree = "<group>"; };
+		E3520B1422698106003D3510 /* UCFNewCashRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewCashRecordCell.m; sourceTree = "<group>"; };
+		E3520B162269B60A003D3510 /* UCFNewRechargeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewRechargeListCell.h; sourceTree = "<group>"; };
+		E3520B172269B60A003D3510 /* UCFNewRechargeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewRechargeListCell.m; sourceTree = "<group>"; };
 		E352FC9021E4ABA300617AB7 /* Macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		E352FCE621E4AF0A00617AB7 /* HUDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDManager.h; sourceTree = "<group>"; };
 		E352FCE721E4AF0A00617AB7 /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toast.m; sourceTree = "<group>"; };
@@ -8366,6 +8372,10 @@
 		E335542E223FC37F001FADEA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E3520B1322698106003D3510 /* UCFNewCashRecordCell.h */,
+				E3520B1422698106003D3510 /* UCFNewCashRecordCell.m */,
+				E3520B162269B60A003D3510 /* UCFNewRechargeListCell.h */,
+				E3520B172269B60A003D3510 /* UCFNewRechargeListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -10703,6 +10713,7 @@
 				33CBEF732241F299007D977B /* UCFMyBatchBidModel.m in Sources */,
 				746BBEAB1AF8E93E00EBA0E7 /* UCFCouponUseCell.m in Sources */,
 				3375F2DA22291A6E00D21FE2 /* UCFCellDataModel.m in Sources */,
+				E3520B1522698106003D3510 /* UCFNewCashRecordCell.m in Sources */,
 				74AFB1451EE93ACC007DBAFC /* UCFMicroMoneyGroup.m in Sources */,
 				E3264BED221D49750045FE94 /* UCFMineDimensionCodeViewController.m in Sources */,
 				847103BA1D59AD7500935B19 /* UCFBankDepositoryAccountViewController.m in Sources */,
@@ -11454,6 +11465,7 @@
 				74270D201EC595ED00F9419B /* UCFRebateCell1.m in Sources */,
 				E3ACB2142202D912005BEF27 /* UCFLoginModel.m in Sources */,
 				E3DEC72E223276B5009F9B1E /* UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel.m in Sources */,
+				E3520B182269B60A003D3510 /* UCFNewRechargeListCell.m in Sources */,
 				3328796721EEC75500832CE8 /* NSString+MD5.m in Sources */,
 				E3951B5121F95F5300D7E999 /* Timer.m in Sources */,
 				74931A301B1326FE00143424 /* NSTextCheckingResult+ExtendedURL.m in Sources */,

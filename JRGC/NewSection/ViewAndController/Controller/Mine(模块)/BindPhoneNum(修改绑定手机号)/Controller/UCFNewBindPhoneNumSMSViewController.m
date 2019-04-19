@@ -322,6 +322,9 @@
 //            [self.rt_navigationController popViewControllerAnimated:YES];
             for (UCFBaseViewController *vc in self.rt_navigationController.rt_viewControllers) {
                 if ([vc isKindOfClass:[UCFSecurityCenterViewController class]]) {
+                    if ([vc respondsToSelector:@selector(refresh)]) {
+                        [vc refresh];
+                    }
                     [self.rt_navigationController popToViewController:vc animated:YES];
                     return;
                 }

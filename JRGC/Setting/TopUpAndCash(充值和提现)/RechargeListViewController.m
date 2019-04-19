@@ -11,6 +11,8 @@
 #import "UCFNoDataView.h"
 #import "UCFSettingGroup.h"
 #import "Common.h"
+#import "UCFNewRechargeListCell.h"
+
 @interface RechargeListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     int pageNum;
@@ -124,46 +126,57 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 101.5f;
+    return 136.f;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return 30;
+        return 33;
     }
-    return 40;
+    return 43;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     // 1.创建头部控件
     
-    UIView *headerView = [[UIView alloc]init];
-    headerView.backgroundColor = UIColorWithRGB(0xebebee) ;
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
-    UILabel *headTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 8, 100, 15)];
-    headTitleLab.font = [UIFont systemFontOfSize:13];
-    headTitleLab.textColor = UIColorWithRGB(0x333333);
-    [view addSubview:headTitleLab];
-    [headerView addSubview:view];
-    if (section == 0) {
-        headerView.frame = CGRectMake(0, 0, ScreenWidth, 30);
-    }else{
-        headerView.frame = CGRectMake(0, 0, ScreenWidth, 40);
-        view.frame = CGRectMake(0, 10, ScreenWidth, 30);
-    }
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 33)];
+    headerView.backgroundColor = UIColorWithRGB(0xf5f5f5) ;
+//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+//    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    UILabel *headTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 0,ScreenWidth -30, 33)];
+    headTitleLab.font = [UIFont systemFontOfSize:12];
+    headTitleLab.textColor = UIColorWithRGB(0xB1B5C2);
+//    [view addSubview:headTitleLab];
+//    [headerView addSubview:view];
+    
+    [headerView addSubview:headTitleLab];
+//    if (section == 0) {
+//        headerView.frame = CGRectMake(0, 0, ScreenWidth, 30);
+//    }else{
+//        headerView.frame = CGRectMake(0, 0, ScreenWidth, 40);
+//        view.frame = CGRectMake(0, 10, ScreenWidth, 30);
+//    }
     UCFSettingGroup *group = self.sectionItemArray[section];
     headTitleLab.text = [[group.headTitle stringByReplacingOccurrencesOfString:@"-" withString:@"年"] stringByAppendingString:@"月"];
     return headerView;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellStr = @"cell";
-    RechargeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+    static NSString *cellStr = @"UCFNewRechargeListCell";
+//    RechargeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+//    if (cell == nil) {
+//        cell = [[RechargeListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    }
+//    UCFSettingGroup *group = self.sectionItemArray[indexPath.section];
+//    cell.dataDict = [group.items objectAtIndex:indexPath.row];
+    
+    UCFNewRechargeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
     if (cell == nil) {
-        cell = [[RechargeListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
+        //        cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFNewCashRecordCell" owner:nil options:nil]firstObject];
+        cell = [[UCFNewRechargeListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     UCFSettingGroup *group = self.sectionItemArray[indexPath.section];
-    cell.dataDict = [group.items objectAtIndex:indexPath.row];
+    [cell showInfo:[group.items objectAtIndex:indexPath.row]];
     return cell;
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
