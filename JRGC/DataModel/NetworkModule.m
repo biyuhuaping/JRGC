@@ -21,6 +21,7 @@
 #import "UITabBar+TabBarBadge.h"
 #import "AuxiliaryFunc.h"
 #import "JSONKit.h"
+#import "UCFPublicPopupWindowView.h"
 @interface NetworkModule () <UIAlertViewDelegate>
 @property (nonatomic, assign) BOOL isShowAlert;
 @property (nonatomic, assign) BOOL isShowSingleAlert; //是否已经弹出单设备警告框
@@ -472,8 +473,15 @@ static NetworkModule *gInstance = NULL;
                 if (req.sxTag == kSXTagGetBanner) {
                     
                 } else {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
-                    [alertView show];
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+//                    [alertView show];
+                    
+                    UCFPopViewWindow *popView = [UCFPopViewWindow new];
+                    popView.delegate = self;
+                    popView.contentStr = dic[@"message"];
+                    popView.type = POPMessageLoginInvalid;
+                    popView.popViewTag = 10001;
+                    [popView startPopView];
                 }
             }
         } else if (rstcode == -2 || rstcode == -3 || rstcode == -4) {
@@ -485,9 +493,16 @@ static NetworkModule *gInstance = NULL;
             //清空数据
             [self cleanData];
             if (self.isShowSingleAlert) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新登录", nil];
-                alertView.tag = 0x100;
-                [alertView show];
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新登录", nil];
+//                alertView.tag = 0x100;
+//                [alertView show];
+                
+                UCFPopViewWindow *popView = [UCFPopViewWindow new];
+                popView.delegate = self;
+                popView.contentStr = dic[@"message"];
+                popView.type = POPMessageLoginOut;
+                popView.popViewTag = 10001;
+                [popView startPopView];
             }
             self.isShowSingleAlert = NO;
         } else if (rstcode == -5) {
@@ -506,14 +521,60 @@ static NetworkModule *gInstance = NULL;
             //清空数据
             [self cleanData];
             if (self.isShowSingleAlert) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"联系客服" otherButtonTitles:@"重新登录", nil];
-                alertView.tag = 0x101;
-                [alertView show];
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"联系客服" otherButtonTitles:@"重新登录", nil];
+//                alertView.tag = 0x101;
+//                [alertView show];
+                UCFPopViewWindow *popView = [UCFPopViewWindow new];
+                popView.delegate = self;
+                popView.contentStr = dic[@"message"];
+                popView.type = POPMessageLoginOutService;
+                popView.popViewTag = 10002;
+                [popView startPopView];
             }
             self.isShowSingleAlert = NO;
         }  else {
             [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
             req.owner = nil;
+        }
+    }
+}
+- (void)popEnterButtonClick:(UIButton *)btn
+{
+     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    if (btn.tag == 10001 || btn.tag == 10002) //退出登录 10002取消是联系客服
+    {
+        [SingleUserInfo loadLoginViewController];
+        NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+        UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+        [nav popToRootViewControllerAnimated:NO];
+        [appDelegate.tabBarController setSelectedIndex:0];
+    }
+}
+-(void)popCancelButtonClick:(UIButton *)btn
+{
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    if (btn.tag == 10001)
+    {
+        NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+        UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+        [nav popToRootViewControllerAnimated:NO];
+        if (appDelegate.tabBarController.selectedIndex != 0)
+        {
+            [appDelegate.tabBarController setSelectedIndex:0];
+        }
+    }
+    else if (btn.tag == 10002)
+    {
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        
+        NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+        UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+
+        [nav popToRootViewControllerAnimated:NO];
+        if (appDelegate.tabBarController.selectedIndex != 0)
+        {
+            [appDelegate.tabBarController setSelectedIndex:0];
         }
     }
 }
