@@ -25,7 +25,7 @@
             [parentController addChildViewController:viewControler];
         }
 
-        CGFloat segmentViewHeight = CGRectGetHeight(self.headView.frame);
+        CGFloat segmentViewHeight = CGRectGetMaxY(self.headView.frame);
         
         if (self.headView.nameArray.count <= 1 && self.headView.isHiddenHeadView == YES) {
             self.headView.hidden = YES;

@@ -56,8 +56,8 @@
 - (UCFPageHeadView *)pageHeadView
 {
     if (nil == _pageHeadView) {
-        NSString *title1 = [NSString stringWithFormat:@"可用返现券(%ld)",self.canUseCashArray.count];
-        NSString *title2 = [NSString stringWithFormat:@"不可用返现券(%ld)",self.unCanUseCashArray.count];
+        NSString *title1 = [NSString stringWithFormat:@"可用返现券(%lu)",(unsigned long)self.canUseCashArray.count];
+        NSString *title2 = [NSString stringWithFormat:@"不可用返现券(%lu)",(unsigned long)self.unCanUseCashArray.count];
         _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:@[title1,title2]];
         [_pageHeadView reloaShowView];
     }
