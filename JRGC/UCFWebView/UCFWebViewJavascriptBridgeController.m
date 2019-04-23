@@ -320,6 +320,7 @@
             //}
             
             //带跳转链接直接跳转
+            SingleUserInfo.loginType = LoginWebLogin;
             [weakSelf jsLogin:nativeData];
         }
         
@@ -1012,6 +1013,7 @@
     //判断首页是否需要登录,只有需要登录并且未登录才调登录
     if (islogin && (!SingleUserInfo.loginData.userInfo.userId))
     {
+        SingleUserInfo.loginType = LoginWebLogin;
         //没有登录去调登录
         [self jumpLogin];
     
@@ -1040,6 +1042,7 @@
             web.isHidenNavigationbar = YES;
         }
         web.url = [dic objectSafeForKey:@"value"];
+        web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
         
     }

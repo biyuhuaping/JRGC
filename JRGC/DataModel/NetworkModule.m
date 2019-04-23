@@ -528,6 +528,7 @@ static NetworkModule *gInstance = NULL;
         req.parmData = nil;
         
     } else if (rstcode == -1) {
+        SingleUserInfo.loginType = LoginSingatureOut;
         _loseTag = req.sxTag;
         SEL sel = @selector(errorPost:tag:);
         if ([req.owner respondsToSelector:sel]) {
@@ -541,6 +542,7 @@ static NetworkModule *gInstance = NULL;
             }
         }
     } else if (rstcode == -2 || rstcode == -3 || rstcode == -4) {
+        SingleUserInfo.loginType = LoginSingatureOut;
         _loseTag = req.sxTag;
         SEL sel = @selector(errorPost:tag:);
         if ([req.owner respondsToSelector:sel]) {
@@ -563,6 +565,7 @@ static NetworkModule *gInstance = NULL;
         }
         else return;
     } else if (rstcode == -6) {
+        SingleUserInfo.loginType = LoginSingatureOut;
         _loseTag = req.sxTag;
         SEL sel = @selector(errorPost:tag:);
         if ([req.owner respondsToSelector:sel]) {
@@ -579,19 +582,7 @@ static NetworkModule *gInstance = NULL;
         self.isShowSingleAlert = NO;
     }
     else {
-//        [MBProgressHUD displayHudError:req.result];
-        
-        if ([UserInfoSingle sharedManager].isSubmitTime) {
-            NSString *resultStr = (NSString *)req.result;
-            resultStr = [resultStr stringByReplacingOccurrencesOfString:@"出借" withString:@"购买"];
-            id result = resultStr;
-            [req.owner performSelector:sel withObject:result withObject:[NSNumber numberWithInt: req.sxTag]];
-        } else {
-            [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
-        }
-        
-//        [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
-//        req.owner = nil;
+
     }
 }
 

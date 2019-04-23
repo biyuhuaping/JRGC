@@ -270,6 +270,7 @@
 - (UCFLockHandleViewController *)cretateLockViewWithType:(LLLockViewType)type
 {
     UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] initWithType:type];
+    lockVc.hidesBottomBarWhenPushed = YES;
     lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     return lockVc;
 }

@@ -28,15 +28,37 @@
     [super pushViewController:viewController animated:animated];
 
 }
-
-
-//- (nullable UIViewController *)popViewControllerAnimated:(BOOL)animated
+//- (UIViewController *)popViewControllerAnimated:(BOOL)animated complete:(void (^)(BOOL))block
 //{
-//    return self;
+//    //判断即将到栈底
+//    UINavigationController *nav = SingGlobalView.tabBarController.selectedViewController;
+//    if (nav.viewControllers.count == 1) {
+//        SingGlobalView.tabBarController.tabBar.hidden = NO;
+//    } else {
+//        SingGlobalView.tabBarController.tabBar.hidden = YES;
+//    }
+//    //显示自定义的tabBar
+//    //  pop出栈
+//    return [super popViewControllerAnimated:animated complete:block];
 //}
-//- (nullable NSArray<__kindof UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated
+
+
+//- (nullable NSArray<__kindof UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated complete:(void (^)(BOOL))block
 //{
-//    return @[self];
+//    UINavigationController *nav = SingGlobalView.tabBarController.selectedViewController;
+//    UIViewController *vc  = nav.viewControllers.lastObject;
+//    if (nav.viewControllers.count == 1) {
+//        [SingGlobalView.tabBarController showTabBar];
+//
+//    } else {
+//        SingGlobalView.tabBarController.tabBar.hidden = YES;
+//        vc.tabBarController.hidesBottomBarWhenPushed = YES;
+//               [SingGlobalView.tabBarController hideTabBar];
+        
+//    }
+    //显示自定义的tabBar
+    //  pop出栈
+//    return [super popToRootViewControllerAnimated:animated complete:block];
 //}
 /*
 #pragma mark - Navigation

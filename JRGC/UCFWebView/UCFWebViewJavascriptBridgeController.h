@@ -68,4 +68,5 @@
 - (void)jumpLogin;
 -(void)gotoOpenAccout;
 - (void)jsToNative:(NSString *)controllerName;
+-(void)webViewReload;
 @end

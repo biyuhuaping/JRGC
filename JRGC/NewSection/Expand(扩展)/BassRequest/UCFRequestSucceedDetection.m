@@ -34,7 +34,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithDictionary:succeedDetectionDic];
     NSInteger rstcode = [dic[@"code"] integerValue];
     if (rstcode == -1) {
-        
+        SingleUserInfo.loginType = LoginSingatureOut;
 //  无效的请求,也需要退出
         UCFPopViewWindow *popView = [UCFPopViewWindow new];
         popView.delegate = appDelegate;
@@ -45,6 +45,7 @@
     }
     else if (rstcode == -2 || rstcode == -3 || rstcode == -4 || rstcode == -6)
     {
+        SingleUserInfo.loginType = LoginSingatureOut;
         //清空数据
         [SingleUserInfo deleteUserData];
         UCFPopViewWindow *popView = [UCFPopViewWindow new];

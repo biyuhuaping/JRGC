@@ -50,7 +50,6 @@
     NSString *pwd = [UCFToolsMehod md5:[MD5Util MD5Pwd:passWord]];
     [self generateSingature:loginData withPassWord:pwd];
     [self setUserData:loginData];
-   
     [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:5] forKey:@"nRetryTimesRemain"];
     [[NSUserDefaults standardUserDefaults] setValue:pwd forKey:AWP];
     [[NSUserDefaults standardUserDefaults] synchronize];

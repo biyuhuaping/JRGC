@@ -29,6 +29,7 @@
 #import "UCFNewModifyPasswordViewController.h"
 #import "UCFNewVerificationLoginPassWordViewController.h"
 #import "UCFRegisterdSucceedViewController.h"
+#import "UCFWebViewJavascriptBridgeController.h"
 #define kTipColorNormal [UIColor blackColor]
 #define kTipColorError [UIColor redColor]
 @interface UCFLockHandleViewController ()
@@ -606,21 +607,6 @@
         if (_isFromRegister) {
             UCFRegisterdSucceedViewController *vc = [[UCFRegisterdSucceedViewController alloc] init];
             [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
-//            UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
-//            VC.isPresentViewController = YES;
-//            AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//            VC.rootVc = delegate.tabBarController;
-//            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
-//            NSInteger personInt = [[[NSUserDefaults standardUserDefaults] valueForKey:@"personCenterClick"] integerValue];
-//            if (personInt == 1) {
-//                [delegate.tabBarController setSelectedIndex:4];
-//                [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
-//            }
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                [delegate.tabBarController presentViewController:nav animated:NO completion:^{
-//                }];
-//            });
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
         } else {
             [UCFCouponPopup startQueryCouponPopup];
@@ -631,11 +617,26 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"useLockView"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
-    [SingGlobalView.tabBarController.selectedViewController.rt_navigationController popToRootViewControllerAnimated:NO];
-    [SingGlobalView.tabBarController setSelectedIndex:0];
-}
+    [self dealLoginPage];
+    
 
+}
+- (void)dealLoginPage
+{
+    [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
+    if (SingleUserInfo.loginType == LoginSingatureOut) {
+        [SingGlobalView.tabBarController.selectedViewController.rt_navigationController popToRootViewControllerAnimated:NO];
+        [SingGlobalView.tabBarController setSelectedIndex:0];
+    } else if (SingleUserInfo.loginType == LoginWebLogin) {
+        UINavigationController *selectNav = SingGlobalView.tabBarController.selectedViewController;
+        UIViewController *visableControler = selectNav.visibleViewController;
+        if ([visableControler isKindOfClass:[UCFWebViewJavascriptBridgeController class]]) {
+            [(UCFWebViewJavascriptBridgeController *)visableControler   webViewReload];
+        }
+        
+    }
+    SingleUserInfo.loginType  = LoginDefalut;
+}
 - (void)dealWithCancelBtn:(id)sender
 {
     if ([_souceVc isEqualToString:@"securityCenter"]) {
@@ -1034,12 +1035,10 @@
         [UCFCouponPopup startQueryCouponPopup];
     }
     // 在这里可能需要回调上个页面做一些刷新什么的动作
-    [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
     if (_souceVc.length != 0) {
         
     } else {
-        [SingGlobalView.tabBarController.selectedViewController.rt_navigationController popToRootViewControllerAnimated:NO];
-        [SingGlobalView.tabBarController setSelectedIndex:0];
+         [self dealLoginPage];
     }
 }
 

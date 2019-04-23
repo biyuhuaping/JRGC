@@ -115,6 +115,7 @@
 }
 - (void)jumpLogin
 {
+
     [SingleUserInfo loadLoginViewController];
 }
 

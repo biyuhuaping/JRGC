@@ -12,10 +12,15 @@ typedef void(^requestUserAllStatueCallBackBlock)(BOOL);
 @interface UserInfoSingle : NSObject <NetworkModuleDelegate>
 
 
+typedef NS_ENUM(NSInteger, LoginEntranceType) {  //由哪些界面进入支付流程
+    //以下是枚举成员
+    LoginDefalut = 0,               //普通点击触发事件掉起的登录
+    LoginSingatureOut = 1,          //登录失效
+    LoginWebLogin = 2,              //web页面调起的登录
+};
 
 
-
-//SingleUserInfo.loginData.userInfo
+@property (nonatomic, assign)LoginEntranceType  loginType;
 
 @property (nonatomic, assign) BOOL webCloseUpdatePrePage;
 

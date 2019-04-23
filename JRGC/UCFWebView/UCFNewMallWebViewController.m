@@ -34,6 +34,7 @@
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
     self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
+//    [self ddd];
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -41,13 +42,9 @@
     NSLog(@"%@",request.URL.absoluteString);
     NSString *requetRUL = request.URL.absoluteString;
     if ([requetRUL isEqualToString:@"https://m.dougemall.com/static/mall/home/index.html?fromAppBar=true"] || [requetRUL isEqualToString:@"https://m.dougemall.com/?fromAppBar=true"]) {
-//        [SingGlobalView.tabBarController showTabBar];
         showTabBar = YES;
-
     } else {
-
         showTabBar = NO;
-
     }
     [self.view setNeedsLayout];
     return result;
@@ -56,18 +53,28 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     if (showTabBar) {
-        
-//        self.tabBarController.tabBar.hidden = YES;
-//        self.edgesForExtendedLayout = UIRectEdgeBottom;
-        
-        SingGlobalView.tabBarController.tabBar.hidden = NO;
+        [SingGlobalView.tabBarController.tabBar setHidden:NO];
         self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - SingGlobalView.tabBarController.tabBar.frame.size.height);
         self.webView.frame = CGRectMake(0, StatusBarHeight1, ScreenWidth, CGRectGetHeight(self.view.frame));
     } else {
-        SingGlobalView.tabBarController.tabBar.hidden = YES;
+        [SingGlobalView.tabBarController.tabBar setHidden:YES];
         self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
         self.webView.frame = CGRectMake(0, StatusBarHeight1, ScreenWidth, CGRectGetHeight(self.view.frame) - StatusBarHeight1);
     }
     [super webViewDidFinishLoad:webView];
 }
+//- (void)ddd
+//{
+//    [self.KVOController observe:SingGlobalView.tabBarController.tabBar keyPaths:@[@"hidden"] options:NSKeyValueObservingOptionNew  block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+//        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+//        if ([keyPath isEqualToString:@"hidden"]) {
+//            BOOL hide = [[change valueForKey:@"new"] boolValue];
+//            if (hide) {
+//                NSLog(@"隐藏");
+//            } else {
+//                NSLog(@"显示");
+//            }
+//        }
+//    }];
+//}
 @end
