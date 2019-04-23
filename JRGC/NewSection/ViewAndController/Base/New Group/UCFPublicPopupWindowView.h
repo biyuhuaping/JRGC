@@ -14,9 +14,9 @@
 
 - (void)popClickCloseBackgroundView; //声明协议方法
 
-- (void)popEnterButtonClick:(UIButton *)btn; //声明协议方法
+- (void)popEnterButtonClick:(UIButton *__nullable)btn; //声明协议方法
 
-- (void)popCancelButtonClick:(UIButton *)btn;
+- (void)popCancelButtonClick:(UIButton *__nullable)btn;
 @end
 NS_ASSUME_NONNULL_BEGIN
 
