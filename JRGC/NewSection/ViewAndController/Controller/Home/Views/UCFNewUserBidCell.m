@@ -32,7 +32,7 @@
         whitBaseView.leftPos.equalTo(@15);
         whitBaseView.rightPos.equalTo(@15);
         whitBaseView.topPos.equalTo(@0);
-        whitBaseView.bottomPos.equalTo(@15);
+        whitBaseView.heightSize.equalTo(@150);
         whitBaseView.backgroundColor = [UIColor whiteColor];
         whitBaseView.layer.cornerRadius = 5.0f;
         [self.rootLayout addSubview:whitBaseView];

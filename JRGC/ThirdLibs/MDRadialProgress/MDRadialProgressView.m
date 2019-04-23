@@ -165,53 +165,55 @@
             CGContextFillPath(context);
         }
     } else {
-		// Draw just two arcs, one for the completed slices and one for the
-		// uncompleted ones.
-		
-        CGFloat originAngle, endAngle;
-		CGFloat sliceAngle = (2 * M_PI) / self.progressTotal;
-		CGFloat startingAngle = sliceAngle * startingSlice;
-		CGFloat progressAngle = sliceAngle * self.progressCounter;
-		
-		if (self.progressCounter == 0) {
-			originAngle = -M_PI_2;
-			endAngle = originAngle + 2 * M_PI;
-		} else {
-			if (self.clockwise) {
-				originAngle = -M_PI_2 + startingAngle;
-				endAngle = originAngle + progressAngle;
-			} else {
-				originAngle = -M_PI_2 - startingAngle;
-				endAngle = originAngle - progressAngle;
-			}
-		}
-		
-		// Draw the arcs grouped instead of individually to avoid
-		// artifacts between one slice and another.
-		
-		// Completed slices.
-        CGColorRef color;
-//		CGContextBeginPath(context);
-//		CGContextMoveToPoint(context, center.x, center.y);
-//		CGContextAddArc(context, center.x, center.y, circleRadius, originAngle, endAngle, cgClockwise);
-//		CGColorRef color = self.theme.completedColor.CGColor;
-//		CGContextSetFillColorWithColor(context, color);
-//		CGContextFillPath(context);
-		
-		if (self.progressCounter < self.progressTotal) {
-			// Incompleted slices
-			CGContextBeginPath(context);
-			CGContextMoveToPoint(context, center.x, center.y);
-			//CGFloat startAngle = endAngle;
-			endAngle = originAngle;
-			CGContextAddArc(context, center.x, center.y, circleRadius, originAngle, M_PI * 2, cgClockwise);
-			color = self.theme.incompletedColor.CGColor;
-			CGContextSetFillColorWithColor(context, color);
-			CGContextFillPath(context);
-		}
-	}
+        // Draw just two arcs, one for the completed slices (if any) and one for the
+        // uncompleted ones.
+        
+        double originAngle, endAngle;
+        double sliceAngle = (2 * M_PI) / self.progressTotal;
+        double startingAngle = sliceAngle * startingSlice;
+        double progressAngle = sliceAngle * self.progressCounter;
+        
+        if (self.clockwise) {
+            originAngle = -M_PI_2 + startingAngle;
+            endAngle = originAngle + progressAngle;
+        } else {
+            originAngle = -M_PI_2 - startingAngle;
+            endAngle = originAngle - progressAngle;
+        }
+        
+        // Draw the arcs grouped instead of individually to avoid
+        // artifacts between one slice and another.
+        
+        // Completed slices.
+        [self drawArcInContext:context
+                        center:center
+                        radius:circleRadius
+                    startAngle:originAngle
+                      endAngle:endAngle
+                         color:self.theme.completedColor.CGColor
+                     clockwise:cgClockwise];
+        
+        if (self.progressCounter < self.progressTotal) {
+            // Incompleted slices
+            [self drawArcInContext:context
+                            center:center
+                            radius:circleRadius
+                        startAngle:endAngle
+                          endAngle:originAngle
+                             color:self.theme.incompletedColor.CGColor
+                         clockwise:cgClockwise];
+        }
+    }
 }
-
+- (void)drawArcInContext:(CGContextRef)context center:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle
+                endAngle:(CGFloat)endAngle color:(CGColorRef)color clockwise:(BOOL)cgClockwise
+{
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, center.x, center.y);
+    CGContextAddArc(context, center.x, center.y, radius, startAngle, endAngle, cgClockwise);
+    CGContextSetFillColorWithColor(context, color);
+    CGContextFillPath(context);
+}
 - (void)drawSlicesSeparators:(CGContextRef)contextRef withViewSize:(CGSize)viewSize andCenter:(CGPoint)center
 {
 	int outerDiameter = viewSize.width;
@@ -246,7 +248,7 @@
 - (void)drawCenter:(CGContextRef)contextRef withViewSize:(CGSize)viewSize andCenter:(CGPoint)center
 {
 	int innerDiameter = viewSize.width - self.theme.thickness;
-    float innerRadius = innerDiameter / 2;
+    float innerRadius = innerDiameter / 2.0f;
 	
 	CGContextSetLineWidth(contextRef, self.theme.thickness);
 	CGRect innerCircle = CGRectMake(center.x - innerRadius, center.y - innerRadius,

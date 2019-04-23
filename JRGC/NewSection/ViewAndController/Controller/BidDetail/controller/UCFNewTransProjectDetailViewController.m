@@ -272,23 +272,39 @@
             cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
-            UIView *bottomLineView = [[UIView alloc] initWithFrame:CGRectMake(15, 49.5, ScreenWidth -15, 0.5)];
+            UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 13, 25, 25)];
+            iconView.backgroundColor = [UIColor clearColor];
+            iconView.tag = 1001;
+            [cell addSubview:iconView];
+            
+            UILabel *textLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(iconView.frame) + 10, 10, 130, 30)];
+            textLab.backgroundColor = [UIColor clearColor];
+            textLab.textColor = [UIColor blackColor];
+            textLab.font = [Color gc_Font:15];
+            textLab.tag = 1002;
+            [cell addSubview:textLab];
+            
+            
+            UIView *bottomLineView = [[UIView alloc] initWithFrame:CGRectMake(45, 49.5, ScreenWidth -15, 0.5)];
             bottomLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
             bottomLineView.tag = 1000;
             [cell addSubview:bottomLineView];
         }
         
-        NSArray *arr =  self.dataArray[indexPath.section];
         UIView *bottomLineView = [cell viewWithTag:1000];
+        UILabel *textLab = [cell viewWithTag:1002];
+        UIImageView *iconView = [cell viewWithTag:1001];
+        NSArray *arr =  self.dataArray[indexPath.section];
+        
+        UCFSettingArrowItem *model = arr[indexPath.row];
+        iconView.image = [UIImage imageNamed:model.icon];
+        textLab.text = model.title;
         if (indexPath.row == arr.count - 1) {
             bottomLineView.hidden = YES;
         } else {
             bottomLineView.hidden = NO;
         }
-        
-        UCFSettingArrowItem *model = arr[indexPath.row];
-        cell.imageView.image = [UIImage imageNamed:model.icon];
-        cell.textLabel.text = model.title;
+        bottomLineView.frame = CGRectMake(textLab.frame.origin.x, 49.5, ScreenWidth -15, 0.5);
         return cell;
     }
     return nil;

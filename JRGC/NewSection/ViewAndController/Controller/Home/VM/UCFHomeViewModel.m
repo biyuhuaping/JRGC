@@ -156,7 +156,7 @@
             NSArray *groupArr = model.data.group;
             for (int i = 0; i < groupArr.count; i++) {
                 UCFNewHomeGroupModel *groupModel = groupArr[i];
-                //                    1新手 2 智能出借 3 优质债权
+                //1新手 2 智能出借 3 优质债权
                 if ([groupModel.type isEqualToString:@"1"]) {
                     NSArray *prdList = groupModel.prdList;
                     SEL sel = NSSelectorFromString(@"reflectDataModel:");
@@ -227,6 +227,21 @@
                 }
             }
         }
+        for (int i = 0; i < self.dataArray.count; i++) {
+            NSArray *arr = [self.dataArray objectSafeAtIndex:i];
+            for (int j = 0; j < arr.count; j++) {
+                CellConfig *data = [arr objectAtIndex:j];
+                if ([data.className isEqualToString:@"UCFNewUserBidCell"]) {
+                    if (i == self.dataArray.count - 1) {
+                        data.heightOfCell = 150 + 15;
+                    }
+                    if (j == arr.count - 1) {
+                        data.heightOfCell = 150;
+                    }
+                }
+            }
+        }
+        
         //给反射标识赋值
         self.modelListArray = self.dataArray;
     } else {

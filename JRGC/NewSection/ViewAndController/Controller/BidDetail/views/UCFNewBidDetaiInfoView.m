@@ -44,12 +44,12 @@
         
         _circleProgress = [[MDRadialProgressView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) - progressWidth - 25,10, progressWidth, progressWidth)];
         _circleProgress.progressTotal = 100;
-        _circleProgress.progressCounter = 10;
+        _circleProgress.progressCounter = 100;
         _circleProgress.theme.sliceDividerHidden = YES;
         _circleProgress.theme.thickness = 14;
         _circleProgress.theme.centerColor = [UIColor clearColor];
         _circleProgress.theme.incompletedColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
-        _circleProgress.theme.completedColor =  [UIColor whiteColor];
+        _circleProgress.theme.completedColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
         _circleProgress.theme.dropLabelShadow = NO;
         _circleProgress.label.hidden = NO;
         _circleProgress.label.textColor = [UIColor whiteColor];
@@ -59,8 +59,8 @@
 
         _proressView = [[SDLoopProgressView alloc] initWithFrame:_circleProgress.frame];
         _proressView.center = _circleProgress.center;
+        _proressView.completedLineWidth = 4.5;
         _proressView.completedColor = [UIColor whiteColor];
-//        _proressView.completedLineWidth = 4.5;
         [baseimageView addSubview:_proressView];
 
         
