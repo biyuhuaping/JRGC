@@ -374,7 +374,7 @@
     if ([title isEqualToString:@"注册领券"] || [title isEqualToString:@"存管开户"] || [title isEqualToString:@"风险评测"] || [title isEqualToString:@"新人专享"]) {
         [self skipNewUserGuideWebPageTitle:@"新手入门指引" URL:@"https://m.9888.cn/static/wap/invest/index.html#/new-guide/guide"];
     } else if ([title isEqualToString:@"注册领优惠券"]) {
-        [SingleUserInfo loadLoginViewController];
+        [SingleUserInfo loadRegistViewController];
     } else if ([title isEqualToString:@"开通存管账户"]){
         [HSHelper  goToWeijinOpenAccount:self.rt_navigationController];
     }  else if ([title isEqualToString:@"设置交易密码"]){

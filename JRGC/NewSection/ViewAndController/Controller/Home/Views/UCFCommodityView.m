@@ -22,6 +22,8 @@
         self.shopImageView = imageView;
         [self addSubview:imageView];
         
+        
+        
         UILabel *nameLal = [[UILabel alloc] init];
         nameLal.frame = CGRectMake(0, CGRectGetMaxY(imageView.frame) + 8, frame.size.width, 13);
         nameLal.font = [Color gc_Font:12.0f];
