@@ -124,14 +124,7 @@
 	
     // Draw the center.
 	[self drawCenter:contextRef withViewSize:viewSize andCenter:center];
-    
-//    [[UIColor redColor] set];
-//    CGContextSetLineWidth(contextRef, 18);
-//    CGContextSetLineCap(contextRef, kCGLineCapRound);
-//    CGFloat to = - M_PI * 0.5 + (self.progressCounter / self.progressTotal) * M_PI * 2; // 初始值0.05
-//    CGFloat rad = MIN(rect.size.width, rect.size.height) * 0.5 - 10;
-//    CGContextAddArc(contextRef, center.x, center.y, rad, - M_PI * 0.5, to, 0);
-//    CGContextStrokePath(contextRef);
+
 }
 
 - (void)drawSlices:(NSUInteger)slicesCount

@@ -41,10 +41,11 @@
 }
 -(void)startTimer{
     _passTime= 0;
-//    [self.timer setFireDate:[NSDate distantPast]];
+    [self.timer setFireDate:[NSDate distantPast]];
+    [self.timer invalidate];
+    self.timer = nil;
     //时间间隔是1秒
     _timer = [HWWeakTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-//    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
       [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 //- (void)setTimeInterval:(double)timeInterval
@@ -84,7 +85,7 @@
         for (UILabel *label in self.subviews) {
             if (label.tag == 101) {
                 label.hidden = NO;
-                label.textColor = UIColorWithRGB(0x333333);
+                label.textColor = [Color color:PGColorOptionTitleBlack];
             }else{
                 label.hidden = NO;
             }
@@ -109,11 +110,11 @@
     //1s
     _passTime += 1000.f;//所以每次过去1秒
     //小时数
-    NSString *hours = [NSString stringWithFormat:@"%ld", (NSInteger)((timeInterval-_passTime)/1000/60/60)];
+    NSString *hours = [NSString stringWithFormat:@"%ld", (long)((timeInterval-_passTime)/1000/60/60)];
     //分钟数
-    NSString *minute = [NSString stringWithFormat:@"%ld", (NSInteger)((timeInterval-_passTime)/1000/60)%60];
+    NSString *minute = [NSString stringWithFormat:@"%d", (NSInteger)((timeInterval-_passTime)/1000/60)%60];
     //秒数
-    NSString *second = [NSString stringWithFormat:@"%ld", ((NSInteger)(timeInterval-_passTime)/1000)%60];
+    NSString *second = [NSString stringWithFormat:@"%d", ((NSInteger)(timeInterval-_passTime)/1000)%60];
     
     //防止有乱数据
     hours = [self getCurrentStr:hours];
