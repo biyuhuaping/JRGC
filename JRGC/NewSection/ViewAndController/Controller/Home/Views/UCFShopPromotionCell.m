@@ -112,6 +112,13 @@
     view.shopValue.frame = react;
     view.shopValue.text = [NSString stringWithFormat:@"%@工贝",showValue];
     view.shopOrginalValue.hidden = YES;
+    if (model.discount.length > 0) {
+        view.discountLab.text = [NSString stringWithFormat:@"%@折",model.discount];
+        view.discountLab.superview.hidden = NO;
+    } else {
+        view.discountLab.superview.hidden = YES;
+    }
+    
 //    NSString *showStr =  [NSString stringWithFormat:@"%@工贝",model.price];
 //    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
 //    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:showStr attributes:attribtDic];

@@ -77,6 +77,12 @@
     view.shopValue.frame = react;
     view.shopValue.text = [NSString stringWithFormat:@"%@工贝",showValue];
     view.shopOrginalValue.hidden = YES;
+    if (model.discount.length > 0) {
+        view.discountLab.text = [NSString stringWithFormat:@"%@折",model.discount];
+        view.discountLab.superview.hidden = NO;
+    } else {
+        view.discountLab.superview.hidden = YES;
+    }
     return view;
 }
 

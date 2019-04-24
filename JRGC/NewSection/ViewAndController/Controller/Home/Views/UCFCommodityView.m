@@ -22,7 +22,18 @@
         self.shopImageView = imageView;
         [self addSubview:imageView];
         
+        UIImageView *sacleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_discount"]];
+        sacleImage.frame = CGRectMake(CGRectGetWidth(imageView.frame) - 32, CGRectGetHeight(imageView.frame) - 37, 32, 37);
+        sacleImage.backgroundColor = [UIColor clearColor];
+        [imageView addSubview:sacleImage];
         
+        UILabel *discountLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 32, 35)];
+        discountLab.textColor = [Color color:PGColorOptionThemeWhite];
+        discountLab.textAlignment = NSTextAlignmentCenter;
+        discountLab.font = [Color gc_Font:15];
+        discountLab.text = @"9折";
+        [sacleImage addSubview:discountLab];
+        self.discountLab = discountLab;
         
         UILabel *nameLal = [[UILabel alloc] init];
         nameLal.frame = CGRectMake(0, CGRectGetMaxY(imageView.frame) + 8, frame.size.width, 13);

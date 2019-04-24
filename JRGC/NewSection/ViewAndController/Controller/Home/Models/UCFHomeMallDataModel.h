@@ -70,6 +70,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *pid;
 
+@property (nonatomic, copy) NSString *discount;
+
 @end
 
 @interface UCFHomeMallrecommends : BaseModel
@@ -91,6 +93,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *tags;
 
 @property (nonatomic, copy) NSString *pid;
+
+@property (nonatomic, copy) NSString *discount;
 
 @end
 

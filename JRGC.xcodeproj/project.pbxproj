@@ -127,6 +127,8 @@
 		33793F4E21ECB3D6001065D9 /* UCFCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F4D21ECB3D6001065D9 /* UCFCommodityView.m */; };
 		33793F5121ECC95D001065D9 /* UCFBoutiqueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F5021ECC95D001065D9 /* UCFBoutiqueCell.m */; };
 		33793F5421ECD004001065D9 /* HomeFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33793F5321ECD004001065D9 /* HomeFootView.m */; };
+		3379DCAE226F42CA001CE1AB /* UCFCreateLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379DCAD226F42CA001CE1AB /* UCFCreateLockViewController.m */; };
+		3379DCB1226F4389001CE1AB /* UCFUnlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379DCB0226F4389001CE1AB /* UCFUnlockViewController.m */; };
 		337BB2E422154A21001ACDE6 /* UCFNewTransProjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2E322154A21001ACDE6 /* UCFNewTransProjectDetailViewController.m */; };
 		337BB2E722154C8A001ACDE6 /* UCFTransBidInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2E622154C8A001ACDE6 /* UCFTransBidInfoModel.m */; };
 		337BB2EA22154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BB2E922154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m */; };
@@ -178,6 +180,7 @@
 		33D218C4223B92A5008A9BDE /* UCFBatchPageRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D218C3223B92A5008A9BDE /* UCFBatchPageRootModel.m */; };
 		33D218C7223B9987008A9BDE /* UCFNewPureCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D218C6223B9987008A9BDE /* UCFNewPureCollectionViewController.m */; };
 		33D218CA223B9BCD008A9BDE /* UCFCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D218C9223B9BCD008A9BDE /* UCFCollectionViewModel.m */; };
+		33E0DD30226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E0DD2F226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m */; };
 		33E1A5DF20FDC5A9008244BD /* UCFCustomPopTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */; };
 		33E1A5E020FDC5A9008244BD /* UCFOpenRedBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */; };
 		33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */; };
@@ -1636,6 +1639,10 @@
 		33793F5021ECC95D001065D9 /* UCFBoutiqueCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBoutiqueCell.m; sourceTree = "<group>"; };
 		33793F5221ECD004001065D9 /* HomeFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFootView.h; sourceTree = "<group>"; };
 		33793F5321ECD004001065D9 /* HomeFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeFootView.m; sourceTree = "<group>"; };
+		3379DCAC226F42CA001CE1AB /* UCFCreateLockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCreateLockViewController.h; sourceTree = "<group>"; };
+		3379DCAD226F42CA001CE1AB /* UCFCreateLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCreateLockViewController.m; sourceTree = "<group>"; };
+		3379DCAF226F4389001CE1AB /* UCFUnlockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFUnlockViewController.h; sourceTree = "<group>"; };
+		3379DCB0226F4389001CE1AB /* UCFUnlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFUnlockViewController.m; sourceTree = "<group>"; };
 		337BB2E222154A21001ACDE6 /* UCFNewTransProjectDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewTransProjectDetailViewController.h; sourceTree = "<group>"; };
 		337BB2E322154A21001ACDE6 /* UCFNewTransProjectDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewTransProjectDetailViewController.m; sourceTree = "<group>"; };
 		337BB2E522154C8A001ACDE6 /* UCFTransBidInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransBidInfoModel.h; sourceTree = "<group>"; };
@@ -1720,6 +1727,9 @@
 		33D218C6223B9987008A9BDE /* UCFNewPureCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewPureCollectionViewController.m; sourceTree = "<group>"; };
 		33D218C8223B9BCD008A9BDE /* UCFCollectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCollectionViewModel.h; sourceTree = "<group>"; };
 		33D218C9223B9BCD008A9BDE /* UCFCollectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCollectionViewModel.m; sourceTree = "<group>"; };
+		33E0DD2D226FFA6D00F8AF4A /* UCFLockConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFLockConfig.h; sourceTree = "<group>"; };
+		33E0DD2E226FFCCA00F8AF4A /* UCFNewLockContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewLockContainerViewController.h; sourceTree = "<group>"; };
+		33E0DD2F226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewLockContainerViewController.m; sourceTree = "<group>"; };
 		33E1A5D820FDC5A8008244BD /* UCFOpenRedBagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOpenRedBagButton.h; sourceTree = "<group>"; };
 		33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCustomPopTransitionAnimation.m; sourceTree = "<group>"; };
 		33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOpenRedBagButton.m; sourceTree = "<group>"; };
@@ -4388,6 +4398,20 @@
 				33B5011122607226008CC3F4 /* UCFTransCalculatorRequest.m */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		3379DCAB226F424D001CE1AB /* NewLockView */ = {
+			isa = PBXGroup;
+			children = (
+				3379DCAC226F42CA001CE1AB /* UCFCreateLockViewController.h */,
+				3379DCAD226F42CA001CE1AB /* UCFCreateLockViewController.m */,
+				3379DCAF226F4389001CE1AB /* UCFUnlockViewController.h */,
+				3379DCB0226F4389001CE1AB /* UCFUnlockViewController.m */,
+				33E0DD2D226FFA6D00F8AF4A /* UCFLockConfig.h */,
+				33E0DD2E226FFCCA00F8AF4A /* UCFNewLockContainerViewController.h */,
+				33E0DD2F226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m */,
+			);
+			path = NewLockView;
 			sourceTree = "<group>";
 		};
 		33813A1521BFB114004666E5 /* NewSection */ = {
@@ -8481,6 +8505,7 @@
 		E352FCE421E4AF0A00617AB7 /* PublicModule(公共组件) */ = {
 			isa = PBXGroup;
 			children = (
+				3379DCAB226F424D001CE1AB /* NewLockView */,
 				E3D3A1E2224A0FB700DA6185 /* RTNavgationController */,
 				332B6056221F9558008893EF /* HQFlowView */,
 				E36EB86D21F815420093915D /* CQCountDownButton */,
@@ -11134,6 +11159,7 @@
 				74BDA98C1F09F6C60054403F /* FSCalendarDelegationFactory.m in Sources */,
 				7BC217281ACD4A030086D374 /* GuideViewController.m in Sources */,
 				748D776C1ADE51C900910FF7 /* UCFSettingGroup.m in Sources */,
+				3379DCB1226F4389001CE1AB /* UCFUnlockViewController.m in Sources */,
 				7BCE01F71AC8FC260084C15C /* ASIDataDecompressor.m in Sources */,
 				3332C8A32213BA15009956BB /* UCFCheckCouponApi.m in Sources */,
 				74B3AD871ED2C31B00653F8B /* YFRollingLabel.m in Sources */,
@@ -11224,6 +11250,7 @@
 				747B103B1F15F82200CECB2C /* UCFGoldenHeaderView.m in Sources */,
 				744BE8521F6BBCA200107FAA /* UCFHomeIconModel.m in Sources */,
 				74270D431EC5960100F9419B /* UCFDataStaticsModel.m in Sources */,
+				33E0DD30226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m in Sources */,
 				7BD180231B0EC7D30003A953 /* UCFNoDataView.m in Sources */,
 				83CD843F1F13A50800227704 /* UCFProjectListCell.m in Sources */,
 				749140BA1F18D1EA00E624CE /* UCFGoldCashMoneyViewController.m in Sources */,
@@ -11364,6 +11391,7 @@
 				EDEC8C031CB3BAB300815228 /* NSString+WPAttributedMarkup.m in Sources */,
 				833CC9F91FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.m in Sources */,
 				83F4DAF51D9561EC00A0632E /* UCFPrdTransferBIdWebView.m in Sources */,
+				3379DCAE226F42CA001CE1AB /* UCFCreateLockViewController.m in Sources */,
 				7BA6E4BA1AD6731900FE8C37 /* SDImageCache.m in Sources */,
 				744B9EDA1F0B8E9A00440FBA /* UCFCalendarDayCell.m in Sources */,
 				7BDD8FD81AE1043C007A5CE8 /* SDBaseProgressView.m in Sources */,
