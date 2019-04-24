@@ -12,7 +12,7 @@
 #import "UCFCellDataModel.h"
 #import "UCFNewBannerModel.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
-#import "UCFHomeMallDataModel.h"
+#import "UCFQueryBannerByTypeModel.h"
 @interface UCFMinePromotionCell()<RCFFlowViewDelegate>
 
 @property(nonatomic, strong)RCFFlowView *adCycleScrollView;
@@ -67,9 +67,8 @@
 }
 - (void)showInfo:(id)data
 {
-    
-    UCFMallDataModel *dataModel = data;
-    self.dataArray = [NSArray arrayWithArray:dataModel.mallBannerList];
+    UCFQueryBannerByTypeData *dataModel = data;
+    self.dataArray = [NSArray arrayWithArray:dataModel.bannerList];
     
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:1];
     

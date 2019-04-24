@@ -1265,6 +1265,9 @@
 		E3B57DB61DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B57DB41DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.m */; };
 		E3B57DB71DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B57DB51DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib */; };
 		E3B76E7521EC6ECC009C9021 /* UCFNewMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B76E7421EC6ECC009C9021 /* UCFNewMineViewController.m */; };
+		E3B9423D227049C600BCB6BD /* UCFMineShopDiscountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B9423C227049C600BCB6BD /* UCFMineShopDiscountCell.m */; };
+		E3B94240227056C100BCB6BD /* UCFQueryBannerByTypeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B9423F227056C100BCB6BD /* UCFQueryBannerByTypeAPI.m */; };
+		E3B94243227056E900BCB6BD /* UCFQueryBannerByTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B94242227056E900BCB6BD /* UCFQueryBannerByTypeModel.m */; };
 		E3C1179A1D40CFCC0053A052 /* UCFContributionValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C117921D40CFCC0053A052 /* UCFContributionValueCell.m */; };
 		E3C1179B1D40CFCC0053A052 /* UCFContributionValueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C117931D40CFCC0053A052 /* UCFContributionValueCell.xib */; };
 		E3C1179C1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C117951D40CFCC0053A052 /* UCFContributionValueTypeTowCell.m */; };
@@ -3593,6 +3596,12 @@
 		E3B57DB51DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCouponExchangeToFriendTableViewCell.xib; sourceTree = "<group>"; };
 		E3B76E7321EC6ECC009C9021 /* UCFNewMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewMineViewController.h; sourceTree = "<group>"; };
 		E3B76E7421EC6ECC009C9021 /* UCFNewMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewMineViewController.m; sourceTree = "<group>"; };
+		E3B9423B227049C600BCB6BD /* UCFMineShopDiscountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineShopDiscountCell.h; sourceTree = "<group>"; };
+		E3B9423C227049C600BCB6BD /* UCFMineShopDiscountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineShopDiscountCell.m; sourceTree = "<group>"; };
+		E3B9423E227056C100BCB6BD /* UCFQueryBannerByTypeAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFQueryBannerByTypeAPI.h; sourceTree = "<group>"; };
+		E3B9423F227056C100BCB6BD /* UCFQueryBannerByTypeAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFQueryBannerByTypeAPI.m; sourceTree = "<group>"; };
+		E3B94241227056E900BCB6BD /* UCFQueryBannerByTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFQueryBannerByTypeModel.h; sourceTree = "<group>"; };
+		E3B94242227056E900BCB6BD /* UCFQueryBannerByTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFQueryBannerByTypeModel.m; sourceTree = "<group>"; };
 		E3C117911D40CFCC0053A052 /* UCFContributionValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFContributionValueCell.h; sourceTree = "<group>"; };
 		E3C117921D40CFCC0053A052 /* UCFContributionValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFContributionValueCell.m; sourceTree = "<group>"; };
 		E3C117931D40CFCC0053A052 /* UCFContributionValueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFContributionValueCell.xib; sourceTree = "<group>"; };
@@ -9426,8 +9435,8 @@
 			isa = PBXGroup;
 			children = (
 				E3B76E6F21EC6E89009C9021 /* Controller */,
-				E3B76E7021EC6E89009C9021 /* Model */,
 				E3B76E7121EC6E89009C9021 /* View */,
+				E3B76E7021EC6E89009C9021 /* Model */,
 				E3B76E7221EC6E89009C9021 /* Api */,
 			);
 			path = "Mine(我的界面)";
@@ -9463,6 +9472,8 @@
 				E343360C22140C3E00343E78 /* UCFMineCellAccountModel.m */,
 				E3364E2E2241EF520021694D /* UCFUserStatusInfoModel.h */,
 				E3364E2F2241EF520021694D /* UCFUserStatusInfoModel.m */,
+				E3B94241227056E900BCB6BD /* UCFQueryBannerByTypeModel.h */,
+				E3B94242227056E900BCB6BD /* UCFQueryBannerByTypeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -9478,6 +9489,8 @@
 				E337444B2216616700003FEF /* UCFMineTableViewHead.m */,
 				E30429BB224E411E005015E5 /* UCFMineShopPromotionCell.h */,
 				E30429BC224E411E005015E5 /* UCFMineShopPromotionCell.m */,
+				E3B9423B227049C600BCB6BD /* UCFMineShopDiscountCell.h */,
+				E3B9423C227049C600BCB6BD /* UCFMineShopDiscountCell.m */,
 				E30429BE224E4C18005015E5 /* UCFMinePromotionCell.h */,
 				E30429BF224E4C18005015E5 /* UCFMinePromotionCell.m */,
 			);
@@ -9503,6 +9516,8 @@
 				E3364E2C2241EE740021694D /* UCFUserStatusInfoApi.m */,
 				E3D3A1E6224A273400DA6185 /* UCFGetBindingBankCardListApi.h */,
 				E3D3A1E7224A273400DA6185 /* UCFGetBindingBankCardListApi.m */,
+				E3B9423E227056C100BCB6BD /* UCFQueryBannerByTypeAPI.h */,
+				E3B9423F227056C100BCB6BD /* UCFQueryBannerByTypeAPI.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -10700,6 +10715,7 @@
 				740E2E941ECD4D55006FA335 /* UCFNoticeView.m in Sources */,
 				74D657931F2F135700177EB7 /* UCFHomeInvestCell.m in Sources */,
 				E3355415223F444B001FADEA /* UCFMineServiceHeadView.m in Sources */,
+				E3B9423D227049C600BCB6BD /* UCFMineShopDiscountCell.m in Sources */,
 				3351B6492244EA86000AE65D /* NewInvestmentDetailTableViewCell.m in Sources */,
 				83C3E7E21F346188007BE065 /* UCFGoldCouponViewController.m in Sources */,
 				E30C799721F1C287000183FA /* UCFMineGetWithdrawInfoModel.m in Sources */,
@@ -11139,6 +11155,7 @@
 				334B9E6C223A29A700E278D8 /* UCFNewCollectionDetailViewController.m in Sources */,
 				83AB49641F6A76CA00C4231F /* UCFTotalAssetPieChartViewController.m in Sources */,
 				74270D4C1EC5976100F9419B /* UCFInvitationRewardViewController.m in Sources */,
+				E3B94240227056C100BCB6BD /* UCFQueryBannerByTypeAPI.m in Sources */,
 				7BC304891ACBC22D007767F1 /* UITextField+ExtentRange.m in Sources */,
 				7BCE022E1AC9141A0084C15C /* MBProgressHUD.m in Sources */,
 				74B98CA41F711D7500CB6A9F /* UCFMineFuncSecCell.m in Sources */,
@@ -11576,6 +11593,7 @@
 				E30C799421F1C00D000183FA /* UCFMineGetAccountBalanceListModel.m in Sources */,
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
+				E3B94243227056E900BCB6BD /* UCFQueryBannerByTypeModel.m in Sources */,
 				4AC947D71E5598F600354CF8 /* BatchSetView.m in Sources */,
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
 				3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */,

@@ -82,4 +82,6 @@ static NSString *GetBindingBankCardListApiURL = @"api/userAccount/v2/getBindingB
 
 static NSString *DougeMallOrderListURL = @"https://m.dougemall.com/static/mall/order-list/index.html?closeView=true";//商城订单
 
+static NSString *QueryBannerByTypeURL = @"api/publicMsg/v2/queryBannerByType.json";//banner接口
+
 #endif /* RequestConstant_h */

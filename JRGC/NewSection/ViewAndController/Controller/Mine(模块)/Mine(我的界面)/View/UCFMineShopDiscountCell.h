@@ -1,16 +1,16 @@
 //
-//  UCFMineShopPromotionCell.h
+//  UCFMineShopDiscountCell.h
 //  JRGC
 //
-//  Created by kuangzhanzhidian on 2019/3/29.
+//  Created by kuangzhanzhidian on 2019/4/24.
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
 #import "BaseTableViewCell.h"
-//为您精选
+//折扣专区
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UCFMineShopPromotionCell : BaseTableViewCell
+@interface UCFMineShopDiscountCell : BaseTableViewCell
 
 @end
 
