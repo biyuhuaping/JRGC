@@ -139,7 +139,7 @@
     NSString *title;
     NSString *score;
     NSString *price;
-    
+    NSString *discount;
     if ([self.cellTitleString isEqualToString:@"mallRecommends"])
     {
         UCFHomeMallrecommends *model = self.dataArray[index];
@@ -147,6 +147,7 @@
         title = model.title;
         score = model.score;
         price = model.price;
+        discount = model.discount;
     }
     else if ([self.cellTitleString isEqualToString:@"mallSale"])
     {
@@ -155,6 +156,7 @@
         title = model.title;
         score = model.score;
         price = model.price;
+        discount = model.discount;
     }
     
     UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0,105, SHOPLISTHEIGHT )withHeightOfCommodity:105];
@@ -169,6 +171,14 @@
         showValue = score;
     }
     view.shopValue.text = [NSString stringWithFormat:@"%@工贝",showValue];
+    if (discount.length > 0) {
+        view.discountLab.text = [NSString stringWithFormat:@"%@折",discount];
+        view.discountLab.superview.hidden = NO;
+    } else {
+        view.discountLab.superview.hidden = YES;
+    }
+    
+
 //    NSString *showStr =  [NSString stringWithFormat:@"%@工贝",price];
 //    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
 //    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:showStr attributes:attribtDic];
