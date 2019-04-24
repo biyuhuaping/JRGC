@@ -181,6 +181,7 @@
 		33D218C7223B9987008A9BDE /* UCFNewPureCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D218C6223B9987008A9BDE /* UCFNewPureCollectionViewController.m */; };
 		33D218CA223B9BCD008A9BDE /* UCFCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D218C9223B9BCD008A9BDE /* UCFCollectionViewModel.m */; };
 		33E0DD30226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E0DD2F226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m */; };
+		33E0DD33227084AE00F8AF4A /* UCFTouchIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E0DD32227084AE00F8AF4A /* UCFTouchIDViewController.m */; };
 		33E1A5DF20FDC5A9008244BD /* UCFCustomPopTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */; };
 		33E1A5E020FDC5A9008244BD /* UCFOpenRedBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */; };
 		33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */; };
@@ -1730,6 +1731,8 @@
 		33E0DD2D226FFA6D00F8AF4A /* UCFLockConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFLockConfig.h; sourceTree = "<group>"; };
 		33E0DD2E226FFCCA00F8AF4A /* UCFNewLockContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewLockContainerViewController.h; sourceTree = "<group>"; };
 		33E0DD2F226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewLockContainerViewController.m; sourceTree = "<group>"; };
+		33E0DD31227084AE00F8AF4A /* UCFTouchIDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTouchIDViewController.h; sourceTree = "<group>"; };
+		33E0DD32227084AE00F8AF4A /* UCFTouchIDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTouchIDViewController.m; sourceTree = "<group>"; };
 		33E1A5D820FDC5A8008244BD /* UCFOpenRedBagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOpenRedBagButton.h; sourceTree = "<group>"; };
 		33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCustomPopTransitionAnimation.m; sourceTree = "<group>"; };
 		33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOpenRedBagButton.m; sourceTree = "<group>"; };
@@ -4407,6 +4410,8 @@
 				3379DCAD226F42CA001CE1AB /* UCFCreateLockViewController.m */,
 				3379DCAF226F4389001CE1AB /* UCFUnlockViewController.h */,
 				3379DCB0226F4389001CE1AB /* UCFUnlockViewController.m */,
+				33E0DD31227084AE00F8AF4A /* UCFTouchIDViewController.h */,
+				33E0DD32227084AE00F8AF4A /* UCFTouchIDViewController.m */,
 				33E0DD2D226FFA6D00F8AF4A /* UCFLockConfig.h */,
 				33E0DD2E226FFCCA00F8AF4A /* UCFNewLockContainerViewController.h */,
 				33E0DD2F226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m */,
@@ -11368,6 +11373,7 @@
 				33EA9C992248F95900E4B3B6 /* UCFHighQualityTableViewCell.m in Sources */,
 				83A6FEA81EBC2DDF000BC48C /* UCFProductListCell.m in Sources */,
 				E31454462243BC6F00E883E3 /* UCFRegisterdSucceedViewController.m in Sources */,
+				33E0DD33227084AE00F8AF4A /* UCFTouchIDViewController.m in Sources */,
 				FB4F9E4A1D62A6C400CCB492 /* UpgradeAccountVC.m in Sources */,
 				740586D11F41B10900E2DE01 /* UCFGoldRaiseCell.m in Sources */,
 				338A5597223FA62E00B5A31A /* UCFCollectRootModel.m in Sources */,

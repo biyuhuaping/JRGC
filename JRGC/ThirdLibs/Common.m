@@ -40,6 +40,8 @@
         newSize = inputFloat * 1.171875;
     } else if (ScreenWidth == 414.0f && ScreenHeight == 736.0f) {
         newSize = inputFloat * 1.29375;
+    } else if (ScreenHeight > 800) {
+        newSize = inputFloat * 1.171875;
     }
     return newSize;
 }
