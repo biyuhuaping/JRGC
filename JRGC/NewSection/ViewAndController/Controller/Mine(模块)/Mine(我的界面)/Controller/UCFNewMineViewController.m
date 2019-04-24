@@ -18,10 +18,13 @@
 #import "UCFMineIntoCoinPageApi.h"
 #import "UCFGetBindingBankCardListApi.h"
 #import "UCFMallProductApi.h"
+#import "UCFQueryBannerByTypeAPI.h"
+#import "UCFQueryBannerByTypeModel.h"
 
 #import "UCFMineTableViewHead.h"
 #import "UCFMineActivitiesCell.h"
 #import "UCFMineItemCell.h"
+#import "UCFMineShopDiscountCell.h"
 #import "UCFMineCellAccountModel.h"
 #import "CellConfig.h"
 #import "NSString+Misc.h"
@@ -128,6 +131,7 @@
     [self requestMyReceipt];
     [self requestMySimpleInfo];
     [self getMallData];
+    [self getBannerData];
 }
 - (UCFMineTableViewHead *)tableHead
 {
@@ -163,7 +167,6 @@
     // 拿到对应cell并根据模型显示
     UITableViewCell *cell = [cellConfig cellOfCellConfigWithTableView:tableView dataModel:self.arryData[indexPath.section][indexPath.row] isNib:NO];
     ((BaseTableViewCell *)cell).bc = self;
-    ((BaseTableViewCell *)cell).cellTitleString = cellConfig.title;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -558,6 +561,11 @@
              
              [self showShopUrl:model];
          }
+         if ([model isKindOfClass:[UCFQueryBannerByTypeModel class]]) {
+             
+             [self showBannerUrl:model];
+         }
+         
            [self.tableView cyl_reloadData];
      }
 
@@ -741,12 +749,7 @@
     //当前没有活动内容
     NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:5];
     NSMutableArray *cellArray = [NSMutableArray arrayWithCapacity:5];
-    if (model.data.mallBannerList.count >0)
-    {
-        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMinePromotionCell class]) title:@"banner" showInfoMethod:@selector(showInfo:) heightOfCell:98];
-        [cellArray addObject:cellConfigCentre];
-        [dataArray addObject:model.data];
-    }
+    
     if (model.data.mallRecommends.count >0)
     {
         CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineShopPromotionCell class]) title:@"mallRecommends" showInfoMethod:@selector(showInfo:) heightOfCell:215];
@@ -755,15 +758,17 @@
     }
     if (model.data.mallSale.count >0)
     {
-        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineShopPromotionCell class]) title:@"mallSale" showInfoMethod:@selector(showInfo:) heightOfCell:215];
+        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineShopDiscountCell class]) title:@"mallSale" showInfoMethod:@selector(showInfo:) heightOfCell:215];
         [cellArray addObject:cellConfigCentre];
         [dataArray addObject:model.data];
     }
     
-    if ([cellConfig.title isEqualToString:@"banner"] || [cellConfig.title isEqualToString:@"mallRecommends"] || [cellConfig.title isEqualToString:@"mallSale"]) {
+    
+    
+    if ([cellConfig.title isEqualToString:@"mallRecommends"] || [cellConfig.title isEqualToString:@"mallSale"]) {
         //说明当前是有活动这组内容
-        [self.arryData replaceObjectAtIndex:3 withObject:[dataArray copy]];
-        [self.cellConfigData replaceObjectAtIndex:3 withObject:[cellArray copy]];
+        [self.arryData replaceObjectAtIndex:4 withObject:[dataArray copy]];
+        [self.cellConfigData replaceObjectAtIndex:4 withObject:[cellArray copy]];
     }
     else
     {
@@ -780,6 +785,77 @@
 //    }];
 }
 
+- (void)getBannerData
+{
+    //    @PGWeakObj(self);
+    UCFQueryBannerByTypeAPI *mallRequest = [[UCFQueryBannerByTypeAPI alloc] initWithBannerType:17];
+    [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+        [self.tableView endRefresh];
+        UCFQueryBannerByTypeModel *model = request.responseJSONModel;
+        if (model.ret) {
+
+            [self setTableViewArrayWithData:model];
+
+        } else {
+            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        [self.tableView endRefresh];
+    }];
+    [mallRequest start];
+}
+
+- (void)showBannerUrl:(UCFQueryBannerByTypeModel *)model
+{
+    NSArray *cellArrayData ;
+    CellConfig *cellConfig ;
+    if (self.cellConfigData.count < 4) {
+        cellArrayData = [self.cellConfigData lastObject];
+        cellConfig = [cellArrayData firstObject];
+    }
+    else
+    {
+        cellArrayData = [self.cellConfigData objectAtIndex:3];
+        cellConfig = [cellArrayData firstObject];
+    }
+    
+    //当前没有活动内容
+    NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:5];
+    NSMutableArray *cellArray = [NSMutableArray arrayWithCapacity:5];
+ 
+    if (model.data.bannerList.count)
+    {
+        //当前banner有数据
+        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMinePromotionCell class]) title:@"banner" showInfoMethod:@selector(showInfo:) heightOfCell:98];
+        [cellArray addObject:cellConfigCentre];
+        [dataArray addObject:model.data];
+        
+        if ([cellConfig.title isEqualToString:@"banner"])
+        {
+            //第三组是否是banner,如果是直接替换,不是就插入到第三行
+            //说明当前是有活动这组内容
+            [self.arryData replaceObjectAtIndex:3 withObject:[dataArray copy]];
+            [self.cellConfigData replaceObjectAtIndex:3 withObject:[cellArray copy]];
+        }
+        else
+        {
+            //没有活动这组数据,就直接插入
+            [self.arryData insertObject:dataArray atIndex:3];
+            [self.cellConfigData insertObject:cellArray atIndex:3];
+        }
+    }
+    else
+    {
+        //当前banner没有数据,需要隐藏
+        if ([cellConfig.title isEqualToString:@"banner"]){
+            [self.cellConfigData removeObjectAtIndex:3];
+            [self.arryData removeObjectAtIndex:3];
+        }
+        
+    }
+    [self.tableView cyl_reloadData];
+}
 //登录或者注册
 - (void)monitorUserLogin
 {

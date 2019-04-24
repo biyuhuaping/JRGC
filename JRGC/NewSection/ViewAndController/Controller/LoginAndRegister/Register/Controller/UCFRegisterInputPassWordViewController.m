@@ -395,6 +395,7 @@
 {
     UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] initWithType:type];
     lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    lockVc.isFromRegister = YES;
     return lockVc;
 }
 //- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
