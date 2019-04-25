@@ -34,9 +34,10 @@
 
 
 
-#import "UCFCreateLockViewController.h"
-#import "UCFUnlockViewController.h"
-#import "UCFTouchIDViewController.h"
+//#import "UCFCreateLockViewController.h"
+//#import "UCFUnlockViewController.h"
+//#import "UCFTouchIDViewController.h"
+//#import "UCFNewLockContainerViewController.h"
 @interface UCFNewHomeViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,YTKRequestDelegate,HomeHeadCycleViewDelegate,BaseTableViewCellDelegate,UCFNewHomeSectionViewDelegate>
 @property(nonatomic, strong)HomeHeadCycleView *homeHeadView;
 @property(nonatomic, strong)UCFHomeViewModel  *homeListViewModel;
@@ -73,21 +74,24 @@
 }
 - (void)rightBarClicked:(UIButton *)button
 {
-    
-    UCFTouchIDViewController *aa = [[UCFTouchIDViewController alloc] init];
-    [self.rt_navigationController pushViewController:aa animated:YES complete:nil];
-
-    return;
-    UCFUnlockViewController * vc1 = [[UCFUnlockViewController alloc] init];
-    [self.rt_navigationController pushViewController:vc1 animated:YES complete:nil];
-
-    return;
-    UCFCreateLockViewController *vc = [[UCFCreateLockViewController alloc] init];
-    [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
-    return;
-//    UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
-//    vc.hidesBottomBarWhenPushed = YES;
+//    UCFNewLockContainerViewController *vc3 = [[UCFNewLockContainerViewController alloc] initWithType:RCLockViewTypeCheck];
+//    [SingGlobalView.rootNavController pushViewController:vc3 animated:YES complete:nil];
+//
+//    return;
+//    UCFTouchIDViewController *aa = [[UCFTouchIDViewController alloc] init];
+//    [self.rt_navigationController pushViewController:aa animated:YES complete:nil];
+//
+//    return;
+//    UCFUnlockViewController * vc1 = [[UCFUnlockViewController alloc] init];
+//    [self.rt_navigationController pushViewController:vc1 animated:YES complete:nil];
+//
+//    return;
+//    UCFCreateLockViewController *vc = [[UCFCreateLockViewController alloc] init];
 //    [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
+//    return;
+    UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
 
 }
 - (void)viewDidLayoutSubviews

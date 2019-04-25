@@ -54,9 +54,9 @@
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UINavigationController *nav = app.tabBarController.selectedViewController;
     
-    if ([self isCurrentViewControllerVisible:app.lockVc]) {
-        return;
-    }
+//    if ([self isCurrentViewControllerVisible:app.lockVc]) {
+//        return;
+//    }
     if ([nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
         //下面是需要登录后查看的
         if (!SingleUserInfo.loginData.userInfo.userId) {

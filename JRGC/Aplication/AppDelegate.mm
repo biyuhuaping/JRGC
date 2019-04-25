@@ -486,7 +486,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
         DDLogDebug(@"主队列--延迟执行------%@",[NSThread currentThread]);
         NSInteger selectIndex = self.tabBarController.selectedIndex;
-        if (selectIndex == 0 && !self.lockVc) {
+        if (selectIndex == 0 ) {
             UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:0];
             if ([nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
                     [[MongoliaLayerCenter sharedManager] showLogic];
@@ -497,9 +497,9 @@
 - (void)checkIsLockView
 {
     //判断当前页是否解锁
-    if ([LockFlagSingle sharedManager].disappearType == DisHome && [LockFlagSingle sharedManager].showSection == LockFingerprint) {
-         [self.lockVc openTouchidAlert];
-    }
+//    if ([LockFlagSingle sharedManager].disappearType == DisHome && [LockFlagSingle sharedManager].showSection == LockFingerprint) {
+//         [self.lockVc openTouchidAlert];
+//    }
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
     //   将要杀死进程，删除保存的亮度数据和工场码标示符
@@ -521,23 +521,15 @@
 - (void)showGCode
 {
     if (SingleUserInfo.loginData.userInfo.userId) {
-        [self showLLLockViewController:LLLockViewTypeCheck];
+        [self showLLLockViewController:RCLockViewTypeCheck];
     }
 }
 
 #pragma mark - 弹出手势解锁密码输入框
-- (void)showLLLockViewController:(LLLockViewType)type
+- (void)showLLLockViewController:(RCLockViewType)type
 {
-
-        self.lockVc = [[UCFLockHandleViewController alloc] init];
-
-        self.lockVc.nLockViewType = type;
-
-        self.lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-
-        [SingGlobalView.rootNavController pushViewController:self.lockVc animated:NO complete:nil];
-        LLLog(@"创建了一个pop=%@", self.lockVc);
-    
+    UCFNewLockContainerViewController *vc = [[UCFNewLockContainerViewController alloc] initWithType:type];
+    [SingGlobalView.rootNavController pushViewController:vc animated:NO complete:nil];
 }
 
 #pragma mark GuideViewContlerDelegate

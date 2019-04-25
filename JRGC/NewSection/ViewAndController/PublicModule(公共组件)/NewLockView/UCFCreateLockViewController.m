@@ -14,6 +14,7 @@
 #import "LLLockPassword.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import <Security/Security.h>
+#import "UCFRegisterdSucceedViewController.h"
 @interface UCFCreateLockViewController ()<LLLockDelegate>
 @property(nonatomic, strong)UILabel *titleLabe; //标题
 @property(nonatomic, strong)UIButton *runButton;//跳过按钮
@@ -44,9 +45,19 @@
     
     [self initData];
 }
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    ((RTContainerController *) (self.parentViewController.rt_navigationController.viewControllers.lastObject)).fd_interactivePopDisabled = YES;
+    // 禁用返回手势
+    if ([self.parentViewController.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.parentViewController.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+
+}
 - (void)initData
 {
-    ((RTContainerController *) (self.rt_navigationController.viewControllers.lastObject)).fd_interactivePopDisabled = YES;
+
     _clearButton.myVisibility = MyVisibility_Invisible;
     _errorLabel.myVisibility = MyVisibility_Invisible;
     _nLockViewType = RCLockViewTypeCreate;
@@ -254,7 +265,7 @@
  */
 - (void)dealWithrunBtn:(UIButton *)button
 {
-    [self.rt_navigationController popViewControllerAnimated:YES complete:nil];
+    [self hide];
 }
 
 /**
@@ -272,7 +283,19 @@
 }
 - (void)hide
 {
-    
+    if (_isFromRegist) {
+        [SingGlobalView.rootNavController popToRootViewControllerAnimated:NO complete:^(BOOL finished) {
+            UCFRegisterdSucceedViewController *vc = [[UCFRegisterdSucceedViewController alloc] init];
+            RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.selectedViewController;
+            [nav pushViewController:vc animated:NO complete:^(BOOL finished) {
+            }];
+        }];
+
+        
+    } else {
+        [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES];
+
+    }
 }
 - (void)loadView
 {

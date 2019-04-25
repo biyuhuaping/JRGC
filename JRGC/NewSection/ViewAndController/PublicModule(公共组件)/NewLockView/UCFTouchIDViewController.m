@@ -10,6 +10,8 @@
 #import "UCFLockConfig.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import <Security/Security.h>
+#import "UCFNewLockContainerViewController.h"
+#import "UCFNewVerificationLoginPassWordViewController.h"
 @interface UCFTouchIDViewController ()
 @property(nonatomic, strong)UIImageView *headImageView;
 
@@ -20,6 +22,8 @@
 @property(nonatomic, strong)UILabel *tipLab1;
 
 @property(nonatomic, strong)UIImageView *touchIDAmition;
+
+@property(nonatomic, strong)UIButton *restartTouchId;
 
 @property(nonatomic, assign)BOOL    isFaceID;
 
@@ -37,22 +41,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
 - (void)switchPageBtnClick:(UIButton *)button
 {
-    
+    [(UCFNewLockContainerViewController  *)self.parentViewController childControlerCallShow:self];
 }
 - (void)dealWithPassword:(UIButton *)button
 {
-    
+    UCFNewVerificationLoginPassWordViewController *controller = [[UCFNewVerificationLoginPassWordViewController alloc] init];
+    controller.titleString = [NSString stringWithFormat:@""];
+    [self.parentViewController.rt_navigationController pushViewController:controller animated:YES];
 }
 - (void)changeAccountBtnClicked:(UIButton *)button
 {
-    
+     [SingleUserInfo loadLoginViewController];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    if (self.parentViewController.childViewControllers.count == 1) {
+        self.switchPageBtn.myVisibility = MyVisibility_Invisible;
+    }
 }
 - (void)loadView
 {
@@ -64,10 +74,90 @@
     [self.rootLayout addSubview:self.tipLab];
     [self.rootLayout addSubview:self.tipLab1];
     [self.rootLayout addSubview:self.touchIDAmition];
-    
+    [self.rootLayout addSubview:self.restartTouchId];
     [self.rootLayout addSubview:self.switchPageBtn];
     [self.rootLayout addSubview:self.reminderButton];
     [self.rootLayout addSubview:self.changeAccountBtn];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self openTouchId:nil];
+}
+//启动touchID 进行验证
+- (void)openTouchId:(UIButton *)button
+{
+    // 判断系统是否是iOS8.0以上 8.0以上可用
+    if (!([[UIDevice currentDevice]systemVersion].doubleValue >= 8.0)) {
+        NSLog(@"系统不支持");
+        return;
+    }
+    LAContext *lol = [[LAContext alloc] init];
+    lol.localizedFallbackTitle = @"";
+    NSError *error = nil;
+    NSString *showStr = _isFaceID ? @"面对前置摄像头进行验证" : @"通过home键验证已有手机指纹";
+    [lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error];
+    if (error.code == LAErrorTouchIDLockout && kIS_IOS9) {
+        [lol evaluatePolicy:LAPolicyDeviceOwnerAuthentication localizedReason:@"重新开启TouchID功能" reply:^(BOOL success, NSError * _Nullable error) {
+            if (success) {
+                [self openTouchId:nil];
+            }
+        }];
+        return;
+    }
+    //TODO:TOUCHID是否存在
+    //TODO:TOUCHID开始运作
+    [lol evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:showStr reply:^(BOOL succes, NSError *error)
+     {
+         dispatch_async(dispatch_get_main_queue(), ^{
+             if (succes) {
+                 NSLog(@"指纹验证成功");
+                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isUserShowTouchIdLockView"];
+                 [[NSUserDefaults standardUserDefaults] synchronize];
+                 [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
+             } else {
+                 if (error) {
+                     switch (error.code) {
+                         case LAErrorUserCancel:
+                             NSLog(@"Authentication was cancelled by the user");
+                             //用户取消验证Touch ID
+     
+                             break;
+                         case LAErrorTouchIDLockout:
+                             if (kIS_IOS9) {
+                                 [self openTouchId:nil];
+                             }
+                             break;
+                             
+                         case LAErrorAuthenticationFailed:
+                             NSLog(@"LAErrorAuthenticationFailed");
+                             break;
+                         case LAErrorUserFallback:
+                             // 用户点击输入密码按钮
+                             NSLog(@"1111");
+                             break;
+                         case LAErrorPasscodeNotSet:
+                             //没有在设备上设置密码
+                             NSLog(@"1111");
+                             break;
+                         case LAErrorTouchIDNotAvailable:
+                             //设备不支持TouchID
+                             NSLog(@"1111");
+                             break;
+                         case LAErrorTouchIDNotEnrolled:
+                             NSLog(@"1111");
+                             break;
+                         default:
+
+                             break;
+                     }
+                     return ;
+                 }
+             }
+         });
+         
+         
+     }];
 }
 - (UIImageView *)headImageView
 {
@@ -142,7 +232,6 @@
             _touchIDAmition.topPos.equalTo(self.tipLab1.bottomPos).offset(86);
             _touchIDAmition.centerXPos.equalTo(self.rootLayout.centerXPos);
             _touchIDAmition.image = [UIImage imageNamed:@"face_bg_round"];
-            
             UIImageView *centerImageView = [[UIImageView alloc] init];
             centerImageView.mySize = CGSizeMake(100, 100);
             centerImageView.centerXPos.equalTo(_touchIDAmition.centerXPos);
@@ -159,6 +248,25 @@
     }
     return _touchIDAmition;
 
+}
+
+- (UIButton *)restartTouchId
+{
+    if (!_restartTouchId) {
+        _restartTouchId = [UIButton buttonWithType:UIButtonTypeCustom];
+        _restartTouchId.backgroundColor = [UIColor clearColor];
+        [_restartTouchId addTarget:self action:@selector(openTouchId:) forControlEvents:UIControlEventTouchUpInside];
+        if (_isFaceID) {
+            _restartTouchId.mySize = CGSizeMake(230, 230);
+            _restartTouchId.topPos.equalTo(self.tipLab1.bottomPos).offset(86);
+            _restartTouchId.centerXPos.equalTo(self.rootLayout.centerXPos);
+        } else {
+            _restartTouchId.mySize = CGSizeMake(120, 120);
+            _restartTouchId.centerXPos.equalTo(self.rootLayout.centerXPos);
+            _restartTouchId.centerYPos.equalTo(self.rootLayout.centerYPos);
+        }
+    }
+    return _restartTouchId;
 }
 - (UIButton *)switchPageBtn
 {

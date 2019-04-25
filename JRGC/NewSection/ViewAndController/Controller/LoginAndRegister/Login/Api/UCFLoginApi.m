@@ -8,6 +8,7 @@
 
 #import "UCFLoginApi.h"
 #import "MD5Util.h"
+#import "NSString+Tool.h"
 @implementation UCFLoginApi
 {
     NSString* _username;
@@ -44,7 +45,7 @@
  *  @return 封装好的参数
  */
 - (id)requestArgument {
-    NSString *token_id = [UserInfoSingle didReceiveDeviceBlackBox];
+    NSString *token_id = [[UserInfoSingle didReceiveDeviceBlackBox] dealNullString];
     NSString *isCompanyBool;
     
     if ([_isCompany isEqualToString:@"个人"]) {

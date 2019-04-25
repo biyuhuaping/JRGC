@@ -16,7 +16,8 @@
 #import "UCFToolsMehod.h"
 #import "MD5Util.h"
 #import "FMDeviceManager.h"
-#import "UCFLockHandleViewController.h"
+//#import "UCFLockHandleViewController.h"
+#import "UCFNewLockContainerViewController.h"
 @interface UCFRegisterInputPassWordViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
@@ -367,7 +368,7 @@
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:@"个人",@"isCompany",self.phoneNo,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:self.passWordField.text];
             [self.rootLayout endEditing:YES];
-            [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:LLLockViewTypeCreate] animated:YES complete:^(BOOL finished) {
+            [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:RCLockViewTypeCreate] animated:YES complete:^(BOOL finished) {
                 //                [SingGlobalView.tabBarController.selectedViewController.navigationController popToRootViewControllerAnimated:NO];
                 //                [SingGlobalView.tabBarController setSelectedIndex:0];
                 [SingGlobalView.rootNavController removeViewController:self];
@@ -391,11 +392,11 @@
         
     }];
 }
-- (UCFLockHandleViewController *)cretateLockViewWithType:(LLLockViewType)type
+- (UCFNewLockContainerViewController *)cretateLockViewWithType:(RCLockViewType)type
 {
-    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] initWithType:type];
-    lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    lockVc.isFromRegister = YES;
+    UCFNewLockContainerViewController *lockVc = [[UCFNewLockContainerViewController alloc] initWithType:type];
+    lockVc.isFromRegist = YES;
+    lockVc.hidesBottomBarWhenPushed = YES;
     return lockVc;
 }
 //- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

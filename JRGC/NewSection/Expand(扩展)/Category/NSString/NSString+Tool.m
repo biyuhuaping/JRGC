@@ -77,4 +77,30 @@
     }
     return newString;
 }
+- (NSString *)dealNullString
+{
+    if ([self isKindOfClass:[NSNull class]] || [self isEqualToString:@""] || nil == self || [self isEqual:[NSNull null]] || [self isNbsp]) {
+        return @"";
+    } else {
+        return self;
+    }
+}
+- (BOOL)isNbsp
+{
+    if ([self isKindOfClass:[NSString class]])
+    {
+        if ([self rangeOfString:@"nbsp"].location != NSNotFound)
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else
+    {
+        return NO;
+    }
+}
 @end

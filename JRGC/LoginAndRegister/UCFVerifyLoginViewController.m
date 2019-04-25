@@ -332,7 +332,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         } else { //开启手势密码
 //            [self showGestureCode];
-              [self showLLLockViewController:LLLockViewTypeCreate];
+              [self showLLLockViewController:RCLockViewTypeCreate];
         }
     } else if ([_sourceVC isEqualToString:@"securityCenter_touchID"]) {
         //这个是从个人信息页面 开启指纹解锁进来的
@@ -342,7 +342,7 @@
     else {
         //这个是从手势密码页面点击忘记密码进来的
 //        [self showGestureCode];
-          [self showLLLockViewController:LLLockViewTypeCreate];
+          [self showLLLockViewController:RCLockViewTypeCreate];
     }
 }
 
