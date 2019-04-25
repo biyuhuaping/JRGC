@@ -180,7 +180,7 @@
             }
         }
         else{
-            ShowMessage(model.message);
+//            ShowMessage(model.message);
         }
          [self endRefreshAndReloadData];
         

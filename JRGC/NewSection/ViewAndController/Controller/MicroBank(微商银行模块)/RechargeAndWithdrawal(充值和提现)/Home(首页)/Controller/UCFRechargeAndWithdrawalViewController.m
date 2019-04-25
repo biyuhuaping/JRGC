@@ -126,7 +126,7 @@
             [self.rootLayout addSubview:self.pageController];
         }
         else{
-            ShowMessage(self.model.message);
+//            ShowMessage(self.model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self

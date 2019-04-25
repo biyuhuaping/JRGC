@@ -351,7 +351,7 @@
                             [self.navigationController pushViewController:web animated:YES];
                         }
                         else{
-                            ShowMessage(model.message);
+//                            ShowMessage(model.message);
                         }
                     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
                         // 你可以直接在这里使用 self

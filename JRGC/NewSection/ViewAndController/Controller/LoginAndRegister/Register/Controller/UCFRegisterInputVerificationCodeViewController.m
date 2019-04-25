@@ -180,7 +180,7 @@
             alertView.tag = 1001;
 //            [NSTimer scheduledTimerWithTimeInterval:55.0f target:self selector:@selector(performDismiss:) userInfo:alertView repeats:NO];
             [alertView show];
-            ShowMessage(model.message);
+//            ShowMessage(model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -213,7 +213,7 @@
         }
         else{
             [self.verificationCodeView sharkWithClearContent];
-            ShowMessage(model.message);
+//            ShowMessage(model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
