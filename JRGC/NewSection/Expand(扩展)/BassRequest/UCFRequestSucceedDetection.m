@@ -33,6 +33,7 @@
     }
     NSDictionary *dic = [NSDictionary dictionaryWithDictionary:succeedDetectionDic];
     NSInteger rstcode = [dic[@"code"] integerValue];
+    BOOL ret = [dic[@"ret"] boolValue];
     if (rstcode == -1) {
         SingleUserInfo.loginType = LoginSingatureOut;
 //  无效的请求,也需要退出
@@ -69,6 +70,9 @@
         //强制更新
         [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
         
+    }
+    if (rstcode != -2 && rstcode != -3 && rstcode != -4 && rstcode != -6 && ret == NO) {
+        ShowMessage(dic[@"message"]);
     }
 }
 
