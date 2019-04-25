@@ -107,7 +107,7 @@
             [self.dataArray addObjectsFromArray:dataArr];
             [self.showTableView reloadData];
         } else {
-            ShowMessage(rsttext);
+//            ShowMessage(rsttext);
         }
         
         

@@ -245,7 +245,7 @@
         //给反射标识赋值
         self.modelListArray = self.dataArray;
     } else {
-        ShowMessage(model.message);
+//        ShowMessage(model.message);
     }
     [self getMallData];
 
@@ -292,7 +292,7 @@
             [self.dataArray addObject:section4];
         }
     } else {
-        ShowMessage(model.message);
+//        ShowMessage(model.message);
     }
     if (self.recommendBannerArray.count > 0) {
         CellConfig *data5_0 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"内容推荐" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];

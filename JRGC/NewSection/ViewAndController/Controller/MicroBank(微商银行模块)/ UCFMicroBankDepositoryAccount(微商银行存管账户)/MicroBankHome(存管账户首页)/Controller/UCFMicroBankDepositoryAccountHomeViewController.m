@@ -244,7 +244,7 @@
             [self.tableHead.openAccountNameLabel sizeToFit];
         }
         else{
-            ShowMessage(model.message);
+//            ShowMessage(model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -295,7 +295,7 @@
             }
         }
         else{
-            ShowMessage(model.message);
+//            ShowMessage(model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -342,7 +342,7 @@
                     [self.navigationController pushViewController:webView animated:YES];
                 }
                 else{
-                    ShowMessage(model.message);
+//                    ShowMessage(model.message);
                 }
             } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
                 // 你可以直接在这里使用 self

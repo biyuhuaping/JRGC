@@ -109,7 +109,7 @@
             [self.dataArray addObjectsFromArray:dataArr];
             [self.showTableView cyl_reloadData];
         } else {
-            ShowMessage(rsttext);
+//            ShowMessage(rsttext);
         }
         
 

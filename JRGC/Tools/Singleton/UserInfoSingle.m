@@ -219,7 +219,7 @@
             }
             else
             {
-                ShowMessage(dic[@"message"]);
+//                ShowMessage(dic[@"message"]);
                 self.requestUserbackBlock(NO);
                 self.requestUserbackBlock = nil;
             }
