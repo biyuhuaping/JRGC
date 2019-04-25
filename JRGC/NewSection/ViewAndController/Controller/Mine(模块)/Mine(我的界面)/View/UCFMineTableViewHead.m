@@ -441,12 +441,14 @@
         self.totalAssetsMoneyLabel.text = @"****";//总资产
         self.expectedInterestMoneyLabel.text = @"****";//总待收利息
         self.accountBalanceMoneyLabel.text = @"****";//余额
+        [self.amountShownBtn setImage:[UIImage imageNamed:@"mine_icon_invisible"] forState:UIControlStateNormal];
     }
     else
     {
         self.totalAssetsMoneyLabel.text = self.total;//总资产
         self.expectedInterestMoneyLabel.text = self.totalDueIn;//总待收利息
         self.accountBalanceMoneyLabel.text = self.cashBalance;//余额
+        [self.amountShownBtn setImage:[UIImage imageNamed:@"MineShowCapital.png"] forState:UIControlStateNormal];
     }
     
     [self.totalAssetsMoneyLabel sizeToFit];

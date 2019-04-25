@@ -229,7 +229,7 @@
 }
 - (void)chooseBankData:(NSDictionary *)data {
     //开户行名称
-    self.bankId = data[@"bankName"];
+    self.bankId = [NSString stringWithFormat:@"%@",data[@"bankId"]];
     self.selectBankView.oaContentLabel.text = data[@"bankName"];
     [self.selectBankView sizeToFit];
     //银行logo
@@ -249,7 +249,7 @@
         _enterButton.rightPos.equalTo(@25);
         _enterButton.leftPos.equalTo(@25);
         _enterButton.heightSize.equalTo(@40);
-        [_enterButton setTitle:@"立即开通" forState:UIControlStateNormal];
+        [_enterButton setTitle:@"提交" forState:UIControlStateNormal];
         _enterButton.titleLabel.font= [Color gc_Font:15.0];
         [_enterButton setBackgroundImage:[Image createImageWithColor:[Color color:PGColorOptionButtonBackgroundColorGray] withCGRect:CGRectMake(0, 0, PGScreenWidth - 50, 40)] forState:UIControlStateNormal];
         _enterButton.userInteractionEnabled = NO;
@@ -410,7 +410,7 @@
         [AuxiliaryFunc showToastMessage:@"请输入正确的银行卡号" withView:self.view];
         return;
     }
-    else if (textField == self.smsView.contentField && [self inspectSmsView]){
+    else if (textField == self.smsView.contentField && ![self inspectSmsView]){
         [AuxiliaryFunc showToastMessage:@"请输入正确的短信验证码" withView:self.view];
         return;
     }
@@ -506,25 +506,25 @@
                 //                self.idView.contentField.text   = asteriskIdCardNo;
                 self.idView.contentField.text   = self.GetOpenAccountModel.data.userInfo.idCardNo;
             }
-            if (self.GetOpenAccountModel.data.userInfo.bankCard.length > 0) {
-                //将银行卡（textField3）要显示的文字四位分隔
-                self.bankNumView.contentField.text  = [NSString bankIdSeparate:self.GetOpenAccountModel.data.userInfo.bankCard];
-            }
+//            if (self.GetOpenAccountModel.data.userInfo.bankCard.length > 0) {
+//                //将银行卡（textField3）要显示的文字四位分隔
+//                self.bankNumView.contentField.text  = [NSString bankIdSeparate:self.GetOpenAccountModel.data.userInfo.bankCard];
+//            }
             
-            //银行logo
-            if (self.GetOpenAccountModel.data.userInfo.bankName.length > 0)
-            {//如果有银行名称，就显示名称，否则显示“请选择”
-                self.selectBankView.oaContentLabel.text = self.GetOpenAccountModel.data.userInfo.bankName;
-                
-            }
-            
-            if (self.GetOpenAccountModel.data.userInfo.bankLogo.length > 0) {
-                [self.selectBankView.bankImageView sd_setImageWithURL:[NSURL URLWithString:self.GetOpenAccountModel.data.userInfo.bankLogo] placeholderImage:[UIImage imageNamed:@"bank_default"]];
-            }
-            if (self.GetOpenAccountModel.data.userInfo.bankId.length > 0) {
-                self.bankId = self.GetOpenAccountModel.data.userInfo.bankId;
-            }
-            
+//            //银行logo
+//            if (self.GetOpenAccountModel.data.userInfo.bankName.length > 0)
+//            {//如果有银行名称，就显示名称，否则显示“请选择”
+//                self.selectBankView.oaContentLabel.text = self.GetOpenAccountModel.data.userInfo.bankName;
+//
+//            }
+//
+//            if (self.GetOpenAccountModel.data.userInfo.bankLogo.length > 0) {
+//                [self.selectBankView.bankImageView sd_setImageWithURL:[NSURL URLWithString:self.GetOpenAccountModel.data.userInfo.bankLogo] placeholderImage:[UIImage imageNamed:@"bank_default"]];
+//            }
+//            if (self.GetOpenAccountModel.data.userInfo.bankId.length > 0) {
+//                self.bankId = self.GetOpenAccountModel.data.userInfo.bankId;
+//            }
+//
             
             if (self.GetOpenAccountModel.data.userInfo.notSupportDes.length > 0)
             {

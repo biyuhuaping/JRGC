@@ -53,6 +53,8 @@
 
 @property (nonatomic, assign) BOOL isCompanyAgent; //是否是企业用户
 
+@property (nonatomic, copy)   NSString *phoneNum;
+
 @end
 
 @implementation UCFMicroBankOpenAccountTradersPasswordViewController
@@ -119,6 +121,7 @@
         _nameView.titleImageView.image = [UIImage imageNamed:@"list_icon_name"];
         _nameView.contentField.delegate = self;
         _nameView.contentField.placeholder = @"请输入真实姓名";
+        _nameView.contentField.enabled = NO;
         [_nameView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _nameView;
@@ -157,6 +160,7 @@
         _phoneView.titleImageView.image = [UIImage imageNamed:@"list_icon_phone"];
         _phoneView.contentField.delegate = self;
         _phoneView.contentField.placeholder = @"请输入手机号码";
+        _phoneView.contentField.enabled = NO;
         [_phoneView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _phoneView;
@@ -383,7 +387,9 @@
 }
 - (BOOL)inspectPhoneView
 {
-    if (self.phoneView.contentField.text.length == 11 && [Common isOnlyNumber:self.phoneView.contentField.text] ) {
+//    if (self.phoneView.contentField.text.length == 11 && [Common isOnlyNumber:self.phoneView.contentField.text] )
+    if (self.phoneView.contentField.text.length == 11 )
+    {
         return YES;
     }
     else
@@ -411,7 +417,7 @@
         return;
     }
 
-    UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:self.phoneView.contentField.text isVms:isVmsNew type:@"5" AccoutType:self.accoutType];
+    UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:self.phoneNum isVms:isVmsNew type:@"5" AccoutType:self.accoutType];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -474,11 +480,11 @@
             {
                 //                NSString *asteriskIdCardNo = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.idCardNo startLocation:3 lenght:self.GetOpenAccountModel.data.userInfo.idCardNo.length -7];
                 //                self.idView.contentField.text   = asteriskIdCardNo;
-                NSString *str = self.GetOpenAccountModel.data.userInfo.phoneNum;
-                if (str.length < 7) {
+                self.phoneNum = self.GetOpenAccountModel.data.userInfo.phoneNum;
+                if (self.phoneNum.length < 7) {
                     return ;
                 }
-                self.phoneView.contentField.text   = [str stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];;
+                self.phoneView.contentField.text   = [self.phoneNum stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
             }
             
             if (self.GetOpenAccountModel.data.userInfo.notSupportDes.length > 0)

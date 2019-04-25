@@ -314,7 +314,7 @@
         _couponImageView.myTop = self.imageTop;
         _couponImageView.heightSize.equalTo(self.signInImageView.heightSize);
         _couponImageView.widthSize.equalTo(self.signInImageView.widthSize);
-        _couponImageView.image = [UIImage imageNamed:@"mine_icon_coupon.png"];
+        _couponImageView.image = [UIImage imageNamed:@"mine_my_icon_coupon"];
     }
     return _couponImageView;
 }

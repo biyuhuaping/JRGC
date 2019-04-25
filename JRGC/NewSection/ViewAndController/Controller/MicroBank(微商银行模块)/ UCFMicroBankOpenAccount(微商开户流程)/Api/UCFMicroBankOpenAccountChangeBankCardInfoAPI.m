@@ -55,7 +55,7 @@
              @"fromSite":[NSString stringWithFormat:@"%zd",_accoutType],
              @"bankCard": _bankCard,
              @"bankId" : _bankId,
-             @"bvalidateCode" : _validateCode,
+             @"validateCode" : _validateCode,
              @"openStatus" : _openStatus,
              };
 }
