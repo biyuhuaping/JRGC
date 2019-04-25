@@ -373,10 +373,10 @@
 }
 - (void)pushWebViewWithUrl:(NSString *)url Title:(NSString *)title
 {
-    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
     web.url = [NSString stringWithFormat:@"%@",url];
     web.title = title;
-    web.isHidenNavigationbar = YES;
+//    web.isHidenNavigationbar = YES;
     [self.navigationController pushViewController:web animated:YES];
 }
 - (void)homeViewDataBidClickModel:(UCFNewHomeListModel *)model type:(UCFNewHomeListType)type
