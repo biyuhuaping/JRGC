@@ -10,8 +10,8 @@
 #import "UCFCouponPopup.h"
 #import "NZLabel.h"
 #import "BaseScrollview.h"
-
-@interface UCFRegisterdSucceedViewController ()
+#import "UCFMicroBankOpenAccountViewController.h"
+@interface UCFRegisterdSucceedViewController ()<PublicPopupWindowViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
@@ -93,6 +93,19 @@
 }
 
 - (void)getToBack
+{
+
+    UCFPopViewWindow *popView = [UCFPopViewWindow new];
+    popView.delegate = self;
+    popView.type = POPOpenAccountRenounce;
+    popView.popViewTag = 10001;
+    [popView startPopView];
+}
+- (void)popEnterButtonClick:(UIButton *)btn
+{
+    [self goToOpenAccount];
+}
+- (void)popCancelButtonClick:(UIButton *__nullable)btn
 {
     [self.rt_navigationController popToRootViewControllerAnimated:YES];
     [UCFCouponPopup startQueryCouponPopup];//去调取首页优惠券弹框
@@ -350,7 +363,7 @@
         [_openAccoutBtn setTitle:@"立即开通" forState:UIControlStateNormal];
         _openAccoutBtn.titleLabel.font= [Color gc_Font:15.0];
         [_openAccoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_openAccoutBtn addTarget:self action:@selector(aaaa) forControlEvents:UIControlEventTouchUpInside];
+        [_openAccoutBtn addTarget:self action:@selector(goToOpenAccount) forControlEvents:UIControlEventTouchUpInside];
         _openAccoutBtn.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
             //设置圆角的半径
@@ -363,9 +376,11 @@
     }
     return _openAccoutBtn;
 }
-- (void)aaaa
+- (void)goToOpenAccount
 {
     _titleLabel.myVisibility = MyVisibility_Visible;
+    UCFMicroBankOpenAccountViewController *vc = [[UCFMicroBankOpenAccountViewController alloc] init];
+    [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
 }
 
 #pragma mark - 请求网络及回调

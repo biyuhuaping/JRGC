@@ -14,7 +14,8 @@
 #import "UCFRegisterInputPhoneNumViewController.h"
 #import "UCFNewFindPassWordViewController.h"
 #import "UCFUserAllStatueRequest.h"
-#import "UCFLockHandleViewController.h"
+//#import "UCFLockHandleViewController.h"
+#import "UCFNewLockContainerViewController.h"
 @interface UCFNewLoginViewController ()<UITextFieldDelegate,YTKChainRequestDelegate>
 
 @property (nonatomic, strong) NZLabel     *loginLabel;//注册
@@ -226,7 +227,7 @@
 
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:self.isCompany,@"isCompany",self.username,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:self.pwd];
-            [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:LLLockViewTypeCreate] animated:YES complete:^(BOOL finished) {
+            [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:RCLockViewTypeCreate] animated:YES complete:^(BOOL finished) {
 
                 [SingGlobalView.rootNavController removeViewController:self];
             }];
@@ -267,11 +268,10 @@
     
     
 }
-- (UCFLockHandleViewController *)cretateLockViewWithType:(LLLockViewType)type
+- (UCFNewLockContainerViewController *)cretateLockViewWithType:(RCLockViewType)type
 {
-    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] initWithType:type];
+    UCFNewLockContainerViewController *lockVc = [[UCFNewLockContainerViewController alloc] initWithType:type];
     lockVc.hidesBottomBarWhenPushed = YES;
-    lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     return lockVc;
 }
 //- (void)chainRequestFinished:(YTKChainRequest *)chainRequest {

@@ -11,6 +11,8 @@
 #import "LLLockView.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "LLLockPassword.h"
+#import "UCFNewLockContainerViewController.h"
+#import "UCFNewVerificationLoginPassWordViewController.h"
 @interface UCFUnlockViewController ()<LLLockDelegate>
 {
     int nRetryTimesRemain; // 剩余几次输入机会
@@ -39,6 +41,9 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    if (self.parentViewController.childViewControllers.count == 1) {
+        self.switchPageBtn.myVisibility = MyVisibility_Invisible;
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -106,15 +111,17 @@
 
 - (void)hide
 {
-    
+    [SingGlobalView.rootNavController popToRootViewControllerAnimated:YES complete:nil];
 }
 - (void)dealWithPassword:(UIButton *)button
 {
-    
+    UCFNewVerificationLoginPassWordViewController *controller = [[UCFNewVerificationLoginPassWordViewController alloc] init];
+    controller.titleString = [NSString stringWithFormat:@""];
+    [self.parentViewController.rt_navigationController pushViewController:controller animated:YES];
 }
 - (void)changeAccountBtnClicked:(UIButton *)button
 {
-    
+    [SingleUserInfo loadLoginViewController];
 }
 - (void)loadView
 {
@@ -276,6 +283,7 @@
 }
 - (void)switchPageBtnClick:(UIButton *)button
 {
-    
+    [(UCFNewLockContainerViewController  *)self.parentViewController childControlerCallShow:self];
+
 }
 @end

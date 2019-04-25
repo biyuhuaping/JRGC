@@ -4415,13 +4415,13 @@
 		3379DCAB226F424D001CE1AB /* NewLockView */ = {
 			isa = PBXGroup;
 			children = (
+				33E0DD2D226FFA6D00F8AF4A /* UCFLockConfig.h */,
 				3379DCAC226F42CA001CE1AB /* UCFCreateLockViewController.h */,
 				3379DCAD226F42CA001CE1AB /* UCFCreateLockViewController.m */,
 				3379DCAF226F4389001CE1AB /* UCFUnlockViewController.h */,
 				3379DCB0226F4389001CE1AB /* UCFUnlockViewController.m */,
 				33E0DD31227084AE00F8AF4A /* UCFTouchIDViewController.h */,
 				33E0DD32227084AE00F8AF4A /* UCFTouchIDViewController.m */,
-				33E0DD2D226FFA6D00F8AF4A /* UCFLockConfig.h */,
 				33E0DD2E226FFCCA00F8AF4A /* UCFNewLockContainerViewController.h */,
 				33E0DD2F226FFCCA00F8AF4A /* UCFNewLockContainerViewController.m */,
 			);

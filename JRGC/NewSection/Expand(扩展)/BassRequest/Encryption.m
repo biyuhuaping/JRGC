@@ -12,6 +12,7 @@
 #import "NSData+AES.h"
 #import "NSData+Base64.h"
 #import "SFHFKeychainUtils.h"
+#import "NSString+Tool.h"
 @implementation Encryption
 
 + (NSString *)AESWithKey:(NSString *)key WithDic:(NSDictionary *)dic
@@ -119,7 +120,8 @@
     NSString *lastStr = @"";
     if (!valuesArr || valuesArr.count > 0) {
         for (int i = 0; i< valuesArr.count; i++) {
-            lastStr = [lastStr stringByAppendingString:[valuesArr objectAtIndex:i]];
+            NSString *valueStr = [[valuesArr objectAtIndex:i] dealNullString];
+            lastStr = [lastStr stringByAppendingString:valueStr];
         }
     }
     return lastStr;

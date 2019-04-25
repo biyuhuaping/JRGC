@@ -22,6 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 //银行卡每四位分隔
 + (NSString *)bankIdSeparate:(NSString *)originalString;
+
+/**
+ 处理空字符串
+
+ @return 如果为空返回@“”
+ */
+- (NSString *)dealNullString;
 @end
 
 NS_ASSUME_NONNULL_END

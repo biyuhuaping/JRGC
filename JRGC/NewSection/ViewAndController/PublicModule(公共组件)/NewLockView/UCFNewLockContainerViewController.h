@@ -7,10 +7,15 @@
 //
 
 #import "UCFNewBaseViewController.h"
-
+#import "UCFLockConfig.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFNewLockContainerViewController : UCFNewBaseViewController
+@property(nonatomic, assign)BOOL isFromRegist; //是否注册
+@property(nonatomic, copy)NSString *souceVc;
+- (id)initWithType:(RCLockViewType)type;
+- (void)childControlerCallShow:(UIViewController *)controller;
+
 
 @end
 

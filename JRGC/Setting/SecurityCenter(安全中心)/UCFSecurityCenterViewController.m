@@ -51,7 +51,8 @@
 #import "UCFNewBindPhoneNumViewController.h"
 #import "UCFNewBindPhoneNumSMSViewController.h"
 #import "UCFNewVerificationLoginPassWordViewController.h"
-@interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
+
+@interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate>
 
 // 选项表数据
 @property (nonatomic, strong) NSMutableArray *itemsData;

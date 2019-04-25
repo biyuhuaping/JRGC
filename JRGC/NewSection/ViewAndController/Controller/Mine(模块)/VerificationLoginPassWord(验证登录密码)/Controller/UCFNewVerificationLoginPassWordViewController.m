@@ -252,7 +252,7 @@
         NSMutableDictionary *dic = [data objectFromJSONString];
         if ([dic[@"ret"] boolValue]) {
             if ([_titleString isEqualToString:@"启用手势密码需验证"]) {
-                [self showLLLockViewController:LLLockViewTypeCreate];
+                [self showLLLockViewController:RCLockViewTypeCreate];
             } else if ([_titleString isEqualToString:@"关闭手势密码需验证"]) {
                 [LLLockPassword saveLockPassword:nil];
                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"useLockView"];
@@ -264,7 +264,7 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"进行人脸识别" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
                 [alert show];
             } else {
-                [self showLLLockViewController:LLLockViewTypeCreate];
+                [self showLLLockViewController:RCLockViewTypeCreate];
             }
         } else {
             NSString *rsttext =  dic[@"message"];
@@ -313,18 +313,31 @@
         return YES;
     }
 }
-- (void)showLLLockViewController:(LLLockViewType)type
+- (UCFNewLockContainerViewController *)showLLLockViewController:(RCLockViewType)type
 {
-    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
-    lockVc.nLockViewType = type;
+    UCFNewLockContainerViewController *lockVc = [[UCFNewLockContainerViewController alloc] initWithType:type];
     NSInteger currentIndex = [self.navigationController.viewControllers indexOfObject:self];
     UIViewController *contro  = self.navigationController.viewControllers[currentIndex-1];
     if ([NSStringFromClass(contro.class) isEqualToString:@"UCFSecurityCenterViewController"]) {
         lockVc.souceVc = @"securityCenter";
     }
+    lockVc.hidesBottomBarWhenPushed = YES;
     [SingGlobalView.rootNavController pushViewController:lockVc animated:YES complete:nil];
     [self.rt_navigationController removeViewController:self];
+    return lockVc;
 }
+//- (void)showLLLockViewController:(LLLockViewType)type
+//{
+//    UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
+//    lockVc.nLockViewType = type;
+//    NSInteger currentIndex = [self.navigationController.viewControllers indexOfObject:self];
+//    UIViewController *contro  = self.navigationController.viewControllers[currentIndex-1];
+//    if ([NSStringFromClass(contro.class) isEqualToString:@"UCFSecurityCenterViewController"]) {
+//        lockVc.souceVc = @"securityCenter";
+//    }
+//    [SingGlobalView.rootNavController pushViewController:lockVc animated:YES complete:nil];
+//    [self.rt_navigationController removeViewController:self];
+//}
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
