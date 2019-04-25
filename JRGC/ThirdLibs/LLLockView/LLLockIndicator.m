@@ -137,7 +137,7 @@
 }
 - (void)drawRect:(CGRect)rect
 {
-    if (self.selectArray.count > 0) {
+    if (self.selectArray.count > 1) {
         
         UIColor *rightColor = UIColorWithRGB(0xC2D0F7);
         UIColor *wrongColor = UIColorWithRGB(0xFFD1CD);

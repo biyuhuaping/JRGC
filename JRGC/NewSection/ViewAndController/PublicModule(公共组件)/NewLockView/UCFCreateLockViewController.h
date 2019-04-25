@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFCreateLockViewController : UCFNewBaseViewController
-
+@property(nonatomic, copy)NSString *souceVc;
 @end
 
 NS_ASSUME_NONNULL_END

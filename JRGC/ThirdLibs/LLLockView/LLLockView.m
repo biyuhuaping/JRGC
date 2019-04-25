@@ -135,14 +135,14 @@
 {
     LLLog(@"drawRect - %@", [NSString stringWithFormat:@"%d", isWrongColor]);
     
-    if (selectedButtonArray.count > 0) {
+    if (selectedButtonArray.count > 1) {
         CGContextRef context = UIGraphicsGetCurrentContext();
         
         isWrongColor ? [kLLLineColorWrong set] : [kLLLineColor set]; // 正误线条色
         CGContextSetLineWidth(context, kLLLineWidth);
-
+        
         // 画之前线s
-        CGPoint addLines[9];
+        CGPoint addLines[9] = {0};
         int count = 0;
         for (UIButton* button in selectedButtonArray) {
             CGPoint point = CGPointMake(button.center.x, button.center.y);

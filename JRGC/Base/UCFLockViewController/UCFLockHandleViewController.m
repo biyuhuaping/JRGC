@@ -986,6 +986,7 @@
     }
 }
 
+
 - (void)setIndecatorBtn:(NSNotification*)info
 {
     NSString *str = [info.userInfo valueForKey:@"indecatorkey"];
