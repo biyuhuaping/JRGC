@@ -47,13 +47,24 @@
     UIView *centerView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - 112) / 2, (self.frame.size.height - 112) / 2, 112, 112)];
     centerView.backgroundColor = [UIColor clearColor];
     [self addSubview:centerView];
-    
+
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 83, 83)];
-    NSString *imageStr = isGold ? @"gold_transaction_icon_NoRecords" : @"default_icon.png";
+    if (isGold) {
+        iconView.frame = CGRectMake(15, 0, 83, 83);
+    } else {
+        iconView.frame = CGRectMake((112 - 55 )/2, 0, 55, 55);
+        
+    }
+    NSString *imageStr = isGold ? @"gold_transaction_icon_NoRecords" : @"default_icon";
     iconView.image = [UIImage imageNamed:imageStr];
     [centerView addSubview:iconView];
-    UIColor *showColor = isGold ? UIColorWithRGB(0xe3a257) : UIColorWithRGB(0x8591b3);
+    
+    
+    UIColor *showColor = isGold ? UIColorWithRGB(0xe3a257) : [Color color:PGColorOptionTitleGray];
     UILabel *errorLbl = [UILabel labelWithFrame:CGRectMake(-20, CGRectGetMaxY(iconView.frame) + 15, 152, 14) text:_errorTitle textColor:showColor font:[UIFont systemFontOfSize:14]];
+    CGPoint point = iconView.center;
+    point.y = errorLbl.center.y;
+    errorLbl.center = point;
     [centerView addSubview:errorLbl];
     
     if ( isGold && ![_btnStr isEqualToString:@""]) {

@@ -98,15 +98,15 @@
         tiplab.leftPos.equalTo(self.imageView4.rightPos);
         tiplab.centerYPos.equalTo(iconView.centerYPos);
         tiplab.heightSize.equalTo(@20);
-        tiplab.text = @"智能分散出借";
+//        tiplab.text = @"智能分散出借";
         tiplab.textAlignment = NSTextAlignmentCenter;
-        CGSize size = [Common getStrWitdth:@"智能分散出借" Font:11];
+//        CGSize size = [Common getStrWitdth:@"智能分散出借" Font:11];
         tiplab.font = [Color gc_Font:11];
         tiplab.textColor = [Color color:PGColorOptionTitleOrange];
         [whitBaseView addSubview:tiplab];
         [tiplab sizeToFit];
         
-        tiplab.myWidth = size.width + 10;
+//        tiplab.myWidth = size.width + 10;
         [tiplab setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
             v.layer.borderColor = [Color color:PGColorOptionTitleOrange].CGColor;
             v.layer.cornerRadius = 10;
@@ -165,6 +165,7 @@
     [self.timeLimitLab setFont:[UIFont systemFontOfSize:16] string:@"天"];
     [self.timeLimitLab sizeToFit];
     self.titleLab.text = microModel.prdName;
+    [self.titleLab sizeToFit];
     NSUInteger type = [microModel.type integerValue];
 
     switch (type) {
@@ -235,23 +236,27 @@
         self.iconView.backgroundColor = [Color color:PGColorOptionTitleGray];;
         
     }
-    
-    if (microModel.prdLabelsList.count > 0) {
-        UCFProjectLabel *projectLabel = [microModel.prdLabelsList firstObject];
-        if ([projectLabel.labelPriority integerValue] == 1) {
-            self.tiplabel.hidden = NO;
-            self.tiplabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-            [self.titleLab sizeToFit];
-            CGSize size = [Common getStrWitdth:projectLabel.labelName Font:11];
-            self.tiplabel.myWidth = size.width + 10;
+    if ([microModel.status intValue] == 2) {
+        if (microModel.prdLabelsList.count > 0) {
+            UCFProjectLabel *projectLabel = [microModel.prdLabelsList firstObject];
+            if ([projectLabel.labelPriority integerValue] == 1) {
+                self.tiplabel.hidden = NO;
+                self.tiplabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                [self.titleLab sizeToFit];
+                CGSize size = [Common getStrWitdth:projectLabel.labelName Font:11];
+                self.tiplabel.myWidth = size.width + 10;
+            }
+            else {
+                self.tiplabel.hidden = YES;
+            }
         }
         else {
             self.tiplabel.hidden = YES;
         }
-    }
-    else {
+    } else {
         self.tiplabel.hidden = YES;
     }
+
     if (microModel.platformSubsidyExpense.length > 0) {//贴
         self.imageView1.myVisibility = MyVisibility_Visible;
     }

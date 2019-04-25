@@ -221,6 +221,7 @@
     return _printView;
 
 }
+
 - (void)setModel:(UCFCouponListResult *)model
 {
     _model = model;

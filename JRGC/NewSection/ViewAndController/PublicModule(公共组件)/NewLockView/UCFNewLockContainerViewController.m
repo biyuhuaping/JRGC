@@ -11,6 +11,7 @@
 #import "UCFCreateLockViewController.h"
 #import "UCFUnlockViewController.h"
 #import "UCFTouchIDViewController.h"
+#import "UCFWebViewJavascriptBridgeController.h"
 @interface UCFNewLockContainerViewController ()
 @property(nonatomic, strong)UIViewController *currentController;
 @property(nonatomic, strong)UCFTouchIDViewController *touchIDController;
@@ -123,5 +124,24 @@
         _userLockController.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
     }
     return _userLockController;
+}
+- (void)dealLoginPage
+{
+    if (SingleUserInfo.loginType == LoginSingatureOut) {
+        [SingGlobalView.tabBarController.selectedViewController.rt_navigationController popToRootViewControllerAnimated:NO];
+        [SingGlobalView.tabBarController setSelectedIndex:0];
+    } else if (SingleUserInfo.loginType == LoginWebLogin) {
+        UINavigationController *selectNav = SingGlobalView.tabBarController.selectedViewController;
+        UIViewController *visableControler = selectNav.visibleViewController;
+        if ([visableControler isKindOfClass:[UCFWebViewJavascriptBridgeController class]]) {
+            [(UCFWebViewJavascriptBridgeController *)visableControler   webViewReload];
+        }
+        
+    }
+    SingleUserInfo.loginType  = LoginDefalut;
+}
+- (void)dealloc
+{
+    [self dealLoginPage];
 }
 @end

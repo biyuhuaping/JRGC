@@ -6,11 +6,17 @@
 //  Copyright © 2019 JRGC. All rights reserved.
 //
 
+
+
+
 #import "BaseTableViewCell.h"
 #import "NZLabel.h"
 #import "UCFCouponListModel.h"
 #import "PrintView.h"
+
 NS_ASSUME_NONNULL_BEGIN
+
+
 
 @interface UCFNewCouponTableViewCell : BaseTableViewCell
 @property (nonatomic, strong) MyRelativeLayout *couponTypeLayout;
