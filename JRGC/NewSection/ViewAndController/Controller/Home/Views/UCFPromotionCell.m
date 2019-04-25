@@ -11,7 +11,7 @@
 #import "CellConfig.h"
 #import "UCFCellDataModel.h"
 #import "UCFNewBannerModel.h"
-#import "UCFWebViewJavascriptBridgeMallDetails.h"
+#import "UCFWebViewJavascriptBridgeBanner.h"
 @interface UCFPromotionCell()<RCFFlowViewDelegate>
 
 @property(nonatomic, strong)RCFFlowView *adCycleScrollView;
@@ -49,10 +49,9 @@
         url = model.url;
         title = model.title;
     }
-    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
     web.url = url;
     web.title = title;
-    web.isHidenNavigationbar = YES;
     [((UIViewController *)self.bc).navigationController pushViewController:web animated:YES];
 }
 - (CGSize)sizeForPageFlowView:(RCFFlowView *)viwe

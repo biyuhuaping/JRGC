@@ -11,7 +11,7 @@
 #import "CellConfig.h"
 #import "UCFCellDataModel.h"
 #import "UCFNewBannerModel.h"
-#import "UCFWebViewJavascriptBridgeMallDetails.h"
+#import "UCFWebViewJavascriptBridgeBanner.h"
 #import "UCFQueryBannerByTypeModel.h"
 @interface UCFMinePromotionCell()<RCFFlowViewDelegate>
 
@@ -55,10 +55,9 @@
     
     UCFhomeMallbannerlist *model = self.dataArray[subIndex];
     
-    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
     web.url = model.url;
     web.title = model.title;
-    web.isHidenNavigationbar = YES;
     [((UIViewController *)self.bc).navigationController pushViewController:web animated:YES];
 }
 - (CGSize)sizeForPageFlowView:(RCFFlowView *)viwe

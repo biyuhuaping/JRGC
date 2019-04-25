@@ -9,5 +9,5 @@
 #import "UCFWebViewJavascriptBridgeController.h"
 
 @interface UCFWebViewJavascriptBridgeBanner : UCFWebViewJavascriptBridgeController
-
+//@property (nonatomic, assign) BOOL isHidenNavigationbar;
 @end
