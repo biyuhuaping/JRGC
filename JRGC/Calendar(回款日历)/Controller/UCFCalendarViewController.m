@@ -197,7 +197,7 @@
             }
             if (self.selectedDayDatas.count == 0) {
                 UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200)];
-                UCFNoDataView *noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200) errorTitle:@"暂无数据"];
+                UCFNoDataView *noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200) errorTitle:@"暂无回款记录"];
                 [footView addSubview:noDataView];
                 self.tableview.tableFooterView = footView;
             } else {

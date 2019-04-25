@@ -459,14 +459,6 @@
         UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
         bean.title = @"我的工豆";
         [self.rt_navigationController pushViewController:bean animated:YES];
-//        AccountSuccessVC *acVC = [[AccountSuccessVC alloc]initWithNibName:@"AccountSuccessVC" bundle:nil];
-//        //            acVC.site = self.site;
-//        acVC.accoutType = self.accoutType;
-//        acVC.fromVC = 2;
-//        //            acVC.db = self.db;
-//        //            self.db.isOpenAccount = YES;
-//        [self.rt_navigationController pushViewController:acVC animated:YES];
-        
     }
     else if (tag == 1004){
         //优惠券

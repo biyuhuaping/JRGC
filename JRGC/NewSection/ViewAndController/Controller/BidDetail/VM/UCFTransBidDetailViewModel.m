@@ -149,9 +149,9 @@
 - (NSArray *)getTableViewData1
 {
     NSMutableArray *sectionArr = [NSMutableArray arrayWithCapacity:3];
-    UCFSettingItem *basicBetailItem = [UCFSettingArrowItem itemWithIcon:@"particular_icon_info" title:@"基础详情" destVcClass:nil];
+    UCFSettingItem *basicBetailItem = [UCFSettingArrowItem itemWithIcon:@"particular_icon_info" title:@"原标详情" destVcClass:nil];
     UCFSettingItem *safetyGuaranteeItem = [UCFSettingArrowItem itemWithIcon:@"particular_icon_security" title:@"安全保障" destVcClass:nil];
-    UCFSettingItem *investmentecordItem = [UCFSettingArrowItem itemWithIcon:@"particular_icon_record" title:@"出借记录" destVcClass:nil];
+    UCFSettingItem *investmentecordItem = [UCFSettingArrowItem itemWithIcon:@"particular_icon_record" title:@"转让记录" destVcClass:nil];
     [sectionArr addObject:basicBetailItem];
     [sectionArr addObject:safetyGuaranteeItem];
     [sectionArr addObject:investmentecordItem];

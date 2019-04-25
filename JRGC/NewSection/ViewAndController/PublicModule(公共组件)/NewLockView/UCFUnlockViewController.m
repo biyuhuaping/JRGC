@@ -161,7 +161,7 @@
         _nameLabel.centerXPos.equalTo(self.rootLayout.centerXPos);
         _nameLabel.topPos.equalTo(self.headImageView.bottomPos).offset(18 * HeightScale);
         _nameLabel.numberOfLines = 1;
-        _nameLabel.text = @"hi 158****3245";
+          _nameLabel.text = [NSString stringWithFormat:@"hi %@",SingleUserInfo.loginData.userInfo.mobile];
         _nameLabel.font = [UIFont systemFontOfSize:14*HeightScale];
         _nameLabel.textColor = [Color color:PGColorOptionTitleBlack];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -237,7 +237,7 @@
         _reminderButton.leftPos.equalTo(@(50 * WidthScale));
         _reminderButton.heightSize.equalTo(@40);
         _reminderButton.centerYPos.equalTo(_switchPageBtn.centerYPos).offset(HeightScale >=1 ? 60 : 40 *HeightScale);
-        [_reminderButton setTitle:@"忘记密码" forState:UIControlStateNormal];
+        [_reminderButton setTitle:@"密码登录" forState:UIControlStateNormal];
         [_reminderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_reminderButton setBackgroundColor:[UIColor clearColor]];
         [_reminderButton addTarget:self action:@selector(dealWithPassword:) forControlEvents:UIControlEventTouchUpInside];

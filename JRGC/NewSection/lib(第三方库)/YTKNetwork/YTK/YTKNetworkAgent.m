@@ -368,7 +368,7 @@
     if (succeed) {
         [self requestDidSucceedWithRequest:request];
     } else {
-        NSString *sttt = [[NSString alloc] initWithData:request.responseData encoding:NSUTF8StringEncoding];
+//        NSString *sttt = [[NSString alloc] initWithData:request.responseData encoding:NSUTF8StringEncoding];
         [self requestDidFailWithRequest:request error:requestError];
     }
 

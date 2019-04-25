@@ -363,7 +363,7 @@
             UCFNewPureTransBidViewController *view = [[UCFNewPureTransBidViewController alloc] init];
             view.model = model;
             [self.navigationController pushViewController:view animated:YES];
-        } else if (statue == 21){
+        } else if (statue == 21 || statue == 7) {
             HSHelper *helper = [HSHelper new];
             NSInteger step = self.accoutType == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]: [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
             [helper pushOpenHSType:self.accoutType Step:step nav:self.navigationController];

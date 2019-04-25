@@ -133,8 +133,11 @@
         if (!cell) {
             cell = [[UCFNewCouponTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
             [cell.donateButton addTarget:self action:@selector(toUCFCouponExchangeToFriendsView:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.investButton addTarget:self action:@selector(skipToHome:) forControlEvents:UIControlEventTouchUpInside];
+            
             
         }
+        cell.donateButton.tag = 100 + indexPath.row;
         cell.model = _dataArr[indexPath.row];
         return cell;
         
@@ -144,7 +147,12 @@
 //        return cell;
     }
 }
-
+- (void)skipToHome:(UIButton *)button
+{
+    [self.parentViewController.rt_navigationController popToRootViewControllerAnimated:NO complete:^(BOOL finished) {
+        [SingGlobalView.tabBarController setSelectedIndex:1];
+    }];
+}
 - (void)toUCFCouponExchangeToFriendsView:(id)sender
 {
     if (!_presentFriendExist) {
@@ -160,15 +168,15 @@
         return;
     }
     
-    UITableViewCell * cell = nil;
-    if (kIS_IOS8) {
-        cell = (UITableViewCell *)[[sender superview] superview];
-    } else {
-        cell = (UITableViewCell *)[[[sender superview] superview] superview];
-    }
-    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+//    UITableViewCell * cell = nil;
+//    if (kIS_IOS8) {
+//        cell = (UITableViewCell *)[[sender superview] superview];
+//    } else {
+//        cell = (UITableViewCell *)[[[sender superview] superview] superview];
+//    }
+    NSInteger row = ((UIButton *)sender).tag - 100;
     UCFCouponExchangeToFriends *vc = [[UCFCouponExchangeToFriends alloc]initWithNibName:@"UCFCouponExchangeToFriends" bundle:nil];
-    vc.quanData = _dataArr[indexPath.row];
+    vc.quanData = _dataArr[row];
     vc.couponType = @"1";
     [self.navigationController pushViewController:vc animated:YES];
 }
