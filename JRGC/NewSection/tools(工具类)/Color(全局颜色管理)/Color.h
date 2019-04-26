@@ -11,7 +11,7 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
     
     PGColorOptionGrayBackgroundColor = 0, //背景颜色-- 灰色 0xebebee
     PGColorOptionThemeWhite,              //主题色--白色 0xFFFFFF
-    PGColorOptionTitleOrange,              //文字颜色--橘色 0xFF4E11
+    PGColorOptionTitleOrange,              //文字颜色--橘色 0xFF4E33
     PGColorOptionTitleBlack,               //文字颜色--黑色 0x000000
     PGColorOptionTitleBlackGray,           //文字颜色--黑灰色 0x000000
     PGColorOptionTitleGray,                //文字颜色--灰色 0xB1B5C2

@@ -61,7 +61,7 @@
 
     baseTitleLabel.text = @"微金项目";
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
+    self.tableview.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
     
 //    UCFHonorHeaderView *honorHeaderView = (UCFHonorHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHonorHeaderView" owner:self options:nil] lastObject];

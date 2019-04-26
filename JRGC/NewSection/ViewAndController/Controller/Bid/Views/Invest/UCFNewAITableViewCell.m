@@ -37,7 +37,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         
         MyRelativeLayout *whitBaseView = [MyRelativeLayout new];
         whitBaseView.leftPos.equalTo(@15);
@@ -55,7 +55,7 @@
         iconView.myTop = 20;
         iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         iconView.clipsToBounds = YES;
-        iconView.layer.cornerRadius = 2;
+        iconView.layer.cornerRadius = 1.5;
         self.iconView = iconView;
         [whitBaseView addSubview:iconView];
         
@@ -68,34 +68,34 @@
         self.titleLab = label;
         
         self.imageView1.centerYPos.equalTo(iconView.centerYPos);
-        self.imageView1.leftPos.equalTo(self.titleLab.rightPos);
+        self.imageView1.leftPos.equalTo(self.titleLab.rightPos).offset(2);
         self.imageView1.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView1];
         self.imageView1.myVisibility = MyVisibility_Gone;
         
         self.imageView2.centerYPos.equalTo(iconView.centerYPos);
-        self.imageView2.leftPos.equalTo(self.imageView1.rightPos);
+        self.imageView2.leftPos.equalTo(self.imageView1.rightPos).offset(1.5);
         self.imageView2.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView2];
         
         self.imageView2.myVisibility = MyVisibility_Gone;
         
         self.imageView3.centerYPos.equalTo(iconView.centerYPos);
-        self.imageView3.leftPos.equalTo(self.imageView2.rightPos);
+        self.imageView3.leftPos.equalTo(self.imageView2.rightPos).offset(1.5);
         self.imageView3.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView3];
         
         self.imageView3.myVisibility = MyVisibility_Gone;
         
         self.imageView4.centerYPos.equalTo(iconView.centerYPos);
-        self.imageView4.leftPos.equalTo(self.imageView3.rightPos);
+        self.imageView4.leftPos.equalTo(self.imageView3.rightPos).offset(1.5);
         self.imageView4.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView4];
         
         self.imageView4.myVisibility = MyVisibility_Gone;
         
         UILabel *tiplab = [[UILabel alloc] init];
-        tiplab.leftPos.equalTo(self.imageView4.rightPos);
+        tiplab.leftPos.equalTo(self.imageView4.rightPos).offset(2);
         tiplab.centerYPos.equalTo(iconView.centerYPos);
         tiplab.heightSize.equalTo(@20);
 //        tiplab.text = @"智能分散出借";
@@ -122,9 +122,7 @@
         [self.investButton setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
             v.clipsToBounds = YES;
             v.layer.cornerRadius = CGRectGetHeight(v.frame)/2;
-//            NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
-//            UIImage *image = [(UIButton *)v buttonImageFromColors:colorArray ByGradientType:leftToRight];
-//            [(UIButton *)v setBackgroundImage:image forState:UIControlStateNormal];
+
         }];
         
         
@@ -135,17 +133,18 @@
         self.rateTipLab.leftPos.equalTo(self.rateLab.leftPos);
         self.rateTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(20);
         [whitBaseView addSubview:self.rateTipLab];
+        self.rateTipLab.textColor = [Color color:PGColorOptionTitleGray];
         
+  
         
-        self.timeLimitLab.centerXPos.equalTo(whitBaseView.centerXPos);
-        self.timeLimitLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(5);
-        [whitBaseView addSubview:self.timeLimitLab];
-        
-        self.timeLimitTipLab.leftPos.equalTo(self.timeLimitLab.leftPos);
+        self.timeLimitTipLab.centerXPos.equalTo(whitBaseView.centerXPos).offset(-10);;
         self.timeLimitTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(20);
+        self.timeLimitTipLab.textColor = [Color color:PGColorOptionTitleGray];
         [whitBaseView addSubview:self.timeLimitTipLab];
         
-        
+        self.timeLimitLab.leftPos.equalTo(self.timeLimitTipLab.leftPos);
+        self.timeLimitLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(5);
+        [whitBaseView addSubview:self.timeLimitLab];
     }
     return self;
 }
@@ -162,7 +161,11 @@
     [self.rateLab setFont:[UIFont systemFontOfSize:16] string:@"%"];
     [self.rateLab sizeToFit];
     self.timeLimitLab.text = [NSString stringWithFormat:@"%@", microModel.repayPeriodtext];
-    [self.timeLimitLab setFont:[UIFont systemFontOfSize:16] string:@"天"];
+    if ([self.timeLimitLab.text containsString:@"天"]) {
+        [self.timeLimitLab setFont:[UIFont systemFontOfSize:16] string:@"天"];
+    } else {
+        [self.timeLimitLab setFont:[UIFont systemFontOfSize:16] string:@"个月"];
+    }
     [self.timeLimitLab sizeToFit];
     self.titleLab.text = microModel.prdName;
     [self.titleLab sizeToFit];
@@ -221,14 +224,14 @@
     
     if ([microModel.status intValue] == 2) {
         self.rateLab.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
-        self.timeLimitLab.textColor = [Color color:PGColorOptionTitleBlackGray];
+        self.timeLimitLab.textColor = [Color color:PGColorOptionTitleBlack];
         NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
         UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
         self.iconView.backgroundColor = [Color color:PGColorOptionTitleOrange];;
         [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
         
     } else {
-        NSArray *colorArray = [NSArray arrayWithObjects:[Color color:PGColorOptionTitleGray],[Color color:PGColorOptionTitleGray], nil];
+        NSArray *colorArray = [NSArray arrayWithObjects:[Color color:PGColorOpttonBtnBackgroundColor],[Color color:PGColorOpttonBtnBackgroundColor], nil];
         UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 35) gradientType:leftToRight];
         [self.investButton setBackgroundImage:image forState:UIControlStateNormal];
         self.rateLab.textColor = [Color color:PGColorOptionTitleGray];

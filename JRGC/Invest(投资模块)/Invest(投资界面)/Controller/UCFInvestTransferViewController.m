@@ -46,7 +46,7 @@
     UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
     transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 40);
     self.tableview.tableHeaderView = transferHeaderView;
-    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
+    self.tableview.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     transferHeaderView.delegate = self;
     self.transferHeaderView = transferHeaderView;
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
@@ -58,6 +58,7 @@
     [self.tableview setSeparatorColor:[UIColor clearColor]];
 //    [transferHeaderView initData];
     [self.tableview.header beginRefreshing];
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 
 }
 - (void)initData

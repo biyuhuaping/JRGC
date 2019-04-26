@@ -240,11 +240,11 @@
         textStyle.alignment = NSTextAlignmentCenter;//水平居中
         //字体
 //        UIFont *font = [UIFont systemFontOfSize:0.25*CircleSelfWidth];
-        UIFont *font = [UIFont systemFontOfSize:13];
+        UIFont *font = [UIFont systemFontOfSize:15];
         if (_progressText.length > 2) {
-            font = [UIFont systemFontOfSize:12];
+            font = [UIFont systemFontOfSize:15];
             if (_progressText.length > 3) {
-                font = [UIFont systemFontOfSize:11];
+                font = [UIFont systemFontOfSize:15];
             }
         }
         //构建属性集合

@@ -54,7 +54,8 @@
         NSString *title1 = @"优质债权";
         NSString *title2 = @"智能出借";
         NSString *title3 = @"债权转让";
-        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, StatusBarHeight1, ScreenWidth, 44) WithTitleArray:@[title1,title2,title3]];
+        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44 + StatusBarHeight1) WithTitleArray:@[title1,title2,title3]];
+        _pageHeadView.isNavBar = YES;
         _pageHeadView.leftSpace = _pageHeadView.rightSpace = 30;
         [_pageHeadView reloaShowView];
     }
