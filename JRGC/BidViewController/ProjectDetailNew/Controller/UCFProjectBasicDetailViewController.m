@@ -92,14 +92,14 @@
     }
     else if(_detailType == PROJECTDETAILTYPERIGHTINTEREST) //权益标
     {
-         baseTitleLabel.text = @"基础详情";
+        baseTitleLabel.text = @"基础详情";
         self.prdType = @"0";
         [self initRightInterestNewTableViews];
         
     }
     else
     {//债转标
-         baseTitleLabel.text = @"原标详情";
+        baseTitleLabel.text = @"原标详情";
         self.prdType = @"1";
         self.projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
         [self initMarkOfBondsRransferTableViews];
@@ -130,7 +130,7 @@
 {
     
     //是否隐藏借款人信息一栏
-    _isHideBorrowerInformation = YES; //默认不隐藏
+    _isHideBorrowerInformation = YES; //默认隐藏
     _borrowerInformationStr = @"借款人信息";
     _auditRecordArray = [NSMutableArray arrayWithArray:@[@"身份认证",@"手机认证",@"工作认证",@"信用认证"]];
     NSString *agencyCodeStr = [[[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeDictionaryForKey:@"enterpriseInfo"] objectSafeForKey:@"enterpriseCode"];
@@ -411,13 +411,17 @@
         } else {
             if (section == 0)
             {
-                UCFNewHomeSectionView *headView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 45)];
+                UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 55)];
+                baseView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+                
+                UCFNewHomeSectionView *headView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 45)];
                 headView.titleLab.text = @"产品介绍";
                 headView.backgroundColor = [Color color:PGColorOptionThemeWhite];
-                return headView;
-            } else {
+                [baseView addSubview:headView];
+                return baseView;
+            } else if(section == 1){
                 UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-                headView.backgroundColor = UIColorWithRGB(0xebebee);
+                headView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
                 return headView;
             }
         }
@@ -445,7 +449,7 @@
 -(UIView *)createTableViewHeaderView:(NSString *)titleStr
 {
     UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 55)];
-    baseView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+    baseView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     
     UCFNewHomeSectionView *headView = [[UCFNewHomeSectionView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 45)];
     headView.titleLab.text = titleStr;
@@ -474,13 +478,13 @@
             return 10;
         }
         else if(section == 0) {
-            return 45;
+            return 55;
         }
         else if(_isHideBorrowerInformation) {
-            return section == 3 ? 10 :55;
+            return section == 3 ? 10 : 55;
         }
         else {
-            return section == 4 ? 10 :55;
+            return section == 4 ? 10 : 55;
         }
     }
     else if(_detailType == PROJECTDETAILTYPERIGHTINTEREST)
@@ -501,7 +505,7 @@
     {
         if([indexPath section] == 1)
         {
-            return 44;
+            return 50;
         }
         else if([indexPath section] == 0)
         {
@@ -523,7 +527,7 @@
    else if(_detailType == PROJECTDETAILTYPERIGHTINTEREST){
        if([indexPath section] == 1)
        {
-           return 44;
+           return 50;
        }
        else if([indexPath section] == 0 ) {
            return _sectionViewHight;
@@ -593,11 +597,10 @@
     if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
         
     }else{
-      
-    
         if (_detailType == PROJECTDETAILTYPENORMAL ) {     //基础详情
            return  _isHideBorrowerInformation ? 3:4;
-        } else//权益标
+        }
+        else//权益标
         {
             return  _isHideBorrowerInformation ? 3:5;
         }
@@ -657,18 +660,22 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIImageView *inconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(13, 13, 18, 18)];
+            UIImageView *inconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12.5, 25, 25)];
             inconImageView.tag = 11;
-            UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(inconImageView.frame)+5, 13, 200, 18)];
+            
+            UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(inconImageView.frame)+5, 10, 200, 30)];
             titleLabel.tag = 12;
-            titleLabel.font = [UIFont systemFontOfSize:13];
-            titleLabel.textColor = UIColorWithRGB(0x555555);
+            titleLabel.font = [UIFont systemFontOfSize:15];
+            titleLabel.textColor = [Color color:PGColorOptionTitleBlack];
             [cell.contentView addSubview:inconImageView];
             [cell.contentView addSubview:titleLabel];
-            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 44 - 0.5, ScreenWidth - 15 , 0.5)];
+            
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(inconImageView.frame)+5, 50 - 0.5, ScreenWidth - 15 , 0.5)];
             lineView.tag = 13;
-            lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
+            lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
             [cell.contentView addSubview:lineView];
+            
+     
         }
         UIImageView  *inconImageView = (UIImageView*)[cell.contentView viewWithTag:11];
         UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:12];
@@ -679,13 +686,13 @@
         titleLabel.text = [dict objectSafeForKey:@"contractName"];
         lineView.hidden = indexPath.row == _firstSectionArray.count - 1;
         
-        
         UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0, 0 ,ScreenWidth ,44);
+        button.frame = CGRectMake(0, 0 ,ScreenWidth ,50);
         button.backgroundColor = [UIColor clearColor];
         button.tag = 100+indexPath.row;
         [button addTarget:self action:@selector(getContractMsgDetail:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:button];
+
         return cell;
     }
     
@@ -699,7 +706,7 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.font = [UIFont systemFontOfSize:12];
-                cell.textLabel.textColor = UIColorWithRGB(0x555555);
+                cell.textLabel.textColor = [Color color:PGColorOptionTitleBlack];
                 
                 
                 NSInteger yPos,imgYPos,placeHolderYPos;
@@ -714,7 +721,7 @@
                 }
                 UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, yPos, 160, 12)];
                 nameLabel.font = [UIFont systemFontOfSize:12];
-                nameLabel.textColor = UIColorWithRGB(0x555555);
+                nameLabel.textColor = [Color color:PGColorOptionTitleBlack];;
                 nameLabel.textAlignment = NSTextAlignmentLeft;
                 nameLabel.backgroundColor = [UIColor clearColor];
                 nameLabel.tag = 101;
@@ -722,7 +729,7 @@
                 
                 UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 160 - XPOS, yPos, 160, 12)];
                 detail.font = [UIFont boldSystemFontOfSize:12];
-                detail.textColor = UIColorWithRGB(0x555555);
+                detail.textColor = [Color color:PGColorOptionTitleBlack];
                 detail.textAlignment = NSTextAlignmentRight;
                 detail.backgroundColor = [UIColor clearColor];
                 detail.tag = 102;
@@ -743,8 +750,8 @@
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.textLabel.font = [UIFont systemFontOfSize:12];
-                cell.textLabel.textColor = UIColorWithRGB(0x555555);
+                cell.textLabel.font = [UIFont systemFontOfSize:14];
+                cell.textLabel.textColor = [Color color:PGColorOptionTitleBlack];
                 
                 NSInteger yPos,imgYPos,placeHolderYPos;
                 if ([indexPath row] == 0) {
@@ -756,33 +763,32 @@
                     imgYPos = 5;
                     placeHolderYPos = 9;
                 }
-                
+//                55
                 UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, yPos, 160, 12)];
-                nameLabel.font = [UIFont systemFontOfSize:12];
-                nameLabel.textColor = UIColorWithRGB(0x555555);
+                nameLabel.font = [UIFont systemFontOfSize:14];
+                nameLabel.textColor = [Color color:PGColorOptionTitleBlack];
                 nameLabel.textAlignment = NSTextAlignmentLeft;
                 nameLabel.backgroundColor = [UIColor clearColor];
                 nameLabel.text = @"我是测试数据";
                 nameLabel.tag = 101;
                 [cell.contentView addSubview:nameLabel];
                 
-                UILabel *renzhengLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - XPOS - 14*3, yPos, 14*3, 15)];
-                renzhengLabel.font = [UIFont boldSystemFontOfSize:12];
-                renzhengLabel.textColor = UIColorWithRGB(0x555555);
+                UILabel *renzhengLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - XPOS - 16*3, yPos, 16*3, 15)];
+                renzhengLabel.font = [UIFont boldSystemFontOfSize:14];
+                renzhengLabel.textColor = [Color color:PGColorOptionTitleBlack];
                 renzhengLabel.textAlignment = NSTextAlignmentRight;
                 renzhengLabel.backgroundColor = [UIColor clearColor];
                 renzhengLabel.text = @"已认证";
                 renzhengLabel.tag = 103;
                 [cell.contentView addSubview:renzhengLabel];
                 
-                UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(renzhengLabel.frame.origin.x - 5 - 14, imgYPos, 14, 14)];
-                imageView.image = [UIImage imageNamed:@"coupon_btn_selected.png"];
+                UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(renzhengLabel.frame.origin.x - 5 - 14, imgYPos, 15, 15)];
                 imageView.tag = 104;
                 [cell.contentView addSubview:imageView];
                 
                 UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, placeHolderYPos, 160, 9)];
-                placehoderLabel.font = [UIFont systemFontOfSize:9];
-                placehoderLabel.textColor = UIColorWithRGB(0x999999);
+                placehoderLabel.font = [UIFont systemFontOfSize:12];
+                placehoderLabel.textColor = [Color color:PGColorOptionTitleGray];
                 placehoderLabel.textAlignment = NSTextAlignmentLeft;
                 placehoderLabel.backgroundColor = [UIColor clearColor];
                 placehoderLabel.tag = 105;
@@ -792,13 +798,13 @@
             UILabel *renzhengLabel = (UILabel*)[cell.contentView viewWithTag:103];
             UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:104];
             UILabel *placehoderLabel = (UILabel*)[cell.contentView viewWithTag:105];
-            //            NSArray *titleArr = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
             nameLbl.text = [_auditRecordArray objectAtIndex:[indexPath row]];
             if(indexPath.row == 0)
             {
                 
                 if (!_isHideBusinessLicense) {
-                    imageView.hidden = NO;
+                    imageView.image = [UIImage imageNamed:@"coupon_btn_selected"];
+
                     renzhengLabel.text = @"已认证";
                     placehoderLabel.text = _prdDesType ? _isP2P ?_licenseNumberStr : @"" : @"";
                 }else{
@@ -806,15 +812,13 @@
                     {
                         if([UCFToolsMehod isNullOrNilWithString:_idno].length == 0)
                         {
-                            imageView.hidden = YES;
+                            imageView.image = [UIImage imageNamed:@"details_icon_uncertified"];
                             renzhengLabel.text = @"未认证";
                         }
                         else
                         {
-                            imageView.hidden = NO;
+                            imageView.image = [UIImage imageNamed:@"coupon_btn_selected"];
                             renzhengLabel.text = @"已认证";
-//                            NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-//                            NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
                             if(_isP2P){
                                 placehoderLabel.text = _prdDesType ?  [NSString stringWithFormat:@"%@ %@",_realName,_idno] : @"";
                             }else{
@@ -828,12 +832,12 @@
                 
                 if([UCFToolsMehod isNullOrNilWithString:_mobile].length == 0)
                 {
-                    imageView.hidden = YES;
+                    imageView.image = [UIImage imageNamed:@"details_icon_uncertified"];
                     renzhengLabel.text = @"未认证";
                 }
                 else
                 {
-                    imageView.hidden = NO;
+                    imageView.image = [UIImage imageNamed:@"coupon_btn_selected"];
                     renzhengLabel.text = @"已认证";
                     if (_isP2P) {
                         placehoderLabel.text = _mobile;
@@ -844,7 +848,7 @@
             } else if(indexPath.row == 2 && _isHideBusinessLicense) {
                 if([_joboauth integerValue] == 1)
                 {
-                    imageView.hidden = NO;
+                    imageView.image = [UIImage imageNamed:@"coupon_btn_selected"];
                     renzhengLabel.text = @"已认证";
                     if (_isP2P) {
                         placehoderLabel.text = _office;
@@ -854,18 +858,18 @@
                 }
                 else
                 {
-                    imageView.hidden = YES;
+                    imageView.image = [UIImage imageNamed:@"details_icon_uncertified"];
                     renzhengLabel.text = @"未认证";
                 }
             }else if((indexPath.row == 3 && _isHideBusinessLicense ) || (indexPath.row == 2 && !_isHideBusinessLicense )) {
                 if([_creditAuth integerValue] == 1)
                 {
-                    imageView.hidden = NO;
+                    imageView.image = [UIImage imageNamed:@"coupon_btn_selected"];
                     renzhengLabel.text = @"已认证";
                 }
                 else
                 {
-                    imageView.hidden = YES;
+                    imageView.image = [UIImage imageNamed:@"details_icon_uncertified"];
                     renzhengLabel.text = @"未认证";
                 }
             }else if((indexPath.row == 4 && _isHideBusinessLicense ) || (indexPath.row == 3 && !_isHideBusinessLicense )) {
@@ -904,7 +908,7 @@
                        }
                        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, yPos, 160, 12)];
                        nameLabel.font = [UIFont systemFontOfSize:12];
-                       nameLabel.textColor = UIColorWithRGB(0x555555);
+                       nameLabel.textColor = [Color color:PGColorOptionTitleBlack];
                        nameLabel.textAlignment = NSTextAlignmentLeft;
                        nameLabel.backgroundColor = [UIColor clearColor];
                        nameLabel.text = @"我是测试数据";
@@ -913,7 +917,7 @@
                        
                        UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 230 - XPOS, yPos, 230, 12)];
                        detail.font = [UIFont boldSystemFontOfSize:12];
-                       detail.textColor = UIColorWithRGB(0x555555);
+                       detail.textColor = [Color color:PGColorOptionTitleBlack];
                        detail.textAlignment = NSTextAlignmentRight;
                        detail.backgroundColor = [UIColor clearColor];
                        detail.text = @"我是测试数据";
@@ -932,7 +936,7 @@
                    if (!cell) {
                        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
                        cell.textLabel.font = [UIFont systemFontOfSize:12];
-                       cell.textLabel.textColor = UIColorWithRGB(0x555555);
+                       cell.textLabel.textColor = [Color color:PGColorOptionTitleBlack];
                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
                        NSInteger yPos,imgYPos,placeHolderYPos;
                        if ([indexPath row] == 0) {
@@ -947,7 +951,7 @@
                        
                        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, yPos, 160, 12)];
                        nameLabel.font = [UIFont systemFontOfSize:12];
-                       nameLabel.textColor = UIColorWithRGB(0x555555);
+                       nameLabel.textColor = [Color color:PGColorOptionTitleBlack];
                        nameLabel.textAlignment = NSTextAlignmentLeft;
                        nameLabel.backgroundColor = [UIColor clearColor];
                        nameLabel.tag = 101;
@@ -955,7 +959,7 @@
                        
                        UILabel *renzhengLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - XPOS - 14*3, yPos, 14*3, 15)];
                        renzhengLabel.font = [UIFont boldSystemFontOfSize:12];
-                       renzhengLabel.textColor = UIColorWithRGB(0x555555);
+                       renzhengLabel.textColor = [Color color:PGColorOptionTitleBlack];
                        renzhengLabel.textAlignment = NSTextAlignmentRight;
                        renzhengLabel.backgroundColor = [UIColor clearColor];
                        renzhengLabel.text = @"已认证";

@@ -61,13 +61,20 @@
 
     UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
     UIImageView *imaview = [[UIImageView alloc]initWithFrame:CGRectMake(0, -10, ScreenWidth, 10)];
-    //imaview.backgroundColor = [UIColor redColor];
     imaview.image = tabImag;
+    
     self.tabBar.clipsToBounds = NO;
     [self.tabBar addSubview:imaview];
     [[UITabBar appearance] setShadowImage:tabImag];
 
-
+//    @PGWeakObj(self);
+//    [self.KVOController observe:self.tabBar keyPaths:@[@"shadowImage"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+//        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+//        if ([keyPath isEqualToString:@"shadowImage"]) {
+//
+//        }
+//
+//    }];
 }
 
 - (void)redbag_toLend:(NSNotification *)noty {
@@ -149,6 +156,7 @@
                 UCFNewMineViewController *mine = [[UCFNewMineViewController alloc] init];
                 controller = mine;
                 _mineView = mine;
+
             }
                 break;
             default:

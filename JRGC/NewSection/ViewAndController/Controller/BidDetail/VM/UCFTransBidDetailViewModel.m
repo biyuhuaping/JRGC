@@ -101,6 +101,7 @@
         }
         self.markList = tmpArr;
     }
+
 }
 
 - (void)invetsButtonState

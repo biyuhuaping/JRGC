@@ -8,6 +8,7 @@
 
 #import "UCFProjectInvestmentRecordViewController.h"
 #import "UCFToolsMehod.h"
+#import "UILabel+Misc.h"
 @interface UCFProjectInvestmentRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (assign,nonatomic)int  currentPage;
@@ -74,7 +75,7 @@
 //    [self viewAddLine:headView Up:NO];
     
     UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS,20, ScreenWidth - XPOS * 2, 12)];
-    placehoderLabel.font = [UIFont boldSystemFontOfSize:12];
+    placehoderLabel.font = [UIFont boldSystemFontOfSize:15];
     placehoderLabel.textColor = [Color color:PGColorOptionTitleGray];
     placehoderLabel.textAlignment = NSTextAlignmentLeft;
     placehoderLabel.backgroundColor = [UIColor clearColor];
@@ -109,7 +110,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 52;
+    return 65;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -133,68 +134,46 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, 17, 160, 14)];
-            titleLabel.font = [UIFont systemFontOfSize:14];
-            titleLabel.textColor = UIColorWithRGB(0x333333);
+            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, 0, 160, 65)];
+            titleLabel.font = [UIFont systemFontOfSize:15];
+            titleLabel.textColor = [Color color:PGColorOptionTitleBlack];
             titleLabel.textAlignment = NSTextAlignmentLeft;
             titleLabel.backgroundColor = [UIColor clearColor];
             titleLabel.tag = 101;
-            [titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
             [cell.contentView addSubview:titleLabel];
             
-            UILabel *placoHolderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            placoHolderLabel.font = [UIFont systemFontOfSize:10];
-            placoHolderLabel.textColor = UIColorWithRGB(0xc8c8c8);
-            placoHolderLabel.textAlignment = NSTextAlignmentLeft;
+            UILabel *placoHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 15 -180, 38, 180, 13)];
+            placoHolderLabel.font = [UIFont systemFontOfSize:11];
+            placoHolderLabel.textColor = [Color color:PGColorOptionTitleGray];
+            placoHolderLabel.textAlignment = NSTextAlignmentRight;
             placoHolderLabel.backgroundColor = [UIColor clearColor];
             placoHolderLabel.tag = 102;
-            [placoHolderLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
             [cell.contentView addSubview:placoHolderLabel];
             
-            UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            countLabel.font = [UIFont systemFontOfSize:14];
-            countLabel.textColor = UIColorWithRGB(0x333333);
+            UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 15 - 250, 13 , 250, 20)];
+            countLabel.font = [UIFont systemFontOfSize:18];
+            countLabel.textAlignment = NSTextAlignmentRight;
+            countLabel.textColor = [Color color:PGColorOptionTitleBlack];
             countLabel.backgroundColor = [UIColor clearColor];
             countLabel.tag = 103;
-            [countLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
             [cell.contentView addSubview:countLabel];
             
             
-            UIImageView * phoneImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-            phoneImageView.image = [UIImage imageNamed:@"particular_icon_phone.png"];
-            phoneImageView.tag = 104;
-            [phoneImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-            [cell.contentView addSubview:phoneImageView];
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 65 - 0.5, ScreenWidth, 0.5)];
+            lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+            [cell.contentView addSubview:lineView];
             
-            NSDictionary *views = NSDictionaryOfVariableBindings(titleLabel,placoHolderLabel,countLabel,phoneImageView);
-            NSDictionary *metrics = @{@"vPadding":@19,@"hPadding":@15,@"vPadding2":@3,@"hPadding2":@3};
-            NSString *vfl1 = @"V:|-vPadding-[titleLabel(14)]-vPadding2-[placoHolderLabel(10)]";
-            NSString *vfl2 = @"|-hPadding-[titleLabel]-hPadding2-[phoneImageView(17)]";
-            NSString *vfl3 = @"V:|-17-[phoneImageView(18)]";
-            NSString *vfl4 = @"V:|-vPadding-[countLabel(14)]";
-            NSString *vfl5 = @"[countLabel]-hPadding-|";
-            NSString *vfl6 = @"|-hPadding-[placoHolderLabel]";
-            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl1 options:0 metrics:metrics views:views]];
-            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl2 options:0 metrics:metrics views:views]];
-            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl3 options:0 metrics:metrics views:views]];
-            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl4 options:0 metrics:metrics views:views]];
-            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl5 options:0 metrics:metrics views:views]];
-            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl6 options:0 metrics:metrics views:views]];
+
             
         }
-        tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
         UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:101];
         UILabel *placoHolderLabel = (UILabel*)[cell.contentView viewWithTag:102];
         UILabel *countLabel = (UILabel*)[cell.contentView viewWithTag:103];
-        UIImageView *phoneImageView = (UIImageView*)[cell.contentView viewWithTag:104];
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 52 - 0.5, ScreenWidth, 0.5)];
-        lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
-        [cell.contentView addSubview:lineView];
+ 
     
     if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
-        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[_dataDic objectForKey:@"prdOrders"] objectAtIndex:[indexPath row]]objectForKey:@"acceptName"]];
-        //            titleStr = [titleStr stringByReplacingCharactersInRange:NSMakeRange(3, 2) withString:@"**"];
-        titleLabel.text = titleStr;
+ 
+        
         NSString *investAmt = [[[_dataDic objectForKey:@"prdOrders"] objectAtIndex:[indexPath row]] objectForKey:@"totalInvestAmt"];
         investAmt = [UCFToolsMehod dealmoneyFormart:investAmt];
         countLabel.text = [NSString stringWithFormat:@"¥%@",investAmt];
@@ -204,27 +183,33 @@
         
         NSString *busnissSource = [UCFToolsMehod isNullOrNilWithString:[[[_dataDic objectForKey:@"prdOrders"] objectAtIndex:[indexPath row]]objectForKey:@"businessSource"]];
         if ([busnissSource isEqualToString:@"1"] || [busnissSource isEqualToString:@"2"]) {
-            [phoneImageView setHidden:NO];
+//            [phoneImageView setHidden:NO];
         } else {
-            [phoneImageView setHidden:YES];
+//            [phoneImageView setHidden:YES];
         }
+        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[_dataDic objectForKey:@"prdOrders"] objectAtIndex:[indexPath row]]objectForKey:@"acceptName"]];
+        
+        titleLabel.text = titleStr;
+        
+
         
         NSString *applyUname = [UCFToolsMehod isNullOrNilWithString:[[[_dataDic objectForKey:@"prdOrders"] objectAtIndex:[indexPath row]]objectForKey:@"orderUserIdStr"]];
         NSString *personId = SingleUserInfo.loginData.userInfo.userId;
         if ([personId isEqualToString:applyUname]) {
-            titleLabel.textColor = UIColorWithRGB(0xfd4d4c);
-            titleLabel.font = [UIFont boldSystemFontOfSize:14];
-            countLabel.textColor = UIColorWithRGB(0xfd4d4c);
+            titleLabel.textColor = [Color color:PGColorOpttonTextRedColor];
+            countLabel.textColor = [Color color:PGColorOpttonTextRedColor];
         }  else {
-            titleLabel.textColor = UIColorWithRGB(0x333333);
-            titleLabel.font = [UIFont systemFontOfSize:14];
-            countLabel.textColor = UIColorWithRGB(0x333333);
+            titleLabel.textColor = [Color color:PGColorOptionTitleBlack];
+            countLabel.textColor = [Color color:PGColorOptionTitleBlack];
         }
+        NSRange range = [titleStr rangeOfString:@"("];
+        NSRange range1 = [titleStr rangeOfString:@")"];
+        NSRange range2 = NSMakeRange(range.location, range1.location - range.location + 1);
+        [titleLabel setFontColor:[Color color:PGColorOptionTitleGray] range:range2];
     }else {
         NSArray *prdOrders = _dataArray;
         NSInteger path = [indexPath row];
         NSString *titleStr = [[prdOrders objectAtIndex:path]objectForKey:@"leftRealName"];
-
         titleLabel.text = titleStr;
         NSString *investAmt = [[prdOrders objectAtIndex:path] objectForKey:@"investAmt"];
         investAmt = [UCFToolsMehod dealmoneyFormart:investAmt];
@@ -233,22 +218,24 @@
         placoHolderLabel.text = applyDate;
         NSString *busnissSource = [UCFToolsMehod isNullOrNilWithString:[[prdOrders objectAtIndex:path]objectForKey:@"businessSource"]];
         if ([busnissSource isEqualToString:@"1"] || [busnissSource isEqualToString:@"2"]) {
-            [phoneImageView setHidden:NO];
+//            [phoneImageView setHidden:NO];
         } else {
-            [phoneImageView setHidden:YES];
+//            [phoneImageView setHidden:YES];
         }
         
         NSString *applyUname = [UCFToolsMehod isNullOrNilWithString:[[prdOrders objectAtIndex:path]objectForKey:@"applyUname"]];
         NSString *personId = SingleUserInfo.loginData.userInfo.userId;
         if ([personId isEqualToString:applyUname]) {
-            titleLabel.textColor = UIColorWithRGB(0xfd4d4c);
-            titleLabel.font = [UIFont boldSystemFontOfSize:14];
-            countLabel.textColor = UIColorWithRGB(0xfd4d4c);
+            titleLabel.textColor = [Color color:PGColorOpttonTextRedColor];
+            countLabel.textColor = [Color color:PGColorOpttonTextRedColor];
         } else {
-            titleLabel.textColor = UIColorWithRGB(0x333333);
-            titleLabel.font = [UIFont systemFontOfSize:14];
-            countLabel.textColor = UIColorWithRGB(0x333333);
+            titleLabel.textColor = [Color color:PGColorOptionTitleBlack];
+            countLabel.textColor = [Color color:PGColorOptionTitleBlack];
         }
+        NSRange range = [titleStr rangeOfString:@"("];
+        NSRange range1 = [titleStr rangeOfString:@")"];
+        NSRange range2 = NSMakeRange(range.location, range1.location - range.location + 1);
+        [titleLabel setFontColor:[Color color:PGColorOptionTitleGray] range:range2];
     }
     
     return cell;

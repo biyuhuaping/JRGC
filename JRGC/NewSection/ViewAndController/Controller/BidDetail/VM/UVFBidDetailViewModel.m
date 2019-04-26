@@ -134,6 +134,8 @@
         }
     }
     self.markList = [NSArray arrayWithArray:labelPriorityArr];
+//    self.markList = @[@"100起投",@"100起投",@"100起投"];
+
 }
 - (void)dealMinuteCountDownData
 {
