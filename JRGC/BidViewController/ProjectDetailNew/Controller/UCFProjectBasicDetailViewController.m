@@ -105,6 +105,12 @@
         [self initMarkOfBondsRransferTableViews];
     }
     [_tableView reloadData];
+    
+    _tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 5)];
+    footView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    _tableView.tableFooterView =footView;
 }
 -(void)orderUserDataInformation
 {
@@ -621,26 +627,24 @@
             [cell.contentView addSubview:_webView];
             
             UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(0, 0 ,ScreenWidth ,37);
+            button.frame = CGRectMake(0, 0 ,ScreenWidth ,45);
             button.tag = 14;
             button.backgroundColor = [UIColor clearColor];
             
-            UIImageView * imageView = [[UIImageView alloc] init];
-            imageView.image = [UIImage imageNamed:@"loading_arrow_blue.png"];
-            imageView.bounds = CGRectMake(0, 0, 12, 7);
+
             
-            UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth -  50)/2 , 15,50 ,15)];
-            placehoderLabel.font = [UIFont systemFontOfSize:12];
-            placehoderLabel.textColor = UIColorWithRGB(0x4aa1f9);
+            UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth -  80)/2 , 14.5,80,16)];
+            placehoderLabel.font = [UIFont systemFontOfSize:14];
+            placehoderLabel.textColor = UIColorWithRGB(0x91ACFB);
             placehoderLabel.textAlignment = NSTextAlignmentCenter;
             placehoderLabel.numberOfLines = 0;
             placehoderLabel.backgroundColor = [UIColor clearColor];
             placehoderLabel.text = @"显示更多";
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 150, ScreenWidth,44)];
+            
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 150, ScreenWidth,45)];
             view.backgroundColor = [UIColor whiteColor];
             view.tag = 1001;
-            imageView.center = CGPointMake( ScreenWidth/2 + 35,CGRectGetHeight(view.frame)/2);
-            [view addSubview:imageView];
+            
             [view addSubview:placehoderLabel];
             [view addSubview:button];
             [button addTarget:self action:@selector(OpenWebViewDetail) forControlEvents:UIControlEventTouchUpInside];
@@ -649,7 +653,7 @@
         UIView *view = (UIView*)[cell.contentView viewWithTag:1001];
         view.hidden = _isOpenWebViewOpen;
         cell.textLabel.text = _webViewHight == 0 ? @"加载中...." :@"";
-        cell.textLabel.textColor = UIColorWithRGB(0x999999);
+        cell.textLabel.textColor = [Color color:PGColorOptionTitleBlack];
         cell.textLabel.font = [UIFont systemFontOfSize:12];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         return cell;
@@ -720,7 +724,7 @@
                     placeHolderYPos = 11;
                 }
                 UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, yPos, 160, 12)];
-                nameLabel.font = [UIFont systemFontOfSize:12];
+                nameLabel.font = [UIFont systemFontOfSize:14];
                 nameLabel.textColor = [Color color:PGColorOptionTitleBlack];;
                 nameLabel.textAlignment = NSTextAlignmentLeft;
                 nameLabel.backgroundColor = [UIColor clearColor];
@@ -728,7 +732,7 @@
                 [cell.contentView addSubview:nameLabel];
                 
                 UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 160 - XPOS, yPos, 160, 12)];
-                detail.font = [UIFont boldSystemFontOfSize:12];
+                detail.font = [UIFont boldSystemFontOfSize:14];
                 detail.textColor = [Color color:PGColorOptionTitleBlack];
                 detail.textAlignment = NSTextAlignmentRight;
                 detail.backgroundColor = [UIColor clearColor];
@@ -782,7 +786,7 @@
                 renzhengLabel.tag = 103;
                 [cell.contentView addSubview:renzhengLabel];
                 
-                UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(renzhengLabel.frame.origin.x - 5 - 14, imgYPos, 15, 15)];
+                UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(renzhengLabel.frame.origin.x - 15 - 0, imgYPos, 15, 15)];
                 imageView.tag = 104;
                 [cell.contentView addSubview:imageView];
                 
@@ -966,7 +970,7 @@
                        renzhengLabel.tag = 103;
                        [cell.contentView addSubview:renzhengLabel];
                        
-                       UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(renzhengLabel.frame.origin.x - 5 - 14, imgYPos, 14, 14)];
+                       UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(renzhengLabel.frame.origin.x - 0 - 14, imgYPos, 15, 15)];
                        imageView.image = [UIImage imageNamed:@"coupon_btn_selected.png"];
                        imageView.tag = 104;
                        [cell.contentView addSubview:imageView];

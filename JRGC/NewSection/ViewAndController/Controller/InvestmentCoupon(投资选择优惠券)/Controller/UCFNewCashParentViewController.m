@@ -26,8 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addBlueLeftButton];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = [Color color:PGColorOptionThemeWhite];
     [self setTitleViewText:@"使用返现券"];
-    [self addRightButtonWithImage:[UIImage imageNamed:@"icon_question.png"]];
+    [self addRightButtonWithImage:[UIImage imageNamed:@"icon_question"]];
 
 }
 - (void)leftBar1Clicked

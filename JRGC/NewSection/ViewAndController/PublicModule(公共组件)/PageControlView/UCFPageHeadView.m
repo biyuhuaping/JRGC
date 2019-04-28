@@ -49,7 +49,7 @@
         [self addSubview:button];
         if (i == 0) {
             [self click:button];
-            button.titleLabel.font = [Color gc_Font:18];
+            button.titleLabel.font =  [Color gc_Font:self.isSacle ? 18 : 15];
         } else {
             button.titleLabel.font = [Color gc_Font:15];
         }
@@ -95,7 +95,8 @@
     }
     [self pageHeadView:self chiliControllerSelectIndex:button.tag - 100];
     button.selected = YES;
-    button.titleLabel.font = [Color gc_Font:18];
+    
+    button.titleLabel.font = [Color gc_Font:self.isSacle ? 18 : 15];
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(pageHeadView:noticeScroViewScrollToPoint:)]) {
         [self.delegate pageHeadView:self noticeScroViewScrollToPoint:CGPointMake(ScreenWidth * (button.tag - 100), 0)];
@@ -123,13 +124,13 @@
     UIButton *button = [self viewWithTag:index + 100];
     if (button) {
         button.selected = YES;
-        button.titleLabel.font = [Color gc_Font:18];
+        button.titleLabel.font =  [Color gc_Font:self.isSacle ? 18 : 15];
     }
 }
 - (UIView *)indicateView
 {
     if (nil == _indicateView) {
-        _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 5, 36, 3)];
+        _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 5, 36, 4)];
         _indicateView.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
         _indicateView.layer.cornerRadius = 2.0f;
         _indicateView.clipsToBounds = YES;

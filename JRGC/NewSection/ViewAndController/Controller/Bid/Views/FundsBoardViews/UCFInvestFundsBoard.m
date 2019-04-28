@@ -154,6 +154,7 @@
     topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     topLineView.myTop = 0;
     topLineView.myHorzMargin = 0;
+    topLineView.hidden = YES;
     topLineView.heightSize.equalTo(@0.5);
     [_totalMoneyBoard addSubview:topLineView];
     
@@ -179,7 +180,7 @@
     [_totalMoneyBoard addSubview:_KeYongMoneyLabel];
     
     _totalKeYongTipLabel = [[UILabel alloc] init];
-    _totalKeYongTipLabel.font = [UIFont systemFontOfSize:10.0f];
+    _totalKeYongTipLabel.font = [UIFont systemFontOfSize:11.0f];
     _totalKeYongTipLabel.textColor = [Color color:PGColorOptionTitleGray];
     _totalKeYongTipLabel.text = [UserInfoSingle sharedManager].isShowCouple ? @"(我的余额+我的工豆)"  : @"";
     [_totalKeYongTipLabel sizeToFit];
@@ -190,11 +191,11 @@
     [_totalMoneyBoard addSubview:_totalKeYongTipLabel];
     
     UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    endLineView.myBottom = 0;
-    endLineView.myLeft = 15;
-    endLineView.myRight = 0;
-    endLineView.heightSize.equalTo(@0.5);
+    endLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    endLineView.bottomPos.equalTo(@0);
+    endLineView.leftPos.equalTo(@15);
+    endLineView.rightPos.equalTo(@0);
+    endLineView.heightSize.equalTo(@0.7);
     [_totalMoneyBoard addSubview:endLineView];
 }
 #pragma mark view three
@@ -231,11 +232,11 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"充值" forState:UIControlStateNormal];
-    [button setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+    [button setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
     button.rightPos.equalTo(_balanceBoard.rightPos).offset(15);
     button.myWidth = 60;
     button.myVertMargin = 0;
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
     [button setTitleEdgeInsets:UIEdgeInsetsMake(17, 0, 0, -33)];
     button.backgroundColor = [UIColor whiteColor];
     [button addTarget:self action:@selector(goToRecharge:) forControlEvents:UIControlEventTouchUpInside];
@@ -299,12 +300,11 @@
     _beanSwitch.imageEdgeInsets = UIEdgeInsetsMake(-14, 0, 0, -37);
     
     UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
-    endLineView.myBottom = 0;
-    endLineView.myRight = 0;
-    endLineView.myLeft = 0;
-//    endLineView.myHorzMargin = 0;
-    endLineView.heightSize.equalTo(@0.5);
+    endLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    endLineView.bottomPos.equalTo(@0);
+    endLineView.leftPos.equalTo(@0);
+    endLineView.rightPos.equalTo(@0);
+    endLineView.heightSize.equalTo(@0.7);
     [_beansBoard addSubview:endLineView];
 }
 - (void)changeBtnStatue:(UIButton *)button
@@ -326,8 +326,7 @@
     [self addSubview:_inputMoenyBoard];
     
     UIView *midLineView = [[UIView alloc] init];
-    midLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
-//    midLineView.backgroundColor = [UIColor redColor];
+    midLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     midLineView.topPos.equalTo(@80);
     midLineView.leftPos.equalTo(@15);
     midLineView.rightPos.equalTo(@0);
@@ -360,12 +359,12 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"全投" forState:UIControlStateNormal];
-    [button setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+    [button setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
     button.rightPos.equalTo(_inputMoenyBoard.rightPos).offset(15);
     button.myWidth = 60;
     button.myHeight = 50;
     button.centerYPos.equalTo(_investMoneyTextfield.centerYPos);
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
     [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -33)];
     button.backgroundColor = [UIColor whiteColor];
     [button addTarget:self action:@selector(allInvestClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -404,12 +403,7 @@
     [_riskTypeLab sizeToFit];
     [_inputMoenyBoard addSubview:_riskTypeLab];
     
-    UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
-    endLineView.myBottom = 0;
-    endLineView.myHorzMargin = 0;
-    endLineView.heightSize.equalTo(@0.5);
-    [_inputMoenyBoard addSubview:endLineView];
+
     
 }
 - (void)textfieldLength:(UITextField *)textField

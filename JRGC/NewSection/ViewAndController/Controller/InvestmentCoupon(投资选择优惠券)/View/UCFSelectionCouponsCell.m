@@ -25,31 +25,68 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // 初始化视图对象
-        self.rootLayout.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        
         [self.rootLayout addSubview:self.couponTypeLayout];
-        self.couponTypeLayout.layer.cornerRadius = 4.0f;
+        self.couponTypeLayout.layer.cornerRadius = 5.0f;
         self.couponTypeLayout.clipsToBounds = YES;
         self.couponTypeLayout.layer.borderWidth = 0.5;
         self.couponTypeLayout.layer.borderColor = [Color color:PGColorOptionCellSeparatorGray].CGColor;
+        
         [self.couponTypeLayout addSubview:self.separteImageView];
+        
+        UIView *leftCircleView = [[UIView alloc] init];
+        leftCircleView.layer.cornerRadius = 5.0f;
+        leftCircleView.clipsToBounds = YES;
+        leftCircleView.layer.borderWidth = 0.5;
+        leftCircleView.leftPos.equalTo(self.couponTypeLayout).offset(-5);
+        leftCircleView.widthSize.equalTo(@10);
+        leftCircleView.heightSize.equalTo(@10);
+        leftCircleView.bottomPos.equalTo(@25);
+        leftCircleView.layer.borderColor = [Color color:PGColorOptionCellSeparatorGray].CGColor;
+        leftCircleView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        [self.rootLayout addSubview:leftCircleView];
+        
+        UIView *leftreactView = [[UIView alloc] init];
+        leftreactView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        leftreactView.rightPos.equalTo(self.couponTypeLayout.leftPos);
+        leftreactView.widthSize.equalTo(@10);
+        leftreactView.heightSize.equalTo(@10);
+        leftreactView.bottomPos.equalTo(@25);
+        [self.rootLayout addSubview:leftreactView];
+        
+        UIView *rightCircleView = [[UIView alloc] init];
+        rightCircleView.layer.cornerRadius = 5.0f;
+        rightCircleView.clipsToBounds = YES;
+        rightCircleView.layer.borderWidth = 0.5;
+        rightCircleView.layer.borderColor = [Color color:PGColorOptionCellSeparatorGray].CGColor;
+        rightCircleView.leftPos.equalTo(self.couponTypeLayout.rightPos).offset(-5);
+        rightCircleView.widthSize.equalTo(@10);
+        rightCircleView.heightSize.equalTo(@10);
+        rightCircleView.bottomPos.equalTo(@25);
+        rightCircleView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        [self.rootLayout addSubview:rightCircleView];
+        
+        UIView *rightreactView = [[UIView alloc] init];
+        rightreactView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        rightreactView.leftPos.equalTo(self.couponTypeLayout.rightPos);
+        rightreactView.widthSize.equalTo(@10);
+        rightreactView.heightSize.equalTo(@10);
+        rightreactView.bottomPos.equalTo(@25);
+        [self.rootLayout addSubview:rightreactView];
         
         [self.couponTypeLayout addSubview:self.couponAmounLabel];
         [self.couponTypeLayout addSubview:self.remarkLabel];
         [self.couponTypeLayout addSubview:self.overdueTimeLabel];
-
-//        [self.couponTypeLayout addSubview:self.unUseReasonMarkLab];
-//        [self.couponTypeLayout addSubview:self.detailReasonLab];
-//        [self.couponTypeLayout addSubview:self.willExpireLayout];
 //
         [self.couponTypeLayout addSubview:self.investMultipLabel];
         [self.couponTypeLayout addSubview:self.inverstPeriodLabel];
-        
-       
+    
         [self.rootLayout addSubview:self.selectCouponsBtn];
-        
     }
     return self;
 }
+
 - (MyRelativeLayout *)couponTypeLayout
 {
     if (nil == _couponTypeLayout) {
@@ -81,13 +118,12 @@
 {
     if (nil == _couponAmounLabel) {
         _couponAmounLabel = [NZLabel new];
-        _couponAmounLabel.topPos.equalTo(@15);
+        _couponAmounLabel.topPos.equalTo(@12);
         _couponAmounLabel.leftPos.equalTo(@15);
         _couponAmounLabel.rightPos.equalTo(@10);
         _couponAmounLabel.textAlignment = NSTextAlignmentLeft;
-        _couponAmounLabel.font = [UIFont systemFontOfSize:30.0];
+        _couponAmounLabel.font = [Color gc_ANC_font :32.0];
         _couponAmounLabel.textColor = [UIColor whiteColor];
-        //        [_titleLabel sizeToFit];
     }
     return _couponAmounLabel;
 }
@@ -97,7 +133,7 @@
     if(_selectCouponsBtn==nil)
     {
         _selectCouponsBtn = [UIButton buttonWithType:0];
-        _selectCouponsBtn.centerYPos.equalTo(self.rootLayout.centerYPos);
+        _selectCouponsBtn.centerYPos.equalTo(self.couponTypeLayout.centerYPos);
         _selectCouponsBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         _selectCouponsBtn.leftPos.equalTo(@0);
         _selectCouponsBtn.widthSize.equalTo(@50);
@@ -152,12 +188,11 @@
 {
     if (nil == _remarkLabel) {
         _remarkLabel = [UILabel new];
-        _remarkLabel.topPos.equalTo(self.couponAmounLabel.bottomPos).offset(10);
+        _remarkLabel.centerYPos.equalTo(self.couponTypeLayout.centerYPos).offset(5);
         _remarkLabel.leftPos.equalTo(self.couponAmounLabel.leftPos);
         _remarkLabel.textAlignment = NSTextAlignmentLeft;
-        _remarkLabel.font = [UIFont systemFontOfSize:10.0];
+        _remarkLabel.font = [UIFont systemFontOfSize:12.0];
         _remarkLabel.textColor = [Color color:PGColorOptionTitleGray];
-        //        [_titleLabel sizeToFit];
     }
     return _remarkLabel;
 }
@@ -213,11 +248,10 @@
 {
     if (nil == _investMultipLabel) {
         _investMultipLabel = [UILabel new];
-        _investMultipLabel.bottomPos.equalTo(@10);
+        _investMultipLabel.bottomPos.equalTo(@9);
         _investMultipLabel.leftPos.equalTo(self.remarkLabel.leftPos);
         _investMultipLabel.font = self.remarkLabel.font;
-        _investMultipLabel.textColor = UIColorWithRGB(0x999999);
-        //        [_titleLabel sizeToFit];
+        _investMultipLabel.textColor = [Color color:PGColorOptionTitleGray];
     }
     return _investMultipLabel;
 }
@@ -230,7 +264,6 @@
         _inverstPeriodLabel.textAlignment = NSTextAlignmentRight;
         _inverstPeriodLabel.font = self.remarkLabel.font;
         _inverstPeriodLabel.textColor = self.investMultipLabel.textColor;
-        //        [_titleLabel sizeToFit];
     }
     return _inverstPeriodLabel;
 }
@@ -253,15 +286,16 @@
     //        0返现券 1返息券
     if ([cpData.couponType isEqualToString:@"0"])
     {
-//        self.couponTypeLayout.backgroundColor = UIColorWithRGB(0x70CBF4);
-        self.couponAmounLabel.text = [NSString stringWithFormat:@"￥%@",couponAmount];
-        [self.couponAmounLabel setFont:[UIFont systemFontOfSize:13.0] string:@"￥"];
+        self.couponAmounLabel.text = [NSString stringWithFormat:@"¥%@",couponAmount];
+        [self.couponAmounLabel setFont:[Color gc_ANC_font: 18.0] string:@"¥"];
 
     }
     else
     {
+        [_selectCouponsBtn setImage:[UIImage imageNamed:@"coupon_btn_selected_blue"] forState:UIControlStateSelected];
+
         self.couponAmounLabel.text = [NSString stringWithFormat:@"%@%%",couponAmount];
-        [self.couponAmounLabel setFont:[UIFont systemFontOfSize:13.0] string:@"%"];
+        [self.couponAmounLabel setFont:[Color gc_ANC_font:18.0] string:@"%"];
     }
     //YES勾选,no正常模式
     if (cpData.isCheck)
@@ -276,14 +310,16 @@
     //优惠券是否可用
     if (cpData.isCanUse)
     {
-        UIImage *image = [self createImageWithColor:UIColorWithRGB(0xdddddd)];
-        [self.selectCouponsBtn setImage:image forState:UIControlStateNormal];
+//        UIImage *image = [self createImageWithColor:UIColorWithRGB(0xdddddd)];
+//        [self.selectCouponsBtn setImage:image forState:UIControlStateNormal];
         self.selectCouponsBtn.userInteractionEnabled = YES;
-        self.couponAmounLabel.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
-//        self.unUseReasonMarkLab.myVisibility = MyVisibility_Invisible;
-//        self.detailReasonLab.myVisibility = MyVisibility_Invisible;
+        if ([cpData.couponType isEqualToString:@"0"]) {
+            self.couponAmounLabel.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
+        } else {
+            self.couponAmounLabel.textColor = [Color color:PGColorOptionCellContentBlue]; 
+        }
     } else {
-        [self.selectCouponsBtn setImage:[UIImage imageNamed:@"invest_btn_select_normal"] forState:UIControlStateNormal];
+        [self.selectCouponsBtn setImage:[UIImage imageNamed:@"coupon_btn_unavailable"] forState:UIControlStateNormal];
         self.selectCouponsBtn.userInteractionEnabled = NO;
         self.couponAmounLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
 //        self.unUseReasonMarkLab.myVisibility = MyVisibility_Visible;

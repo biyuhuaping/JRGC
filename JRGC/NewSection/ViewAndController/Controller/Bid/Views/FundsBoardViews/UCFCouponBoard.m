@@ -70,8 +70,27 @@
                 NSString *repayCoupon = [change objectSafeForKey:NSKeyValueChangeNewKey];
                 NSString *repayCouponStr = [NSString stringWithFormat:@"¥%@",repayCoupon];
                 NSString *allText = [NSString stringWithFormat:@"返息%@工豆，满¥%@可用",repayCouponStr,selfWeak.myVM.couponTotalcouponAmount];
-                selfWeak.couponLab.text = allText;
-                selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:repayCouponStr WithTotalString:allText];
+                
+                
+                NSString *text1 = [NSString stringWithFormat:@"返息%@",repayCouponStr];
+                NSRange range1 = [allText rangeOfString:text1];
+                range1.location += 2;
+                range1.length -= 2;
+                NSRange range2 = [allText rangeOfString:[NSString stringWithFormat:@"满¥%@",selfWeak.myVM.couponTotalcouponAmount]];
+                range2.location += 1;
+                range2.length -= 1;
+                NSValue *value1 = [NSValue valueWithBytes:&range1 objCType:@encode(NSRange)];
+                NSValue *value2 = [NSValue valueWithBytes:&range2 objCType:@encode(NSRange)];
+                NSDictionary *attributeDict0 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                [UIFont systemFontOfSize:14.0],NSFontAttributeName,
+                                                [Color color:PGColorOptionTitlerRead],NSForegroundColorAttributeName,nil];
+                
+                NSDictionary *attributeDict = [NSDictionary dictionaryWithObjectsAndKeys:[Color color:PGColorOptionTitlerRead],NSForegroundColorAttributeName,nil];
+                
+                selfWeak.couponLab.attributedText = [Common twoSectionOfLabelShowDifferentAttribute:[NSArray arrayWithObjects:attributeDict,attributeDict0, nil] WithTextLocations:[NSArray arrayWithObjects:value1,value2, nil] WithTotalString:allText];
+                
+//                selfWeak.couponLab.text = allText;
+//                selfWeak.couponLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:repayCouponStr WithTotalString:allText];
                 
                 [selfWeak.couponLab sizeToFit];
                 selfWeak.couponBtn.myVisibility = MyVisibility_Gone;
@@ -86,7 +105,27 @@
                 NSString *cashStr = [NSString stringWithFormat:@"¥%@",repayCash];
                 NSString *allText = [NSString stringWithFormat:@"返现%@，满¥%@可用",cashStr,selfWeak.myVM.cashTotalcouponAmount];
                 selfWeak.cashLab.text = allText;
-                selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:cashStr WithTotalString:allText];
+                
+                NSString *text1 = [NSString stringWithFormat:@"返现%@",cashStr];
+                NSRange range1 = [allText rangeOfString:text1];
+                range1.location += 2;
+                range1.length -= 2;
+                NSRange range2 = [allText rangeOfString:[NSString stringWithFormat:@"满¥%@",selfWeak.myVM.cashTotalcouponAmount]];
+                range2.location += 1;
+                range2.length -= 1;
+                NSValue *value1 = [NSValue valueWithBytes:&range1 objCType:@encode(NSRange)];
+                NSValue *value2 = [NSValue valueWithBytes:&range2 objCType:@encode(NSRange)];
+                NSDictionary *attributeDict0 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                [UIFont systemFontOfSize:14.0],NSFontAttributeName,
+                                                [Color color:PGColorOptionTitlerRead],NSForegroundColorAttributeName,nil];
+                
+                NSDictionary *attributeDict = [NSDictionary dictionaryWithObjectsAndKeys:[Color color:PGColorOptionTitlerRead],NSForegroundColorAttributeName,nil];
+                
+                selfWeak.cashLab.attributedText = [Common twoSectionOfLabelShowDifferentAttribute:[NSArray arrayWithObjects:attributeDict,attributeDict0, nil] WithTextLocations:[NSArray arrayWithObjects:value1,value2, nil] WithTotalString:allText];
+                
+                
+                
+//                selfWeak.cashLab.attributedText = [Common oneSectionOfLabelShowDifferentColor:UIColorWithRGB(0xfd4d4c) WithSectionText:cashStr WithTotalString:allText];
                 [selfWeak.cashLab sizeToFit];
                 selfWeak.cashBtn.myVisibility = MyVisibility_Gone;
 
@@ -172,13 +211,13 @@
     titleLab.centerYPos.equalTo(view.centerYPos);
     [view addSubview:titleLab];
     
-    UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xeff0f3);
-    endLineView.myBottom = 0;
-    endLineView.myLeft = 0;
-    endLineView.myRight = 0;
-    endLineView.heightSize.equalTo(@0.5);
-    [view addSubview:endLineView];
+//    UIView *endLineView = [[UIView alloc] init];
+//    endLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+//    endLineView.myBottom = 0;
+//    endLineView.myLeft = 0;
+//    endLineView.myRight = 0;
+//    endLineView.heightSize.equalTo(@0.5);
+//    [view addSubview:endLineView];
     
 }
 - (void)addCashCoupon
@@ -204,7 +243,7 @@
     [cashCoupleView addSubview:titleLab];
     
     UIButton *totalCashBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    totalCashBtn.leftPos.equalTo(titleLab.rightPos).offset(10);
+    totalCashBtn.leftPos.equalTo(titleLab.rightPos).offset(5);
     totalCashBtn.heightSize.equalTo(@22);
     totalCashBtn.widthSize.equalTo(@40);
     totalCashBtn.titleLabel.font = [Color gc_Font:13];
@@ -229,7 +268,7 @@
     numLabel.adjustsFontSizeToFitWidth = YES;
     numLabel.text = @"返现¥10.00";
     numLabel.centerYPos.equalTo(arrowImageView.centerYPos);
-    numLabel.textColor = UIColorWithRGB(0x555555);
+    numLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
     numLabel.backgroundColor =  [UIColor clearColor];
     [numLabel sizeToFit];
     numLabel.rightPos.equalTo(arrowImageView.leftPos).offset(10);
@@ -241,7 +280,7 @@
     endLineView.myBottom = 0;
     endLineView.myLeft = 15;
     endLineView.myRight = 0;
-    endLineView.heightSize.equalTo(@0.5);
+    endLineView.heightSize.equalTo(@0.6);
     [cashCoupleView addSubview:endLineView];
     
     
@@ -278,7 +317,7 @@
     [cashCoupleView addSubview:titleLab];
     
     UIButton *totalCashBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    totalCashBtn.leftPos.equalTo(titleLab.rightPos).offset(10);
+    totalCashBtn.leftPos.equalTo(titleLab.rightPos).offset(5);
     totalCashBtn.heightSize.equalTo(@22);
     totalCashBtn.widthSize.equalTo(@40);
     totalCashBtn.clipsToBounds = YES;
@@ -302,7 +341,7 @@
     numLabel.textAlignment = NSTextAlignmentLeft;
     numLabel.adjustsFontSizeToFitWidth = YES;
     numLabel.text = @"返现¥10.00";
-    numLabel.textColor = UIColorWithRGB(0x555555);
+    numLabel.textColor = [Color color:PGColorOptionTitleGray];
     numLabel.backgroundColor =  [UIColor clearColor];
     numLabel.rightPos.equalTo(arrowImageView.leftPos).offset(10);
     numLabel.centerYPos.equalTo(arrowImageView.centerYPos);
@@ -311,13 +350,13 @@
     [cashCoupleView addSubview:numLabel];
     self.couponLab = numLabel;
     
-    UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    endLineView.myBottom = 0;
-    endLineView.myLeft = 0;
-    endLineView.myRight = 0;
-    endLineView.heightSize.equalTo(@0.5);
-    [cashCoupleView addSubview:endLineView];
+//    UIView *endLineView = [[UIView alloc] init];
+//    endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//    endLineView.myBottom = 0;
+//    endLineView.myLeft = 0;
+//    endLineView.myRight = 0;
+//    endLineView.heightSize.equalTo(@0.5);
+//    [cashCoupleView addSubview:endLineView];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.myTop = 0;

@@ -46,22 +46,22 @@
     self.titleLab.bottomPos.equalTo(@0);
     
     self.imageView1.centerYPos.equalTo(self.centerYPos);
-    self.imageView1.leftPos.equalTo(self.titleLab.rightPos);
+    self.imageView1.leftPos.equalTo(self.titleLab.rightPos).offset(2);
     self.imageView1.mySize = CGSizeMake(18, 18);
     self.imageView1.myVisibility = MyVisibility_Gone;
     
     self.imageView2.centerYPos.equalTo(self.centerYPos);
-    self.imageView2.leftPos.equalTo(self.imageView1.rightPos);
+    self.imageView2.leftPos.equalTo(self.imageView1.rightPos).offset(2);
     self.imageView2.mySize = CGSizeMake(18, 18);
     self.imageView2.myVisibility = MyVisibility_Gone;
     
     self.imageView3.centerYPos.equalTo(self.centerYPos);
-    self.imageView3.leftPos.equalTo(self.imageView2.rightPos);
+    self.imageView3.leftPos.equalTo(self.imageView2.rightPos).offset(2);
     self.imageView3.mySize = CGSizeMake(18, 18);
     self.imageView3.myVisibility = MyVisibility_Gone;
 
     self.imageView4.centerYPos.equalTo(self.centerYPos);
-    self.imageView4.leftPos.equalTo(self.imageView3.rightPos);
+    self.imageView4.leftPos.equalTo(self.imageView3.rightPos).offset(2);
     self.imageView4.mySize = CGSizeMake(18, 18);
     self.imageView4.myVisibility = MyVisibility_Gone;
 }
@@ -139,7 +139,7 @@
         _iconView = [[UIImageView alloc] init];
         _iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         _iconView.clipsToBounds = YES;
-        _iconView.layer.cornerRadius = 2;
+        _iconView.layer.cornerRadius = 1.5;
     }
     return _iconView;
 }

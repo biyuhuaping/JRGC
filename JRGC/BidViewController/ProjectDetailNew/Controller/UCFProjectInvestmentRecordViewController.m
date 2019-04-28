@@ -48,6 +48,8 @@
         
         self.tableView.footer.hidden = YES;
         [self.tableView.header beginRefreshing];
+        self.tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     }
 }
 -(void)getInvestmentRecordHTTPRequst
@@ -75,7 +77,7 @@
 //    [self viewAddLine:headView Up:NO];
     
     UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS,20, ScreenWidth - XPOS * 2, 12)];
-    placehoderLabel.font = [UIFont boldSystemFontOfSize:15];
+    placehoderLabel.font = [UIFont systemFontOfSize:14];
     placehoderLabel.textColor = [Color color:PGColorOptionTitleGray];
     placehoderLabel.textAlignment = NSTextAlignmentLeft;
     placehoderLabel.backgroundColor = [UIColor clearColor];
@@ -161,6 +163,7 @@
             
             UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 65 - 0.5, ScreenWidth, 0.5)];
             lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+            lineView.tag = 104;
             [cell.contentView addSubview:lineView];
             
 
@@ -169,8 +172,21 @@
         UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:101];
         UILabel *placoHolderLabel = (UILabel*)[cell.contentView viewWithTag:102];
         UILabel *countLabel = (UILabel*)[cell.contentView viewWithTag:103];
- 
-    
+        UIView *lineView = [cell.contentView viewWithTag:104];
+        if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER)
+        {
+            if (indexPath.row == [[_dataDic objectForKey:@"prdOrders"] count] - 1) {
+                lineView.hidden = YES;
+            } else {
+                lineView.hidden = NO;
+            }
+        }else{
+            if (indexPath.row == _dataArray.count - 1) {
+                lineView.hidden = YES;
+            } else {
+                lineView.hidden = NO;
+            }
+        }
     if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
  
         

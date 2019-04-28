@@ -57,6 +57,7 @@
         _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44 + StatusBarHeight1) WithTitleArray:@[title1,title2,title3]];
         _pageHeadView.isNavBar = YES;
         _pageHeadView.leftSpace = _pageHeadView.rightSpace = 30;
+        _pageHeadView.isSacle = YES;
         [_pageHeadView reloaShowView];
     }
     return _pageHeadView;

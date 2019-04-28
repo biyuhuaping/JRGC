@@ -77,7 +77,7 @@
 {
     if (nil == _tableView) {
         _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1 + 50)];
-        _tableView.backgroundColor = UIColorWithRGB(0xebebee);
+        _tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _tableView.delegate = self;
         _tableView.dataSource =self;
         _tableView.enableRefreshHeader = NO;

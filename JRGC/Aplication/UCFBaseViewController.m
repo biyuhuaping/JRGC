@@ -36,7 +36,7 @@
     
     if (!_isHideNavigationBar){
         lineViewAA = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-        lineViewAA.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        lineViewAA.backgroundColor = UIColorWithRGB(0xe2e2e2);
         [self.view addSubview:lineViewAA];
     }
     [self.navigationController.navigationBar setHidden:_isHideNavigationBar];

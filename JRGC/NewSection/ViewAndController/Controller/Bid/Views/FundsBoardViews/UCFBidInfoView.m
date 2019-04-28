@@ -25,7 +25,6 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-//        [self addSubview:self.topLine];
         [self addSubview:self.rateLab];
         [self addSubview:self.rateTipLab];
         [self addSubview:self.timeLimitLab];
@@ -127,19 +126,19 @@
 //    self.topLine.myTop = 0;
 //    self.topLine.myHorzMargin = 0;
     
-    self.rateLab.myLeading = 15;
+    self.rateLab.myLeading = 22;
     self.rateLab.myTop = 5;
     
     self.timeLimitLab.leadingPos.equalTo(self.rateLab.trailingPos);
-    self.timeLimitLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(10);
+    self.timeLimitLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(3);
     
     self.moneyAmountLab.leadingPos.equalTo(self.timeLimitLab.trailingPos);
-    self.moneyAmountLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(10);
+    self.moneyAmountLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(3);
     
-    self.rateLab.widthSize.equalTo(@[self.timeLimitLab.widthSize, self.moneyAmountLab.widthSize]).add(-30);
+    self.rateLab.widthSize.equalTo(@[self.timeLimitLab.widthSize, self.moneyAmountLab.widthSize]).add(-37);
     
     
-    self.rateTipLab.myLeading = 15;
+    self.rateTipLab.myLeading = 22;
     self.rateTipLab.topPos.equalTo(self.rateLab.bottomPos).offset(-4);
     
     self.timeLimitTipLab.leadingPos.equalTo(self.rateTipLab.trailingPos);
@@ -148,7 +147,7 @@
     self.moneyAmountTipLab.leadingPos.equalTo(self.timeLimitTipLab.trailingPos);
     self.moneyAmountTipLab.bottomPos.equalTo(self.rateTipLab.bottomPos);
     
-    self.rateTipLab.widthSize.equalTo(@[self.timeLimitTipLab.widthSize, self.moneyAmountTipLab.widthSize]).add(-30);
+    self.rateTipLab.widthSize.equalTo(@[self.timeLimitTipLab.widthSize, self.moneyAmountTipLab.widthSize]).add(-37);
     
     self.bottomLineview.myHeight = 1;
     self.bottomLineview.myBottom = 0;
@@ -198,7 +197,7 @@
     if (!_timeLimitLab) {
         _timeLimitLab = [[UILabel alloc] init];
         _timeLimitLab.textColor = [Color color:PGColorOptionTitleBlack];
-        _timeLimitLab.font = [Color gc_ANC_font:18.0f];
+        _timeLimitLab.font = [Color gc_ANC_font:20.0f];
 //        _timeLimitLab.text = @"30天";
 //        [_timeLimitLab sizeToFit];
     }
@@ -220,7 +219,7 @@
     if (!_moneyAmountLab) {
         _moneyAmountLab = [[UILabel alloc] init];
         _moneyAmountLab.textColor = [Color color:PGColorOptionTitleBlack];
-        _moneyAmountLab.font = [Color gc_ANC_font:18.0f];
+        _moneyAmountLab.font = [Color gc_ANC_font:20.0f];
         _moneyAmountLab.text = @"¥1,000,000";
         [_moneyAmountLab sizeToFit];
     }
