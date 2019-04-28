@@ -68,12 +68,17 @@
 
 - (void)pushWebViewWithUrl:(NSString *)url Title:(NSString *)title
 {
-    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-//    web.url = [NSString stringWithFormat:@"%@&closeView=true",url];
-    web.url = url;
-    web.title = title;
-    web.isHidenNavigationbar = YES;
-    [((UCFBaseViewController *)self.bc).rt_navigationController pushViewController:web animated:YES];
+    if ([url containsString:@"http"]) {
+        UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+        //    web.url = [NSString stringWithFormat:@"%@&closeView=true",url];
+        web.url = url;
+        web.title = title;
+        web.isHidenNavigationbar = YES;
+        [((UCFBaseViewController *)self.bc).rt_navigationController pushViewController:web animated:YES];
+        
+    } else {
+        [SingGlobalView.tabBarController setSelectedIndex:3];
+    }
 }
 
 - (UCFShopHListView *)shopList

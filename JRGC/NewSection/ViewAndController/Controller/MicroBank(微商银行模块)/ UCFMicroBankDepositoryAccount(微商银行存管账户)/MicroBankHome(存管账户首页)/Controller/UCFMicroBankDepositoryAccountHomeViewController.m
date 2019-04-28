@@ -180,7 +180,14 @@
         _riskTolerance = [[UCFMicroBankDepositoryAccountHomeCellView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
         _riskTolerance.topPos.equalTo(self.changePassword.bottomPos);
         _riskTolerance.myLeft = 0;
-        _riskTolerance.microBankTitleLabel.text = @"微金风险承担能力";
+        
+        if (self.accoutType == SelectAccoutTypeP2P) {
+            _riskTolerance.microBankTitleLabel.text = @"微金风险承担能力";
+        }
+        else
+        {
+            _riskTolerance.microBankTitleLabel.text = @"尊享风险承担能力";
+        }
         [_riskTolerance.microBankTitleLabel sizeToFit];
         
         _riskTolerance.microBankSubtitleLabel.text = @"";

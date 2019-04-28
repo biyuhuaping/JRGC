@@ -326,7 +326,7 @@
             return;
         }
         
-        if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+        if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
             
             UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
             vc.accoutType = SelectAccoutTypeP2P;
@@ -676,22 +676,22 @@
     {
         //尊享账户是否显示
         CellConfig *cellConfigRespect = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineItemCell class]) title:@"尊享项目" showInfoMethod:@selector(showInfo:) heightOfCell:50];
-        [accountCellConfigArray insertObject:cellConfigRespect atIndex:accountCellConfigArray.count -2];
+        [accountCellConfigArray insertObject:cellConfigRespect atIndex:accountCellConfigArray.count -1];
         
         UCFMineCellAccountModel *cellAccountRespect = [[UCFMineCellAccountModel alloc]init];//尊享项目
         cellAccountRespect.cellAccountTitle = @"尊享项目";
         cellAccountRespect.cellAccountImage = @"mine_icon_gold.png";
-        [accountCellData insertObject:cellAccountRespect atIndex:accountCellData.count -2];
+        [accountCellData insertObject:cellAccountRespect atIndex:accountCellData.count -1];
     }
     if (model.data.nmAccountIsShow) {
         //黄金账户是否显示
         CellConfig *cellConfigGold = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineItemCell class]) title:@"持有黄金" showInfoMethod:@selector(showInfo:) heightOfCell:50];
-        [accountCellConfigArray insertObject:cellConfigGold atIndex:accountCellConfigArray.count -2];
+        [accountCellConfigArray insertObject:cellConfigGold atIndex:accountCellConfigArray.count -1];
        
         UCFMineCellAccountModel *cellAccountGold = [[UCFMineCellAccountModel alloc]init];//持有黄金
         cellAccountGold.cellAccountTitle = @"持有黄金";
         cellAccountGold.cellAccountImage = @"mine_icon_respect.png";
-        [accountCellData insertObject:cellAccountGold atIndex:accountCellData.count -2];
+        [accountCellData insertObject:cellAccountGold atIndex:accountCellData.count -1];
     }
     //新的数据直接替换第二组内容
     [self.cellConfigData replaceObjectAtIndex:1 withObject:[accountCellConfigArray copy]];

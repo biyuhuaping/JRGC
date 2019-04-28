@@ -50,6 +50,7 @@
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     
+    [self setSetNavgationPopDisabled:YES];
     self.viewHeight = PGStatusBarHeight + self.navigationController.navigationBar.frame.size.height + HEADVIEWHEIGHT;
     [self addLeftButton];
     

@@ -47,6 +47,7 @@
         }else{
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
+        [self refreshMineHome];
      
     }
     else if ([controllerName  isEqualToString:@"app_withdraw_recharge"])//提现失败页面
@@ -57,6 +58,7 @@
     {
         self.flagInvestSuc = YES;
     }
+    
 }
 - (void)addRefresh //去掉页面刷新
 {
@@ -82,6 +84,17 @@
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
         [self.navigationController popViewControllerAnimated:YES];
+    }
+    [self refreshMineHome];
+}
+
+
+- (void)refreshMineHome
+{
+    RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.viewControllers.lastObject;
+    UCFBaseViewController *bs = nav.rt_viewControllers.firstObject;
+    if ([bs isKindOfClass:[UCFBaseViewController class]]) {
+        [bs monitorOpenStatueChange];
     }
 }
 - (void)didReceiveMemoryWarning {

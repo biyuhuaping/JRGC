@@ -129,12 +129,13 @@
 {
     if (nil == _resetPassWordPhoneLabel) {
         _resetPassWordPhoneLabel = [NZLabel new];
-        _resetPassWordPhoneLabel.topPos.equalTo(self.resetPassWordLabel.bottomPos).offset(10);
+        _resetPassWordPhoneLabel.topPos.equalTo(self.resetPassWordLabel.bottomPos).offset(0);
         _resetPassWordPhoneLabel.myLeft = 26;
         _resetPassWordPhoneLabel.textAlignment = NSTextAlignmentLeft;
         _resetPassWordPhoneLabel.font = [Color gc_Font:15.0];
         _resetPassWordPhoneLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _resetPassWordPhoneLabel.text = @"验证码已发送至 ";
+        NSString *replaceStr = [NSString replaceStringWithAsterisk:self.phoneNum startLocation:3 lenght:self.phoneNum.length -7];
+        _resetPassWordPhoneLabel.text = [NSString stringWithFormat:@"验证码已发送至 %@",replaceStr];
         [_resetPassWordPhoneLabel sizeToFit];
     }
     return _resetPassWordPhoneLabel;
@@ -146,7 +147,7 @@
         _resetPassWordSMSLabel = [NZLabel new];
         _resetPassWordSMSLabel.myLeft = 26;
         _resetPassWordSMSLabel.myRight = 26;
-        _resetPassWordSMSLabel.topPos.equalTo(self.resetPassWordPhoneLabel.bottomPos).offset(10);
+        _resetPassWordSMSLabel.topPos.equalTo(self.resetPassWordPhoneLabel.bottomPos).offset(5);
         _resetPassWordSMSLabel.textAlignment = NSTextAlignmentLeft;
         _resetPassWordSMSLabel.font = [Color gc_Font:13.0];
         _resetPassWordSMSLabel.textColor = [Color color:PGColorOptionTitleGray];
@@ -286,11 +287,11 @@
             [self.smsCodeView.verifyCodeButton startCountDown];
             __weak typeof(self) weakSelf = self;
             
-            NSString *replaceStr = [NSString replaceStringWithAsterisk:self.phoneNum startLocation:3 lenght:self.phoneNum.length -7];
             self.resetPassWordSMSLabel.myVisibility = MyVisibility_Visible;
-            self.resetPassWordSMSLabel.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",replaceStr];
+            self.resetPassWordSMSLabel.text = [NSString stringWithFormat:@"若收不到短信?请点击这里获取语音验证码。"];
             [self.resetPassWordSMSLabel sizeToFit];
-            [self.resetPassWordSMSLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
+//            [self.resetPassWordSMSLabel setFontColor:[UIColorWithRGB(0x4aa1f9)] string:@"点击这里"];
+            [self.resetPassWordSMSLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"点击这里"];
             [self.resetPassWordSMSLabel addLinkString:@"点击这里" block:^(ZBLinkLabelModel *linkModel) {
                 if (![weakSelf.smsCodeView.verifyCodeButton getIsCountDown]) {
                     [weakSelf statVerifyCodeRequest:@"VMS"];

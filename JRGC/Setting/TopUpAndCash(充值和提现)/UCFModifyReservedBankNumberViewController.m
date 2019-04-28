@@ -254,7 +254,7 @@
                     }
                     
                 }];
-                [_telServerLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
+                [_telServerLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"点击这里"];
             }else{
                 self.getCodeBtn.userInteractionEnabled = YES;
                 NSString *messageStr = [dic objectSafeForKey:@"message"];

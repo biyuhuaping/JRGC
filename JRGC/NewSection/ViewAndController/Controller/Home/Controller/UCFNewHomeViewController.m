@@ -373,11 +373,18 @@
 }
 - (void)pushWebViewWithUrl:(NSString *)url Title:(NSString *)title
 {
-    UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
-    web.url = [NSString stringWithFormat:@"%@",url];
-    web.title = title;
-//    web.isHidenNavigationbar = YES;
-    [self.navigationController pushViewController:web animated:YES];
+    
+    if ([self.remcommendUrl containsString:@"http"]) {
+        UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+        web.url = [NSString stringWithFormat:@"%@",url];
+        web.title = title;
+        //    web.isHidenNavigationbar = YES;
+        [self.navigationController pushViewController:web animated:YES];
+        
+    } else {
+        [SingGlobalView.tabBarController setSelectedIndex:3];
+    }
+
 }
 - (void)homeViewDataBidClickModel:(UCFNewHomeListModel *)model type:(UCFNewHomeListType)type
 {

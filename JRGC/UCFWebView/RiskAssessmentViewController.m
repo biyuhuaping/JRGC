@@ -22,7 +22,15 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+    
+    if (self.accoutType == SelectAccoutTypeHoner)
+    {
+        [self.navigationController setNavigationBarHidden:NO];
+    }
+    else
+    {
+        [self.navigationController setNavigationBarHidden:YES];
+    }
     if ([self.sourceVC isEqualToString:@"ProjectDetailVC"]) {
          [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     }

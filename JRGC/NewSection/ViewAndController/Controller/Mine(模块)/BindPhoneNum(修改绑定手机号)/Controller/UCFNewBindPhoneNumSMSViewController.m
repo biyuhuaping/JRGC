@@ -255,7 +255,7 @@
             NSString *replaceStr = [NSString replaceStringWithAsterisk:self.moddifyPhoneTextField.text startLocation:3 lenght:self.moddifyPhoneTextField.text.length -7];
             self.resetPhoneSMSLabel.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",replaceStr];
             [self.resetPhoneSMSLabel sizeToFit];
-            [self.resetPhoneSMSLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
+            [self.resetPhoneSMSLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"点击这里"];
             [self.resetPhoneSMSLabel addLinkString:@"点击这里" block:^(ZBLinkLabelModel *linkModel) {
                 if (![weakSelf.smsCodeView.verifyCodeButton getIsCountDown]) {
                     [weakSelf statVerifyCodeRequest:@"VMS"];

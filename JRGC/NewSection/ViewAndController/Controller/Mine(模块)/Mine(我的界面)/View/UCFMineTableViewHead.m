@@ -413,11 +413,11 @@
     {
         
         if (myModel.data.unReadMsgCount > 0) {
-             [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
+             [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
         }
         else
         {
-            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
         }
         if ([myModel.data.memberLever integerValue] <= 1)
         {

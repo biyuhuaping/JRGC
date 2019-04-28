@@ -97,14 +97,19 @@
         _findPwdPhoneField = [UITextField new];
         _findPwdPhoneField.backgroundColor = [UIColor clearColor];
         _findPwdPhoneField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _findPwdPhoneField.font = [Color font:15.0 andFontName:nil];
+        _findPwdPhoneField.font = [Color font:18.0 andFontName:nil];
         _findPwdPhoneField.textAlignment = NSTextAlignmentLeft;
-        _findPwdPhoneField.placeholder = @"请输入手机号";
+//        _findPwdPhoneField.placeholder = @"请输入手机号";
         _findPwdPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_findPwdPhoneField.placeholder attributes:dict];
-        [_findPwdPhoneField setAttributedPlaceholder:attribute];
+        NSString *holderText = @"请输入手机号";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _findPwdPhoneField.attributedPlaceholder = placeholder;
         _findPwdPhoneField.textColor = [Color color:PGColorOptionTitleBlack];
         _findPwdPhoneField.heightSize.equalTo(@25);
         _findPwdPhoneField.leftPos.equalTo(self.findPwdPhoneImageView.rightPos).offset(9);
