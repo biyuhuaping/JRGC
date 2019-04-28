@@ -36,6 +36,7 @@ typedef NS_ENUM(NSUInteger, PGColorOptions) {
     PGColorOpttonRegisterdSucceedColor,        //注册成功标题字体黄色#FEF1DD
     PGColorOpttonMyVipBackgroundColor,        //我的页面vip背景色#EC2E02
     PGColorOpttonPopcContentTextColor,        //弹窗content#7780A3
+    PGColorOpttonRegisterBackgroundColor,        //注册成功背景色#ff5736
 };
 
 

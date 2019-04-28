@@ -82,7 +82,7 @@
         _showPassWordBtn = [UIButton buttonWithType:0];
         _showPassWordBtn.centerYPos.equalTo(self.titleImageView.centerYPos);
         _showPassWordBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        _showPassWordBtn.rightPos.equalTo(@12.5);
+        _showPassWordBtn.rightPos.equalTo(@20);
         _showPassWordBtn.widthSize.equalTo(@50);
         _showPassWordBtn.heightSize.equalTo(@50);
         [_showPassWordBtn setImage:[UIImage imageNamed:@"icon_invisible_bule.png"] forState:UIControlStateNormal];
@@ -112,7 +112,7 @@
         _itemLineView.myBottom = 1;
         _itemLineView.myHeight = 0.5;
         _itemLineView.myLeft = 25;
-        _itemLineView.myRight = 0;
+        _itemLineView.myRight = 33;
         _itemLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         //
     }

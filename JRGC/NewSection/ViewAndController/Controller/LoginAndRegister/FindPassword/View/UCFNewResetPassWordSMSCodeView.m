@@ -58,6 +58,7 @@
         NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_contentField.placeholder attributes:dict];
         [_contentField setAttributedPlaceholder:attribute];
         
+        
         //        NSString *phoneStr = [UserObeject getUserDataMobile];
         //        if (phoneStr != nil && phoneStr.length > 0) {
         //            _atTextField.text = phoneStr;
@@ -86,7 +87,7 @@
         _itemLineView.myBottom = 1;
         _itemLineView.myHeight = 0.5;
         _itemLineView.myLeft = 25;
-        _itemLineView.myRight = 0;
+        _itemLineView.myRight = 33;
         _itemLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         _itemLineView.hidden = NO;
         //
@@ -121,12 +122,12 @@
             NSLog(@"倒计时结束");
         }];
         
-        _verifyCodeButton.rightPos.equalTo(@0);
+        _verifyCodeButton.rightPos.equalTo(@33);
         _verifyCodeButton.widthSize.equalTo(@122);
         _verifyCodeButton.heightSize.equalTo(self.rootLayout.heightSize);
         _verifyCodeButton.centerYPos.equalTo(self.rootLayout.centerYPos);
         [_verifyCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-        _verifyCodeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        _verifyCodeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         _verifyCodeButton.titleLabel.font = [Color gc_Font:15.0];
         [_verifyCodeButton setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
         //        [_verifyCodeButton setTitleColor:[Color color:PGColorOptionSettingPWBeforeInputLightTextColor] forState:UIControlStateDisabled];

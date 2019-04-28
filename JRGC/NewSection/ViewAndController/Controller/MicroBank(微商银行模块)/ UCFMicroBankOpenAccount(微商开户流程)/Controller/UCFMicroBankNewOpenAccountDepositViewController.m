@@ -77,7 +77,7 @@
         _scrollView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _scrollView.leftPos.equalTo(@0);
         _scrollView.rightPos.equalTo(@0);
-        _scrollView.topPos.equalTo(@10);
+        _scrollView.topPos.equalTo(@00);
         _scrollView.bottomPos.equalTo(@0);
     }
     return _scrollView;
@@ -99,7 +99,7 @@
 {
     if (nil == _nameView) {
         _nameView = [[UCFMicroBankOpenAccountDepositCellView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
-        _nameView.myTop = 0;
+        _nameView.myTop = 25;
         _nameView.myLeft = 0;
         _nameView.titleImageView.image = [UIImage imageNamed:@"list_icon_name"];
         _nameView.contentField.delegate = self;
@@ -116,7 +116,7 @@
         _selectBankView.myLeft = 0;
         _selectBankView.titleImageView.image = [UIImage imageNamed:@"list_icon_bank"];
         _selectBankView.tag = 1001;
-        _selectBankView.itemLineView.hidden = NO;
+        _selectBankView.itemLineView.hidden = YES;
         UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pushBankListViewController)];
         [_selectBankView addGestureRecognizer:tapGesturRecognizer];
     }
@@ -290,7 +290,8 @@
     //开户行名称
     self.bankId  = [NSString stringWithFormat:@"%@",data[@"bankId"]];
     self.selectBankView.oaContentLabel.text = data[@"bankName"];
-    [self.selectBankView sizeToFit];
+    self.selectBankView.oaContentLabel.textColor = [Color color:PGColorOptionTitleBlack];
+    [self.selectBankView.oaContentLabel sizeToFit];
     //银行logo
     NSURL *url = [NSURL URLWithString:data[@"logoUrl"]];
     [self.selectBankView.bankImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"bank_default"]];
@@ -356,7 +357,7 @@
                 self.agreementLabel.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》";
                 [self.agreementLabel sizeToFit];
                 __weak typeof(self) weakSelf = self;
-                [self.agreementLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》"];
+                [self.agreementLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"《CFCA数字证书服务协议》"];
                 [self.agreementLabel addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
                     FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:weakSelf.GetOpenAccountModel.data.cfcaContractUrl title:@"CFCA数字证书服务协议"];
                     webController.baseTitleType = @"specialUser";

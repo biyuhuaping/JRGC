@@ -47,6 +47,10 @@
 
 @property (nonatomic, strong) UIView  *rightRound;
 
+@property (nonatomic, strong) UIView  *leftLineView;
+
+@property (nonatomic, strong) UIView  *rightLineView;
+
 @property (nonatomic, strong) UIButton *openAccoutBtn;
 
 @end
@@ -72,10 +76,10 @@
     [self.tipsLayout addSubview:self.tipsTitleImageView];
     [self.tipsLayout addSubview:self.tipsTitleLabel];
     [self.tipsLayout addSubview:self.tipsContentLabel];
-    [self.tipsLayout addSubview:self.openAccoutLabel];
-    [self.tipsLayout addSubview:self.leftRound];
-    [self.tipsLayout addSubview:self.rightRound];
-    [self.tipsLayout addSubview:self.openAccoutAwardLabel];
+//    [self.tipsLayout addSubview:self.openAccoutLabel];
+//    [self.tipsLayout addSubview:self.leftRound];
+//    [self.tipsLayout addSubview:self.rightRound];
+//    [self.tipsLayout addSubview:self.openAccoutAwardLabel];
     [self.tipsLayout addSubview:self.openAccoutBtn];
     
     [self getRegistResultData];
@@ -115,7 +119,7 @@
     if (nil == _scrollView) {
         _scrollView = [BaseScrollview new];
         _scrollView.scrollEnabled = YES;
-        _scrollView.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
+        _scrollView.backgroundColor = [Color color:PGColorOpttonRegisterBackgroundColor];
         _scrollView.leftPos.equalTo(@0);
         _scrollView.rightPos.equalTo(@0);
         _scrollView.topPos.equalTo(@0);
@@ -128,7 +132,7 @@
 {
     if (nil == _scrollLayout) {
         _scrollLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
-        _scrollLayout.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
+        _scrollLayout.backgroundColor = [Color color:PGColorOpttonRegisterBackgroundColor];
         _scrollLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _scrollLayout.myHorzMargin = 0;                          //同时指定左右边距为0表示宽度和父视图一样宽
         _scrollLayout.heightSize.lBound(self.scrollView.heightSize, 10, 1); //高度虽然是wrapContentHeight的。但是最小的高度不能低于父视图的高度加10.
@@ -140,7 +144,7 @@
 {
     if (nil == _bkLayout) {
         _bkLayout = [MyRelativeLayout new];
-        _bkLayout.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
+        _bkLayout.backgroundColor = [Color color:PGColorOpttonRegisterBackgroundColor];
         _bkLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _bkLayout.myHeight = 661;
         _bkLayout.myTop = 0;
@@ -188,7 +192,7 @@
 {
     if (nil == _titleBkImageView) {
         _titleBkImageView = [[UIImageView alloc] init];
-        _titleBkImageView.myTop = 0;
+        _titleBkImageView.myTop = 20;
         _titleBkImageView.myLeft = 0;
         _titleBkImageView.myWidth = PGScreenWidth;
         _titleBkImageView.myHeight = PGScreenWidth *1.2;
@@ -231,10 +235,17 @@
         _tipsLayout = [MyRelativeLayout new];
         _tipsLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
 //        _tipsLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
-        _tipsLayout.myHeight = 474;
+        _tipsLayout.myHeight = 400;
         _tipsLayout.topPos.equalTo(self.titleLabel.bottomPos).offset(20);
         _tipsLayout.myLeft = 15;
         _tipsLayout.myRight = 15;
+        _tipsLayout.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
+        { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
+            //设置圆角的半径
+            sbv.layer.cornerRadius = 10;
+            //切割超出圆角范围的子视图
+            sbv.layer.masksToBounds = YES;
+        };
 //        _tipsLayout.tag = 1005;
 //        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(layoutClick:)];
 //        [_inviteLayout addGestureRecognizer:tapGesturRecognizer];
@@ -261,7 +272,7 @@
 {
     if (nil == _tipsTitleLabel) {
         _tipsTitleLabel = [NZLabel new];
-        _tipsTitleLabel.topPos.equalTo(self.tipsTitleImageView.bottomPos).offset(20);
+        _tipsTitleLabel.topPos.equalTo(self.tipsTitleImageView.bottomPos).offset(15);
         _tipsTitleLabel.centerXPos.equalTo(self.tipsTitleImageView.centerXPos);
         _tipsTitleLabel.textAlignment = NSTextAlignmentCenter;
         _tipsTitleLabel.font = [Color gc_Font:20.0];
@@ -275,12 +286,13 @@
 {
     if (nil == _tipsContentLabel) {
         _tipsContentLabel = [NZLabel new];
-        _tipsContentLabel.topPos.equalTo(self.tipsTitleLabel.bottomPos).offset(10);
+        _tipsContentLabel.topPos.equalTo(self.tipsTitleLabel.bottomPos).offset(8);
         _tipsContentLabel.centerXPos.equalTo(self.tipsTitleImageView.centerXPos);
         _tipsContentLabel.textAlignment = NSTextAlignmentCenter;
         _tipsContentLabel.font = [Color gc_Font:15.0];
         _tipsContentLabel.textColor = [Color color:PGColorOptionTitleGray];
         _tipsContentLabel.text = @"由徽商银行提供资金存管\n为保障您的资金安全，请及时开通存管账户";
+        _tipsContentLabel.wrapContentHeight = YES;
         [_tipsContentLabel sizeToFit];
     }
     return _tipsContentLabel;
@@ -356,7 +368,7 @@
 {
     if (nil == _openAccoutBtn) {
         _openAccoutBtn = [UIButton buttonWithType:0];
-        _openAccoutBtn.topPos.equalTo(self.openAccoutAwardLabel.bottomPos).offset(20);
+        _openAccoutBtn.myBottom = 30;
         _openAccoutBtn.rightPos.equalTo(@30);
         _openAccoutBtn.leftPos.equalTo(@30);
         _openAccoutBtn.heightSize.equalTo(@40);

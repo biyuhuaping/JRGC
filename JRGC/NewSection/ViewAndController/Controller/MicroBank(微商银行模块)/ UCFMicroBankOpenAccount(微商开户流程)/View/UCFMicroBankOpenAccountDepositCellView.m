@@ -44,7 +44,7 @@
         _contentField = [UITextField new];
         _contentField.backgroundColor = [UIColor clearColor];
 //        _contentField.delegate = self;
-//        _contentField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _contentField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _contentField.font = [Color gc_Font:15.0];
         _contentField.placeholder = @"   ";
 //        _contentField.keyboardType =  UIKeyboardTypeNumberPad;
@@ -57,17 +57,17 @@
 //        if (phoneStr != nil && phoneStr.length > 0) {
 //            _atTextField.text = phoneStr;
 //        }
-//        UIButton *clearButton = [_atTextField valueForKey:@"_clearButton"];
-//        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
-//
-//            [clearButton setImage:[UIImage imageNamed:@"register_clear_icon.png"] forState:UIControlStateNormal];
-//            [clearButton setImage:[UIImage imageNamed:@"register_clear_icon.png"] forState:UIControlStateHighlighted];
-//
-//        }
+        UIButton *clearButton = [_contentField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+            
+            [clearButton setImage:[UIImage imageNamed:@"openAccountClose"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"openAccountClose"] forState:UIControlStateHighlighted];
+            
+        }
         _contentField.textColor = [Color color:PGColorOptionTitleBlack];
         _contentField.heightSize.equalTo(self.rootLayout.heightSize);
         _contentField.leftPos.equalTo(self.titleImageView.rightPos).offset(13);
-        _contentField.rightPos.equalTo(@26);
+        _contentField.rightPos.equalTo(@8);
         _contentField.centerYPos.equalTo(self.rootLayout.centerYPos);
         
     }

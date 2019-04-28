@@ -44,6 +44,7 @@
         {0xfe,0xf1,0xDD},        //注册成功标题字体黄色#FEF1DD
         {0xec,0x2e,0x02},        //我的页面vip背景色#EC2E02
         {0x77,0x80,0xa3},        //弹窗content#7780A3
+        {0xff,0x57,0x36},        //注册成功背景色#ff5736
     };
     
     return [UIColor colorWithRed:colors[colorOptions][0]/255.0 green:colors[colorOptions][1]/255.0 blue:colors[colorOptions][2]/255.0 alpha:1];
