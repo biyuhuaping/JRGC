@@ -68,16 +68,20 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;  //设置视图控制器中的视图尺寸不延伸到导航条或者工具条下面。您可以注释这句代码看看效果。
 
     MyRelativeLayout *rootLayout = [MyRelativeLayout new];
-    rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+    rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.view = rootLayout;
+    rootLayout.backgroundColor = [UIColor yellowColor];
     rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     rootLayout.insetsPaddingFromSafeArea = UIRectEdgeBottom;  //您可以在这里将值改变为UIRectEdge的其他类型然后试试运行的效果。并且在运行时切换横竖屏看看效果
     
     UIScrollView *scrollView = [UIScrollView new];
     scrollView.myHorzMargin = 0;
     scrollView.topPos.equalTo(@0);
-    scrollView.bottomPos.equalTo(@57);
+    scrollView.bottomPos.equalTo(@50);
     scrollView.myHorzMargin = 0;
+    scrollView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
     [rootLayout addSubview:scrollView];
     adjustsScrollViewInsets(scrollView);
 
@@ -86,8 +90,9 @@
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     contentLayout.padding = UIEdgeInsetsMake(15, 0, 0, 0);
     contentLayout.myHorzMargin = 0;                          //同时指定左右边距为0表示宽度和父视图一样宽
-    contentLayout.heightSize.lBound(scrollView.heightSize, 10, 1); //高度虽然是wrapContentHeight的。但是最小的高度不能低于父视图的高度加10.
+    contentLayout.heightSize.lBound(scrollView.heightSize, 50, 1); //高度虽然是wrapContentHeight的。但是最小的高度不能低于父视图的高度加10.
     [scrollView addSubview:contentLayout];
+    contentLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.contentLayout = contentLayout;
     
     _bidHeadView = [UCFSectionHeadView new];
