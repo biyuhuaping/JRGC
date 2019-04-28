@@ -71,7 +71,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
         
     }
-    if (rstcode != -2 && rstcode != -3 && rstcode != -4 && rstcode != -6 && ret == NO) {
+    if (rstcode != -1 && rstcode != -2 && rstcode != -3 && rstcode != -4 && rstcode != -6 && ret == NO) {
         ShowMessage(dic[@"message"]);
     }
 }

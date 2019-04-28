@@ -184,7 +184,7 @@
 {
     if (nil == _registerContentLabel) {
         _registerContentLabel = [NZLabel new];
-        _registerContentLabel.topPos.equalTo(self.registerLabel.bottomPos).offset(10);
+        _registerContentLabel.topPos.equalTo(self.registerLabel.bottomPos).offset(4);
         _registerContentLabel.leftPos.equalTo(self.registerLabel.leftPos);
         _registerContentLabel.textAlignment = NSTextAlignmentLeft;
         _registerContentLabel.font = [Color gc_Font:15.0];
@@ -245,14 +245,20 @@
         _registerPhoneField = [UITextField new];
         _registerPhoneField.backgroundColor = [UIColor clearColor];
         _registerPhoneField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _registerPhoneField.font = [Color font:15.0 andFontName:nil];
+        _registerPhoneField.font = [Color font:18.0 andFontName:nil];
         _registerPhoneField.textAlignment = NSTextAlignmentLeft;
         _registerPhoneField.placeholder = @"请输入手机号";
         _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_registerPhoneField.placeholder attributes:dict];
-        [_registerPhoneField setAttributedPlaceholder:attribute];
+        
+        NSString *holderText = @"请输入手机号";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _registerPhoneField.attributedPlaceholder = placeholder;
         _registerPhoneField.textColor = [Color color:PGColorOptionTitleBlack];
         _registerPhoneField.heightSize.equalTo(@25);
         _registerPhoneField.leftPos.equalTo(self.registerPhoneImageView.rightPos).offset(9);
@@ -325,7 +331,7 @@
 {
     if (nil == _registerAgreeLabel) {
         _registerAgreeLabel = [NZLabel new];
-        _registerAgreeLabel.topPos.equalTo(self.nextBtn.bottomPos).offset(20);
+        _registerAgreeLabel.topPos.equalTo(self.nextBtn.bottomPos).offset(15);
         _registerAgreeLabel.myLeft= 25;
         _registerAgreeLabel.myRight= 25;
         _registerAgreeLabel.numberOfLines = 0;

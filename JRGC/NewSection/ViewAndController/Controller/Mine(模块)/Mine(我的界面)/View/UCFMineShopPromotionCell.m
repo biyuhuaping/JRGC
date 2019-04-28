@@ -33,7 +33,6 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-//        self.rootLayout.useFrame = YES;
         [self.rootLayout addSubview:self.sectionView];
         [self.rootLayout addSubview:self.shopList];
         [self.rootLayout addSubview:self.lineView];
@@ -48,6 +47,7 @@
 //        _sectionView.useFrame = YES;
         _sectionView.delegate = self;
         _sectionView.myTop = 10;
+        _sectionView.titleLab.font = [Color gc_Font:16.0];
         [_sectionView showMore];
         [_sectionView titlecenterYPos];
         _sectionView.rootLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
@@ -160,6 +160,7 @@
 //    }
     
     UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0,105, SHOPLISTHEIGHT )withHeightOfCommodity:105];
+     view.shopValue.frame = CGRectMake(view.shopValue.frame.origin.x, view.shopValue.frame.origin.y +3, view.shopValue.frame.size.width, view.shopValue.frame.size.height);
     [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:img] placeholderImage:nil];
     view.shopName.text = title;
     NSString *showValue;

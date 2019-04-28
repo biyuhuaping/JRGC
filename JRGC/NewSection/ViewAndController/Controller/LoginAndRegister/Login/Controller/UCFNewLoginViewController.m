@@ -16,6 +16,7 @@
 #import "UCFUserAllStatueRequest.h"
 //#import "UCFLockHandleViewController.h"
 #import "UCFNewLockContainerViewController.h"
+#import "UCFWebViewJavascriptBridgeBanner.h"
 @interface UCFNewLoginViewController ()<UITextFieldDelegate,YTKChainRequestDelegate>
 
 @property (nonatomic, strong) NZLabel     *loginLabel;//注册
@@ -100,7 +101,23 @@
 }
 - (void)getToBack
 {
+    RTRootNavigationAddPushController *rt = SingGlobalView.tabBarController.selectedViewController;
+    UIViewController *bs;
+    
+    
+    if ([rt isKindOfClass:[RTRootNavigationAddPushController class]]) {
+        bs = rt.rt_navigationController.rt_viewControllers.lastObject;
+    }
+    else
+    {
+        bs = rt.viewControllers.lastObject;
+    }
+    
+    if ([bs isKindOfClass:[UCFWebViewJavascriptBridgeBanner class]]) {
+        [bs.rt_navigationController popViewControllerAnimated:YES];
+    }
     [SingGlobalView.rootNavController popViewControllerAnimated:YES];
+    
 }
 - (NZLabel *)loginLabel
 {
@@ -153,8 +170,8 @@
         _leftView.rightPos.equalTo(_serviceLabel.leftPos).offset(15);
         _leftView.myLeft = 25;
         _leftView.centerYPos.equalTo(_serviceLabel.centerYPos);
-        _leftView.myHeight = 1;
-        _leftView.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        _leftView.myHeight = 0.5;
+        _leftView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     }
     return _leftView;
 }
@@ -166,8 +183,8 @@
         _rightView.leftPos.equalTo(_serviceLabel.rightPos).offset(15);
         _rightView.myRight = 25;
         _rightView.centerYPos.equalTo(_serviceLabel.centerYPos);
-        _rightView.myHeight = 1;
-        _rightView.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        _rightView.myHeight = 0.5;
+        _rightView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     }
     return _rightView;
 }

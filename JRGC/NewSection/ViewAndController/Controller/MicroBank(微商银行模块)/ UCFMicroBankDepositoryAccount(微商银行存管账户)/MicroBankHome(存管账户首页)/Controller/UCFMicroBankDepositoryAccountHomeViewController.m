@@ -90,7 +90,7 @@
 {
     if (nil == _scrollLayout) {
         _scrollLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
-        _scrollLayout.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+        _scrollLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _scrollLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _scrollLayout.myHorzMargin = 0;                          //同时指定左右边距为0表示宽度和父视图一样宽
         _scrollLayout.heightSize.lBound(self.scrollView.heightSize, 10, 1); //高度虽然是wrapContentHeight的。但是最小的高度不能低于父视图的高度加10.
@@ -237,6 +237,15 @@
 
             self.tableHead.bankDepositNameLabel.text = model.data.hsAccountInfo.bankBranch;
             self.tableHead.bankCardNumberLabel.text = [NSString dealWithString:model.data.hsAccountInfo.bankCardNo];
+            self.tableHead.bankCardNumberLabel.shadowColor = UIColorWithRGB(0xF9402C);
+            self.tableHead.bankCardNumberLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];//加粗
+            self.tableHead.bankCardNumberLabel.shadowOffset = CGSizeMake(1.0,1.0);
+//            NSShadow *shadow = [[NSShadow alloc] init];
+//            shadow.shadowBlurRadius = 2.0;
+//            shadow.shadowOffset = CGSizeMake(2.0, 0);
+//            shadow.shadowColor = UIColorWithRGB(0xF9402C);
+//            NSAttributedString *att = [[NSAttributedString alloc] initWithString:[NSString dealWithString:model.data.hsAccountInfo.bankCardNo] attributes:@{NSShadowAttributeName:shadow}];
+//            self.tableHead.bankCardNumberLabel.attributedText = att;
             self.tableHead.openAccountNameLabel.text =  model.data.hsAccountInfo.accountName;
             
             [self.tableHead.bankDepositNameLabel sizeToFit];
@@ -283,7 +292,7 @@
             {
                 //只有微金账户才有批量投标,尊享没有批量投标
                 if (model.data.batchMaximum.length == 0) {
-                    self.batchLend.microBankSubtitleLabel.text = @"批量出借(开通后一次可投多个项目)";
+                    self.batchLend.microBankSubtitleLabel.text = @"(开通后一次可投多个项目)";
                     [self.batchLend.microBankSubtitleLabel sizeToFit];
                     self.batchLend.microBankContentLabel.text =  @"未开启";
                 }

@@ -79,7 +79,7 @@
 {
     if (_backgroundView == nil) {
         UIView *backgroundView = [[UIView alloc]initWithFrame:self.bounds];
-        backgroundView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+        backgroundView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
         _backgroundView = backgroundView;
     }
     [self insertSubview:_backgroundView atIndex:0];

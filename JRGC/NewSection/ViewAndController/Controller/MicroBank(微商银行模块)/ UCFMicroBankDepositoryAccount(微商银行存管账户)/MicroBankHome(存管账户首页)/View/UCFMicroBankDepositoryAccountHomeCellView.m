@@ -81,10 +81,10 @@
     if (nil == _microBankSubtitleLabel) {
         _microBankSubtitleLabel = [NZLabel new];
         _microBankSubtitleLabel.centerYPos.equalTo(self.rootLayout.centerYPos);
-        _microBankSubtitleLabel.leftPos.equalTo(self.microBankTitleLabel.rightPos).offset(6);
+        _microBankSubtitleLabel.leftPos.equalTo(self.microBankTitleLabel.rightPos).offset(0);
         _microBankSubtitleLabel.rightPos.equalTo(self.microBankContentLabel.leftPos);
         _microBankSubtitleLabel.adjustsFontSizeToFitWidth = YES;
-        _microBankSubtitleLabel.textAlignment = NSTextAlignmentCenter;
+        _microBankSubtitleLabel.textAlignment = NSTextAlignmentLeft;
         _microBankSubtitleLabel.font = [Color gc_Font:13.0];
         _microBankSubtitleLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
         //        _microBankContentLabel.text = @"每日签到";

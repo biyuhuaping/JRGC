@@ -138,22 +138,33 @@
         _passWordField = [UITextField new];
         _passWordField.backgroundColor = [UIColor clearColor];
         _passWordField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _passWordField.font = [Color font:15.0 andFontName:nil];
+        _passWordField.font = [Color font:18.0 andFontName:nil];
         _passWordField.textAlignment = NSTextAlignmentLeft;
-        _passWordField.placeholder = @"6-16位密码，数字、字母组合";
+//        _passWordField.placeholder = @"6-16位密码，数字、字母组合";
+        NSString *holderText = @"6-16位密码，数字、字母组合";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _passWordField.attributedPlaceholder = placeholder;
         _passWordField.secureTextEntry = YES;
         _passWordField.delegate = self;
-//            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_passWordField.placeholder attributes:dict];
-        [_passWordField setAttributedPlaceholder:attribute];
         _passWordField.textColor = [Color color:PGColorOptionTitleBlack];
         _passWordField.heightSize.equalTo(@25);
         _passWordField.leftPos.equalTo(self.passWordImageView.rightPos).offset(9);
         _passWordField.rightPos.equalTo(self.showPassWordBtn.leftPos).offset(10);
         _passWordField.centerYPos.equalTo(self.passWordImageView.centerYPos);
         [_passWordField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+        UIButton *clearButton = [_passWordField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+            
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateHighlighted];
+            
+        }
     }
     return _passWordField;
 }
@@ -207,21 +218,31 @@
         _recommendField = [UITextField new];
         _recommendField.backgroundColor = [UIColor clearColor];
         _recommendField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _recommendField.font = [Color font:15.0 andFontName:nil];
+        _recommendField.font = [Color font:18.0 andFontName:nil];
         _recommendField.textAlignment = NSTextAlignmentLeft;
-        _recommendField.placeholder = @"推荐人工场码(选填)";
+//        _recommendField.placeholder = @"推荐人工场码(选填)";
+        NSString *holderText = @"推荐人工场码(选填)";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _recommendField.attributedPlaceholder = placeholder;
         _recommendField.delegate = self;
-        //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_recommendField.placeholder attributes:dict];
-        [_recommendField setAttributedPlaceholder:attribute];
         _recommendField.textColor = [Color color:PGColorOptionTitleBlack];
         _recommendField.heightSize.equalTo(@25);
         _recommendField.leftPos.equalTo(self.recommendImageView.rightPos).offset(9);
         _recommendField.rightPos.equalTo(self.rootLayout.rightPos).offset(25);
         _recommendField.centerYPos.equalTo(self.recommendImageView.centerYPos);
-        
+        UIButton *clearButton = [_recommendField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+            
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateHighlighted];
+            
+        }
     }
     return _recommendField;
 }

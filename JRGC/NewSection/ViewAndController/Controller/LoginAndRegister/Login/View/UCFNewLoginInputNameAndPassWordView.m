@@ -82,19 +82,30 @@
         _userField = [UITextField new];
         _userField.backgroundColor = [UIColor clearColor];
         _userField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _userField.font = [Color font:15.0 andFontName:nil];
+        _userField.font = [Color font:18.0 andFontName:nil];
         _userField.textAlignment = NSTextAlignmentLeft;
+        
+        NSString *holderText;
         if ([self.userType isEqualToString:@"个人"]) {
-            _userField.placeholder = @"用户名 / 邮箱 / 手机号";
+            holderText = @"用户名 / 邮箱 / 手机号";
         }
         else{
-            _userField.placeholder = @"手机号";
+            holderText = @"手机号";
             
         }
         if ([self.userType isEqualToString:@"企业"]) {
             //只有企业是纯数字键盘
              _userField.keyboardType = UIKeyboardTypeNumberPad;
         }
+
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _userField.attributedPlaceholder = placeholder;
         
         // 读取上次登录的账号...
 //        [NSDictionary dictionaryWithObjectsAndKeys:isCompany,@"isCompany",username,@"lastLoginName", nil];
@@ -108,16 +119,20 @@
             }
         }
 
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_userField.placeholder attributes:dict];
-        [_userField setAttributedPlaceholder:attribute];
         _userField.textColor = [Color color:PGColorOptionTitleBlack];
         _userField.heightSize.equalTo(@25);
         _userField.leftPos.equalTo(self.userImageView.rightPos).offset(9);
         _userField.rightPos.equalTo(self.rootLayout.rightPos).offset(20);
         _userField.centerYPos.equalTo(self.userImageView.centerYPos);
         _userField.userInteractionEnabled = YES;
+        
+        UIButton *clearButton = [_userField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateHighlighted];
+
+        }
     }
     return _userField;
 }
@@ -141,7 +156,7 @@
 {
     if (nil == _passWordImageView) {
         _passWordImageView = [[UIImageView alloc] init];
-        _passWordImageView.topPos.equalTo(self.userLine.bottomPos).offset(17.5);
+        _passWordImageView.topPos.equalTo(self.userLine.bottomPos).offset(22);
         _passWordImageView.myLeft = 30;
         _passWordImageView.myWidth = 25;
         _passWordImageView.myHeight = 25;
@@ -157,21 +172,33 @@
         _passWordField = [UITextField new];
         _passWordField.backgroundColor = [UIColor clearColor];
         _passWordField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _passWordField.font = [Color font:15.0 andFontName:nil];
+        _passWordField.font = [Color font:18.0 andFontName:nil];
         _passWordField.textAlignment = NSTextAlignmentLeft;
-        _passWordField.placeholder = @"登录密码";
+        NSString *holderText = @"登录密码";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _passWordField.attributedPlaceholder = placeholder;
         _passWordField.secureTextEntry = YES;
         //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_passWordField.placeholder attributes:dict];
-        [_passWordField setAttributedPlaceholder:attribute];
         _passWordField.textColor = [Color color:PGColorOptionTitleBlack];
         _passWordField.heightSize.equalTo(@25);
         _passWordField.leftPos.equalTo(self.passWordImageView.rightPos).offset(9);
         _passWordField.rightPos.equalTo(self.showPassWordBtn.leftPos);
         _passWordField.centerYPos.equalTo(self.passWordImageView.centerYPos);
         _passWordField.userInteractionEnabled = YES;
+        
+        UIButton *clearButton = [_passWordField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+            
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateHighlighted];
+            
+        }
     }
     return _passWordField;
 }
@@ -235,7 +262,7 @@
     if(_forgetBtn == nil)
     {
         _forgetBtn = [UIButton buttonWithType:0];
-        _forgetBtn.topPos.equalTo(self.loginBtn.bottomPos).offset(15);
+        _forgetBtn.topPos.equalTo(self.loginBtn.bottomPos).offset(7);
         _forgetBtn.leftPos.equalTo(@25);
         _forgetBtn.widthSize.equalTo(@70);
         _forgetBtn.heightSize.equalTo(@30);
@@ -251,7 +278,7 @@
     btn.selected = !btn.selected;
     if (btn.selected)
     {
-        [btn setImage:[UIImage imageNamed:@"mine_icon_ exhibition"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"mine_icon_ exhibition"] forState:UIControlStateNormal];
         self.passWordField.secureTextEntry = NO;
 
     }

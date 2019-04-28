@@ -30,7 +30,7 @@
         self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         self.rootLayout.useFrame = YES;
         
-        RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth,98)];
+        RCFFlowView *view = [[RCFFlowView alloc] initWithFrame:CGRectMake(0, 10, PGScreenWidth,98)];
         view.delegate = self;
         view.isHideImageCorner = YES;
         self.adCycleScrollView = view;

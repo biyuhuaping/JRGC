@@ -80,9 +80,9 @@
     if (self) {
         // 初始化视图对象
         
-        self.titleTop = 10;
-        self.contentTop = 3;
-        self.imageTop = 5;
+        self.titleTop = 5;
+        self.contentTop = 0;
+        self.imageTop = 10;
         self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
      
         [self.rootLayout addSubview:self.signInLayout];// 签到
@@ -223,7 +223,7 @@
         _cowryContentLabel.centerXPos.equalTo(self.cowryImageView.centerXPos);
         _cowryContentLabel.topPos.equalTo(self.cowryTitleLabel.bottomPos).offset(self.contentTop);
         _cowryContentLabel.textAlignment = NSTextAlignmentCenter;
-        _cowryContentLabel.font = self.signInContentLabel.font;
+        _cowryContentLabel.font = [Color gc_ANC_font:11.0];
         _cowryContentLabel.textColor = self.signInContentLabel.textColor;
         _cowryContentLabel.text = @"0.00";
         _cowryContentLabel.adjustsFontSizeToFitWidth = YES;
@@ -281,7 +281,7 @@
         _beanContentLabel.centerXPos.equalTo(self.beanImageView.centerXPos);
         _beanContentLabel.topPos.equalTo(self.beanTitleLabel.bottomPos).offset(self.contentTop);
         _beanContentLabel.textAlignment = NSTextAlignmentCenter;
-        _beanContentLabel.font = self.signInContentLabel.font;
+        _beanContentLabel.font = self.cowryContentLabel.font;
         _beanContentLabel.textColor = self.signInContentLabel.textColor;
         _beanContentLabel.text = @"¥0.00";
         _beanContentLabel.adjustsFontSizeToFitWidth = YES;
@@ -340,7 +340,7 @@
         _couponContentLabel.centerXPos.equalTo(self.couponImageView.centerXPos);
         _couponContentLabel.topPos.equalTo(self.couponTitleLabel.bottomPos).offset(self.contentTop);
         _couponContentLabel.textAlignment = NSTextAlignmentCenter;
-        _couponContentLabel.font = self.signInContentLabel.font;
+        _couponContentLabel.font = self.cowryContentLabel.font;
         _couponContentLabel.textColor = self.signInContentLabel.textColor;
         _couponContentLabel.text = @"张可用";
         [_couponContentLabel sizeToFit];
@@ -398,7 +398,7 @@
         _inviteContentLabel.centerXPos.equalTo(self.inviteImageView.centerXPos);
         _inviteContentLabel.topPos.equalTo(self.inviteTitleLabel.bottomPos).offset(self.contentTop);
         _inviteContentLabel.textAlignment = NSTextAlignmentCenter;
-        _inviteContentLabel.font = self.signInContentLabel.font;
+        _inviteContentLabel.font = self.cowryContentLabel.font;
         _inviteContentLabel.textColor = self.signInContentLabel.textColor;
     }
     return _inviteContentLabel;

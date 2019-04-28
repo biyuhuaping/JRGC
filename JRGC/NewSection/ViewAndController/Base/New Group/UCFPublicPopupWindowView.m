@@ -14,9 +14,9 @@
     PGScreenWidth < 375? width -10 : width;\
 })
 //一个按钮的高度
-#define ContentButtonHeight 170
+#define ContentButtonHeight 160
 //两个按钮的高度
-#define ContentBothButtonHeight 203
+#define ContentBothButtonHeight 193
 static NSString *TextTitleHint = @"提示";
 static NSString *TextButtonTitleEnter = @"确定";
 static NSString *TextButtonTitleLogin = @"去登录";
@@ -365,7 +365,7 @@ static BOOL isForcedUpdating = NO;//强制更新
         _bkLayout.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
             //设置圆角的半径
-            sbv.layer.cornerRadius = 10;
+            sbv.layer.cornerRadius = 8;
             //切割超出圆角范围的子视图
             sbv.layer.masksToBounds = YES;
         };
@@ -612,11 +612,11 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.bkLayout.myWidth = getWidth(310);
     self.bkLayout.myCenterX = 0;
     self.bkLayout.myCenterY = 0;
-    self.bkLayout.myHeight = 393;
+    self.bkLayout.myHeight = 433;
     
-    self.bkImageView.myTop = 0;
+    self.bkImageView.myTop = 30;
     self.bkImageView.widthSize.equalTo(self.bkLayout.widthSize);
-    self.bkImageView.myHeight = 188;
+    self.bkImageView.heightSize.equalTo(self.bkLayout.widthSize).multiply(0.64);
     self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
     self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
 
@@ -627,7 +627,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.titleLabel sizeToFit];
     
-    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(8);
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(5);
     self.contentLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
     self.contentLabel.text = TextRegisterRenounceContent;
     self.contentLabel.font = [Color gc_Font:29.0];
@@ -1038,24 +1038,24 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.bkLayout.myCenterX = 0;
     self.bkLayout.myCenterY = 0;
     
-    self.titleLabel.myTop = 26;
+    self.titleLabel.myTop = 20;
     self.titleLabel.myLeft= 22;
     self.titleLabel.text = TextTitleHint;
     self.titleLabel.font = [Color gc_Font:25.0];
     [self.titleLabel sizeToFit];
     
-    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(20);
     self.contentLabel.myLeft= 22;
     self.contentLabel.myRight= 22;
     self.contentLabel.text = self.contentStr;
     self.contentLabel.font = [Color gc_Font:14.0];
     [self.contentLabel sizeToFit];
     
-    self.enterButton.myBottom = 25;
+    self.enterButton.myBottom = 20;
     self.enterButton.rightPos.equalTo(@25);
     self.enterButton.leftPos.equalTo(@25);
     self.enterButton.heightSize.equalTo(@40);
-    [self.enterButton setTitle:TextButtonAgainLogin forState:UIControlStateNormal];
+    [self.enterButton setTitle:TextButtonTitleLogin forState:UIControlStateNormal];
     
     //    [self addSingleGesture];
     

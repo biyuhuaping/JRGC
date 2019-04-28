@@ -104,7 +104,7 @@
 {
     if (nil == _verificationCodeContentLabel) {
         _verificationCodeContentLabel = [NZLabel new];
-        _verificationCodeContentLabel.topPos.equalTo(self.verificationCodeTitleLabel.bottomPos).offset(10);
+        _verificationCodeContentLabel.topPos.equalTo(self.verificationCodeTitleLabel.bottomPos).offset(0);
         _verificationCodeContentLabel.leftPos.equalTo(self.verificationCodeTitleLabel.leftPos);
         _verificationCodeContentLabel.textAlignment = NSTextAlignmentLeft;
         _verificationCodeContentLabel.font = [Color gc_Font:15.0];

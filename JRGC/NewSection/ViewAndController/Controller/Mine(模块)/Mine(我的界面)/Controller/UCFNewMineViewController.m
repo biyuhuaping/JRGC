@@ -106,7 +106,7 @@
 - (BaseTableView *)tableView
 {
     if (nil == _tableView) {
-        _tableView = [[BaseTableView alloc]init];
+        _tableView = [[BaseTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _tableView.delegate = self;
         _tableView.dataSource =self;
@@ -234,18 +234,42 @@
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 10)];
     view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+//    view.backgroundColor = [UIColor blackColor];
     return view;
-    
+
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+   
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 10)];
+        view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+//        view.backgroundColor = [UIColor redColor];
+        return view;
+
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    
-    return 0.01;
-   
+    if (section == 1 ||section == 2 ) {
+        return 10;
+    }
+    else
+    {
+        return 0.01;
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;//设置尾视图高度为0.01
+    //设置尾视图高度为0.01
+    return 0.001;
+//    if (section == 3) {
+//        return 0.01;
+//    }
+//    else
+//    {
+//       return 10;
+//    }
 }
 /*
 #pragma mark - Navigation
@@ -819,7 +843,7 @@
     if (model.data.bannerList.count)
     {
         //当前banner有数据
-        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMinePromotionCell class]) title:@"banner" showInfoMethod:@selector(showInfo:) heightOfCell:98];
+        CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMinePromotionCell class]) title:@"banner" showInfoMethod:@selector(showInfo:) heightOfCell:108];
         [cellArray addObject:cellConfigCentre];
         [dataArray addObject:model.data];
         

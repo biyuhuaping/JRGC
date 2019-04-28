@@ -34,6 +34,8 @@
 
 @property (nonatomic, strong) UIButton    *payBtn;//充值按钮
 
+@property (nonatomic, strong) UIImageView *waveImageView;//背景图
+
 @property (nonatomic, strong) MyRelativeLayout *topUpWithdrawalLayout; //充值提现
 
 @property (nonatomic, strong) NZLabel     *accountBalanceLabel;//账户总余额
@@ -72,6 +74,7 @@
         [self.userMesageLayout addSubview:self.expectedInterestMoneyLabel];
         [self.userMesageLayout addSubview:self.amountShownBtn];
         [self.userMesageLayout addSubview:self.payBtn];
+        [self.userMesageLayout addSubview:self.waveImageView];
         
         [self.rootLayout addSubview:self.topUpWithdrawalLayout];
         [self.topUpWithdrawalLayout addSubview:self.accountBalanceLabel];
@@ -124,11 +127,23 @@
     return _bkImageView;
 }
 
+- (UIImageView *)waveImageView
+{
+    if (nil == _waveImageView) {
+        _waveImageView = [[UIImageView alloc] init];
+        _waveImageView.myLeft = 0;
+        _waveImageView.myBottom = 0;
+        _waveImageView.myRight = 0;
+        _waveImageView.myHeight = 42;
+        _waveImageView.image = [UIImage imageNamed:@"wave"];
+    }
+    return _waveImageView;
+}
 - (UIButton *)headImageBtn
 {
     if (nil == _headImageBtn) {
         _headImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _headImageBtn.myTop = 0;//(@30);
+        _headImageBtn.myTop = 16;//(@30);
         _headImageBtn.myLeft = 0;
         _headImageBtn.myHeight = 63;
         _headImageBtn.myWidth = 67;
@@ -137,7 +152,7 @@
 //        left : 为正数的时候往右偏移,为负数的时候往左偏移;
 //        bottom : 为正数的时候往上偏移,为负数的时候往下偏移;
 //        right :为正数的时候往左偏移,为负数的时候往右偏移;
-        _headImageBtn.imageEdgeInsets = UIEdgeInsetsMake(30,16, 0, 0);
+        _headImageBtn.imageEdgeInsets = UIEdgeInsetsMake(30,15, 0, 0);
         _headImageBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [_headImageBtn setImage:[UIImage imageNamed:@"mine_icon_head"] forState:UIControlStateNormal];
         _headImageBtn.tag = 10001;
@@ -174,7 +189,7 @@
     if (nil == _messageImageBtn) {
         _messageImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _messageImageBtn.centerYPos.equalTo(self.memberLeverBtn.centerYPos);
-        _messageImageBtn.rightPos.equalTo(@15);
+        _messageImageBtn.rightPos.equalTo(@0);
         _messageImageBtn.heightSize.equalTo(self.headImageBtn.heightSize);
         _messageImageBtn.widthSize.equalTo(self.headImageBtn.widthSize);
         _messageImageBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -190,7 +205,7 @@
 {
     if (nil == _totalAssetsLabel) {
         _totalAssetsLabel = [NZLabel new];
-        _totalAssetsLabel.topPos.equalTo(self.headImageBtn.bottomPos).offset(8);
+        _totalAssetsLabel.topPos.equalTo(self.headImageBtn.bottomPos).offset(10);
         _totalAssetsLabel.leftPos.equalTo(@25);
         _totalAssetsLabel.textAlignment = NSTextAlignmentLeft;
         _totalAssetsLabel.font = [Color gc_Font:14.0];
@@ -221,11 +236,11 @@
 {
     if (nil == _totalAssetsMoneyLabel) {
         _totalAssetsMoneyLabel = [NZLabel new];
-        _totalAssetsMoneyLabel.topPos.equalTo(self.totalAssetsLabel.bottomPos).offset(12);
+        _totalAssetsMoneyLabel.topPos.equalTo(self.totalAssetsLabel.bottomPos).offset(5);
         _totalAssetsMoneyLabel.leftPos.equalTo(self.totalAssetsLabel.leftPos);
         _totalAssetsMoneyLabel.rightPos.equalTo(self.payBtn.leftPos);
         _totalAssetsMoneyLabel.textAlignment = NSTextAlignmentLeft;
-        _totalAssetsMoneyLabel.font = [Color gc_Font:30.0];
+        _totalAssetsMoneyLabel.font = [Color gc_ANC_font:33.0];
         _totalAssetsMoneyLabel.textColor = [Color color:PGColorOptionThemeWhite];
         _totalAssetsMoneyLabel.text =@"   ";
         [_totalAssetsMoneyLabel sizeToFit];
@@ -264,10 +279,10 @@
 {
     if (nil == _expectedInterestLabel) {
         _expectedInterestLabel = [NZLabel new];
-        _expectedInterestLabel.topPos.equalTo(self.totalAssetsMoneyLabel.bottomPos).offset(10);
+        _expectedInterestLabel.topPos.equalTo(self.totalAssetsMoneyLabel.bottomPos).offset(4);
         _expectedInterestLabel.leftPos.equalTo(self.totalAssetsLabel.leftPos);
         _expectedInterestLabel.textAlignment = NSTextAlignmentLeft;
-        _expectedInterestLabel.font = [Color gc_Font:13.0];
+        _expectedInterestLabel.font = [Color gc_Font:14.0];
         _expectedInterestLabel.textColor = self.totalAssetsMoneyLabel.textColor;
         _expectedInterestLabel.text = @"预期利息";
         [_expectedInterestLabel sizeToFit];
@@ -282,7 +297,7 @@
         _expectedInterestMoneyLabel.centerYPos.equalTo(self.expectedInterestLabel.centerYPos);
         _expectedInterestMoneyLabel.leftPos.equalTo(self.expectedInterestLabel.rightPos).offset(10);
         _expectedInterestMoneyLabel.textAlignment = NSTextAlignmentLeft;
-        _expectedInterestMoneyLabel.font = [Color gc_Font:13.0];
+        _expectedInterestMoneyLabel.font = [Color gc_ANC_font:18.0];
         _expectedInterestMoneyLabel.textColor = self.totalAssetsMoneyLabel.textColor;
         //        [_titleLabel sizeToFit];
     }
@@ -311,8 +326,8 @@
         _accountBalanceMoneyLabel.leftPos.equalTo(self.accountBalanceLabel.rightPos).offset(10);
         _accountBalanceMoneyLabel.rightPos.equalTo(self.topUpWithdrawalLabel.leftPos);
         _accountBalanceMoneyLabel.textAlignment = NSTextAlignmentLeft;
-        _accountBalanceMoneyLabel.font = [Color gc_Font:15.0];
-        _accountBalanceMoneyLabel.textColor = [Color color:PGColorOptionTitleGray];
+        _accountBalanceMoneyLabel.font = [Color gc_ANC_font:20.0];
+        _accountBalanceMoneyLabel.textColor = [Color color:PGColorOptionTitleOrange];
         //        [_titleLabel sizeToFit];
     }
     return _accountBalanceMoneyLabel;
@@ -381,6 +396,7 @@
         self.cashBalance = myModel.data.cashBalance;//余额
         
         self.totalAssetsMoneyLabel.text = [NSString stringWithFormat:@"¥%@",self.total];//总资产
+        [self.totalAssetsMoneyLabel setFont:[Color gc_Font:22.0] string:@"¥"];
         self.expectedInterestMoneyLabel.text = [NSString stringWithFormat:@"¥%@",self.totalDueIn];//总待收利息
         self.accountBalanceMoneyLabel.text = [NSString stringWithFormat:@"¥%@",self.cashBalance];//余额
 
