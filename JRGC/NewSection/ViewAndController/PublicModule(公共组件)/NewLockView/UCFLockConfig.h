@@ -16,8 +16,7 @@ typedef enum {
     RCLockViewTypeClean,  // 清除
 }RCLockViewType;
 
-#define WidthScale  [[UIScreen mainScreen] bounds].size.width/375.0f
-#define HeightScale [[UIScreen mainScreen] bounds].size.height/812.0f
+
 
 #endif /* UCFLockConfig_h */
 

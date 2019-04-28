@@ -17,11 +17,16 @@
 @property(nonatomic, strong)IBOutlet NZLabel *hoursLabel;
 @property(nonatomic, strong)IBOutlet NZLabel *minutesLabel;
 @property(nonatomic, strong)IBOutlet NZLabel *secondsLabel;
+@property (weak, nonatomic) IBOutlet UIView *bottomLineView;
 
 @end
 
 @implementation MinuteCountDownView
-
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    _bottomLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+}
 //- (instancetype)initWithFrame:(CGRect)frame
 //{
 //    self = [super initWithFrame:frame];

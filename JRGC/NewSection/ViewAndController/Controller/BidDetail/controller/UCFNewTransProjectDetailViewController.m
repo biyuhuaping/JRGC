@@ -62,7 +62,6 @@
     remind.topPos.equalTo(bidinfoView.bottomPos);
     remind.myHorzMargin = 0;
     remind.heightSize.equalTo(@40);
-    remind.backgroundColor = [UIColor clearColor];
     remind.subviewVSpace = 5;
     remind.subviewHSpace = 5;
     self.remind = remind;
@@ -194,6 +193,29 @@
         return 50;
     }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 0.001;
+    } else {
+        return 0.001;
+    }
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return nil;
+//        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+//        headView.backgroundColor = [UIColor whiteColor];
+//        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:headView isTop:YES];
+//        return headView;
+    } else {
+//        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+//        headView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+        return nil;
+    }
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -202,39 +224,19 @@
         return 0.001;
     }
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return 10;
-    } else {
-        return 10;
-    }
-}
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
         UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-        footView.backgroundColor = [UIColor whiteColor];
-        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:footView isTop:NO];
+        footView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        //        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:footView isTop:NO];
         return footView;
     } else {
         return nil;
     }
     
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-        headView.backgroundColor = [UIColor whiteColor];
-        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:headView isTop:YES];
-        return headView;
-    } else {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-        headView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
-        return nil;
-    }
-}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.dataArray.count;

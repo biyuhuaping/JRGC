@@ -30,9 +30,11 @@
         leftButton.mySize = CGSizeMake(60, 44);
         leftButton.bottomPos.equalTo(@0);
         leftButton.leftPos.equalTo(@0);
+        leftButton.backgroundColor = [UIColor clearColor];
         [leftButton addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
-        [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateNormal];
-        [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateHighlighted];
+        [leftButton setImage:[UIImage imageNamed:@"btn_whiteback"]forState:UIControlStateNormal];
+        [leftButton setImage:[UIImage imageNamed:@"btn_whiteback"]forState:UIControlStateHighlighted];
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
         [self.rootLayout addSubview:leftButton];
         
         MyRelativeLayout *titleBaseView = [MyRelativeLayout new];

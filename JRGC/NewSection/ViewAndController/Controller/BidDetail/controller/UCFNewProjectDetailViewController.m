@@ -63,7 +63,6 @@
     remind.topPos.equalTo(bidinfoView.bottomPos);
     remind.myHorzMargin = 0;
     remind.heightSize.equalTo(@40);
-    remind.backgroundColor = [UIColor clearColor];
     remind.subviewVSpace = 5;
     remind.subviewHSpace = 5;
     self.remind = remind;
@@ -98,7 +97,9 @@
     self.showTableView.topPos.equalTo(self.navView.bottomPos);
     self.showTableView.bottomPos.equalTo(@57);
     self.showTableView.myHorzMargin = 0;
-    self.showTableView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
+    self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+//    self.showTableView.backgroundColor = [UIColor redColor];
+
     [self.rootLayout addSubview:self.showTableView];
     
     self.showTableView.tableHeaderView = contentLayout;
@@ -298,8 +299,7 @@
 {
     if (section == 0) {
         UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-        footView.backgroundColor = [UIColor whiteColor];
-        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:footView isTop:NO];
+        footView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         return footView;
     } else {
         return nil;
@@ -309,22 +309,24 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 10;
+        return 0.001;
     } else {
-        return 10;
+        return 0;
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-        headView.backgroundColor = [UIColor whiteColor];
-        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:headView isTop:YES];
-        return headView;
-    } else {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-        headView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
         return nil;
+//        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+//        headView.backgroundColor = [UIColor whiteColor];
+//        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:headView isTop:YES];
+//        return headView;
+    } else {
+        return nil;
+//        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+//        headView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+//        return headView;
     }
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -421,7 +423,6 @@
                 [dictArr addObject:dict];
             }
             basicDetailVC.dataArray = dictArr;
-            basicDetailVC.accoutType = self.accoutType;
             basicDetailVC.accoutType = self.accoutType;
             [self.navigationController  pushViewController:basicDetailVC animated:YES];
         } else {

@@ -31,7 +31,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         
         MyRelativeLayout *whitBaseView = [MyRelativeLayout new];
         whitBaseView.leftPos.equalTo(@15);
@@ -55,23 +55,25 @@
         UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 20) gradientType:leftToRight];
         [self.addRateTipView setBackgroundImage:image forState:UIControlStateNormal];
         
-        self.rateLab.leftPos.equalTo(@25);
+        self.rateLab.leftPos.equalTo(@(25 * WidthScale));
         self.rateLab.topPos.equalTo(@25);
         [whitBaseView addSubview:self.rateLab];
 
-        self.rateTipLab.leftPos.equalTo(@25);
+        self.rateTipLab.leftPos.equalTo(@(25 * WidthScale));
         self.rateTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(20);
         [whitBaseView addSubview:self.rateTipLab];
 
-        self.timeLimitLab.centerXPos.equalTo(whitBaseView.centerXPos);
-        self.timeLimitLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(5);
-        [whitBaseView addSubview:self.timeLimitLab];
-        
-        self.timeLimitTipLab.leftPos.equalTo(self.timeLimitLab.leftPos);
+        self.timeLimitTipLab.centerXPos.equalTo(whitBaseView.centerXPos).offset(-10);
         self.timeLimitTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(20);
         [whitBaseView addSubview:self.timeLimitTipLab];
         
-        self.remainMoneyTipLab.rightPos.equalTo(whitBaseView.rightPos).offset(60);
+        self.timeLimitLab.leftPos.equalTo(self.timeLimitTipLab.leftPos);
+        self.timeLimitLab.bottomPos.equalTo(self.rateLab.bottomPos).offset(5);
+        [whitBaseView addSubview:self.timeLimitLab];
+        
+
+        
+        self.remainMoneyTipLab.rightPos.equalTo(whitBaseView.rightPos).offset(60 * WidthScale);
         self.remainMoneyTipLab.bottomPos.equalTo(self.rateTipLab.bottomPos);
         [whitBaseView addSubview:self.remainMoneyTipLab];
         

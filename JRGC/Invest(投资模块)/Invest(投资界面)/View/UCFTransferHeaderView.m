@@ -41,15 +41,12 @@
 {
     [super awakeFromNib];
 
-    self.backgroundColor = UIColorWithRGB(0xebebee);
     self.rateState = YES;
     self.limitState = YES;
     self.sumState = YES;
-    self.backgroundColor = UIColorWithRGB(0xebebee);
+    self.backgroundColor = [Color color:PGColorOptionThemeWhite];
     self.bottomBaseView.backgroundColor =  [Color color:PGColorOptionThemeWhite];
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:self.buttonBaseView isTop:NO];
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:self.bottomBaseView isTop:YES];
-    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:self.bottomBaseView isTop:NO];
+
     
     [_rateOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
     [_limitOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
@@ -68,6 +65,10 @@
 //    
 //    [self.sumOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7, 0, 0)];
 //    [self.sumOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7 + 43, 0, 0)];
+    
+    
+    [Common addLineViewColor:UIColorWithRGB(0xe1e1e1) With:self isTop:NO];
+    [Common addLineViewColor:UIColorWithRGB(0xe1e1e1) With:self isTop:YES];
 }
 
 - (void)layoutSubviews
@@ -96,9 +97,9 @@
 - (void)initData
 {
     [self calcueAllStateButton];
-    [_rateOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
-    [_limitOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
-    [_sumOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
+    [_rateOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
+    [_limitOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
+    [_sumOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
 }
 #pragma mark - button点击事件
 - (IBAction)rateOrder:(UIButton *)sender {
@@ -165,10 +166,10 @@
 }
 - (void)changeButtonTitleColor:(UIButton *)button
 {
-    [_rateOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
-    [_limitOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
-    [_sumOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
-    [button setTitleColor:UIColorWithRGB(0xf5343c) forState:UIControlStateNormal];
+    [_rateOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
+    [_limitOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
+    [_sumOrderButton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateNormal];
+    [button setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateNormal];
 }
 
 - (void)calcueAllStateButton

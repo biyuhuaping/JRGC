@@ -7,7 +7,7 @@
 //
 
 #import "UCFMicroMoneyViewController.h"
-#import "UCFMicroMoneyHeaderView.h"
+//#import "UCFMicroMoneyHeaderView.h"
 #import "UCFBatchInvestmentViewController.h"
 #import "UCFFacReservedViewController.h"
 
@@ -37,7 +37,7 @@
 #import "UCFNewAITableViewCell.h"
 @interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate,UCFInvestMicroMoneyCellDelegate,UCFNewAITableViewCellDelegate>
 
-@property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
+//@property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) UCFMicroMoneyModel *model;
@@ -77,7 +77,8 @@
     
     self.tableview.tableFooterView = [self createFootView];
     
-    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
+    self.tableview.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    
     //=========  下拉刷新、上拉加载更多  =========
 //    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) errorTitle:@"敬请期待..."]
     // 添加传统的下拉刷新
@@ -91,7 +92,7 @@
 //    });
 }
 -(void)reloadData{
-    [self.microMoneyHeaderView getNormalBannerData];
+//    [self.microMoneyHeaderView getNormalBannerData];
    [ self.apiManager getNewMicroMoneyFromNet];
 }
 
@@ -181,7 +182,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 8)];
-    footerView.backgroundColor = UIColorWithRGB(0xebebee);
+    footerView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     return footerView;
 }
 
@@ -259,7 +260,7 @@
 - (UIView *)createFootView
 {
     UIView *footView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
-    footView.backgroundColor = UIColorWithRGB(0xebebee);
+    footView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     
     UILabel *firstProtocolLabel = [[UILabel alloc] init];
     firstProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
@@ -268,7 +269,7 @@
     firstProtocolLabel.textAlignment  = NSTextAlignmentCenter;
     firstProtocolLabel.frame = CGRectMake(15, 0, ScreenWidth - 15*2, size.height);
     firstProtocolLabel.text = @"市场有风险 投资需谨慎";
-    firstProtocolLabel.textColor = UIColorWithRGB(0x999999);
+    firstProtocolLabel.textColor =  [Color color:PGColorOptionInputDefaultBlackGray];
     
     [footView addSubview:firstProtocolLabel];
     

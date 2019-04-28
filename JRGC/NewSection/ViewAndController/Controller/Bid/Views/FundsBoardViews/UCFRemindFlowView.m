@@ -14,8 +14,8 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-
-
+        self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+//        self.backgroundColor = [UIColor blackColor];
     }
     return self;
 }
@@ -27,13 +27,13 @@
         [self createTagButton:showStr];
     }
     [self layoutAnimationWithDuration:0];
-    self.leftPadding = 15.0f;
+    self.leftPadding = 20.0f;
     if (textArr.count > 3) {
         self.topPadding = 3.0f;
     } else {
-        self.topPadding = 12.0f;
+        self.topPadding = 10.0f;
     }
-    self.rightPadding = 15.0f;
+    self.rightPadding = 20.0f;
     
 
 }

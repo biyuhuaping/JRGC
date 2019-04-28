@@ -20,7 +20,7 @@
 {
     self.edgesForExtendedLayout = UIRectEdgeNone;  //设置视图控制器中的视图尺寸不延伸到导航条或者工具条下面。您可以注释这句代码看看效果。
     MyRelativeLayout *rootLayout = [MyRelativeLayout new];
-    rootLayout.backgroundColor = [UIColor colorWithRed:245.0/255.0f green:245.0/255.0f blue:245.0/255.0f alpha:1];
+    rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     rootLayout.insetsPaddingFromSafeArea = UIRectEdgeBottom;
     self.rootLayout = rootLayout;

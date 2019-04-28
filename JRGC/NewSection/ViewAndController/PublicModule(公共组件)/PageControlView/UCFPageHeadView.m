@@ -36,7 +36,7 @@
         return;
     }
     buttonWidth = (self.frame.size.width - _leftSpace -_rightSpace - (_btnHorizontal * (self.nameArray.count - 1)))/self.nameArray.count;
-    CGFloat buttonY  = _leftBackImage.length > 0 ? StatusBarHeight1 : 0;
+    CGFloat buttonY  = (_leftBackImage.length > 0 || _isNavBar) ? StatusBarHeight1 : 0;
     for (int i = 0; i < self.nameArray.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitleColor:[Color color:PGColorOpttonRateNoramlTextColor] forState:UIControlStateSelected];
@@ -49,9 +49,11 @@
         [self addSubview:button];
         if (i == 0) {
             [self click:button];
+            button.titleLabel.font = [Color gc_Font:18];
+        } else {
+            button.titleLabel.font = [Color gc_Font:15];
         }
         [self addSubview:self.indicateView];
-        button.titleLabel.font = [Color gc_Font:15];
     }
     
     if (_leftBackImage.length > 0) {
@@ -86,12 +88,15 @@
 {
     for (UIView *view in self.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {
-            UIButton *button = (UIButton *)view;
-            button.selected = NO;
+            UIButton *button1 = (UIButton *)view;
+            button1.selected = NO;
+            button1.titleLabel.font = [Color gc_Font:15];
         }
     }
     [self pageHeadView:self chiliControllerSelectIndex:button.tag - 100];
     button.selected = YES;
+    button.titleLabel.font = [Color gc_Font:18];
+
     if (self.delegate && [self.delegate respondsToSelector:@selector(pageHeadView:noticeScroViewScrollToPoint:)]) {
         [self.delegate pageHeadView:self noticeScroViewScrollToPoint:CGPointMake(ScreenWidth * (button.tag - 100), 0)];
     }
@@ -112,17 +117,19 @@
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             button.selected = NO;
+            button.titleLabel.font = [Color gc_Font:15];
         }
     }
     UIButton *button = [self viewWithTag:index + 100];
     if (button) {
         button.selected = YES;
+        button.titleLabel.font = [Color gc_Font:18];
     }
 }
 - (UIView *)indicateView
 {
     if (nil == _indicateView) {
-        _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 4, 36, 4)];
+        _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 5, 36, 3)];
         _indicateView.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
         _indicateView.layer.cornerRadius = 2.0f;
         _indicateView.clipsToBounds = YES;

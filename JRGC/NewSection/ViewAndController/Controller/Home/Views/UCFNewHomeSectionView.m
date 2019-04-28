@@ -27,7 +27,7 @@
         iconView.myBottom = 10;
         iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         iconView.clipsToBounds = YES;
-        iconView.layer.cornerRadius = 2;
+        iconView.layer.cornerRadius = 1.5;
         self.iconView = iconView;
         [self.rootLayout addSubview:iconView];
         

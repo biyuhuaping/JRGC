@@ -41,7 +41,7 @@
     }
     [self.navigationController.navigationBar setHidden:_isHideNavigationBar];
 
-    //self.view.backgroundColor = [UIColor colorWithHexString:@"eeeeee"];
+    self.view.backgroundColor = UIColorWithRGB(0xf5f5f5);
 //    [GiFHUD setGifWithImageName:@"gif@3x.gif"];
 }
 

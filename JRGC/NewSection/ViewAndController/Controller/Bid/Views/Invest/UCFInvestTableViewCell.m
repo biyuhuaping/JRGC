@@ -41,7 +41,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.rootLayout.backgroundColor = UIColorWithRGB(0xebebee);
+        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         
         MyRelativeLayout *whitBaseView = [MyRelativeLayout new];
         whitBaseView.leftPos.equalTo(@15);
@@ -59,7 +59,7 @@
         iconView.myTop = 20;
         iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         iconView.clipsToBounds = YES;
-        iconView.layer.cornerRadius = 2;
+        iconView.layer.cornerRadius = 1.5;
         [whitBaseView addSubview:iconView];
         self.iconView = iconView;
         UILabel *label = [[UILabel alloc] init];
@@ -71,34 +71,34 @@
         self.titleLab = label;
         
         self.imageView1.centerYPos.equalTo(iconView.centerYPos);
-        self.imageView1.leftPos.equalTo(self.titleLab.rightPos);
+        self.imageView1.leftPos.equalTo(self.titleLab.rightPos).offset(2);
         self.imageView1.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView1];
         self.imageView1.myVisibility = MyVisibility_Gone;
         
         self.imageView2.centerYPos.equalTo(iconView.centerYPos);
-        self.imageView2.leftPos.equalTo(self.imageView1.rightPos);
+        self.imageView2.leftPos.equalTo(self.imageView1.rightPos).offset(1.5);
         self.imageView2.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView2];
 
         self.imageView2.myVisibility = MyVisibility_Gone;
         
         self.imageView3.centerYPos.equalTo(iconView.centerYPos);
-        self.imageView3.leftPos.equalTo(self.imageView2.rightPos);
+        self.imageView3.leftPos.equalTo(self.imageView2.rightPos).offset(1.5);;
         self.imageView3.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView3];
 
         self.imageView3.myVisibility = MyVisibility_Gone;
         
         self.imageView4.centerYPos.equalTo(iconView.centerYPos);
-        self.imageView4.leftPos.equalTo(self.imageView3.rightPos);
+        self.imageView4.leftPos.equalTo(self.imageView3.rightPos).offset(1.5);;
         self.imageView4.mySize = CGSizeMake(18, 18);
         [whitBaseView addSubview:self.imageView4];
 
         self.imageView4.myVisibility = MyVisibility_Gone;
         
         UILabel *tiplab = [[UILabel alloc] init];
-        tiplab.leftPos.equalTo(self.imageView4.rightPos);
+        tiplab.leftPos.equalTo(self.imageView4.rightPos).offset(3);;
         tiplab.centerYPos.equalTo(iconView.centerYPos);
         tiplab.heightSize.equalTo(@20);
         tiplab.text = @"智能分散出借";
@@ -126,17 +126,16 @@
         button.mySize = CGSizeMake(65, 65);
         button.bottomPos.equalTo(@15);
         button.rightPos.equalTo(whitBaseView.rightPos).offset(25);
-//        button.backgroundColor = [UIColor yellowColor];
         [button addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         [whitBaseView addSubview:button];
 
         
         self.rateLab.leftPos.equalTo(self.titleLab.leftPos);
-        self.rateLab.centerYPos.equalTo(self.progressView.centerYPos);
+        self.rateLab.centerYPos.equalTo(self.progressView.centerYPos).offset(-6);
         [whitBaseView addSubview:self.rateLab];
         
         self.rateTipLab.leftPos.equalTo(self.rateLab.leftPos);
-        self.rateTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(15);
+        self.rateTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(20);
         [whitBaseView addSubview:self.rateTipLab];
         
         
@@ -145,7 +144,7 @@
         [whitBaseView addSubview:self.timeLimitLab];
 
         self.timeLimitTipLab.leftPos.equalTo(self.timeLimitLab.leftPos);
-        self.timeLimitTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(15);
+        self.timeLimitTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(20);
         [whitBaseView addSubview:self.timeLimitTipLab];
         
         
@@ -190,7 +189,7 @@
 
     }
     else {
-        self.progressView.textColor = UIColorWithRGB(0x555555);
+        self.progressView.textColor = [Color color:PGColorOptionTitleGray];
         if (microMoneyModel.modelType == UCFMicroMoneyModelTypeBatchBid && status == 2) {
             self.progressView.progressText = @"批量出借";
         }
@@ -217,6 +216,8 @@
     else {
         self.tiplabel.hidden = YES;
     }
+
+
     if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
         self.imageView1.myVisibility = MyVisibility_Visible;
     }
@@ -252,9 +253,11 @@
     }
     //控制进度视图显示
     if (status < 3) {
-        self.progressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
+        self.progressView.pathFillColor = UIColorWithRGB(0xff4133);
+        self.tiplabel.hidden = NO;
     }else{
-        self.progressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+        self.progressView.pathFillColor =  UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+        self.tiplabel.hidden = YES;
     }
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -311,9 +314,10 @@
 {
     if (!_progressView) {
         _progressView = [[ZZCircleProgress alloc] initWithFrame:CGRectMake(0, 0, 65, 65)];
-//        _progressView.backgroundColor = [UIColor yellowColor];
-        _progressView.strokeWidth = 3.0f;
+        _progressView.backgroundColor = [Color color:PGColorOptionThemeWhite];
+        _progressView.strokeWidth = 3.5f;
         _progressView.showPoint = NO;
+        _progressView.pathBackColor =  UIColorWithRGB(0xe2e2e2);
     }
     return _progressView;
 }

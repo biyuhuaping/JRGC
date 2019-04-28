@@ -16,61 +16,68 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距结束" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PME-25-rnp">
-                    <rect key="frame" x="15" y="14.5" width="40" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="20" y="13.5" width="46" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pv-rM-9mL" customClass="NZLabel">
-                    <rect key="frame" x="60" y="14.5" width="17" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="71" y="13.5" width="18.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="0.25490196078431371" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ksg-Z2-Jpi">
-                    <rect key="frame" x="79.5" y="14.5" width="14" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="92" y="13.5" width="15.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoX-pM-rZI" customClass="NZLabel">
-                    <rect key="frame" x="98.5" y="14.5" width="17" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="112.5" y="13.5" width="18.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="0.25490196078431371" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9T-F4-9FU">
-                    <rect key="frame" x="121.5" y="14.5" width="13.5" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="137" y="13.5" width="15.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIt-9u-4N5" customClass="NZLabel">
-                    <rect key="frame" x="140" y="14.5" width="17" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="157.5" y="13.5" width="18.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="0.25490196078431371" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G22-6r-lwl">
-                    <rect key="frame" x="162" y="14.5" width="13.5" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="181" y="13.5" width="15.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeY-gY-2Vp" customClass="NZLabel">
-                    <rect key="frame" x="180.5" y="14.5" width="18" height="16"/>
+                    <rect key="frame" x="201.5" y="13.5" width="21" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="18" id="8gz-QO-d26"/>
+                        <constraint firstAttribute="width" constant="21" id="8gz-QO-d26"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="0.25490196078431371" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="秒" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuo-jg-TIk">
-                    <rect key="frame" x="203.5" y="14.5" width="13.5" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="227.5" y="13.5" width="15.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiT-mV-kgk">
+                    <rect key="frame" x="0.0" y="44" width="329" height="1"/>
+                    <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="abk-2M-eIA"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="PME-25-rnp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="4Cn-Gq-giS"/>
+                <constraint firstItem="PME-25-rnp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="4Cn-Gq-giS"/>
                 <constraint firstItem="Ksg-Z2-Jpi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6EE-oI-Ytx"/>
                 <constraint firstItem="p9T-F4-9FU" firstAttribute="leading" secondItem="KoX-pM-rZI" secondAttribute="trailing" constant="6" id="7Nr-re-qlv"/>
                 <constraint firstItem="XIt-9u-4N5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="9Z8-md-cFR"/>
@@ -82,22 +89,26 @@
                 <constraint firstItem="kuo-jg-TIk" firstAttribute="leading" secondItem="DeY-gY-2Vp" secondAttribute="trailing" constant="5" id="WjC-Ji-2VO"/>
                 <constraint firstItem="DeY-gY-2Vp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="XSU-aT-vFh"/>
                 <constraint firstItem="KoX-pM-rZI" firstAttribute="leading" secondItem="Ksg-Z2-Jpi" secondAttribute="trailing" constant="5" id="bnj-2X-Mvt"/>
+                <constraint firstAttribute="bottom" secondItem="hiT-mV-kgk" secondAttribute="bottom" id="e1f-Rp-Ih8"/>
                 <constraint firstItem="PME-25-rnp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hji-Ta-JB6"/>
+                <constraint firstAttribute="trailing" secondItem="hiT-mV-kgk" secondAttribute="trailing" id="jMB-Ti-dis"/>
                 <constraint firstItem="Ksg-Z2-Jpi" firstAttribute="leading" secondItem="6Pv-rM-9mL" secondAttribute="trailing" constant="2.5" id="jQH-Tb-0Vd"/>
                 <constraint firstItem="DeY-gY-2Vp" firstAttribute="leading" secondItem="G22-6r-lwl" secondAttribute="trailing" constant="5" id="qIx-bo-Pzy"/>
                 <constraint firstItem="G22-6r-lwl" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="r5o-26-ziW"/>
+                <constraint firstItem="hiT-mV-kgk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rwB-aC-AtY"/>
                 <constraint firstItem="G22-6r-lwl" firstAttribute="leading" secondItem="XIt-9u-4N5" secondAttribute="trailing" constant="5" id="u6p-rl-qwg"/>
                 <constraint firstItem="p9T-F4-9FU" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wBX-Df-U5h"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="bottomLineView" destination="hiT-mV-kgk" id="lBA-ns-cEJ"/>
                 <outlet property="daysLabel" destination="6Pv-rM-9mL" id="pCg-EK-ccG"/>
                 <outlet property="hoursLabel" destination="KoX-pM-rZI" id="UMa-Y4-yUl"/>
                 <outlet property="minutesLabel" destination="XIt-9u-4N5" id="eNb-tH-Qnp"/>
                 <outlet property="secondsLabel" destination="DeY-gY-2Vp" id="nDu-3u-FSB"/>
                 <outlet property="tipLabel" destination="PME-25-rnp" id="zLa-MH-rWm"/>
             </connections>
-            <point key="canvasLocation" x="-592.79999999999995" y="-367.01649175412297"/>
+            <point key="canvasLocation" x="-967.20000000000005" y="-390.85457271364322"/>
         </view>
     </objects>
 </document>

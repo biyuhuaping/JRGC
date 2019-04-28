@@ -134,7 +134,7 @@
         totalMoneyLab.backgroundColor = [UIColor clearColor];
         totalMoneyLab.text = @"¥100,000.00";
         totalMoneyLab.textColor = [Color color:PGColorOptionThemeWhite];
-        totalMoneyLab.font = [Color gc_ANC_font:13.0f];
+        totalMoneyLab.font = [Color gc_ANC_font:16.0f];
         totalMoneyLab.frame = CGRectMake(CGRectGetMaxX(totalMoneyTipLab.frame) + 10, 1, 200, CGRectGetHeight(bottomView.frame));
         [bottomView addSubview:totalMoneyLab];
         self.totalMoneyLab = totalMoneyLab;
@@ -157,7 +157,7 @@
         availableMoneyLab.backgroundColor = [UIColor clearColor];
         availableMoneyLab.text = @"¥100,000.00";
         availableMoneyLab.textColor = [Color color:PGColorOptionThemeWhite];
-        availableMoneyLab.font = [Color gc_ANC_font:13.0f];
+        availableMoneyLab.font = [Color gc_ANC_font:16.0f];
 //        [availableMoneyLab sizeToFit];
         availableMoneyLab.frame = CGRectMake(CGRectGetMaxX(availableMoneyTipLab.frame) + 10, 1, 200, CGRectGetHeight(bottomView.frame));
         [bottomView addSubview:availableMoneyLab];
