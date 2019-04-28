@@ -8,9 +8,9 @@
 
 #import "UCFNewUserGuideTableViewCell.h"
 
-#import "UIButton+Gradient.h"
+//#import "UIButton+Gradient.h"
 #import "UIButton+MLSpace.h"
-
+#import "UIImage+Compression.h"
 #import "UCFNewHomeViewController.h"
 
 @interface UCFNewUserGuideTableViewCell()
@@ -63,17 +63,17 @@
         button.rightPos.equalTo(@45);
         button.bottomPos.equalTo(@0);
         button.heightSize.equalTo(@40);
-        [button setBackgroundColor:[UIColor blueColor]];
         button.clipsToBounds = YES;
+        button.layer.cornerRadius = 45/2.0f;
         [button setTitle:@"注册领优惠券" forState:UIControlStateNormal];
         button.titleLabel.font = [Color gc_Font:16];
         [button addTarget:self action:@selector(buttonclick:) forControlEvents:UIControlEventTouchUpInside];
         [button setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
-            v.layer.cornerRadius = CGRectGetHeight(v.frame)/2;
-            NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
-            UIImage *image = [(UIButton *)v buttonImageFromColors:colorArray ByGradientType:leftToRight];
-            [(UIButton *)v setBackgroundImage:image forState:UIControlStateNormal];
+//            NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
+//            UIImage *image = [(UIButton *)v buttonImageFromColors:colorArray ByGradientType:leftToRight];
+//            [(UIButton *)v setBackgroundImage:image forState:UIControlStateNormal];
         }];
+        [button setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(ScreenWidth - 45 * 2, 40)] forState:UIControlStateNormal];
         [bottonBaseView addSubview:button];
         self.bottomButton = button;
     }

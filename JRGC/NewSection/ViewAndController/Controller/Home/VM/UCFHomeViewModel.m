@@ -111,8 +111,8 @@
         data1.dataModel = self.bannerModel.data.siteNoticeMap;
         [section1 addObject:data1];
     } else {
-        //新手引导
-        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:SingleUserInfo.loginData.userInfo.isRisk ? 185 - 55: 185];
+        //新手引导  老用户已经做了风险测评 但是未设置交易密码 或者白名单用户
+        CellConfig *data1 = [CellConfig cellConfigWithClassName:@"UCFNewUserGuideTableViewCell" title:@"新手入门" showInfoMethod:nil heightOfCell:SingleUserInfo.loginData.userInfo.isRisk && [SingleUserInfo.loginData.userInfo.openStatus intValue] > 3 ? 185 - 55: 185];
         [section1 addObject:data1];
     }
     

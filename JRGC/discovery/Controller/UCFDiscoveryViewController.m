@@ -38,6 +38,9 @@
     
     [self gotoURL:self.url];
 //    self.webView.scrollView.bounces = NO;
+    
+    
+
 }
 -(void)gotoOpenAccout
 {

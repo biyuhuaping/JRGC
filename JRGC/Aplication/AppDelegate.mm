@@ -64,6 +64,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+//    [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: @"WebKitCacheModelPreferenceKey"];
+//    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey: @"WebKitMediaPlaybackAllowsInline"];
+    
     [self startGLobalRealReachability]; //开启网络监测
     [self startNetConfig];
 
@@ -1066,6 +1069,9 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:infoAgentDic];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
+    //
+
+    
     //    测试重新加cookies
 //    [Common addTestCookies];
 }

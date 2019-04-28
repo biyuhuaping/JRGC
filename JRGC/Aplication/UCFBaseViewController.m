@@ -257,7 +257,7 @@
                 [selfWeak monitorRiskStatueChange];
             }
         }else if ([keyPath isEqualToString:@"webCloseUpdatePrePage"]) {
-            [selfWeak refreshPageData];
+//            [selfWeak refreshPageData];
         }
     }];
 }
