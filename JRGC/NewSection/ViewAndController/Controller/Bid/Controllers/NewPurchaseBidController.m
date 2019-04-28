@@ -74,12 +74,13 @@
     rootLayout.insetsPaddingFromSafeArea = UIRectEdgeBottom;  //您可以在这里将值改变为UIRectEdge的其他类型然后试试运行的效果。并且在运行时切换横竖屏看看效果
     
     UIScrollView *scrollView = [UIScrollView new];
-    scrollView.backgroundColor = [UIColor clearColor];
     scrollView.myHorzMargin = 0;
     scrollView.topPos.equalTo(@0);
     scrollView.bottomPos.equalTo(@57);
     scrollView.myHorzMargin = 0;
     [rootLayout addSubview:scrollView];
+    adjustsScrollViewInsets(scrollView);
+
     self.scrollView = scrollView;
     
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
@@ -111,7 +112,7 @@
     remind.heightSize.equalTo(@40);
     remind.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
     remind.subviewVSpace = 5;
-    remind.subviewHSpace = 5;
+    remind.subviewHSpace = 10;
     [self.contentLayout addSubview:remind];
     self.remind = remind;
 
@@ -140,9 +141,9 @@
     self.recommendView = recommendView;
     
     UCFBidFootBoardView *footView = [UCFBidFootBoardView linearLayoutWithOrientation:MyOrientation_Vert];
-    footView.myVertMargin = 10;
+    footView.myVertMargin = 15;
     footView.myHorzMargin = 0;
-    footView.backgroundColor = UIColorWithRGB(0xebebee);
+    footView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     footView.userInteractionEnabled = YES;
     [self.contentLayout addSubview:footView];
     self.footView = footView;

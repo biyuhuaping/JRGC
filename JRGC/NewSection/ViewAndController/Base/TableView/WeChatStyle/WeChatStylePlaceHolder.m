@@ -41,7 +41,7 @@ static float const kUIemptyOverlayLabelHeight    = 20;
 }
 
 - (instancetype)sharedInit {
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
   
     self.contentMode =   UIViewContentModeTop;
     [self addUIemptyOverlayImageView];
@@ -95,7 +95,7 @@ static float const kUIemptyOverlayLabelHeight    = 20;
 
 - (void)longPressUIemptyOverlay:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        self.emptyOverlayImageView.alpha = 0.4;
+        self.emptyOverlayImageView.alpha = 1;
     }
     if ( gesture.state == UIGestureRecognizerStateEnded ) {
         self.emptyOverlayImageView.alpha = 1;

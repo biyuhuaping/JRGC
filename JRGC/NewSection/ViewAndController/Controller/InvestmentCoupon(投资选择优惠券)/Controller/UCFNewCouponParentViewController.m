@@ -25,9 +25,29 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = [Color color:PGColorOptionThemeWhite];
     [self addBlueLeftButton];
     [self setTitleViewText:@"使用返息券"];
-    
+    [self addRightButtonWithImage:[UIImage imageNamed:@"icon_question"]];
+
+}
+- (void)addRightButtonWithImage:(UIImage *)rightButtonimage;
+{
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.frame = CGRectMake(0, 0, 25, 25);
+    rightbutton.backgroundColor = [UIColor clearColor];
+    [rightbutton setImage:rightButtonimage forState:UIControlStateNormal];
+    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+- (void)clickRightBtn
+{
+    NSString *isP2PTipStr =  self.accoutType == SelectAccoutTypeP2P  ? @"出借":@"投资";
+    NSString *messageStr = [NSString stringWithFormat:@"1.返现券和返息券可在一笔%@中共用\n2.返现券可叠加使用\n3.返息券只能使用一张,不可叠加",isP2PTipStr];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr  delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+    [alert show];
 }
 - (void)leftBar1Clicked
 {

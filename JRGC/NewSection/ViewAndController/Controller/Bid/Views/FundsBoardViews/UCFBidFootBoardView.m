@@ -39,9 +39,7 @@
                 NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:limitAmountMess];
                 text.yy_color = [Color color:PGColorOptionTitleGray];
                 text.yy_font = [Color gc_Font:14];
-//                selfWeak.limitAmountMessLabel.font =
-//                selfWeak.limitAmountMessLabel.text = limitAmountMess;
-//                [selfWeak.limitAmountMessLabel sizeToFit];
+
                 selfWeak.limitAmountMessLabel.attributedText = text;
                 selfWeak.firstSectionView.myVisibility = MyVisibility_Visible;
             } else {
@@ -54,7 +52,7 @@
                 NSMutableAttributedString *attri_str = [[NSMutableAttributedString alloc] initWithString:string];
                 attri_str.yy_color = [Color color:PGColorOptionTitleGray];
                 attri_str.yy_font = [Color gc_Font:14];
-                [attri_str yy_setColor:UIColorWithRGB(0xf3ab47) range:[selfWeak.limitAmountMessLabel.text rangeOfString:limitAmountNum]];
+                [attri_str yy_setColor: [Color color:PGColorOptionTitleGray] range:[selfWeak.limitAmountMessLabel.text rangeOfString:limitAmountNum]];
                 selfWeak.limitAmountMessLabel.font = [Color gc_Font:14];
                 selfWeak.limitAmountMessLabel.attributedText = attri_str;
                 [selfWeak.limitAmountMessLabel sizeToFit];
@@ -78,7 +76,7 @@
 //                __weak typeof(self) weakSelf = self;
                 for (int i = 0; i < contractMsg.count; i++) {
                     NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsg objectAtIndex:i] valueForKey:@"contractName"]] ;
-                    [selfWeak.contractMsgLabel setFontColor:UIColorWithRGB(0x4aa1f9) range:[totalStr rangeOfString:tmpStr]];
+                    [selfWeak.contractMsgLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[totalStr rangeOfString:tmpStr]];
                     
                     [selfWeak.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
                         NSLog(@"111");
@@ -129,7 +127,7 @@
                     UCFTransPureContractmsg *md = [contractMsg objectAtIndex:i];
 
                     NSString *tmpStr = [NSString stringWithFormat:@"《%@》",md.contractName] ;
-                    [selfWeak.contractMsgLabel setFontColor:UIColorWithRGB(0x4aa1f9) range:[totalStr rangeOfString:tmpStr]];
+                    [selfWeak.contractMsgLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[totalStr rangeOfString:tmpStr]];
                     
                     [selfWeak.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
                         NSLog(@"111");
@@ -177,7 +175,7 @@
                 //                __weak typeof(self) weakSelf = self;
                 for (int i = 0; i < contractMsg.count; i++) {
                     NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[contractMsg objectAtIndex:i]];
-                    [selfWeak.contractMsgLabel setFontColor:UIColorWithRGB(0x4aa1f9) range:[totalStr rangeOfString:tmpStr]];
+                    [selfWeak.contractMsgLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[totalStr rangeOfString:tmpStr]];
                     
                     [selfWeak.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
                         NSLog(@"111");
@@ -254,7 +252,7 @@
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
     imageView.centerYPos.equalTo(view.centerYPos).offset(1.5);
-    imageView.mySize = CGSizeMake(5, 5);
+    imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.firstSectionView addSubview:imageView];
     
@@ -265,7 +263,7 @@
     //不要删除，需要占位，要不数据反射回来 这个lab的frame 会变成0
     limitAmountMessLabel.text = @"经过风险评估，您本次出借金额上限为1000万";
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
-    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
+    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
     [self.firstSectionView addSubview:limitAmountMessLabel];
     self.limitAmountMessLabel = limitAmountMessLabel;
     [limitAmountMessLabel sizeToFit];
@@ -283,7 +281,7 @@
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
     imageView.centerYPos.equalTo(view.centerYPos).offset(1.5);
-    imageView.mySize = CGSizeMake(5, 5);
+    imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.secondSectionView addSubview:imageView];
     
@@ -295,13 +293,13 @@
     limitAmountMessLabel.text = showStr;
     [limitAmountMessLabel sizeToFit];
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
-    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
+    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
     limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
     [self.secondSectionView addSubview:limitAmountMessLabel];
     
     limitAmountMessLabel.userInteractionEnabled = YES;
-    [limitAmountMessLabel setFontColor:UIColorWithRGB(0x4aa1f9) range:[showStr rangeOfString:@"《CFCA数字证书服务协议》"]];
+    [limitAmountMessLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[showStr rangeOfString:@"《CFCA数字证书服务协议》"]];
     __weak typeof(self) weakSelf = self;
     [limitAmountMessLabel addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
         //        [weakSelf totalString:text andRange:range];
@@ -323,7 +321,7 @@
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
     imageView.myTop = 10;
-    imageView.mySize = CGSizeMake(5, 5);
+    imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.thirdSectionView addSubview:imageView];
    
@@ -334,7 +332,7 @@
     limitAmountMessLabel.numberOfLines = 0;
     limitAmountMessLabel.text = showStr;
     limitAmountMessLabel.topPos.equalTo(@5);
-    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
+    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
     limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
     limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
@@ -343,7 +341,7 @@
     [self.thirdSectionView addSubview:limitAmountMessLabel];
     limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
     limitAmountMessLabel.userInteractionEnabled = YES;
-    [limitAmountMessLabel setFontColor:UIColorWithRGB(0x4aa1f9) range:[showStr rangeOfString:@"《网络借贷出借风险及禁止性行为提示》"]];
+    [limitAmountMessLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[showStr rangeOfString:@"《网络借贷出借风险及禁止性行为提示》"]];
     __weak typeof(self) weakSelf = self;
     [limitAmountMessLabel addLinkString:@"《网络借贷出借风险及禁止性行为提示》" block:^(ZBLinkLabelModel *linkModel) {
 //        [weakSelf totalString:text andRange:range];
@@ -355,7 +353,7 @@
 //    text.yy_color = UIColorWithRGB(0x999999);
 //     __weak typeof(self) weakSelf = self;
 //    [text yy_setTextHighlightRange:[showStr rangeOfString:@"《网络借贷出借风险及禁止性行为提示》"]
-//                             color:UIColorWithRGB(0x4aa1f9)
+//                             color:[Color color:PGColorOptionCellContentBlue]
 //                   backgroundColor:[UIColor lightGrayColor]
 //                         tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
 //                             NSLog(@"111");
@@ -377,7 +375,7 @@
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
     imageView.myTop = 10;
-    imageView.mySize = CGSizeMake(5, 5);
+    imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.fourSectionView addSubview:imageView];
     
@@ -388,7 +386,7 @@
     limitAmountMessLabel.numberOfLines = 0;
     limitAmountMessLabel.text = showStr;
     limitAmountMessLabel.topPos.equalTo(@5);
-    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
+    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
     limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
     limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
@@ -414,7 +412,7 @@
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
     imageView.myTop = 11.5;
-    imageView.mySize = CGSizeMake(5, 5);
+    imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.fiveSectionView addSubview:imageView];
     
@@ -425,7 +423,7 @@
     limitAmountMessLabel.numberOfLines = 0;
     limitAmountMessLabel.text = showStr;
     limitAmountMessLabel.topPos.equalTo(@5);
-    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
+    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
     limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
     limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
@@ -450,8 +448,8 @@
     
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
-    imageView.myTop = 7;
-    imageView.mySize = CGSizeMake(5, 5);
+    imageView.myTop = 6;
+    imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.sixSectionView addSubview:imageView];
     
@@ -462,7 +460,7 @@
     limitAmountMessLabel.text = @"本人接受筹标期内资金不计利息，出借意向不可撤销";
     limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
-    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
+    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
     [self.sixSectionView addSubview:limitAmountMessLabel];
     [limitAmountMessLabel sizeToFit];
 }
@@ -478,8 +476,8 @@
     
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
-    imageView.myTop = 7;
-    imageView.mySize = CGSizeMake(5, 5);
+    imageView.myTop = 6;
+    imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.sevenSectionView addSubview:imageView];
     
@@ -490,7 +488,7 @@
     limitAmountMessLabel.text = @"单笔尊享项目仅支持一对一转让，不支持部分购买";
     limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
-    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
+    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
     [self.sevenSectionView addSubview:limitAmountMessLabel];
     [limitAmountMessLabel sizeToFit];
 }

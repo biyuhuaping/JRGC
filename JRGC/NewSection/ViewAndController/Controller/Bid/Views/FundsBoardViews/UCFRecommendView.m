@@ -60,72 +60,82 @@
 - (void)addSepateteView
 {
     UIView *topView =[[UIView alloc] init];
-    topView.backgroundColor = UIColorWithRGB(0xebebee);
+    topView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     topView.myHeight = 10;
     topView.myHorzMargin = 0;
     [self addSubview:topView];
     
-    UIView *topLineView = [[UIView alloc] init];
-    topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    topLineView.myTop = 0;
-    topLineView.myHorzMargin = 0;
-    topLineView.heightSize.equalTo(@0.5);
-    [topView addSubview:topLineView];
-    
-    
-//    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
-//    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
+//    UIView *topLineView = [[UIView alloc] init];
+//    topLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+//    topLineView.myTop = 0;
+//    topLineView.myHorzMargin = 0;
+//    topLineView.heightSize.equalTo(@0.5);
+//    [topView addSubview:topLineView];
+
 }
 - (void)addheadView
 {
     UIView *view = [MyRelativeLayout new];
-    view.myHeight = 37;
+    view.myHeight = 50;
     view.myHorzMargin = 0;
-    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    view.backgroundColor = [Color color:PGColorOptionThemeWhite];
+//    view.backgroundColor = [UIColor yellowColor];
+
     [self addSubview:view];
     
-    UIView *topLineView = [[UIView alloc] init];
-    topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    topLineView.myTop = 0;
-    topLineView.myHorzMargin = 0;
-    topLineView.heightSize.equalTo(@0.5);
-    [view addSubview:topLineView];
+//    UIView *topLineView = [[UIView alloc] init];
+//    topLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+//    topLineView.myTop = 0;
+//    topLineView.myHorzMargin = 0;
+//    topLineView.heightSize.equalTo(@0.5);
+//    [view addSubview:topLineView];
+    
+    UIImageView *iconView = [[UIImageView alloc] init];
+    iconView.backgroundColor = UIColorWithRGB(0xFF4133);
+    iconView.clipsToBounds = YES;
+    iconView.leftPos.equalTo(@15);
+    iconView.centerYPos.equalTo(view.centerYPos);
+    iconView.myHeight = 16;
+    iconView.myWidth = 3;
+    iconView.layer.cornerRadius = 1.5;
+    [view addSubview:iconView];
     
     UILabel  *titleLab = [UILabel new];
-    titleLab.font = [UIFont systemFontOfSize:14.0f];
+    titleLab.font = [UIFont systemFontOfSize:16.0f];
     titleLab.textAlignment = NSTextAlignmentLeft;
     titleLab.adjustsFontSizeToFitWidth = YES;
     titleLab.text = @"推荐人（没有推荐人可不填）";
-    titleLab.textColor = UIColorWithRGB(0x333333);
+    titleLab.textColor = [Color color:PGColorOptionTitleBlack];
     titleLab.backgroundColor =  [UIColor clearColor];
+    titleLab.leftPos.equalTo(iconView.rightPos).offset(5);
+    titleLab.centerYPos.equalTo(iconView.centerYPos);
     [titleLab sizeToFit];
-    titleLab.myLeft = 15;
-    titleLab.centerYPos.equalTo(view.centerYPos);
     [view addSubview:titleLab];
+
     
-    UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xeff0f3);
-    endLineView.myBottom = 0;
-    endLineView.myLeft = 0;
-    endLineView.myRight = 0;
-    endLineView.heightSize.equalTo(@0.5);
-    [view addSubview:endLineView];
+//    UIView *endLineView = [[UIView alloc] init];
+//    endLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+//    endLineView.myBottom = 0;
+//    endLineView.myLeft = 0;
+//    endLineView.myRight = 0;
+//    endLineView.heightSize.equalTo(@0.5);
+//    [view addSubview:endLineView];
 }
 - (void)addInputView
 {
     UIView *view = [MyRelativeLayout new];
-    view.myHeight = 67;
+    view.myHeight = 67-15;
     view.myHorzMargin = 0;
     view.backgroundColor = [UIColor whiteColor];
     [self addSubview:view];
     
     UIView * inputBaseView = [MyRelativeLayout new];
-    inputBaseView.myTop = 15;
+    inputBaseView.myTop = 0;
     inputBaseView.myHorzMargin = 15;
     inputBaseView.myHeight = 37;
-    inputBaseView.backgroundColor = UIColorWithRGB(0xf2f2f2);
+    inputBaseView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     inputBaseView.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *v) {
-        v.layer.borderColor = UIColorWithRGB(0xd8d8d8).CGColor;
+        v.layer.borderColor = [Color color:PGColorOptionCellSeparatorGray].CGColor;
         v.layer.borderWidth = 0.5f;
         v.layer.cornerRadius = 4.0f;
     };
@@ -140,17 +150,10 @@
     gCCodeTextField.returnKeyType = UIReturnKeyDone;
     gCCodeTextField.keyboardType = UIKeyboardTypeEmailAddress;
     gCCodeTextField.placeholder = @"点击填写工场码";
+    gCCodeTextField.font = [Color gc_Font:14];
     [gCCodeTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     [inputBaseView addSubview:gCCodeTextField];
     self.gCCodeTextField = gCCodeTextField;
-    
-    UIView *endLineView = [[UIView alloc] init];
-    endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    endLineView.myBottom = 0;
-    endLineView.myLeft = 0;
-    endLineView.myRight = 0;
-    endLineView.heightSize.equalTo(@0.5);
-    [view addSubview:endLineView];
 }
 - (void)textfieldLength:(UITextField *)textField
 {

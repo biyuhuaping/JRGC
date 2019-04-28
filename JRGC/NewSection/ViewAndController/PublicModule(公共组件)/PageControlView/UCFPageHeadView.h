@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL  isHiddenHeadView; //当只有数组中只有一个数据的时候,是否需要隐藏头
 
+@property(nonatomic, assign)BOOL    isSacle; //文字是否有放大缩小的效果 //默认为NO，没有 YES 有
+
 - (void)setSelectIndex:(NSInteger)index;
 
 - (void)pageHeadView:(UCFPageHeadView *)pageView chiliControllerSelectIndex:(CGFloat)index;

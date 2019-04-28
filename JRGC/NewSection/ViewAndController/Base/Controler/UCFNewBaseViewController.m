@@ -62,7 +62,7 @@
 }
 - (void)addBlueLeftButton
 {
-    [self addLeftbuttonImageName:@"icon_back.png"];
+    [self addLeftbuttonImageName:@"icon_left"];
 }
 - (void)addLeftbuttonImageName:(NSString *)name
 {
@@ -135,7 +135,10 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    UIView *lineViewAA = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+    lineViewAA.backgroundColor = UIColorWithRGB(0xe2e2e2);
+    [self.view addSubview:lineViewAA];
 }
 
 - (void)monitorUserLgoinOrRegist

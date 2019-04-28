@@ -68,12 +68,13 @@
     UIButton *investmentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     investmentButton.myHorzMargin = 0;
     investmentButton.myTop = 0;
-    investmentButton.myHeight = 50;
+    investmentButton.myBottom = 0;
     investmentButton.layer.masksToBounds = YES;
 
     [investmentButton addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
     [investmentButton setTitle:@"立即出借" forState:UIControlStateNormal];
     [self addSubview:investmentButton];
+    
     self.investmentButton = investmentButton;
     [investmentButton setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(ScreenWidth, 50)] forState:UIControlStateNormal];
     [investmentButton setBackgroundImage:[UIImage gc_styleGrayImageSize:CGSizeMake(ScreenWidth, 50)] forState:UIControlStateDisabled];

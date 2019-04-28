@@ -86,7 +86,7 @@
 {
     if (nil == _tableView) {
         _tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, TableViewHeight)];
-        _tableView.backgroundColor = UIColorWithRGB(0xebebee);
+        _tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _tableView.delegate = self;
         _tableView.dataSource =self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -118,10 +118,10 @@
 - (UCFInvestmentCouponInstructionsView *)instructionsView
 {
     if (nil == _instructionsView) {
-        _instructionsView= [[UCFInvestmentCouponInstructionsView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
+        _instructionsView= [[UCFInvestmentCouponInstructionsView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
         _instructionsView.bottomPos.equalTo(self.useEnterBtn.topPos);
         _instructionsView.widthSize.equalTo(self.rootLayout.widthSize);
-        _instructionsView.heightSize.equalTo(@47);
+        _instructionsView.heightSize.equalTo(@40);
         _instructionsView.leftPos.equalTo(self.rootLayout.leftPos);
     }
     return _instructionsView;
