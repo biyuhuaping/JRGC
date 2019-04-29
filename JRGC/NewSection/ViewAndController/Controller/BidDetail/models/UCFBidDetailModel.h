@@ -69,6 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *fixedDate;
 
+@property (nonatomic, copy) NSString *startDateMess;
+
 @property (nonatomic, copy) NSString *repayPeriod;
 
 @property (nonatomic, copy) NSString *holdTime;

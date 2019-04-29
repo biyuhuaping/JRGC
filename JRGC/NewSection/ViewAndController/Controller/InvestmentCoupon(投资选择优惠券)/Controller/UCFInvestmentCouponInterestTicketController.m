@@ -74,11 +74,11 @@
             }
         }];
     }];
-    if (self.db.couponSelectArr.count == 0) {
-        _useEnterBtn.enterButton.enabled = NO;
-    } else {
-        _useEnterBtn.enterButton.enabled = YES;
-    }
+//    if (self.db.couponSelectArr.count == 0) {
+//        _useEnterBtn.enterButton.enabled = NO;
+//    } else {
+//        _useEnterBtn.enterButton.enabled = YES;
+//    }
     [self.tableView cyl_reloadData];
 }
 
@@ -141,10 +141,10 @@
         [_useEnterBtn setViewBackgroundColor:[UIColor whiteColor]];
         
         UIImage *backImage = [UIImage  gc_styleImageSize:CGSizeMake(ScreenWidth - 50, 40)];
-        UIImage *backGrayImage = [UIImage  gc_styleGrayImageSize:CGSizeMake(ScreenWidth - 50, 40)];
+//        UIImage *backGrayImage = [UIImage  gc_styleGrayImageSize:CGSizeMake(ScreenWidth - 50, 40)];
         
         [_useEnterBtn setButtonBackgroundImage:backImage forState:UIControlStateNormal];
-        [_useEnterBtn setButtonBackgroundImage:backGrayImage forState:UIControlStateDisabled];
+//        [_useEnterBtn setButtonBackgroundImage:backGrayImage forState:UIControlStateDisabled];
     }
     return _useEnterBtn;
 }
@@ -292,11 +292,11 @@
         }
     }
     self.oldIndexPath = indexPath;
-    if (newObj.isCheck) {
-        _useEnterBtn.enterButton.enabled = YES;
-    } else {
-        _useEnterBtn.enterButton.enabled = NO;
-    }
+//    if (newObj.isCheck) {
+//        _useEnterBtn.enterButton.enabled = YES;
+//    } else {
+//        _useEnterBtn.enterButton.enabled = NO;
+//    }
     
 }
 

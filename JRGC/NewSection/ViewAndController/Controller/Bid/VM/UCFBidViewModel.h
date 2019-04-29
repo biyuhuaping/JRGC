@@ -190,6 +190,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)dealMyfundsNumWithBeansSwitch:(UIButton *)switchView;
 - (void)calculate:(NSString *)investMoney;
+- (void)dealCouponData:(NSString *)investMoeny;
 - (void)calculateTotalMoney;
 
 //******************************************************

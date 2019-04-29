@@ -65,12 +65,12 @@
         }];
     }];
     [self.tableView cyl_reloadData];
-    if (self.db.cashSelectArr.count == 0) {
-        self.useEnterBtn.enterButton.enabled = NO;
-    } else {
-        self.useEnterBtn.enterButton.enabled = YES;
-
-    }
+//    if (self.db.cashSelectArr.count == 0) {
+//        self.useEnterBtn.enterButton.enabled = NO;
+//    } else {
+//        self.useEnterBtn.enterButton.enabled = YES;
+//
+//    }
 }
 
 - (BaseTableView *)tableView
@@ -130,10 +130,10 @@
         [_useEnterBtn setViewBackgroundColor:[UIColor whiteColor]];
         
         UIImage *backImage = [UIImage  gc_styleImageSize:CGSizeMake(ScreenWidth - 50, 40)];
-        UIImage *backGrayImage = [UIImage  gc_styleGrayImageSize:CGSizeMake(ScreenWidth - 50, 40)];
+//        UIImage *backGrayImage = [UIImage  gc_styleGrayImageSize:CGSizeMake(ScreenWidth - 50, 40)];
 
         [_useEnterBtn setButtonBackgroundImage:backImage forState:UIControlStateNormal];
-        [_useEnterBtn setButtonBackgroundImage:backGrayImage forState:UIControlStateDisabled];
+//        [_useEnterBtn setButtonBackgroundImage:backGrayImage forState:UIControlStateDisabled];
 
         
     }
@@ -171,11 +171,11 @@
             }
 
     }];
-    if (moneyValue < 1) {
-        _useEnterBtn.enterButton.enabled = NO;
-    } else {
-        _useEnterBtn.enterButton.enabled = YES;
-    }
+//    if (moneyValue < 1) {
+//        _useEnterBtn.enterButton.enabled = NO;
+//    } else {
+//        _useEnterBtn.enterButton.enabled = YES;
+//    }
     if (moneyValue > [self.db.investAmt integerValue]) {
         @PGWeakObj(self);
         BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"优惠券使用条件不足,输入的出借金额小于优惠券的最低使用金额" cancelButtonTitle:@"重新输入金额" clickButton:^(NSInteger index){

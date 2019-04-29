@@ -115,7 +115,7 @@
 
 - (void)subShar
 {
-    [self addRightButtonWithName:@"分享"];
+//    [self addRightButtonWithName:@"分享"];
     [self addRightButtonWithImage:[UIImage imageNamed:@"btn_share"]];
 }
 

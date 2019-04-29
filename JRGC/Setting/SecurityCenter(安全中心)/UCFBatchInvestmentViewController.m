@@ -237,7 +237,7 @@
     
     
     UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(tipLab.frame) + 5, ScreenWidth, 16)];
-    tipLabel.text = [NSString stringWithFormat:@"批量出借单次最高限额：%@",[selectButton titleForState:UIControlStateNormal]];
+    tipLabel.text = [NSString stringWithFormat:@"批量出借单次最高限额：%@元",[selectButton titleForState:UIControlStateNormal]];
     tipLabel.textAlignment = NSTextAlignmentCenter;
     tipLabel.font = [UIFont systemFontOfSize:15.0f];
     tipLabel.textColor = [Color color:PGColorOptionTitleGray];
@@ -396,7 +396,7 @@
     [self.thirdView addSubview:hookImView3];
     
     UILabel *label3 = [[UILabel alloc] init];
-    label3.text = @"授权完成";
+    label3.text = @"授权结果";
     label3.textAlignment = NSTextAlignmentCenter;
     label3.font = [Color gc_Font:15];
     [self.thirdView addSubview:label3];

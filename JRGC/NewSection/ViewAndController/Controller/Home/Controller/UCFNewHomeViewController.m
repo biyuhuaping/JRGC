@@ -74,25 +74,9 @@
 }
 - (void)rightBarClicked:(UIButton *)button
 {
-//    UCFNewLockContainerViewController *vc3 = [[UCFNewLockContainerViewController alloc] initWithType:RCLockViewTypeCheck];
-//    [SingGlobalView.rootNavController pushViewController:vc3 animated:YES complete:nil];
-//
-//    return;
-//    UCFTouchIDViewController *aa = [[UCFTouchIDViewController alloc] init];
-//    [self.rt_navigationController pushViewController:aa animated:YES complete:nil];
-//
-//    return;
-//    UCFUnlockViewController * vc1 = [[UCFUnlockViewController alloc] init];
-//    [self.rt_navigationController pushViewController:vc1 animated:YES complete:nil];
-//
-//    return;
-//    UCFCreateLockViewController *vc = [[UCFCreateLockViewController alloc] init];
-//    [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
-//    return;
     UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
-
 }
 - (void)viewDidLayoutSubviews
 {
@@ -232,16 +216,13 @@
         } else {
             [SingGlobalView.tabBarController setSelectedIndex:3];
         }
-        
     } else if([title isEqualToString:@"商城特惠"]){
         if ([self.remcommendUrl containsString:@"http"]) {
             [self pushWebViewWithUrl:self.remcommendUrl Title:@"商城特惠"];
         } else {
             [SingGlobalView.tabBarController setSelectedIndex:3];
         }
-        
     } else if ([title isEqualToString:@"智能出借"] || [title isEqualToString:@"优质债权"]) {
-        
         RTRootNavigationAddPushController *nav = SingGlobalView.tabBarController.viewControllers[1];
         RTContainerController *container = nav.viewControllers[0];
         UCFInvestViewController *vc  = container.contentViewController;
@@ -250,7 +231,6 @@
             [vc changeView];
         }
         [SingGlobalView.tabBarController setSelectedIndex:1];
-        
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -373,7 +353,6 @@
 }
 - (void)pushWebViewWithUrl:(NSString *)url Title:(NSString *)title
 {
-    
     if ([self.remcommendUrl containsString:@"http"]) {
         UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
         web.url = [NSString stringWithFormat:@"%@",url];

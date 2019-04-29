@@ -315,9 +315,13 @@
     webView.baseTitleType = @"lunbotuhtml";
     webView.url = bannermodel.url;
     webView.navTitle = bannermodel.title;
-    webView.dicForShare.url = bannermodel.url;
-    webView.dicForShare.thumb = bannermodel.thumb;
     webView.title = bannermodel.title;
+
+    UCFCycleModel *shareModel = [UCFCycleModel new];
+    shareModel.url = bannermodel.url;
+    shareModel.thumb = bannermodel.thumb;
+    shareModel.title = bannermodel.title;
+    webView.dicForShare = shareModel;
     webView.hidesBottomBarWhenPushed = YES;
     [_rootViewController.rt_navigationController pushViewController:webView animated:YES];
 }
