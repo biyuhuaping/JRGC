@@ -133,7 +133,7 @@
     [dataArr addObject:parmDict1];
     
     NSMutableDictionary *parmDict2 = [NSMutableDictionary dictionaryWithCapacity:1];
-    [parmDict2 setValue:[NSString stringWithFormat:@"¥%@起",self.model.prdTransferFore.investAmt] forKey:@"value"];
+    [parmDict2 setValue:[NSString stringWithFormat:@"¥%@元起",self.model.prdTransferFore.investAmt] forKey:@"value"];
     [parmDict2 setValue:@"起投金额" forKey:@"title"];
     [dataArr addObject:parmDict2];
     

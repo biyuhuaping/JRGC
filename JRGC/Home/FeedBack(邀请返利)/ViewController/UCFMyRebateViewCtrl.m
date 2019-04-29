@@ -515,7 +515,7 @@
             
             float tableViewRowHeight = 278;
             //判断好友返利是否为0.0
-            if([dic[@"lenderCommission"] floatValue] > 0 ){
+            if([dic[@"lenderCommission"] floatValue] > 0){
                 cell.friendRebateViewHeight.constant = 28;
                 cell.title_5.text = [NSString stringWithFormat:@"¥%@",dic[@"lenderCommission"]];//好友返利
             }else{
@@ -541,9 +541,10 @@
             
             cell.lab1.text = [NSString stringWithFormat:@"%@",dic[@"arate"]];//15%
             if ([dic[@"holdTime"]length] > 0) {
-                cell.lab2.text = [NSString stringWithFormat:@"%@~%@",dic[@"holdTime"],dic[@"repayPeriodtext"]];//投资期限
+                
+                cell.lab2.text = [NSString stringWithFormat:@"%@~%@",dic[@"holdTime"],  [dic objectSafeForKey:@"repayPeriodtext"]];//投资期限
             }else{
-                cell.lab2.text = dic[@"repayPeriodtext"];//30天
+                cell.lab2.text = [dic objectSafeForKey:@"repayPeriodtext"];//30天
             }
             cell.lab3.text = dic[@"repayModetext"];//一次结清
             

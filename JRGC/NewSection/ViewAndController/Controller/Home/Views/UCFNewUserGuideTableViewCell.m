@@ -133,8 +133,8 @@
     [self.leftBottombutton setImage:[UIImage imageNamed:@"risk_test_icon"] forState:UIControlStateNormal];
     [self.leftBottombutton setImage:[UIImage imageNamed:@"home_risk_account"] forState:UIControlStateDisabled];
 
-    [self.leftBottombutton setTitle:@"风险评测" forState:UIControlStateNormal];
-    [self.leftBottombutton setTitle:@"已评测   " forState:UIControlStateDisabled];
+    [self.leftBottombutton setTitle:@"风险测评" forState:UIControlStateNormal];
+    [self.leftBottombutton setTitle:@"已测评   " forState:UIControlStateDisabled];
     [self.leftBottombutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [self.leftBottombutton setTitleColor:[Color color:PGColorOptionTitleGray] forState:UIControlStateDisabled];
     
@@ -194,42 +194,48 @@
 {
     [super layoutSubviews];
     if (SingleUserInfo.loginData.userInfo.userId.length > 0) {
+        self.leftTopbutton.enabled = NO; //已注册
+        
         //用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码  
         switch ([SingleUserInfo.loginData.userInfo.openStatus integerValue]) {
             case 1:
-                self.leftTopbutton.enabled = NO;
                 self.rightTopbutton.enabled = YES;
-                self.leftBottombutton.enabled = YES;
                 self.rightBottombutton.enabled = YES;
-
+                if (SingleUserInfo.loginData.userInfo.isRisk) {
+                    self.leftBottombutton.enabled = NO;
+                } else {
+                    self.leftBottombutton.enabled = YES;
+                }
+                [self.bottomButton setTitle: @"开通存管账户" forState:UIControlStateNormal];
+                self.bottonBaseView.myVisibility = MyVisibility_Visible;
                 break;
             case 2:
+                self.rightTopbutton.enabled = NO;
+                self.rightBottombutton.enabled = YES;
+                if (SingleUserInfo.loginData.userInfo.isRisk) {
+                    self.leftBottombutton.enabled = NO;
+                } else {
+                    self.leftBottombutton.enabled = YES;
+                }
+                [self.bottomButton setTitle: @"设置交易密码" forState:UIControlStateNormal];
+                self.bottonBaseView.myVisibility = MyVisibility_Visible;
+                break;
             case 3:
             case 4:
-                self.leftTopbutton.enabled = NO;
                 self.rightTopbutton.enabled = NO;
-                self.leftBottombutton.enabled = YES;
                 self.rightBottombutton.enabled = YES;
+                if (SingleUserInfo.loginData.userInfo.isRisk) {
+                    self.leftBottombutton.enabled = NO;
+                    self.bottonBaseView.myVisibility = MyVisibility_Gone;
+                } else {
+                    self.leftBottombutton.enabled = YES;
+                    [self.bottomButton setTitle: @"进行风险评测" forState:UIControlStateNormal];
+                    self.bottonBaseView.myVisibility = MyVisibility_Visible;
+                }
                 break;
             default:
                 break;
         }
-        if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 4) {
-            
-            [self.bottomButton setTitle:[SingleUserInfo.loginData.userInfo.openStatus intValue] > 2 ?@"设置交易密码" : @"开通存管账户" forState:UIControlStateNormal];
-            self.bottonBaseView.myVisibility = MyVisibility_Visible;
-        } else {
-            if (SingleUserInfo.loginData.userInfo.isRisk) {
-                self.bottonBaseView.myVisibility = MyVisibility_Gone;
-                self.leftBottombutton.enabled = NO;
-                
-            } else {
-                [self.bottomButton setTitle:@"进行风险评测" forState:UIControlStateNormal];
-                self.bottonBaseView.myVisibility = MyVisibility_Visible;
-                self.leftBottombutton.enabled = YES;
-            }
-        }
-
     } else {
         self.leftTopbutton.enabled = YES;
         self.rightTopbutton.enabled = YES;

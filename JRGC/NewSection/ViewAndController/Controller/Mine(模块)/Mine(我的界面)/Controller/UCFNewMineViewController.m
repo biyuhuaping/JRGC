@@ -512,11 +512,11 @@
         //        DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
 
-//            if (SingleUserInfo.loginData.userInfo.zxIsNew == !model.data.zxAccountIsShow)
-//            {
-//                SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
-//                [SingleUserInfo setUserData:SingleUserInfo.loginData];
-//            }
+            if (SingleUserInfo.loginData.userInfo.zxIsNew != !model.data.zxAccountIsShow)
+            {
+                SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
+                [SingleUserInfo setUserData:SingleUserInfo.loginData];
+            }
             self.zxAccountIsShow = model.data.zxAccountIsShow;
             self.nmAccountIsShow = model.data.nmAccountIsShow;
             [self setTableViewArrayWithData:model];

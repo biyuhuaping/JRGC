@@ -102,12 +102,7 @@
     if (self.accoutType == SelectAccoutTypeGold) {
         baseTitleLabel.text = @"邀请返利";
     } else {
-//        UISegmentedControl *segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"邀请返利",@"邀请奖励"]];;
-//        segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
-//        [segmentContrl setTintColor:[UIColor redColor]];
-//        segmentContrl.selectedSegmentIndex = 0;
-//        [segmentContrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
-//        self.segmentedCtrl = segmentContrl;
+
         self.navigationItem.titleView = self.pageHeadView;
     }
     self.invitaionRebateVC = [[UCFFeedBackViewController alloc]initWithNibName:@"UCFFeedBackViewController" bundle:nil];

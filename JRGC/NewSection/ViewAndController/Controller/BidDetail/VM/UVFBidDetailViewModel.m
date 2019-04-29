@@ -271,7 +271,7 @@
 
         } else {
             NSMutableDictionary *parmDict3 = [NSMutableDictionary dictionaryWithCapacity:1];
-            [parmDict3 setValue:[NSString stringWithFormat:@"%ld",(long)self.model.data.minInvest] forKey:@"value"];
+            [parmDict3 setValue:[NSString stringWithFormat:@"%ld元起",(long)self.model.data.minInvest] forKey:@"value"];
             [parmDict3 setValue:@"起投金额" forKey:@"title"];
             [dataArr addObject:parmDict3];
 
@@ -282,15 +282,7 @@
             [dataArr addObject:parmDict4];
         }
     } else {
-        NSString *startDateMess = self.model.data.startDateMess;
-//        NSString *guTitle;
-//        NSDate *fixDate = [NSDateManager getDateWithDateDes:fixUpdate dateFormatterStr:@"yyyy-MM-dd"];
-//        guTitle = [NSString stringWithFormat:@"%@",[NSDateManager getDateDesWithDate:fixDate dateFormatterStr:@"yyyy-MM-dd"]];
-        
-        NSMutableDictionary *parmDict1 = [NSMutableDictionary dictionaryWithCapacity:1];
-        [parmDict1 setValue:startDateMess forKey:@"value"];
-        [parmDict1 setValue:@"起息日期" forKey:@"title"];
-        [dataArr addObject:parmDict1];
+
         
         NSMutableDictionary *parmDict2 = [NSMutableDictionary dictionaryWithCapacity:1];
         [parmDict2 setValue:self.model.data.repayModeText forKey:@"value"];
@@ -298,15 +290,30 @@
         [dataArr addObject:parmDict2];
         
         if (!_isP2P && [self.model.data.status integerValue] != 2) {
+            
+            NSString *startDateMess = self.model.data.startDateMess;
+            NSMutableDictionary *parmDict1 = [NSMutableDictionary dictionaryWithCapacity:1];
+            [parmDict1 setValue:startDateMess forKey:@"value"];
+            [parmDict1 setValue:@"起息日期" forKey:@"title"];
+            [dataArr addObject:parmDict1];
+            
             NSMutableDictionary *parmDict3 = [NSMutableDictionary dictionaryWithCapacity:1];
             [parmDict3 setValue:@"担保方" forKey:@"title"];
             [parmDict3 setValue:guaranteeCompanyNameStr forKey:@"value"];
             [dataArr addObject:parmDict3];
         } else {
+     
+            
             NSMutableDictionary *parmDict4 = [NSMutableDictionary dictionaryWithCapacity:1];
-            [parmDict4 setValue:[NSString stringWithFormat:@"%ld",(long)self.model.data.minInvest] forKey:@"value"];
+            [parmDict4 setValue:[NSString stringWithFormat:@"%ld元起",(long)self.model.data.minInvest] forKey:@"value"];
             [parmDict4 setValue:@"起投金额" forKey:@"title"];
             [dataArr addObject:parmDict4];
+            
+            NSString *startDateMess = self.model.data.startDateMess;
+            NSMutableDictionary *parmDict1 = [NSMutableDictionary dictionaryWithCapacity:1];
+            [parmDict1 setValue:startDateMess forKey:@"value"];
+            [parmDict1 setValue:@"起息日期" forKey:@"title"];
+            [dataArr addObject:parmDict1];
             
             NSMutableDictionary *parmDict5 = [NSMutableDictionary dictionaryWithCapacity:1];
             [parmDict5 setValue:@"担保方" forKey:@"title"];

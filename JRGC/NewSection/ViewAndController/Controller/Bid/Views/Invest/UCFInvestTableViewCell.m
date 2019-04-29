@@ -205,16 +205,16 @@
     if (microMoneyModel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
         if ([projectLabel.labelPriority integerValue] == 1) {
-            self.tiplabel.hidden = NO;
+            self.tiplabel.myVisibility = MyVisibility_Visible;
             self.tiplabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
             [self.tiplabel sizeToFit];
         }
         else {
-            self.tiplabel.hidden = YES;
+            self.tiplabel.myVisibility = MyVisibility_Gone;;
         }
     }
     else {
-        self.tiplabel.hidden = YES;
+        self.tiplabel.myVisibility = MyVisibility_Gone;;
     }
 
 
@@ -254,7 +254,6 @@
     //控制进度视图显示
     if (status < 3) {
         self.progressView.pathFillColor = UIColorWithRGB(0xff4133);
-        self.tiplabel.hidden = NO;
     }else{
         self.progressView.pathFillColor =  UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
         self.tiplabel.hidden = YES;
