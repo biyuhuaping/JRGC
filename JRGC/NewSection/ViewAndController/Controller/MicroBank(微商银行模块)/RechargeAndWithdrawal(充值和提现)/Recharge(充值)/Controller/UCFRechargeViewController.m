@@ -66,14 +66,14 @@
     if (!_transVC) {
         _transVC = [[UCFTransRechargeViewController alloc] initWithNibName:@"UCFTransRechargeViewController" bundle:nil];
         _transVC.accoutType = SelectAccoutTypeP2P;
-        _transVC.rootVc = self.parentViewController;
+        _transVC.rootVc = self;
     }
     return _transVC;
 }
 - (UCFQuickRechargeViewController *)quickVC {
     if (!_quickVC) {
         _quickVC = [[UCFQuickRechargeViewController alloc] initWithNibName:@"UCFQuickRechargeViewController" bundle:nil];
-        _quickVC.rootVc = self.parentViewController;
+        _quickVC.rootVc = self;
         _quickVC.accoutType = SelectAccoutTypeP2P;
         
     }

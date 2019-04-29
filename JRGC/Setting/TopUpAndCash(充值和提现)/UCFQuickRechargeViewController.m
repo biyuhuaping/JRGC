@@ -16,6 +16,7 @@
 #import "NSString+Misc.h"
 #import "AppDelegate.h"
 #import "HSHelper.h"
+#import "UCFMicroBankDepositoryAccountHomeViewController.h"
 @interface UCFQuickRechargeViewController ()<QuickRechargeHeadViewDelegate,UITableViewDelegate,UITableViewDataSource,UCFModifyReservedBankNumberDelegate,QuickIntroduceTableViewCellDelegate>
 {
     NSString *telNum;
@@ -281,7 +282,23 @@
             HSHelper *helper = [HSHelper new];
             [helper pushOpenHSType:self.accoutType Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav: ((UIViewController *)self.rootVc).navigationController];
         }
-    }else {
+    }
+    else if (alertView.tag == 1002) {
+        if (buttonIndex == 1) {
+//            HSHelper *helper = [HSHelper new];
+//            [helper pushOpenHSType:self.accoutType Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav: ((UIViewController *)self.rootVc).navigationController];
+            @PGWeakObj(self)
+            UCFMicroBankDepositoryAccountHomeViewController *vc = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
+//            [self.parentViewController.rt_navigationController pushViewController:vc animated:YES complete:^(BOOL finished) {
+//                [selfWeak.rt_navigationController removeViewController:selfWeak];
+//            }];
+           [ ((UIViewController *)self.rootVc).rt_navigationController pushViewController:vc animated:YES complete:^(BOOL finished) {
+                [((UIViewController *)selfWeak.rootVc).rt_navigationController removeViewController:(UIViewController *)selfWeak.rootVc];
+            }];
+            
+        }
+    }
+    else {
         if (buttonIndex == 1) {
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",[telNum  stringByReplacingOccurrencesOfString:@"-" withString:@""]];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];

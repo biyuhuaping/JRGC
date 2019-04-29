@@ -369,7 +369,7 @@
     { //判断是否设置交易密码
         NSMutableDictionary *parmDict = [NSMutableDictionary dictionaryWithCapacity:2];
         [parmDict setValue:[NSString stringWithFormat:@"%@",SingleUserInfo.loginData.userInfo.openStatus] forKey:@"userSatues"];
-        [parmDict setValue:@"1" forKey:@"fromSite"];
+        [parmDict setValue:@"2" forKey:@"fromSite"];
         
         UCFCashWithdrawalRequest *api = [[UCFCashWithdrawalRequest alloc] initWithParameterdict:parmDict];
         api.animatingView = self.view;

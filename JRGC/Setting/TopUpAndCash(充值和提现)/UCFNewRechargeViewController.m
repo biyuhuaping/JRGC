@@ -59,7 +59,7 @@
     _bottomRedView.frame = CGRectMake(center.x - CGRectGetWidth(_bottomRedView.frame)/2.0f, CGRectGetMinY(_bottomRedView.frame), CGRectGetWidth(_bottomRedView.frame), CGRectGetHeight(_bottomRedView.frame));
     _baseScroView.contentOffset = CGPointMake((button1.tag - 100) * ScreenWidth, 0);
     button1.selected = YES;
-    _quickVC.uperViewController = self.uperViewController;
+    _quickVC.uperViewController = self;
 }
 - (void)createUI
 {
@@ -154,7 +154,7 @@
     if (!_quickVC) {
         _quickVC = [[UCFQuickRechargeViewController alloc] initWithNibName:@"UCFQuickRechargeViewController" bundle:nil];
         _quickVC.view.frame = CGRectMake(0, 40, ScreenWidth, CGRectGetHeight(self.view.frame) - 40);
-        _quickVC.rootVc = _uperViewController;
+        _quickVC.rootVc = self;
         _quickVC.accoutType = SelectAccoutTypeP2P;
         
     }
