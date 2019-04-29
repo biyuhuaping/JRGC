@@ -49,7 +49,7 @@
     scrollView.backgroundColor = [UIColor clearColor];
     scrollView.myHorzMargin = 0;
     scrollView.topPos.equalTo(@0);
-    scrollView.bottomPos.equalTo(@57);
+    scrollView.bottomPos.equalTo(@50);
     scrollView.myHorzMargin = 0;
     [rootLayout addSubview:scrollView];
     self.scrollView = scrollView;

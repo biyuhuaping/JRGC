@@ -64,6 +64,15 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
     
     self.attributedText = attributed;
 }
+- (void)setFontColor:(UIColor *)color range:(NSRange)range lineSpace:(CGFloat)space
+{
+    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle1 setLineSpacing:space];
+    [attributed addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [self.attributedText length])];
+    [attributed addAttribute:NSForegroundColorAttributeName value:color range:range];
+    self.attributedText = attributed;
+}
 
 - (void)setFontColor:(UIColor *)color string:(NSString *)string
 {

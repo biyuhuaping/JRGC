@@ -30,6 +30,8 @@
 
 @property (nonatomic, strong) UCFNewCashParentViewController *db;
 
+@property (nonatomic, strong) UIView *noDataView;
+
 @end
 
 @implementation UCFInvestmentCouponCashTicketController
@@ -80,6 +82,7 @@
         _tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _tableView.delegate = self;
         _tableView.dataSource =self;
+        _tableView.tableRefreshDelegate = self;
         _tableView.enableRefreshHeader = NO;
         _tableView.enableRefreshFooter = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -87,9 +90,29 @@
         _tableView.leftPos.equalTo(@0);
         _tableView.rightPos.equalTo(@0);
         _tableView.bottomPos.equalTo(self.useEnterBtn.topPos);
+        _tableView.isShowDefaultPlaceHolder = YES;
         
     }
     return _tableView;
+}
+- (UIView *)setupPlaceHolder
+{
+    UIView *noDataView = [[UIView alloc] init];
+    noDataView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1 - 50 - 89 );
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake((ScreenWidth - (99 * WidthScale))/2, (ScreenHeight - NavigationBarHeight1 - 50 - 89 - (60 * WidthScale))/2 -30, 99 * WidthScale, 60 *WidthScale);
+    [button setBackgroundImage:[UIImage imageNamed:@"coupon_default_icon"] forState:UIControlStateNormal];
+    [noDataView addSubview:button];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(button.frame) + 10, ScreenWidth, 20)];
+    label.textColor = [Color color:PGColorOptionTitleGray];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"暂无优惠券";
+    label.font = [Color gc_Font:18 * HeightScale];
+    [noDataView addSubview:label];
+    
+    return noDataView;
 }
 - (UIImageView *)shadowView
 {

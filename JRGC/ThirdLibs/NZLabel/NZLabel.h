@@ -41,6 +41,8 @@ typedef void (^ZBLinkLabelBlock)(ZBLinkLabelModel *linkModel);
 - (void)addLinkString:(NSString *)linkString block:(ZBLinkLabelBlock)linkBlock;
 - (void)setMoreColor:(UIColor *)color string:(NSString *)string;
 - (void)setMoreFont:(UIFont *)font string:(NSString *)string;
+- (void)setFontColor:(UIColor *)color range:(NSRange)range lineSpace:(CGFloat)space;
+
 @end
 
 

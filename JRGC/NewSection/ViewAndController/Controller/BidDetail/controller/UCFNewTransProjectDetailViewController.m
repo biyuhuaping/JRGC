@@ -70,14 +70,14 @@
     contentLayout.heightSize.equalTo(@(155 + 40));
     
     self.showTableView.topPos.equalTo(self.navView.bottomPos);
-    self.showTableView.bottomPos.equalTo(@57);
+    self.showTableView.bottomPos.equalTo(@50);
     self.showTableView.myHorzMargin = 0;
     self.showTableView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
     [self.rootLayout addSubview:self.showTableView];
     
     self.showTableView.tableHeaderView = contentLayout;
     
-    UCFNewInvestBtnView *investView = [[UCFNewInvestBtnView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 57)];
+    UCFNewInvestBtnView *investView = [[UCFNewInvestBtnView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
     investView.topPos.equalTo(self.showTableView.bottomPos);
     investView.myHorzMargin = 0;
     investView.rightPos.equalTo(@0);
@@ -194,28 +194,6 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return 0.001;
-    } else {
-        return 0.001;
-    }
-}
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return nil;
-//        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-//        headView.backgroundColor = [UIColor whiteColor];
-//        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:headView isTop:YES];
-//        return headView;
-    } else {
-//        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-//        headView.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
-        return nil;
-    }
-}
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -224,17 +202,36 @@
         return 0.001;
     }
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 10;
+    } else {
+        return 10;
+    }
+}
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
         UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-        footView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-        //        [Common addLineViewColor:[Color color:PGColorOptionCellSeparatorGray] WithView:footView isTop:NO];
+        footView.backgroundColor = [Color color:PGColorOptionThemeWhite];
         return footView;
     } else {
         return nil;
     }
     
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        headView.backgroundColor = [Color color:PGColorOptionThemeWhite];
+        return headView;
+    } else {
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        headView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        return headView;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
