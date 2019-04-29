@@ -77,6 +77,11 @@
     [self setWebView];       //初始化webView 并加入js
     [self subErrorView];     //添加404页
 
+    /** 想要goBack不刷新页面的核心代码 BEGIN */
+//     id webView1 = [self.webView valueForKeyPath:@"_internal.browserView._webView"];
+//    id preferences = [webView1 valueForKey:@"preferences"];
+//    [preferences performSelector:@selector(_postCacheModelChangedNotification)];
+    /** 想要goBack不刷新页面的核心代码 END */
 }
 /*- (void)viewDidDisappear:(BOOL)animated
 {
@@ -260,7 +265,10 @@
 }
 
 #pragma mark - 初始化webView 并加入js
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+}
 - (void)setWebView
 {
     if (_bridge) { return; }

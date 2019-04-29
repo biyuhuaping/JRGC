@@ -24,7 +24,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    [self.webView reload];
+  
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -77,4 +77,12 @@
 //        }
 //    }];
 //}
+-(void)monitorUserGetOut
+{
+    [self.webView reload];
+}
+- (void)monitorUserLogin
+{
+    [self.webView reload];
+}
 @end
