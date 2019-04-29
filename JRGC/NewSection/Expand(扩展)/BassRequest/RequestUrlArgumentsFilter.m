@@ -74,8 +74,12 @@
     [tempParametersDic addEntriesFromDictionary:originParameters];
     [tempParametersDic addEntriesFromDictionary:parameters];
     NSDictionary *parametersDic = tempParametersDic;
-    if (SingleUserInfo.loginData.userInfo.userId) {
-        [tempParametersDic setValue:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
+    if (SingleUserInfo.loginData.userInfo.userId)
+    {
+        if (![[tempParametersDic allKeys] containsObject:@"userId"])
+        {
+            [tempParametersDic setValue:SingleUserInfo.loginData.userInfo.userId forKey:@"userId"];
+        }
         parametersDic = [Encryption getSinaturDictWithOrginalDict:tempParametersDic];
     }
     if (request.oldGCApi) {

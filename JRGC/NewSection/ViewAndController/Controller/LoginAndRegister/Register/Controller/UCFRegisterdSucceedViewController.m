@@ -391,8 +391,14 @@
 - (void)goToOpenAccount
 {
     _titleLabel.myVisibility = MyVisibility_Visible;
+    
     UCFMicroBankOpenAccountViewController *vc = [[UCFMicroBankOpenAccountViewController alloc] init];
-    [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
+    @PGWeakObj(self);
+    [self.rt_navigationController pushViewController:vc animated:YES complete:^(BOOL finished) {
+        [selfWeak.rt_navigationController removeViewController:selfWeak];
+        SingGlobalView.tabBarController.selectedIndex = 0;
+    }];
+
 }
 
 #pragma mark - 请求网络及回调
