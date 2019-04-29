@@ -366,14 +366,12 @@
             view.model = model;
             [self.navigationController pushViewController:view animated:YES];
         } else if (statue == 21 || statue == 7) {
-            HSHelper *helper = [HSHelper new];
-            NSInteger step = self.accoutType == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]: [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
-            [helper pushOpenHSType:self.accoutType Step:step nav:self.navigationController];
+            [self checkUserCanInvest];
         }else if (statue == 3 || statue == 4) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: model.statusdes delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
             alert.tag =7001;
             [alert show];
-        }else if (statue == 30) {
+        }else if (statue == 30 ) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: model.statusdes delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
             alert.tag = 9000;
             [alert show];
@@ -391,6 +389,44 @@
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
+- (BOOL)checkUserCanInvest
+{
+    BOOL isP2P = self.accoutType == SelectAccoutTypeP2P ? YES : NO;
+    
+    NSInteger step = isP2P  ? [SingleUserInfo.loginData.userInfo.openStatus intValue]: [SingleUserInfo.loginData.userInfo.zxOpenStatus intValue];
+    switch (step)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            [self showHSAlert:isP2P ? P2PTIP1 : ZXTIP1];
+            return NO;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            [self showHSAlert:isP2P ? P2PTIP2 : ZXTIP2];
+            return NO;
+        }
+            break;
+        case 5://特殊用户
+        {
+            //            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:[NSString stringWithFormat:@"%@staticRe/remind/withdraw.jsp",SERVER_IP] title:@""];
+            //            webController.baseTitleType = @"specialUser";
+            //            [self.navigationController pushViewController:webController animated:YES];
+            return YES;
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 8000;
+    [alert show];
+}
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 7001 || alertView.tag == 7000) {
@@ -405,6 +441,12 @@
     }else if(alertView.tag == 9001){
         if (buttonIndex == 1) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+        }
+    } else if(alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            NSInteger step = self.accoutType == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]: [SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+            [helper pushOpenHSType:self.accoutType Step:step nav:self.navigationController];
         }
     }
     

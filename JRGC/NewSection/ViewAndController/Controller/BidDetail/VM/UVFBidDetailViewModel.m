@@ -250,14 +250,14 @@
 - (NSArray *)getTableViewData
 {
     _isP2P = YES;
-    NSString *fixUpdate = @"";
+    NSString *startDateMess = @"";
     NSString *guaranteeCompanyNameStr  = @"";
 
     guaranteeCompanyNameStr = self.model.data.guaranteeCompanyName;
-    fixUpdate = self.model.data.fixedDate;
+    startDateMess = self.model.data.startDateMess;
     NSMutableArray *dataArr = [NSMutableArray arrayWithCapacity:4];
     //如果没有固定起息日
-    if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
+    if ([startDateMess isEqual:[NSNull null]] || [startDateMess isEqualToString:@""] || !startDateMess) {
 
         NSMutableDictionary *parmDict1 = [NSMutableDictionary dictionaryWithCapacity:1];
         [parmDict1 setValue:self.model.data.repayModeText forKey:@"value"];
@@ -271,7 +271,7 @@
 
         } else {
             NSMutableDictionary *parmDict3 = [NSMutableDictionary dictionaryWithCapacity:1];
-            [parmDict3 setValue:[NSString stringWithFormat:@"%ld",self.model.data.minInvest] forKey:@"value"];
+            [parmDict3 setValue:[NSString stringWithFormat:@"%ld",(long)self.model.data.minInvest] forKey:@"value"];
             [parmDict3 setValue:@"起投金额" forKey:@"title"];
             [dataArr addObject:parmDict3];
 
@@ -282,14 +282,14 @@
             [dataArr addObject:parmDict4];
         }
     } else {
-        NSString *fixUpdate = self.model.data.fixedDate;
-        NSString *guTitle;
-        NSDate *fixDate = [NSDateManager getDateWithDateDes:fixUpdate dateFormatterStr:@"yyyy-MM-dd"];
-        guTitle = [NSString stringWithFormat:@"%@",[NSDateManager getDateDesWithDate:fixDate dateFormatterStr:@"yyyy-MM-dd"]];
+        NSString *startDateMess = self.model.data.startDateMess;
+//        NSString *guTitle;
+//        NSDate *fixDate = [NSDateManager getDateWithDateDes:fixUpdate dateFormatterStr:@"yyyy-MM-dd"];
+//        guTitle = [NSString stringWithFormat:@"%@",[NSDateManager getDateDesWithDate:fixDate dateFormatterStr:@"yyyy-MM-dd"]];
         
         NSMutableDictionary *parmDict1 = [NSMutableDictionary dictionaryWithCapacity:1];
-        [parmDict1 setValue:guTitle forKey:@"value"];
-        [parmDict1 setValue:@"固定起息日" forKey:@"title"];
+        [parmDict1 setValue:startDateMess forKey:@"value"];
+        [parmDict1 setValue:@"起息日期" forKey:@"title"];
         [dataArr addObject:parmDict1];
         
         NSMutableDictionary *parmDict2 = [NSMutableDictionary dictionaryWithCapacity:1];
@@ -304,7 +304,7 @@
             [dataArr addObject:parmDict3];
         } else {
             NSMutableDictionary *parmDict4 = [NSMutableDictionary dictionaryWithCapacity:1];
-            [parmDict4 setValue:[NSString stringWithFormat:@"%ld",self.model.data.minInvest] forKey:@"value"];
+            [parmDict4 setValue:[NSString stringWithFormat:@"%ld",(long)self.model.data.minInvest] forKey:@"value"];
             [parmDict4 setValue:@"起投金额" forKey:@"title"];
             [dataArr addObject:parmDict4];
             

@@ -135,8 +135,7 @@
         [whitBaseView addSubview:self.rateTipLab];
         self.rateTipLab.textColor = [Color color:PGColorOptionTitleGray];
         
-  
-        
+
         self.timeLimitTipLab.centerXPos.equalTo(whitBaseView.centerXPos).offset(-10);;
         self.timeLimitTipLab.bottomPos.equalTo(whitBaseView.bottomPos).offset(20);
         self.timeLimitTipLab.textColor = [Color color:PGColorOptionTitleGray];
@@ -260,7 +259,7 @@
         self.tiplabel.hidden = YES;
     }
 
-    if (microModel.platformSubsidyExpense.length > 0) {//贴
+    if (microModel.platformSubsidyExpense.length > 0 && [microModel.platformSubsidyExpense floatValue] > 0.01) {//贴
         self.imageView1.myVisibility = MyVisibility_Visible;
     }
     else {
@@ -274,7 +273,6 @@
     }
     if (microModel.fixedDate.length > 0) {//贴
         self.imageView3.myVisibility = MyVisibility_Visible;
-        
     }
     else {
         self.imageView3.myVisibility = MyVisibility_Gone;
@@ -285,14 +283,6 @@
     else {
         self.imageView4.myVisibility = MyVisibility_Gone;
     }
-//    if ([microModel.platformSubsidyExpense floatValue] > 0.00) {
-//        self.addedRateLabel.text = [NSString stringWithFormat:@"+%@%%",microModel.platformSubsidyExpense];
-//        self.addedRateLabel.hidden = NO;
-//    }
-//    else {
-//        self.addedRateLabel.text = @"";
-//        self.addedRateLabel.hidden = YES;
-//    }
 }
 - (void)layoutSubviews
 {

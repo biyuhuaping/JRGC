@@ -178,7 +178,7 @@
     [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
     rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
-    rightbutton.titleLabel.textColor = [UIColor whiteColor];
+    rightbutton.titleLabel.textColor = [UIColor blackColor];
     [rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
     [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
 

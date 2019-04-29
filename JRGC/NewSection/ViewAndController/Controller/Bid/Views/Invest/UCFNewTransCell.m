@@ -43,13 +43,14 @@
         [self.rootLayout addSubview:whitBaseView];
         
         self.addRateTipView.rightPos.equalTo(whitBaseView.rightPos);
-        self.addRateTipView.mySize = CGSizeMake(90, 20);
-        self.addRateTipView.myTop = 12;
-        [whitBaseView addSubview:self.addRateTipView];
+        self.addRateTipView.widthSize.equalTo(@90);
+        self.addRateTipView.heightSize.equalTo(@20);
+        self.addRateTipView.topPos.equalTo(@20);
         [self.addRateTipView setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
             [v rc_bezierPathWithRoundedRect:v.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(10, 10)];
         }];
-        
+        [whitBaseView addSubview:self.addRateTipView];
+
         
         NSArray *colorArray = [NSArray arrayWithObjects:UIColorWithRGB(0xFF4133),UIColorWithRGB(0xFF7F40), nil];
         UIImage *image = [UIImage imageGradientByColorArray:colorArray ImageSize:CGSizeMake(90, 20) gradientType:leftToRight];
@@ -88,12 +89,11 @@
 {
     _model = model;
     if ([_model.discountRate floatValue] >= 0.01) {
-        _addRateTipView.myVisibility = MyVisibility_Visible;
         NSString *showStr = [NSString stringWithFormat:@"奖本金%@%%工豆",_model.discountRate];
         [_addRateTipView setTitle:showStr forState:UIControlStateNormal];
-        
+        _addRateTipView.myVisibility = MyVisibility_Visible;
     } else {
-        _addRateTipView.myVisibility = MyVisibility_Gone;
+        _addRateTipView.myVisibility = MyVisibility_Invisible;
     }
     
     self.rateLab.text = [NSString stringWithFormat:@"%@%%",_model.transfereeYearRate];
