@@ -223,12 +223,13 @@
         // 你可以直接在这里使用 self
         DDLogDebug(@"---------%@",request.responseJSONModel);
         UCFMicroBankOpenAccountTradersPasswordSetHsPwdReturnJsonModel *model = [request.responseJSONModel copy];
+        NSDictionary *dic = request.responseObject;
         if (model.ret == YES)
         {
             AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
             webView.title = @"即将跳转";
             webView.url = model.data.url;
-            webView.webDataDic =  [NSDictionary dictionaryWithObjectsAndKeys:model.data.tradeReq.PARAMS,@"PARAMS", nil];
+            webView.webDataDic = dic[@"data"][@"tradeReq"];
             [self.rt_navigationController pushViewController:webView animated:YES complete:^(BOOL finished) {
                 //进入设置交易密码页面,把开户页面的根视图去掉,返回不再返回到开户页面,直接到h开户页面的上一级
                 [self.rt_navigationController removeViewController: self.parentViewController];
