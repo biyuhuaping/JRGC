@@ -17,7 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _showView = [[UCFTransferTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight -NavigationBarHeight1 - 40)];
+    _showView = [[UCFTransferTableView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, ScreenHeight -NavigationBarHeight1 - 40)];
+    _showView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     _showView.delegate = self;
     [self.view addSubview:_showView];
 }

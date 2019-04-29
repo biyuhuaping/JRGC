@@ -12,6 +12,7 @@
 #import "NZLabel.h"
 #import "UCFNewBindPhoneNumSMSViewController.h"
 #import "UIImageView+NetImageView.h"
+#import "UCFNewFindPassWordViewController.h"
 @interface UCFNewBindPhoneNumViewController() <UITextFieldDelegate, UIAlertViewDelegate>{
     NSString    *previousTextFieldContent;
     UITextRange *previousSelection;
@@ -40,6 +41,8 @@
 // 下一步
 @property (strong, nonatomic) UIButton *nextBtn;
 
+@property (nonatomic, strong) UIButton *forgetBtn;//忘记密码
+
 @end
 @implementation UCFNewBindPhoneNumViewController
 - (void)viewDidLoad {
@@ -60,6 +63,8 @@
     [self.rootLayout addSubview:self.showPassWordBtn];
     [self.rootLayout addSubview:self.passWordLine];
     [self.rootLayout addSubview:self.nextBtn];
+    [self.rootLayout addSubview:self.forgetBtn];
+    
 }
 - (NZLabel *)titleLabel
 {
@@ -255,7 +260,28 @@
     }
     return _nextBtn;
 }
-
+- (UIButton*)forgetBtn{
+    
+    if(_forgetBtn == nil)
+    {
+        _forgetBtn = [UIButton buttonWithType:0];
+        _forgetBtn.topPos.equalTo(self.nextBtn.bottomPos).offset(15);
+        _forgetBtn.leftPos.equalTo(@25);
+        _forgetBtn.widthSize.equalTo(@70);
+        _forgetBtn.heightSize.equalTo(@30);
+        [_forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
+        _forgetBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _forgetBtn.titleLabel.font= [Color gc_Font:13.0];
+        [_forgetBtn addTarget:self action:@selector(buttonforgetClick) forControlEvents:UIControlEventTouchUpInside];
+        [_forgetBtn setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
+    }
+    return _forgetBtn;
+}
+-(void)buttonforgetClick
+{
+    UCFNewFindPassWordViewController *vc = [[UCFNewFindPassWordViewController alloc] init];
+    [self.rt_navigationController pushViewController:vc animated:YES];
+}
 - (void)textFieldEditChanged:(UITextField *)textField
 {
     [self inspectTextField]; //个人用户输入界面

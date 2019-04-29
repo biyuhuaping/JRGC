@@ -120,7 +120,7 @@
     if (nil == _firstStepLabel) {
         _firstStepLabel = [NZLabel new];
         _firstStepLabel.centerYPos.equalTo(self.firstLayout.centerYPos);
-        _firstStepLabel.leftPos.equalTo(self.firstStepImageView.rightPos).offset(2);
+        _firstStepLabel.leftPos.equalTo(self.firstStepImageView.rightPos).offset(4);
         _firstStepLabel.textAlignment = NSTextAlignmentLeft;
         _firstStepLabel.font = [Color gc_Font:15.0];
         _firstStepLabel.text = @"徽商存管";
@@ -173,7 +173,7 @@
     if (nil == _secondStepLabel) {
         _secondStepLabel = [NZLabel new];
         _secondStepLabel.centerYPos.equalTo(self.secondLayout.centerYPos);
-        _secondStepLabel.leftPos.equalTo(self.secondStepImageView.rightPos).offset(2);
+        _secondStepLabel.leftPos.equalTo(self.secondStepImageView.rightPos).offset(4);
         _secondStepLabel.textAlignment = NSTextAlignmentLeft;
         _secondStepLabel.font = [Color gc_Font:15.0];
         _secondStepLabel.textColor = [Color color:PGColorOptionTitleGray];

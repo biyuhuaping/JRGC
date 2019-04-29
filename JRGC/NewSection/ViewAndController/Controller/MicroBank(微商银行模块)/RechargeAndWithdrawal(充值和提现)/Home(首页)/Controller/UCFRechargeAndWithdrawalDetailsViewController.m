@@ -110,12 +110,13 @@
 {
     if (nil == _accoutLabel) {
         _accoutLabel = [NZLabel new];
-        _accoutLabel.topPos.equalTo(self.balanceLabel.bottomPos).offset(10);
+        _accoutLabel.topPos.equalTo(self.balanceLabel.bottomPos).offset(0);
         _accoutLabel.centerXPos.equalTo(self.rootLayout.centerXPos);
         _accoutLabel.textAlignment = NSTextAlignmentCenter;
         _accoutLabel.font = [Color gc_Font:40.0];
         _accoutLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _accoutLabel.text = [NSString stringWithFormat:@"¥%0.2f", self.accoutBalance];
+        _accoutLabel.text = [NSString stringWithFormat:@"¥%@",[NSString  AddComma:[NSString stringWithFormat:@"%0.2f", self.accoutBalance]]] ;
+        [_accoutLabel setFont:[Color gc_Font:30.0] string:@"¥"];
         [_accoutLabel sizeToFit];
     }
     return _accoutLabel;
@@ -125,7 +126,7 @@
     if(nil == _wjRechargeBtn)
     {
         _wjRechargeBtn = [UIButton buttonWithType:0];
-        _wjRechargeBtn.topPos.equalTo(self.accoutLabel.bottomPos).offset(50);
+        _wjRechargeBtn.topPos.equalTo(self.accoutLabel.bottomPos).offset(45);
         _wjRechargeBtn.rightPos.equalTo(@25);
         _wjRechargeBtn.leftPos.equalTo(@25);
         _wjRechargeBtn.heightSize.equalTo(@40);
@@ -183,7 +184,7 @@
     if(nil == _zxWithdrawaBtn)
     {
         _zxWithdrawaBtn = [UIButton buttonWithType:0];
-        _zxWithdrawaBtn.topPos.equalTo(self.accoutLabel.bottomPos).offset(50);
+        _zxWithdrawaBtn.topPos.equalTo(self.accoutLabel.bottomPos).offset(45);
         _zxWithdrawaBtn.rightPos.equalTo(@25);
         _zxWithdrawaBtn.leftPos.equalTo(@25);
         _zxWithdrawaBtn.heightSize.equalTo(@40);
@@ -210,7 +211,7 @@
     if(nil == _goldWithdrawaBtn)
     {
         _goldWithdrawaBtn = [UIButton buttonWithType:0];
-        _goldWithdrawaBtn.topPos.equalTo(self.accoutLabel.bottomPos).offset(50);
+        _goldWithdrawaBtn.topPos.equalTo(self.accoutLabel.bottomPos).offset(45);
         _goldWithdrawaBtn.rightPos.equalTo(@25);
         _goldWithdrawaBtn.leftPos.equalTo(@25);
         _goldWithdrawaBtn.heightSize.equalTo(@40);

@@ -836,7 +836,7 @@
             _counter = 59;
             
             _customLabel1.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",SingleUserInfo.loginData.userInfo.mobile];
-            [_customLabel1 setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"点击这里"];
+            [_customLabel1 setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"语音验证码"];
             _customLabel1.hidden = NO;
             _customLabel1.userInteractionEnabled = YES;
             if ([self.currentMSGRoute isEqualToString:@"VMS"]) {

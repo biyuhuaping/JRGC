@@ -19,6 +19,7 @@
 - (void)refreshView
 {
     _showTableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+    _showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     [_showTableView reloadData];
     [_showTableView updateConstraints];
 }

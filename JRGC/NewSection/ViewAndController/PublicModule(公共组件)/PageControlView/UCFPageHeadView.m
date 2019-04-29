@@ -130,7 +130,7 @@
 - (UIView *)indicateView
 {
     if (nil == _indicateView) {
-        _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 5, 36, 4)];
+        _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 6, 36, 4)];
         _indicateView.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
         _indicateView.layer.cornerRadius = 2.0f;
         _indicateView.clipsToBounds = YES;

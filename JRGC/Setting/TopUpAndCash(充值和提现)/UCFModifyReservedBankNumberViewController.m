@@ -244,7 +244,7 @@
                     _telServerLabel.text = tempText;
                 }
                 __weak typeof(self) weakSelf = self;
-                [_telServerLabel addLinkString:@"点击这里" block:^(ZBLinkLabelModel *linkModel) {
+                [_telServerLabel addLinkString:@"语音验证码" block:^(ZBLinkLabelModel *linkModel) {
                     if (_counter > 0 && _counter < 60) {
                         [AuxiliaryFunc showToastMessage:weakSelf.getCodeBtn.titleLabel.text withView:weakSelf.view];
                         return;
@@ -254,7 +254,7 @@
                     }
                     
                 }];
-                [_telServerLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"点击这里"];
+                [_telServerLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"语音验证码"];
             }else{
                 self.getCodeBtn.userInteractionEnabled = YES;
                 NSString *messageStr = [dic objectSafeForKey:@"message"];

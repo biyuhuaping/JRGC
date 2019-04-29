@@ -56,6 +56,7 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     _noDataView = [[UCFNoDataView alloc] initWithFrame:self.cashRecordTable.bounds errorTitle:@"暂无数据"];
+    _cashRecordTable.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 }
 - (void)getCashRecordListHttpRequset
 {
@@ -133,11 +134,11 @@
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return 33;
-    }
-    return 43;
-
+//    if (section == 0) {
+//
+//    }
+//    return 43;
+    return 33;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     // 1.创建头部控件
@@ -146,7 +147,7 @@
     headerView.backgroundColor = UIColorWithRGB(0xf5f5f5) ;
 //    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
 //    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
-    UILabel *headTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, ScreenWidth -30, 33)];
+    UILabel *headTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 33-15, ScreenWidth -30, 15)];
     headTitleLab.font = [UIFont systemFontOfSize:14];
     headTitleLab.textColor = UIColorWithRGB(0xB1B5C2);
 //    [view addSubview:headTitleLab];

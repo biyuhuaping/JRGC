@@ -87,8 +87,8 @@
     rightbutton.backgroundColor = [UIColor clearColor];
     [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
     [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
-    [rightbutton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    [rightbutton setTitleColor:UIColorWithRGB(0x333333) forState:UIControlStateNormal];
+    [rightbutton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [rightbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
     [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
@@ -144,7 +144,7 @@
 {
     if (!_transVC) {
         _transVC = [[UCFTransRechargeViewController alloc] initWithNibName:@"UCFTransRechargeViewController" bundle:nil];
-        _transVC.view.frame = CGRectMake(ScreenWidth, 40, ScreenWidth, CGRectGetHeight(self.view.frame) - 40);
+        _transVC.view.frame = CGRectMake(ScreenWidth, 44, ScreenWidth, CGRectGetHeight(self.view.frame) - 44);
         _transVC.accoutType = SelectAccoutTypeP2P;
         _transVC.rootVc = self;
     }
@@ -153,7 +153,7 @@
 - (UCFQuickRechargeViewController *)quickVC {
     if (!_quickVC) {
         _quickVC = [[UCFQuickRechargeViewController alloc] initWithNibName:@"UCFQuickRechargeViewController" bundle:nil];
-        _quickVC.view.frame = CGRectMake(0, 40, ScreenWidth, CGRectGetHeight(self.view.frame) - 40);
+        _quickVC.view.frame = CGRectMake(0, 44, ScreenWidth, CGRectGetHeight(self.view.frame) - 44);
         _quickVC.rootVc = self;
         _quickVC.accoutType = SelectAccoutTypeP2P;
         

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,47 +24,40 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzG-OX-JER">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <subviews>
                         <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSQ-Nf-Fps">
-                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="40"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="快捷充值">
-                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <state key="selected">
-                                <color key="titleColor" red="1" green="0.1513113351" blue="0.29841413449999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="1" green="0.25490196078431371" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="topButtonClick:" destination="-1" eventType="touchUpInside" id="fHU-nJ-vzV"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVp-R0-IXD">
-                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="40"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="转账充值">
-                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <state key="selected">
-                                <color key="titleColor" red="1" green="0.1513113351" blue="0.29841413449999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="1" green="0.25490196078431371" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="topButtonClick:" destination="-1" eventType="touchUpInside" id="qic-dB-sbk"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scA-S4-6tr">
-                            <rect key="frame" x="100" y="37" width="65" height="3"/>
-                            <color key="backgroundColor" red="1" green="0.1513113351" blue="0.29841413449999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="100" y="36" width="36" height="6"/>
+                            <color key="backgroundColor" red="1" green="0.25490196078431371" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="3" id="5sl-xV-KgY"/>
-                                <constraint firstAttribute="width" constant="65" id="u5n-tV-cM8"/>
-                            </constraints>
-                        </view>
-                        <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFH-YM-BMu">
-                            <rect key="frame" x="0.0" y="39" width="375" height="1"/>
-                            <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="Kyz-QK-bnZ"/>
+                                <constraint firstAttribute="height" constant="6" id="5sl-xV-KgY"/>
+                                <constraint firstAttribute="width" constant="36" id="u5n-tV-cM8"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -73,17 +66,14 @@
                         <constraint firstItem="scA-S4-6tr" firstAttribute="leading" secondItem="gzG-OX-JER" secondAttribute="leading" constant="100" id="3bq-oB-Qgm"/>
                         <constraint firstAttribute="bottom" secondItem="CVp-R0-IXD" secondAttribute="bottom" id="71T-6K-VJ3"/>
                         <constraint firstItem="CVp-R0-IXD" firstAttribute="top" secondItem="gzG-OX-JER" secondAttribute="top" id="8eJ-fd-iwy"/>
-                        <constraint firstAttribute="bottom" secondItem="qFH-YM-BMu" secondAttribute="bottom" id="Fhy-zV-MYh"/>
                         <constraint firstAttribute="bottom" secondItem="YSQ-Nf-Fps" secondAttribute="bottom" id="GGJ-X1-udw"/>
-                        <constraint firstAttribute="bottom" secondItem="scA-S4-6tr" secondAttribute="bottom" id="GJP-Li-hSE"/>
-                        <constraint firstAttribute="height" constant="40" id="N6T-dm-3wJ"/>
+                        <constraint firstAttribute="bottom" secondItem="scA-S4-6tr" secondAttribute="bottom" constant="2" id="GJP-Li-hSE"/>
+                        <constraint firstAttribute="height" constant="44" id="N6T-dm-3wJ"/>
                         <constraint firstItem="CVp-R0-IXD" firstAttribute="leading" secondItem="YSQ-Nf-Fps" secondAttribute="trailing" id="PnZ-E4-Orq"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="VLO-GT-IQ0"/>
-                        <constraint firstItem="qFH-YM-BMu" firstAttribute="leading" secondItem="gzG-OX-JER" secondAttribute="leading" id="diA-90-2hj"/>
                         <constraint firstItem="YSQ-Nf-Fps" firstAttribute="leading" secondItem="gzG-OX-JER" secondAttribute="leading" id="eHX-bP-ltP"/>
                         <constraint firstItem="CVp-R0-IXD" firstAttribute="width" secondItem="YSQ-Nf-Fps" secondAttribute="width" id="hRU-bj-nSy"/>
                         <constraint firstItem="YSQ-Nf-Fps" firstAttribute="top" secondItem="gzG-OX-JER" secondAttribute="top" id="rmD-8M-8Co"/>
-                        <constraint firstAttribute="trailing" secondItem="qFH-YM-BMu" secondAttribute="trailing" id="rqU-4d-4S8"/>
                         <constraint firstAttribute="trailing" secondItem="CVp-R0-IXD" secondAttribute="trailing" id="wik-cq-9bc"/>
                     </constraints>
                 </view>
@@ -95,7 +85,7 @@
                 <constraint firstAttribute="trailing" secondItem="gzG-OX-JER" secondAttribute="trailing" id="wWS-t1-Onx"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
-            <point key="canvasLocation" x="-186" y="-34"/>
+            <point key="canvasLocation" x="-356" y="-193"/>
         </view>
     </objects>
 </document>

@@ -113,7 +113,7 @@
         _scrollView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _scrollView.leftPos.equalTo(@0);
         _scrollView.rightPos.equalTo(@0);
-        _scrollView.topPos.equalTo(@10);
+        _scrollView.topPos.equalTo(@0);
         _scrollView.bottomPos.equalTo(@0);
     }
     return _scrollView;
@@ -229,7 +229,8 @@
     //开户行名称
     self.bankId  = [NSString stringWithFormat:@"%@",data[@"bankId"]];
     self.selectBankView.oaContentLabel.text = data[@"bankName"];
-    [self.selectBankView sizeToFit];
+    self.selectBankView.oaContentLabel.textColor = [Color color:PGColorOptionTitleBlackGray];
+    [self.selectBankView.oaContentLabel sizeToFit];
     //银行logo
     NSURL *url = [NSURL URLWithString:data[@"logoUrl"]];
     [self.selectBankView.bankImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"bank_default"]];
@@ -521,13 +522,15 @@
             if (self.GetOpenAccountModel.data.userInfo.bankCard.length > 0) {
                 //将银行卡（textField3）要显示的文字四位分隔
                 self.bankNumView.contentField.text  = [NSString bankIdSeparate:self.GetOpenAccountModel.data.userInfo.bankCard];
+                [self.bankNumView.contentField sizeToFit];
             }
             
             //银行logo
             if (self.GetOpenAccountModel.data.userInfo.bankName.length > 0)
             {//如果有银行名称，就显示名称，否则显示“请选择”
                 self.selectBankView.oaContentLabel.text = self.GetOpenAccountModel.data.userInfo.bankName;
-                
+                self.selectBankView.oaContentLabel.textColor = [Color color:PGColorOptionTitleBlackGray];
+                [self.selectBankView.oaContentLabel sizeToFit];
             }
             
             if (self.GetOpenAccountModel.data.userInfo.bankLogo.length > 0) {
@@ -573,8 +576,8 @@
             NSString *replaceStr = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.phoneNum startLocation:3 lenght:self.GetOpenAccountModel.data.userInfo.phoneNum.length -7];
             self.smsLabel.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",replaceStr];
             [self.smsLabel sizeToFit];
-            [self.smsLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"点击这里"];
-            [self.smsLabel addLinkString:@"点击这里" block:^(ZBLinkLabelModel *linkModel) {
+            [self.smsLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"语音验证码"];
+            [self.smsLabel addLinkString:@"语音验证码" block:^(ZBLinkLabelModel *linkModel) {
                 if (![weakSelf.smsView.verifyCodeButton getIsCountDown]) {
                     [weakSelf statVerifyCodeRequest:@"VMS"];
                 }

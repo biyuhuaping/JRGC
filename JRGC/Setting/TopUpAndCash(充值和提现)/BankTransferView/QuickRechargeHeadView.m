@@ -31,7 +31,12 @@
         [self.delegate quickRechargeHeadView:self rechargeButtonClick:sender];
     }
 }
-
+- (void)setButtonStyle
+{
+    [self.rechargeButton setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
+    //切割超出圆角范围的子视图
+    self.rechargeButton.layer.masksToBounds = YES;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -92,7 +92,7 @@
         _cuttingLineView.myWidth = 0.5;
         _cuttingLineView.myHeight = 20;
         _cuttingLineView.centerYPos.equalTo(self.rootLayout.centerYPos);
-        _cuttingLineView.myRight = 123;
+        _cuttingLineView.rightPos.equalTo(self.verifyCodeButton.leftPos);
         _cuttingLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         //
     }
@@ -154,7 +154,7 @@
         }];
         
         _verifyCodeButton.rightPos.equalTo(@0);
-        _verifyCodeButton.widthSize.equalTo(@122);
+        _verifyCodeButton.widthSize.equalTo(@142);
         _verifyCodeButton.heightSize.equalTo(self.rootLayout.heightSize);
         _verifyCodeButton.centerYPos.equalTo(self.rootLayout.centerYPos);
         [_verifyCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
