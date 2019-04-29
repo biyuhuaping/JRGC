@@ -33,7 +33,7 @@
     
         self.showImagesDataArr = [NSMutableArray arrayWithCapacity:4];
         NSDictionary *dict0 = @{@"img":@"home_icon_shop",@"title":@"豆哥商城"};
-        NSDictionary *dict1 = @{@"img":@"mine_icon_coupon",@"title":@"领券中心"};
+        NSDictionary *dict1 = @{@"img":@"home_mine_icon_coupon",@"title":@"领券中心"};
         NSDictionary *dict2 = @{@"img":@"home_icon_rebate",@"title":@"邀请返利"};
         NSDictionary *dict3 = @{@"img":@"home_icon_shell",@"title":@"工力工贝"};
         [self.showImagesDataArr addObject:dict0];

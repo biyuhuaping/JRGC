@@ -91,7 +91,7 @@
     [self.rootLayout addSubview:self.pageController];
 
     
-    UCFNewInvestBtnView *investView = [[UCFNewInvestBtnView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 57)];
+    UCFNewInvestBtnView *investView = [[UCFNewInvestBtnView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
     investView.myHorzMargin = 0;
     investView.bottomPos.equalTo(@0);
     self.investView = investView;

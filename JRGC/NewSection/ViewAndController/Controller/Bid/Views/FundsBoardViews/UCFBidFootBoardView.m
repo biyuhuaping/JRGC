@@ -10,6 +10,7 @@
 #import "YYLabel.h"
 #import "NSAttributedString+YYText.h"
 #import "NZLabel.h"
+#import "UILabel+Misc.h"
 @interface UCFBidFootBoardView()
 @property(nonatomic, strong) UIView     *firstSectionView;
 @property(nonatomic, strong) YYLabel *limitAmountMessLabel;
@@ -17,7 +18,7 @@
 @property(nonatomic, strong) UIView     *thirdSectionView;
 @property(nonatomic, strong) UIView     *fourSectionView;
 @property(nonatomic, strong) NZLabel    *contractMsgLabel;
-@property(nonatomic, strong) UIView     *fiveSectionView;
+//@property(nonatomic, strong) UIView     *fiveSectionView;
 @property(nonatomic, strong) UIView     *sixSectionView;
 @property(nonatomic, strong) UIView     *sevenSectionView;
 @property(nonatomic, weak)UCFBidViewModel *myVM;
@@ -76,7 +77,7 @@
 //                __weak typeof(self) weakSelf = self;
                 for (int i = 0; i < contractMsg.count; i++) {
                     NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsg objectAtIndex:i] valueForKey:@"contractName"]] ;
-                    [selfWeak.contractMsgLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[totalStr rangeOfString:tmpStr]];
+                    [selfWeak.contractMsgLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[totalStr rangeOfString:tmpStr] lineSpace:5];
                     
                     [selfWeak.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
                         NSLog(@"111");
@@ -127,10 +128,9 @@
                     UCFTransPureContractmsg *md = [contractMsg objectAtIndex:i];
 
                     NSString *tmpStr = [NSString stringWithFormat:@"《%@》",md.contractName] ;
-                    [selfWeak.contractMsgLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[totalStr rangeOfString:tmpStr]];
+                    [selfWeak.contractMsgLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[totalStr rangeOfString:tmpStr] lineSpace:5];
                     
                     [selfWeak.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
-                        NSLog(@"111");
                         [selfWeak totalString:linkModel.linkString];
                     }];
                     
@@ -175,14 +175,16 @@
                 //                __weak typeof(self) weakSelf = self;
                 for (int i = 0; i < contractMsg.count; i++) {
                     NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[contractMsg objectAtIndex:i]];
-                    [selfWeak.contractMsgLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[totalStr rangeOfString:tmpStr]];
+                    [selfWeak.contractMsgLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[totalStr rangeOfString:tmpStr] lineSpace:5];
                     
                     [selfWeak.contractMsgLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
-                        NSLog(@"111");
+//                        NSLog(@"111");
                         [selfWeak totalString:linkModel.linkString];
                     }];
                     
                 }
+
+                [selfWeak.contractMsgLabel sizeToFit];
                 selfWeak.fourSectionView.myVisibility = MyVisibility_Visible;
                 
             } else {
@@ -273,14 +275,14 @@
     UIView *view = [MyRelativeLayout new];
     view.backgroundColor = [UIColor clearColor];
     view.topPos.equalTo(self.firstSectionView.bottomPos);
-    view.myHeight = 20;
+    view.wrapContentHeight = YES;
     view.myHorzMargin = 0;
     [self addSubview:view];
     self.secondSectionView = view;
     
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
-    imageView.centerYPos.equalTo(view.centerYPos).offset(1.5);
+    imageView.myTop = 9;
     imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.secondSectionView addSubview:imageView];
@@ -291,19 +293,20 @@
     limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
     limitAmountMessLabel.numberOfLines = 0;
     limitAmountMessLabel.text = showStr;
-    [limitAmountMessLabel sizeToFit];
-    limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
+    limitAmountMessLabel.topPos.equalTo(@5);
+    limitAmountMessLabel.bottomPos.equalTo(@5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
     limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
+    limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
     [self.secondSectionView addSubview:limitAmountMessLabel];
-    
+    [limitAmountMessLabel sizeToFit];
+
     limitAmountMessLabel.userInteractionEnabled = YES;
     [limitAmountMessLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[showStr rangeOfString:@"《CFCA数字证书服务协议》"]];
     __weak typeof(self) weakSelf = self;
     [limitAmountMessLabel addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
-        //        [weakSelf totalString:text andRange:range];
-        NSLog(@"111");
         [weakSelf totalString:linkModel.linkString];
     }];
 
@@ -320,7 +323,7 @@
     
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
-    imageView.myTop = 10;
+    imageView.myTop = 9;
     imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.thirdSectionView addSubview:imageView];
@@ -338,28 +341,15 @@
     limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
     limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
     [limitAmountMessLabel sizeToFit];
-    [self.thirdSectionView addSubview:limitAmountMessLabel];
     limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
     limitAmountMessLabel.userInteractionEnabled = YES;
-    [limitAmountMessLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[showStr rangeOfString:@"《网络借贷出借风险及禁止性行为提示》"]];
+    [limitAmountMessLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[showStr rangeOfString:@"《网络借贷出借风险及禁止性行为提示》"] lineSpace:5];
     __weak typeof(self) weakSelf = self;
     [limitAmountMessLabel addLinkString:@"《网络借贷出借风险及禁止性行为提示》" block:^(ZBLinkLabelModel *linkModel) {
-//        [weakSelf totalString:text andRange:range];
         [weakSelf totalString:linkModel.linkString];
-        NSLog(@"111");
     }];
-    
-//    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:showStr];
-//    text.yy_color = UIColorWithRGB(0x999999);
-//     __weak typeof(self) weakSelf = self;
-//    [text yy_setTextHighlightRange:[showStr rangeOfString:@"《网络借贷出借风险及禁止性行为提示》"]
-//                             color:[Color color:PGColorOptionCellContentBlue]
-//                   backgroundColor:[UIColor lightGrayColor]
-//                         tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
-//                             NSLog(@"111");
-//                             [weakSelf totalString:text andRange:range];
-//                         }];
-//    limitAmountMessLabel.attributedText = text;
+    [self.thirdSectionView addSubview:limitAmountMessLabel];
+
 }
 - (void)createSectionFour
 {
@@ -374,7 +364,7 @@
     
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
-    imageView.myTop = 10;
+    imageView.myTop = 9;
     imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.fourSectionView addSubview:imageView];
@@ -398,42 +388,6 @@
     [self.fourSectionView addSubview:limitAmountMessLabel];
 }
 
-- (void)createSectionfive
-{
-    UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor clearColor];
-    view.topPos.equalTo(self.fourSectionView.bottomPos);
-    view.wrapContentHeight = YES;
-    //    view.myHeight = 20;
-    view.myHorzMargin = 0;
-    [self addSubview:view];
-    self.fiveSectionView = view;
-    
-    UIImageView * imageView = [[UIImageView alloc] init];
-    imageView.myLeading = 15;
-    imageView.myTop = 11.5;
-    imageView.mySize = CGSizeMake(8, 8);
-    imageView.image = [UIImage imageNamed:@"point.png"];
-    [self.fiveSectionView addSubview:imageView];
-    
-    NSString *showStr = @"同意并认可";;
-    
-    NZLabel *limitAmountMessLabel = [[NZLabel alloc] init];
-    limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
-    limitAmountMessLabel.numberOfLines = 0;
-    limitAmountMessLabel.text = showStr;
-    limitAmountMessLabel.topPos.equalTo(@5);
-    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
-    limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
-    limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
-    limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
-    limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
-    [limitAmountMessLabel sizeToFit];
-    self.contractMsgLabel = limitAmountMessLabel;
-    self.contractMsgLabel.userInteractionEnabled = YES;
-    [self.fiveSectionView addSubview:limitAmountMessLabel];
-}
 
 
 - (void)createSectionsix
@@ -441,14 +395,14 @@
     UIView *view = [MyRelativeLayout new];
     view.backgroundColor = [UIColor clearColor];
     view.topPos.equalTo(self.fourSectionView.bottomPos);
-    view.myHeight = 20;
+    view.wrapContentHeight = YES;
     view.myHorzMargin = 0;
     [self addSubview:view];
     self.sixSectionView = view;
     
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
-    imageView.myTop = 6;
+    imageView.myTop = 9;
     imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.sixSectionView addSubview:imageView];
@@ -456,11 +410,16 @@
     YYLabel *limitAmountMessLabel = [[YYLabel alloc] init];
     limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
     limitAmountMessLabel.numberOfLines = 0;
+    limitAmountMessLabel.preferredMaxLayoutWidth = SCREEN_WIDTH - 38 -15;
     //不要删除，需要占位，要不数据反射回来 这个lab的frame 会变成0
     limitAmountMessLabel.text = @"本人接受筹标期内资金不计利息，出借意向不可撤销";
     limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
-    limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
+    limitAmountMessLabel.topPos.equalTo(@5);
+    limitAmountMessLabel.bottomPos.equalTo(@5);
+    limitAmountMessLabel.rightPos.equalTo(@15);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
+    limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
     [self.sixSectionView addSubview:limitAmountMessLabel];
     [limitAmountMessLabel sizeToFit];
 }
@@ -469,14 +428,14 @@
     UIView *view = [MyRelativeLayout new];
     view.backgroundColor = [UIColor clearColor];
     view.topPos.equalTo(self.fourSectionView.bottomPos);
-    view.myHeight = 20;
+    view.wrapContentHeight = YES;
     view.myHorzMargin = 0;
     [self addSubview:view];
     self.sevenSectionView = view;
     
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
-    imageView.myTop = 6;
+    imageView.myTop = 9;
     imageView.mySize = CGSizeMake(8, 8);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.sevenSectionView addSubview:imageView];
@@ -484,10 +443,15 @@
     YYLabel *limitAmountMessLabel = [[YYLabel alloc] init];
     limitAmountMessLabel.font = [UIFont systemFontOfSize:14.0f];
     limitAmountMessLabel.numberOfLines = 0;
+    limitAmountMessLabel.preferredMaxLayoutWidth = SCREEN_WIDTH - 38 -15;
     //不要删除，需要占位，要不数据反射回来 这个lab的frame 会变成0
     limitAmountMessLabel.text = @"单笔尊享项目仅支持一对一转让，不支持部分购买";
+    limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
     limitAmountMessLabel.textColor = [Color color:PGColorOptionTitleGray];
-    limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
+    limitAmountMessLabel.topPos.equalTo(@5);
+    limitAmountMessLabel.bottomPos.equalTo(@5);
+    limitAmountMessLabel.rightPos.equalTo(@15);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(15);
     [self.sevenSectionView addSubview:limitAmountMessLabel];
     [limitAmountMessLabel sizeToFit];
