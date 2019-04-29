@@ -36,10 +36,10 @@
     [self addLeftButton];
     self.dataArray = [NSMutableArray array];
     self.sectionItemArray = [NSMutableArray array];
-    _rechargeTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) style:UITableViewStylePlain];
+    _rechargeTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) style:UITableViewStyleGrouped];
     _rechargeTable.delegate = self;
     _rechargeTable.dataSource = self;
-    _rechargeTable.backgroundColor = [UIColor clearColor];
+    _rechargeTable.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];;
     _rechargeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_rechargeTable];
     pageNum = 1;
@@ -129,10 +129,19 @@
     return 136.f;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return 33;
-    }
-    return 43;
+//    if (section == 0) {
+//        return 33;
+//    }
+//    return 43;
+    return 33;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return nil;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     // 1.创建头部控件
@@ -141,9 +150,10 @@
     headerView.backgroundColor = UIColorWithRGB(0xf5f5f5) ;
 //    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
 //    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
-    UILabel *headTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 0,ScreenWidth -30, 33)];
-    headTitleLab.font = [UIFont systemFontOfSize:12];
+    UILabel *headTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 33-15,ScreenWidth -30, 15)];
+    headTitleLab.font = [UIFont systemFontOfSize:14];
     headTitleLab.textColor = UIColorWithRGB(0xB1B5C2);
+    
 //    [view addSubview:headTitleLab];
 //    [headerView addSubview:view];
     
@@ -156,7 +166,20 @@
 //    }
     UCFSettingGroup *group = self.sectionItemArray[section];
     headTitleLab.text = [[group.headTitle stringByReplacingOccurrencesOfString:@"-" withString:@"年"] stringByAppendingString:@"月"];
+//    [headTitleLab sizeToFit];
+//    [self textAlignmentBottom:headTitleLab];
     return headerView;
+}
+- (void)textAlignmentBottom:(UILabel *)label {
+    label.numberOfLines = 0;
+    CGSize fontSize = [label.text sizeWithAttributes:@{NSFontAttributeName:label.font}];
+    double finalWidth = label.frame.size.width;
+    CGSize maximumSize = CGSizeMake(finalWidth, CGFLOAT_MAX);
+    CGRect stringSize = [label.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:label.font} context:nil];
+    int lines = (label.frame.size.height - stringSize.size.height) / fontSize.height;
+    for (int i = 0; i < lines; i++) {
+        label.text = [NSString stringWithFormat:@" \n%@",label.text];
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

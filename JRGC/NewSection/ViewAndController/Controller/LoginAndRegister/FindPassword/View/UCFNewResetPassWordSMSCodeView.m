@@ -51,7 +51,7 @@
         //        _contentField.delegate = self;
         //        _contentField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _contentField.font = [Color gc_Font:15.0];
-        _contentField.placeholder = @"请输入短息验证码";
+        _contentField.placeholder = @"短息验证码";
         _contentField.keyboardType =  UIKeyboardTypeNumberPad;
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];

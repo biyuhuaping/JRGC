@@ -291,8 +291,8 @@
             self.resetPassWordSMSLabel.text = [NSString stringWithFormat:@"若收不到短信?请点击这里获取语音验证码。"];
             [self.resetPassWordSMSLabel sizeToFit];
 //            [self.resetPassWordSMSLabel setFontColor:[UIColorWithRGB(0x4aa1f9)] string:@"点击这里"];
-            [self.resetPassWordSMSLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"点击这里"];
-            [self.resetPassWordSMSLabel addLinkString:@"点击这里" block:^(ZBLinkLabelModel *linkModel) {
+            [self.resetPassWordSMSLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"语音验证码"];
+            [self.resetPassWordSMSLabel addLinkString:@"语音验证码" block:^(ZBLinkLabelModel *linkModel) {
                 if (![weakSelf.smsCodeView.verifyCodeButton getIsCountDown]) {
                     [weakSelf statVerifyCodeRequest:@"VMS"];
                 }

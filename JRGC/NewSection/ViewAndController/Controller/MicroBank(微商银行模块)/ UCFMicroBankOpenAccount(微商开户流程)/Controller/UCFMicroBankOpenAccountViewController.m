@@ -23,7 +23,7 @@
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
-@property (nonatomic, strong) UCFMicroBankOpenAccountDepositViewController *depositView; //微金老开户界面
+//@property (nonatomic, strong) UCFMicroBankOpenAccountDepositViewController *depositView; //微金老开户界面
 
 @property (nonatomic, strong) UCFMicroBankNewOpenAccountDepositViewController *theNewDepositView; //微金新开户界面
 
@@ -99,6 +99,7 @@
             self.accoutStep = OpenAccoutMicroBank;
         }
         [self.rootLayout addSubview:self.optionView];
+
         if (openStatus == 1)
         {
             //微金未开户,走新的开户页面(开户+设置交易密码)
@@ -119,7 +120,7 @@
         else if (openStatus == 3)
         {
             //开户完成,未设置交易密码.走老的设置交易密码页面
-            [self addChildViewController:self.depositView];
+//            [self addChildViewController:self.depositView];
             [self addChildViewController:self.tradersPasswordView];
             [self.rootLayout addSubview:self.tradersPasswordView.view];
             self.currentVC = self.tradersPasswordView;
@@ -160,16 +161,16 @@
 {
     [self.rt_navigationController popViewControllerAnimated:YES];
 }
-- (UCFMicroBankOpenAccountDepositViewController *)depositView
-{
-    if (nil == _depositView) {
-        _depositView = [[UCFMicroBankOpenAccountDepositViewController alloc] init];
-        _depositView.view.frame = CGRectMake(0, self.viewHeight, PGScreenWidth, PGScreenHeight - self.viewHeight);
-        _depositView.view.topPos.equalTo(self.optionView.bottomPos);
-        _depositView.view.myLeft = 0;
-    }
-    return _depositView;
-}
+//- (UCFMicroBankOpenAccountDepositViewController *)depositView
+//{
+//    if (nil == _depositView) {
+//        _depositView = [[UCFMicroBankOpenAccountDepositViewController alloc] init];
+//        _depositView.view.frame = CGRectMake(0, self.viewHeight, PGScreenWidth, PGScreenHeight - self.viewHeight);
+//        _depositView.view.topPos.equalTo(self.optionView.bottomPos);
+//        _depositView.view.myLeft = 0;
+//    }
+//    return _depositView;
+//}
 
 - (UCFMicroBankNewOpenAccountDepositViewController *)theNewDepositView
 {

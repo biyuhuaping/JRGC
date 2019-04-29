@@ -79,6 +79,8 @@
         _headView = [[UCFAssetAccountViewTotalHeaderView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 290)];
         [_headView.amountShownBtn addTarget:self action:@selector(jumpAccountCapital:) forControlEvents:UIControlEventTouchUpInside];
         [_headView.totalAssetsBtn addTarget:self action:@selector(jumpAccountCapital:) forControlEvents:UIControlEventTouchUpInside];
+        _headView.titleLabel.text =@"已收收益";//标题---总资产 或者已收收益
+        [_headView.titleLabel sizeToFit];
         _headView.myTop = 0;
         _headView.myLeft = 0;
     }

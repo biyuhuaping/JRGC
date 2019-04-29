@@ -55,8 +55,8 @@
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     
-    [self.rootLayout addSubview:self.closeBtn];
-    [self.rootLayout addSubview:self.loginBtn];
+//    [self.rootLayout addSubview:self.closeBtn];
+//    [self.rootLayout addSubview:self.loginBtn];
     [self.rootLayout addSubview:self.registerLabel];
     [self.rootLayout addSubview:self.registerContentLabel];
     [self.rootLayout addSubview:self.registerImageView];
@@ -355,14 +355,20 @@
     }
     return _registerAgreeLabel;
 }
-- (void)buttonCloseClick:(UIButton *)btn
-{
-    
-}
-- (void)buttonloginClick:(UIButton *)btn
-{
-    
-}
+//- (void)buttonCloseClick:(UIButton *)btn
+//{
+//    NSLog(@"111");
+//    UCFPopViewWindow *popView = [UCFPopViewWindow new];
+//    popView.delegate = self;
+//    popView.type = POPRegisterRenounce;
+//    popView.controller = self;
+//    [popView startPopView];
+//}
+//
+//- (void)buttonloginClick:(UIButton *)btn
+//{
+//
+//}
 - (void)buttonNextBtnClick:(UIButton *)btn
 {
     UCFRegistVerificationMobileApi * request = [[UCFRegistVerificationMobileApi alloc] initWithphoneNum:self.registerPhoneField.text];

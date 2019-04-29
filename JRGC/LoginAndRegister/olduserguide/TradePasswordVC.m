@@ -51,9 +51,9 @@
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     
-    [_label setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"点击这里"];
+    [_label setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"语音验证码"];
     __weak typeof(self) weakSelf = self;
-    [self.label addLinkString:@"点击这里" block:^(ZBLinkLabelModel *linkModel) {
+    [self.label addLinkString:@"语音验证码" block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf soudLabelClick];
     }];
     _isCompanyAgent = [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"];
@@ -422,7 +422,7 @@
             _counter = 59;
 //             [AuxiliaryFunc showToastMessage:@"已发送,请等待接收，60秒后可再次获取" withView:self.view];
             _label.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",SingleUserInfo.loginData.userInfo.mobile];
-            [_label setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"点击这里"];
+            [_label setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"语音验证码"];
             _label.hidden = NO;
             self.label.userInteractionEnabled = YES;
             if (_isVoiceMsg) {

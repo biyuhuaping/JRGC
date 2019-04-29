@@ -173,8 +173,8 @@
     rightbutton.backgroundColor = [UIColor clearColor];
     [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
     [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
-    [rightbutton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    [rightbutton setTitleColor:UIColorWithRGB(0x333333) forState:UIControlStateNormal];
+    [rightbutton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [rightbutton setTitleColor:UIColorWithRGB(0x000000) forState:UIControlStateNormal];
     [rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
     [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];

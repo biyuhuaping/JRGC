@@ -40,15 +40,24 @@
 
     _showTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _showTableView.estimatedRowHeight = 44.0f;//推测高度，必须有，可以随便写多少
-    _showTableView.backgroundColor = UIColorWithRGB(0xebebee);
+    _showTableView.backgroundColor = UIColorWithRGB(0xf5f5f5);
 
     self.showHeadView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([QuickRechargeHeadView class]) owner:nil options:nil][0];
     _showHeadView.frame = CGRectMake(0, 0, ScreenWidth, 230);
-    _showHeadView.backgroundColor = UIColorWithRGB(0xebebee);
-
+//    _showHeadView.backgroundColor = UIColorWithRGB(0xebebee);
+    
+    NSString *holderText = @"输入充值金额，最低1元";
+    NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+    [placeholder addAttribute:NSForegroundColorAttributeName
+                        value:[Color color:PGColorOptionInputDefaultBlackGray]
+                        range:NSMakeRange(0, holderText.length)];
+    [placeholder addAttribute:NSFontAttributeName
+                        value:[Color gc_Font:15.0]
+                        range:NSMakeRange(0, holderText.length)];
+    _showHeadView.moneyTextField.attributedPlaceholder = placeholder;
     _showHeadView.delegate = self;
     _showTableView.tableHeaderView = _showHeadView;
-
+    [self.showHeadView  setButtonStyle];
 }
 - (void)setDefaultMoney:(NSString *)defaultMoney
 {
@@ -204,7 +213,7 @@
             }else{
                 _showHeadView.mobileTextField.text = bankPhone;
                 _showHeadView.fixButton.hidden = NO;
-                _showHeadView.mobileTextField.textColor = UIColorWithRGB(0x999999);
+                _showHeadView.mobileTextField.textColor = UIColorWithRGB(0xB1B5C2);
                 _showHeadView.mobileTextField.userInteractionEnabled = NO;
             }
             

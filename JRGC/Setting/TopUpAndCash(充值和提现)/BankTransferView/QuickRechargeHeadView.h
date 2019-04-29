@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *fixButton;
 @property (weak)id<QuickRechargeHeadViewDelegate>delegate;
 
+- (void)setButtonStyle;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -77,6 +77,9 @@
         _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:[self.accountTitleArray copy]];
         _pageHeadView.isHiddenHeadView = YES;
         [_pageHeadView reloaShowView];
+        UIView *topLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 43.5, ScreenWidth, 0.5)];
+        topLineView.backgroundColor = UIColorWithRGB(0xe2e2e2);
+        [_pageHeadView  addSubview:topLineView];
     }
     return _pageHeadView;
 }
@@ -84,6 +87,7 @@
 {
     if (nil == _pageController) {
         _pageController = [[UCFPageControlTool alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1) WithChildControllers:self.accountControllerArray WithParentViewController:self WithHeadView:self.pageHeadView];
+        
     }
     return _pageController;
 }
@@ -124,6 +128,10 @@
                 [self.accountControllerArray addObject:vc];
             }
             [self.rootLayout addSubview:self.pageController];
+            
+            UIView *topLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+            topLineView.backgroundColor = UIColorWithRGB(0xe2e2e2);
+            [self.rootLayout  addSubview:topLineView];
         }
         else{
 //            ShowMessage(self.model.message);
