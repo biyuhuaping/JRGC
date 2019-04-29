@@ -48,6 +48,7 @@
              @"phoneNum":_phoneNum,
              @"validateCode":_validateCode,
              @"pwd":_pwd,
+             @"userId":@"1",
              };
 }
 
