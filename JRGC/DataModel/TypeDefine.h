@@ -61,39 +61,23 @@
 #define PRDORDERUINVEST     @"newprdOrder/uinvest"//我的投资
 #define PRDORDERUINVESTDETAIL     @"newprdOrder/detail"//我的投资详情
 #define PRDORDERREFUNDLSIT  @"NewRefund/refundLsit"//回款明细
-//#define PRDCLAIMSFOREALLBORROWS @"prdClaimsFore/allBorrows"
-//#define PRDCLAIMSFORCEBORROWS   @"prdClaimsFore/borrows"
-//#define PRDCLAIMSFOREDEBTBORROWS @"prdClaimsFore/debtBorrows"
+
 #define FRIENDS_LIST        @"newfactoryCodeController/investFriendsList"//邀请返利-邀请投资明细
 #define GOLD_FRIENDS_LIST   @"api/inviteRebate/v2/goldInviteDetail.json"
-//#define CONTRACTSIGN        @"contractParty/contractSign"
-//#define CONTRACTCONTENT     @"contractParty/getContent"
-//#define BASEBANKMESS        @"newbankCard/baseBankMess"  // 银行卡列表
+
 #define GETTREGIONLIST      @"personalSettings/getTRegionList"
-//#define BANKCARDSUBMITAPPLY @"newsafe/submitApply"
-//#define SENDPHONeVERIFYCODE @"actWithdraw/sendPhoneVerifyCode"
-//#define ACTWITHDRAWAPPLY   @"api/withdraw/v2/withdraw.json" // @"actWithdraw/apply" 提现
-//#define PICKUPINTEREST      @"actWithdraw/pickUpInterest"
-//#define ACCOUNTFUNDS        @"account/funds"
+
 #define COMPUTEINTREST      @"newprdTransfer/newCompensateInterest"
 #define NORMALCOMPUTEINTREST @"newPrdClaims/computeIntrest"
-//#define TRANSFERCOMPUTEINTREST @"prdTransfer/computeIntrest"
-//#define PRDCLAIMSFOREGUARANTORBORROWS @"prdClaimsFore/guarantorBorrows"
-//#define PRDALLSUBROGATION             @"prdClaimsFore/allSubrogation"
-//#define PRDTRANSFERPAY                @"prdClaimsFore/transferPay"
-//#define PRDBUYBACK                    @"prdClaimsFore/buyBack"
+
 #define PRDBORROWSINFO                @"prdClaimsFore/borrowsInfo"
 #define FACTORYCODESAVERATE           @"factoryCode/saveRate"//修改佣金比例
 #define CAULATENUM                    @"appInstallCount/save"
-//#define GETGUAGUAKA                   @"scratchCard/toExchange"
-//#define CHECKGUACARD                  @"scratchCard/exchange"
-//#define USERBEHAVIOR                  @"userBehavior/writeBehavior"
+
 #define EXCAHGELIST                   @"scratchCard/exchangeList"
-//#define APPLYCARD                     @"scratchCard/applyCard"
 
 #define RIGISTCHECK                   @"api/user/v2/verificationMobile.json"
 
-//#define INVITEREBATE                  @"newfactoryCodeController/info"          //邀请返利
 #define INVITEREBATE                  @"api/inviteRebate/v2/info.json"          //邀请返利
 #define FRIENDREGISTERLIST            @"newfactoryCodeController/recFriendList" //邀请注册记录
 //#define AllInverstMoney               @"top/index"
@@ -102,12 +86,7 @@
 #define GongDouExpend                 @"newBeanRecordCon/expendBorrows" //工豆支出
 #define GongDouOverDue                @"newBeanRecordCon/overdueBorrows" //工豆过期
 #define CheckPomoCode                 @"newuserregist/isexitpomocode"
-//#define ChatFriendList                @"accountyouyun/getyouyunfriends"
-//#define CheckChatId                   @"accountyouyun/checkRegYouyun"
-//#define RegistyouYun                  @"accountyouyun/regyouyun"
-//#define GetRedBag                     @"scratchCard/applyByRedBag"
-//#define IsExistSpring                 @"scratchCard/isExist"
-//#define RedPackage                    @"NewBeans/SmallRedList"  /// 抢到的红包
+
 #define MyRedPackage                  @"NewBeans/redPackageList"    /// 我的红包
 //#define ZiJinTuoGuan                  @"sysDataDicItem/dicItemList"
 #define HSPayMobile                  @"api/recharge/v2/recharge.json"
