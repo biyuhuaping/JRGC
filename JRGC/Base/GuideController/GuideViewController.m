@@ -12,7 +12,9 @@
 {
     UIScrollView *guideScrollView;
 //    UIPageControl *pageControl;
+
 }
+@property(nonatomic,strong)    UIView *baseView;
 @end
 
 @implementation GuideViewController
@@ -33,7 +35,7 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 
-    self.view.backgroundColor = [UIColor blueColor];
+//    self.view.backgroundColor = [UIColor blueColor];
     self.navigationController.navigationBarHidden = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.navigationBar.translucent = NO;
@@ -48,36 +50,81 @@
     [self.view addSubview:guideScrollView];
     
     adjustsScrollViewInsets(guideScrollView);
-    int version = 7;
-    if(ScreenHeight == 480){
-        version = 6;
-    } else if (ScreenHeight == 812) {
-        version = 8;  //iphonex
+    NSString *imageNamePre = @"X_";
+    if(ScreenHeight/ ScreenWidth > 2){
+        imageNamePre = @"X_";
+    } else  {
+        imageNamePre = @"Y_";
     }
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 4; i++) {
         UIImageView *adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * i, 0, ScreenWidth,ScreenHeight)];
-        adImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guideImage%d_%d",version,i+1]];
+        NSString *imageName = [NSString stringWithFormat:@"%@guide0%d.png",imageNamePre,i + 1];
+        NSBundle *bundle = [NSBundle mainBundle];
+        NSString *resourcePath = [bundle resourcePath];
+        NSString *filePath = [resourcePath stringByAppendingPathComponent:imageName];
+        UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+        adImageView.image = image;
         [guideScrollView addSubview:adImageView];
-        if (i == 0) {
-            UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-            if (ScreenHeight == 480 ) {
-                button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 49 - 38, 210, 38);
-            } else if (ScreenHeight == 812) {
-                button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 130 - 38, 210, 38);
-            }
-            else {
-                button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 85 - 38, 210, 38);
-            }
-            button.backgroundColor = [UIColor clearColor];
-            [button setBackgroundImage:[UIImage imageNamed:@"page_btn.png"] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(skipToMainWorkView) forControlEvents:UIControlEventTouchUpInside];
-            [adImageView addSubview:button];
-            adImageView.userInteractionEnabled = YES;
-        }
     }
-    guideScrollView.contentSize = CGSizeMake(ScreenWidth * 1, ScreenHeight);
+    guideScrollView.contentSize = CGSizeMake(ScreenWidth * 4, ScreenHeight);
+    [self createPageControllView];
 }
-
+- (void)createPageControllView
+{
+    CGFloat bottom = 135;
+    if (ScreenWidth < 321) {
+        bottom = 120;
+    } else if (ScreenWidth < 414 && ScreenHeight < 737) {
+        bottom = 135;
+    } else {
+        bottom = 185;
+    }
+    
+    UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - bottom, ScreenWidth, 135)];
+    baseView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:baseView];
+   self.baseView = baseView;
+    for (int i = 0; i < 4; i ++) {
+        UIView *pageView = [[UIView alloc] init];
+        pageView.frame = CGRectMake((ScreenWidth - 90)/2 + (15 + 10) * i,2, 15, 4);
+        pageView.tag = 700 + i;
+        pageView.clipsToBounds = YES;
+        pageView.layer.cornerRadius = 2.0f;
+        
+        if (i == 0) {
+            pageView.backgroundColor = [Color color:PGColorOptionTitlerRead];
+        } else {
+            pageView.backgroundColor = UIColorWithRGB(0xfbeeee);
+        }
+        [baseView addSubview:pageView];
+    }
+    
+    UIButton *registButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [registButton setBackgroundColor:[UIColor whiteColor]];
+    [registButton setTitle:@"立即注册" forState:UIControlStateNormal];
+    registButton.clipsToBounds = YES;
+    [registButton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateNormal];
+    registButton.layer.cornerRadius = 20.0f;
+    registButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    registButton.layer.borderColor = [Color color:PGColorOptionTitlerRead].CGColor;
+    registButton.layer.borderWidth = 1.0f;
+    registButton.frame = CGRectMake((ScreenWidth - 270)/2, 33, 270, 40);
+    [baseView addSubview:registButton];
+    [registButton addTarget:self action:@selector(regist) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *skipBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [skipBtn setTitle:@"先转转" forState:UIControlStateNormal];
+    skipBtn.frame = CGRectMake((ScreenWidth - 270)/2, 75, 270, 40);
+    [skipBtn addTarget:self action:@selector(skipToMainWorkView) forControlEvents:UIControlEventTouchUpInside];
+    [skipBtn setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
+    skipBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [baseView addSubview:skipBtn];
+}
+- (void)regist
+{
+    [self skipToMainWorkView];
+    [SingleUserInfo loadRegistViewController];
+}
 - (void)skipToMainWorkView
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(changeRootView:)]) {
@@ -85,7 +132,21 @@
     }
 //    [self showTabbarController];
 }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    int i = scrollView.contentOffset.x /ScreenWidth;
 
+    UIView *pageView1 = [self.baseView viewWithTag:700];
+    UIView *pageView2 = [self.baseView viewWithTag:701];
+    UIView *pageView3 = [self.baseView viewWithTag:702];
+    UIView *pageView4 = [self.baseView viewWithTag:703];
+    pageView1.backgroundColor = pageView2.backgroundColor = pageView3.backgroundColor =pageView4.backgroundColor = UIColorWithRGB(0xfbeeee);
+    
+    UIView *pageView = [self.baseView viewWithTag:700 + i];
+    [pageView setBackgroundColor:[Color color:PGColorOptionTitlerRead]];
+    
+    
+}
 - (void)showTabbarController
 {
     UCFMainTabBarController *tabBarController = [[UCFMainTabBarController alloc] init];
