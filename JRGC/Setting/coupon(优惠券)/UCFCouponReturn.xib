@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="couponCenterBtn" destination="saM-3e-KmE" id="qpD-WG-Utl"/>
                 <outlet property="couponNameLabel" destination="UVL-hn-ygO" id="BzG-7I-PjG"/>
-                <outlet property="tableView" destination="Qzs-bn-RW0" id="Fi8-8L-Fcr"/>
+                <outlet property="tableView" destination="Qzs-bn-RW0" id="hFY-AT-11c"/>
                 <outlet property="unUserFxCount" destination="hHB-dh-63K" id="0eM-0s-VPE"/>
                 <outlet property="view" destination="h5e-wn-xXW" id="S6C-yD-rgQ"/>
             </connections>
@@ -67,13 +67,9 @@
                         <constraint firstItem="hHB-dh-63K" firstAttribute="leading" secondItem="CcB-of-gwu" secondAttribute="leading" constant="25" id="muj-dx-7BX"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qzs-bn-RW0">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qzs-bn-RW0" customClass="BaseTableView">
                     <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="kd9-aR-qFZ"/>
-                        <outlet property="delegate" destination="-1" id="eOz-gJ-3Im"/>
-                    </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

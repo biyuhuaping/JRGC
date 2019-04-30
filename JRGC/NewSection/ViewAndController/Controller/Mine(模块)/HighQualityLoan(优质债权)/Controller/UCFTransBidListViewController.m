@@ -93,7 +93,6 @@
         [self.showTableView endRefresh];
         NSMutableDictionary *dic = [result objectFromJSONString];
         NSString *rstcode = dic[@"status"];
-        NSString *rsttext = dic[@"statusdes"];
         if ([rstcode intValue] == 1) {
             if (_currentPage == 1) {
                 [self.dataArray removeAllObjects];
@@ -102,12 +101,18 @@
             BOOL hasNextPage = [dic[@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
             if (hasNextPage) {
                 _currentPage++;
+                self.showTableView.enableRefreshFooter = YES;
+            } else {
+                self.showTableView.enableRefreshFooter = NO;
             }
+
             NSArray *dataArr = dic[@"pageData"][@"result"];
             [self.dataArray addObjectsFromArray:dataArr];
-            [self.showTableView reloadData];
+            [self.showTableView cyl_reloadData];
         } else {
 //            ShowMessage(rsttext);
+            [self.showTableView cyl_reloadData];
+
         }
         
         

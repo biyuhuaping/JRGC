@@ -122,7 +122,7 @@
         if (nil == goldCash1) {
             goldCash1 = (UCFGoldCashOneCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldCashOneCell" owner:self options:nil] lastObject];
         }
-        goldCash1.amountLabel.text = self.balanceMoney == nil ? @"¥0.00" : [NSString stringWithFormat:@"¥%@", self.balanceMoney];
+        goldCash1.amountLabel.text = self.balanceMoney == nil ? @"¥0.00" : [NSString stringWithFormat:@"¥%.2f", [self.balanceMoney floatValue]];
         return goldCash1;
     }
     else if (indexPath.section == 1) {

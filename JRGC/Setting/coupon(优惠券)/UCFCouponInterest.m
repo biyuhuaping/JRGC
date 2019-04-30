@@ -24,9 +24,11 @@
 #import "UCFNoDataView.h"
 #import "UCFNewCouponTableViewCell.h"
 #import "UCFNewCouponList.h"
-@interface UCFCouponInterest ()<NetworkModuleDelegate>
+#import "BaseTableView.h"
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@interface UCFCouponInterest ()<UITableViewDelegate,UITableViewDataSource, NetworkModuleDelegate,BaseTableViewDelegate>
+@property (weak, nonatomic) IBOutlet BaseTableView *tableView;
+
 @property (strong, nonatomic) NSMutableArray *dataArr;
 @property (nonatomic, assign) NSUInteger currentPage;                   // 当前页码
 @property (strong, nonatomic) NSMutableArray *selectedStateArray;       // 已选中状态存储数组
@@ -82,23 +84,18 @@
 
 - (void)initTableView{
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = UIColorWithRGB(0xebebee);
-    
-    //=========  下拉刷新、上拉加载更多  =========
-    __weak typeof(self) weakSelf = self;
-    
-    // 添加上拉加载更多
-    [_tableView addLegendFooterWithRefreshingBlock:^{
-        [weakSelf getCouponDataList];
-    }];
-    
-    // 添加传统的下拉刷新
-    [_tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshingData)];
-    [_tableView.header beginRefreshing];
-    _tableView.footer.hidden = YES;
+    _tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    _tableView.tableRefreshDelegate = self;
+    _tableView.enableRefreshHeader = YES;
+    _tableView.enableRefreshFooter = NO;
+    _tableView.isShowDefaultPlaceHolder = YES;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
     if (_sourceVC == 1) {
         _couponCenterBtn.hidden = YES;
     }
+    [_tableView beginRefresh];
+    
 }
 
 #pragma mark - UITableViewDelegate
@@ -175,12 +172,12 @@
 }
 #pragma mark - 请求网络及回调
 //下拉刷新
-- (void)refreshingData{
+- (void)refreshTableViewHeader{
     _currentPage = 1;
-    [self getCouponDataList];
+    [self refreshTableViewFooter];
 }
 // 上拉加载更多
-- (void)getCouponDataList{
+- (void)refreshTableViewFooter{
     
     UCFNewCouponList *api = [[UCFNewCouponList alloc] initWithCouponType:@"2" CurrentPage:_currentPage PageSize:20 Statue:_status];
     @PGWeakObj(self);
@@ -189,7 +186,14 @@
         [_tableView.footer endRefreshing];
         UCFCouponListModel *model = request.responseJSONModel;
         if (model.ret) {
-            BOOL hasNextPage = model.data.pageData.pagination.hasNextPage;
+            BOOL hasNextPage = [model.data.pageData.pagination.hasNextPage boolValue];
+    
+            if (hasNextPage) {
+                selfWeak.tableView.enableRefreshFooter = YES;
+                selfWeak.currentPage ++ ;
+            } else {
+                selfWeak.tableView.enableRefreshFooter = NO;
+            }
             selfWeak.presentFriendExist = [model.data.presentFriendExist boolValue];
             NSArray *dataArr = model.data.pageData.result;
             NSMutableArray *temp1 = [NSMutableArray array];
@@ -202,36 +206,16 @@
             [selfWeak.unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@"张"];
             if (_currentPage == 1) {
                 selfWeak.dataArr = [NSMutableArray arrayWithArray:temp1];
-                if (dataArr.count == 0) {
-                    [selfWeak.tableView.footer noticeNoMoreData];
-                    [selfWeak.noDataView showInView:selfWeak.tableView];
-                } else {
-                    [selfWeak.noDataView hide];
-                    selfWeak.tableView.footer.hidden = NO;
-                    if (!hasNextPage) {
-                        [selfWeak.tableView.footer noticeNoMoreData];
-                    } else {
-                        selfWeak.currentPage ++;
-                        [selfWeak.tableView.footer resetNoMoreData];
-                    }
-                }
             }else{
-                [selfWeak.tableView.footer endRefreshing];
                 [selfWeak.dataArr addObjectsFromArray:temp1];
-                if (!hasNextPage) {
-                    [selfWeak.tableView.footer noticeNoMoreData];
-                }
-                else {
-                    selfWeak.currentPage ++;
-                    [selfWeak.tableView.footer resetNoMoreData];
-                }
             }
-            [selfWeak.tableView reloadData];
+            [selfWeak.tableView cyl_reloadData];
         } else {
+            [selfWeak.tableView cyl_reloadData];
             [AuxiliaryFunc showToastMessage:model.message withView:self.view];
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
+        [selfWeak.tableView cyl_reloadData];
     }];
     [api start];
 }

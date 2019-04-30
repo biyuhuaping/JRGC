@@ -24,9 +24,10 @@
 #import "UCFNoDataView.h"
 #import "UCFNewCouponList.h"
 #import "UCFNewCouponTableViewCell.h"
-@interface UCFCouponReturn ()<NetworkModuleDelegate>
+#import "BaseTableView.h"
+@interface UCFCouponReturn ()<NetworkModuleDelegate,BaseTableViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet BaseTableView *tableView;
 @property (strong, nonatomic) NSMutableArray *dataArr;
 @property (nonatomic, assign) NSUInteger currentPage;                   //当前页码
 @property (strong, nonatomic) NSMutableArray *selectedStateArray;       // 已选中状态存储数组
@@ -44,6 +45,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view from its nib.
     _selectedStateArray = [[NSMutableArray alloc] init];// 已选中状态存储数组
     _currentPage = 1;
@@ -88,23 +90,18 @@
 
 - (void)initTableView{
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = UIColorWithRGB(0xebebee);
-
-    //=========  下拉刷新、上拉加载更多  =========
-    __weak typeof(self) weakSelf = self;
-    
-    // 添加上拉加载更多
-    [_tableView addLegendFooterWithRefreshingBlock:^{
-        [weakSelf getCouponDataList];
-    }];
-    
-    // 添加传统的下拉刷新
-    [_tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshingData)];
-    [_tableView.header beginRefreshing];
-    _tableView.footer.hidden = YES;
+    _tableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    _tableView.tableRefreshDelegate = self;
+    _tableView.enableRefreshHeader = YES;
+    _tableView.enableRefreshFooter = NO;
+    _tableView.isShowDefaultPlaceHolder = YES;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
     if (_sourceVC == 1) {
         _couponCenterBtn.hidden = YES;
     }
+    [_tableView beginRefresh];
+
 }
 
 #pragma mark - UITableViewDelegate
@@ -167,13 +164,7 @@
         [alert_bankbrach show];
         return;
     }
-    
-//    UITableViewCell * cell = nil;
-//    if (kIS_IOS8) {
-//        cell = (UITableViewCell *)[[sender superview] superview];
-//    } else {
-//        cell = (UITableViewCell *)[[[sender superview] superview] superview];
-//    }
+
     NSInteger row = ((UIButton *)sender).tag - 100;
     UCFCouponExchangeToFriends *vc = [[UCFCouponExchangeToFriends alloc]initWithNibName:@"UCFCouponExchangeToFriends" bundle:nil];
     vc.quanData = _dataArr[row];
@@ -183,21 +174,26 @@
 
 #pragma mark - 请求网络及回调
 //下拉刷新
-- (void)refreshingData{
+- (void)refreshTableViewHeader{
     _currentPage = 1;
-    [self getCouponDataList];
+    [self refreshTableViewFooter];
 }
 // 上拉加载更多
-- (void)getCouponDataList{
+- (void)refreshTableViewFooter{
 
     UCFNewCouponList *api = [[UCFNewCouponList alloc] initWithCouponType:@"1" CurrentPage:_currentPage PageSize:20 Statue:_status];
     @PGWeakObj(self);
     [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        [_tableView.header endRefreshing];
-        [_tableView.footer endRefreshing];
+        [_tableView endRefresh];
         UCFCouponListModel *model = request.responseJSONModel;
         if (model.ret) {
-            BOOL hasNextPage = model.data.pageData.pagination.hasNextPage;
+            BOOL hasNextPage = [model.data.pageData.pagination.hasNextPage boolValue];
+            if (hasNextPage) {
+                selfWeak.tableView.enableRefreshFooter = YES;
+                selfWeak.currentPage ++ ;
+            } else {
+                selfWeak.tableView.enableRefreshFooter = NO;
+            }
             selfWeak.presentFriendExist = [model.data.presentFriendExist boolValue];
             NSArray *dataArr = model.data.pageData.result;
             NSMutableArray *temp1 = [NSMutableArray array];
@@ -210,36 +206,17 @@
             [selfWeak.unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@"张"];
             if (_currentPage == 1) {
                 selfWeak.dataArr = [NSMutableArray arrayWithArray:temp1];
-                if (dataArr.count == 0) {
-                    [selfWeak.tableView.footer noticeNoMoreData];
-                    [selfWeak.noDataView showInView:selfWeak.tableView];
-                } else {
-                    [selfWeak.noDataView hide];
-                   selfWeak.tableView.footer.hidden = NO;
-                    if (!hasNextPage) {
-                        [selfWeak.tableView.footer noticeNoMoreData];
-                    } else {
-                        selfWeak.currentPage ++;
-                        [selfWeak.tableView.footer resetNoMoreData];
-                    }
-                }
             }else{
-                [selfWeak.tableView.footer endRefreshing];
+                [selfWeak.tableView endRefresh];
                 [selfWeak.dataArr addObjectsFromArray:temp1];
-                if (!hasNextPage) {
-                    [selfWeak.tableView.footer noticeNoMoreData];
-                }
-                else {
-                    selfWeak.currentPage ++;
-                    [selfWeak.tableView.footer resetNoMoreData];
-                }
             }
-            [selfWeak.tableView reloadData];
+            [selfWeak.tableView cyl_reloadData];
         } else {
             [AuxiliaryFunc showToastMessage:model.message withView:self.view];
+            [selfWeak.tableView cyl_reloadData];
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
+        [selfWeak.tableView cyl_reloadData];
     }];
     [api start];
 }
