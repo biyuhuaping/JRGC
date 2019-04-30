@@ -26,28 +26,23 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ue-Vq-Hjw">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可用返息券" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixC-Xo-ckL">
-                            <rect key="frame" x="25" y="25" width="72" height="17"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="17" id="X4q-Ot-1RA"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.69411764705882351" green="0.70980392156862748" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coupon_center_bg" translatesAutoresizingMaskIntoConstraints="NO" id="5HC-Mh-dfk">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0张" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg2-BP-Ynu" customClass="NZLabel">
-                            <rect key="frame" x="25" y="56.5" width="52.5" height="38.5"/>
+                            <rect key="frame" x="25" y="41.5" width="52.5" height="38.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cjx-Y7-gpm">
-                            <rect key="frame" x="260" y="68" width="100" height="15"/>
+                            <rect key="frame" x="260" y="52" width="100" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="IDk-Qp-qLn"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-49" maxY="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="17" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-57" maxY="0.0"/>
                             <state key="normal" title="领券中心" image="list_icon_arrow">
                                 <color key="titleColor" red="0.69411764710000001" green="0.70980392160000005" blue="0.76078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -55,16 +50,36 @@
                                 <action selector="fetchCouponCenter:" destination="-1" eventType="touchUpInside" id="DO2-5R-Yjj"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me8-cn-IRd">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                            <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="xFN-1B-5SY"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可用返息券" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixC-Xo-ckL">
+                            <rect key="frame" x="25" y="24.5" width="61.5" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.69411764705882351" green="0.70980392156862748" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="ixC-Xo-ckL" firstAttribute="top" secondItem="9ue-Vq-Hjw" secondAttribute="top" constant="25" id="5rS-D5-uSp"/>
-                        <constraint firstAttribute="bottom" secondItem="Cjx-Y7-gpm" secondAttribute="bottom" constant="17" id="7qZ-96-tY1"/>
+                        <constraint firstAttribute="trailing" secondItem="5HC-Mh-dfk" secondAttribute="trailing" id="9uh-B7-LcB"/>
                         <constraint firstItem="Cjx-Y7-gpm" firstAttribute="centerY" secondItem="Dg2-BP-Ynu" secondAttribute="centerY" id="Aks-J6-VrT"/>
-                        <constraint firstAttribute="height" constant="100" id="LH1-ZO-E8R"/>
+                        <constraint firstItem="Dg2-BP-Ynu" firstAttribute="top" secondItem="ixC-Xo-ckL" secondAttribute="bottom" constant="2.5" id="J1D-6M-Mc4"/>
+                        <constraint firstItem="Me8-cn-IRd" firstAttribute="top" secondItem="9ue-Vq-Hjw" secondAttribute="top" id="Jry-db-R7d"/>
+                        <constraint firstAttribute="width" secondItem="9ue-Vq-Hjw" secondAttribute="height" multiplier="15:4" id="NX0-Ed-wRZ"/>
                         <constraint firstItem="Dg2-BP-Ynu" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" constant="25" id="PbR-Hp-Sqt"/>
                         <constraint firstAttribute="trailing" secondItem="Cjx-Y7-gpm" secondAttribute="trailing" constant="15" id="R2c-aG-mTS"/>
-                        <constraint firstItem="ixC-Xo-ckL" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" constant="25" id="nsa-zC-PwE"/>
+                        <constraint firstItem="ixC-Xo-ckL" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" constant="25" id="TnU-BS-qZ2"/>
+                        <constraint firstItem="Cjx-Y7-gpm" firstAttribute="top" secondItem="9ue-Vq-Hjw" secondAttribute="top" constant="52" id="e7r-Rg-8iY"/>
+                        <constraint firstAttribute="bottom" secondItem="5HC-Mh-dfk" secondAttribute="bottom" id="q0q-5L-iSj"/>
+                        <constraint firstAttribute="trailing" secondItem="Me8-cn-IRd" secondAttribute="trailing" id="qsB-6i-otw"/>
+                        <constraint firstItem="5HC-Mh-dfk" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" id="syo-5F-hDn"/>
+                        <constraint firstItem="Me8-cn-IRd" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" id="tdJ-o7-2Gv"/>
+                        <constraint firstItem="5HC-Mh-dfk" firstAttribute="top" secondItem="9ue-Vq-Hjw" secondAttribute="top" id="xyb-PJ-ZYU"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dLl-LR-WKU" customClass="BaseTableView">
@@ -82,9 +97,11 @@
                 <constraint firstAttribute="trailing" secondItem="dLl-LR-WKU" secondAttribute="trailing" id="Xl3-Cy-6SR"/>
                 <constraint firstAttribute="trailing" secondItem="9ue-Vq-Hjw" secondAttribute="trailing" id="uD2-89-nbi"/>
             </constraints>
+            <point key="canvasLocation" x="39.200000000000003" y="46.326836581709152"/>
         </view>
     </objects>
     <resources>
+        <image name="coupon_center_bg" width="375" height="101"/>
         <image name="list_icon_arrow" width="8" height="13"/>
     </resources>
 </document>

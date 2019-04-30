@@ -202,8 +202,8 @@
                 [temp1 addObject:couponModel];
             }
             id unUserFxCount = model.data.unUserFxCount;
-            selfWeak.unUserFxCount.text = [NSString stringWithFormat:@"%@张",unUserFxCount?unUserFxCount:@"0"];
-            [selfWeak.unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@"张"];
+            selfWeak.unUserFxCount.text = [NSString stringWithFormat:@"%@ 张",unUserFxCount?unUserFxCount:@"0"];
+            [selfWeak.unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@" 张"];
             if (_currentPage == 1) {
                 selfWeak.dataArr = [NSMutableArray arrayWithArray:temp1];
             }else{

@@ -56,6 +56,9 @@
     baseTitleLabel.text = @"优惠券";
     _currentSelectedState = 0;
     
+    UIView *lineViewAA = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+    lineViewAA.backgroundColor = UIColorWithRGB(0xe2e2e2);
+    [self.view addSubview:lineViewAA];
     //下拉选框
     self.listArray = [[NSMutableArray alloc]initWithObjects:@"使用记录",@"赠送记录", nil];
     _cellViewShowList = [[MLMOptionSelectView alloc] initOptionView];//***初始化下拉弹框
@@ -69,7 +72,6 @@
     //返现券
     _couponReturnView = [[UCFCouponReturn alloc]initWithNibName:@"UCFCouponReturn" bundle:nil];
     _couponReturnView.status = @"1";
-//    _couponReturnView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
     
     //返息券
     _couponInterestView = [[UCFCouponInterest alloc]initWithNibName:@"UCFCouponInterest" bundle:nil];
@@ -86,7 +88,7 @@
     if (nil == _pageHeadView) {
         NSString *title1 = [NSString stringWithFormat:@"返现券"];
         NSString *title2 = [NSString stringWithFormat:@"返息券"];
-        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:@[title1,title2]];
+        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0.5, ScreenWidth, 44) WithTitleArray:@[title1,title2]];
         [_pageHeadView reloaShowView];
     }
     return _pageHeadView;

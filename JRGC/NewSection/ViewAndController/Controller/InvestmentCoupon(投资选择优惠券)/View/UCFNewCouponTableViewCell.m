@@ -21,11 +21,52 @@
         // 初始化视图对象
         self.rootLayout.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
         [self.rootLayout addSubview:self.couponTypeLayout];
-        self.couponTypeLayout.layer.cornerRadius = 4.0f;
+        self.couponTypeLayout.layer.cornerRadius = 5.0f;
         self.couponTypeLayout.clipsToBounds = YES;
         self.couponTypeLayout.layer.borderWidth = 0.5;
         self.couponTypeLayout.layer.borderColor = [Color color:PGColorOptionCellSeparatorGray].CGColor;
         [self.couponTypeLayout addSubview:self.separteImageView];
+        
+        
+        UIView *leftCircleView = [[UIView alloc] init];
+        leftCircleView.layer.cornerRadius = 5.0f;
+        leftCircleView.clipsToBounds = YES;
+        leftCircleView.layer.borderWidth = 0.5;
+        leftCircleView.leftPos.equalTo(self.couponTypeLayout).offset(-5);
+        leftCircleView.widthSize.equalTo(@10);
+        leftCircleView.heightSize.equalTo(@10);
+        leftCircleView.bottomPos.equalTo(@25);
+        leftCircleView.layer.borderColor = [Color color:PGColorOptionCellSeparatorGray].CGColor;
+        leftCircleView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        [self.rootLayout addSubview:leftCircleView];
+        
+        UIView *leftreactView = [[UIView alloc] init];
+        leftreactView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        leftreactView.rightPos.equalTo(self.couponTypeLayout.leftPos);
+        leftreactView.widthSize.equalTo(@10);
+        leftreactView.heightSize.equalTo(@10);
+        leftreactView.bottomPos.equalTo(@25);
+        [self.rootLayout addSubview:leftreactView];
+        
+        UIView *rightCircleView = [[UIView alloc] init];
+        rightCircleView.layer.cornerRadius = 5.0f;
+        rightCircleView.clipsToBounds = YES;
+        rightCircleView.layer.borderWidth = 0.5;
+        rightCircleView.layer.borderColor = [Color color:PGColorOptionCellSeparatorGray].CGColor;
+        rightCircleView.leftPos.equalTo(self.couponTypeLayout.rightPos).offset(-5);
+        rightCircleView.widthSize.equalTo(@10);
+        rightCircleView.heightSize.equalTo(@10);
+        rightCircleView.bottomPos.equalTo(@25);
+        rightCircleView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        [self.rootLayout addSubview:rightCircleView];
+        
+        UIView *rightreactView = [[UIView alloc] init];
+        rightreactView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        rightreactView.leftPos.equalTo(self.couponTypeLayout.rightPos);
+        rightreactView.widthSize.equalTo(@10);
+        rightreactView.heightSize.equalTo(@10);
+        rightreactView.bottomPos.equalTo(@25);
+        [self.rootLayout addSubview:rightreactView];
         
         [self.couponTypeLayout addSubview:self.couponAmounLabel];
         [self.couponTypeLayout addSubview:self.remarkLabel];
@@ -86,7 +127,7 @@
         _couponAmounLabel.leftPos.equalTo(@15);
         _couponAmounLabel.rightPos.equalTo(@10);
         _couponAmounLabel.textAlignment = NSTextAlignmentLeft;
-        _couponAmounLabel.font = [UIFont systemFontOfSize:30.0];
+        _couponAmounLabel.font = [Color gc_ANC_font:32];
         
     }
     return _couponAmounLabel;
@@ -95,10 +136,10 @@
 {
     if (nil == _remarkLabel) {
         _remarkLabel = [UILabel new];
-        _remarkLabel.topPos.equalTo(self.couponAmounLabel.bottomPos).offset(10);
+        _remarkLabel.topPos.equalTo(self.couponAmounLabel.bottomPos).offset(0);
         _remarkLabel.leftPos.equalTo(self.couponAmounLabel.leftPos);
         _remarkLabel.textAlignment = NSTextAlignmentLeft;
-        _remarkLabel.font = [UIFont systemFontOfSize:10.0];
+        _remarkLabel.font = [UIFont systemFontOfSize:12.0];
         _remarkLabel.textColor = [Color color:PGColorOptionTitleGray];
         //        [_titleLabel sizeToFit];
     }
@@ -190,6 +231,7 @@
         _donateButton.mySize = CGSizeMake(50, 25);
         _donateButton.layer.cornerRadius = 12.5;
         _donateButton.clipsToBounds = YES;
+        _donateButton.titleLabel.font = [Color gc_Font:13];
         _donateButton.rightPos.equalTo(@80);
         _donateButton.topPos.equalTo(@18);
         _donateButton.layer.borderColor = [Color color:PGColorOptionTitlerRead].CGColor;
@@ -207,6 +249,7 @@
         _investButton.clipsToBounds = YES;
         _investButton.rightPos.equalTo(@15);
         _investButton.topPos.equalTo(@18);
+        _investButton.titleLabel.font = [Color gc_Font:13];
         UIImage *image = [UIImage gc_styleImageSize:CGSizeMake(50, 25)];
         [_investButton setBackgroundImage:image forState:UIControlStateNormal];
     }
@@ -243,7 +286,7 @@
 
                     self.couponAmounLabel.textColor = [Color color:PGColorOptionCellContentBlue];
                     self.couponAmounLabel.text = [NSString stringWithFormat:@"%@",model.backIntrestRate];
-                    [self.couponAmounLabel setFont:[UIFont systemFontOfSize:15] string:@"%"];
+                    [self.couponAmounLabel setFont:[UIFont systemFontOfSize:18] string:@"%"];
                     UIImage *image = [Image createImageWithColor:[Color color:PGColorOptionCellContentBlue] withCGRect:CGRectMake(0, 0, 50, 25)];
                     [_investButton setBackgroundImage:image forState:UIControlStateNormal];
                 }
@@ -251,7 +294,7 @@
                     [self.investButton setTitleColor:[Color color:PGColorOptionThemeWhite] forState:UIControlStateNormal];
                     [self.donateButton setTitleColor:[Color color:PGColorOpttonRateNoramlTextColor] forState:UIControlStateNormal];
                     self.couponAmounLabel.text = [NSString stringWithFormat:@"¥%@",model.useInvest];
-                    [self.couponAmounLabel setFont:[UIFont systemFontOfSize:15] string:@"¥"];
+                    [self.couponAmounLabel setFont:[UIFont systemFontOfSize:18] string:@"¥"];
                     self.couponAmounLabel.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
                 }
             }

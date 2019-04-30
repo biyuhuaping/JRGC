@@ -31,7 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
-
+    UIView *lineViewAA = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+    lineViewAA.backgroundColor = UIColorWithRGB(0xe2e2e2);
+    [self.view addSubview:lineViewAA];
     [self initViewController];
 }
 
@@ -96,7 +98,7 @@
     if (nil == _pageHeadView) {
         NSString *title1 = [NSString stringWithFormat:@"返现券"];
         NSString *title2 = [NSString stringWithFormat:@"返息券"];
-        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44) WithTitleArray:@[title1,title2]];
+        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0.5, ScreenWidth, 44) WithTitleArray:@[title1,title2]];
         [_pageHeadView reloaShowView];
     }
     return _pageHeadView;
