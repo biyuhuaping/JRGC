@@ -421,7 +421,7 @@
 //初始化标题view
 - (void)initView {
     NSString *firstStr = @"批量出借授权开启后可一次性出借多个小额项目";
-    NSString *secondStr = @"为保证您的资金安全，请合理选择出借金额";
+    NSString *secondStr = @"为保障您的资金安全，请合理选择出借金额";
 //    NSString *thirdStr = @"批量出借授权已经开启";
     switch (self.isStep) {
         case 1:{

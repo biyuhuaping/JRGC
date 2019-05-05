@@ -83,10 +83,15 @@
         parametersDic = [Encryption getSinaturDictWithOrginalDict:tempParametersDic];
     }
     if (request.oldGCApi) {
+        DDLogInfo(@"---请求接口 %@ -----",request.requestUrl);
+        
+        DDLogInfo(@"---%@请求参数未加密 -----%@",request,parametersDic);
         return parametersDic;
     } else {
         NSString *encryptParam  = [Encryption AESWithKey:AES_TESTKEY WithDic:parametersDic];
         NSDictionary *postDict = [NSDictionary dictionaryWithObject:encryptParam forKey:@"encryptParam"];
+        DDLogInfo(@"---请求接口 %@ -----",request.requestUrl);
+
         DDLogInfo(@"---%@请求参数未加密 -----%@",request,parametersDic);
         return postDict;
     }

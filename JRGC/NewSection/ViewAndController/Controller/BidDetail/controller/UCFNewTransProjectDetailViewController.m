@@ -63,7 +63,7 @@
     remind.myHorzMargin = 0;
     remind.heightSize.equalTo(@40);
     remind.subviewVSpace = 5;
-    remind.subviewHSpace = 5;
+    remind.subviewHSpace = 10;
     self.remind = remind;
     [self.contentLayout addSubview:remind];
 

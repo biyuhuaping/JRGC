@@ -31,7 +31,7 @@
         [self addSubview:self.timeLimitTipLab];
         [self addSubview:self.moneyAmountLab];
         [self addSubview:self.moneyAmountTipLab];
-        [self addSubview:self.bottomLineview];
+//        [self addSubview:self.bottomLineview];
     }
     return self;
 }

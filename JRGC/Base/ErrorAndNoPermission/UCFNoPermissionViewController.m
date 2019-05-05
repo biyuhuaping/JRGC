@@ -15,11 +15,18 @@
     NSString *_title;
     NSString *_infoStr;
 }
-
+@property(nonatomic, strong)UIView *bkView;
 @end
 
 @implementation UCFNoPermissionViewController
-
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    CGFloat height = CGRectGetHeight(self.view.frame);
+    
+    CGPoint point = CGPointMake(ScreenWidth/2, height/2 - 40);
+    self.bkView.center = point;
+}
 - (id)initWithTitle:(NSString*)title noPermissionTitle:(NSString *)infoStr
 {
     self = [super init];
@@ -52,29 +59,30 @@
     // Do any additional setup after loading the view.
     [self addLeftButton];
     self.baseTitleType = @"nopromition";
-    self.view.backgroundColor = UIColorWithRGB(0xebebee);
+    self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
     
-    UIView *bkView = [[UIView alloc] initWithFrame:CGRectMake(0, (ScreenHeight - 64 - 296) / 2 , ScreenWidth, 296)];
-
-    baseTitleLabel.text = _title;
-    UIImageView *logoImageVW = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 246)/2, 0, 246, 157)];
-    logoImageVW.image = [UIImage imageNamed:@"invisible_bg.png"];
+    UIView *bkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 , ScreenWidth, 184 + 15 + 17 + 25 + 37)];
+    self.bkView = bkView;
+    
+    UIImageView *logoImageVW = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 288)/2, 0, 288, 184)];
+    logoImageVW.image = [UIImage imageNamed:@"invisible_bg"];
     [bkView addSubview:logoImageVW];
     
-    UILabel *infoLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(logoImageVW.frame) + 33, ScreenWidth, 15) text:_infoStr textColor:[Color color:PGColorOptionTitleGray] font:[UIFont systemFontOfSize:13]];
+    UILabel *infoLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(logoImageVW.frame) + 15, ScreenWidth, 17) text:_infoStr textColor:[Color color:PGColorOptionTitleGray] font:[UIFont systemFontOfSize:15]];
     [bkView addSubview:infoLabel];
     
     UIButton *lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    lookBtn.frame = CGRectMake((ScreenWidth - 246) / 2,CGRectGetMaxY(infoLabel.frame) + 30, 246, 37);
+    lookBtn.frame = CGRectMake(25,CGRectGetMaxY(infoLabel.frame) + 25, ScreenWidth - 50, 37);
     [lookBtn addTarget:self action:@selector(lookBtn:) forControlEvents:UIControlEventTouchUpInside];
     [lookBtn setTitle:@"再去转转" forState:UIControlStateNormal];
-    lookBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    lookBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     lookBtn.layer.cornerRadius = 37/2.0f;
     lookBtn.clipsToBounds = YES;
     lookBtn.titleLabel.textColor = [UIColor whiteColor];
-    [lookBtn setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(288, 37)] forState:UIControlStateNormal];
+    [lookBtn setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(246, 37)] forState:UIControlStateNormal];
     [bkView addSubview:lookBtn];
     
+    bkView.center = self.view.center;
     [self.view addSubview:bkView];
 }
 

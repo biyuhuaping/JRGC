@@ -27,7 +27,7 @@
     self.showTableView.myVertMargin = 0;
     self.showTableView.myHorzMargin = 0;
     [self.rootLayout addSubview:self.showTableView];
-    self.showTableView.backgroundColor = [UIColor whiteColor];
+    self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     
     [self.showTableView registerClass:[UCFSimpleNoticeTableViewCell class] forCellReuseIdentifier:@"message"];
 //    if (@available(iOS 11.0, *)) {
@@ -57,6 +57,10 @@
     api.animatingView = [UIApplication sharedApplication].keyWindow;
     @PGWeakObj(self);
     [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+        if (selfWeak.pageIndex == 0) {
+            [selfWeak.dataArray removeAllObjects];
+        }
         
         NoticeCenterModel *model = request.responseJSONModel;
         if (model.data.pageData.pagination.hasNextPage) {
