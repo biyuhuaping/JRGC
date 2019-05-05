@@ -314,7 +314,7 @@
                 weakSelf.viewModel.cashTotalcouponAmount = @"0";
                 weakSelf.viewModel.cashTotalIDStr = @"";
                 weakSelf.selectCashArray = [NSArray array];
-                [weakSelf.viewModel dealCouponData:weakSelf.viewModel.investMoeny];
+                [weakSelf.viewModel dealCouponData:weakSelf.viewModel.investMoeny withType:1];
             }
         }
     }];
@@ -348,7 +348,7 @@
                 weakSelf.viewModel.couponTotalcouponAmount = @"0";
                 weakSelf.viewModel.couponIDStr = @"";
                 weakSelf.selectCouponArray = [NSArray array];
-                [weakSelf.viewModel dealCouponData:weakSelf.viewModel.investMoeny];
+                [weakSelf.viewModel dealCouponData:weakSelf.viewModel.investMoeny withType:2];
             }
         }
     }];

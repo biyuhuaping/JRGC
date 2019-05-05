@@ -360,7 +360,36 @@
     }
     
 }
-
+- (void)dealCouponData:(NSString *)investMoeny withType:(NSInteger)type
+{
+    if (type == 1) {
+        int a = 0;
+        
+        for (InvestmentCouponCouponlist *model in self.cashCouponArray) {
+            if (model.investMultip <= [investMoeny doubleValue]) {
+                a++;
+            }
+        }
+        if (a > 0) {
+            self.availableCashNum = [NSString stringWithFormat:@"%d张可用",a];
+        } else {
+            self.availableCashNum = @"暂无可用";
+        }
+    } else if(type == 2) {
+        int b = 0;
+        
+        for (InvestmentCouponCouponlist *model in self.interestCouponArray) {
+            if (model.investMultip <= [investMoeny doubleValue]) {
+                b++;
+            }
+        }
+        if (b > 0) {
+            self.availableCouponNum = [NSString stringWithFormat:@"%d张可用",b];
+        } else {
+            self.availableCouponNum = @"暂无可用";
+        }
+    }
+}
 
 #pragma mark ------------------------
 

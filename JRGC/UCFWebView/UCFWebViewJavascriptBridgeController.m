@@ -477,7 +477,11 @@
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
             [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
             if (StatusBarHeight1 > 20) {
-                weakSelf.topConSpace.constant = StatusBarHeight1;
+                if (self.parentViewController) {
+                    weakSelf.topConSpace.constant = 0;
+                } else {
+                    weakSelf.topConSpace.constant = StatusBarHeight1;
+                }
             } else {
                 weakSelf.topConSpace.constant = 0;
             }
