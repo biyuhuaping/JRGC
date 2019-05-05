@@ -39,11 +39,12 @@
     _showTableView.delaysContentTouches = NO;
 
     _showTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _showTableView.estimatedRowHeight = 44.0f;//推测高度，必须有，可以随便写多少
+//    _showTableView.rowHeight = UITableViewAutomaticDimension;
+//    _showTableView.estimatedRowHeight = 20.0f;//推测高度，必须有，可以随便写多少
     _showTableView.backgroundColor = UIColorWithRGB(0xf5f5f5);
 
     self.showHeadView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([QuickRechargeHeadView class]) owner:nil options:nil][0];
-    _showHeadView.frame = CGRectMake(0, 0, ScreenWidth, 230);
+    _showHeadView.frame = CGRectMake(0, 0, ScreenWidth, 255);
 //    _showHeadView.backgroundColor = UIColorWithRGB(0xebebee);
     
     NSString *holderText = @"输入充值金额，最低1元";
@@ -71,13 +72,13 @@
     SingleUserInfo.bankNumTip = @"88888";
     self.dataArr = [NSMutableArray arrayWithCapacity:7];
     [self.dataArr addObject:@"温馨提示"];
-    [self.dataArr addObject:@"● 使用快捷支付充值最低金额应大于等于1元；"];
-    [self.dataArr addObject:@"● 对充值后未出借的提现，由第三方平台收取0.4%的手续费；"];
-    [self.dataArr addObject:@"● 充值/提现必须为银行借记卡，不支持存折、信用卡充值；"];
-    [self.dataArr addObject:@"● 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服；"];
-    [self.dataArr addObject:@"● 单笔充值不可超过该银行充值限额；"];
-    [self.dataArr addObject:@"● 如果手机快捷支付充值失败，可使用网银、手机银行转账等其他方式进行充值。"];
-    [self.dataArr addObject:@"● 如果充值金额没有及时到账，请拨打客服查询。"];
+    [self.dataArr addObject:@"使用快捷支付充值最低金额应大于等于1元；"];
+    [self.dataArr addObject:@"对充值后未出借的提现，由第三方平台收取0.4%的手续费；"];
+    [self.dataArr addObject:@"充值/提现必须为银行借记卡，不支持存折、信用卡充值；"];
+    [self.dataArr addObject:@"充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服；"];
+    [self.dataArr addObject:@"单笔充值不可超过该银行充值限额；"];
+    [self.dataArr addObject:@"如果手机快捷支付充值失败，可使用网银、手机银行转账等其他方式进行充值。"];
+    [self.dataArr addObject:@"如果充值金额没有及时到账，请拨打客服查询。"];
 
     [self getMyBindCardMessage];
 }
@@ -219,13 +220,13 @@
             
             [self.dataArr removeAllObjects];
             [self.dataArr addObject:@"温馨提示"];
-            [self.dataArr addObject:[NSString stringWithFormat:@"● 使用快捷支付充值最低金额应大于等于%@元；",minRecharge]];
-            [self.dataArr addObject:[NSString stringWithFormat:@"● 对充值后未出借的提现，由第三方平台收取%@%%的手续费；",fee]];
-            [self.dataArr addObject:@"● 充值/提现必须为银行借记卡，不支持存折、信用卡充值；"];
-            [self.dataArr addObject:@"● 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服；"];
-            [self.dataArr addObject:@"● 单笔充值不可超过该银行充值限额；"];
-            [self.dataArr addObject:@"● 如果手机快捷支付充值失败，可使用网银、手机银行转账等其他方式进行充值。"];
-            [self.dataArr addObject:@"● 如果充值金额没有及时到账，请拨打客服查询。"];
+            [self.dataArr addObject:[NSString stringWithFormat:@"使用快捷支付充值最低金额应大于等于%@元；",minRecharge]];
+            [self.dataArr addObject:[NSString stringWithFormat:@"对充值后未出借的提现，由第三方平台收取%@%%的手续费；",fee]];
+            [self.dataArr addObject:@"充值/提现必须为银行借记卡，不支持存折、信用卡充值；"];
+            [self.dataArr addObject:@"充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服；"];
+            [self.dataArr addObject:@"单笔充值不可超过该银行充值限额；"];
+            [self.dataArr addObject:@"如果手机快捷支付充值失败，可使用网银、手机银行转账等其他方式进行充值。"];
+            [self.dataArr addObject:@"如果充值金额没有及时到账，请拨打客服查询。"];
             
             [_showTableView reloadData];
         } else {
@@ -317,7 +318,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    _showHeadView.frame = CGRectMake(0, 0, ScreenWidth, 230);
+    _showHeadView.frame = CGRectMake(0, 0, ScreenWidth, 255);
     _showTableView.tableHeaderView = _showHeadView;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -334,14 +335,36 @@
     }
     cell.delegate = self;
     cell.showLabel.text = self.dataArr[indexPath.row];
-    [cell.showLabel setLineSpace:3 string:cell.showLabel.text];
-
-    if ([cell.showLabel.text containsString:@"如果充值金额没有及时到账，请拨打客服查询"]) {
-        [cell.showLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"拨打客服"];
-    
+    if (indexPath.row == 0) {
+        cell.roundView.hidden = YES;
+        cell.labelLeft.constant = 15;
+        cell.showLabel.font = [UIFont systemFontOfSize:15.0];
     }
+    else
+    {
+        cell.roundView.hidden = NO;
+        cell.labelLeft.constant = 27;
+        cell.showLabel.font = [UIFont systemFontOfSize:13.0];
+    }
+    cell.showLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    if ([cell.showLabel.text containsString:@"如果充值金额没有及时到账，请拨打客服查询"]) {
+        [cell.showLabel setFontColor:UIColorWithRGB(0x92AEF8) string:@"拨打客服"];
+
+    }
+
     
     return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize size = [Common getStrHeightWithStr:self.dataArr[indexPath.row] AndStrFont:13 AndWidth:ScreenWidth - 42];
+    if (size.height >16) {
+        return size.height + 15;
+    }
+    else{
+        return size.height + 10;
+    }
+    
 }
 - (void)telServiceNo
 {

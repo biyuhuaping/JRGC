@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) NZLabel     *gcmContentLabel;//内容
 
+@property (nonatomic, strong) UIView      *navLine;
 @end
 
 @implementation UCFMineDimensionCodeViewController
@@ -37,6 +38,8 @@
     [self.rootLayout addSubview:self.gcmImageView];
     [self.rootLayout addSubview:self.gcmTitleLabel];
     [self.rootLayout addSubview:self.gcmContentLabel];
+    [self.rootLayout addSubview:self.navLine];
+    
     [self getData];
     [self addLeftButton];
 }
@@ -72,7 +75,7 @@
         _gcmTitleLabel.textAlignment = NSTextAlignmentCenter;
         _gcmTitleLabel.font = [Color gc_Font:15.0];
         _gcmTitleLabel.textColor = [Color color:PGColorOptionTitleBlack];
-        _gcmTitleLabel.text = @"工场码 ";
+        _gcmTitleLabel.text = @"工场码";
         [_gcmTitleLabel sizeToFit];
     }
     return _gcmTitleLabel;
@@ -81,13 +84,26 @@
 {
     if (nil == _gcmContentLabel) {
         _gcmContentLabel = [NZLabel new];
-        _gcmContentLabel.topPos.equalTo(self.gcmTitleLabel.bottomPos).offset(5);
+        _gcmContentLabel.topPos.equalTo(self.gcmTitleLabel.bottomPos).offset(0);
         _gcmContentLabel.centerXPos.equalTo(self.rootLayout.centerXPos);
         _gcmContentLabel.textAlignment = NSTextAlignmentCenter;
         _gcmContentLabel.font = [Color gc_Font:21.0];
         _gcmContentLabel.textColor = [Color color:PGColorOptionTitlerRead];
     }
     return _gcmContentLabel;
+}
+- (UIView *)navLine
+{
+    if (nil == _navLine) {
+        _navLine = [UIView new];
+        _navLine.myTop = 0;
+        _navLine.myHeight = 0.5;
+        _navLine.myLeft = 0;
+        _navLine.myRight = 0;
+        _navLine.backgroundColor = [Color color:PGColorOpttonNavLineBackgroundColor];
+        //
+    }
+    return _navLine;
 }
 #pragma mark - 请求网络及回调
 //获取数据

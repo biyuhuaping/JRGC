@@ -67,10 +67,10 @@
     rightbutton.frame = CGRectMake(0, 0, 44, 44);
     rightbutton.backgroundColor = [UIColor whiteColor];
     [rightbutton setTitle:@"注册" forState:UIControlStateNormal];
-    rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    rightbutton.titleLabel.font = [UIFont systemFontOfSize:18.0];
     [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
-    [rightbutton setTitleColor:[Color color:PGColorOpttonTextRedColor] forState:UIControlStateNormal];
-    [rightbutton setTitleColor:[Color color:PGColorOpttonTextRedColor] forState:UIControlStateHighlighted];
+    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateNormal];
+    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateHighlighted];
     [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];

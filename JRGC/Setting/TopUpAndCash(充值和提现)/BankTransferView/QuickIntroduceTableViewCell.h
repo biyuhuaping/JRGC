@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QuickIntroduceTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet NZLabel *showLabel;
+@property (weak, nonatomic) IBOutlet UIView *roundView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelLeft;
 @property (weak)id<QuickIntroduceTableViewCellDelegate> delegate;
 @end
 

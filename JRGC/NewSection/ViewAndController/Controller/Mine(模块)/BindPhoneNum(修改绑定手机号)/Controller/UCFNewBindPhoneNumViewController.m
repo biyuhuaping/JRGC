@@ -115,15 +115,25 @@
         _moddifyPhoneTextField = [UITextField new];
         _moddifyPhoneTextField.backgroundColor = [UIColor clearColor];
         _moddifyPhoneTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _moddifyPhoneTextField.font = [Color font:15.0 andFontName:nil];
+        _moddifyPhoneTextField.font = [Color font:18.0 andFontName:nil];
         _moddifyPhoneTextField.textAlignment = NSTextAlignmentLeft;
-        _moddifyPhoneTextField.placeholder = @"请输入原绑定手机号";
+        _moddifyPhoneTextField.keyboardType = UIKeyboardTypeNumberPad;
+//        _moddifyPhoneTextField.placeholder = @"请输入原绑定手机号";
         _moddifyPhoneTextField.delegate = self;
         //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_moddifyPhoneTextField.placeholder attributes:dict];
-        [_moddifyPhoneTextField setAttributedPlaceholder:attribute];
+//        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
+//        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_moddifyPhoneTextField.placeholder attributes:dict];
+//        [_moddifyPhoneTextField setAttributedPlaceholder:attribute];
+        NSString *holderText = @"请输入手机号";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _moddifyPhoneTextField.attributedPlaceholder = placeholder;
         _moddifyPhoneTextField.textColor = [Color color:PGColorOptionTitleBlack];
         _moddifyPhoneTextField.heightSize.equalTo(@25);
         _moddifyPhoneTextField.leftPos.equalTo(self.moddifyPhoneImageView.rightPos).offset(9);
@@ -131,6 +141,14 @@
         _moddifyPhoneTextField.centerYPos.equalTo(self.moddifyPhoneImageView.centerYPos);
         _moddifyPhoneTextField.userInteractionEnabled = YES;
         [_moddifyPhoneTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+        
+        UIButton *clearButton = [_moddifyPhoneTextField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+            
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateHighlighted];
+            
+        }
     }
     return _moddifyPhoneTextField;
 }
@@ -153,7 +171,7 @@
 {
     if (nil == _passWordImageView) {
         _passWordImageView = [[UIImageView alloc] init];
-        _passWordImageView.topPos.equalTo(self.moddifyPhoneLine.bottomPos).offset(17.5);
+        _passWordImageView.topPos.equalTo(self.moddifyPhoneLine.bottomPos).offset(22);
         _passWordImageView.myLeft = 30;
         _passWordImageView.myWidth = 25;
         _passWordImageView.myHeight = 25;
@@ -169,16 +187,25 @@
         _loginPwdTextField = [UITextField new];
         _loginPwdTextField.backgroundColor = [UIColor clearColor];
         _loginPwdTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _loginPwdTextField.font = [Color font:15.0 andFontName:nil];
+        _loginPwdTextField.font = [Color font:18.0 andFontName:nil];
         _loginPwdTextField.textAlignment = NSTextAlignmentLeft;
-        _loginPwdTextField.placeholder = @"请输入登录密码";
+//        _loginPwdTextField.placeholder = @"请输入登录密码";
         _loginPwdTextField.secureTextEntry = YES;
         _loginPwdTextField.delegate = self;
         //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_loginPwdTextField.placeholder attributes:dict];
-        [_loginPwdTextField setAttributedPlaceholder:attribute];
+//        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
+//        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_loginPwdTextField.placeholder attributes:dict];
+//        [_loginPwdTextField setAttributedPlaceholder:attribute];
+        NSString *holderText = @"请输入登录密码";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _loginPwdTextField.attributedPlaceholder = placeholder;
         _loginPwdTextField.textColor = [Color color:PGColorOptionTitleBlack];
         _loginPwdTextField.heightSize.equalTo(@25);
         _loginPwdTextField.leftPos.equalTo(self.passWordImageView.rightPos).offset(9);
@@ -186,6 +213,14 @@
         _loginPwdTextField.centerYPos.equalTo(self.passWordImageView.centerYPos);
         _loginPwdTextField.userInteractionEnabled = YES;
         [_loginPwdTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+        
+        UIButton *clearButton = [_loginPwdTextField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+            
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateHighlighted];
+            
+        }
     }
     return _loginPwdTextField;
 }
@@ -193,7 +228,7 @@
 {
     if (nil == _passWordLine) {
         _passWordLine = [UIView new];
-        _passWordLine.topPos.equalTo(self.passWordImageView.bottomPos).offset(13);
+        _passWordLine.topPos.equalTo(self.moddifyPhoneLine.bottomPos).offset(60);
         _passWordLine.myHeight = 0.5;
         _passWordLine.myLeft = 25;
         _passWordLine.myRight = 25;
@@ -265,7 +300,7 @@
     if(_forgetBtn == nil)
     {
         _forgetBtn = [UIButton buttonWithType:0];
-        _forgetBtn.topPos.equalTo(self.nextBtn.bottomPos).offset(15);
+        _forgetBtn.topPos.equalTo(self.nextBtn.bottomPos).offset(10);
         _forgetBtn.leftPos.equalTo(@25);
         _forgetBtn.widthSize.equalTo(@70);
         _forgetBtn.heightSize.equalTo(@30);

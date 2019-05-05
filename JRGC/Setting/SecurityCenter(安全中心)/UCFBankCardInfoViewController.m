@@ -28,7 +28,9 @@
     MjAlertView *alert;
    
 }
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (strong, nonatomic) IBOutlet UITableView *tableview;
+
+@property (nonatomic, strong) MyRelativeLayout *rootLayout;
 // tips提示升级开户
 @property (nonatomic, copy) NSString *tipsText;
 // 银行卡图标地址
@@ -101,6 +103,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.rootLayout = [MyRelativeLayout new];
+    self.rootLayout.backgroundColor = [UIColor whiteColor];
+    self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.view = self.rootLayout;
+    
+    [self.rootLayout addSubview:self.tableview];
+    
     //***设置导航title 1.p2p绑定银行卡 2.尊享绑定银行卡
     if(self.accoutType == SelectAccoutTypeP2P)
     {
@@ -112,12 +121,34 @@
     rowInSecionOne = 0;//***第一section里的Row的个数初始化为0；需要显示tips时就动态+1；不现实就动态-1；
     self.isNeedAlert = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(renewDataForPage) name:MODIBANKZONE_SUCCESSED object:nil];//***修改绑定银行卡成功后返回该页面需要刷新数据
+    
+    
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    self.tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
+    
     [self getBankCardInfoFromNet];
+    
 }
-
+- (UITableView *)tableview
+{
+    if (nil == _tableview) {
+        _tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableview.delegate = self;
+        _tableview.dataSource = self;
+        _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _tableview.backgroundColor = UIColorWithRGB(0xf5f5f5);
+        _tableview.backgroundColor = [UIColor redColor];
+//        _tableview.estimatedRowHeight = 60;
+//        _tableview.rowHeight = UITableViewAutomaticDimension;
+        _tableview.myTop = 0;
+        _tableview.myBottom = 0;
+        _tableview.myLeft = 0;
+        _tableview.myRight = 0;
+        adjustsScrollViewInsets(_tableview);
+        
+    }
+    return _tableview;
+}
 
 #pragma mark  #---------tableviewDelegate-------------#
 #pragma mark -tableviewdelegate- 指定有多少个分区(Section)
@@ -155,32 +186,33 @@
 {
     if(section==([self.itemsData count]-1))
     {
+        CGFloat tableHeadHeight = PGScreenWidth *0.83;
 //        CGSize markContentSize = [self sizeWithText:@"如果您绑定的银行卡暂不支持手机一键支付请联系客服400-0322-988" font:[UIFont systemFontOfSize:13] maxSize:CGSizeMake(ScreenWidth-30, MAXFLOAT)];
-        CGSize markContentSize = CGSizeMake(0, 0);
-        CGFloat height = 0;
-        NSString *machineType = [Common machineName];
-        if ([machineType isEqualToString:@"4"] || [machineType isEqualToString:@"5"]) {
-            height = 202 + markContentSize.height +10;
-        }
-        else if ([machineType isEqualToString:@"6"]) {
-            height = 215 + markContentSize.height +20 ;
-        }
-        else if ([machineType isEqualToString:@"6Plus"]) {
-            height = 231 + markContentSize.height;
-        } else {
-            height = 231 + markContentSize.height;
-        }
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, height)];
+//        CGSize markContentSize = CGSizeMake(0, 0);
+//        CGFloat height = 0;
+//        NSString *machineType = [Common machineName];
+//        if ([machineType isEqualToString:@"4"] || [machineType isEqualToString:@"5"]) {
+//            height = 202 + markContentSize.height +10;
+//        }
+//        else if ([machineType isEqualToString:@"6"]) {
+//            height = 215 + markContentSize.height +20 ;
+//        }
+//        else if ([machineType isEqualToString:@"6Plus"]) {
+//            height = 231 + markContentSize.height;
+//        } else {
+//            height = 231 + markContentSize.height;
+//        }
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, tableHeadHeight)];
         
-        UCFNewBankCardView *bankCard = [[UCFNewBankCardView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, PGScreenWidth *0.83)];//***银行卡view
+        UCFNewBankCardView *bankCard = [[UCFNewBankCardView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,tableHeadHeight )];//***银行卡view
         
 //        OHAttributedLabel *label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(bankCard.frame), ScreenWidth - 30, height - CGRectGetMaxY(bankCard.frame))];
-        float heightFanal = 0;
-        if ([machineType isEqualToString:@"6"]) {
-              heightFanal = markContentSize.height +8;
-        }else{
-            heightFanal = markContentSize.height;
-        }
+//        float heightFanal = 0;
+//        if ([machineType isEqualToString:@"6"]) {
+//              heightFanal = markContentSize.height +8;
+//        }else{
+//            heightFanal = markContentSize.height;
+//        }
         
 //         OHAttributedLabel *label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(bankCard.frame) + 10, ScreenWidth - 30,heightFanal)];
 //        [view addSubview:label];
@@ -209,7 +241,7 @@
                 }
             }];
         }
-        [view addSubview:bankCard];
+//        [view addSubview:bankCard];
         
         if (self.bankName) {
             bankCard.bankNameLabel.text = self.bankName;
@@ -224,7 +256,7 @@
             [bankCard.cardNoLabel sizeToFit];
         }
         bankCard.quickPayImageView.hidden = !self.quickPaySign;
-        return view;
+        return bankCard;
     }else{//***第一个额section的headerview 设为黑色
         UIView*view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,1)];
         view.backgroundColor = [UIColor clearColor];
@@ -232,6 +264,7 @@
         return view;
     }
 }
+
 
 #pragma mark -tableviewdelegate-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -278,7 +311,7 @@
 {
     if(indexPath.section == ([self.itemsData count]-1))
     {
-        return 50;
+        return 60;
     }else{
         return 44;
     }

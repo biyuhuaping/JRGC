@@ -50,13 +50,14 @@
         _contentField.backgroundColor = [UIColor clearColor];
         //        _contentField.delegate = self;
         //        _contentField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _contentField.font = [Color gc_Font:15.0];
-        _contentField.placeholder = @"短息验证码";
+        _contentField.font = [Color gc_Font:18.0];
+//        _contentField.placeholder = @"短息验证码";
         _contentField.keyboardType =  UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_contentField.placeholder attributes:dict];
-        [_contentField setAttributedPlaceholder:attribute];
+        
+//        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
+//        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_contentField.placeholder attributes:dict];
+//        [_contentField setAttributedPlaceholder:attribute];
         
         
         //        NSString *phoneStr = [UserObeject getUserDataMobile];
@@ -70,6 +71,16 @@
         //            [clearButton setImage:[UIImage imageNamed:@"register_clear_icon.png"] forState:UIControlStateHighlighted];
         //
         //        }
+        
+        NSString *holderText = @"短息验证码";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _contentField.attributedPlaceholder = placeholder;
         _contentField.textColor = [Color color:PGColorOptionTitleBlack];
         _contentField.heightSize.equalTo(self.rootLayout.heightSize);
         _contentField.leftPos.equalTo(self.titleImageView.rightPos).offset(13);

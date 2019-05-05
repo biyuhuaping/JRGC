@@ -54,8 +54,10 @@
 {
     if (nil == _bkImageView) {
         _bkImageView = [[UIImageView alloc] init];
-        _bkImageView.centerYPos.equalTo(self.rootLayout.centerYPos);
-        _bkImageView.centerXPos.equalTo(self.rootLayout.centerXPos);
+//        _bkImageView.centerYPos.equalTo(self.rootLayout.centerYPos);
+//        _bkImageView.centerXPos.equalTo(self.rootLayout.centerXPos);
+        _bkImageView.myTop = 0;
+        _bkImageView.myLeft = 0;
         _bkImageView.myWidth = PGScreenWidth;
         _bkImageView.myHeight = PGScreenWidth *0.83;
         _bkImageView.image = [UIImage imageNamed:@"binding_bank_cardsbg"];

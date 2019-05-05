@@ -52,7 +52,7 @@
         _personalBtn.widthSize.equalTo(@60);
         _personalBtn.heightSize.equalTo(@40);
         [_personalBtn setTitle:@"个人登录" forState:UIControlStateNormal];
-        [_personalBtn setTitleColor:[Color color:PGColorOptionTitleLoginRead] forState: UIControlStateNormal];
+        [_personalBtn setTitleColor:[Color color:PGColorOptionTitlerRead] forState: UIControlStateNormal];
         _personalBtn.titleLabel.font = [Color gc_Font:15.0];
         _personalBtn.tag = 1000;
         [_personalBtn addTarget:self action:@selector(setSelectedButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -81,7 +81,7 @@
 - (void)setSelectedButton:(UIButton *)btn
 {
     if (btn.tag == 1000) {
-        [self.personalBtn setTitleColor:[Color color:PGColorOptionTitleLoginRead] forState: UIControlStateNormal];
+        [self.personalBtn setTitleColor:[Color color:PGColorOptionTitlerRead] forState: UIControlStateNormal];
         [self.enterpriseBtn setTitleColor:[Color color:PGColorOptionTitleBlack] forState: UIControlStateNormal];
         [UIView animateWithDuration:0.1 delay:0.2 usingSpringWithDamping:0.2 initialSpringVelocity:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.halvingLine.centerXPos.equalTo(self.personalBtn.centerXPos);
@@ -94,7 +94,7 @@
     else
     {
         [self.personalBtn setTitleColor:[Color color:PGColorOptionTitleBlack] forState: UIControlStateNormal];
-        [self.enterpriseBtn setTitleColor:[Color color:PGColorOptionTitleLoginRead] forState: UIControlStateNormal];
+        [self.enterpriseBtn setTitleColor:[Color color:PGColorOptionTitlerRead] forState: UIControlStateNormal];
         [UIView animateWithDuration:0.1 delay:0.2 usingSpringWithDamping:0.2 initialSpringVelocity:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.halvingLine.centerXPos.equalTo(self.enterpriseBtn.centerXPos);
         } completion:^(BOOL finished) {
@@ -127,7 +127,7 @@
         _halvingLine.myWidth= 24;
         _halvingLine.myHeight = 3;
         _halvingLine.topPos.equalTo(self.underline.topPos).offset(-5);
-        _halvingLine.backgroundColor = [Color color:PGColorOptionTitleLoginRead];
+        _halvingLine.backgroundColor = [Color color:PGColorOptionTitlerRead];
         _halvingLine.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
         { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
             //设置圆角的半径

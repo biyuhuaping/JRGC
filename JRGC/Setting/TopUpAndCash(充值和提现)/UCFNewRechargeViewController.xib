@@ -53,12 +53,17 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scA-S4-6tr">
-                            <rect key="frame" x="100" y="36" width="36" height="6"/>
+                            <rect key="frame" x="100" y="34" width="36" height="4"/>
                             <color key="backgroundColor" red="1" green="0.25490196078431371" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="6" id="5sl-xV-KgY"/>
+                                <constraint firstAttribute="height" constant="4" id="5sl-xV-KgY"/>
                                 <constraint firstAttribute="width" constant="36" id="u5n-tV-cM8"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -67,7 +72,7 @@
                         <constraint firstAttribute="bottom" secondItem="CVp-R0-IXD" secondAttribute="bottom" id="71T-6K-VJ3"/>
                         <constraint firstItem="CVp-R0-IXD" firstAttribute="top" secondItem="gzG-OX-JER" secondAttribute="top" id="8eJ-fd-iwy"/>
                         <constraint firstAttribute="bottom" secondItem="YSQ-Nf-Fps" secondAttribute="bottom" id="GGJ-X1-udw"/>
-                        <constraint firstAttribute="bottom" secondItem="scA-S4-6tr" secondAttribute="bottom" constant="2" id="GJP-Li-hSE"/>
+                        <constraint firstAttribute="bottom" secondItem="scA-S4-6tr" secondAttribute="bottom" constant="6" id="GJP-Li-hSE"/>
                         <constraint firstAttribute="height" constant="44" id="N6T-dm-3wJ"/>
                         <constraint firstItem="CVp-R0-IXD" firstAttribute="leading" secondItem="YSQ-Nf-Fps" secondAttribute="trailing" id="PnZ-E4-Orq"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="VLO-GT-IQ0"/>

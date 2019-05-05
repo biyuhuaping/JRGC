@@ -68,7 +68,7 @@
         _tableView.topPos.equalTo(@10);
         _tableView.leftPos.equalTo(@0);
         _tableView.rightPos.equalTo(@0);
-        _tableView.bottomPos.equalTo(@0);
+        _tableView.bottomPos.equalTo(@10);
         
     }
     return _tableView;

@@ -114,6 +114,13 @@
         _titleVerticalView.myWidth = 4;
         _titleVerticalView.myLeft = 15;
         _titleVerticalView.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
+        _titleVerticalView.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
+        { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
+            //设置圆角的半径
+            sbv.layer.cornerRadius = 2;
+            //切割超出圆角范围的子视图
+            sbv.layer.masksToBounds = YES;
+        };
     }
     return _titleVerticalView;
 }
@@ -195,7 +202,7 @@
 {
     if (nil == _availBalanceLabel) {
         _availBalanceLabel = [NZLabel new];
-        _availBalanceLabel.myCenterY = 0;
+        _availBalanceLabel.myCenterY = 8;
         _availBalanceLabel.myLeft = LabelLeft;
         _availBalanceLabel.textAlignment = NSTextAlignmentLeft;
         _availBalanceLabel.font = [Color gc_Font:15.0];
@@ -210,7 +217,7 @@
 {
     if (nil == _moneyLabel) {
         _moneyLabel = [NZLabel new];
-        _moneyLabel.myCenterY = 0;
+        _moneyLabel.centerYPos.equalTo(self.availBalanceLabel.centerYPos);
         _moneyLabel.myRight = 25;
         _moneyLabel.textAlignment = NSTextAlignmentRight;
         _moneyLabel.font = [Color gc_Font:14.0];
@@ -241,7 +248,7 @@
 {
     if (nil == _waitPrincipalLabel) {
         _waitPrincipalLabel = [NZLabel new];
-        _waitPrincipalLabel.myCenterY = 0;
+        _waitPrincipalLabel.myCenterY = 2;
         _waitPrincipalLabel.myLeft = LabelLeft;
         _waitPrincipalLabel.textAlignment = NSTextAlignmentLeft;
         _waitPrincipalLabel.font = [Color gc_Font:15.0];
@@ -256,7 +263,7 @@
 {
     if (nil == _cashWayLabel) {
         _cashWayLabel = [NZLabel new];
-        _cashWayLabel.myCenterY = 0;
+        _cashWayLabel.centerYPos.equalTo(self.waitPrincipalLabel.centerYPos);
         _cashWayLabel.myRight = 25;
         _cashWayLabel.textAlignment = NSTextAlignmentRight;
         _cashWayLabel.font = [Color gc_Font:14.0];
@@ -286,7 +293,7 @@
 {
     if (nil == _waitInterestLabel) {
         _waitInterestLabel = [NZLabel new];
-        _waitInterestLabel.myCenterY = 0;
+        _waitInterestLabel.myCenterY = -2;
         _waitInterestLabel.myLeft = LabelLeft;
         _waitInterestLabel.textAlignment = NSTextAlignmentLeft;
         _waitInterestLabel.font = [Color gc_Font:15.0];
@@ -301,7 +308,7 @@
 {
     if (nil == _timeValueLabel) {
         _timeValueLabel = [NZLabel new];
-        _timeValueLabel.myCenterY = 0;
+        _timeValueLabel.centerYPos.equalTo(self.waitInterestLabel.centerYPos);
         _timeValueLabel.myRight = 25;
         _timeValueLabel.textAlignment = NSTextAlignmentRight;
         _timeValueLabel.font = [Color gc_Font:14.0];
@@ -394,12 +401,12 @@
     }
     //  0：未处理；7：已退款；9：提现成功；10：提现失败；11：处理中
     if (statue == 9) { // 9:提现成功
-        self.statueLabel.textColor = UIColorWithRGB(0x4aa1f9);
+        self.statueLabel.textColor = [Color color:PGColorOptionCellContentBlue];
     }else if(statue == 11 || statue == 10) // 10：提现失败；11：处理中
     {
-        self.statueLabel.textColor = UIColorWithRGB(0xfd4d4c);
+        self.statueLabel.textColor = [Color color:PGColorOptionTitleBlack];
     }else{ //0：未处理；7：已退款；
-        self.statueLabel.textColor = UIColorWithRGB(0x999999);
+        self.statueLabel.textColor = [Color color:PGColorOptionTitleBlack];
     }
     switch (statue) {
         case 0:

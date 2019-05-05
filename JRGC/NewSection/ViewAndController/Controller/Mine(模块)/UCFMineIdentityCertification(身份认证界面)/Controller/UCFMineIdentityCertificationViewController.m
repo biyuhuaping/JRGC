@@ -93,8 +93,8 @@
         _backgroundImageView = [[UIImageView alloc] init];
         _backgroundImageView.myTop = 0;
         _backgroundImageView.myLeft = 0;
-        _backgroundImageView.myRight = 0;
-        _backgroundImageView.myHeight = 375;
+        _backgroundImageView.myWidth = PGScreenWidth;
+        _backgroundImageView.myHeight = PGScreenWidth*0.987;
         _backgroundImageView.image = [UIImage imageNamed:@"identity_authentication_bg"];
     }
     return _backgroundImageView;

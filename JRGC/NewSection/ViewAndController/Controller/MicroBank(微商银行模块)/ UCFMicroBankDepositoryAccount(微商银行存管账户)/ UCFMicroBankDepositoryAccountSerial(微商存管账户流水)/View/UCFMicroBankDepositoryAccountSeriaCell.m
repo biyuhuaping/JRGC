@@ -79,7 +79,7 @@
 {
     if (nil == _itemTimeLabel) {
         _itemTimeLabel = [NZLabel new];
-        _itemTimeLabel.topPos.equalTo(self.itemTitleLabel.bottomPos).offset(8);
+        _itemTimeLabel.topPos.equalTo(self.itemTitleLabel.bottomPos).offset(0);
         _itemTimeLabel.leftPos.equalTo(self.itemTitleLabel.leftPos);
         _itemTimeLabel.textAlignment = NSTextAlignmentLeft;
         _itemTimeLabel.font = [Color gc_Font:12.0];

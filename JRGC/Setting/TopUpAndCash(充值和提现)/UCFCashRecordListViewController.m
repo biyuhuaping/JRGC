@@ -57,6 +57,10 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     _noDataView = [[UCFNoDataView alloc] initWithFrame:self.cashRecordTable.bounds errorTitle:@"暂无数据"];
     _cashRecordTable.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 0.5)];
+    lineView.backgroundColor = UIColorWithRGB(0xe2e2e2);
+    [self.view addSubview:lineView];
 }
 - (void)getCashRecordListHttpRequset
 {
@@ -130,7 +134,7 @@
     if ([withdrawModeStr isEqualToString:@""]) {
         return 170 -37;
     }else{
-        return 170;
+        return 180;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

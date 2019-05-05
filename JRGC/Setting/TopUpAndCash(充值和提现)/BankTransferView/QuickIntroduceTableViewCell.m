@@ -23,7 +23,19 @@
         [self.delegate quickIntroduceTableViewCell:self withButton:sender];
     }
 }
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self.showLabel setLineSpace:6 string:self.showLabel.text];
 
+    
+        if (self.showLabel.size.height > 26) {
+       
+        } else {
+            
+        }
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

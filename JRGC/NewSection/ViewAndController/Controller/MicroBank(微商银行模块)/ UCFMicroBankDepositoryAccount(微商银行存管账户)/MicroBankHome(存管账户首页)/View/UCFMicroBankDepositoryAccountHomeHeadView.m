@@ -58,7 +58,7 @@
 {
     if (nil == _bankCardNumberLabel) {
         _bankCardNumberLabel = [NZLabel new];
-        _bankCardNumberLabel.leftPos.equalTo(self.bankCardBKImageView.leftPos).offset(29);
+        _bankCardNumberLabel.leftPos.equalTo(self.bankCardBKImageView.leftPos).offset(36);
         _bankCardNumberLabel.rightPos.equalTo(self.bankCardBKImageView.rightPos).offset(29);
         _bankCardNumberLabel.topPos.equalTo(self.bankCardBKImageView.topPos).offset(PGScreenWidth *0.573*0.437);
         _bankCardNumberLabel.textAlignment = NSTextAlignmentLeft;

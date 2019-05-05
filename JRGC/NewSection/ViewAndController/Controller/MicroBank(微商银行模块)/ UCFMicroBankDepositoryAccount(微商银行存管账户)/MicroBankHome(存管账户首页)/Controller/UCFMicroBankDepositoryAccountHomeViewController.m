@@ -331,8 +331,10 @@
 //        修改银行卡
 //        UCFMicroBankDepositoryChangeBankCardViewController *vc = [[UCFMicroBankDepositoryChangeBankCardViewController alloc] init];
 //        [self.rt_navigationController pushViewController:vc animated:YES];
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
-        UCFBankCardInfoViewController *bankCardInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"bankcardinfo"];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
+//        UCFBankCardInfoViewController *bankCardInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"bankcardinfo"];
+        UCFBankCardInfoViewController *bankCardInfoVC = [[UCFBankCardInfoViewController alloc] init];
+        bankCardInfoVC.isHideNavigationBar = YES;
         bankCardInfoVC.accoutType = self.accoutType;
         [self.rt_navigationController pushViewController:bankCardInfoVC animated:YES];
     }

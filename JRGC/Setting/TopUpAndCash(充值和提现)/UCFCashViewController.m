@@ -48,6 +48,10 @@
     MjAlertView *_redBagAlertView;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
+@property (weak, nonatomic) IBOutlet UIView *agreementView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *agreementViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *bkView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bkViewHeight;
 @property (strong, nonatomic) IBOutlet UIImageView *bankIcon;
 @property (strong, nonatomic) IBOutlet UILabel *bankName;
 @property (strong, nonatomic) IBOutlet UILabel *bankNum;
@@ -165,6 +169,19 @@
     [_warnSendLabel addGestureRecognizer:tapGes];
     _warnSendLabel.userInteractionEnabled = YES;
     _warnSendLabel.text = @"";
+    
+    
+    NSString *holderText = @"请输入提现金额";
+    NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+    [placeholder addAttribute:NSForegroundColorAttributeName
+                        value:[Color color:PGColorOptionInputDefaultBlackGray]
+                        range:NSMakeRange(0, holderText.length)];
+    [placeholder addAttribute:NSFontAttributeName
+                        value:[Color gc_Font:15.0]
+                        range:NSMakeRange(0, holderText.length)];
+    _crachTextField.attributedPlaceholder = placeholder;
+    self.bkView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+     self.baseScrollView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 }
 - (void)addRightButtonWithName:(NSString *)rightButtonName;
 {
@@ -231,7 +248,8 @@
     //设置ScrollView总高度
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         float scrollViewHeight = CGRectGetMaxY(_telServiceLabel.frame);
-        self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, scrollViewHeight + 50);
+//        self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, scrollViewHeight + 50);
+        self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, 445+ self.agreementView.frame.size.height +80);
         DDLogDebug(@"%@",self.baseScrollView);
     });
 #ifdef __IPHONE_5_0
@@ -534,19 +552,115 @@
     _noticeTxt = [dataDic objectSafeForKey:@"noticeTxt"];
     _hasCoupon = [[dataDic objectSafeForKey:@"hasCoupon"] boolValue];
     _honerCashTipLabel.text = _noticeTxt;
-
-    NSString *isThreePlatStr = self.accoutType == SelectAccoutTypeP2P ? @"平台方":@"第三方支付平台";
-    NSString *withdrawDescriptionStr = [NSString stringWithFormat: @"•单笔提现金额不能低于%@元，提现申请成功后不可撤回；\n•对首次充值后无投资的提现，%@收取%@%%的手续费；\n•徽电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；",[dataDic  objectForKey:@"minAmt"],isThreePlatStr,_fee];
-    _withdrawDescriptionLab.text = withdrawDescriptionStr;
-    __weak typeof(self) weakSelf = self;
     self.telServiceNo = [dataDic objectSafeForKey:@"customerServiceNo"];
-    self.telServiceLabel.text = [NSString stringWithFormat:@"•如遇问题请与客服联系%@。",self.telServiceNo];
-    [self.telServiceLabel addLinkString:self.telServiceNo block:^(ZBLinkLabelModel *linkModel) {
-        [weakSelf openURL];
-    }];
-    [self.telServiceLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:self.telServiceNo];
+    [self loadAgreementViewWithDictionary:dataDic];
+//    NSString *isThreePlatStr = self.accoutType == SelectAccoutTypeP2P ? @"平台方":@"第三方支付平台";
+//    NSString *withdrawDescriptionStr = [NSString stringWithFormat: @"•单笔提现金额不能低于%@元，提现申请成功后不可撤回；\n•对首次充值后无投资的提现，%@收取%@%%的手续费；\n•徽电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；",[dataDic  objectForKey:@"minAmt"],isThreePlatStr,_fee];
+//    _withdrawDescriptionLab.text = withdrawDescriptionStr;
+//
+//    __weak typeof(self) weakSelf = self;
+//    self.telServiceNo = [dataDic objectSafeForKey:@"customerServiceNo"];
+//    self.telServiceLabel.text = [NSString stringWithFormat:@"•如遇问题请与客服联系%@。",self.telServiceNo];
+//    [self.telServiceLabel addLinkString:self.telServiceNo block:^(ZBLinkLabelModel *linkModel) {
+//        [weakSelf openURL];
+//    }];
+//    [self.telServiceLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:self.telServiceNo];
 
    
+}
+- (void)loadAgreementViewWithDictionary:(NSDictionary *)dataDic
+{
+    CGFloat spacingHeight = 8;
+    CGFloat spacingLabelHeight = 5;
+    CGFloat spacingWidth = 4;
+    CGFloat labelWidth = PGScreenWidth - 50;
+    
+    NZLabel *titleLabel = [[NZLabel alloc] initWithFrame:CGRectMake(15, 0, PGScreenWidth, 15)];
+    titleLabel.font = [Color gc_Font:15];
+    titleLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    titleLabel.text = @"温馨提示";
+    [self.agreementView addSubview:titleLabel];
+    
+    
+    UIView *firstRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(titleLabel.frame) +15, 8, 8)];
+    firstRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    firstRound.layer.cornerRadius = 4;
+    firstRound.layer.masksToBounds = YES;
+    
+    NZLabel *firstLabel = [[NZLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(firstRound.frame) +spacingWidth, CGRectGetMinY(firstRound.frame) -spacingLabelHeight,labelWidth , 50)];
+    firstLabel.font = [Color gc_Font:13];
+    firstLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    firstLabel.text = [NSString stringWithFormat:@"单笔提现金额不能低于%@元，提现申请成功后不可撤回；",[dataDic  objectForKey:@"minAmt"]];
+    [firstLabel setLineSpace:6 string:firstLabel.text];
+    firstLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    firstLabel.numberOfLines = 0;
+    firstLabel.preferredMaxLayoutWidth = labelWidth;
+    [self.agreementView addSubview:firstRound];
+    [self.agreementView addSubview:firstLabel];
+    
+    UIView *secondRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(firstLabel.frame) +spacingHeight, 8, 8)];
+    secondRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    secondRound.layer.cornerRadius = 4;
+    secondRound.layer.masksToBounds = YES;
+    
+    NZLabel *secondLabel = [[NZLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(secondRound.frame) +spacingWidth, CGRectGetMinY(secondRound.frame) -spacingLabelHeight,labelWidth , 50)];
+    secondLabel.font = [Color gc_Font:13];
+    secondLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    NSString *isThreePlatStr = self.accoutType == SelectAccoutTypeP2P ? @"平台方":@"第三方支付平台";
+    secondLabel.text = [NSString stringWithFormat:@"对首次充值后无投资的提现，%@收取%@%%的手续费",isThreePlatStr ,[dataDic objectSafeForKey:@"fee"]];
+    [secondLabel setLineSpace:6 string:secondLabel.text];
+    secondLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    secondLabel.numberOfLines = 0;
+    secondLabel.preferredMaxLayoutWidth = labelWidth;
+    [self.agreementView addSubview:secondRound];
+    [self.agreementView addSubview:secondLabel];
+    
+    UIView *thirdRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(secondLabel.frame) +spacingHeight, 8, 8)];
+    thirdRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    thirdRound.layer.cornerRadius = 4;
+    thirdRound.layer.masksToBounds = YES;
+    
+    NZLabel *thirdLabel = [[NZLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(thirdRound.frame) +spacingWidth, CGRectGetMinY(thirdRound.frame) -spacingLabelHeight,labelWidth , 50)];
+    thirdLabel.font = [Color gc_Font:13];
+    thirdLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    thirdLabel.text = [NSString stringWithFormat:@"徽电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；"];
+    thirdLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    thirdLabel.numberOfLines = 0;
+    thirdLabel.preferredMaxLayoutWidth = labelWidth;
+    [thirdLabel setLineSpace:6 string:thirdLabel.text];
+    [self.agreementView addSubview:thirdRound];
+    [self.agreementView addSubview:thirdLabel];
+    
+    UIView *fourthRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(thirdLabel.frame) +spacingHeight, 8, 8)];
+    fourthRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    fourthRound.layer.cornerRadius = 4;
+    fourthRound.layer.masksToBounds = YES;
+    
+    NZLabel *fourthLabel = [[NZLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(fourthRound.frame) +spacingWidth, CGRectGetMinY(fourthRound.frame) -spacingLabelHeight,labelWidth , 50)];
+    fourthLabel.font = [Color gc_Font:13];
+    fourthLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+    __weak typeof(self) weakSelf = self;
+    fourthLabel.text = [NSString stringWithFormat:@"如遇问题请与客服联系%@。",self.telServiceNo];
+    fourthLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    fourthLabel.numberOfLines = 0;
+    fourthLabel.userInteractionEnabled = YES;
+    [fourthLabel setFontColor:[Color color:PGColorOptionCellContentBlue] range:[fourthLabel.text rangeOfString:self.telServiceNo] lineSpace:6];
+    [fourthLabel addLinkString:self.telServiceNo block:^(ZBLinkLabelModel *linkModel) {
+        [weakSelf openURL];
+    }];
+//    - (void)setFontColor:(UIColor *)color range:(NSRange)range lineSpace:(CGFloat)space
+//    [fourthLabel setFontColor: string:self.telServiceNo];
+
+    [fourthLabel sizeToFit];
+//    [fourthLabel setLineSpace:6 string:fourthLabel.text];
+    
+    [self.agreementView addSubview:fourthRound];
+    [self.agreementView addSubview:fourthLabel];
+    
+    self.agreementViewHeight.constant = CGRectGetMaxY(fourthLabel.frame)+50;
+    self.bkViewHeight.constant = PGScreenHeight+CGRectGetMaxY(fourthLabel.frame)+50;
+    self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, PGScreenHeight+CGRectGetMaxY(fourthLabel.frame)+50);
+    [self.view layoutIfNeeded];
 }
 #pragma mark --- 初始化提现方式
 -(void)initCashStyle{

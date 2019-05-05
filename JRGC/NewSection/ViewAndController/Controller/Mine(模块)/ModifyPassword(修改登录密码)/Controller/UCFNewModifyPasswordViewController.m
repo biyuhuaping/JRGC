@@ -115,16 +115,19 @@
         _oldPasswordTextField = [UITextField new];
         _oldPasswordTextField.backgroundColor = [UIColor clearColor];
         _oldPasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _oldPasswordTextField.font = [Color font:15.0 andFontName:nil];
+        _oldPasswordTextField.font = [Color font:18.0 andFontName:nil];
         _oldPasswordTextField.textAlignment = NSTextAlignmentLeft;
-        _oldPasswordTextField.placeholder = @"请输入原密码";
         _oldPasswordTextField.secureTextEntry = YES;
         _oldPasswordTextField.delegate = self;
-        //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_oldPasswordTextField.placeholder attributes:dict];
-        [_oldPasswordTextField setAttributedPlaceholder:attribute];
+        NSString *holderText = @"请输入原密码";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _oldPasswordTextField.attributedPlaceholder = placeholder;
         _oldPasswordTextField.textColor = [Color color:PGColorOptionTitleBlack];
         _oldPasswordTextField.heightSize.equalTo(@25);
         _oldPasswordTextField.leftPos.equalTo(self.oldPassWordImageView.rightPos).offset(9);
@@ -132,6 +135,13 @@
         _oldPasswordTextField.centerYPos.equalTo(self.oldPassWordImageView.centerYPos);
         _oldPasswordTextField.userInteractionEnabled = YES;
         [_oldPasswordTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+        UIButton *clearButton = [_oldPasswordTextField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+            
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateHighlighted];
+            
+        }
     }
     return _oldPasswordTextField;
 }
@@ -170,16 +180,20 @@
         _lastPasswordTextField = [UITextField new];
         _lastPasswordTextField.backgroundColor = [UIColor clearColor];
         _lastPasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _lastPasswordTextField.font = [Color font:15.0 andFontName:nil];
+        _lastPasswordTextField.font = [Color font:18.0 andFontName:nil];
         _lastPasswordTextField.textAlignment = NSTextAlignmentLeft;
-        _lastPasswordTextField.placeholder = @"请输入新密码";
+//        _lastPasswordTextField.placeholder = @"请输入新密码";
         _lastPasswordTextField.secureTextEntry = YES;
         _lastPasswordTextField.delegate = self;
-        //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_lastPasswordTextField.placeholder attributes:dict];
-        [_lastPasswordTextField setAttributedPlaceholder:attribute];
+        NSString *holderText = @"请输入新密码";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _lastPasswordTextField.attributedPlaceholder = placeholder;
         _lastPasswordTextField.textColor = [Color color:PGColorOptionTitleBlack];
         _lastPasswordTextField.heightSize.equalTo(@25);
         _lastPasswordTextField.leftPos.equalTo(self.passWordImageView.rightPos).offset(9);
@@ -187,6 +201,13 @@
         _lastPasswordTextField.centerYPos.equalTo(self.passWordImageView.centerYPos);
         _lastPasswordTextField.userInteractionEnabled = YES;
         [_lastPasswordTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+        UIButton *clearButton = [_lastPasswordTextField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+            
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateHighlighted];
+            
+        }
     }
     return _lastPasswordTextField;
 }
@@ -316,7 +337,7 @@
     if(_forgetBtn == nil)
     {
         _forgetBtn = [UIButton buttonWithType:0];
-        _forgetBtn.topPos.equalTo(self.handInButton.bottomPos).offset(15);
+        _forgetBtn.topPos.equalTo(self.handInButton.bottomPos).offset(10);
         _forgetBtn.leftPos.equalTo(@25);
         _forgetBtn.widthSize.equalTo(@70);
         _forgetBtn.heightSize.equalTo(@30);

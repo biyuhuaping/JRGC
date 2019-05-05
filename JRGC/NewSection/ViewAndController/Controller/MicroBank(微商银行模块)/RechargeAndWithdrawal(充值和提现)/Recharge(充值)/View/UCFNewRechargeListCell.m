@@ -10,7 +10,7 @@
 #import "NZLabel.h"
 #import "UCFAccountCenterAssetsOverViewModel.h"
 #define LabelLeft 25
-#define LayoutHeight 37
+#define LayoutHeight 40
 #import "FundsDetailFrame.h"
 #import "FundsDetailModel.h"
 #import "UCFToolsMehod.h"
@@ -105,6 +105,13 @@
         _titleVerticalView.myWidth = 4;
         _titleVerticalView.myLeft = 15;
         _titleVerticalView.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
+        _titleVerticalView.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
+        { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
+            //设置圆角的半径
+            sbv.layer.cornerRadius = 2;
+            //切割超出圆角范围的子视图
+            sbv.layer.masksToBounds = YES;
+        };
     }
     return _titleVerticalView;
 }
@@ -186,7 +193,7 @@
 {
     if (nil == _availBalanceLabel) {
         _availBalanceLabel = [NZLabel new];
-        _availBalanceLabel.myCenterY = 0;
+        _availBalanceLabel.myCenterY = 4;
         _availBalanceLabel.myLeft = LabelLeft;
         _availBalanceLabel.textAlignment = NSTextAlignmentLeft;
         _availBalanceLabel.font = [Color gc_Font:15.0];
@@ -201,7 +208,7 @@
 {
     if (nil == _moneyLabel) {
         _moneyLabel = [NZLabel new];
-        _moneyLabel.myCenterY = 0;
+        _moneyLabel.centerYPos.equalTo(self.availBalanceLabel.centerYPos);
         _moneyLabel.myRight = 25;
         _moneyLabel.textAlignment = NSTextAlignmentRight;
         _moneyLabel.font = [Color gc_Font:14.0];
@@ -230,7 +237,7 @@
 {
     if (nil == _waitInterestLabel) {
         _waitInterestLabel = [NZLabel new];
-        _waitInterestLabel.myCenterY = 0;
+        _waitInterestLabel.myCenterY = -6;
         _waitInterestLabel.myLeft = LabelLeft;
         _waitInterestLabel.textAlignment = NSTextAlignmentLeft;
         _waitInterestLabel.font = [Color gc_Font:15.0];
@@ -245,7 +252,7 @@
 {
     if (nil == _timeValueLabel) {
         _timeValueLabel = [NZLabel new];
-        _timeValueLabel.myCenterY = 0;
+        _timeValueLabel.centerYPos.equalTo(self.waitInterestLabel.centerYPos);
         _timeValueLabel.myRight = 25;
         _timeValueLabel.textAlignment = NSTextAlignmentRight;
         _timeValueLabel.font = [Color gc_Font:14.0];
@@ -310,18 +317,18 @@
     _timeValueLabel.text = [_dataDict objectForKey:@"createTime"];
     NSInteger statue = [[_dataDict objectForKey:@"status"] integerValue];
     if (statue == 1) {
-        _statueLabel.textColor = UIColorWithRGB(0x555555);
+        _statueLabel.textColor = [Color color:PGColorOptionTitleBlack];
         _statueLabel.text = @"未支付";
         
     } else if (statue == 2) {
-        _statueLabel.textColor = UIColorWithRGB(0x555555);
+        _statueLabel.textColor = [Color color:PGColorOptionTitleBlack];
         _statueLabel.text = @"支付中";
     } else if (statue == 3) {
         _statueLabel.text = @"充值成功";
-        _statueLabel.textColor = UIColorWithRGB(0x4aa1f9);
+        _statueLabel.textColor = [Color color:PGColorOptionCellContentBlue];
         
     } else {
-        _statueLabel.textColor = UIColorWithRGB(0x555555);
+        _statueLabel.textColor = [Color color:PGColorOptionTitleBlack];
         _statueLabel.text = @"充值失败";
         
     }

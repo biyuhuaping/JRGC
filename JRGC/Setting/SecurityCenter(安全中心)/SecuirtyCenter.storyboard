@@ -321,30 +321,11 @@
                         <viewControllerLayoutGuide type="top" id="s39-CR-E6G"/>
                         <viewControllerLayoutGuide type="bottom" id="Yyn-MV-6g9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="W9V-Fm-8bf">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W9V-Fm-8bf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Gxq-eM-CEi">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="ZPw-id-vL9" id="IXc-ts-CgZ"/>
-                                    <outlet property="delegate" destination="ZPw-id-vL9" id="8MU-Z8-gcs"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="Gxq-eM-CEi" firstAttribute="leading" secondItem="W9V-Fm-8bf" secondAttribute="leading" id="QC0-oa-xpX"/>
-                            <constraint firstItem="Yyn-MV-6g9" firstAttribute="top" secondItem="Gxq-eM-CEi" secondAttribute="bottom" id="VcH-gh-GQd"/>
-                            <constraint firstItem="Gxq-eM-CEi" firstAttribute="top" secondItem="s39-CR-E6G" secondAttribute="bottom" id="gvs-HH-sy0"/>
-                            <constraint firstAttribute="trailing" secondItem="Gxq-eM-CEi" secondAttribute="trailing" id="jZS-09-vwj"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="tableview" destination="Gxq-eM-CEi" id="zJL-kv-Gv7"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tax-fb-1iY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

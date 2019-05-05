@@ -90,15 +90,25 @@
         _moddifyPhoneTextField = [UITextField new];
         _moddifyPhoneTextField.backgroundColor = [UIColor clearColor];
         _moddifyPhoneTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _moddifyPhoneTextField.font = [Color font:15.0 andFontName:nil];
+        _moddifyPhoneTextField.font = [Color font:18.0 andFontName:nil];
         _moddifyPhoneTextField.textAlignment = NSTextAlignmentLeft;
-        _moddifyPhoneTextField.placeholder = @"请输入新绑定手机号";
+//        _moddifyPhoneTextField.placeholder = @"请输入新绑定手机号";
+        _moddifyPhoneTextField.keyboardType = UIKeyboardTypeNumberPad;
         _moddifyPhoneTextField.delegate = self;
         //            _registerPhoneField.keyboardType = UIKeyboardTypeNumberPad;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
-        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_moddifyPhoneTextField.placeholder attributes:dict];
-        [_moddifyPhoneTextField setAttributedPlaceholder:attribute];
+//        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//        dict[NSForegroundColorAttributeName] = [Color color:PGColorOptionInputDefaultBlackGray];
+//        NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:_moddifyPhoneTextField.placeholder attributes:dict];
+//        [_moddifyPhoneTextField setAttributedPlaceholder:attribute];
+        NSString *holderText = @"请输入新绑定手机号";
+        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+        [placeholder addAttribute:NSForegroundColorAttributeName
+                            value:[Color color:PGColorOptionInputDefaultBlackGray]
+                            range:NSMakeRange(0, holderText.length)];
+        [placeholder addAttribute:NSFontAttributeName
+                            value:[Color gc_Font:15.0]
+                            range:NSMakeRange(0, holderText.length)];
+        _moddifyPhoneTextField.attributedPlaceholder = placeholder;
         _moddifyPhoneTextField.textColor = [Color color:PGColorOptionTitleBlack];
         _moddifyPhoneTextField.heightSize.equalTo(@25);
         _moddifyPhoneTextField.leftPos.equalTo(self.moddifyPhoneImageView.rightPos).offset(9);
@@ -106,6 +116,13 @@
         _moddifyPhoneTextField.centerYPos.equalTo(self.moddifyPhoneImageView.centerYPos);
         _moddifyPhoneTextField.userInteractionEnabled = YES;
         [_moddifyPhoneTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+        UIButton *clearButton = [_moddifyPhoneTextField valueForKey:@"_clearButton"];
+        if (clearButton && [clearButton isKindOfClass:[UIButton class]]) {
+            
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateNormal];
+            [clearButton setImage:[UIImage imageNamed:@"icon_delete.png"] forState:UIControlStateHighlighted];
+            
+        }
     }
     return _moddifyPhoneTextField;
 }
@@ -116,7 +133,7 @@
         _moddifyPhoneLine.topPos.equalTo(self.moddifyPhoneImageView.bottomPos).offset(13);
         _moddifyPhoneLine.centerXPos.equalTo(self.rootLayout.centerXPos);
         _moddifyPhoneLine.myHeight = 0.5;
-        _moddifyPhoneLine.widthSize.equalTo(self.rootLayout.widthSize).add(-50);
+        _moddifyPhoneLine.widthSize.equalTo(self.rootLayout.widthSize).add(-58);
         _moddifyPhoneLine.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         //
     }
@@ -125,13 +142,19 @@
 - (UCFNewResetPassWordSMSCodeView *)smsCodeView
 {
     if (nil == _smsCodeView) {
-        _smsCodeView = [[UCFNewResetPassWordSMSCodeView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
+        _smsCodeView = [[UCFNewResetPassWordSMSCodeView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 60)];
         _smsCodeView.topPos.equalTo(self.moddifyPhoneLine.bottomPos);
         _smsCodeView.myLeft = 0;
         _smsCodeView.contentField.delegate = self;
         @PGWeakObj(self);
         _smsCodeView.backBlock = ^(void) {
-            [selfWeak statVerifyCodeRequest:@"SMS"];
+            if ([selfWeak inspectPhoneNum]) {
+                [selfWeak statVerifyCodeRequest:@"SMS"];
+            }else
+            {
+                ShowMessage(@"请输入正确的手机号");
+            }
+            
         };
         [_smsCodeView.contentField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     }
@@ -143,13 +166,14 @@
         _resetPhoneSMSLabel = [NZLabel new];
         _resetPhoneSMSLabel.myLeft = 26;
         _resetPhoneSMSLabel.myRight = 26;
-        _resetPhoneSMSLabel.topPos.equalTo(self.smsCodeView.bottomPos).offset(10);
+        _resetPhoneSMSLabel.topPos.equalTo(self.smsCodeView.bottomPos).offset(25);
         _resetPhoneSMSLabel.textAlignment = NSTextAlignmentLeft;
         _resetPhoneSMSLabel.font = [Color gc_Font:13.0];
         _resetPhoneSMSLabel.textColor = [Color color:PGColorOptionTitleGray];
         //自动折行设置
         _resetPhoneSMSLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _resetPhoneSMSLabel.numberOfLines = 0;
+        _resetPhoneSMSLabel.userInteractionEnabled = YES;
         _resetPhoneSMSLabel.wrapContentHeight = YES;
         //        /**视图可见，等价于hidden = false*/
         //        MyVisibility_Visible,
@@ -252,8 +276,10 @@
             [self.smsCodeView.verifyCodeButton startCountDown];
             __weak typeof(self) weakSelf = self;
             
-            NSString *replaceStr = [NSString replaceStringWithAsterisk:self.moddifyPhoneTextField.text startLocation:3 lenght:self.moddifyPhoneTextField.text.length -7];
-            self.resetPhoneSMSLabel.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",replaceStr];
+//            NSString *replaceStr = [NSString replaceStringWithAsterisk:self.moddifyPhoneTextField.text startLocation:3 lenght:self.moddifyPhoneTextField.text.length -7];
+            self.resetPhoneSMSLabel.text = [NSString stringWithFormat:@"收不到短信？点击获取语音验证码。"];
+            self.resetPhoneSMSLabel.topPos.equalTo(self.smsCodeView.bottomPos).offset(10);
+            self.resetPhoneSMSLabel.myVisibility = MyVisibility_Visible;
             [self.resetPhoneSMSLabel sizeToFit];
             [self.resetPhoneSMSLabel setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"语音验证码"];
             [self.resetPhoneSMSLabel addLinkString:@"语音验证码" block:^(ZBLinkLabelModel *linkModel) {

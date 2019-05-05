@@ -61,6 +61,10 @@
     _noDataView = [[UCFNoDataView alloc] initWithFrame:_rechargeTable.bounds errorTitle:@"暂无数据"];
 
     self.view.backgroundColor = UIColorWithRGBA(235, 235, 238, 1);
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 0.5)];
+    lineView.backgroundColor = UIColorWithRGB(0xe2e2e2);
+    [self.view addSubview:lineView];
 }
 - (void)getNewData
 {
@@ -126,7 +130,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 136.f;
+    return 142.f;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 //    if (section == 0) {

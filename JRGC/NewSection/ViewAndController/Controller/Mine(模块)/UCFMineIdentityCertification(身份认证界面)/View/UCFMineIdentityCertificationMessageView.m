@@ -14,6 +14,10 @@
 
 @property (nonatomic, strong) NZLabel     *titleLabel;//标题内容
 
+@property (nonatomic, strong) UIView     *titleLeftLine;//左边线
+
+@property (nonatomic, strong) UIView     *titleRightLine;//右边线
+
 @property (nonatomic, strong) NZLabel     *nameLabel;//名称(姓名或者企业名称)
 
 @property (nonatomic, strong) NZLabel     *nameContentLabel;//名称内容
@@ -44,6 +48,8 @@
         // 初始化视图对象
         self.rootLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
         [self.rootLayout addSubview:self.titleLabel];
+        [self.rootLayout addSubview:self.titleLeftLine];
+        [self.rootLayout addSubview:self.titleRightLine];
         [self.rootLayout addSubview:self.nameLabel];
         [self.rootLayout addSubview:self.nameContentLabel];
         [self.rootLayout addSubview:self.nameLine];
@@ -61,7 +67,7 @@
 {
     if (nil == _titleLabel) {
         _titleLabel = [NZLabel new];
-        _titleLabel.myTop = 21;
+        _titleLabel.myTop = 23;
         _titleLabel.centerXPos.equalTo(self.rootLayout.centerXPos);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.font = [Color gc_Font:18.0];
@@ -71,12 +77,35 @@
     }
     return _titleLabel;
 }
-
+- (UIView *)titleLeftLine
+{
+    if (nil == _titleLeftLine) {
+        _titleLeftLine = [UIView new];
+        _titleLeftLine.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+        _titleLeftLine.rightPos.equalTo(self.titleLabel.leftPos).offset(10);
+        _titleLeftLine.centerYPos.equalTo(self.titleLabel.centerYPos);
+        _titleLeftLine.myHeight = 0.5;
+        _titleLeftLine.myWidth = 50;
+    }
+    return _titleLeftLine;
+}
+- (UIView *)titleRightLine
+{
+    if (nil == _titleRightLine) {
+        _titleRightLine = [UIView new];
+        _titleRightLine.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+        _titleRightLine.leftPos.equalTo(self.titleLabel.rightPos).offset(10);
+        _titleRightLine.centerYPos.equalTo(self.titleLabel.centerYPos);
+        _titleRightLine.myHeight = 0.5;
+        _titleRightLine.myWidth = 50;
+    }
+    return _titleRightLine;
+}
 - (NZLabel *)nameLabel
 {
     if (nil == _nameLabel) {
         _nameLabel = [NZLabel new];
-        _nameLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(26);
+        _nameLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(20);
         _nameLabel.myLeft = 15;
         _nameLabel.textAlignment = NSTextAlignmentLeft;
         _nameLabel.font = [Color gc_Font:15.0];
@@ -92,7 +121,7 @@
     if (nil == _nameContentLabel) {
         _nameContentLabel = [NZLabel new];
         _nameContentLabel.centerYPos.equalTo(self.nameLabel.centerYPos);
-        _nameContentLabel.leftPos.equalTo(self.nameLabel.rightPos).offset(20);
+        _nameContentLabel.leftPos.equalTo(self.credentialsContentLabel.leftPos);
         _nameContentLabel.textAlignment = NSTextAlignmentLeft;
         _nameContentLabel.font = [Color gc_Font:15.0];
         _nameContentLabel.textColor = [Color color:PGColorOptionTitleBlack];
@@ -134,7 +163,7 @@
     if (nil == _detailsContentLabel) {
         _detailsContentLabel = [NZLabel new];
         _detailsContentLabel.centerYPos.equalTo(self.detailsLabel.centerYPos);
-        _detailsContentLabel.leftPos.equalTo(self.detailsLabel.rightPos).offset(20);
+        _detailsContentLabel.leftPos.equalTo(self.credentialsContentLabel.leftPos);
         _detailsContentLabel.textAlignment = NSTextAlignmentLeft;
         _detailsContentLabel.font = self.nameContentLabel.font;
         _detailsContentLabel.textColor = self.nameContentLabel.textColor;
@@ -150,7 +179,7 @@
         _detailsLine.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         _detailsLine.leftPos.equalTo(self.detailsLabel.leftPos);
         _detailsLine.rightPos.equalTo(self.nameLine.rightPos);
-        _detailsLine.topPos.equalTo(self.detailsLabel.bottomPos).offset(16);
+        _detailsLine.topPos.equalTo(self.nameLine.bottomPos).offset(50);
         _detailsLine.myHeight = 0.5;
     }
     return _detailsLine;
@@ -176,7 +205,9 @@
     if (nil == _credentialsContentLabel) {
         _credentialsContentLabel = [NZLabel new];
         _credentialsContentLabel.centerYPos.equalTo(self.credentialsLabel.centerYPos);
-        _credentialsContentLabel.leftPos.equalTo(self.credentialsLabel.rightPos).offset(20);
+        _credentialsContentLabel.leftPos.equalTo(self.credentialsLabel.rightPos).offset(10);
+        _credentialsContentLabel.rightPos.equalTo(@15);
+        _credentialsContentLabel.adjustsFontSizeToFitWidth = YES;
         _credentialsContentLabel.textAlignment = NSTextAlignmentLeft;
         _credentialsContentLabel.font = self.nameContentLabel.font;
         _credentialsContentLabel.textColor = self.nameContentLabel.textColor;
@@ -195,6 +226,7 @@
             self.detailsContentLabel.text = myModel.data.legalName;
             self.credentialsLabel.text = myModel.data.codeName;
             self.credentialsContentLabel.text = myModel.data.idno;
+
         }
         else
         {
