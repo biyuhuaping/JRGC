@@ -43,7 +43,7 @@
 - (void)refreshTableViewHeader
 {
     _currentPage = 0;
-    self.showTableView.enableRefreshFooter = YES;
+    self.showTableView.enableRefreshFooter = NO;
     [self fetchData];
 }
 /**
@@ -74,7 +74,7 @@
             } else {
                 selfWeak.showTableView.enableRefreshFooter = YES;
             }
-            [selfWeak.showTableView reloadData];
+            [selfWeak.showTableView cyl_reloadData];
         } else {
 //            ShowMessage(model.message);
         }
@@ -88,13 +88,13 @@
 - (BaseTableView *)showTableView
 {
     if (!_showTableView) {
-        _showTableView = [[BaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _showTableView = [[BaseTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight - StatusBarHeight1 - 44) style:UITableViewStyleGrouped];
         _showTableView.delegate = self;
         _showTableView.dataSource = self;
         _showTableView.tableRefreshDelegate = self;
         _showTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        _showTableView.estimatedRowHeight = 60;
-//        _showTableView.rowHeight = UITableViewAutomaticDimension;
+        _showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+
     }
     return _showTableView;
 }

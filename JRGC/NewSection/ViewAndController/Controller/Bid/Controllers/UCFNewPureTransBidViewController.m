@@ -81,7 +81,7 @@
     remind.heightSize.equalTo(@40);
     remind.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
     remind.subviewVSpace = 5;
-    remind.subviewHSpace = 5;
+    remind.subviewHSpace = 10;
     [self.contentLayout addSubview:remind];
     self.remind = remind;
     
@@ -96,7 +96,7 @@
     UCFBidFootBoardView *footView = [UCFBidFootBoardView linearLayoutWithOrientation:MyOrientation_Vert];
     footView.myVertMargin = 10;
     footView.myHorzMargin = 0;
-    footView.backgroundColor = UIColorWithRGB(0xebebee);
+    footView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     footView.userInteractionEnabled = YES;
     [self.contentLayout addSubview:footView];
     self.footView = footView;
@@ -118,6 +118,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self addBlueLeftButton];
     [self setTitleViewText:@"出借"];
     [self initializationData];

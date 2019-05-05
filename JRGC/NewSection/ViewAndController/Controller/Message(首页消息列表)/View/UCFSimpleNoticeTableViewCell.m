@@ -33,9 +33,10 @@
         self.rootLayout.widthSize.equalTo(self.contentView.widthSize);
         self.rootLayout.wrapContentHeight = YES;
         
+        
         UILabel *titleLabe = [UILabel new];
         titleLabe.leftPos.equalTo(@15);
-        titleLabe.topPos.equalTo(@20);
+        titleLabe.topPos.equalTo(@18);
 //        titleLabe.backgroundColor = [UIColor redColor];
         titleLabe.rightPos.equalTo(@87);
         titleLabe.bottomPos.equalTo(@42);
@@ -48,8 +49,7 @@
         UILabel *timeLabe = [UILabel new];
         timeLabe.topPos.equalTo(titleLabe.bottomPos).offset(10);
         timeLabe.leftPos.equalTo(@15);
-        timeLabe.bottomPos.equalTo(@20);
-//        timeLabe.backgroundColor = [UIColor blueColor];
+        timeLabe.bottomPos.equalTo(@18);
         [self.rootLayout addSubview:timeLabe];
         timeLabe.backgroundColor = [UIColor whiteColor];
         timeLabe.font = [Color gc_Font:13];
@@ -65,9 +65,9 @@
         self.accessView = aceesView;
         
         UIView *lineView = [UIView new];
-        lineView.heightSize.equalTo(@1);
+        lineView.heightSize.equalTo(@0.5);
         lineView.leftPos.equalTo(@15);
-        lineView.bottomPos.equalTo(@0);
+        lineView.bottomPos.equalTo(@0.5);
         lineView.rightPos.equalTo(@0);
         lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         [self.rootLayout addSubview:lineView];
@@ -80,8 +80,10 @@
 {
     if (isEnd) {
         self.endLineView.leftPos.equalTo(@0);
+        self.endLineView.hidden = YES;
     } else {
         self.endLineView.leftPos.equalTo(@15);
+        self.endLineView.hidden = NO;
     }
     self.titleLab.text = model.title;
     [self.titleLab sizeToFit];

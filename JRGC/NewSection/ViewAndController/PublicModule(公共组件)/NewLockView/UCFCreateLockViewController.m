@@ -44,6 +44,7 @@
     [super viewDidLoad];
     
     [self initData];
+    self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
 }
 - (void)viewDidAppear:(BOOL)animated
 {

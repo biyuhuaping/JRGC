@@ -83,7 +83,7 @@
     remind.heightSize.equalTo(@40);
     remind.backgroundColor = [Color color:PGColorOptionGrayBackgroundColor];
     remind.subviewVSpace = 5;
-    remind.subviewHSpace = 5;
+    remind.subviewHSpace = 10;
     [self.contentLayout addSubview:remind];
     self.remind = remind;
     

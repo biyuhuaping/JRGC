@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="couponCenterBtn" destination="saM-3e-KmE" id="qpD-WG-Utl"/>
                 <outlet property="couponNameLabel" destination="UVL-hn-ygO" id="BzG-7I-PjG"/>
-                <outlet property="tableView" destination="Qzs-bn-RW0" id="Fi8-8L-Fcr"/>
+                <outlet property="tableView" destination="Qzs-bn-RW0" id="hFY-AT-11c"/>
                 <outlet property="unUserFxCount" destination="hHB-dh-63K" id="0eM-0s-VPE"/>
                 <outlet property="view" destination="h5e-wn-xXW" id="S6C-yD-rgQ"/>
             </connections>
@@ -26,28 +26,28 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CcB-of-gwu">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coupon_center_bg" translatesAutoresizingMaskIntoConstraints="NO" id="8UZ-Ea-wBa">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可用返现券" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVL-hn-ygO">
-                            <rect key="frame" x="25" y="25" width="72" height="17"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="17" id="7z6-CZ-D4R"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <rect key="frame" x="25" y="25" width="62" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.69411764705882351" green="0.70980392156862748" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0张" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHB-dh-63K" customClass="NZLabel">
-                            <rect key="frame" x="25" y="40.5" width="52.5" height="38.5"/>
+                            <rect key="frame" x="25" y="41.5" width="52.5" height="38.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saM-3e-KmE">
-                            <rect key="frame" x="260" y="52" width="100" height="15"/>
+                            <rect key="frame" x="260" y="52" width="100" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="Mfh-eS-t2U"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-49" maxY="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="17" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-57" maxY="0.0"/>
                             <state key="normal" title="领券中心" image="list_icon_arrow">
                                 <color key="titleColor" red="0.69411764710000001" green="0.70980392160000005" blue="0.76078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -55,25 +55,35 @@
                                 <action selector="fetchCouponCenter:" destination="-1" eventType="touchUpInside" id="7le-le-W0o"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lMd-e7-gDU">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                            <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="gch-6L-DF2"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="UVL-hn-ygO" firstAttribute="leading" secondItem="CcB-of-gwu" secondAttribute="leading" constant="25" id="K7g-3F-qmN"/>
-                        <constraint firstItem="UVL-hn-ygO" firstAttribute="top" secondItem="CcB-of-gwu" secondAttribute="top" constant="25" id="QoT-6U-JY6"/>
+                        <constraint firstItem="lMd-e7-gDU" firstAttribute="leading" secondItem="CcB-of-gwu" secondAttribute="leading" id="4bh-ny-V1f"/>
+                        <constraint firstItem="8UZ-Ea-wBa" firstAttribute="leading" secondItem="CcB-of-gwu" secondAttribute="leading" id="Ocp-CD-eDW"/>
+                        <constraint firstItem="UVL-hn-ygO" firstAttribute="leading" secondItem="CcB-of-gwu" secondAttribute="leading" constant="25" id="Ofl-Hn-LLO"/>
                         <constraint firstAttribute="trailing" secondItem="saM-3e-KmE" secondAttribute="trailing" constant="15" id="R0s-h1-cFQ"/>
+                        <constraint firstItem="hHB-dh-63K" firstAttribute="top" secondItem="UVL-hn-ygO" secondAttribute="bottom" constant="1.5" id="b9s-rd-yVZ"/>
                         <constraint firstItem="saM-3e-KmE" firstAttribute="centerY" secondItem="hHB-dh-63K" secondAttribute="centerY" id="dSB-Jf-rzH"/>
+                        <constraint firstAttribute="trailing" secondItem="8UZ-Ea-wBa" secondAttribute="trailing" id="fIH-uG-Wx5"/>
+                        <constraint firstAttribute="trailing" secondItem="lMd-e7-gDU" secondAttribute="trailing" id="fPc-wl-UmT"/>
+                        <constraint firstItem="lMd-e7-gDU" firstAttribute="top" secondItem="CcB-of-gwu" secondAttribute="top" id="gFr-X6-Gjg"/>
                         <constraint firstItem="saM-3e-KmE" firstAttribute="top" secondItem="CcB-of-gwu" secondAttribute="top" constant="52" id="hw3-e2-nyf"/>
-                        <constraint firstAttribute="height" constant="100" id="lxp-iC-ir1"/>
+                        <constraint firstItem="8UZ-Ea-wBa" firstAttribute="top" secondItem="CcB-of-gwu" secondAttribute="top" id="kEa-1F-DCX"/>
                         <constraint firstItem="hHB-dh-63K" firstAttribute="leading" secondItem="CcB-of-gwu" secondAttribute="leading" constant="25" id="muj-dx-7BX"/>
+                        <constraint firstAttribute="width" secondItem="CcB-of-gwu" secondAttribute="height" multiplier="15:4" id="s8X-6a-f94"/>
+                        <constraint firstAttribute="bottom" secondItem="8UZ-Ea-wBa" secondAttribute="bottom" id="tw1-Hs-pub"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qzs-bn-RW0">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qzs-bn-RW0" customClass="BaseTableView">
                     <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="kd9-aR-qFZ"/>
-                        <outlet property="delegate" destination="-1" id="eOz-gJ-3Im"/>
-                    </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,10 +96,11 @@
                 <constraint firstAttribute="bottom" secondItem="Qzs-bn-RW0" secondAttribute="bottom" id="sal-4L-fOa"/>
                 <constraint firstItem="CcB-of-gwu" firstAttribute="top" secondItem="h5e-wn-xXW" secondAttribute="top" id="yHD-Ju-29T"/>
             </constraints>
-            <point key="canvasLocation" x="-465" y="-76"/>
+            <point key="canvasLocation" x="-466.39999999999998" y="-76.011994002998506"/>
         </view>
     </objects>
     <resources>
+        <image name="coupon_center_bg" width="375.5" height="100"/>
         <image name="list_icon_arrow" width="8" height="13"/>
     </resources>
 </document>

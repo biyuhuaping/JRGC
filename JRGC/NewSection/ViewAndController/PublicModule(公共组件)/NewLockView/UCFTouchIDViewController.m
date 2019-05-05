@@ -40,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
 }
 
 - (void)switchPageBtnClick:(UIButton *)button
@@ -66,6 +67,7 @@
 }
 - (void)loadView
 {
+
     [super loadView];
     [self checkTouchIdIsOpen];
     self.rootLayout.backgroundColor = [UIColor whiteColor];
@@ -184,7 +186,7 @@
         _nameLabel.topPos.equalTo(self.headImageView.bottomPos).offset(18 * HeightScale);
         _nameLabel.numberOfLines = 1;
         _nameLabel.text = [NSString stringWithFormat:@"hi %@",SingleUserInfo.loginData.userInfo.mobile];
-        _nameLabel.font = [UIFont systemFontOfSize:14*HeightScale];
+        _nameLabel.font = [UIFont systemFontOfSize:18*HeightScale];
         _nameLabel.textColor = [Color color:PGColorOptionTitleBlack];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.backgroundColor = [UIColor clearColor];
@@ -274,11 +276,12 @@
         _switchPageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _switchPageBtn.backgroundColor = [UIColor clearColor];
         _switchPageBtn.centerXPos.equalTo(self.rootLayout.centerXPos);
-        _switchPageBtn.titleLabel.font = [UIFont systemFontOfSize:17 *HeightScale];
+        _switchPageBtn.titleLabel.font = [UIFont systemFontOfSize:18 *HeightScale];
         [_switchPageBtn setTitle:@"切换至手势解锁" forState:UIControlStateNormal];
         _switchPageBtn.widthSize.equalTo(@200);
         _switchPageBtn.heightSize.equalTo(@40);
-        _switchPageBtn.topPos.equalTo(_touchIDAmition.bottomPos).offset(HeightScale >=1 ? 100 : 60);
+        _switchPageBtn.bottomPos.equalTo(self.reminderButton.topPos).offset(-10);
+//        _switchPageBtn.topPos.equalTo(_touchIDAmition.bottomPos).offset(HeightScale >=1 ? 100 : 60);
         [_switchPageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_switchPageBtn addTarget:self action:@selector(switchPageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -293,13 +296,12 @@
         _reminderButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         _reminderButton.leftPos.equalTo(@(50 * WidthScale));
         _reminderButton.heightSize.equalTo(@40);
-        _reminderButton.centerYPos.equalTo(_switchPageBtn.centerYPos).offset(60);
+        _reminderButton.bottomPos.equalTo(@(StatusBarHeight1 > 20 ? 39 + 46 : 46));
         [_reminderButton setTitle:@"密码登录" forState:UIControlStateNormal];
         [_reminderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_reminderButton setBackgroundColor:[UIColor clearColor]];
         [_reminderButton addTarget:self action:@selector(dealWithPassword:) forControlEvents:UIControlEventTouchUpInside];
         _reminderButton.titleLabel.font = [UIFont systemFontOfSize:15 * HeightScale];
-        [self.view addSubview:_reminderButton];
         [_reminderButton sizeToFit];
     }
     return _reminderButton;

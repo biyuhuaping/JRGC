@@ -56,6 +56,7 @@
     LLLog(@"本地保存的密码是%@", self.savedPassword);
     // 尝试机会
     nRetryTimesRemain = [[[NSUserDefaults standardUserDefaults] valueForKey:@"nRetryTimesRemain"] intValue];
+    self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
 }
 - (void)lockString:(NSString*)string
 {
@@ -73,14 +74,14 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         if (nRetryTimesRemain > 0) {
             NSDictionary *normalStrDict = @{NSFontAttributeName : [UIFont systemFontOfSize:16 * HeightScale],
-                                            NSForegroundColorAttributeName : UIColorWithRGB(0x94bde4)
+                                            NSForegroundColorAttributeName : [Color color:PGColorOptionCellContentBlue]
                                             };
             NSString *str = [NSString stringWithFormat:@"密码输入错误，您还可以尝试 %d 次", nRetryTimesRemain];
             NSRange strRg = [str rangeOfString:[NSString stringWithFormat:@"%d",nRetryTimesRemain]];
             NSMutableAttributedString *StrAttri = [[NSMutableAttributedString alloc] initWithString:str attributes:normalStrDict];
             
             NSDictionary *redStrDict = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:16],
-                                         NSForegroundColorAttributeName : UIColorWithRGB(0xfd4d4c)
+                                         NSForegroundColorAttributeName : [Color color:PGColorOptionTitlerRead]
                                          };
             [StrAttri addAttributes:redStrDict range:strRg];
             
@@ -135,7 +136,6 @@
     [self.rootLayout addSubview:self.switchPageBtn];
     [self.rootLayout addSubview:self.reminderButton];
     [self.rootLayout addSubview:self.changeAccountBtn];
-    
 }
 - (UIImageView *)headImageView
 {
@@ -162,7 +162,7 @@
         _nameLabel.topPos.equalTo(self.headImageView.bottomPos).offset(18 * HeightScale);
         _nameLabel.numberOfLines = 1;
           _nameLabel.text = [NSString stringWithFormat:@"hi %@",SingleUserInfo.loginData.userInfo.mobile];
-        _nameLabel.font = [UIFont systemFontOfSize:14*HeightScale];
+        _nameLabel.font = [UIFont systemFontOfSize:18*HeightScale];
         _nameLabel.textColor = [Color color:PGColorOptionTitleBlack];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.backgroundColor = [UIColor clearColor];
@@ -193,7 +193,7 @@
         _errorLabel.topPos.equalTo(self.tipLab.bottomPos).offset(18 * HeightScale);
         _errorLabel.centerXPos.equalTo(self.rootLayout.centerXPos);
         _errorLabel.font = [UIFont systemFontOfSize:16 * HeightScale];
-        _errorLabel.textColor = [Color color:PGColorOpttonTextRedColor];
+        _errorLabel.textColor = [Color color:PGColorOptionCellContentBlue];
         _errorLabel.textAlignment = NSTextAlignmentCenter;
         _errorLabel.backgroundColor = [UIColor clearColor];
         _errorLabel.text = @"密码输入错误，您还可以尝试5次";
@@ -217,11 +217,12 @@
         _switchPageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _switchPageBtn.backgroundColor = [UIColor clearColor];
         _switchPageBtn.centerXPos.equalTo(self.rootLayout.centerXPos);
-        _switchPageBtn.titleLabel.font = [UIFont systemFontOfSize:17 *HeightScale];
+        _switchPageBtn.titleLabel.font = [UIFont systemFontOfSize:18 *HeightScale];
         [_switchPageBtn setTitle:@"切换至指纹解锁" forState:UIControlStateNormal];
         _switchPageBtn.widthSize.equalTo(@200);
         _switchPageBtn.heightSize.equalTo(@40);
-        _switchPageBtn.topPos.equalTo(@(HeightScale >=1 ? CGRectGetMaxY(self.lockView.frame) :  CGRectGetMaxY(self.lockView.frame) - 20));
+//        _switchPageBtn.topPos.equalTo(@(HeightScale >=1 ? CGRectGetMaxY(self.lockView.frame) : CGRectGetMaxY(self.lockView.frame) - 20));
+        _switchPageBtn.bottomPos.equalTo(self.reminderButton.topPos).offset(-10);
         [_switchPageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_switchPageBtn addTarget:self action:@selector(switchPageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -236,7 +237,9 @@
         _reminderButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         _reminderButton.leftPos.equalTo(@(50 * WidthScale));
         _reminderButton.heightSize.equalTo(@40);
-        _reminderButton.centerYPos.equalTo(_switchPageBtn.centerYPos).offset(HeightScale >=1 ? 60 : 40 *HeightScale);
+//        _reminderButton.centerYPos.equalTo(_switchPageBtn.centerYPos).offset(HeightScale >=1 ? 60 : 40 *HeightScale);
+        _reminderButton.bottomPos.equalTo(@(StatusBarHeight1 > 20 ? 39 + 46 : 46));
+
         [_reminderButton setTitle:@"密码登录" forState:UIControlStateNormal];
         [_reminderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_reminderButton setBackgroundColor:[UIColor clearColor]];
