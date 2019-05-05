@@ -56,6 +56,7 @@
     LLLog(@"本地保存的密码是%@", self.savedPassword);
     // 尝试机会
     nRetryTimesRemain = [[[NSUserDefaults standardUserDefaults] valueForKey:@"nRetryTimesRemain"] intValue];
+    self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
 }
 - (void)lockString:(NSString*)string
 {
@@ -220,7 +221,8 @@
         [_switchPageBtn setTitle:@"切换至指纹解锁" forState:UIControlStateNormal];
         _switchPageBtn.widthSize.equalTo(@200);
         _switchPageBtn.heightSize.equalTo(@40);
-        _switchPageBtn.topPos.equalTo(@(HeightScale >=1 ? CGRectGetMaxY(self.lockView.frame) : CGRectGetMaxY(self.lockView.frame) - 20));
+//        _switchPageBtn.topPos.equalTo(@(HeightScale >=1 ? CGRectGetMaxY(self.lockView.frame) : CGRectGetMaxY(self.lockView.frame) - 20));
+        _switchPageBtn.bottomPos.equalTo(self.reminderButton.topPos).offset(-10);
         [_switchPageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_switchPageBtn addTarget:self action:@selector(switchPageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }

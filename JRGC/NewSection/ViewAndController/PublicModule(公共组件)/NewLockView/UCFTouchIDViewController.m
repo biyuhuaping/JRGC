@@ -40,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
 }
 
 - (void)switchPageBtnClick:(UIButton *)button
@@ -279,7 +280,8 @@
         [_switchPageBtn setTitle:@"切换至手势解锁" forState:UIControlStateNormal];
         _switchPageBtn.widthSize.equalTo(@200);
         _switchPageBtn.heightSize.equalTo(@40);
-        _switchPageBtn.topPos.equalTo(_touchIDAmition.bottomPos).offset(HeightScale >=1 ? 100 : 60);
+        _switchPageBtn.bottomPos.equalTo(self.reminderButton.topPos).offset(-10);
+//        _switchPageBtn.topPos.equalTo(_touchIDAmition.bottomPos).offset(HeightScale >=1 ? 100 : 60);
         [_switchPageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_switchPageBtn addTarget:self action:@selector(switchPageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }

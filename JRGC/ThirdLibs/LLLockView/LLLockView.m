@@ -10,8 +10,8 @@
 #import "Common.h"
 
 #define kLLBaseCircleNumber 10000       // tag基数（请勿修改）
-#define kCircleMargin 35.0              // 圆点离屏幕左边距
-#define kCircleDiameter 60.0            // 圆点直径
+#define kCircleMargin 38.5              // 圆点离屏幕左边距
+#define kCircleDiameter 55.0            // 圆点直径
 #define kLLCircleAlpha 1.0              // 圆点透明度
 #define kLLLineWidth 15.0               // 线条宽
 #define kLLLineColor UIColorWithRGB(0xC2D0F7) // 线条色蓝
@@ -68,26 +68,34 @@
     buttonArray = [NSMutableArray array];
     selectedButtonArray = [NSMutableArray array];
     
+    CGFloat totalWidth = CGRectGetWidth(self.frame);
+    CGFloat margin = [Common calculateNewSizeBaseMachine:kCircleMargin];
+    CGFloat buttonWidth = (totalWidth -  margin * 4)/3;
     // 初始化圆点
     for (int i = 0; i < 9; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         int x,y;
-        if (kIS_Iphone4) {
-            x = kCircleMargin + (i%3) * (kCircleDiameter+(320-kCircleMargin*2- kCircleDiameter *3)/2);
-            y = kCircleMargin + (i/3) * (kCircleDiameter+(320-kCircleMargin*2- kCircleDiameter *3)/2);
-            x = [Common calculateNewSizeBaseMachine:x];
-            y = [Common calculateNewSizeBaseMachine:y];
-        } else {
-            x = 45 + (i%3) * (kCircleDiameter+(320- 45*2- kCircleDiameter *3)/2);
-            y = 45 + (i/3) * (kCircleDiameter+(320- 45*2- kCircleDiameter *3)/2);
-        }
+//        if (kIS_Iphone4) {
+        
+            x = margin + (i%3) * margin + (i%3) * buttonWidth;
+            y = margin + (i/3) * (margin + buttonWidth);
+            
+//            x =  [Common calculateNewSizeBaseMachine:kCircleMargin] + (i%3) * (kCircleDiameter+(320-[Common calculateNewSizeBaseMachine:kCircleMargin]*2- kCircleDiameter *3)/2);
+//            y =  [Common calculateNewSizeBaseMachine:kCircleMargin] + (i/3) * (kCircleDiameter+(320- [Common calculateNewSizeBaseMachine:kCircleMargin]*2- kCircleDiameter *3)/2);
+//            x = [Common calculateNewSizeBaseMachine:x];
+//            y = [Common calculateNewSizeBaseMachine:y];
+//        }
+//        else {
+//            x = 45 + (i%3) * (kCircleDiameter+(320- 45*2- kCircleDiameter *3)/2);
+//            y = 45 + (i/3) * (kCircleDiameter+(320- 45*2- kCircleDiameter *3)/2);
+//        }
 
 //        LLLog(@"每个圆点位置 %d,%d", x, y);
-        [button setFrame:CGRectMake(x, y, [Common calculateNewSizeBaseMachine:kCircleDiameter], [Common calculateNewSizeBaseMachine:kCircleDiameter])];
+        [button setFrame:CGRectMake(x, y, buttonWidth, buttonWidth)];
         
         [button setBackgroundColor:[UIColor clearColor]];
-        [button setBackgroundImage:[UIImage imageNamed:@"password_round_normal.png"] forState:UIControlStateNormal];
-        [button setBackgroundImage:[UIImage imageNamed:@"password_round_right.png"] forState:UIControlStateSelected];
+        [button setBackgroundImage:[UIImage imageNamed:@"password_round_normal"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"password_round_right"] forState:UIControlStateSelected];
         button.userInteractionEnabled= NO;//禁止用户交互
         button.alpha = kLLCircleAlpha;
         button.tag = i + kLLBaseCircleNumber + 1; // tag从基数+1开始,
