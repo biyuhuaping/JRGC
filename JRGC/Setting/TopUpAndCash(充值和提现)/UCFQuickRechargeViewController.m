@@ -299,6 +299,7 @@
 //            [helper pushOpenHSType:self.accoutType Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav: ((UIViewController *)self.rootVc).navigationController];
             @PGWeakObj(self)
             UCFMicroBankDepositoryAccountHomeViewController *vc = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
+            vc.accoutType = SelectAccoutTypeP2P;
 //            [self.parentViewController.rt_navigationController pushViewController:vc animated:YES complete:^(BOOL finished) {
 //                [selfWeak.rt_navigationController removeViewController:selfWeak];
 //            }];
@@ -306,6 +307,10 @@
                 [((UIViewController *)selfWeak.rootVc).rt_navigationController removeViewController:(UIViewController *)selfWeak.rootVc];
             }];
             
+        }
+        else
+        {
+            [((UIViewController *)self.rootVc).rt_navigationController popViewControllerAnimated:YES];
         }
     }
     else {

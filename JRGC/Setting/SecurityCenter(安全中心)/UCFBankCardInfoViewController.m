@@ -21,6 +21,7 @@
 #import "UCFWJSetAndRestHsPwdModel.h"
 #import "AccountWebView.h"
 #import "UCFMicroBankDepositoryChangeBankCardViewController.h"
+#import "UILabel+Misc.h"
 @interface UCFBankCardInfoViewController ()<UITableViewDataSource, UITableViewDelegate,MjAlertViewDelegate,UCFChoseBankViewControllerDelegate>
 {
     int sectionNumberInTableview;//***本页中有几个section
@@ -110,24 +111,48 @@
     
     [self.rootLayout addSubview:self.tableview];
     
-    //***设置导航title 1.p2p绑定银行卡 2.尊享绑定银行卡
-    if(self.accoutType == SelectAccoutTypeP2P)
-    {
-     baseTitleLabel.text =@"微金绑定银行卡";
-    }else{
-     baseTitleLabel.text =@"尊享绑定银行卡";
-    }
-    [self addLeftButton];
     rowInSecionOne = 0;//***第一section里的Row的个数初始化为0；需要显示tips时就动态+1；不现实就动态-1；
     self.isNeedAlert = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(renewDataForPage) name:MODIBANKZONE_SUCCESSED object:nil];//***修改绑定银行卡成功后返回该页面需要刷新数据
-    
-    
-    
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    
     [self getBankCardInfoFromNet];
+    [self addLeftButton];
+}
+- (void)addLeftButton
+{
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [leftButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [leftButton setBackgroundColor:[UIColor clearColor]];
+    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+//    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
+    [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateNormal];
+    [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateHighlighted];
+    //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
+    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+    leftButton.myTop = 20 + StatusBarHeight1;
+    leftButton.myLeft = 0;
+    leftButton.myWidth = 41;
+    leftButton.myHeight = 16;
+    [self.rootLayout addSubview:leftButton];
     
+    NZLabel *titleLabel = [NZLabel new];
+    titleLabel.font = [Color gc_Font:18.0];
+    //***设置导航title 1.p2p绑定银行卡 2.尊享绑定银行卡
+    if(self.accoutType == SelectAccoutTypeP2P)
+    {
+        titleLabel.text =@"微金绑定银行卡";
+    }else{
+        titleLabel.text =@"尊享绑定银行卡";
+    }
+    titleLabel.textColor = [Color color:PGColorOptionThemeWhite];
+    [titleLabel sizeToFit];
+    titleLabel.myCenterX = 0;
+    titleLabel.centerYPos.equalTo(leftButton.centerYPos);
+    [self.rootLayout addSubview:titleLabel];
+}
+- (void)getToRoot
+{
+    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 - (UITableView *)tableview
 {
@@ -136,8 +161,8 @@
         _tableview.delegate = self;
         _tableview.dataSource = self;
         _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        _tableview.backgroundColor = UIColorWithRGB(0xf5f5f5);
-        _tableview.backgroundColor = [UIColor redColor];
+        _tableview.backgroundColor = UIColorWithRGB(0xf5f5f5);
+//        _tableview.backgroundColor = [UIColor redColor];
 //        _tableview.estimatedRowHeight = 60;
 //        _tableview.rowHeight = UITableViewAutomaticDimension;
         _tableview.myTop = 0;
@@ -177,7 +202,7 @@
 //            return 231 + markContentSize.height;
 //        }
 //        return 0;
-        return PGScreenWidth *0.83;
+        return PGScreenWidth *0.8267;
     }
     return 0.01;
 }
@@ -186,7 +211,7 @@
 {
     if(section==([self.itemsData count]-1))
     {
-        CGFloat tableHeadHeight = PGScreenWidth *0.83;
+        CGFloat tableHeadHeight = PGScreenWidth *0.8267;
 //        CGSize markContentSize = [self sizeWithText:@"如果您绑定的银行卡暂不支持手机一键支付请联系客服400-0322-988" font:[UIFont systemFontOfSize:13] maxSize:CGSizeMake(ScreenWidth-30, MAXFLOAT)];
 //        CGSize markContentSize = CGSizeMake(0, 0);
 //        CGFloat height = 0;
@@ -281,10 +306,73 @@
 {
     if(section==([self.itemsData count]-1))
     {
-        UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"UCFBankCardInfoExplainView" owner:self options:nil] lastObject];
-        view.frame = CGRectMake(0, 0, ScreenWidth, 115);
+//        UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"UCFBankCardInfoExplainView" owner:self options:nil] lastObject];
+//        view.frame = CGRectMake(0, 0, ScreenWidth, 115);
+        UIView *agreementView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 117)];
         
-        return view;
+        CGFloat spacingHeight = 8;
+        CGFloat spacingLabelHeight = 5;
+        CGFloat spacingWidth = 4;
+        CGFloat labelWidth = PGScreenWidth - 50;
+        
+        NZLabel *titleLabel = [[NZLabel alloc] initWithFrame:CGRectMake(15, 20, PGScreenWidth, 15)];
+        titleLabel.font = [Color gc_Font:15];
+        titleLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        titleLabel.text = @"温馨提示";
+        [agreementView addSubview:titleLabel];
+        
+
+        
+        UIView *firstRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(titleLabel.frame) +15, 8, 8)];
+        firstRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        firstRound.layer.cornerRadius = 4;
+        firstRound.layer.masksToBounds = YES;
+        
+        NZLabel *firstLabel = [[NZLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(firstRound.frame) +spacingWidth, CGRectGetMinY(firstRound.frame) -spacingLabelHeight,labelWidth , 50)];
+        firstLabel.font = [Color gc_Font:13];
+        firstLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        firstLabel.text = [NSString stringWithFormat:@"目前官网上可绑定的部分银行暂不支持手机快捷支付。"];
+        [firstLabel setLineSpace:6 string:firstLabel.text];
+        firstLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        firstLabel.numberOfLines = 0;
+        firstLabel.preferredMaxLayoutWidth = labelWidth;
+        [agreementView addSubview:firstRound];
+        [agreementView addSubview:firstLabel];
+        
+        UIView *secondRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(firstLabel.frame) +spacingHeight, 8, 8)];
+        secondRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        secondRound.layer.cornerRadius = 4;
+        secondRound.layer.masksToBounds = YES;
+        
+        NZLabel *secondLabel = [[NZLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(secondRound.frame) +spacingWidth, CGRectGetMinY(secondRound.frame) -spacingLabelHeight,labelWidth , 50)];
+        secondLabel.font = [Color gc_Font:13];
+        secondLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        secondLabel.text = [NSString stringWithFormat:@"若账户内有余额或待收不可修改绑定银行卡。"];
+        [secondLabel setLineSpace:6 string:secondLabel.text];
+        secondLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        secondLabel.numberOfLines = 0;
+        secondLabel.preferredMaxLayoutWidth = labelWidth;
+        [agreementView addSubview:secondRound];
+        [agreementView addSubview:secondLabel];
+        
+        UIView *thirdRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(secondLabel.frame) +spacingHeight, 8, 8)];
+        thirdRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        thirdRound.layer.cornerRadius = 4;
+        thirdRound.layer.masksToBounds = YES;
+        
+        NZLabel *thirdLabel = [[NZLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(thirdRound.frame) +spacingWidth, CGRectGetMinY(thirdRound.frame) -spacingLabelHeight,labelWidth , 50)];
+        thirdLabel.font = [Color gc_Font:13];
+        thirdLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        thirdLabel.text = [NSString stringWithFormat:@"开户行名称填写错误将无法提现，请拨打银行客服电话查询进行修改。"];
+        thirdLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        thirdLabel.numberOfLines = 0;
+        thirdLabel.preferredMaxLayoutWidth = labelWidth;
+        [thirdLabel setLineSpace:6 string:thirdLabel.text];
+        [agreementView addSubview:thirdRound];
+        [agreementView addSubview:thirdLabel];
+        
+        agreementView.frame = CGRectMake(0, 0, agreementView.frame.size.width, CGRectGetMaxY(thirdLabel.frame)+50);
+        return agreementView;
     }
     return nil;
 }

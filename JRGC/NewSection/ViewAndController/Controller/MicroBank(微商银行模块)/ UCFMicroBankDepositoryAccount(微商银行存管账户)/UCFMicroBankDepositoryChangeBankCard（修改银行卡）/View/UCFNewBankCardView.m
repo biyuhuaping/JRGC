@@ -59,7 +59,7 @@
         _bkImageView.myTop = 0;
         _bkImageView.myLeft = 0;
         _bkImageView.myWidth = PGScreenWidth;
-        _bkImageView.myHeight = PGScreenWidth *0.83;
+        _bkImageView.myHeight = PGScreenWidth *0.8267;
         _bkImageView.image = [UIImage imageNamed:@"binding_bank_cardsbg"];
     }
     return _bkImageView;
@@ -68,10 +68,11 @@
 {
     if (nil == _bankImageView) {
         _bankImageView = [[UIImageView alloc] init];
-        _bankImageView.centerYPos.equalTo(self.rootLayout.centerYPos);
+//        _bankImageView.centerYPos.equalTo(self.rootLayout.centerYPos);
         _bankImageView.centerXPos.equalTo(self.rootLayout.centerXPos);
-        _bankImageView.myWidth = PGScreenWidth -40;
-        _bankImageView.myHeight = PGScreenWidth *0.61;
+        _bankImageView.myWidth = PGScreenWidth -20;
+        _bankImageView.myHeight = PGScreenWidth *0.606;
+        _bankImageView.myBottom = 10;
         _bankImageView.image = [UIImage imageNamed:@"white_bank_bg"];
     }
     return _bankImageView;

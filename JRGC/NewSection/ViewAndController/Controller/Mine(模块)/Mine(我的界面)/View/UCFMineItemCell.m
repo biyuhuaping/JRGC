@@ -162,7 +162,7 @@
     self.itemTitleLabel.text = caModel.cellAccountTitle;
     [self.itemTitleLabel sizeToFit];
     if ([caModel.cellAccountTitle isEqualToString:@"客服热线"]) {
-        self.itemContentLabel.text = @"400-032-2988";
+        self.itemContentLabel.text = @"400-0322-988";
         self.itemContentLabel.font = [Color gc_ANC_font:14.0];
         [self.itemContentLabel sizeToFit];
         self.itemContentLabel.myVisibility = MyVisibility_Visible;
