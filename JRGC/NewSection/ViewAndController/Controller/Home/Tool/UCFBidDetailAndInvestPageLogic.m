@@ -148,7 +148,7 @@
                     if([self checkUserCanInvestIsDetail:NO type:SelectAccoutTypeP2P control:controler]){//
                         @PGWeakObj(self);
                         
-                        InvestPageInfoApi *api = [[InvestPageInfoApi alloc] initWithProjectId:tmpModel.ID type:SelectAccoutTypeP2P];
+                        InvestPageInfoApi *api = [[InvestPageInfoApi alloc] initWithProjectId:tmpModel.ID bidStatue:tmpModel.status type:SelectAccoutTypeP2P];
                         api.animatingView = controler.view;
                         [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
                             [selfWeak dealInvestInfoData:request.responseJSONModel andControl:controler];

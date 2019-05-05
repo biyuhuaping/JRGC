@@ -32,7 +32,14 @@
 //    }
     [self gotoURL:self.url];
     
-    
+//    [self.KVOController observe:self.webView keyPaths:@[@"frame"] options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial  block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+//        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+//        if ([keyPath isEqualToString:@"frame"]) {
+//            
+//        }
+//        
+//    }];
+//    self.view.backgroundColor = [UIColor redColor];
 }
 
 - (void)didReceiveMemoryWarning {

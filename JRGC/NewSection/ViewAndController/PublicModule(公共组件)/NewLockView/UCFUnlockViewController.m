@@ -91,9 +91,12 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             // 强制注销该账户，并清除手势密码，以便重设
             [SingleUserInfo deleteUserData];
-            [SingleUserInfo loadLoginViewController];
             [LLLockPassword saveLockPassword:nil];
-            [SingGlobalView.rootNavController removeViewController:self];
+
+            [SingGlobalView.rootNavController popToRootViewControllerAnimated:NO complete:^(BOOL finished) {
+                [SingleUserInfo loadLoginViewController];
+            }];
+
         }
     } else {
         NSAssert(YES, @"意外情况");
