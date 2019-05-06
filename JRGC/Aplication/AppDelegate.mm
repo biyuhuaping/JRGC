@@ -439,7 +439,7 @@
     BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
 
     if (useLockView || isOpen) {
-        if (_backTime > 5) {
+        if (_backTime > 60) {
             [[ToolSingleTon sharedManager] hideAlertAction:nil];
             [self showGCode];
         }

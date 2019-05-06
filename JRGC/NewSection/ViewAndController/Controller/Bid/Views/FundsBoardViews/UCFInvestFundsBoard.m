@@ -61,7 +61,7 @@
 {
     self.myVM = viewModel;
     @PGWeakObj(self);
-    [self.KVOController observe:viewModel keyPaths:@[@"totalFunds",@"myFundsNum",@"myBeansNum",@"expectedInterestNum",@"inputViewPlaceStr",@"allMoneyInputNum",@"isCompanyAgent"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.KVOController observe:viewModel keyPaths:@[@"totalFunds",@"myFundsNum",@"myBeansNum",@"expectedInterestNum",@"inputViewPlaceStr",@"allMoneyInputNum",@"isCompanyAgent",@"riskDes"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
         if ([keyPath isEqualToString:@"myFundsNum"]) {
             NSString *funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
@@ -108,6 +108,14 @@
                 selfWeak.totalKeYongTipLabel.text = @"";
             } else {
                 selfWeak.beansBoard.myVisibility = MyVisibility_Visible;
+            }
+        } else if ([keyPath isEqualToString:@"riskDes"]) {
+            NSString *riskDes = [change objectForKey:NSKeyValueChangeNewKey];
+            if (riskDes.length > 0) {
+                selfWeak.riskTypeLab.text = riskDes;
+                [selfWeak.riskTypeLab sizeToFit];
+            } else {
+                selfWeak.riskTypeLab.text = @"";
             }
         }
     }];
@@ -241,15 +249,16 @@
     button.backgroundColor = [UIColor whiteColor];
     [button addTarget:self action:@selector(goToRecharge:) forControlEvents:UIControlEventTouchUpInside];
     [_balanceBoard addSubview: button];
-    
-//    UIView *endLineView = [[UIView alloc] init];
-//    endLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
-//    endLineView.myBottom = 0;
-//    endLineView.myRight = 0;
-//    endLineView.myLeft = 15;
-//    endLineView.myHorzMargin = 0;
-//    endLineView.heightSize.equalTo(@0.5);
-//    [_balanceBoard addSubview:endLineView];
+    if (![UserInfoSingle sharedManager].isShowCouple) {
+        UIView *endLineView = [[UIView alloc] init];
+        endLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+        endLineView.bottomPos.equalTo(@0);
+        endLineView.leftPos.equalTo(@15);
+        endLineView.rightPos.equalTo(@0);
+        endLineView.heightSize.equalTo(@0.7);
+        [_balanceBoard addSubview:endLineView];
+    }
+
 }
 - (void)goToRecharge:(UIButton *)button
 {
@@ -294,7 +303,6 @@
     _beanSwitch.myWidth = 60;
     [_beanSwitch setImage:[UIImage imageNamed:@"invest_btn_unselected"] forState:UIControlStateNormal];
     [_beanSwitch setImage:[UIImage imageNamed:@"invest_btn_selected_slices"] forState:UIControlStateSelected];
-//    [_beanSwitch setBackgroundColor:[UIColor blueColor]];
     [_beanSwitch addTarget:self action:@selector(changeBtnStatue:) forControlEvents:UIControlEventTouchUpInside];
     [_beansBoard addSubview:_beanSwitch];
     _beanSwitch.imageEdgeInsets = UIEdgeInsetsMake(-14, 0, 0, -37);

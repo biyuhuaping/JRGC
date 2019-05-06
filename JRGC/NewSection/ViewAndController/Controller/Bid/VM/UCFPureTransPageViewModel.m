@@ -58,19 +58,21 @@
 }
 - (void)dealBidInfo
 {
+        //不要随便调整顺序 remainingMoney 和 timeLimitText 因为根据annualRate  remainingMoney 反射到View上的时候计算timeLimitText 反射View的位置
     NSString *annualRate = self.model.data.transfereeYearRate;
     if (annualRate.length > 0) {
         self.annualRate = [NSString stringWithFormat:@"%@%%",annualRate];
-    }
-    NSString *timeLimitText = self.model.data.lastDays;
-    if (annualRate.length > 0) {
-        self.timeLimitText = [NSString stringWithFormat:@"%@天",timeLimitText];
     }
     NSString *remainingMoney = self.model.data.cantranMoney;
     if (remainingMoney.length > 0) {
         remainingMoney = [NSString AddComma:remainingMoney];
         self.remainingMoney = [NSString stringWithFormat:@"¥%@",remainingMoney];//剩余钱数
     }
+    NSString *timeLimitText = self.model.data.lastDays;
+    if (annualRate.length > 0) {
+        self.timeLimitText = [NSString stringWithFormat:@"%@天",timeLimitText];
+    }
+
 }
 - (void)dealMarkView
 {

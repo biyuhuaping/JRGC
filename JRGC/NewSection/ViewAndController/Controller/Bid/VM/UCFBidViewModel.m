@@ -93,7 +93,13 @@
 }
 - (void)dealBidInfo
 {
+        //不要随便调整顺序 remainingMoney 和 timeLimitText 因为根据annualRate  remainingMoney 反射到View上的时候计算timeLimitText 反射View的位置
     self.annualRate = [NSString stringWithFormat:@"%@%%",self.model.data.prdClaim.annualRate];
+    
+    
+    NSString *remainStr = [NSString stringWithFormat:@"%.2f",self.model.data.prdClaim.borrowAmount - self.model.data.prdClaim.completeLoan];
+    remainStr = [UCFToolsMehod AddComma:remainStr];
+    self.remainingMoney = [NSString stringWithFormat:@"¥%@",remainStr];//剩余钱数
     
     if (self.model.data.prdClaim.holdTime.length > 0) {
        self.timeLimitText = [NSString stringWithFormat:@"%@~%@",self.model.data.prdClaim.holdTime,self.model.data.prdClaim.repayPeriodtext];//投资期限
@@ -101,9 +107,7 @@
         self.timeLimitText = self.model.data.prdClaim.repayPeriodtext;//投资期限
     }
     
-    NSString *remainStr = [NSString stringWithFormat:@"%.2f",self.model.data.prdClaim.borrowAmount - self.model.data.prdClaim.completeLoan];
-    remainStr = [UCFToolsMehod AddComma:remainStr];
-    self.remainingMoney = [NSString stringWithFormat:@"¥%@",remainStr];//剩余钱数
+
 }
 - (void)dealMarkView
 {
@@ -159,7 +163,7 @@
     }
     self.inputViewPlaceStr = palceText;
 
-    
+    self.riskDes = self.model.data.prdClaim.riskLevelDes;
 }
 
 /**

@@ -110,6 +110,8 @@
 
 @property (nonatomic, copy) NSString *repayPeriodDay;
 
+@property (nonatomic, copy) NSString *riskLevelDes;
+
 @end
 
 @interface ContractModel : BaseModel
