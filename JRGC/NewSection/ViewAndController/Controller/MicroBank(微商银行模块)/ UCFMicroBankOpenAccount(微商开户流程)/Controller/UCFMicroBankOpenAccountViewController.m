@@ -54,12 +54,13 @@
     self.viewHeight = PGStatusBarHeight + self.navigationController.navigationBar.frame.size.height + HEADVIEWHEIGHT;
     [self addLeftButton];
     
-    baseTitleLabel.text = @"开通微金徽商存管账户";
-//    if (self.accoutType == SelectAccoutTypeP2P) {
-//        baseTitleLabel.text = @"开通微金徽商存管账户";
-//    } else {
-//        baseTitleLabel.text = @"开通尊享徽商存管账户";
-//    }
+//    baseTitleLabel.text = @"开通微金徽商存管账户";
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        baseTitleLabel.text = @"开通尊享徽商存管账户";
+        
+    } else {
+        baseTitleLabel.text = @"开通微金徽商存管账户";
+    }
     [SingleUserInfo requestUserAllStatueWithView:self.view];
     @PGWeakObj(self);
     SingleUserInfo.requestUserbackBlock = ^(BOOL requestFinsh)
@@ -83,12 +84,6 @@
         }
         //            用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码
         NSInteger openStatus = [SingleUserInfo.loginData.userInfo.openStatus integerValue]; //微金开户状态
-        //            OpenAccoutMicroBank = 1, //存管开户
-        //            OpenAccoutPassWord , //选择交易密码
-        //微金用户
-        //                openStatus = 2;
-       
-       
         if (openStatus >= 3)
         {
             self.openAccountSucceed = YES;
@@ -123,6 +118,7 @@
 //            [self addChildViewController:self.depositView];
             [self addChildViewController:self.tradersPasswordView];
             [self.rootLayout addSubview:self.tradersPasswordView.view];
+            self.tradersPasswordView.accoutType = self.accoutType;
             self.currentVC = self.tradersPasswordView;
         }
     }

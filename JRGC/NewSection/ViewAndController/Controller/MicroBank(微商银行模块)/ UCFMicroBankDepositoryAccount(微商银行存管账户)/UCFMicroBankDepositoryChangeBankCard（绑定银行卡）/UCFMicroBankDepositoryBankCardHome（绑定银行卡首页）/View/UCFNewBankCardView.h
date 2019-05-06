@@ -23,10 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic)  UIImageView *quickPayImageView;//***快捷支付图片
 
-@property (strong, nonatomic)  UIImageView *image_bankCardValuable;//***银行卡失效图片
+//@property (strong, nonatomic)  UIImageView *image_bankCardValuable;//***银行卡失效图片
 
-//***当银行卡失效的时候页面部分至灰色
--(void)thisBankCardInvaluable:(BOOL)_gray;
+////***当银行卡失效的时候页面部分至灰色
+//-(void)thisBankCardInvaluable:(BOOL)_gray;
 @end
 
 NS_ASSUME_NONNULL_END

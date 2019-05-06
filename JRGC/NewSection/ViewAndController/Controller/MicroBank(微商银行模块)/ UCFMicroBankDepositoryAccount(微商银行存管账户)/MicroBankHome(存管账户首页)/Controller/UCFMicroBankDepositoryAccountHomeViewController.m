@@ -25,6 +25,8 @@
 #import "UCFMicroBankGetHSAccountInfoModel.h"
 #import "UCFWJSetAndRestHsPwdApi.h"
 #import "UCFWJSetAndRestHsPwdModel.h"
+#import "UCFMicroBankDepositoryBankCardHomeViewController.h"
+#import "UCFMicroBankOpenAccountViewController.h"
 
 @interface UCFMicroBankDepositoryAccountHomeViewController ()<UIScrollViewDelegate>
 
@@ -158,7 +160,28 @@
         _changePassword = [[UCFMicroBankDepositoryAccountHomeCellView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
         _changePassword.topPos.equalTo(self.modifyBankCard.bottomPos);
         _changePassword.myLeft = 0;
-        _changePassword.microBankTitleLabel.text = @"修改交易密码";
+        
+        if (self.accoutType == SelectAccoutTypeP2P) {
+            if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 4) {
+                //未设置交易密码
+                _changePassword.microBankTitleLabel.text = @"设置交易密码";
+            }
+            else
+            {
+                _changePassword.microBankTitleLabel.text = @"修改交易密码";
+            }
+        }
+        else
+        {
+            if ([SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 4) {
+                //未设置交易密码
+                _changePassword.microBankTitleLabel.text = @"设置交易密码";
+            }
+            else
+            {
+                _changePassword.microBankTitleLabel.text = @"修改交易密码";
+            }
+        }
         [_changePassword.microBankTitleLabel sizeToFit];
         
         _changePassword.microBankSubtitleLabel.text = @"";
@@ -333,47 +356,29 @@
 //        [self.rt_navigationController pushViewController:vc animated:YES];
 //        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
 //        UCFBankCardInfoViewController *bankCardInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"bankcardinfo"];
-        UCFBankCardInfoViewController *bankCardInfoVC = [[UCFBankCardInfoViewController alloc] init];
+        UCFMicroBankDepositoryBankCardHomeViewController *bankCardInfoVC = [[UCFMicroBankDepositoryBankCardHomeViewController alloc] init];
         bankCardInfoVC.isHideNavigationBar = YES;
         bankCardInfoVC.accoutType = self.accoutType;
         [self.rt_navigationController pushViewController:bankCardInfoVC animated:YES];
     }
     else if (sender.view.tag == 1003)
     {
-//        修改交易密码
-        if (self.accoutType != SelectAccoutTypeP2P) {
-
-            UCFWJSetAndRestHsPwdApi * request = [[UCFWJSetAndRestHsPwdApi alloc] init];
-            request.animatingView = self.view;
-            //    request.tag =tag;
-            [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-                // 你可以直接在这里使用 self
-                UCFWJSetAndRestHsPwdModel *model = [request.responseJSONModel copy];
-                DDLogDebug(@"---------%@",model);
-                if (model.ret == YES) {
-                    
-                    AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
-                    webView.title = @"即将跳转";
-                    webView.url =model.data.url;
-                    NSDictionary *dic = request.responseObject;
-                    webView.webDataDic = dic[@"data"][@"tradeReq"];
-                    [self.navigationController pushViewController:webView animated:YES];
-                }
-                else{
-//                    ShowMessage(model.message);
-                }
-            } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-                // 你可以直接在这里使用 self
-                
-            }];
-//            
-        }
-        else
+//        修改或者设置交易密码
+        if ([self.changePassword.microBankTitleLabel.text isEqualToString:@"修改交易密码"])
         {
-            //修改交易密码
+                //修改交易密码
             UCFMicroBankChangeTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankChangeTradersPasswordViewController alloc] init];
             tradePasswordVC.accoutType = self.accoutType;
             [self.rt_navigationController pushViewController:tradePasswordVC  animated:YES];
+    
+        }
+        else
+        {
+            //设置交易密码
+            UCFMicroBankOpenAccountViewController *vc = [[UCFMicroBankOpenAccountViewController alloc] init];
+            vc.accoutType = self.accoutType;
+            [self.rt_navigationController pushViewController:vc animated:YES];
+            
         }
     }
     else if (sender.view.tag == 1004){

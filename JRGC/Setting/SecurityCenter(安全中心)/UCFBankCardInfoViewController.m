@@ -262,7 +262,7 @@
                 
                 if([self.bankCardStatus isEqualToString:@"0"])
                 {
-                [bankCard thisBankCardInvaluable:YES];//***???银行卡view 至灰
+//                [bankCard thisBankCardInvaluable:YES];//***???银行卡view 至灰
                 }
             }];
         }
@@ -313,9 +313,9 @@
         CGFloat spacingHeight = 8;
         CGFloat spacingLabelHeight = 5;
         CGFloat spacingWidth = 4;
-        CGFloat labelWidth = PGScreenWidth - 50;
+        CGFloat labelWidth = PGScreenWidth - 62;
         
-        NZLabel *titleLabel = [[NZLabel alloc] initWithFrame:CGRectMake(15, 20, PGScreenWidth, 15)];
+        NZLabel *titleLabel = [[NZLabel alloc] initWithFrame:CGRectMake(25, 20, PGScreenWidth, 15)];
         titleLabel.font = [Color gc_Font:15];
         titleLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
         titleLabel.text = @"温馨提示";
@@ -323,7 +323,7 @@
         
 
         
-        UIView *firstRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(titleLabel.frame) +15, 8, 8)];
+        UIView *firstRound = [[UIView alloc] initWithFrame:CGRectMake(25, CGRectGetMaxY(titleLabel.frame) +15, 8, 8)];
         firstRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
         firstRound.layer.cornerRadius = 4;
         firstRound.layer.masksToBounds = YES;
@@ -339,7 +339,7 @@
         [agreementView addSubview:firstRound];
         [agreementView addSubview:firstLabel];
         
-        UIView *secondRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(firstLabel.frame) +spacingHeight, 8, 8)];
+        UIView *secondRound = [[UIView alloc] initWithFrame:CGRectMake(25, CGRectGetMaxY(firstLabel.frame) +spacingHeight, 8, 8)];
         secondRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
         secondRound.layer.cornerRadius = 4;
         secondRound.layer.masksToBounds = YES;
@@ -355,7 +355,7 @@
         [agreementView addSubview:secondRound];
         [agreementView addSubview:secondLabel];
         
-        UIView *thirdRound = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(secondLabel.frame) +spacingHeight, 8, 8)];
+        UIView *thirdRound = [[UIView alloc] initWithFrame:CGRectMake(25, CGRectGetMaxY(secondLabel.frame) +spacingHeight, 8, 8)];
         thirdRound.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
         thirdRound.layer.cornerRadius = 4;
         thirdRound.layer.masksToBounds = YES;

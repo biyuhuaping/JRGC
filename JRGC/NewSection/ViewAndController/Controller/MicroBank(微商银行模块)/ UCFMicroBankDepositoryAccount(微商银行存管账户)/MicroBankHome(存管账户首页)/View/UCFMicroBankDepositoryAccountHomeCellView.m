@@ -22,7 +22,7 @@
     if (self) {
         
         // 初始化视图对象
-        self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        self.rootLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
         
         [self.rootLayout addSubview:self.microBankTitleLabel];//标题
         [self.rootLayout addSubview:self.microBankSubtitleLabel];//标题
