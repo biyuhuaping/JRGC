@@ -144,7 +144,7 @@
             _errorLabel.text = @"两次绘制的密码不一致";
             [_errorLabel sizeToFit];
             _clearButton.myVisibility = MyVisibility_Visible;
-            [self shakeAnimationForView:_errorLabel];
+//            [self shakeAnimationForView:_errorLabel];
         }
     } else {
         NSAssert(1, @"设置密码意外");
@@ -256,7 +256,7 @@
     _errorLabel.myVisibility = MyVisibility_Visible;
     _errorLabel.text = tip;
     [_errorLabel sizeToFit];
-    [self shakeAnimationForView:_errorLabel];
+//    [self shakeAnimationForView:_errorLabel];
 }
 
 /**
@@ -354,7 +354,7 @@
         _tipLab.topPos.equalTo(self.titleLabe.bottomPos).offset(40 * HeightScale);
         _tipLab.widthSize.equalTo(self.rootLayout.widthSize);
         _tipLab.heightSize.equalTo(@(30 * HeightScale));
-        _tipLab.font = [UIFont systemFontOfSize:23];
+        _tipLab.font = [UIFont systemFontOfSize:23 * HeightScale];
         _tipLab.textColor = [Color color:PGColorOptionTitleBlack];
         _tipLab.textAlignment = NSTextAlignmentCenter;
         _tipLab.backgroundColor = [UIColor clearColor];

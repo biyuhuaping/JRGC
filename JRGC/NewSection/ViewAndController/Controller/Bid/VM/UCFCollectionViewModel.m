@@ -53,19 +53,21 @@
 }
 - (void)dealBidInfo
 {
+    //不要随便调整顺序 remainingMoney 和 timeLimitText 因为根据annualRate  remainingMoney 反射到View上的时候计算timeLimitText 反射View的位置
     NSString *annualRate = self.dataModel.data.colPrdClaimDetail.colRate;
     if (annualRate.length > 0) {
         self.annualRate = [NSString stringWithFormat:@"%@%%",annualRate];
-    }
-    NSString *timeLimitText = self.dataModel.data.colPrdClaimDetail.colPeriodTxt;
-    if (annualRate.length > 0) {
-        self.timeLimitText = [NSString stringWithFormat:@"%@",timeLimitText];
     }
     NSString *remainingMoney = [NSString stringWithFormat:@"%.2f",self.dataModel.data.colPrdClaimDetail.canBuyAmt];
     if (remainingMoney.length > 0) {
         remainingMoney = [NSString AddComma:remainingMoney];
         self.remainingMoney = [NSString stringWithFormat:@"¥%@",remainingMoney];//剩余钱数
     }
+    NSString *timeLimitText = self.dataModel.data.colPrdClaimDetail.colPeriodTxt;
+    if (annualRate.length > 0) {
+        self.timeLimitText = [NSString stringWithFormat:@"%@",timeLimitText];
+    }
+
 }
 - (void)dealMarkView
 {

@@ -73,14 +73,14 @@
         [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:nRetryTimesRemain] forKey:@"nRetryTimesRemain"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         if (nRetryTimesRemain > 0) {
-            NSDictionary *normalStrDict = @{NSFontAttributeName : [UIFont systemFontOfSize:16 * HeightScale],
-                                            NSForegroundColorAttributeName : [Color color:PGColorOptionCellContentBlue]
+            NSDictionary *normalStrDict = @{NSFontAttributeName : [UIFont systemFontOfSize:15 * HeightScale],
+                                            NSForegroundColorAttributeName : [Color color:PGColorOptionTitlerRead]
                                             };
             NSString *str = [NSString stringWithFormat:@"密码输入错误，您还可以尝试 %d 次", nRetryTimesRemain];
             NSRange strRg = [str rangeOfString:[NSString stringWithFormat:@"%d",nRetryTimesRemain]];
             NSMutableAttributedString *StrAttri = [[NSMutableAttributedString alloc] initWithString:str attributes:normalStrDict];
             
-            NSDictionary *redStrDict = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:16],
+            NSDictionary *redStrDict = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15 * HeightScale],
                                          NSForegroundColorAttributeName : [Color color:PGColorOptionTitlerRead]
                                          };
             [StrAttri addAttributes:redStrDict range:strRg];
@@ -110,7 +110,7 @@
     _errorLabel.myVisibility = MyVisibility_Visible;
     _errorLabel.attributedText = tip;
     [_errorLabel sizeToFit];
-    [self shakeAnimationForView:_errorLabel];
+//    [self shakeAnimationForView:_errorLabel];
 }
 
 - (void)hide
@@ -193,7 +193,7 @@
 {
     if (!_errorLabel) {
         _errorLabel = [[UILabel alloc] init];
-        _errorLabel.topPos.equalTo(self.tipLab.bottomPos).offset(18 * HeightScale);
+        _errorLabel.topPos.equalTo(self.tipLab.bottomPos).offset(16 * HeightScale);
         _errorLabel.centerXPos.equalTo(self.rootLayout.centerXPos);
         _errorLabel.font = [UIFont systemFontOfSize:16 * HeightScale];
         _errorLabel.textColor = [Color color:PGColorOptionCellContentBlue];
@@ -208,7 +208,7 @@
 - (LLLockView *)lockView
 {
     if (!_lockView) {
-        _lockView = [[LLLockView alloc] initWithFrame:CGRectMake((ScreenWidth - [Common calculateNewSizeBaseMachine:320]) / 2,HeightScale >= 1 ? 270 * HeightScale : 250 * HeightScale, [Common calculateNewSizeBaseMachine:320], [Common calculateNewSizeBaseMachine:320])];
+        _lockView = [[LLLockView alloc] initWithFrame:CGRectMake((ScreenWidth - [Common calculateNewSizeBaseMachine:320]) / 2,HeightScale >= 1 ? 270 * HeightScale : 237 * HeightScale, [Common calculateNewSizeBaseMachine:320], [Common calculateNewSizeBaseMachine:320])];
         _lockView.useFrame = YES;
         _lockView.delegate = self;
     }
@@ -225,7 +225,7 @@
         _switchPageBtn.widthSize.equalTo(@200);
         _switchPageBtn.heightSize.equalTo(@40);
 //        _switchPageBtn.topPos.equalTo(@(HeightScale >=1 ? CGRectGetMaxY(self.lockView.frame) : CGRectGetMaxY(self.lockView.frame) - 20));
-        _switchPageBtn.bottomPos.equalTo(self.reminderButton.topPos).offset(-10);
+        _switchPageBtn.bottomPos.equalTo(self.reminderButton.topPos).offset(0);
         [_switchPageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_switchPageBtn addTarget:self action:@selector(switchPageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -241,7 +241,7 @@
         _reminderButton.leftPos.equalTo(@(50 * WidthScale));
         _reminderButton.heightSize.equalTo(@40);
 //        _reminderButton.centerYPos.equalTo(_switchPageBtn.centerYPos).offset(HeightScale >=1 ? 60 : 40 *HeightScale);
-        _reminderButton.bottomPos.equalTo(@(StatusBarHeight1 > 20 ? 39 + 46 : 46));
+        _reminderButton.bottomPos.equalTo(@(StatusBarHeight1 > 20 ? 39 + 36 : 36));
 
         [_reminderButton setTitle:@"密码登录" forState:UIControlStateNormal];
         [_reminderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

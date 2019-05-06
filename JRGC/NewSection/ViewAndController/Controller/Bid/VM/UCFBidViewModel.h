@@ -80,6 +80,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString          *expectedInterestNum;
 
 /**
+ 风险评估文案
+ */
+@property(nonatomic, copy)NSString          *riskDes;
+
+/**
  输入框默认填充
  */
 @property(nonatomic, copy)NSString          *inputViewPlaceStr;
