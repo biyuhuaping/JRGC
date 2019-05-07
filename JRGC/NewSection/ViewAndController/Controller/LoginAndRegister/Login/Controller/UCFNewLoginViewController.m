@@ -103,8 +103,6 @@
 {
     RTRootNavigationAddPushController *rt = SingGlobalView.tabBarController.selectedViewController;
     UIViewController *bs;
-    
-    
     if ([rt isKindOfClass:[RTRootNavigationAddPushController class]]) {
         bs = rt.rt_navigationController.rt_viewControllers.lastObject;
     }
@@ -241,11 +239,13 @@
         UCFLoginModel *model = [request.responseJSONModel copy];
         DDLogDebug(@"---------%@",model);
         if (model.ret == YES) {
-
+           NSString *oldUserName = [SingleUserInfo getlastLoginName];
+            if (![oldUserName isEqualToString:self.username]) {
+                SingleUserInfo.loginType = LoginChangeUser;
+            }
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:self.isCompany,@"isCompany",self.username,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:self.pwd];
             [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:RCLockViewTypeCreate] animated:YES complete:^(BOOL finished) {
-
                 [SingGlobalView.rootNavController removeViewController:self];
             }];
             

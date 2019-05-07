@@ -28,7 +28,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+//    [self blindUserStatue];
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
@@ -77,12 +77,17 @@
 //        }
 //    }];
 //}
+//现在剩下的问题是换账号登录 页面导致这个没有调用引起不刷新，明天来看下
 -(void)monitorUserGetOut
 {
-    [self.webView reload];
+    [self reSetLoadURL];
 }
 - (void)monitorUserLogin
 {
-    [self.webView reload];
+    [self reSetLoadURL];
+}
+- (void)reSetLoadURL
+{
+    [self gotoURL:@"https://m.dougemall.com?fromAppBar=true"];
 }
 @end

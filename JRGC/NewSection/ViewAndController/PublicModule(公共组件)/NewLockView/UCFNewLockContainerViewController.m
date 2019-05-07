@@ -127,18 +127,42 @@
 }
 - (void)dealLoginPage
 {
-    if (SingleUserInfo.loginType == LoginSingatureOut) {
-        [SingGlobalView.tabBarController.selectedViewController.rt_navigationController popToRootViewControllerAnimated:NO];
-        [SingGlobalView.tabBarController setSelectedIndex:0];
+    if (SingleUserInfo.loginType == LoginSingatureOut || SingleUserInfo.loginType == LoginChangeUser) {
+        
+        if (SingGlobalView.tabBarController.selectedIndex == 3) {
+            UINavigationController *nav = SingGlobalView.tabBarController.selectedViewController;
+            [nav popToRootViewControllerAnimated:NO];
+            UCFBaseViewController *baeeView = nav.viewControllers[0];
+            [baeeView monitorUserGetOut];
+        } else {
+            RTRootNavigationController *nav = SingGlobalView.tabBarController.selectedViewController;
+            [nav popToRootViewControllerAnimated:NO complete:nil];
+            
+            [SingGlobalView.tabBarController setSelectedIndex:0];
+        }
     } else if (SingleUserInfo.loginType == LoginWebLogin) {
         UINavigationController *selectNav = SingGlobalView.tabBarController.selectedViewController;
         UIViewController *visableControler = selectNav.visibleViewController;
         if ([visableControler isKindOfClass:[UCFWebViewJavascriptBridgeController class]]) {
             [(UCFWebViewJavascriptBridgeController *)visableControler   webViewReload];
         }
-        
+    } else if (SingleUserInfo.loginType == LoginDrawError) {
+        if (SingGlobalView.tabBarController.selectedIndex == 3) {
+            UINavigationController *nav = SingGlobalView.tabBarController.selectedViewController;
+            [nav popToRootViewControllerAnimated:NO];
+            UCFBaseViewController *baeeView = nav.viewControllers[0];
+            [baeeView monitorUserGetOut];
+        } else {
+            RTRootNavigationController *nav = SingGlobalView.tabBarController.selectedViewController;
+            [nav popToRootViewControllerAnimated:NO complete:nil];
+            [SingGlobalView.tabBarController setSelectedIndex:0];
+        }
+        [SingleUserInfo loadLoginViewController];
     }
     SingleUserInfo.loginType  = LoginDefalut;
+    
+    
+
 }
 - (void)dealloc
 {

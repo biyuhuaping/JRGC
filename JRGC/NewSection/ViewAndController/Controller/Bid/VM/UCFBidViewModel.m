@@ -763,7 +763,7 @@
         }
     }
     
-    int compare = [Common stringA:self.investMoeny ComparedStringB:@"1000.00"];
+    int compare = [Common stringA:investMoney ComparedStringB:@"1000.00"];
     if (compare == 1 || compare == 0 ) {
         [self showLastAlert:investMoney];
     } else {
