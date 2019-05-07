@@ -892,5 +892,10 @@
 {
    [self.tableView beginRefresh];
 }
+- (void)refreshMessagePoint
+{
+   [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
+   [self requestMySimpleInfo];
+}
 
 @end

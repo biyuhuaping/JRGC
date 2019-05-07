@@ -253,4 +253,6 @@ typedef NS_ENUM(NSInteger, PicType) {
  */
 +(NSString*)getBundleID;
 
++ (void)setPhoneNumSpacing:(UITextField *)text;
+
 @end

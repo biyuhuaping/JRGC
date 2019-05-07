@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) BaseTableView *tableView;
 
 - (void)signInButtonClick:(NSInteger )tag;
+
+- (void)refreshMessagePoint;
+
 @end
 
 NS_ASSUME_NONNULL_END

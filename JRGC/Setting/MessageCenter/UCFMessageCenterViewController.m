@@ -14,6 +14,7 @@
 #import "UCFNoDataView.h"
 #import "MLMOptionSelectView.h"//***下拉弹框
 #import "JRGCCustomGroupCell.h"
+#import "UCFNewMineViewController.h"
 @interface UCFMessageCenterViewController ()<UITableViewDataSource,UITableViewDelegate,MGSwipeTableCellDelegate>
 
 @property (strong, nonatomic)  UIImageView *tableBaseShadowView;    //删除deleteBaseView上面的阴影
@@ -65,6 +66,14 @@
     //初始化下拉菜单
 //    [self addRightButtonWithImage:[UIImage imageNamed:@"message_btn_setting"]];
     [self addRightButtonWithName:@"更多操作"];
+}
+- (void)getToBack
+{
+    UCFNewMineViewController *vc = self.rt_navigationController.rt_viewControllers.firstObject;
+    if ([vc isKindOfClass:[UCFNewMineViewController class]]) {
+        [vc refreshMessagePoint];
+    }
+    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 - (void)addRightButtonWithName:(NSString *)rightButtonName
 {

@@ -316,6 +316,10 @@
                 self.bankCard.cardNoLabel.text = [NSString bankIdSeparate:model.data.bankInfoDetail.bankCard];
                 [self.bankCard.cardNoLabel sizeToFit];
             }
+            if (model.data.bankInfoDetail.bankzone.length > 0) {
+                self.zoneBankCard.itemTitleLabel.text = [NSString bankIdSeparate:model.data.bankInfoDetail.bankzone];
+                [self.zoneBankCard.itemTitleLabel sizeToFit];
+            }
             
             if (model.data.bankInfoDetail.isShortcut) {
 //                isShortcut;//是否支持快捷
