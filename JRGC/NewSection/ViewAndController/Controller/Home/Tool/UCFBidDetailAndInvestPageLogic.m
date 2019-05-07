@@ -217,21 +217,6 @@
              vc.model = request.responseJSONModel;
              vc.hidesBottomBarWhenPushed = YES;
              [controller.navigationController pushViewController:vc  animated:YES];
-
-//             return ;
-//             NSDictionary *dic = request.responseObject;
-//             NSString *rstcode = dic[@"ret"];
-//             NSString *rsttext = dic[@"message"];
-//             if ([rstcode intValue] == 1) {
-//
-//                 UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
-//                 collectionDetailVC.souceVC = @"P2PVC";
-//                 collectionDetailVC.colPrdClaimId = model.ID;
-//                 collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
-//                 collectionDetailVC.accoutType = SelectAccoutTypeP2P;
-//                 collectionDetailVC.hidesBottomBarWhenPushed = YES;
-//                 [controller.navigationController pushViewController:collectionDetailVC  animated:YES];
-//             }
              
          } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
              

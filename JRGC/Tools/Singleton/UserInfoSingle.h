@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, LoginEntranceType) {  //由哪些界面进入支付�
 @property(nonatomic, assign) NSInteger wrangGCodeNumber;  //输错手势密码的次数;
 
 
-@property (nonatomic,strong) requestUserAllStatueCallBackBlock requestUserbackBlock;
+@property (nonatomic,copy) requestUserAllStatueCallBackBlock requestUserbackBlock;
 ////用户id
 //@property(nonatomic, copy) NSString *userId;
 ////用户性别

@@ -213,15 +213,20 @@
                 self.loginData.userInfo.zxAuthorization = [userDict[@"zxAuthorization"] boolValue];
                 self.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
                 [self updateUserData];
-                
-                self.requestUserbackBlock(YES);
-                self.requestUserbackBlock = nil;
+                if (self.requestUserbackBlock) {
+                    self.requestUserbackBlock(YES);
+                    self.requestUserbackBlock = nil;
+                }
+
             }
             else
             {
 //                ShowMessage(dic[@"message"]);
-                self.requestUserbackBlock(NO);
-                self.requestUserbackBlock = nil;
+                if (self.requestUserbackBlock) {
+                    self.requestUserbackBlock(NO);
+                    self.requestUserbackBlock = nil;
+                }
+  
             }
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             
