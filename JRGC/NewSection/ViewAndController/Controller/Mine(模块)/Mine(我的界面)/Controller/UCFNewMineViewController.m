@@ -122,17 +122,7 @@
     }
     return _tableView;
 }
-- (void)refreshTableViewHeader
-{
-    [self refreshHomeRequest];
-}
-- (void)refreshHomeRequest
-{
-    [self requestMyReceipt];
-    [self requestMySimpleInfo];
-    [self getMallData];
-    [self getBannerData];
-}
+
 - (UCFMineTableViewHead *)tableHead
 {
     if (nil == _tableHead) {
@@ -147,7 +137,7 @@
     }
     return _tableHead;
 }
-#pragma mark ---tableviewdelegate
+#pragma mark - tableviewdelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -280,11 +270,84 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+//- (void)getRecharngeBindingBankCardNet
+//{
+//    UCFGetBindingBankCardListApi *request1 = [[UCFGetBindingBankCardListApi alloc] init];
+//    request1.animatingView = self.view;
+//    [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+//        NSDictionary *dic = request.responseObject;
+//        if ([dic[@"ret"] boolValue]) {
+//
+//            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+//            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
+//            rechargeCashVC.dataDict = dataDict;
+//            rechargeCashVC.isRechargeOrCash = NO;//充值
+//            UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
+//            rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+//
+//        }
+//        else
+//        {
+//            ShowMessage(dic[@"message"]);
+//        }
+//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//
+//        self.requestUserbackBlock(NO);
+//    }];
+//    [request1 start];
+//}
+
+
+#pragma mark- 点击事件
+- (void)signInButtonClick:(NSInteger )tag
+{
+    if (tag == 1001) {
+        //每日签到
+        
+        if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
+        {//吐司：此活动暂时未对企业用户开放
+            [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
+        }
+        else{
+            
+            UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+            web.url  = [NSString stringWithFormat:@"%@",@"https://coin.9888keji.com/static/jh/index.html#/task/sign"];
+            web.isHideNativeNav = NO;
+            web.rootVc = @"UCFSecurityCenterVC";
+            [self.rt_navigationController pushViewController:web animated:YES];
+        }
+    }
+    else if (tag == 1002){
+        //我的工贝
+        [self requestMyCoin:nil];//请求工贝地址
+    }
+    else if (tag == 1003){
+        //我的工豆
+        
+        UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
+        bean.title = @"我的工豆";
+        [self.rt_navigationController pushViewController:bean animated:YES];
+    }
+    else if (tag == 1004){
+        //优惠券
+        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+        [self.navigationController pushViewController:coupon animated:YES];
+    }
+    else if (tag == 1005){
+        //邀请返利
+        UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
+        feedBackVC.title = @"邀请获利";
+        feedBackVC.accoutType = SelectAccoutTypeP2P;
+        [self.navigationController pushViewController:feedBackVC animated:YES];
+    }
+}
+
 -(void)layoutClick:(UIGestureRecognizer *)sender
 {
-//    if ([self.bc isKindOfClass:[UCFNewMineViewController class]]) {
-//        [(UCFNewMineViewController *)self.bc signInButtonClick:sender.view.tag];
-//    }
+    //    if ([self.bc isKindOfClass:[UCFNewMineViewController class]]) {
+    //        [(UCFNewMineViewController *)self.bc signInButtonClick:sender.view.tag];
+    //    }
     UCFAssetAccountViewController *vc = [[UCFAssetAccountViewController alloc] init];
     vc.zxAccountIsShow = self.zxAccountIsShow;
     vc.nmAccountIsShow = self.nmAccountIsShow;
@@ -348,246 +411,14 @@
         else{
             if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])//判断是否开户
             {
-               [self requestMyCoin:@"vip"];//请求工贝地址
+                [self requestMyCoin:@"vip"];//请求工贝地址
             }
         }
     }
 }
-//- (void)getRecharngeBindingBankCardNet
-//{
-//    UCFGetBindingBankCardListApi *request1 = [[UCFGetBindingBankCardListApi alloc] init];
-//    request1.animatingView = self.view;
-//    [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        NSDictionary *dic = request.responseObject;
-//        if ([dic[@"ret"] boolValue]) {
-//
-//            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
-//            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
-//            rechargeCashVC.dataDict = dataDict;
-//            rechargeCashVC.isRechargeOrCash = NO;//充值
-//            UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
-//            rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-//
-//        }
-//        else
-//        {
-//            ShowMessage(dic[@"message"]);
-//        }
-//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//
-//        self.requestUserbackBlock(NO);
-//    }];
-//    [request1 start];
-//}
-- (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
-{
-    
-    NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
-    NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
-    
-    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
-    
-    switch (openStatus)
-    {// ***hqy添加
-        case 1://未开户-->>>新用户开户
-        case 2://已开户 --->>>老用户(白名单)开户
-        {
-            [self showHSAlert:tipStr1];
-            return NO;
-            break;
-        }
-        case 3://已绑卡-->>>去设置交易密码页面
-        {
-            if (isDetail) {
-                return YES;
-            }else
-            {
-                [self showHSAlert:tipStr2];
-                return NO;
-            }
-        }
-            break;
-        default:
-            return YES;
-            break;
-    }
-}
-- (void)showHSAlert:(NSString *)alertMessage
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-    alert.tag =  self.accoutType == SelectAccoutTypeP2P ? 8000 :8010;
-    [alert show];
-}
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if (alertView.tag == 8000) {
-        if (buttonIndex == 1) {
-            HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
-        }
-    }else if (alertView.tag == 8010) {
-        if (buttonIndex == 1) {
-            HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
-        }
-    }
-}
-- (void)signInButtonClick:(NSInteger )tag
-{
-    if (tag == 1001) {
-        //每日签到
-        
-        if(SingleUserInfo.loginData.userInfo.isCompanyAgent)//如果是机构用户
-        {//吐司：此活动暂时未对企业用户开放
-            [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
-        }
-        else{
-            
-            UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-            //            NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
-            //            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
-            //            [data setValue:[NSString urlEncodeStr:[paramDict objectSafeForKey:@"encryptParam"]] forKey:@"encryptParam"];
-            //            [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
-            //            [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
-            //            NSString * requestStr = [Common getParameterByDictionary:data];
-            web.url  = [NSString stringWithFormat:@"%@",@"https://coin.9888keji.com/static/jh/index.html#/task/sign"];
-            web.isHideNativeNav = NO;
-            web.rootVc = @"UCFSecurityCenterVC";
-            [self.rt_navigationController pushViewController:web animated:YES];
-        }
-//        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
-//        [self.navigationController pushViewController:subVC animated:YES];
-        
 
-    }
-    else if (tag == 1002){
-        //我的工贝
-        [self requestMyCoin:nil];//请求工贝地址
-        
-//        UCFRegisterdSucceedViewController *vc= [[UCFRegisterdSucceedViewController alloc] init];
-//        [self.rt_navigationController pushViewController:vc animated:YES];
-        
-//        UCFNewResetPassWordViewController *vc= [[UCFNewResetPassWordViewController alloc] init];
-//                [self.rt_navigationController pushViewController:vc animated:YES];
-        
-//        UCFMicroBankOpenAccountViewController *vc= [[UCFMicroBankOpenAccountViewController alloc] init];
-//        [self.rt_navigationController pushViewController:vc animated:YES];
-        
-//                UCFMicroBankDepositoryAccountHomeViewController *ccc = [[UCFMicroBankDepositoryAccountHomeViewController alloc] init];
-//                ccc.accoutType = SelectAccoutTypeP2P;
-//                [self.rt_navigationController pushViewController:ccc animated:YES];
-    }
-    else if (tag == 1003){
-        //我的工豆
-        
-        UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
-        bean.title = @"我的工豆";
-        [self.rt_navigationController pushViewController:bean animated:YES];
-    }
-    else if (tag == 1004){
-        //优惠券
-        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
-        [self.navigationController pushViewController:coupon animated:YES];
-    }
-    else if (tag == 1005){
-        //邀请返利
-        UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
-        feedBackVC.title = @"邀请获利";
-        feedBackVC.accoutType = SelectAccoutTypeP2P;
-        [self.navigationController pushViewController:feedBackVC animated:YES];
-    }
-}
 
-- (void)requestMyReceipt//请求总资产信息
-{
-    UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
-    
-    //    request.animatingView = self.view;
-    //    request.tag =tag;
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
-       
-        [self.tableView endRefresh];
-        //        DDLogDebug(@"---------%@",model);
-        if (model.ret == YES) {
-
-            if (SingleUserInfo.loginData.userInfo.zxIsNew != !model.data.zxAccountIsShow)
-            {
-                SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
-                [SingleUserInfo setUserData:SingleUserInfo.loginData];
-            }
-            self.zxAccountIsShow = model.data.zxAccountIsShow;
-            self.nmAccountIsShow = model.data.nmAccountIsShow;
-            [self setTableViewArrayWithData:model];
-        }
-        else{
-//            ShowMessage(model.message);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        [self.tableView endRefresh];
-    }];
-    
-}
-
-- (void)requestMySimpleInfo//查询用户工豆,工分,等信
-{
-    UCFMineMySimpleInfoApi * request = [[UCFMineMySimpleInfoApi alloc] init];
-    
-    //    request.animatingView = self.view;
-    //    request.tag =tag;
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        UCFMineMySimpleInfoModel *model = [request.responseJSONModel copy];
-        DDLogDebug(@"---------%@",model);
-        [self.tableView endRefresh];
-        if (model.ret == YES) {
-            
-            [self setTableViewArrayWithData:model];
-        }
-        else{
-//            ShowMessage(model.message);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        [self.tableView endRefresh];
-    }];
-    
-}
-- (void)setTableViewArrayWithData:(id)model
-{
-     @synchronized(self) {
-
-         if ([model isKindOfClass:[UCFMineMyReceiptModel class]]) {
-
-             //查询账户信息
-             [self getAccountCellConfig:model];
-             //赋值 账户信息
-             [self.tableHead showMyReceipt:model];
-         }
-         if ([model isKindOfClass:[UCFMineMySimpleInfoModel class]]) {
-             
-             //查询工豆优惠券信息 和未读消息
-             //赋值 未读消息
-             [self.tableHead showMySimple:model];
-             [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:model, nil]];
-         }
-         if ([model isKindOfClass:[UCFHomeMallDataModel class]]) {
-             
-             [self showShopUrl:model];
-         }
-         if ([model isKindOfClass:[UCFQueryBannerByTypeModel class]]) {
-             
-             [self showBannerUrl:model];
-         }
-         
-           [self.tableView cyl_reloadData];
-     }
-
-}
-
-#pragma mark -   CellConfig
+#pragma mark - CellConfig
 - (void)loadCellConfig
 {
     //cellArrayData
@@ -699,6 +530,122 @@
     
 }
 
+
+#pragma mark - 请求
+
+- (void)refreshTableViewHeader
+{
+    [self refreshHomeRequest];
+}
+- (void)refreshHomeRequest
+{
+    [self requestMyReceipt];
+    [self requestMySimpleInfo];
+    [self getMallData];
+    [self getBannerData];
+}
+
+- (void)requestMyReceipt//请求总资产信息
+{
+    UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
+    
+    //    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
+        
+        [self.tableView endRefresh];
+        //        DDLogDebug(@"---------%@",model);
+        if (model.ret == YES) {
+            
+            if (SingleUserInfo.loginData.userInfo.zxIsNew != !model.data.zxAccountIsShow)
+            {
+                SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
+                [SingleUserInfo setUserData:SingleUserInfo.loginData];
+            }
+            self.zxAccountIsShow = model.data.zxAccountIsShow;
+            self.nmAccountIsShow = model.data.nmAccountIsShow;
+            [self setTableViewArrayWithData:model];
+        }
+        else{
+            //            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        [self.tableView endRefresh];
+    }];
+    
+}
+
+- (void)requestMySimpleInfo//查询用户工豆,工分,等信
+{
+    UCFMineMySimpleInfoApi * request = [[UCFMineMySimpleInfoApi alloc] init];
+    
+    //    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        UCFMineMySimpleInfoModel *model = [request.responseJSONModel copy];
+        DDLogDebug(@"---------%@",model);
+        [self.tableView endRefresh];
+        if (model.ret == YES) {
+            
+            [self setTableViewArrayWithData:model];
+        }
+        else{
+            //            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        [self.tableView endRefresh];
+    }];
+    
+}
+
+- (void)getMallData
+{
+    //    @PGWeakObj(self);
+    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"home"];
+    [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+        [self.tableView endRefresh];
+        UCFHomeMallDataModel *model = request.responseJSONModel;
+        if (model.ret) {
+            
+            [self setTableViewArrayWithData:model];
+            
+        } else {
+            //            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        [self.tableView endRefresh];
+    }];
+    [mallRequest start];
+}
+
+- (void)getBannerData
+{
+    //    @PGWeakObj(self);
+    UCFQueryBannerByTypeAPI *mallRequest = [[UCFQueryBannerByTypeAPI alloc] initWithBannerType:17];
+    [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+        [self.tableView endRefresh];
+        UCFQueryBannerByTypeModel *model = request.responseJSONModel;
+        if (model.ret) {
+            
+            [self setTableViewArrayWithData:model];
+            
+        } else {
+            //            ShowMessage(model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        [self.tableView endRefresh];
+    }];
+    [mallRequest start];
+}
+
+
 - (void)requestMyCoin:(NSString *)vip//请求我的工贝
 {
     UCFMineIntoCoinPageApi * request = [[UCFMineIntoCoinPageApi alloc] initWithPageType:vip];
@@ -722,13 +669,13 @@
             }
             else
             {
-                 web.url  = [NSString stringWithFormat:@"%@/#/?%@",model.data.coinRequest.urlPath,requestStr];
+                web.url  = [NSString stringWithFormat:@"%@/#/?%@",model.data.coinRequest.urlPath,requestStr];
             }
             web.isHidenNavigationbar = YES;
             [self.navigationController pushViewController:web animated:YES];
         }
         else{
-//            ShowMessage(model.message);
+            //            ShowMessage(model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -736,26 +683,40 @@
     }];
     
 }
-- (void)getMallData
-{
-//    @PGWeakObj(self);
-    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"home"];
-    [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
-        [self.tableView endRefresh];
-        UCFHomeMallDataModel *model = request.responseJSONModel;
-        if (model.ret) {
-            
-            [self setTableViewArrayWithData:model];
 
-        } else {
-//            ShowMessage(model.message);
+
+- (void)setTableViewArrayWithData:(id)model
+{
+    @synchronized(self) {
+        
+        if ([model isKindOfClass:[UCFMineMyReceiptModel class]]) {
+            
+            //查询账户信息
+            [self getAccountCellConfig:model];
+            //赋值 账户信息
+            [self.tableHead showMyReceipt:model];
         }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        [self.tableView endRefresh];
-    }];
-    [mallRequest start];
+        if ([model isKindOfClass:[UCFMineMySimpleInfoModel class]]) {
+            
+            //查询工豆优惠券信息 和未读消息
+            //赋值 未读消息
+            [self.tableHead showMySimple:model];
+            [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:model, nil]];
+        }
+        if ([model isKindOfClass:[UCFHomeMallDataModel class]]) {
+            
+            [self showShopUrl:model];
+        }
+        if ([model isKindOfClass:[UCFQueryBannerByTypeModel class]]) {
+            
+            [self showBannerUrl:model];
+        }
+        
+        [self.tableView cyl_reloadData];
+    }
+    
 }
+
 
 - (void)showShopUrl:(UCFHomeMallDataModel *)model
 {
@@ -788,38 +749,17 @@
     }
     else
     {
-       //没有活动这组数据,就直接插入
+        //没有活动这组数据,就直接插入
         [self.arryData addObject:dataArray];
         [self.cellConfigData addObject:cellArray];
     }
     [self.tableView cyl_reloadData];
     
-//    [self.cellConfigData enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-////        NSLog(@"%@----%@",array[idx],[NSThread currentThread]);
-//
-//
-//    }];
-}
-
-- (void)getBannerData
-{
-    //    @PGWeakObj(self);
-    UCFQueryBannerByTypeAPI *mallRequest = [[UCFQueryBannerByTypeAPI alloc] initWithBannerType:17];
-    [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
-        [self.tableView endRefresh];
-        UCFQueryBannerByTypeModel *model = request.responseJSONModel;
-        if (model.ret) {
-
-            [self setTableViewArrayWithData:model];
-
-        } else {
-//            ShowMessage(model.message);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        [self.tableView endRefresh];
-    }];
-    [mallRequest start];
+    //    [self.cellConfigData enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    ////        NSLog(@"%@----%@",array[idx],[NSThread currentThread]);
+    //
+    //
+    //    }];
 }
 
 - (void)showBannerUrl:(UCFQueryBannerByTypeModel *)model
@@ -839,7 +779,7 @@
     //当前没有活动内容
     NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:5];
     NSMutableArray *cellArray = [NSMutableArray arrayWithCapacity:5];
- 
+    
     if (model.data.bannerList.count)
     {
         //当前banner有数据
@@ -872,10 +812,12 @@
     }
     [self.tableView cyl_reloadData];
 }
+
 //登录或者注册
 - (void)monitorUserLogin
 {
     [self.tableView beginRefresh];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
 }
 //退出登录，或者切换账户
 - (void)monitorUserGetOut
@@ -898,4 +840,58 @@
    [self requestMySimpleInfo];
 }
 
+#pragma mark - 用户状态检测
+- (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
+{
+    
+    NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
+    NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
+    
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+    
+    switch (openStatus)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            [self showHSAlert:tipStr1];
+            return NO;
+            break;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            if (isDetail) {
+                return YES;
+            }else
+            {
+                [self showHSAlert:tipStr2];
+                return NO;
+            }
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    alert.tag =  self.accoutType == SelectAccoutTypeP2P ? 8000 :8010;
+    [alert show];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[SingleUserInfo.loginData.userInfo.openStatus integerValue] nav:self.navigationController];
+        }
+    }else if (alertView.tag == 8010) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] nav:self.navigationController];
+        }
+    }
+}
 @end
