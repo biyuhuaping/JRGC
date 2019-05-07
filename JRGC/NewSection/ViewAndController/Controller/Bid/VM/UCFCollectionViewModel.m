@@ -352,7 +352,11 @@
             [navVCArray removeObjectAtIndex:navVCArray.count-2];
             [selfWeak.parentViewController.navigationController setViewControllers:navVCArray animated:NO];
         } else {
+<<<<<<< HEAD
             ShowCodeMessage(model.code, model.message);
+=======
+            ShowMessage(model.message);
+>>>>>>> 52a2585bc6369d68c66953a9bba0bab547ad7f88
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         
