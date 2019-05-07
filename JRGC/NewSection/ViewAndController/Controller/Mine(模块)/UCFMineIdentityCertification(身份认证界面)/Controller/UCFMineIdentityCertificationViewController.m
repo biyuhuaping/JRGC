@@ -128,7 +128,7 @@
             [self.messageView showInfo:model];
         }
         else{
-//            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self

@@ -73,6 +73,9 @@ _Pragma("clang diagnostic pop")\
 
 #pragma mark - HUD
 #define ShowMessage(Msg) [[HUDManager manager] showHudWithText:Msg]
+
+#define ShowCodeMessage(Code, Msg) [[HUDManager manager] showHudWithCode:Code WithText:Msg]
+
 #define ShowHUD(view) [[HUDManager manager] showHUDWithView:view]
 #define HideHUD(view) [[HUDManager manager] hide]
 

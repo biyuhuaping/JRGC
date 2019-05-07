@@ -487,7 +487,7 @@
                 vc.hidesBottomBarWhenPushed = YES;
                 [self.parentViewController.navigationController pushViewController:vc  animated:YES];
             } else {
-                ShowMessage(resultModel.message);
+                ShowCodeMessage(resultModel.code, resultModel.message);
             }
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             

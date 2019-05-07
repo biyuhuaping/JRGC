@@ -180,7 +180,7 @@
             }
         }
         else{
-//            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
          [self endRefreshAndReloadData];
         

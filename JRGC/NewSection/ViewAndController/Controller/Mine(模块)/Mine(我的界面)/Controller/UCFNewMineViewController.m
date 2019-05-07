@@ -547,6 +547,7 @@
 
 - (void)requestMyReceipt//请求总资产信息
 {
+    ShowCodeMessage(-1, @"AAAAAA");
     UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
     
     //    request.animatingView = self.view;
@@ -569,7 +570,7 @@
             [self setTableViewArrayWithData:model];
         }
         else{
-            //            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -594,7 +595,7 @@
             [self setTableViewArrayWithData:model];
         }
         else{
-            //            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -616,7 +617,7 @@
             [self setTableViewArrayWithData:model];
             
         } else {
-            //            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         [self.tableView endRefresh];
@@ -637,7 +638,7 @@
             [self setTableViewArrayWithData:model];
             
         } else {
-            //            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         [self.tableView endRefresh];
@@ -675,7 +676,7 @@
             [self.navigationController pushViewController:web animated:YES];
         }
         else{
-            //            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self

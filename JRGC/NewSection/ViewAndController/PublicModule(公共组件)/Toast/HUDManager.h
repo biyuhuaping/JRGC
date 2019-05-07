@@ -12,6 +12,7 @@
 + (instancetype)manager;
 - (void)showHUDWithView:(UIView *)view;
 - (void)showHudWithText:(NSString *)text;
+- (void)showHudWithCode:(NSInteger)code WithText:(NSString *)text;
 - (void)hide;
 
 @end

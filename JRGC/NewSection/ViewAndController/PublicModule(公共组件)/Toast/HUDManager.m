@@ -133,7 +133,12 @@
     return window;
     
 }
-
+- (void)showHudWithCode:(NSInteger)code WithText:(NSString *)text
+{
+    if (code != -1 && code != -2 && code != -3 && code != -4 && code != -6) {
+        [self showHudWithText:text];
+    }
+}
 - (void)showHudWithText:(NSString *)text{
     
     if(text && text.length >0)

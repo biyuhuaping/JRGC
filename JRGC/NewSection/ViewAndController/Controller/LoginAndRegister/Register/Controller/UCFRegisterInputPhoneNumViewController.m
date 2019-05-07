@@ -392,9 +392,9 @@
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:model.message delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles:@"立即拨打", nil];
             [alertView show];
         }
-//        else{
-//            ShowMessage(model.message);
-//        }
+        else{
+            ShowCodeMessage(model.code, model.message);
+        }
 //        [self.registerPhoneField resignFirstResponder];
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self

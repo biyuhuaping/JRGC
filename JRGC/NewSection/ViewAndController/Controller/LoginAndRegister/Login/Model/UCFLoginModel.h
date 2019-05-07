@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFLoginModel : BaseModel
 
-@property (nonatomic, copy) NSString *code;
+@property (nonatomic, assign) NSInteger code;
 
 @property (nonatomic, strong) UCFLoginData *data;
 

@@ -237,7 +237,7 @@
         }
         else
         {
-//            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -446,7 +446,7 @@
         }
         else
         {
-//            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -498,7 +498,7 @@
         }
         else
         {
-//            ShowMessage(self.GetOpenAccountModel.message);
+            ShowCodeMessage(self.GetOpenAccountModel.code, self.GetOpenAccountModel.message);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self

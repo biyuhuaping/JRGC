@@ -76,7 +76,7 @@
             }
             [selfWeak.showTableView cyl_reloadData];
         } else {
-//            ShowMessage(model.message);
+            ShowCodeMessage(model.code, model.message);
         }
 
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -147,7 +147,7 @@
                 vc.batchOrderIdStr = batchOrderIdStr;
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
-//                ShowMessage(model.message);
+                ShowCodeMessage(model.code, model.message);
             }
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             

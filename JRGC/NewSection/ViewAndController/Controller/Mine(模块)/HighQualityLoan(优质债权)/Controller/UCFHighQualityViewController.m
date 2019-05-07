@@ -110,6 +110,7 @@
             [self.showTableView cyl_reloadData];
         } else {
 //            ShowMessage(rsttext);
+//            ShowCodeMessage([rstcode integerValue], rsttext);
         }
         
 
