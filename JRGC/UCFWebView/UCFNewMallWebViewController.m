@@ -11,6 +11,7 @@
 @interface UCFNewMallWebViewController ()
 {
     BOOL showTabBar;
+    BOOL firstLoad;
 }
 @end
 
@@ -24,22 +25,47 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-  
+
+
+
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (firstLoad) {
+        [self performSelector:@selector(updateFrame) withObject:nil afterDelay:0.05];
+    }
+    firstLoad = YES;
+}
+- (void)updateFrame
+{
+    NSString *currentURL = [self.webView stringByEvaluatingJavaScriptFromString:@"document.location.href"];
+    if ([currentURL isEqualToString:@"https://m.dougemall.com/static/mall/home/index.html?fromAppBar=true"] || [currentURL isEqualToString:@"https://m.dougemall.com/?fromAppBar=true"]) {
+        showTabBar = YES;
+    } else {
+        showTabBar = NO;
+    }
+    [self dealTabBar];
+}
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self blindUserStatue];
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
     self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
-//    [self ddd];
+    [self ddd];
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     BOOL result = [super webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
     NSLog(@"%@",request.URL.absoluteString);
+    
+
     NSString *requetRUL = request.URL.absoluteString;
     if ([requetRUL isEqualToString:@"https://m.dougemall.com/static/mall/home/index.html?fromAppBar=true"] || [requetRUL isEqualToString:@"https://m.dougemall.com/?fromAppBar=true"]) {
         showTabBar = YES;
@@ -52,6 +78,11 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    [self dealTabBar];
+    [super webViewDidFinishLoad:webView];
+}
+- (void)dealTabBar
+{
     if (showTabBar) {
         [SingGlobalView.tabBarController.tabBar setHidden:NO];
         self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - SingGlobalView.tabBarController.tabBar.frame.size.height);
@@ -61,22 +92,16 @@
         self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
         self.webView.frame = CGRectMake(0, StatusBarHeight1, ScreenWidth, CGRectGetHeight(self.view.frame) - StatusBarHeight1);
     }
-    [super webViewDidFinishLoad:webView];
 }
-//- (void)ddd
-//{
-//    [self.KVOController observe:SingGlobalView.tabBarController.tabBar keyPaths:@[@"hidden"] options:NSKeyValueObservingOptionNew  block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
-//        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
-//        if ([keyPath isEqualToString:@"hidden"]) {
-//            BOOL hide = [[change valueForKey:@"new"] boolValue];
-//            if (hide) {
-//                NSLog(@"隐藏");
-//            } else {
-//                NSLog(@"显示");
-//            }
-//        }
-//    }];
-//}
+- (void)ddd
+{
+    [self.KVOController observe:self.view keyPaths:@[@"frame"] options:NSKeyValueObservingOptionNew  block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"frame"]) {
+         
+        }
+    }];
+}
 //现在剩下的问题是换账号登录 页面导致这个没有调用引起不刷新，明天来看下
 -(void)monitorUserGetOut
 {

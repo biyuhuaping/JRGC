@@ -79,9 +79,10 @@
 }
 - (void)clickRightBtn
 {
+    [self.navigationController popViewControllerAnimated:NO];
     UCFRegisterInputPhoneNumViewController *uc = [[UCFRegisterInputPhoneNumViewController alloc] init];
-    [SingGlobalView.rootNavController pushViewController:uc animated:YES complete:^(BOOL finished) {
-        [SingGlobalView.rootNavController removeViewController:self];
+    [SingGlobalView.rootNavController pushViewController:uc animated:NO complete:^(BOOL finished) {
+//        [SingGlobalView.rootNavController removeViewController:self];
     }];
 }
 - (void)addLeftButtons
@@ -245,8 +246,8 @@
             }
             [SingleUserInfo saveLoginAccount:[NSDictionary dictionaryWithObjectsAndKeys:self.isCompany,@"isCompany",self.username,@"lastLoginName", nil]];
             [SingleUserInfo setUserData:model.data withPassWord:self.pwd];
-            [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:RCLockViewTypeCreate] animated:YES complete:^(BOOL finished) {
-                [SingGlobalView.rootNavController removeViewController:self];
+            [SingGlobalView.rootNavController popToRootViewControllerAnimated:NO complete:nil];
+            [SingGlobalView.rootNavController pushViewController:[self cretateLockViewWithType:RCLockViewTypeCreate] animated:NO complete:^(BOOL finished) {
             }];
             
         }

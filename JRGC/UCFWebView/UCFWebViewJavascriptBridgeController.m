@@ -1028,7 +1028,6 @@
         SingleUserInfo.loginType = LoginWebLogin;
         //没有登录去调登录
         [self jumpLogin];
-    
     }
     else
     {
@@ -1056,7 +1055,8 @@
         web.url = [dic objectSafeForKey:@"value"];
         web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
-        
+        web.hidesBottomBarWhenPushed = NO;
+
     }
     
 //    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];

@@ -119,6 +119,7 @@
 {
     UCFNewVerificationLoginPassWordViewController *controller = [[UCFNewVerificationLoginPassWordViewController alloc] init];
     controller.titleString = [NSString stringWithFormat:@""];
+    self.parentViewController.rt_navigationController.hidesBottomBarWhenPushed = YES;
     [self.parentViewController.rt_navigationController pushViewController:controller animated:YES];
 }
 - (void)changeAccountBtnClicked:(UIButton *)button

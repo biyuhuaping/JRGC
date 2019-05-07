@@ -158,6 +158,14 @@
             [SingGlobalView.tabBarController setSelectedIndex:0];
         }
         [SingleUserInfo loadLoginViewController];
+    } else {
+        if (SingGlobalView.tabBarController.selectedIndex == 3) {
+            UINavigationController *nav = SingGlobalView.tabBarController.selectedViewController;
+            if (nav.viewControllers.count == 1) {
+                UCFBaseViewController *baeeView = nav.viewControllers[0];
+                [baeeView monitorUserGetOut];
+            }
+        }
     }
     SingleUserInfo.loginType  = LoginDefalut;
     
