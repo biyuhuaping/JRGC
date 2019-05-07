@@ -72,7 +72,7 @@
     if (countDownVms == 60) {
         //说明语音没有进行倒计时
         if (countDownSms == 60) {
-            //说明短息没有进行倒计时,需要去请求短息接口
+            //说明短信没有进行倒计时,需要去请求短信接口
             [self requestAgainVerificationCode:@"SMS"];
         }
         else

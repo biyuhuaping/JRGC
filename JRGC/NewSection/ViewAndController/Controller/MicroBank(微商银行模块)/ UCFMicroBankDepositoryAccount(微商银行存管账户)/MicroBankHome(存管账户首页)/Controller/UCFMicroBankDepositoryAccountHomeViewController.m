@@ -25,6 +25,9 @@
 #import "UCFMicroBankGetHSAccountInfoModel.h"
 #import "UCFWJSetAndRestHsPwdApi.h"
 #import "UCFWJSetAndRestHsPwdModel.h"
+#import "UCFMicroBankDepositoryBankCardHomeViewController.h"
+#import "UCFMicroBankOpenAccountViewController.h"
+#import "HSHelper.h"
 
 @interface UCFMicroBankDepositoryAccountHomeViewController ()<UIScrollViewDelegate>
 
@@ -158,7 +161,28 @@
         _changePassword = [[UCFMicroBankDepositoryAccountHomeCellView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
         _changePassword.topPos.equalTo(self.modifyBankCard.bottomPos);
         _changePassword.myLeft = 0;
-        _changePassword.microBankTitleLabel.text = @"修改交易密码";
+        
+        if (self.accoutType == SelectAccoutTypeP2P) {
+            if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] < 4) {
+                //未设置交易密码
+                _changePassword.microBankTitleLabel.text = @"设置交易密码";
+            }
+            else
+            {
+                _changePassword.microBankTitleLabel.text = @"修改交易密码";
+            }
+        }
+        else
+        {
+            if ([SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue] < 4) {
+                //未设置交易密码
+                _changePassword.microBankTitleLabel.text = @"设置交易密码";
+            }
+            else
+            {
+                _changePassword.microBankTitleLabel.text = @"修改交易密码";
+            }
+        }
         [_changePassword.microBankTitleLabel sizeToFit];
         
         _changePassword.microBankSubtitleLabel.text = @"";
@@ -329,52 +353,13 @@
     else if (sender.view.tag == 1002)
     {
 //        修改银行卡
-//        UCFMicroBankDepositoryChangeBankCardViewController *vc = [[UCFMicroBankDepositoryChangeBankCardViewController alloc] init];
-//        [self.rt_navigationController pushViewController:vc animated:YES];
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
-//        UCFBankCardInfoViewController *bankCardInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"bankcardinfo"];
-        UCFBankCardInfoViewController *bankCardInfoVC = [[UCFBankCardInfoViewController alloc] init];
-        bankCardInfoVC.isHideNavigationBar = YES;
-        bankCardInfoVC.accoutType = self.accoutType;
-        [self.rt_navigationController pushViewController:bankCardInfoVC animated:YES];
+        [self checkUserSelected:sender.view.tag];
     }
     else if (sender.view.tag == 1003)
     {
-//        修改交易密码
-        if (self.accoutType != SelectAccoutTypeP2P) {
-
-            UCFWJSetAndRestHsPwdApi * request = [[UCFWJSetAndRestHsPwdApi alloc] init];
-            request.animatingView = self.view;
-            //    request.tag =tag;
-            [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-                // 你可以直接在这里使用 self
-                UCFWJSetAndRestHsPwdModel *model = [request.responseJSONModel copy];
-                DDLogDebug(@"---------%@",model);
-                if (model.ret == YES) {
-                    
-                    AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
-                    webView.title = @"即将跳转";
-                    webView.url =model.data.url;
-                    NSDictionary *dic = request.responseObject;
-                    webView.webDataDic = dic[@"data"][@"tradeReq"];
-                    [self.navigationController pushViewController:webView animated:YES];
-                }
-                else{
-//                    ShowMessage(model.message);
-                }
-            } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-                // 你可以直接在这里使用 self
-                
-            }];
-//            
-        }
-        else
-        {
-            //修改交易密码
-            UCFMicroBankChangeTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankChangeTradersPasswordViewController alloc] init];
-            tradePasswordVC.accoutType = self.accoutType;
-            [self.rt_navigationController pushViewController:tradePasswordVC  animated:YES];
-        }
+        [self checkUserSelected:sender.view.tag];
+//        修改或者设置交易密码
+       
     }
     else if (sender.view.tag == 1004){
 //        微金风险承担能力
@@ -420,18 +405,90 @@
     [self reuqestHead];
 }
 
-
-//- (void)dealloc
-//{
-//
-//}
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    for (UIViewController *vc in self.navigationController.viewControllers) {
-//        if ([vc isKindOfClass:[UCFMicroBankDepositoryAccountHomeViewController class]]) {
-//            [(UCFMicroBankDepositoryAccountHomeViewController *)vc refresh];
-//        }
-//    }
-//}
+- (void)checkUserSelected:(NSInteger )selected
+{
+    HSHelper *helper = [HSHelper new];
+    //检查企业老用户是否开户
+    NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+    if (![messageStr isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    
+    if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+        [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+        return;
+    }
+    //    if( [self checkIDAAndBankBlindState:self.accoutType])
+    if ([self checkUserCanInvestIsDetail:NO type:self.accoutType])//判断是否设置交易密码
+    {
+        if (selected == 1002) {
+            UCFMicroBankDepositoryBankCardHomeViewController *bankCardInfoVC = [[UCFMicroBankDepositoryBankCardHomeViewController alloc] init];
+            bankCardInfoVC.isHideNavigationBar = YES;
+            bankCardInfoVC.accoutType = self.accoutType;
+            [self.rt_navigationController pushViewController:bankCardInfoVC animated:YES];
+        }
+        else if (selected == 1003)
+        {
+            //修改交易密码
+            UCFMicroBankChangeTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankChangeTradersPasswordViewController alloc] init];
+            tradePasswordVC.accoutType = self.accoutType;
+            [self.rt_navigationController pushViewController:tradePasswordVC  animated:YES];
+        }
+    }
+}
+- (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
+{
+    
+    NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
+    NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
+    
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [SingleUserInfo.loginData.userInfo.openStatus integerValue]:[SingleUserInfo.loginData.userInfo.zxOpenStatus integerValue];
+    
+    switch (openStatus)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            //            [self showHSAlert:tipStr1];
+            UCFPopViewWindow *popView = [UCFPopViewWindow new];
+            popView.delegate = self;
+            popView.type = POPOpenAccountWindow;
+            popView.controller = self;
+            popView.popViewTag = 10001;
+            [popView startPopView];
+            return NO;
+            break;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            if (isDetail) {
+                return YES;
+            }else
+            {
+                //                [self showHSAlert:tipStr2];
+                UCFPopViewWindow *popView = [UCFPopViewWindow new];
+                popView.delegate = self;
+                popView.type = POPOpenAccountPassWord;
+                popView.controller = self;
+                popView.popViewTag = 10002;
+                [popView startPopView];
+                return NO;
+            }
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+- (void)popEnterButtonClick:(UIButton *)btn
+{
+    //去开户,去设置交易密码都是走一样的流程
+    UCFMicroBankOpenAccountViewController *open = [[UCFMicroBankOpenAccountViewController alloc] init];
+    open.accoutType = self.accoutType;
+    [self.rt_navigationController pushViewController:open animated:YES];
+}
 @end

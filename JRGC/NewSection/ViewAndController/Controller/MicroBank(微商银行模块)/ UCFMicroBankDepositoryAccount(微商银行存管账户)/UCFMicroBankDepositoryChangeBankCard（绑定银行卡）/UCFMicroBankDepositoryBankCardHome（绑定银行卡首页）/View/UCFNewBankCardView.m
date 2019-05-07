@@ -43,9 +43,9 @@
         [self.rootLayout addSubview:self.userNameLabel];
         [self.rootLayout addSubview:self.cardNoLabel];
         [self.rootLayout addSubview:self.quickPayImageView];
-        [self.rootLayout addSubview:self.image_bankCardValuable];
+//        [self.rootLayout addSubview:self.image_bankCardValuable];
         
-        self.image_bankCardValuable.hidden = YES;//***“银行卡失效”文字初始化时候隐藏
+//        self.image_bankCardValuable.hidden = YES;//***“银行卡失效”文字初始化时候隐藏
     }
     return self;
 }
@@ -71,7 +71,7 @@
 //        _bankImageView.centerYPos.equalTo(self.rootLayout.centerYPos);
         _bankImageView.centerXPos.equalTo(self.rootLayout.centerXPos);
         _bankImageView.myWidth = PGScreenWidth -20;
-        _bankImageView.myHeight = PGScreenWidth *0.606;
+        _bankImageView.myHeight = PGScreenWidth *0.6;
         _bankImageView.myBottom = 10;
         _bankImageView.image = [UIImage imageNamed:@"white_bank_bg"];
     }
@@ -83,9 +83,9 @@
     if (nil == _bankCardImageView) {
         _bankCardImageView = [[UIImageView alloc] init];
         _bankCardImageView.leftPos.equalTo(self.bankImageView.leftPos).offset(39);
-        _bankCardImageView.topPos.equalTo(self.bankImageView.topPos).offset(39);
+        _bankCardImageView.topPos.equalTo(self.bankImageView.topPos).offset( PGScreenWidth *0.6 *0.18);
         _bankCardImageView.myWidth = 20;
-        _bankCardImageView.myHeight = 15;
+        _bankCardImageView.myHeight = 20;
 //        _bankCardImageView.image = [UIImage imageNamed:@"white_bank_bg"];
     }
     return _bankCardImageView;
@@ -128,7 +128,7 @@
 {
     if (nil == _userNameLabel) {
         _userNameLabel = [NZLabel new];
-        _userNameLabel.bottomPos.equalTo(self.cardNoLabel.topPos).offset(14);
+        _userNameLabel.bottomPos.equalTo(self.cardNoLabel.topPos).offset(6);
         _userNameLabel.leftPos.equalTo(self.cardNoLabel.leftPos);
         _userNameLabel.textAlignment = NSTextAlignmentLeft;
         _userNameLabel.font = [Color gc_Font:14.0];
@@ -150,6 +150,7 @@
         _cardNoLabel.adjustsFontSizeToFitWidth = YES;
         _cardNoLabel.font = [Color gc_Font:25.0];
         _cardNoLabel.textColor = [Color color:PGColorOptionTitleBlack];
+        _cardNoLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];//加粗
         _cardNoLabel.text = @"     ";
         [_cardNoLabel sizeToFit];
         
@@ -161,8 +162,8 @@
 {
     if (nil == _quickPayImageView) {
         _quickPayImageView = [[UIImageView alloc] init];
-        _quickPayImageView.rightPos.equalTo(self.bankImageView.rightPos).offset(32);
-        _quickPayImageView.bottomPos.equalTo(self.bankImageView.bottomPos).offset(42);
+        _quickPayImageView.rightPos.equalTo(self.bankTypeLabel.rightPos);
+        _quickPayImageView.bottomPos.equalTo(self.bankImageView.bottomPos).offset(PGScreenWidth *0.6 *0.19);
         _quickPayImageView.myWidth = 45;
         _quickPayImageView.myHeight = 22;
         _quickPayImageView.image = [UIImage imageNamed:@"bankcard_icon_fast"];
@@ -170,25 +171,25 @@
     return _quickPayImageView;
 }
 
-- (UIImageView *)image_bankCardValuable
-{
-    if (nil == _image_bankCardValuable) {
-        _image_bankCardValuable = [[UIImageView alloc] init];
-        _image_bankCardValuable.centerYPos.equalTo(self.bankImageView.centerYPos);
-        _image_bankCardValuable.rightPos.equalTo(self.quickPayImageView.rightPos);
-        _image_bankCardValuable.myWidth = 97;
-        _image_bankCardValuable.myHeight = 56;
-        _image_bankCardValuable.image = [UIImage imageNamed:@"bindbankcard_invalid"];
-    }
-    return _image_bankCardValuable;
-}
+//- (UIImageView *)image_bankCardValuable
+//{
+//    if (nil == _image_bankCardValuable) {
+//        _image_bankCardValuable = [[UIImageView alloc] init];
+//        _image_bankCardValuable.centerYPos.equalTo(self.bankImageView.centerYPos);
+//        _image_bankCardValuable.rightPos.equalTo(self.quickPayImageView.rightPos);
+//        _image_bankCardValuable.myWidth = 97;
+//        _image_bankCardValuable.myHeight = 56;
+//        _image_bankCardValuable.image = [UIImage imageNamed:@"bindbankcard_invalid"];
+//    }
+//    return _image_bankCardValuable;
+//}
 //***当银行卡失效的时候页面部分至灰色
 -(void)thisBankCardInvaluable:(BOOL)_gray
 {
-    if(_gray==YES){
-        self.quickPayImageView.image = [Common grayImage:self.quickPayImageView.image];
-        self.bankCardImageView.image = [Common grayImage:self.bankCardImageView.image];
-        self.image_bankCardValuable.hidden = NO;
-    }
+//    if(_gray==YES){
+//        self.quickPayImageView.image = [Common grayImage:self.quickPayImageView.image];
+//        self.bankCardImageView.image = [Common grayImage:self.bankCardImageView.image];
+//        self.image_bankCardValuable.hidden = NO;
+//    }
 }
 @end

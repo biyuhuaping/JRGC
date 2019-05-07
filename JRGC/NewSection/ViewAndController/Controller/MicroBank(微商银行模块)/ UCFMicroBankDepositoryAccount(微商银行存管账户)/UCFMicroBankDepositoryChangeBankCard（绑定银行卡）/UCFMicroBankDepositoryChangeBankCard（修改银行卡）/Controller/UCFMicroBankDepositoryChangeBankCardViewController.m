@@ -106,6 +106,11 @@
     
     
 }
+//- (void)getToBack
+//{
+//    [super getToBack];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:MODIBANKZONE_SUCCESSED object:nil];//返回绑定银行卡页面刷刷新数据
+//}
 - (BaseScrollview *)scrollView
 {
     if (nil == _scrollView) {

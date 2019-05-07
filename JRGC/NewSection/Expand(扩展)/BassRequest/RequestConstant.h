@@ -84,4 +84,6 @@ static NSString *DougeMallOrderListURL = @"https://m.dougemall.com/static/mall/o
 
 static NSString *QueryBannerByTypeURL = @"api/publicMsg/v2/queryBannerByType.json";//banner接口
 
+static NSString *ShowBankCardMessURL =  @"api/userInfo/v2/showBankCardMess.json";  //获取银行卡信息（新）
+
 #endif /* RequestConstant_h */

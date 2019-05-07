@@ -224,7 +224,7 @@
     else
     {
         //企业用户点击登录
-        self.username = self.loginInputView.enterpriseInput.userField.text;
+        self.username = [self.loginInputView.enterpriseInput.userField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         self.pwd      = self.loginInputView.enterpriseInput.passWordField.text;
         self.isCompany = @"企业";
     }
@@ -334,10 +334,32 @@
 
 - (void)textFieldEditChanged:(UITextField *)textField
 {
+    if (textField == self.loginInputView.enterpriseInput.userField) {
+        [self textFieldDidChange:self.loginInputView.enterpriseInput.userField];
+    }
+    
     [self inspectPersonalTextField]; //个人用户输入界面
     [self inspectEnterpriseTextField];//企业用户输入界面
+    
+    
 }
-
+- (void)textFieldDidChange:(UITextField *)text
+{
+    NSLog(@"%@",text.text);
+    NSString * str = [text.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (str.length >3&&text.text.length >3) {
+        text.text = [NSString stringWithFormat:@"%@ %@",[str substringWithRange:NSMakeRange(0, 3)],[str substringWithRange:NSMakeRange(3,str.length - 3)]];
+    }
+    if (text.text.length == 4 &&str.length ==3) {
+        text.text = [NSString stringWithFormat:@"%@",[str substringWithRange:NSMakeRange(0, 3)]];
+    }
+    if (str.length >7&&text.text.length >7) {
+        text.text = [NSString stringWithFormat:@"%@ %@",[text.text substringWithRange:NSMakeRange(0, 8)],[text.text substringWithRange:NSMakeRange(8, text.text.length - 8)]];
+    }
+    if (str.length >11) {
+        text.text = [text.text substringWithRange:NSMakeRange(0, 13)];
+    }
+}
 - (void)inspectPersonalTextField
 {
     if ([self inspectPersonalInputUser] && [self inspectPersonalInputPassWord])
@@ -368,6 +390,7 @@
         self.loginInputView.enterpriseInput.loginBtn.userInteractionEnabled = NO;
     }
 }
+
 //个人用户账户输入判断
 - (BOOL)inspectPersonalInputUser
 {
@@ -392,7 +415,8 @@
 //企业用户账户输入判断
 - (BOOL)inspectEnterpriseInputUser
 {
-    if (self.loginInputView.enterpriseInput.userField.text.length >0 && ![self.loginInputView.enterpriseInput.userField.text isEqualToString:@""]) {
+    NSString *inputStr = [self.loginInputView.enterpriseInput.userField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (inputStr.length >0 && ![inputStr isEqualToString:@""] && inputStr.length == 11) {
         return YES;
     }
     else
@@ -416,9 +440,9 @@
         [AuxiliaryFunc showToastMessage:@"请输入用户名" withView:self.view];
         return;
     }
-    else if (textField == self.loginInputView.enterpriseInput.userField && [self.loginInputView.enterpriseInput.userField.text isEqualToString:@""] )
+    else if (textField == self.loginInputView.enterpriseInput.userField && [[self.loginInputView.enterpriseInput.userField.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""] )
     {//&& ![Common isChinese:_textField1.text]
-        [AuxiliaryFunc showToastMessage:@"请输入用户名" withView:self.view];
+        [AuxiliaryFunc showToastMessage:@"请输入手机号" withView:self.view];
         return;
     }
     else if (textField == self.loginInputView.personalInput.passWordField && [self.loginInputView.personalInput.passWordField.text isEqualToString:@""])

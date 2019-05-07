@@ -278,6 +278,7 @@
 }
 - (void)textFieldEditChanged:(UITextField *)textField
 {
+    [self textFieldDidChange:self.registerPhoneField];
     if ([self inspectRegisterPhone]) {
         //输入正常,按钮可点击
         self.nextBtn.userInteractionEnabled = YES;
@@ -290,9 +291,27 @@
         self.nextBtn.userInteractionEnabled = NO;
     }
 }
+- (void)textFieldDidChange:(UITextField *)text
+{
+    NSLog(@"%@",text.text);
+    NSString * str = [text.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (str.length >3&&text.text.length >3) {
+        text.text = [NSString stringWithFormat:@"%@ %@",[str substringWithRange:NSMakeRange(0, 3)],[str substringWithRange:NSMakeRange(3,str.length - 3)]];
+    }
+    if (text.text.length == 4 &&str.length ==3) {
+        text.text = [NSString stringWithFormat:@"%@",[str substringWithRange:NSMakeRange(0, 3)]];
+    }
+    if (str.length >7&&text.text.length >7) {
+        text.text = [NSString stringWithFormat:@"%@ %@",[text.text substringWithRange:NSMakeRange(0, 8)],[text.text substringWithRange:NSMakeRange(8, text.text.length - 8)]];
+    }
+    if (str.length >11) {
+        text.text = [text.text substringWithRange:NSMakeRange(0, 13)];
+    }
+}
 - (BOOL)inspectRegisterPhone
 {
-    if (self.registerPhoneField.text.length == 11 && [Common isOnlyNumber:self.registerPhoneField.text]) {
+    NSString *inputStr = [self.registerPhoneField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (inputStr.length == 11 && [Common isOnlyNumber:inputStr]) {
         return YES;
     }
     else
@@ -371,7 +390,7 @@
 //}
 - (void)buttonNextBtnClick:(UIButton *)btn
 {
-    UCFRegistVerificationMobileApi * request = [[UCFRegistVerificationMobileApi alloc] initWithphoneNum:self.registerPhoneField.text];
+    UCFRegistVerificationMobileApi * request = [[UCFRegistVerificationMobileApi alloc] initWithphoneNum: [self.registerPhoneField.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
     request.animatingView = self.view;
     
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -381,7 +400,7 @@
         if (model.ret == YES) {
             //电话号码可以允许注册
             UCFRegisterInputVerificationCodeViewController *vc = [[UCFRegisterInputVerificationCodeViewController alloc] init];
-            vc.phoneNum = self.registerPhoneField.text;
+            vc.phoneNum =[self.registerPhoneField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             [self.rt_navigationController pushViewController:vc animated:YES];
         }
         else if(model.code == 3) {

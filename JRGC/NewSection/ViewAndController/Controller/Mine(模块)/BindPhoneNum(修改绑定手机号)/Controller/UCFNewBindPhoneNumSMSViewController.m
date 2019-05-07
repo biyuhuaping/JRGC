@@ -215,7 +215,27 @@
 
 - (void)textFieldEditChanged:(UITextField *)textField
 {
+    if (textField == self.moddifyPhoneTextField) {
+        [self textFieldDidChange:self.moddifyPhoneTextField];
+    }
     [self inspectTextField]; //个人用户输入界面
+}
+- (void)textFieldDidChange:(UITextField *)text
+{
+    NSLog(@"%@",text.text);
+    NSString * str = [text.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (str.length >3&&text.text.length >3) {
+        text.text = [NSString stringWithFormat:@"%@ %@",[str substringWithRange:NSMakeRange(0, 3)],[str substringWithRange:NSMakeRange(3,str.length - 3)]];
+    }
+    if (text.text.length == 4 &&str.length ==3) {
+        text.text = [NSString stringWithFormat:@"%@",[str substringWithRange:NSMakeRange(0, 3)]];
+    }
+    if (str.length >7&&text.text.length >7) {
+        text.text = [NSString stringWithFormat:@"%@ %@",[text.text substringWithRange:NSMakeRange(0, 8)],[text.text substringWithRange:NSMakeRange(8, text.text.length - 8)]];
+    }
+    if (str.length >11) {
+        text.text = [text.text substringWithRange:NSMakeRange(0, 13)];
+    }
 }
 - (void)inspectTextField
 {
@@ -233,7 +253,8 @@
 }
 - (BOOL)inspectPhoneNum
 {
-    if (self.moddifyPhoneTextField.text && self.moddifyPhoneTextField.text.length == 11) {
+     NSString *inputStr = [self.moddifyPhoneTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (inputStr && inputStr.length == 11) {
         return YES;
     }
     else
@@ -264,7 +285,7 @@
     self.isVmsStr = isVms;
     
     NSString *isVmsNew = isVms;//SMS："普通短信渠道"；VMS："验证码语音渠道"
-    UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:self.moddifyPhoneTextField.text isVms:isVmsNew type:@"4" AccoutType:SelectAccoutDefault];
+    UCFMicroBankIdentifysendCodeInfoAPI * request = [[UCFMicroBankIdentifysendCodeInfoAPI alloc] initWithDestPhoneNo:[self.moddifyPhoneTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""] isVms:isVmsNew type:@"4" AccoutType:SelectAccoutDefault];
     request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {

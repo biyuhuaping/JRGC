@@ -1223,6 +1223,11 @@
 		E36EB87321F8158F0093915D /* LineOfSendVerifyCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB87121F8158F0093915D /* LineOfSendVerifyCodeView.m */; };
 		E36EB87621F84CCB0093915D /* UCFRegisterSendCodeApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB87521F84CCB0093915D /* UCFRegisterSendCodeApi.m */; };
 		E36EB87921F84CF20093915D /* UCFRegisterSendCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36EB87821F84CF20093915D /* UCFRegisterSendCodeModel.m */; };
+		E37003D6228015B700F9903C /* UCFMicroBankDepositoryBankCardHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37003D5228015B700F9903C /* UCFMicroBankDepositoryBankCardHomeViewController.m */; };
+		E37003D92280176E00F9903C /* UCFMicroBankDepositoryBankCardHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E37003D82280176E00F9903C /* UCFMicroBankDepositoryBankCardHomeView.m */; };
+		E37003DC2280178100F9903C /* UCFMicroBankDepositoryBankCardHomeTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = E37003DB2280178100F9903C /* UCFMicroBankDepositoryBankCardHomeTipView.m */; };
+		E37003DF22801D0400F9903C /* UCFMicroBankDepositoryBankCardInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E37003DE22801D0400F9903C /* UCFMicroBankDepositoryBankCardInfoApi.m */; };
+		E37003E222801D6300F9903C /* UCFMicroBankDepositoryBankCardInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E37003E122801D6300F9903C /* UCFMicroBankDepositoryBankCardInfoModel.m */; };
 		E37086B51D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B31D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m */; };
 		E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086B41D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib */; };
 		E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B81D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m */; };
@@ -3515,6 +3520,16 @@
 		E36EB87521F84CCB0093915D /* UCFRegisterSendCodeApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterSendCodeApi.m; sourceTree = "<group>"; };
 		E36EB87721F84CF20093915D /* UCFRegisterSendCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFRegisterSendCodeModel.h; sourceTree = "<group>"; };
 		E36EB87821F84CF20093915D /* UCFRegisterSendCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterSendCodeModel.m; sourceTree = "<group>"; };
+		E37003D4228015B700F9903C /* UCFMicroBankDepositoryBankCardHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryBankCardHomeViewController.h; sourceTree = "<group>"; };
+		E37003D5228015B700F9903C /* UCFMicroBankDepositoryBankCardHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryBankCardHomeViewController.m; sourceTree = "<group>"; };
+		E37003D72280176E00F9903C /* UCFMicroBankDepositoryBankCardHomeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryBankCardHomeView.h; sourceTree = "<group>"; };
+		E37003D82280176E00F9903C /* UCFMicroBankDepositoryBankCardHomeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryBankCardHomeView.m; sourceTree = "<group>"; };
+		E37003DA2280178100F9903C /* UCFMicroBankDepositoryBankCardHomeTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryBankCardHomeTipView.h; sourceTree = "<group>"; };
+		E37003DB2280178100F9903C /* UCFMicroBankDepositoryBankCardHomeTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryBankCardHomeTipView.m; sourceTree = "<group>"; };
+		E37003DD22801D0400F9903C /* UCFMicroBankDepositoryBankCardInfoApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryBankCardInfoApi.h; sourceTree = "<group>"; };
+		E37003DE22801D0400F9903C /* UCFMicroBankDepositoryBankCardInfoApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryBankCardInfoApi.m; sourceTree = "<group>"; };
+		E37003E022801D6300F9903C /* UCFMicroBankDepositoryBankCardInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroBankDepositoryBankCardInfoModel.h; sourceTree = "<group>"; };
+		E37003E122801D6300F9903C /* UCFMicroBankDepositoryBankCardInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroBankDepositoryBankCardInfoModel.m; sourceTree = "<group>"; };
 		E37086B21D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFHuiShangChooseBankViewController.h; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.h; sourceTree = "<group>"; };
 		E37086B31D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFHuiShangChooseBankViewController.m; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.m; sourceTree = "<group>"; };
 		E37086B41D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFHuiShangChooseBankViewController.xib; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.xib; sourceTree = "<group>"; };
@@ -9110,6 +9125,66 @@
 			path = UserOperation;
 			sourceTree = "<group>";
 		};
+		E37003CE2280147D00F9903C /* UCFMicroBankDepositoryChangeBankCard（绑定银行卡） */ = {
+			isa = PBXGroup;
+			children = (
+				E37003CF228014E300F9903C /* UCFMicroBankDepositoryBankCardHome（绑定银行卡首页） */,
+				E39962762237E79F00C5B96C /* UCFMicroBankDepositoryChangeBankCard（修改银行卡） */,
+			);
+			path = "UCFMicroBankDepositoryChangeBankCard（绑定银行卡）";
+			sourceTree = "<group>";
+		};
+		E37003CF228014E300F9903C /* UCFMicroBankDepositoryBankCardHome（绑定银行卡首页） */ = {
+			isa = PBXGroup;
+			children = (
+				E37003D0228014E300F9903C /* Controller */,
+				E37003D1228014E300F9903C /* Model */,
+				E37003D2228014E300F9903C /* View */,
+				E37003D3228014E300F9903C /* Api */,
+			);
+			path = "UCFMicroBankDepositoryBankCardHome（绑定银行卡首页）";
+			sourceTree = "<group>";
+		};
+		E37003D0228014E300F9903C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E37003D4228015B700F9903C /* UCFMicroBankDepositoryBankCardHomeViewController.h */,
+				E37003D5228015B700F9903C /* UCFMicroBankDepositoryBankCardHomeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E37003D1228014E300F9903C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E37003E022801D6300F9903C /* UCFMicroBankDepositoryBankCardInfoModel.h */,
+				E37003E122801D6300F9903C /* UCFMicroBankDepositoryBankCardInfoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E37003D2228014E300F9903C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E3145441224381B400E883E3 /* UCFNewBankCardView.h */,
+				E3145442224381B400E883E3 /* UCFNewBankCardView.m */,
+				E37003D72280176E00F9903C /* UCFMicroBankDepositoryBankCardHomeView.h */,
+				E37003D82280176E00F9903C /* UCFMicroBankDepositoryBankCardHomeView.m */,
+				E37003DA2280178100F9903C /* UCFMicroBankDepositoryBankCardHomeTipView.h */,
+				E37003DB2280178100F9903C /* UCFMicroBankDepositoryBankCardHomeTipView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E37003D3228014E300F9903C /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				E37003DD22801D0400F9903C /* UCFMicroBankDepositoryBankCardInfoApi.h */,
+				E37003DE22801D0400F9903C /* UCFMicroBankDepositoryBankCardInfoApi.m */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		E37086BC1D61BBB10041D293 /* cellConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -9307,8 +9382,6 @@
 				E39962822237ECFE00C5B96C /* UCFMicroBankDepositoryBankCardCellView.m */,
 				E39962842237F0F000C5B96C /* UCFMicroBankDepositoryAccountHomeCellExpirationView.h */,
 				E39962852237F0F000C5B96C /* UCFMicroBankDepositoryAccountHomeCellExpirationView.m */,
-				E3145441224381B400E883E3 /* UCFNewBankCardView.h */,
-				E3145442224381B400E883E3 /* UCFNewBankCardView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -9615,7 +9688,7 @@
 		E3D6D514221E4A1C00261622 /*  UCFMicroBankDepositoryAccount(微商银行存管账户) */ = {
 			isa = PBXGroup;
 			children = (
-				E39962762237E79F00C5B96C /* UCFMicroBankDepositoryChangeBankCard（修改银行卡） */,
+				E37003CE2280147D00F9903C /* UCFMicroBankDepositoryChangeBankCard（绑定银行卡） */,
 				E39962712237E79F00C5B96C /* UCFMicroBankDepositoryChangePassWord（修改交易密码） */,
 				E34B5E92222578840027718C /*  UCFMicroBankDepositoryAccountSerial(微商存管账户流水) */,
 				E3D6D519221E4ABB00261622 /* MicroBankHome(存管账户首页) */,
@@ -10729,6 +10802,7 @@
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
 				FB4F9E731D62A6F800CCB492 /* TradePasswordVC.m in Sources */,
 				7B2E568E1ADBBE5F008B0F9E /* UCFRetrievePasswordStepOneViewController.m in Sources */,
+				E37003DC2280178100F9903C /* UCFMicroBankDepositoryBankCardHomeTipView.m in Sources */,
 				33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */,
 				E3AF0776221C02B8005CC653 /* UCFMineIdentityCertificationMessageView.m in Sources */,
 				E31BD53221C0C10100D3651F /* UIImage+ImageEffects.m in Sources */,
@@ -11021,6 +11095,7 @@
 				74B1FC5B1F73C71700BACF8A /* UCFHomeListFooterView.m in Sources */,
 				334B9E88223A7FC900E278D8 /* UCFCollectionRootModel.m in Sources */,
 				33E3033021F1E00A00FD657C /* UCFOldUserNoticeCell.m in Sources */,
+				E37003D6228015B700F9903C /* UCFMicroBankDepositoryBankCardHomeViewController.m in Sources */,
 				33EA9C9C2248FFEB00E4B3B6 /* UCFSegementBtnView.m in Sources */,
 				FB88B3BA1AF0C7B0005D6BF3 /* UCFAngleView.m in Sources */,
 				FBB6858A1AE4A76800F222B6 /* UIScrollView+MJRefresh.m in Sources */,
@@ -11294,6 +11369,7 @@
 				74877CBA1FB2A95200F32428 /* PageView.m in Sources */,
 				74931A331B1326FE00143424 /* OHTouchesGestureRecognizer.m in Sources */,
 				74270C991EC58F6800F9419B /* UCFHomeListPresenter.m in Sources */,
+				E37003DF22801D0400F9903C /* UCFMicroBankDepositoryBankCardInfoApi.m in Sources */,
 				A82FBA6A1F4FD40900FD79BC /* CoustomLab.m in Sources */,
 				4AF9C5E91B0B419600E3BE7D /* RechargeListCell.m in Sources */,
 				7404CA011FB44EA7002811E0 /* UCFExtractGoldModel.m in Sources */,
@@ -11556,6 +11632,7 @@
 				7BC7C0B81ADCEDB6003799B0 /* JSONKit.m in Sources */,
 				74BDA9861F09F6C60054403F /* FSCalendarAppearance.m in Sources */,
 				74E535ED1AE5FD6400DAABFC /* UCFAboutUsViewController.m in Sources */,
+				E37003E222801D6300F9903C /* UCFMicroBankDepositoryBankCardInfoModel.m in Sources */,
 				337BB2EA22154DE0001ACDE6 /* UCFTransInvestPageInfoApi.m in Sources */,
 				33D218C4223B92A5008A9BDE /* UCFBatchPageRootModel.m in Sources */,
 				E352FD6021E4AF0B00617AB7 /* MJLogoHeader.m in Sources */,
@@ -11674,6 +11751,7 @@
 				7BC8AA211AD4C74200BF4660 /* UCFNormalInvestment.m in Sources */,
 				74BDA9841F09F6C60054403F /* FSCalendar+Deprecated.m in Sources */,
 				744B9EDE1F0BA64600440FBA /* UCFCalendarDayInfo.m in Sources */,
+				E37003D92280176E00F9903C /* UCFMicroBankDepositoryBankCardHomeView.m in Sources */,
 				74BDA9871F09F6C60054403F /* FSCalendarCalculator.m in Sources */,
 				E352FD4A21E4AF0B00617AB7 /* UCFInvestmentCouponInterestTicketController.m in Sources */,
 				83348290201B56A5008D32BA /* UCFRechargeWebViewController.m in Sources */,

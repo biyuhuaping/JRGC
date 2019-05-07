@@ -478,6 +478,7 @@
 {
     //去开户,去设置交易密码都是走一样的流程
     UCFMicroBankOpenAccountViewController *open = [[UCFMicroBankOpenAccountViewController alloc] init];
+    open.accoutType = self.accoutType;
     [self.rt_navigationController pushViewController:open animated:YES];
 }
 - (void)showHSAlert:(NSString *)alertMessage

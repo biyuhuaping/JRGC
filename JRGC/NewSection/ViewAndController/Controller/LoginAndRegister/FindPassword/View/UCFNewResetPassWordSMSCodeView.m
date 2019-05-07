@@ -51,7 +51,7 @@
         //        _contentField.delegate = self;
         //        _contentField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _contentField.font = [Color gc_Font:18.0];
-//        _contentField.placeholder = @"短息验证码";
+//        _contentField.placeholder = @"短信验证码";
         _contentField.keyboardType =  UIKeyboardTypeNumberPad;
         
 //        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -72,7 +72,7 @@
         //
         //        }
         
-        NSString *holderText = @"短息验证码";
+        NSString *holderText = @"短信验证码";
         NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
         [placeholder addAttribute:NSForegroundColorAttributeName
                             value:[Color color:PGColorOptionInputDefaultBlackGray]
