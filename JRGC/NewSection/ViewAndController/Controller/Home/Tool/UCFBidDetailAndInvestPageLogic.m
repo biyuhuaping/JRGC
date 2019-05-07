@@ -326,24 +326,5 @@
         [MBProgressHUD displayHudError:model.message withShowTimes:3];
     }
 }
-//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//
-//    if (alertView.tag == 8000) {
-//        if (buttonIndex == 1) {
-//            HSHelper *helper = [HSHelper new];
-//            [helper pushOpenHSType:SelectAccoutTypeP2P Step:SingleUserInfo.loginData.userInfo.openStatus nav:self.navigationController];
-//        }
-//    }
-//    else if (alertView.tag == 9000) {
-//
-//
-//
-//
-//        if(buttonIndex == 1){ //测试
-//            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
-//            vc.accoutType = self.accoutType;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-//    }
-//}
+
 @end
