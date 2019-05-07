@@ -64,6 +64,7 @@
 @property (nonatomic,strong) UCFSettingItem *userLevel;
 
 @property (nonatomic ,strong) UIImageView *userLevelImage;
+
 @property (nonatomic,strong)UCFSettingItem *setChangePassword;
 
 @property (assign, nonatomic) BOOL isCompanyAgent;//是否是机构用户
@@ -370,9 +371,12 @@
                     
                     case 2:{
                         if ( [memberLever integerValue] <= 1) {
+                            userItem.subtitle = @"普通会员";
                             _userLevelImage.image =[UIImage imageNamed:@"no_vip_icon.png"];
+                            _userLevelImage.hidden = YES;
                             
                         }else{
+                            _userLevelImage.hidden = NO;
                             _userLevelImage.image =[UIImage imageNamed:[NSString stringWithFormat:@"vip%d_icon.png",[memberLever intValue]-1]];
                         }
                     }

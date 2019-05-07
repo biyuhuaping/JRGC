@@ -216,27 +216,11 @@
 - (void)textFieldEditChanged:(UITextField *)textField
 {
     if (textField == self.moddifyPhoneTextField) {
-        [self textFieldDidChange:self.moddifyPhoneTextField];
+        [Common setPhoneNumSpacing:self.moddifyPhoneTextField];
     }
     [self inspectTextField]; //个人用户输入界面
 }
-- (void)textFieldDidChange:(UITextField *)text
-{
-    NSLog(@"%@",text.text);
-    NSString * str = [text.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if (str.length >3&&text.text.length >3) {
-        text.text = [NSString stringWithFormat:@"%@ %@",[str substringWithRange:NSMakeRange(0, 3)],[str substringWithRange:NSMakeRange(3,str.length - 3)]];
-    }
-    if (text.text.length == 4 &&str.length ==3) {
-        text.text = [NSString stringWithFormat:@"%@",[str substringWithRange:NSMakeRange(0, 3)]];
-    }
-    if (str.length >7&&text.text.length >7) {
-        text.text = [NSString stringWithFormat:@"%@ %@",[text.text substringWithRange:NSMakeRange(0, 8)],[text.text substringWithRange:NSMakeRange(8, text.text.length - 8)]];
-    }
-    if (str.length >11) {
-        text.text = [text.text substringWithRange:NSMakeRange(0, 13)];
-    }
-}
+
 - (void)inspectTextField
 {
     if ([self inspectSmsView] && [self inspectPhoneNum]) {

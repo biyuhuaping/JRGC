@@ -314,7 +314,7 @@
 //个人用户账户输入判断
 - (BOOL)inspectPersonalInputUser
 {
-    if ([self.oldPasswordTextField.text isEqualToString:@""] || self.oldPasswordTextField.text == nil || ![SharedSingleton isValidatePassWord:self.oldPasswordTextField.text]) {
+    if ([self.oldPasswordTextField.text isEqualToString:@""] || self.oldPasswordTextField.text == nil ) {
 //        [[BaseAlertView getShareBaseAlertView] showStringOnTop:@"请输入原密码"];
         //        [_oldPasswordTextField becomeFirstResponder];
         return NO;
