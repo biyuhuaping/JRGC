@@ -92,10 +92,8 @@
             // 强制注销该账户，并清除手势密码，以便重设
             [SingleUserInfo deleteUserData];
             [LLLockPassword saveLockPassword:nil];
-
-            [SingGlobalView.rootNavController popToRootViewControllerAnimated:NO complete:^(BOOL finished) {
-                [SingleUserInfo loadLoginViewController];
-            }];
+            SingleUserInfo.loginType = LoginDrawError;
+            [self hide];
 
         }
     } else {
@@ -121,6 +119,7 @@
 {
     UCFNewVerificationLoginPassWordViewController *controller = [[UCFNewVerificationLoginPassWordViewController alloc] init];
     controller.titleString = [NSString stringWithFormat:@""];
+    self.parentViewController.rt_navigationController.hidesBottomBarWhenPushed = YES;
     [self.parentViewController.rt_navigationController pushViewController:controller animated:YES];
 }
 - (void)changeAccountBtnClicked:(UIButton *)button

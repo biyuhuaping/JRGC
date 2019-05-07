@@ -42,16 +42,17 @@
 
 //只要是豆哥商城的都去掉导航栏
 - (void)viewWillAppear:(BOOL)animated {
+    
     [self.navigationController setNavigationBarHidden:self.isHideNativeNav animated:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)jsClose
 {
-    if (![[self.navigationController.viewControllers firstObject] isKindOfClass:[UCFWebViewJavascriptBridgeMall class]])
-    {
-        [self.navigationController.navigationBar setHidden:NO];
-    }
+//    if (![[self.navigationController.viewControllers firstObject] isKindOfClass:[UCFWebViewJavascriptBridgeMall class]])
+//    {
+//        [self.navigationController.navigationBar setHidden:NO];
+//    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

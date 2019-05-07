@@ -353,7 +353,7 @@
 }
 - (void)pushWebViewWithUrl:(NSString *)url Title:(NSString *)title
 {
-    if ([self.remcommendUrl containsString:@"http"]) {
+    if ([url containsString:@"http"]) {
         UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
         web.url = [NSString stringWithFormat:@"%@",url];
         web.title = title;

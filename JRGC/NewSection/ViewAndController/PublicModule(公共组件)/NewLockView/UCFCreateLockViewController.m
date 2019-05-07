@@ -266,6 +266,9 @@
  */
 - (void)dealWithrunBtn:(UIButton *)button
 {
+    [LLLockPassword saveLockPassword:@""];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"useLockView"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self hide];
 }
 

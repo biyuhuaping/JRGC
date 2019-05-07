@@ -323,7 +323,7 @@
         alert.tag =7000;
         [alert show];
     } else if (code == 30) {
-        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
             if (index == 1) {
                 RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
                 vc.accoutType = SelectAccoutTypeP2P;

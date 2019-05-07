@@ -96,12 +96,12 @@
 {
     UCFSettingGroup *group3 = [[UCFSettingGroup alloc] init];//账户安全
     UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"password_account_icon" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];
-    UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"gesture_account_icon" title:[[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] ? @"关闭手势密码" : @"启用手势密码"];
+    UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"gesture_account_icon" title:[[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] ? @"启用手势密码" : @"启用手势密码"];
     if ([self checkTouchIdIsOpen]) {
         BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
-        NSString *showStr = isOpen ? @"关闭指纹解锁" : @"启用指纹解锁";
+        NSString *showStr = isOpen ? @"启用指纹解锁" : @"启用指纹解锁";
         if (_isFaceID) {
-            showStr = isOpen ? @"关闭面部解锁" : @"启用面部解锁";
+            showStr = isOpen ? @"启用面部解锁" : @"启用面部解锁";
         }
         UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"fingerprint_account_icon" title:showStr withSwitchType:1];
         group3.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith,modifyPassword]];
@@ -146,12 +146,12 @@
         
         UCFSettingGroup *group3 = [[UCFSettingGroup alloc] init];//账户安全
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"password_account_icon" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
-        UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"gesture_account_icon" title:[[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] ? @"关闭手势密码" : @"启用手势密码"];
+        UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"gesture_account_icon" title:[[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"] ? @"启用手势密码" : @"启用手势密码"];
         if ([self checkTouchIdIsOpen]) {
             BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
-            NSString *showStr = isOpen ? @"关闭指纹解锁" : @"启用指纹解锁";
+            NSString *showStr = isOpen ? @"启用指纹解锁" : @"启用指纹解锁";
             if (_isFaceID) {
-                showStr = isOpen ? @"关闭面部解锁" : @"启用面部解锁";
+                showStr = isOpen ? @"启用面部解锁" : @"启用面部解锁";
             }
             UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"fingerprint_account_icon" title:showStr withSwitchType:1];
              group3.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith,modifyPassword]];
@@ -524,12 +524,17 @@
 // 安全中心cell的代理方法
 - (void)securityCell:(SecurityCell *)securityCell changeGestureState:(BOOL)gestureState
 {
-    if ([securityCell.itemNameLabel.text isEqualToString:@"启用手势密码"]) {
+    
+   BOOL fingerLock = [[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"];
+    
+   BOOL touchIDLock = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
+    
+    if ([securityCell.itemNameLabel.text isEqualToString:@"启用手势密码"] && !fingerLock) { //手势密码关闭装态
             UCFNewVerificationLoginPassWordViewController *controller = [[UCFNewVerificationLoginPassWordViewController alloc] init];
             controller.titleString = @"启用手势密码需验证";
             [self.navigationController pushViewController:controller animated:YES];
 
-    } else if ([securityCell.itemNameLabel.text isEqualToString:@"关闭手势密码"] ) {
+    } else if ([securityCell.itemNameLabel.text isEqualToString:@"启用手势密码"] && fingerLock) { //手势密码已经打开
         @PGWeakObj(self);
         //关闭手势密码
         BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"取消设置手势密码会增加账户信息安全风险，确认关闭吗？" message:@"" cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
@@ -546,13 +551,19 @@
         } otherButtonTitles:@"取消"];
         [alert show];
     }
-    else if (([securityCell.itemNameLabel.text isEqualToString:@"启用指纹解锁"] || [securityCell.itemNameLabel.text isEqualToString:@"启用面部解锁"])) {
+    else if (([securityCell.itemNameLabel.text isEqualToString:@"启用指纹解锁"] || [securityCell.itemNameLabel.text isEqualToString:@"启用面部解锁"]) && !touchIDLock) {
+        
         UCFNewVerificationLoginPassWordViewController *controller = [[UCFNewVerificationLoginPassWordViewController alloc] init];
-        controller.titleString = [NSString stringWithFormat:@"%@需验证",securityCell.itemNameLabel.text];
+//        controller.titleString = [NSString stringWithFormat:@"%@需验证",securityCell.itemNameLabel.text];
+        controller.titleString = [NSString stringWithFormat:@"%@需验证",_isFaceID ? @"启用面部解锁":@"启用指纹解锁"];
+
+        
         [self.navigationController pushViewController:controller animated:YES];
-    }   else if (([securityCell.itemNameLabel.text isEqualToString:@"关闭指纹解锁"] || [securityCell.itemNameLabel.text isEqualToString:@"关闭面部解锁"])) {
+    }   else if (([securityCell.itemNameLabel.text isEqualToString:@"启用指纹解锁"] || [securityCell.itemNameLabel.text isEqualToString:@"启用面部解锁"]) && touchIDLock) {
         UCFNewVerificationLoginPassWordViewController *controller = [[UCFNewVerificationLoginPassWordViewController alloc] init];
-        controller.titleString = [NSString stringWithFormat:@"%@需验证",securityCell.itemNameLabel.text];
+//        controller.titleString = [NSString stringWithFormat:@"%@需验证",securityCell.itemNameLabel.text];
+        controller.titleString = [NSString stringWithFormat:@"%@需验证",_isFaceID ? @"关闭面部解锁":@"关闭指纹解锁"];
+
         [self.navigationController pushViewController:controller animated:YES];
     }
 }

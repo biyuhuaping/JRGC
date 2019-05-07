@@ -99,9 +99,10 @@
 }
 - (void)clickRightBtn
 {
+    [self.navigationController popViewControllerAnimated:NO];
     UCFNewLoginViewController *uc = [[UCFNewLoginViewController alloc] init];
-    [SingGlobalView.rootNavController pushViewController:uc animated:YES complete:^(BOOL finished) {
-        [SingGlobalView.rootNavController removeViewController:self];
+    [SingGlobalView.rootNavController pushViewController:uc animated:NO complete:^(BOOL finished) {
+//        [SingGlobalView.rootNavController removeViewController:self];
     }];
 }
 - (void)addLeftButtons

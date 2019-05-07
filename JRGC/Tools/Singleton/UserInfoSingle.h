@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, LoginEntranceType) {  //由哪些界面进入支付�
     LoginDefalut = 0,               //普通点击触发事件掉起的登录
     LoginSingatureOut = 1,          //登录失效
     LoginWebLogin = 2,              //web页面调起的登录
+    LoginChangeUser,                //切换用户
+    LoginDrawError,                 //密码s绘制错误
 };
 
 
