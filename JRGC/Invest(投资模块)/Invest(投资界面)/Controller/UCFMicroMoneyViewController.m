@@ -35,6 +35,8 @@
 //#import "UCFMicroMoneyCell.h"
 #import "NewPurchaseBidController.h"
 #import "UCFNewAITableViewCell.h"
+#import "UCFBatchBidRequest.h"
+#import "UCFNewCollectionDetailViewController.h"
 @interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate,UCFInvestMicroMoneyCellDelegate,UCFNewAITableViewCellDelegate>
 
 //@property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
@@ -472,8 +474,27 @@
     }
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
-            NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
-            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+//            NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
+//            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+        UCFBatchBidRequest *api = [[UCFBatchBidRequest alloc] initWithProjectId:model.Id ];
+        [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+            DDLogDebug(@"%@",request.responseString);
+  
+            UCFBatchRootModel *resultModel = request.responseJSONModel;
+            if (resultModel.ret) {
+                UCFNewCollectionDetailViewController *vc = [[UCFNewCollectionDetailViewController alloc] init];
+                vc.model = request.responseJSONModel;
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.parentViewController.navigationController pushViewController:vc  animated:YES];
+            } else {
+                ShowMessage(resultModel.message);
+            }
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            
+        }];
+        
+        [api start];
+        
     }
 }
 
@@ -684,7 +705,7 @@
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
-            
+//            淡淡的
             UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
             collectionDetailVC.souceVC = @"P2PVC";
             collectionDetailVC.colPrdClaimId = _colPrdClaimIdStr;

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFBatchBidRequest :BaseRequest
 - (id)initWithProjectId:(NSString *)projectId bidState:(NSString *)statue;
+- (id)initWithProjectId:(NSString *)projectId;
 @end
 
 NS_ASSUME_NONNULL_END

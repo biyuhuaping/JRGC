@@ -25,8 +25,20 @@
     }
     return self;
 }
+- (id)initWithProjectId:(NSString *)projectId
+{
+    if (self = [super init]) {
+        self.projectId = projectId;
+    }
+    return self;
+}
 - (id)requestArgument {
-    return @{@"colPrdClaimId":_projectId,@"status":_statue};
+    if (self.statue.length > 0) {
+         return @{@"colPrdClaimId":_projectId,@"status":_statue};
+    } else {
+         return @{@"colPrdClaimId":_projectId};
+    }
+   
 }
 - (NSString *)modelClass
 {
