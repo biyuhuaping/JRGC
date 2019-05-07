@@ -468,7 +468,11 @@
         }
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
+    
 
+//        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetUserAllState owner:self signature:YES Type:SelectAccoutDefault];
+    [SingleUserInfo requestUserAllStatueWithView:nil];
+    [[UserInfoSingle sharedManager] removeIsShare];
 }
 //进入前台的时候，判断是否是个人中心的工场码页面,如果是，判断指纹开关是否开闭
 - (void)checkIsGongChaView
