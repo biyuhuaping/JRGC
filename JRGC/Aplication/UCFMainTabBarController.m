@@ -263,6 +263,10 @@
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
         } else {
+            
+            if ([self.viewControllers indexOfObject:viewController] == 4) {
+                [_mineView refreshPageData];
+            }
             return YES;
         }
     }

@@ -90,6 +90,7 @@
 {
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LOGINDATA];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:TIMESTAMP];//弹框时间记录
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:AWP];

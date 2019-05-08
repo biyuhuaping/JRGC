@@ -535,7 +535,8 @@
 
 - (void)refreshTableViewHeader
 {
-    [self refreshHomeRequest];
+//    [self refreshHomeRequest];
+    [self requestMineMessage];
 }
 - (void)refreshHomeRequest
 {
@@ -544,9 +545,13 @@
 //    [self getMallData];
 //    [self getBannerData];
     
-    [self requestMineMessage];
+    
 }
-
+- (void)refreshPageData
+{
+//    [self refreshHomeRequest];
+    [self.tableView beginRefresh];
+}
 - (void)requestMyReceipt//请求总资产信息
 {
     UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
