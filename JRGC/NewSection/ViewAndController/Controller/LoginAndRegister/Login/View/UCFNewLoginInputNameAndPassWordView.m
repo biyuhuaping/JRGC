@@ -91,10 +91,6 @@
         }
         else{
             holderText = @"手机号";
-            
-        }
-        if ([self.userType isEqualToString:@"企业"]) {
-            //只有企业是纯数字键盘
              _userField.keyboardType = UIKeyboardTypeNumberPad;
         }
 
