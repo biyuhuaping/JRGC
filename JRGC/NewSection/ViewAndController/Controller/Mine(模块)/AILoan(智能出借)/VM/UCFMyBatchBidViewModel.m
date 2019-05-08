@@ -73,4 +73,9 @@
 {
     self.bidInvestText = @"查看奖励";
 }
+
+- (void)dealClickAction:(NSString *)title
+{
+    self.checkBidDetail = YES;
+}
 @end

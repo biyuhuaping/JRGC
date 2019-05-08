@@ -14,7 +14,7 @@
 #import "UCFNewInvestBtnView.h"
 #import "BaseTableView.h"
 #import "UCFCollectionListViewController.h"
-
+#import "UCFBatchBidWebViewController.h"
 @interface UCFMyInvestBatchBidDetailViewController ()<UCFBidDetailNavViewDelegate>
 @property(nonatomic, strong)UCFMyBatchBidViewModel  *VM;
 @property(nonatomic, strong)UCFBidDetailNavView *navView;
@@ -95,7 +95,7 @@
     
     [self.investView blindBaseVM:self.VM];
 
-
+    [self blindCollectionVM:self.VM];
     
 }
 
@@ -113,5 +113,32 @@
 - (void)blindCollectionVM:(UCFMyBatchBidViewModel *)vm
 {
     
+    
+    @PGWeakObj(self);
+    [self.KVOController observe:vm keyPaths:@[@"checkBidDetail"] options:NSKeyValueObservingOptionNew  block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"checkBidDetail"]) {
+            BOOL checkBidDetail = [[change objectSafeForKey:NSKeyValueChangeNewKey] boolValue];
+            if (checkBidDetail) {
+                [selfWeak checkReward];
+            }
+        }
+    }];
+    
+    
+    
+
+}
+//查看奖励
+- (void)checkReward
+{
+    NSDictionary *reqDict =  @{@"userId":SingleUserInfo.loginData.userInfo.userId,@"colOrderId":_batchOrderIdStr};
+    NSString *urlStr =[NSString stringWithFormat:@"%@%@",SERVER_IP,GETBACHINVESTAWARD];
+    UCFBatchBidWebViewController *webView = [[UCFBatchBidWebViewController alloc]initWithNibName:@"UCFBatchBidWebViewController" bundle:nil];
+    webView.url =  urlStr;
+    webView.webDataDic = reqDict;
+    webView.navTitle = @"出借成功";
+    webView.rootVc = self;
+    [self.rt_navigationController pushViewController:webView animated:YES];
 }
 @end

@@ -9,6 +9,7 @@
 #import "UCFNewInvestBtnView.h"
 #import "UIImage+Compression.h"
 #import "UCFCollectionDetailVM.h"
+#import "UCFMyBatchBidViewModel.h"
 @interface UCFNewInvestBtnView()
 @property(nonatomic, strong)UIButton    *investButtom;
 @property(nonatomic, strong)BaseViewModel   *vm;
@@ -102,6 +103,8 @@
         }
     } else if ([self.vm isKindOfClass:[UCFCollectionDetailVM class]]) {
          [(UCFCollectionDetailVM *)self.vm dealClickAction:title];
+    } else if ([self.vm isKindOfClass:[UCFMyBatchBidViewModel class]]) {
+         [(UCFMyBatchBidViewModel *)self.vm dealClickAction:title];
     }
     
 }

@@ -48,6 +48,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)NSString  *bidInvestText;
 
+@property(nonatomic, assign)BOOL checkBidDetail;
+
+- (void)dealClickAction:(NSString *)title;
+
 @end
 
 NS_ASSUME_NONNULL_END
