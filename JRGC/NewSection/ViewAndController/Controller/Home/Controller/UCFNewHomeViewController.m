@@ -31,8 +31,8 @@
 #import "HSHelper.h"
 #import "RiskAssessmentViewController.h"
 #import "UCFDiscoveryViewController.h"
-
-
+#import "UCFCouponPopup.h"
+#import "UCFNewLockContainerViewController.h"
 
 //#import "UCFCreateLockViewController.h"
 //#import "UCFUnlockViewController.h"
@@ -45,7 +45,7 @@
 
 @property(nonatomic, strong)BaseTableView     *showTableView;
 @property(nonatomic, strong)NSMutableArray    *dataArray;
-
+@property (strong, nonatomic)  UCFCouponPopup *ucfCp;
 /**
  商城推荐查看更多URL
  */
@@ -63,14 +63,15 @@
 {
     [super viewWillAppear:animated];
     [self.showTableView reloadData];
+    UIViewController *contro = [self jsd_getCurrentViewController];
+    if (![contro isKindOfClass:[UCFNewLockContainerViewController class]]) {
+        [self homeCouponPopup];
+    }
 }
 
 - (void)loadView
 {
     [super loadView];
-    
-
-
 }
 - (void)rightBarClicked:(UIButton *)button
 {
@@ -113,6 +114,7 @@
     [self blindVM];
     [self fetchData];
     [self blindUserStatue];
+    self.ucfCp = [[UCFCouponPopup alloc]init];
 }
 
 - (void)blindVM
@@ -405,6 +407,12 @@
     
 
 }
+- (void)homeCouponPopup
+{
+    if ([UserInfoSingle sharedManager].isShowCouple) {
+        [self.ucfCp request];
+    }
+}
 - (void)monitorUserLogin
 {
     [self fetchData];
@@ -425,5 +433,45 @@
 {
     [self fetchData];
 
+}
+- (UIViewController *)jsd_getCurrentViewController{
+    
+    UIViewController* currentViewController = [self jsd_getRootViewController];
+    BOOL runLoopFind = YES;
+    while (runLoopFind) {
+        if (currentViewController.presentedViewController) {
+            
+            currentViewController = currentViewController.presentedViewController;
+        } else if ([currentViewController isKindOfClass:[UINavigationController class]]) {
+            
+            UINavigationController* navigationController = (UINavigationController* )currentViewController;
+            currentViewController = [navigationController.childViewControllers lastObject];
+            
+        } else if ([currentViewController isKindOfClass:[UITabBarController class]]) {
+            
+            UITabBarController* tabBarController = (UITabBarController* )currentViewController;
+            currentViewController = tabBarController.selectedViewController;
+        } else {
+            
+            NSUInteger childViewControllerCount = currentViewController.childViewControllers.count;
+            if (childViewControllerCount > 0) {
+                
+                currentViewController = currentViewController.childViewControllers.lastObject;
+                
+                return currentViewController;
+            } else {
+                
+                return currentViewController;
+            }
+        }
+        
+    }
+    return currentViewController;
+}
+- (UIViewController *)jsd_getRootViewController{
+    
+    UIWindow* window = [[[UIApplication sharedApplication] delegate] window];
+    NSAssert(window, @"The window is empty");
+    return window.rootViewController;
 }
 @end
