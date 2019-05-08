@@ -229,9 +229,10 @@
   
             }
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            
-            self.requestUserbackBlock(NO);
-            self.requestUserbackBlock = nil;
+              if (self.requestUserbackBlock) {
+                self.requestUserbackBlock(NO);
+                self.requestUserbackBlock = nil;
+              }
         }];
         [request1 start];
     }

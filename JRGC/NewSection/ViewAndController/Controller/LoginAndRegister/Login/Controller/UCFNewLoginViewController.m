@@ -113,7 +113,8 @@
     }
     
     if ([bs isKindOfClass:[UCFWebViewJavascriptBridgeBanner class]]) {
-        [bs.rt_navigationController popViewControllerAnimated:YES];
+//        [bs.rt_navigationController popViewControllerAnimated:NO];
+        [bs.rt_navigationController removeViewController:bs];
     }
     [SingGlobalView.rootNavController popViewControllerAnimated:YES];
     
