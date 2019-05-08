@@ -12,6 +12,7 @@
 #import "UCFUnlockViewController.h"
 #import "UCFTouchIDViewController.h"
 #import "UCFWebViewJavascriptBridgeController.h"
+#import "UCFCouponPopup.h"
 @interface UCFNewLockContainerViewController ()
 @property(nonatomic, strong)UIViewController *currentController;
 @property(nonatomic, strong)UCFTouchIDViewController *touchIDController;
@@ -167,10 +168,9 @@
             }
         }
     }
+    
     SingleUserInfo.loginType  = LoginDefalut;
-    
-    
-
+    [UCFCouponPopup startQueryCouponPopup];//去调取首页优惠券弹框
 }
 - (void)dealloc
 {

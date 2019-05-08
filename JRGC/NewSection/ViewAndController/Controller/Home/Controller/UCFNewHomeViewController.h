@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)homeViewDataBidClickModel:(UCFNewHomeListModel *)model type:(UCFNewHomeListType)type;
 
+- (void)homeCouponPopup;
 @end
 
 NS_ASSUME_NONNULL_END

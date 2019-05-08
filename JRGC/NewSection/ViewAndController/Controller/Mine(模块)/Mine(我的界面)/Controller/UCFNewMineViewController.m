@@ -539,15 +539,16 @@
 }
 - (void)refreshHomeRequest
 {
-    [self requestMyReceipt];
-    [self requestMySimpleInfo];
-    [self getMallData];
-    [self getBannerData];
+//    [self requestMyReceipt];
+//    [self requestMySimpleInfo];
+//    [self getMallData];
+//    [self getBannerData];
+    
+    [self requestMineMessage];
 }
 
 - (void)requestMyReceipt//请求总资产信息
 {
-    ShowCodeMessage(-1, @"AAAAAA");
     UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
     
     //    request.animatingView = self.view;
@@ -895,4 +896,111 @@
         }
     }
 }
+
+- (void)requestMineMessage
+{
+    UCFMineMyReceiptApi * receiptrRequest = [[UCFMineMyReceiptApi alloc] init];
+    UCFMineMySimpleInfoApi * simpleRequest = [[UCFMineMySimpleInfoApi alloc] init];
+    UCFQueryBannerByTypeAPI *bannerRequest = [[UCFQueryBannerByTypeAPI alloc] initWithBannerType:17];
+    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"home"];
+    
+    YTKBatchRequest *batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:@[receiptrRequest , simpleRequest,bannerRequest, mallRequest]];
+    batchRequest.animatingView = self.view;
+    [batchRequest startWithCompletionBlockWithSuccess:^(YTKBatchRequest *batchRequest) {
+//        NSLog(@"succeed");
+        NSArray *requests = batchRequest.requestArray;
+        UCFMineMyReceiptApi *receiptrRequest   = (UCFMineMyReceiptApi *)requests[0];
+        if ([receiptrRequest isKindOfClass:[UCFMineMyReceiptApi class]])
+        {
+            UCFMineMyReceiptModel *model = [receiptrRequest.responseJSONModel copy];
+            DDLogDebug(@"---------%@",model);
+            if (model.ret == YES) {
+                
+                if (SingleUserInfo.loginData.userInfo.zxIsNew != !model.data.zxAccountIsShow)
+                {
+                    SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
+                    [SingleUserInfo setUserData:SingleUserInfo.loginData];
+                }
+                self.zxAccountIsShow = model.data.zxAccountIsShow;
+                self.nmAccountIsShow = model.data.nmAccountIsShow;
+                [self setTableViewArrayWithData:model];
+            }
+            else{
+                ShowCodeMessage(model.code, model.message);
+            }
+        }
+        
+        UCFMineMySimpleInfoApi * simpleRequest = (UCFMineMySimpleInfoApi *)requests[1];
+        if ([simpleRequest isKindOfClass:[UCFMineMySimpleInfoApi class]])
+        {
+            UCFMineMySimpleInfoModel *model = [simpleRequest.responseJSONModel copy];
+            DDLogDebug(@"---------%@",model);
+            if (model.ret == YES) {
+                
+                [self setTableViewArrayWithData:model];
+            }
+            else{
+                ShowCodeMessage(model.code, model.message);
+            }
+        }
+        
+        UCFQueryBannerByTypeAPI *bannerRequest = (UCFQueryBannerByTypeAPI *)requests[2];
+        if ([bannerRequest isKindOfClass:[UCFQueryBannerByTypeAPI class]])
+        {
+            UCFQueryBannerByTypeModel *model = bannerRequest.responseJSONModel;
+            if (model.ret) {
+                
+                [self setTableViewArrayWithData:model];
+                
+            } else {
+                ShowCodeMessage(model.code, model.message);
+            }
+        }
+        
+        UCFMallProductApi *mallRequest         = (UCFMallProductApi *)requests[3];
+        if ([mallRequest isKindOfClass:[UCFMallProductApi class]])
+        {
+            UCFHomeMallDataModel *model = mallRequest.responseJSONModel;
+            if (model.ret) {
+                
+                [self setTableViewArrayWithData:model];
+                
+            } else {
+                ShowCodeMessage(model.code, model.message);
+            }
+        }
+        // deal with requests result ...
+        [self.tableView endRefresh];
+        [self.tableView cyl_reloadData];
+    } failure:^(YTKBatchRequest *batchRequest) {
+//        NSLog(@"failed");
+        [self.tableView endRefresh];
+    }];
+}
+- (void)setBatchTableViewArrayWithData:(id)model
+{
+    if ([model isKindOfClass:[UCFMineMyReceiptModel class]]) {
+        
+        //查询账户信息
+        [self getAccountCellConfig:model];
+        //赋值 账户信息
+        [self.tableHead showMyReceipt:model];
+    }
+    if ([model isKindOfClass:[UCFMineMySimpleInfoModel class]]) {
+        
+        //查询工豆优惠券信息 和未读消息
+        //赋值 未读消息
+        [self.tableHead showMySimple:model];
+        [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:model, nil]];
+    }
+    if ([model isKindOfClass:[UCFHomeMallDataModel class]]) {
+        
+        [self showShopUrl:model];
+    }
+    if ([model isKindOfClass:[UCFQueryBannerByTypeModel class]]) {
+        
+        [self showBannerUrl:model];
+    }
+}
+
 @end
