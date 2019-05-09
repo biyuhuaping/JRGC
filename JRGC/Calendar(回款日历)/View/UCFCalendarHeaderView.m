@@ -108,7 +108,7 @@ static NSString *const cellId = @"cellId";
 + (CGFloat)viewHeight
 {
     if (SingleUserInfo.loginData.userInfo.zxIsNew) {
-        return 610 ;
+        return 628;
     }
     return 634;
 }

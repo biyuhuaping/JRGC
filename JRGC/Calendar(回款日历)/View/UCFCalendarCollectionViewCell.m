@@ -46,6 +46,10 @@
         calendar.appearance.titlePlaceholderColor = [Color color:PGColorOptionInputDefaultBlackGray];
         calendar.appearance.weekdayFont = [UIFont systemFontOfSize:12];
         calendar.appearance.todayColor = [Color color:PGColorOptionTitlerRead];
+        
+//        calendar.appearance.borderSelectionColor = [UIColor blackColor];
+//        calendar.appearance.selectionColor = [UIColor yellowColor];
+
 
         calendar.today = nil; // Hide the today circle
         [calendar registerClass:[DIYCalendarCell class] forCellReuseIdentifier:@"cell"];
