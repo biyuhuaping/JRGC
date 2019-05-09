@@ -7,7 +7,7 @@
 //
 
 #import "UCFNewRechargeViewController.h"
-
+#import "UCFNewMineViewController.h"
 #import "RechargeListViewController.h"
 @interface UCFNewRechargeViewController ()<UIScrollViewDelegate>
 @property(strong, nonatomic)UIScrollView *baseScroView;
@@ -75,6 +75,14 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fradeboard:)];
     [self.baseScroView addGestureRecognizer:tap];
 
+}
+- (void)getToBack
+{
+    UCFNewMineViewController *vc =  self.rt_navigationController.rt_viewControllers.firstObject;
+    if ([vc isKindOfClass:[UCFNewMineViewController class]]) {
+    [vc refreshMessagePoint];
+    }
+    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 - (void)fradeboard:(UITapGestureRecognizer *)tap
 {
