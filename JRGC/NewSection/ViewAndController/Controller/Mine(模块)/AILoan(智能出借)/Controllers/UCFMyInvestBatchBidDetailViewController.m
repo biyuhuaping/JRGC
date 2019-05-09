@@ -53,7 +53,7 @@
     remind.heightSize.equalTo(@40);
     remind.backgroundColor = [UIColor clearColor];
     remind.subviewVSpace = 5;
-    remind.subviewHSpace = 5;
+    remind.subviewHSpace = 10;
     self.remind = remind;
     [self.contentLayout addSubview:remind];
     
@@ -70,7 +70,7 @@
     [_collectionListVC didMoveToParentViewController:self];
     
     
-    UCFNewInvestBtnView *investView = [[UCFNewInvestBtnView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 57)];
+    UCFNewInvestBtnView *investView = [[UCFNewInvestBtnView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
     investView.myHorzMargin = 0;
     investView.bottomPos.equalTo(@0);
     [self.rootLayout addSubview:investView];
@@ -85,6 +85,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    
     self.VM.myBatchModel = self.dataModel;
     
     [self.navView blindCollectionVM:self.VM];

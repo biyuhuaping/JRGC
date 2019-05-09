@@ -45,7 +45,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.dataArr = [NSMutableArray arrayWithCapacity:20];
     // Do any additional setup after loading the view from its nib.
     _selectedStateArray = [[NSMutableArray alloc] init];// 已选中状态存储数组
     _currentPage = 1;

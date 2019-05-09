@@ -38,7 +38,7 @@
         center.x = sender.center.x;
         _moveLine.center = center;
     }];
-    
+    _moveLine.backgroundColor = [Color color:PGColorOptionTitlerRead];
     if (self.delegate && [self.delegate respondsToSelector:@selector(calendarDetailHeaderView:didClicked:)]) {
         [self.delegate calendarDetailHeaderView:self didClicked:sender];
     }

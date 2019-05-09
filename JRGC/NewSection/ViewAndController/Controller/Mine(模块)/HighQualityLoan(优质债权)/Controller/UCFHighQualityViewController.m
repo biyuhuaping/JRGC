@@ -40,6 +40,7 @@
     segeView.heightSize.equalTo(@57);
     segeView.myHorzMargin = 0;
     segeView.topPos.equalTo(board.bottomPos);
+    segeView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     [headView addSubview:segeView];
     
     [self.rootLayout addSubview:headView];
@@ -48,7 +49,7 @@
     self.showTableView.rightPos.equalTo(@0);
     self.showTableView.topPos.equalTo(headView.bottomPos);
     self.showTableView.bottomPos.equalTo(@0);
-    
+    self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     [self.rootLayout addSubview:self.showTableView];
     [self.showTableView reloadData];
 }

@@ -75,9 +75,14 @@
 }
 - (void)rightBarClicked:(UIButton *)button
 {
-    UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
+    if (button.tag == 100) {
+        [SingleUserInfo loadLoginViewController];
+    } else {
+        UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
+    }
+
 }
 - (void)viewDidLayoutSubviews
 {
@@ -87,8 +92,8 @@
     [super viewDidLoad];
     
     [self addLeftButtonTitle:@"首页"];
-    [self addRightbuttonImageName:@"home_icon_news"];
-    
+//    [self addRightbuttonImageName:@"home_icon_news"];
+    [self addrightButtonWithImageArray:@[@"home_icon_sgin",@"home_icon_news"]];
     self.showTableView.myVertMargin = 0;
     self.showTableView.myHorzMargin = 0;
     [self.rootLayout addSubview:self.showTableView];
@@ -199,7 +204,7 @@
         if (SingleUserInfo.loginData.userInfo.isRisk && !([data.title isEqualToString:@"内容推荐"] || [data.title isEqualToString:@"新手入门"])) {
             [sectionView showMore];
         } else {
-            if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"]) {
+            if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"] || [data.title isEqualToString:@"智能出借"] || [data.title isEqualToString:@"优质债权"]) {
                 [sectionView showMore];
             }
         }

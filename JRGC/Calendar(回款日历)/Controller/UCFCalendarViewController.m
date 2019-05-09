@@ -42,6 +42,7 @@
 {
     [super viewDidLayoutSubviews];
     self.tableview.tableHeaderView.frame =  CGRectMake(0, 0, ScreenWidth, [UCFCalendarHeaderView viewHeight]);
+    self.tableview.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 }
 #pragma mark - 初始化界面
 - (void)createUI {
@@ -52,7 +53,7 @@
     UCFCalendarHeaderView *calendarHeaderView = (UCFCalendarHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarHeaderView" owner:self options:nil] lastObject];
     calendarHeaderView.frame = CGRectMake(0, 0, ScreenWidth, [UCFCalendarHeaderView viewHeight]);
     self.tableview.tableHeaderView = calendarHeaderView;
-    calendarHeaderView.backgroundColor = UIColorWithRGB(0xebebee);
+    calendarHeaderView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     calendarHeaderView.accoutType = self.accoutType;
     calendarHeaderView.delegate = self;
     self.calendarHeader = calendarHeaderView;
@@ -65,6 +66,7 @@
     self.pickerView = pickerView;
     
     [self getCanlendarHeaderInfoFromNet];
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 }
 
 #pragma mark - tableView的数据源方法
@@ -143,6 +145,7 @@
         _headerView.delegate = self;
         self.accoutType = SelectAccoutTypeP2P;
         [_headerView setSelectButtonIndex:0];
+        _headerView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     }
     return _headerView;
 }

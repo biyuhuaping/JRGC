@@ -75,13 +75,13 @@ static float const kUIemptyOverlayLabelHeight    = 20;
     emptyOverlayLabel.numberOfLines = 0;
     emptyOverlayLabel.backgroundColor = [UIColor clearColor];
     emptyOverlayLabel.text = @"暂无数据";
-    emptyOverlayLabel.font = [UIFont boldSystemFontOfSize:18];
+    emptyOverlayLabel.font = [UIFont systemFontOfSize:15];
     emptyOverlayLabel.frame = ({
         CGRect frame = emptyOverlayLabel.frame;
         frame.origin.y = CGRectGetMaxY(self.emptyOverlayImageView.frame) + 10;
         frame;
     });
-    emptyOverlayLabel.textColor = UIColorWithRGB(0xA0A4B1);
+    emptyOverlayLabel.textColor = [Color color:PGColorOptionTitleGray];
     [self addSubview:emptyOverlayLabel];
 }
 

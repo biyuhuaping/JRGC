@@ -42,10 +42,10 @@
         iconView.heightSize.equalTo(@18);
         iconView.widthSize.equalTo(@3);
         iconView.leftPos.equalTo(@15);
-        iconView.topPos.equalTo(@10);
+        iconView.topPos.equalTo(@15);
         iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         iconView.clipsToBounds = YES;
-        iconView.layer.cornerRadius = 2;
+        iconView.layer.cornerRadius = 1.5;
         [whiteView addSubview:iconView];
         
         
@@ -62,7 +62,7 @@
         loanTimeMarkLab.textColor = [Color color:PGColorOptionTitleBlack];
         loanTimeMarkLab.font = [Color gc_Font:14];
         loanTimeMarkLab.leftPos.equalTo(@15);
-        loanTimeMarkLab.bottomPos.equalTo(@20);
+        loanTimeMarkLab.bottomPos.equalTo(@18);
         [loanTimeMarkLab sizeToFit];
         [whiteView addSubview:loanTimeMarkLab];
         

@@ -29,7 +29,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorWithRGB(0xebebee);
+        self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _detailType = tp;
         [self initTableView];
     }
@@ -40,7 +40,7 @@
 {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStylePlain];
     _tableView.backgroundColor = [UIColor clearColor];
-    _tableView.separatorColor = UIColorWithRGB(0xeff0f3);
+    _tableView.separatorColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     //_tableView.bounces = NO;
@@ -56,7 +56,7 @@
     [self addSubview:_tableView];
     UIView *footerview = [[UIView alloc] init];
     footerview.frame = CGRectMake(0, 0, ScreenWidth, 0.5);
-    [footerview setBackgroundColor:UIColorWithRGB(0xd8d8d8)];
+    [footerview setBackgroundColor: [Color color:PGColorOpttonTabeleViewBackgroundColor]];
     _tableView.tableFooterView = footerview;
     [_tableView setHidden:YES];
 }
@@ -76,9 +76,9 @@
 {
     if (section == 2) {
         UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 48)];
-        footerView.backgroundColor = UIColorWithRGB(0xebebee);
+        footerView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         
-        UILabel *titleLabel = [UILabel labelWithFrame:CGRectZero text:@"等级加息奖励将在起息后以工豆形式发放，灵活期限标起息后只发放锁定期内工豆，其余将在回款时发放。" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:11]];
+        UILabel *titleLabel = [UILabel labelWithFrame:CGRectZero text:@"等级加息奖励将在起息后以工豆形式发放，灵活期限标起息后只发放锁定期内工豆，其余将在回款时发放。" textColor:[Color color:PGColorOptionTitleGray] font:[UIFont systemFontOfSize:11]];
         titleLabel.textAlignment = NSTextAlignmentLeft;
         titleLabel.tag = 1001;
         titleLabel.numberOfLines = 0;
@@ -87,15 +87,15 @@
         return footerView;
     }else if(section == 0){
         UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 25)];
-        footerView.backgroundColor = UIColorWithRGB(0xebebee);
-        UILabel *titleLabel = [UILabel labelWithFrame:CGRectZero text:self.investDetailModel.interestMode  textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:11]];
+        footerView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        UILabel *titleLabel = [UILabel labelWithFrame:CGRectZero text:self.investDetailModel.interestMode  textColor:[Color color:PGColorOptionTitleGray] font:[UIFont systemFontOfSize:11]];
         titleLabel.text = [_detailType intValue] == 2  ? self.investDetailModel.buyCueDes : self.investDetailModel.interestMode;
         titleLabel.textAlignment = NSTextAlignmentLeft;
         titleLabel.tag = 1001;
         titleLabel.numberOfLines = 0;
         [footerView addSubview:titleLabel];
         titleLabel.frame = CGRectMake(15, 5, ScreenWidth - 30, 15);
-        [self viewAddLine:footerView Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
+        [self viewAddLine:footerView Up:YES withColor:[Color color:PGColorOptionCellSeparatorGray]];
         
         return footerView;
     } else if (section == 1) {
@@ -103,7 +103,7 @@
             return nil;
         } else {
             UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 34)];
-            footerView.backgroundColor = UIColorWithRGB(0xebebee);
+            footerView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 2, ScreenWidth - 30, 16)];
             label.textColor = [Color color:PGColorOptionTitleGray];
             label.text = @"该借款标还款日不计息";
@@ -214,13 +214,13 @@
         titleStateLabel.font = [UIFont systemFontOfSize:15];
         [view addSubview:titleStateLabel];
         
-//        if ([titleStateLabel.text isEqualToString:@"招标中"]) {
-//            titleStateLabel.textColor = UIColorWithRGB(0xfd4d4c);
-//        } else if ([titleStateLabel.text isEqualToString:@"待回款"]) {
-//            titleStateLabel.textColor = UIColorWithRGB(0x4aa1f9);
-//        } else {
-//            titleStateLabel.textColor = UIColorWithRGB(0x999999);
-//        }
+        if ([titleStateLabel.text isEqualToString:@"招标中"]) {
+            titleStateLabel.textColor = [Color color:PGColorOptionTitlerRead];
+        } else if ([titleStateLabel.text isEqualToString:@"回款中"]) {
+            titleStateLabel.textColor = [Color color:PGColorOptionCellContentBlue];
+        } else {
+            titleStateLabel.textColor = [Color color:PGColorOptionTitleGray];
+        }
         
         [headView addSubview:view];
         
@@ -285,7 +285,7 @@
          */
     } else if (section == 2) {
         UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
-        headView.backgroundColor = UIColorWithRGB(0xebebee);
+        headView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
       
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 50)];
         view.backgroundColor = [Color color:PGColorOptionThemeWhite];
@@ -309,9 +309,9 @@
         if (!self.investDetailModel.gradeIncreases || [[UCFToolsMehod isNullOrNilWithString:self.investDetailModel.gradeIncreases] isEqualToString:@""] || [self.investDetailModel.gradeIncreases doubleValue] == 0.0) {
             if (self.investDetailModel.contractClauses.count > 0) {
                 UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-                headView.backgroundColor = UIColorWithRGB(0xebebee);
-                [self viewAddLine:headView Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
-                [self viewAddLine:headView Up:NO withColor:UIColorWithRGB(0xd8d8d8)];
+                headView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+//                [self viewAddLine:headView Up:YES withColor:[Color color:PGColorOptionTitlerRead]];
+//                [self viewAddLine:headView Up:NO withColor:[Color color:PGColorOptionTitlerRead]];
                 return headView;
             }
         }
@@ -431,7 +431,7 @@
        
     } else if (section == 5) {
         UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
-        headView.backgroundColor = UIColorWithRGB(0xebebee);
+        headView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 50)];
         view.backgroundColor = [Color color:PGColorOptionThemeWhite];
@@ -453,7 +453,7 @@
         UILabel *Label = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 15 - 100, 18, 100, 14)];
         if (self.investDetailModel.refundSummarys.count > 0) {
             NSString *lalText = [NSString stringWithFormat:@"第%@期/共%@期",self.investDetailModel.refundSummarysNow,self.investDetailModel.refundSummarysCount];
-            Label.textColor = UIColorWithRGB(0x555555);
+            Label.textColor = [Color color:PGColorOptionTitleBlack];
             Label.backgroundColor = [UIColor clearColor];
             Label.textAlignment = NSTextAlignmentRight;
             Label.font = [UIFont systemFontOfSize:13];
@@ -823,7 +823,7 @@
         titleLabel.text = [titleArr objectAtIndex:[indexPath row]];
         if ([indexPath row] == 0) {
             amountLabel.text = [NSString stringWithFormat:@"%@%%",self.investDetailModel.gradeIncreases];//self.investDetailModel.gradeIncreases
-            amountLabel.textColor = UIColorWithRGB(0xfd4d4c);
+            amountLabel.textColor = [Color color:PGColorOptionTitlerRead];
         } else if ([indexPath row] == 1) {
             amountLabel.text = [NSString stringWithFormat:@"¥%@",self.investDetailModel.returnBeans];//self.investDetailModel.returnBeans
         }
@@ -842,7 +842,7 @@
             acessoryLabel.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:acessoryLabel];
             
-            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 49, ScreenWidth - 15, 1)];
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 49.5, ScreenWidth - 15, 0.5)];
             lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
             lineView.tag = 101;
             [cell.contentView addSubview:lineView];

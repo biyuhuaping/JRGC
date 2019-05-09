@@ -45,7 +45,7 @@
         calendar.appearance.weekdayTextColor = [Color color:PGColorOptionInputDefaultBlackGray];
         calendar.appearance.titlePlaceholderColor = [Color color:PGColorOptionInputDefaultBlackGray];
         calendar.appearance.weekdayFont = [UIFont systemFontOfSize:12];
-        calendar.appearance.todayColor = UIColorWithRGB(0xfd4d4c);
+        calendar.appearance.todayColor = [Color color:PGColorOptionTitlerRead];
 
         calendar.today = nil; // Hide the today circle
         [calendar registerClass:[DIYCalendarCell class] forCellReuseIdentifier:@"cell"];
@@ -171,14 +171,14 @@
             if ([dateStr isEqualToString:day.paidTime]) {
                 switch ([day.isAdvanceRepay intValue]) {
                     case 0:
-                        return @[UIColorWithRGB(0xfd4d4c)];
+                        return @[[Color color:PGColorOptionTitlerRead]];
                         break;
                     case 1:
-                        return @[UIColorWithRGB(0x7c9dc7)];
+                        return @[[Color color:PGColorOptionCellContentBlue]];
                         break;
                         
                     case 2:
-                        return @[UIColorWithRGB(0x7c9dc7), UIColorWithRGB(0xfd4d4c)];
+                        return @[[Color color:PGColorOptionCellContentBlue], [Color color:PGColorOptionTitlerRead]];
                         break;
                 }
             }
@@ -192,7 +192,7 @@
 
 - (nullable UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance fillSelectionColorForDate:(NSDate *)date
 {
-    return UIColorWithRGB(0xfd4d4c);
+    return [Color color:PGColorOptionTitlerRead];
 }
 
 - (nullable NSArray<UIColor *> *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance eventSelectionColorsForDate:(NSDate *)date {
@@ -202,14 +202,14 @@
             if ([dateStr isEqualToString:day.paidTime]) {
                 switch ([day.isAdvanceRepay intValue]) {
                     case 0:
-                        return @[UIColorWithRGB(0xfd4d4c)];
+                        return @[[Color color:PGColorOptionTitlerRead]];
                         break;
                     case 1:
-                        return @[UIColorWithRGB(0x7c9dc7)];
+                        return @[[Color color:PGColorOptionCellContentBlue]];
                         break;
                         
                     case 2:
-                        return @[UIColorWithRGB(0x7c9dc7), UIColorWithRGB(0xfd4d4c)];
+                        return @[[Color color:PGColorOptionCellContentBlue], [Color color:PGColorOptionTitlerRead]];
                         break;
                 }
             }

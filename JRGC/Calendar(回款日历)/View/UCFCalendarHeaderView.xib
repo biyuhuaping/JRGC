@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -84,24 +84,24 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本月应回款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irx-Tr-ul1">
-                            <rect key="frame" x="15" y="13" width="62" height="15"/>
+                            <rect key="frame" x="15" y="11" width="62" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.69411764705882351" green="0.70980392156862748" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAg-gO-OcS">
-                            <rect key="frame" x="15" y="33" width="47.5" height="21.5"/>
+                            <rect key="frame" x="15" y="30" width="47.5" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本月已回款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZIe-4A-XSn">
-                            <rect key="frame" x="255.5" y="13" width="62" height="15"/>
+                            <rect key="frame" x="255.5" y="11" width="62" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.69411764705882351" green="0.70980392156862748" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHQ-Gh-b60">
-                            <rect key="frame" x="255.5" y="33" width="47.5" height="21.5"/>
+                            <rect key="frame" x="255.5" y="30" width="47.5" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -109,16 +109,16 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="3t3-m6-xYV" firstAttribute="centerX" secondItem="6in-WS-Cwv" secondAttribute="centerX" id="DQO-3H-BYf"/>
-                        <constraint firstItem="IHQ-Gh-b60" firstAttribute="top" secondItem="ZIe-4A-XSn" secondAttribute="bottom" constant="5" id="P7E-y5-F3d"/>
+                        <constraint firstItem="IHQ-Gh-b60" firstAttribute="top" secondItem="ZIe-4A-XSn" secondAttribute="bottom" constant="4" id="P7E-y5-F3d"/>
                         <constraint firstItem="ZIe-4A-XSn" firstAttribute="leading" secondItem="3t3-m6-xYV" secondAttribute="trailing" constant="15" id="Sq3-4Q-W3Y"/>
                         <constraint firstItem="3t3-m6-xYV" firstAttribute="top" secondItem="6in-WS-Cwv" secondAttribute="top" constant="10" id="WMo-Ty-PhS"/>
                         <constraint firstItem="DAg-gO-OcS" firstAttribute="leading" secondItem="Irx-Tr-ul1" secondAttribute="leading" id="Z29-Ao-5fN"/>
-                        <constraint firstItem="DAg-gO-OcS" firstAttribute="top" secondItem="Irx-Tr-ul1" secondAttribute="bottom" constant="5" id="j8S-2p-8ec"/>
-                        <constraint firstItem="ZIe-4A-XSn" firstAttribute="top" secondItem="6in-WS-Cwv" secondAttribute="top" constant="13" id="joO-O0-wd8"/>
+                        <constraint firstItem="DAg-gO-OcS" firstAttribute="top" secondItem="Irx-Tr-ul1" secondAttribute="bottom" constant="4" id="j8S-2p-8ec"/>
+                        <constraint firstItem="ZIe-4A-XSn" firstAttribute="top" secondItem="6in-WS-Cwv" secondAttribute="top" constant="11" id="joO-O0-wd8"/>
                         <constraint firstItem="ZIe-4A-XSn" firstAttribute="leading" secondItem="IHQ-Gh-b60" secondAttribute="leading" id="k3Y-tQ-eXg"/>
                         <constraint firstItem="Irx-Tr-ul1" firstAttribute="leading" secondItem="6in-WS-Cwv" secondAttribute="leading" constant="15" id="kCw-cy-kA9"/>
                         <constraint firstAttribute="bottom" secondItem="3t3-m6-xYV" secondAttribute="bottom" constant="10" id="nZ5-n2-esc"/>
-                        <constraint firstItem="Irx-Tr-ul1" firstAttribute="top" secondItem="6in-WS-Cwv" secondAttribute="top" constant="13" id="tak-Fp-NOf"/>
+                        <constraint firstItem="Irx-Tr-ul1" firstAttribute="top" secondItem="6in-WS-Cwv" secondAttribute="top" constant="11" id="tak-Fp-NOf"/>
                         <constraint firstAttribute="height" constant="60" id="uY6-MG-ZgT"/>
                     </constraints>
                 </view>
@@ -130,7 +130,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aat-EG-eXu">
-                    <rect key="frame" x="0.0" y="579" width="480" height="32"/>
+                    <rect key="frame" x="0.0" y="579" width="480" height="45"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MrX-Q0-fFl">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="0.5"/>
@@ -140,13 +140,13 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计划回款日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXN-hO-XSi">
-                            <rect key="frame" x="403" y="8.5" width="62" height="15"/>
+                            <rect key="frame" x="403" y="15" width="62" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k5H-T2-OGU">
-                            <rect key="frame" x="390" y="12" width="8" height="8"/>
+                            <rect key="frame" x="390" y="18.5" width="8" height="8"/>
                             <color key="backgroundColor" red="0.99215686274509807" green="0.30196078431372547" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="8" id="BTh-uJ-nNI"/>
@@ -159,13 +159,13 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际回款日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cY-ZR-Nyh">
-                            <rect key="frame" x="318" y="8.5" width="62" height="15"/>
+                            <rect key="frame" x="318" y="15" width="62" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZy-EA-DuP">
-                            <rect key="frame" x="305" y="12" width="8" height="8"/>
+                            <rect key="frame" x="305" y="18.5" width="8" height="8"/>
                             <color key="backgroundColor" red="0.48627450980392156" green="0.61568627450980395" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="8" id="eNt-Yj-pcv"/>
@@ -180,7 +180,7 @@
                     </subviews>
                     <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="32" id="2Pm-32-w4M"/>
+                        <constraint firstAttribute="height" constant="45" id="2Pm-32-w4M"/>
                         <constraint firstItem="k5H-T2-OGU" firstAttribute="leading" secondItem="8cY-ZR-Nyh" secondAttribute="trailing" constant="10" id="EFE-xZ-aCT"/>
                         <constraint firstItem="k5H-T2-OGU" firstAttribute="centerY" secondItem="TXN-hO-XSi" secondAttribute="centerY" id="TfS-zd-452"/>
                         <constraint firstItem="MrX-Q0-fFl" firstAttribute="top" secondItem="Aat-EG-eXu" secondAttribute="top" id="ZHn-gu-cJU"/>
@@ -215,11 +215,14 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="baseImageView" destination="XSB-WI-jI6" id="k5e-11-yk7"/>
+                <outlet property="blueView" destination="PZy-EA-DuP" id="oe9-Ei-5KS"/>
                 <outlet property="calendarH" destination="2sG-4w-2Mk" id="PG3-dF-Vzz"/>
                 <outlet property="calendarView" destination="aNX-uC-ikO" id="boc-Kh-q7m"/>
+                <outlet property="dateLineView" destination="MrX-Q0-fFl" id="oHB-bE-F4R"/>
                 <outlet property="moneyBaseView" destination="6in-WS-Cwv" id="AiD-ws-LRf"/>
                 <outlet property="myPaymentLabel" destination="kqV-7G-BjY" id="tn0-Us-AEV"/>
                 <outlet property="paidMoneyLabel" destination="IHQ-Gh-b60" id="Ns9-rU-0RC"/>
+                <outlet property="redView" destination="k5H-T2-OGU" id="x9H-fN-Kpz"/>
                 <outlet property="repayMoneyLabel" destination="DAg-gO-OcS" id="e9W-uB-hti"/>
                 <outlet property="waitInterestLabel" destination="L18-Ds-UPT" id="6Xi-c1-Xl3"/>
                 <outlet property="waitPrincipalLabel" destination="8np-Sd-wm8" id="UmS-sO-pAx"/>

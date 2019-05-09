@@ -48,10 +48,10 @@
         iconView.heightSize.equalTo(@18);
         iconView.widthSize.equalTo(@3);
         iconView.leftPos.equalTo(@15);
-        iconView.topPos.equalTo(@16);
+        iconView.topPos.equalTo(@17);
         iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         iconView.clipsToBounds = YES;
-        iconView.layer.cornerRadius = 2;
+        iconView.layer.cornerRadius = 1.5;
         [whiteView addSubview:iconView];
         
         
@@ -76,12 +76,12 @@
         arrowView.image = [UIImage imageNamed:@"list_icon_arrow"];
         arrowView.mySize = CGSizeMake(7, 11);
         arrowView.rightPos.equalTo(@15);
-        arrowView.centerYPos.equalTo(self.titleLab.centerYPos);
+        arrowView.centerYPos.equalTo(self.bidStatusLab.centerYPos);
         [whiteView addSubview:arrowView];
         
         
         UIView *lineView = [[UIView alloc] init];
-        lineView.heightSize.equalTo(@1);
+        lineView.heightSize.equalTo(@0.5);
         lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         lineView.myHorzMargin = 15;
         lineView.topPos.equalTo(@50);

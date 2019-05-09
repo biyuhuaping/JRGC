@@ -46,7 +46,7 @@
 - (void)addRightButtonWithImage:(UIImage *)rightButtonimage;
 {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 25, 25);
+    rightbutton.frame = CGRectMake(0, 0, 30, 30);
     rightbutton.backgroundColor = [UIColor clearColor];
     [rightbutton setImage:rightButtonimage forState:UIControlStateNormal];
     [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -149,7 +149,7 @@
     [_baseScrollView addSubview:view1];
 //    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view1 isTop:YES];
     
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetHeight(view1.frame) - 1, CGRectGetWidth(view1.frame) - 30 , 1)];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetHeight(view1.frame) - 0.5, CGRectGetWidth(view1.frame) - 30 , 0.5)];
     lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     [view1 addSubview:lineView];
     
@@ -175,6 +175,7 @@
     [submitBtn1 addTarget:self action:@selector(checkIsCanInvest:) forControlEvents:UIControlEventTouchUpInside];
     submitBtn1.clipsToBounds = YES;
     submitBtn1.layer.cornerRadius = 20;
+    submitBtn1.titleLabel.font = [Color gc_Font:15];
     [_baseScrollView addSubview:submitBtn1];
     
 
@@ -185,18 +186,16 @@
     label1.numberOfLines = 0;
     label1.frame = CGRectMake(15, CGRectGetMaxY(submitBtn1.frame) + 15, ScreenWidth - 30, size.height + 5);
     label1.text = totalStr;
-    label1.textAlignment = NSTextAlignmentLeft;
     label1.userInteractionEnabled = YES;
     label1.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
     label1.lineBreakMode = NSLineBreakByCharWrapping;
     label1.wrapContentHeight = YES;   //高度自动计算。
-    [label1 sizeToFit];
     __weak typeof(self) weakSelf = self;
     [label1 addLinkString:@"《批量出借咨询与服务协议》" block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf showHeTong];
     }];
     [label1 setFontColor:[Color color:PGColorOptionCellContentBlue] string:@"《批量出借咨询与服务协议》"];
-    
+    label1.textAlignment = NSTextAlignmentCenter;
     [_baseScrollView addSubview:label1];
 }
 - (void)showHeTong
@@ -236,7 +235,7 @@
     [_baseScrollView addSubview:tipLab];
     
     
-    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(tipLab.frame) + 5, ScreenWidth, 16)];
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(tipLab.frame) + 10, ScreenWidth, 16)];
     tipLabel.text = [NSString stringWithFormat:@"批量出借单次最高限额：%@元",[selectButton titleForState:UIControlStateNormal]];
     tipLabel.textAlignment = NSTextAlignmentCenter;
     tipLabel.font = [UIFont systemFontOfSize:15.0f];
@@ -245,11 +244,11 @@
     
     
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.frame = CGRectMake(CGRectGetMinX(sucessImageView.frame), CGRectGetMaxY(tipLab.frame) + 30, CGRectGetWidth(sucessImageView.frame), 34);
-    [backBtn setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(CGRectGetWidth(sucessImageView.frame), 34)] forState:UIControlStateNormal];
-    backBtn.layer.cornerRadius = 17;
+    backBtn.frame = CGRectMake(CGRectGetMinX(sucessImageView.frame), CGRectGetMaxY(tipLabel.frame) + 30, CGRectGetWidth(sucessImageView.frame), 40);
+    [backBtn setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(CGRectGetWidth(sucessImageView.frame), 40)] forState:UIControlStateNormal];
+    backBtn.layer.cornerRadius = 20;
     backBtn.clipsToBounds = YES;
-    backBtn.titleLabel.font = [Color gc_Font:16];
+    backBtn.titleLabel.font = [Color gc_Font:15];
     [backBtn setTitle:@"返回" forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [_baseScrollView addSubview:backBtn];
@@ -278,8 +277,9 @@
         NSString *title = [self.quotaArr[i] valueForKey:@"title"];
         [button setTitle:[NSString stringWithFormat:@"%@",title] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:20.0f];
-        [button setTitleColor:UIColorWithRGB(0x666666) forState:UIControlStateNormal];
-        
+        [button setTitleColor:[Color color:PGColorOptionTitleBlack] forState:UIControlStateNormal];
+        [button setTitleColor:[Color color:PGColorOpttonRateNoramlTextColor] forState:UIControlStateSelected];
+
         NSRange range = [title rangeOfString:@"万"];
         if (range.location != NSNotFound) {
             NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",[self.quotaArr[i] valueForKey:@"title"]]];
@@ -312,6 +312,7 @@
     [submitBtn2 setTitle:@"提交" forState:UIControlStateNormal];
     submitBtn2.frame = CGRectMake(ScreenWidth + 25, btnMaxY + 40, ScreenWidth - 50, 40);
     UIImage *image = [UIImage gc_styleImageSize:submitBtn2.size];
+     submitBtn2.titleLabel.font = [Color gc_Font:15];
     [submitBtn2 setBackgroundImage:image forState:UIControlStateNormal];
     [submitBtn2 addTarget:self action:@selector(checkIsCanInvest:) forControlEvents:UIControlEventTouchUpInside];
     submitBtn2.clipsToBounds = YES;
@@ -411,11 +412,11 @@
     
     
     UIView *topLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-    topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    topLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     [bottomView addSubview:topLineView];
     
-    UIView *bottmLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomView.frame) - 1, ScreenWidth, 1)];
-    bottmLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    UIView *bottmLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomView.frame) - 0.5, ScreenWidth, 0.5)];
+    bottmLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     [bottomView addSubview:bottmLineView];
 }
 //初始化标题view

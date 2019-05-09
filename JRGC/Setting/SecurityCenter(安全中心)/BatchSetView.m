@@ -35,7 +35,7 @@
     
     _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 12, CGRectGetMinY(_iconImageView.frame), SCREEN_WIDTH - CGRectGetMaxX(_iconImageView.frame) - 10 - 10,  18)];
     _titleLab.font = [Color gc_Font:16.0f];
-    _titleLab.textColor =  [Color color:PGColorOpttonBatchTextColor];
+    _titleLab.textColor =  [Color color:PGColorOptionTitleBlack];
     [self addSubview:_titleLab];
     
     _desLabe = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 12, CGRectGetMaxY(_titleLab.frame) + 5, CGRectGetWidth(_titleLab.frame), 55)];

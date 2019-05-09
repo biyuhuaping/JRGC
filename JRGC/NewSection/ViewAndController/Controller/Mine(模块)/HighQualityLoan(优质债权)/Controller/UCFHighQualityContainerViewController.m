@@ -44,7 +44,7 @@
         _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NavigationBarHeight1) WithTitleArray:@[@"优质债权",@"债权转让"]];
         _pageHeadView.leftSpace = 50;
         _pageHeadView.rightSpace = 50;
-        _pageHeadView.leftBackImage = @"icon_back";
+        _pageHeadView.leftBackImage = @"icon_left";
         [_pageHeadView reloaShowView];
         [_pageHeadView.leftBarBtn addTarget:self action:@selector(leftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
