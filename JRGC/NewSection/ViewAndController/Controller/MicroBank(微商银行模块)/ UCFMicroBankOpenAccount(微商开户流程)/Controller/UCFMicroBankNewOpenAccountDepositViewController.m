@@ -377,14 +377,16 @@
 //        
 //                self.phoneView.contentField.text   = self.GetOpenAccountModel.data.userInfo.phoneNum;
 //            }
-            if (self.GetOpenAccountModel.data.userInfo.bankCard.length > 0) {
-                //将银行卡（textField3）要显示的文字四位分隔
-                self.selectBankView.oaContentLabel.text = [NSString bankIdSeparate:self.GetOpenAccountModel.data.userInfo.bankCard];
-            }
+//            if (self.GetOpenAccountModel.data.userInfo.bankCard.length > 0) {
+//                //将银行卡（textField3）要显示的文字四位分隔
+//                self.selectBankView.oaContentLabel.text = [NSString bankIdSeparate:self.GetOpenAccountModel.data.userInfo.bankCard];
+//            }
             //银行logo
             if (self.GetOpenAccountModel.data.userInfo.bankName.length > 0)
             {//如果有银行名称，就显示名称，否则显示“请选择”
                 self.selectBankView.oaContentLabel.text = self.GetOpenAccountModel.data.userInfo.bankName;
+                self.selectBankView.oaContentLabel.textColor = [Color color:PGColorOptionTitleBlack];
+                [self.selectBankView.oaContentLabel sizeToFit];
             }
             
             if (self.GetOpenAccountModel.data.userInfo.bankLogo.length > 0) {

@@ -589,7 +589,7 @@
 {
     UCFMineMySimpleInfoApi * request = [[UCFMineMySimpleInfoApi alloc] init];
     
-    //    request.animatingView = self.view;
+    request.animatingView = self.view;
     //    request.tag =tag;
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         // 你可以直接在这里使用 self
@@ -844,7 +844,8 @@
 - (void)refreshMessagePoint
 {
    [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
-   [self requestMySimpleInfo];
+//   [self requestMySimpleInfo];
+    [self.tableView beginRefresh];
 }
 
 #pragma mark - 用户状态检测
