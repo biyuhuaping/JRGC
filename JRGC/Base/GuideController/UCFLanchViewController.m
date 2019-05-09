@@ -103,7 +103,7 @@
 - (void)getAdversementImageStyle:(int)style
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanners.php?key=0ca175b9c0f726a831d895e&id=19&p=%d",style];
+        NSString *URL = [NSString stringWithFormat:@"https://www.9888keji.com/api/directive/contentList?categoryId=30"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL:[NSURL URLWithString:URL]];
         [request setHTTPMethod:@"GET"];
@@ -115,19 +115,35 @@
                 return ;
             }
             NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
-            if (imageStr && ![imageStr isEqualToString:@""]) {
-                imageStr = [imageStr stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-                imageStr = [imageStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            NSDictionary * dic = [imageStr objectFromJSONString];
+            NSArray *listArr = dic[@"page"][@"list"];
+            if (listArr.count > 0) {
+                
+                NSInteger index = 1;
+                if (ScreenHeight / ScreenWidth > 2) {
+                    index = 2;
+                } else {
+                    index = 1;
+                }
+                NSString *imageStr = @"";
+                NSDictionary *picDic = [listArr objectSafeAtIndex:index];
+                if ([[picDic allKeys] containsObject:@"cover"]) {
+                    
+                    imageStr = [NSString stringWithFormat:@"%@%@",CMS_SEVERIP, picDic[@"cover"]];
+                }
+                
+                [[NSUserDefaults standardUserDefaults] setValue:imageStr forKey:@"adversementImageUrl"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                SDImageCache *cache = [[SDImageCache alloc] init];
+                NSURL * url = [NSURL URLWithString:imageStr];
+                BOOL hasImage = [cache diskImageExistsWithKey:imageStr];
+                if (!hasImage) {
+                    [Common storeImage:url];
+                }
+                
             }
-            [[NSUserDefaults standardUserDefaults] setValue:imageStr forKey:@"adversementImageUrl"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SDImageCache *cache = [[SDImageCache alloc] init];
-            NSURL * url = [NSURL URLWithString:imageStr];
-            BOOL hasImage = [cache diskImageExistsWithKey:imageStr];
-            if (!hasImage) {
-                [Common storeImage:url];
-            }
         });
     });
 }

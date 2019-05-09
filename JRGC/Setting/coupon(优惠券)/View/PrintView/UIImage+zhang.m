@@ -41,8 +41,8 @@
     
     CFRelease(font);
     
-    int x = 0;
-    int y = 0;
+    int x = 3;
+    int y = 5;
     const char *text = [text1 UTF8String];
     
     CFStringRef string = CFStringCreateWithCString(NULL, text, kCFStringEncodingMacRoman);

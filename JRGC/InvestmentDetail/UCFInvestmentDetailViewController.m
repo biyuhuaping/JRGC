@@ -63,11 +63,10 @@
     [self.view addSubview:_investmentDetailView];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-    lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     [self.view addSubview:lineView];
     
-//    _nodataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) errorTitle:@"暂无投资详情信息"];
-//    [_nodataView showInView:self.view];
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     
     _errorView = [[UCF404ErrorView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) errorTitle:nil];
     _errorView.delegate = self;

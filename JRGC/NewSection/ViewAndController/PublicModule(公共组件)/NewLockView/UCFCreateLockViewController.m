@@ -268,6 +268,8 @@
 {
     [LLLockPassword saveLockPassword:@""];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"useLockView"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
+
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self hide];
 }

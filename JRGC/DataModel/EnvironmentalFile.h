@@ -18,7 +18,7 @@
 #define P2P_SERVER_IP   @"https://app.9888.cn/"
 #define NEW_SERVER_IP   @"https://app.9888.cn/"
 #define ZX_SERVER_IP    @"https://app.9888.cn/mpappZX/"  // 尊享地址链接
-
+#define CMS_SEVERIP     @"https://www.9888keji.com/webfile/"
 #define JPUSHKEY    @"d3fa655cc616a27b694fa9cb" //极光推送正式key
 
 #else

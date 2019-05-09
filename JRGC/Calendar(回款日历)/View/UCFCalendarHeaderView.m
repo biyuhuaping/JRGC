@@ -42,6 +42,12 @@
 @property (strong, nonatomic) UIView *weekView;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter1;
+
+@property (weak, nonatomic) IBOutlet UIView *dateLineView;
+
+@property (weak, nonatomic) IBOutlet UIView *blueView;
+@property (weak, nonatomic) IBOutlet UIView *redView;
+
 @end
 
 @implementation UCFCalendarHeaderView
@@ -88,7 +94,7 @@
         for (int i=0; i<7; i++) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
             label.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
-            label.font = [UIFont systemFontOfSize:12];
+            label.font = [UIFont systemFontOfSize:15];
             label.tag = i;
             label.textAlignment = NSTextAlignmentCenter;
             [_weekView addSubview:label];
@@ -102,14 +108,21 @@ static NSString *const cellId = @"cellId";
 + (CGFloat)viewHeight
 {
     if (SingleUserInfo.loginData.userInfo.zxIsNew) {
-        return 610;
+        return 628;
     }
-    return 620;
+    return 634;
 }
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    self.dateLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    CGRect frame1 = self.dateLineView.frame;
+    frame1.size.height = 0.5;
+    self.dateLineView.frame = frame1;
+    self.dateLineView.hidden = YES;
+    self.redView.backgroundColor = [Color color:PGColorOptionTitlerRead];
+    self.blueView.backgroundColor = [Color color:PGColorOptionCellContentBlue];
     UIImage *image = [UIImage gc_styleImageSize:CGSizeMake(_baseImageView.frame.size.width, _baseImageView.frame.size.height)];
     _baseImageView.image = image;
     
@@ -131,7 +144,7 @@ static NSString *const cellId = @"cellId";
     
     UILabel *monthLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     monthLabel.textColor = [Color color:PGColorOptionTitleBlack];
-    monthLabel.font = [UIFont systemFontOfSize:15];
+    monthLabel.font = [UIFont systemFontOfSize:17];
     monthLabel.textAlignment = NSTextAlignmentCenter;
     monthLabel.backgroundColor = [UIColor whiteColor];
     [self addSubview:monthLabel];
@@ -165,7 +178,7 @@ static NSString *const cellId = @"cellId";
 //    self.upLine = upLine;
     
     UIView *downLine1 = [[UIView alloc] initWithFrame:CGRectZero];
-    [downLine1 setBackgroundColor:UIColorWithRGB(0xe9eaee)];
+    [downLine1 setBackgroundColor:[Color color:PGColorOptionCellSeparatorGray]];
     [self addSubview:downLine1];
     self.downLine1 = downLine1;
     
@@ -182,6 +195,7 @@ static NSString *const cellId = @"cellId";
     [self addSubview:self.weekView];
     
     [collectionView registerClass:[UCFCalendarCollectionViewCell class] forCellWithReuseIdentifier:cellId];
+    self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 }
 
 #pragma mark - 按钮的点击方法
@@ -237,12 +251,14 @@ static NSString *const cellId = @"cellId";
     self.monthLabel.frame = CGRectMake(0, offY, ScreenWidth, 51);
     
     self.downLine1.frame = CGRectMake(0, offY + 50.5, ScreenWidth, 0.5);
-    
+    [self bringSubviewToFront:self.downLine1];
+
 
     
     self.weekView.frame = CGRectMake(0, offY + 51, ScreenWidth, 51);
     
-    self.downLine2.frame = CGRectMake(0, CGRectGetMaxY(self.weekView.frame) - 0.5, ScreenWidth, 0.5);
+    self.downLine2.frame = CGRectMake(0, CGRectGetMaxY(self.weekView.frame) - 0.3, ScreenWidth, 0.3);
+    self.downLine2.hidden = YES;
     [self bringSubviewToFront:self.downLine2];
     
     self.headerButton.frame = CGRectMake(0, offY + 0.5, ScreenWidth, 51);
@@ -316,8 +332,8 @@ static NSString *const cellId = @"cellId";
     _calendarHeaderInfo = calendarHeaderInfo;
     
     self.myPaymentLabel.text = [calendarHeaderInfo objectSafeForKey:@"myPayment"];
-    self.waitPrincipalLabel.text = [NSString stringWithFormat:@"待收本金:%@",[calendarHeaderInfo objectSafeForKey:@"waitPrincipal"]];
-    self.waitInterestLabel.text = [NSString stringWithFormat:@"待收利息:%@",[calendarHeaderInfo objectSafeForKey:@"waitInterest"]];
+    self.waitPrincipalLabel.text = [NSString stringWithFormat:@"待收本金 %@",[calendarHeaderInfo objectSafeForKey:@"waitPrincipal"]];
+    self.waitInterestLabel.text = [NSString stringWithFormat:@"待收利息 %@",[calendarHeaderInfo objectSafeForKey:@"waitInterest"]];
     self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
     [self setCurrentDayWithDate:self.currentDay];
     [self.months removeAllObjects];

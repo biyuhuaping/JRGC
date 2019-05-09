@@ -74,6 +74,8 @@
         self.titleLabel.textColor = [Color color:PGColorOptionTitleGray];
         self.eventIndicator.hidden = NO;
     }
+    self.titleLabel.font = [UIFont systemFontOfSize:17];
+
 }
 
 - (void)setSelectionType:(SelectionType)selectionType

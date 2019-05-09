@@ -216,7 +216,7 @@
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self getLoginImage];
+//    [self getLoginImage];
 //    [self getAdversementLift];
     [self getSharePictureAdversementLink];
     [self geInvestmentSuccesseLift];
@@ -926,41 +926,41 @@
 #pragma mark -
 - (void)getLoginImage
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=57"];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:URL]];
-        [request setHTTPMethod:@"GET"];
-        NSHTTPURLResponse *urlResponse = nil;
-        NSError *error = nil;
-        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (!recervedData) {
-                return ;
-            }
-            NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
-            NSArray *arr = [imageStr objectFromJSONString];
-            NSString *LoginURL = @"";
-            if (ScreenHeight == 480) {
-                LoginURL = [arr objectAtIndex:1][@"thumb"];
-            } else if (ScreenHeight == 812) {
-                LoginURL = [arr objectAtIndex:4][@"thumb"];
-            }
-            else{
-                LoginURL = [arr objectAtIndex:0][@"thumb"];
-            }
-
-            [[NSUserDefaults standardUserDefaults] setValue:LoginURL forKey:@"LoginImageUrl"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            SDImageCache *cache = [[SDImageCache alloc] init];
-            NSURL * url = [NSURL URLWithString:LoginURL];
-            BOOL hasImage = [cache diskImageExistsWithKey:LoginURL];
-            if (!hasImage) {
-                [Common storeImage:url];
-            }
-        });
-    });
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=57"];
+//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//        [request setURL:[NSURL URLWithString:URL]];
+//        [request setHTTPMethod:@"GET"];
+//        NSHTTPURLResponse *urlResponse = nil;
+//        NSError *error = nil;
+//        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (!recervedData) {
+//                return ;
+//            }
+//            NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
+//            NSArray *arr = [imageStr objectFromJSONString];
+//            NSString *LoginURL = @"";
+//            if (ScreenHeight == 480) {
+//                LoginURL = [arr objectAtIndex:1][@"thumb"];
+//            } else if (ScreenHeight == 812) {
+//                LoginURL = [arr objectAtIndex:4][@"thumb"];
+//            }
+//            else{
+//                LoginURL = [arr objectAtIndex:0][@"thumb"];
+//            }
+//
+//            [[NSUserDefaults standardUserDefaults] setValue:LoginURL forKey:@"LoginImageUrl"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//            SDImageCache *cache = [[SDImageCache alloc] init];
+//            NSURL * url = [NSURL URLWithString:LoginURL];
+//            BOOL hasImage = [cache diskImageExistsWithKey:LoginURL];
+//            if (!hasImage) {
+//                [Common storeImage:url];
+//            }
+//        });
+//    });
 }
 
 //- (void)getAdversementLift
@@ -1024,12 +1024,12 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //线上
-        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=55"];
+        NSString *URL = [NSString stringWithFormat:@"https://www.9888keji.com/api/directive/contentList?categoryId=33"];
         if ([[Common getBundleID] isEqualToString:@"com.dzlh.jgrcapp"]) {
-            URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=55"];
+            URL = [NSString stringWithFormat:@"https://www.9888keji.com/api/directive/contentList?categoryId=33"];
         } else {
             //测试
-            URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=28"];
+            URL = [NSString stringWithFormat:@"https://www.9888keji.com/api/directive/contentList?categoryId=33"];
         }
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL:[NSURL URLWithString:URL]];
@@ -1042,9 +1042,16 @@
                 return ;
             }
             NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
-            NSArray *arr = [imageStr objectFromJSONString];
+            NSDictionary *dataDict = [imageStr objectFromJSONString];
+            NSArray *arr = dataDict[@"page"][@"list"];
             if (arr.count > 0) {
-                [[NSUserDefaults standardUserDefaults] setObject:arr forKey:@"SharePictureAdversementLink"];
+                NSMutableArray *picArray = [NSMutableArray arrayWithCapacity:1];
+                
+                for (NSDictionary *dic  in arr) {
+                    [picArray addObject:[NSString stringWithFormat:@"%@%@",CMS_SEVERIP,dic[@"cover"]]];
+                }
+                
+                [[NSUserDefaults standardUserDefaults] setObject:picArray forKey:@"SharePictureAdversementLink"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
             }

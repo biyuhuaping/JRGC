@@ -24,7 +24,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorWithRGB(0xebebee);
+        self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _errorTitle = titleStr;
         [self initViewControls];
     }
@@ -34,7 +34,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorWithRGB(0xebebee);
+        self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         isGold = YES;
         _errorTitle = titleStr;
         _btnStr = btnTitleStr;
