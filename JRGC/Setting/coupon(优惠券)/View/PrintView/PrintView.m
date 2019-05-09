@@ -9,6 +9,8 @@
 #import "PrintView.h"
 #import "UIImage+zhang.h"
 
+#include <math.h>
+static inline double radians (double degrees) {return degrees * M_PI/180;}
 @interface PrintView ()
 
 @end
@@ -46,12 +48,12 @@
     // 1.获得上下文
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextTranslateCTM(ctx, 95, 0);
-    CGContextRotateCTM(ctx, (18.0f * M_PI) / 180.0f);
+    CGContextRotateCTM(ctx, radians(-15.));
     
     // 将ctx拷贝一份放到栈中
     CGContextSaveGState(ctx);
     
-    [image drawInRect:CGRectMake(0, 10, size.width, size.height)];
+    [image drawInRect:CGRectMake(0, 35, size.width, size.height)];
     
     // 将栈顶的上下文出栈,替换当前的上下文
     CGContextRestoreGState(ctx);
