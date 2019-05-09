@@ -20,6 +20,7 @@
 static NSString *TextTitleHint = @"提示";
 static NSString *TextButtonTitleEnter = @"确定";
 static NSString *TextButtonTitleLogin = @"去登录";
+static NSString *TextButtonTitleRegister = @"去注册";
 static NSString *TextButtonTitleLoginAgain = @"重新输入";
 static NSString *TextButtonOpenAccount = @"立即开户";
 static NSString *TextButtonOpenAccountPassWord = @"立即设置";
@@ -727,7 +728,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.enterButton.heightSize.equalTo(@40);
     [self.enterButton setTitle:TextButtonTitleLoginAgain forState:UIControlStateNormal];
     
-    [self.cancelButton setTitle:TextButtonTitleLogin forState:UIControlStateNormal];
+    [self.cancelButton setTitle:TextButtonTitleRegister forState:UIControlStateNormal];
     
     [self addSingleGesture];
     ;

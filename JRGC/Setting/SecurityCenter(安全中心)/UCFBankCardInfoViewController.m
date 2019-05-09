@@ -485,29 +485,31 @@
 //                vc.title = @"设置交易密码";
 //                [self.navigationController pushViewController:vc animated:YES];
                 if (self.accoutType == SelectAccoutTypeP2P) {
-                    UCFWJSetAndRestHsPwdApi * request = [[UCFWJSetAndRestHsPwdApi alloc] init];
-                    request.animatingView = self.view;
-                    //    request.tag =tag;
-                    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-                        // 你可以直接在这里使用 self
-                        UCFWJSetAndRestHsPwdModel *model = [request.responseJSONModel copy];
-                        DDLogDebug(@"---------%@",model);
-                        if (model.ret == YES) {
-                            
-                            AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
-                            webView.title = @"即将跳转";
-                            webView.url =model.data.url;
-                            NSDictionary *dic = request.responseObject;
-                            webView.webDataDic = dic[@"data"][@"tradeReq"];
-                            [self.navigationController pushViewController:webView animated:YES];
-                        }
-                        else{
-                            ShowCodeMessage(model.code, model.message);
-                        }
-                    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-                        // 你可以直接在这里使用 self
-                        
-                    }];
+//                    UCFWJSetAndRestHsPwdApi * request = [[UCFWJSetAndRestHsPwdApi alloc] init];
+//                    request.animatingView = self.view;
+//                    //    request.tag =tag;
+//                    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+//                        // 你可以直接在这里使用 self
+//                        UCFWJSetAndRestHsPwdModel *model = [request.responseJSONModel copy];
+//                        DDLogDebug(@"---------%@",model);
+//                        if (model.ret == YES) {
+//
+//                            AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
+//                            webView.title = @"即将跳转";
+//                            webView.url =model.data.url;
+//                            NSDictionary *dic = request.responseObject;
+//                            webView.webDataDic = dic[@"data"][@"tradeReq"];
+//                            [self.navigationController pushViewController:webView animated:YES];
+//                        }
+//                        else{
+//                            ShowCodeMessage(model.code, model.message);
+//                        }
+//                    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//                        // 你可以直接在这里使用 self
+//
+//                    }];
+                    UCFMicroBankOpenAccountTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankOpenAccountTradersPasswordViewController alloc] init];
+                    [self.rt_navigationController pushViewController:tradePasswordVC  animated:YES];
                 }
                 else if (self.accoutType == SelectAccoutTypeHoner){
                     UCFMicroBankOpenAccountTradersPasswordViewController *tradePasswordVC = [[UCFMicroBankOpenAccountTradersPasswordViewController alloc] init];

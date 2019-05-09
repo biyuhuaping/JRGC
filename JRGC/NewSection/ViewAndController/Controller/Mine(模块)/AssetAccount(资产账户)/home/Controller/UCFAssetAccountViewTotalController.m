@@ -22,7 +22,9 @@
 #import "GoldTransactionRecordViewController.h"
 #import "UCFAccountDetailViewController.h"
 #import "UCFAccountDetailWZAndZXViewController.h"
-@interface UCFAssetAccountViewTotalController ()
+#import "HQImagePageControl.h"
+
+@interface UCFAssetAccountViewTotalController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
@@ -43,6 +45,9 @@
 @property (nonatomic, strong) BaseScrollview *listScrollView;
 
 @property (nonatomic, strong) MyRelativeLayout *listScrollLayout;
+
+@property (nonatomic, strong) HQImagePageControl *pageC;
+
 @end
 
 @implementation UCFAssetAccountViewTotalController
@@ -52,7 +57,7 @@
     // Do any additional setup after loading the view.
     
     self.rootLayout = [MyRelativeLayout new];
-    self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    self.rootLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     [self.rootLayout addSubview: self.scrollView];
@@ -63,7 +68,7 @@
     [self.scrollLayout addSubview:self.headerAccountView];
     [self.scrollLayout addSubview:self.listScrollView];
     [self.listScrollView addSubview:self.listScrollLayout];
-    
+ 
     [self request];
 }
 - (BaseScrollview *)scrollView
@@ -71,7 +76,7 @@
     if (nil == _scrollView) {
         _scrollView = [BaseScrollview new];
         _scrollView.scrollEnabled = YES;
-        _scrollView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        _scrollView.backgroundColor = [Color color:PGColorOptionThemeWhite];
         _scrollView.leftPos.equalTo(@0);
         _scrollView.rightPos.equalTo(@0);
         _scrollView.topPos.equalTo(@0);
@@ -84,7 +89,7 @@
 {
     if (nil == _scrollLayout) {
         _scrollLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
-        _scrollLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        _scrollLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
         _scrollLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _scrollLayout.myHorzMargin = 0;                          //同时指定左右边距为0表示宽度和父视图一样宽
         _scrollLayout.heightSize.lBound(self.scrollView.heightSize, 10, 1); //高度虽然是wrapContentHeight的。但是最小的高度不能低于父视图的高度加10.
@@ -103,6 +108,7 @@
         //设置分页
         _listScrollView.pagingEnabled=YES;
         _listScrollView.bounces=NO;
+        _listScrollView.delegate = self;
         _listScrollView.backgroundColor = [Color color:PGColorOptionThemeWhite];
         _listScrollView.topPos.equalTo(self.headerAccountView.bottomPos);
         _listScrollView.leftPos.equalTo(@0);
@@ -112,7 +118,7 @@
         }
         else
         {
-            _listScrollView.myHeight = 279;
+            _listScrollView.myHeight = 265;
         }
     }
     return _listScrollView;
@@ -152,7 +158,7 @@
 - (UCFAssetAccountViewTotalHeaderAccountView *)headerAccountView
 {
     if (nil ==_headerAccountView) {
-        _headerAccountView = [[UCFAssetAccountViewTotalHeaderAccountView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 63)];
+        _headerAccountView = [[UCFAssetAccountViewTotalHeaderAccountView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 56)];
         _headerAccountView.topPos.equalTo(self.headView.bottomPos);
         _headerAccountView.myLeft = 0;
     }
@@ -163,7 +169,7 @@
 {
     if (nil == _listView) {
 
-        _listView = [[UCFAssetAccountViewTotalListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 279)];//不带标题,只显示列表
+        _listView = [[UCFAssetAccountViewTotalListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 243)];//不带标题,只显示列表
         _listView.myTop =0;
         [_listView.enterButton setTitle:@"资金流水" forState:UIControlStateNormal];
         _listView.myLeft = 0;
@@ -174,13 +180,36 @@
 {
     if (nil == _titleListView) {
         
-        _titleListView = [[UCFAssetAccountViewTotalTitleListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 243)];//带账户标题
+        _titleListView = [[UCFAssetAccountViewTotalTitleListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 265)];//带账户标题
         _titleListView.myTop = 0;
         _titleListView.myLeft = 0;
     }
     return _titleListView;
 }
-
+- (HQImagePageControl *)pageC
+{
+//    if (!_pageC) {
+//        _pageC = [[HQImagePageControl alloc]initWithFrame:CGRectMake(0, PGScreenHeight - 40, self.scrollView.frame.size.width, 7.5)];
+//        [_pageC setCurrentPage:0];
+//    }
+//    [self.pageFlowView.pageControl setCurrentPage:0];
+    
+//    return _pageC;
+    //初始化pageControl
+    if (nil == _pageC) {
+        _pageC = [[HQImagePageControl alloc] initWithFrame:CGRectMake(0, 0,PGScreenWidth, 7.5) withType:@"Asset"];
+        //            _pageC.backgroundColor = [UIColor redColor];
+//        _pageC.bottomPos.equalTo(self.listScrollView.bottomPos);
+        _pageC.myTop = 0;
+        _pageC.centerXPos.equalTo(self.scrollView.centerXPos);
+        _pageC.numberOfPages = 3;
+        //        [_pageC addTarget:self action:@selector(onChangePage) forControlEvents:UIControlEventValueChanged];
+//        _pageC.myVisibility = MyVisibility_Gone;
+        [_pageC setCurrentPage:0];
+        _pageC.myVisibility = MyVisibility_Invisible;
+    }
+    return _pageC;
+}
 - (void)request
 {
     UCFAccountCenterAssetsOverViewApi * request = [[UCFAccountCenterAssetsOverViewApi alloc] init];
@@ -230,10 +259,12 @@
         [self.listScrollLayout addSubview:self.listView];
         [self.listView reloadAccountContent:model];
         [self.listView.enterButton addTarget:self action:@selector(jumpAccountCapital:) forControlEvents:UIControlEventTouchUpInside];
-        
+        self.pageC.myVisibility = MyVisibility_Visible;
     }
     else
     {
+        self.pageC.myVisibility = MyVisibility_Visible;
+        self.pageC.numberOfPages = self.model.data.assetList.count;
         self.listScrollLayout.myWidth = self.model.data.assetList.count *PGScreenWidth;
         NSMutableArray *pieArray = [NSMutableArray array];
         @PGWeakObj(self);
@@ -263,9 +294,10 @@
             [titleListView.enterButton addTarget:self action:@selector(jumpAccountCapital:) forControlEvents:UIControlEventTouchUpInside];
             [selfWeak.listScrollLayout addSubview:titleListView];
         }];
-        
+        [self.scrollLayout addSubview:self.pageC];
         [self.headView reloadPieView:pieArray andTotalAssets:model.data.totalAsset];
         self.headerAccountView.myVisibility = MyVisibility_Visible;
+        self.headerAccountView.bottomLineView.myVisibility = MyVisibility_Visible;
         [self.headerAccountView reloadAccountLayout:model];
         
         
@@ -282,9 +314,12 @@
     }
     else if (btn.tag == 1001) {
         //尊享流水
-        UCFAccountDetailViewController *accountDetailVC = [[UCFAccountDetailViewController alloc] initWithNibName:@"UCFAccountDetailViewController" bundle:nil];
-        accountDetailVC.selectedSegmentIndex = 1;
-        accountDetailVC.accoutType = SelectAccoutTypeP2P;
+//        UCFAccountDetailViewController *accountDetailVC = [[UCFAccountDetailViewController alloc] initWithNibName:@"UCFAccountDetailViewController" bundle:nil];
+//        accountDetailVC.selectedSegmentIndex = 1;
+//        accountDetailVC.accoutType = SelectAccoutTypeP2P;
+//        [self.rt_navigationController pushViewController:accountDetailVC animated:YES];
+        UCFAccountDetailWZAndZXViewController *accountDetailVC = [[UCFAccountDetailWZAndZXViewController alloc] init];
+        accountDetailVC.accoutType = SelectAccoutTypeHoner;
         [self.rt_navigationController pushViewController:accountDetailVC animated:YES];
     }
     else if (btn.tag == 1002) {
@@ -338,13 +373,18 @@
         }
     }
 }
-
-
-//if (SingleUserInfo.loginData.userInfo.isCompanyAgent) {
-//    [AuxiliaryFunc showToastMessage:@"企业用户暂不支持开通资产证明，请在个人账户查看" withView:self.view];
-//    return;
+#pragma 实现协议UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSInteger page = scrollView.contentOffset.x / scrollView.frame.size.width;
+    
+    if(page != self.pageC.currentPage)
+    {
+        self.pageC.currentPage = page;
+    };
+}
+//- (void) onChangePage
+//{
+//    [self.scrollView setCurrentPage:_pageController.currentPage animated:YES];
 //}
-//UCFAccountAssetsProofViewController * assetProofVC = [[UCFAccountAssetsProofViewController alloc]initWithNibName:@"UCFAccountAssetsProofViewController" bundle:nil];
-//assetProofVC.totalAssetStr = self.assetModel.total;
-//[self.navigationController pushViewController:assetProofVC animated:YES];
 @end

@@ -40,14 +40,28 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.rootLayout.backgroundColor = [UIColor whiteColor];
+        [self.rootLayout addSubview:self.bottomLineView];
     }
     return self;
+}
+- (UIView *)bottomLineView
+{
+    if (nil == _bottomLineView) {
+        _bottomLineView = [UIView new];
+        _bottomLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+        _bottomLineView.myBottom = 0;
+        _bottomLineView.myRight = 0;
+        _bottomLineView.myLeft = 0;
+        _bottomLineView.myHeight = 0.5;
+        _bottomLineView.myVisibility = MyVisibility_Invisible;
+    }
+    return _bottomLineView;
 }
 - (MyRelativeLayout *)wjLayout
 {
     if (nil == _wjLayout){
         _wjLayout = [MyRelativeLayout new];
-        _wjLayout.backgroundColor = [UIColor whiteColor];
+        _wjLayout.backgroundColor = [UIColor clearColor];
         _wjLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _wjLayout.myWidth = LayoutWidth;
         _wjLayout.heightSize.equalTo(self.rootLayout.heightSize);
@@ -96,7 +110,7 @@
 {
     if (nil == _zxLayout){
         _zxLayout = [MyRelativeLayout new];
-        _zxLayout.backgroundColor = [UIColor whiteColor];
+        _zxLayout.backgroundColor = [UIColor clearColor];
         _zxLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _zxLayout.myWidth = LayoutWidth;
         _zxLayout.heightSize.equalTo(self.rootLayout.heightSize);
@@ -145,7 +159,7 @@
 {
     if (nil == _goldLayout){
         _goldLayout = [MyRelativeLayout new];
-        _goldLayout.backgroundColor = [UIColor whiteColor];
+        _goldLayout.backgroundColor = [UIColor clearColor];
         _goldLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _goldLayout.myWidth = LayoutWidth;
         _goldLayout.heightSize.equalTo(self.rootLayout.heightSize);

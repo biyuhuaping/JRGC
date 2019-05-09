@@ -36,13 +36,13 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="111111111111" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ly8-gO-c6A">
-                                    <rect key="frame" x="15" y="123.5" width="384" height="20"/>
+                                    <rect key="frame" x="15" y="118.5" width="384" height="20"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" red="0.69411764705882351" green="0.70980392156862748" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHi-1T-bwP">
-                                    <rect key="frame" x="0.0" y="173.5" width="414" height="680.5"/>
+                                    <rect key="frame" x="8" y="168.5" width="398" height="685.5"/>
                                     <color key="backgroundColor" red="0.97037827968597412" green="0.97034925222396851" blue="0.97036570310592651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="vrN-jP-4hJ"/>
@@ -58,10 +58,10 @@
                                 <constraint firstItem="Eiv-5H-bU2" firstAttribute="leading" secondItem="DcM-zv-YNL" secondAttribute="leading" constant="15" id="NRm-g1-BBa"/>
                                 <constraint firstItem="Ly8-gO-c6A" firstAttribute="leading" secondItem="DcM-zv-YNL" secondAttribute="leading" constant="15" id="PfR-3K-yVj"/>
                                 <constraint firstItem="Eiv-5H-bU2" firstAttribute="top" secondItem="DcM-zv-YNL" secondAttribute="topMargin" constant="30" id="iiP-hf-1Vn"/>
-                                <constraint firstAttribute="trailing" secondItem="HHi-1T-bwP" secondAttribute="trailing" id="k4g-iQ-Z0w"/>
-                                <constraint firstItem="Ly8-gO-c6A" firstAttribute="top" secondItem="Eiv-5H-bU2" secondAttribute="bottom" constant="15" id="oO1-SL-DOi"/>
+                                <constraint firstAttribute="trailing" secondItem="HHi-1T-bwP" secondAttribute="trailing" constant="8" id="k4g-iQ-Z0w"/>
+                                <constraint firstItem="Ly8-gO-c6A" firstAttribute="top" secondItem="Eiv-5H-bU2" secondAttribute="bottom" constant="10" id="oO1-SL-DOi"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="HHi-1T-bwP" secondAttribute="bottom" id="oSM-zy-fb8"/>
-                                <constraint firstItem="HHi-1T-bwP" firstAttribute="leading" secondItem="DcM-zv-YNL" secondAttribute="leading" id="yUG-N5-wwq"/>
+                                <constraint firstItem="HHi-1T-bwP" firstAttribute="leading" secondItem="DcM-zv-YNL" secondAttribute="leading" constant="8" id="yUG-N5-wwq"/>
                             </constraints>
                         </view>
                     </subviews>

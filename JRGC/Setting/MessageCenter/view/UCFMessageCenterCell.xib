@@ -22,13 +22,13 @@
                         <rect key="frame" x="15" y="15" width="290" height="117"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-12-23 12:38:43" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-iL-d1Z">
-                                <rect key="frame" x="17" y="44" width="121" height="14"/>
+                                <rect key="frame" x="17" y="41" width="121" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.69411764705882351" green="0.70980392156862748" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8cv-yG-zcM">
-                                <rect key="frame" x="6" y="25" width="8" height="8"/>
+                                <rect key="frame" x="6" y="24" width="8" height="8"/>
                                 <color key="backgroundColor" red="0.99215686274509807" green="0.30196078431372547" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="7" id="0el-tR-uqw"/>
@@ -45,30 +45,28 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezC-V2-avT">
-                                <rect key="frame" x="17" y="73" width="256" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezC-V2-avT">
+                                <rect key="frame" x="17" y="67" width="256" height="16"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="双蛋节，砸彩蛋" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssw-hw-ThM">
-                                <rect key="frame" x="17" y="19" width="115" height="20"/>
+                                <rect key="frame" x="17" y="18" width="115" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ezC-V2-avT" firstAttribute="top" secondItem="v5r-iL-d1Z" secondAttribute="bottom" constant="15" id="2G9-6y-IAc"/>
+                            <constraint firstItem="ezC-V2-avT" firstAttribute="top" secondItem="v5r-iL-d1Z" secondAttribute="bottom" constant="12" id="2G9-6y-IAc"/>
                             <constraint firstItem="ezC-V2-avT" firstAttribute="leading" secondItem="Ssw-hw-ThM" secondAttribute="leading" id="8XP-qs-Jmf"/>
                             <constraint firstItem="ezC-V2-avT" firstAttribute="centerX" secondItem="Wxd-U0-Ux2" secondAttribute="centerX" id="CVl-Ib-1W3"/>
                             <constraint firstItem="Ssw-hw-ThM" firstAttribute="centerY" secondItem="8cv-yG-zcM" secondAttribute="centerY" id="E4m-UB-WgX"/>
-                            <constraint firstItem="Ssw-hw-ThM" firstAttribute="top" secondItem="Wxd-U0-Ux2" secondAttribute="top" constant="19" id="L9s-ln-Qm8"/>
+                            <constraint firstItem="Ssw-hw-ThM" firstAttribute="top" secondItem="Wxd-U0-Ux2" secondAttribute="top" constant="18" id="L9s-ln-Qm8"/>
                             <constraint firstItem="Ssw-hw-ThM" firstAttribute="leading" secondItem="8cv-yG-zcM" secondAttribute="trailing" constant="3" id="VTd-H4-2Br"/>
                             <constraint firstItem="8cv-yG-zcM" firstAttribute="leading" secondItem="Wxd-U0-Ux2" secondAttribute="leading" constant="6" id="bSU-tT-mCj"/>
                             <constraint firstItem="v5r-iL-d1Z" firstAttribute="leading" secondItem="Ssw-hw-ThM" secondAttribute="leading" id="cXU-Dl-fF5"/>
                             <constraint firstAttribute="height" constant="117" id="e1H-LA-LC9"/>
-                            <constraint firstItem="v5r-iL-d1Z" firstAttribute="top" secondItem="Ssw-hw-ThM" secondAttribute="bottom" constant="5" id="rKa-lb-TYo"/>
+                            <constraint firstItem="v5r-iL-d1Z" firstAttribute="top" secondItem="Ssw-hw-ThM" secondAttribute="bottom" constant="3" id="rKa-lb-TYo"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="point" keyPath="myCenter">

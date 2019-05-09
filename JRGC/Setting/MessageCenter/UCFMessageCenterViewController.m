@@ -108,18 +108,18 @@
     [self.view addSubview:_messageTableView];
     
     
-    _deleteBaseView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.messageTableView.frame) - 57, CGRectGetWidth(self.messageTableView.frame), 57)];
+    _deleteBaseView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.messageTableView.frame) - 60, CGRectGetWidth(self.messageTableView.frame), 60)];
     _deleteBaseView.tag = 999999;
     [_deleteBaseView setBackgroundColor:[UIColor whiteColor]];
     self.allChooseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _allChooseBtn.frame = CGRectMake(16,16,22, 22);
+    _allChooseBtn.frame = CGRectMake(12,19,22, 22);
     _allChooseBtn.layer.cornerRadius = 5.0f;
     [_allChooseBtn setImage:[UIImage imageNamed:@"coupon_btn_unselected"] forState:UIControlStateNormal];
     [_allChooseBtn setImage:[UIImage imageNamed:@"coupon_btn_selected"] forState:UIControlStateSelected];
     [_allChooseBtn addTarget:self action:@selector(ClickAllChoose:) forControlEvents:UIControlEventTouchUpInside];
     [_deleteBaseView addSubview:_allChooseBtn];
     
-    UILabel * allChooseLab =[[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_allChooseBtn.frame)+4, 18, 40, 23 )];
+    UILabel * allChooseLab =[[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_allChooseBtn.frame)+4, 0, 40, 60 )];
     [allChooseLab setText:@"全选"];
     allChooseLab.textColor = [UIColor blackColor];
     allChooseLab.textAlignment = NSTextAlignmentCenter;
@@ -128,7 +128,7 @@
     
     _deleteMessageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_deleteMessageBtn setTitle:@"删除" forState:UIControlStateNormal];
-    _deleteMessageBtn.frame = CGRectMake(CGRectGetMaxX(allChooseLab.frame)+8,10,ScreenWidth - CGRectGetMaxX(allChooseLab.frame)- 8 - 15, 37);
+    _deleteMessageBtn.frame = CGRectMake(CGRectGetMaxX(allChooseLab.frame)+8,10,ScreenWidth - CGRectGetMaxX(allChooseLab.frame)- 8 - 15, 40);
     _deleteMessageBtn.userInteractionEnabled = NO;
     _deleteMessageBtn.layer.cornerRadius = 20.0f;
     _deleteMessageBtn.layer.masksToBounds = YES;

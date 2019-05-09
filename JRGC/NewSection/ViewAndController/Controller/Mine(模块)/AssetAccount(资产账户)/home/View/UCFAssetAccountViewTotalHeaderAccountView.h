@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFAssetAccountViewTotalHeaderAccountView : BaseView
 
+@property (nonatomic, strong) UIView      *bottomLineView;
+
 - (void)reloadAccountLayout:(UCFAccountCenterAssetsOverViewModel *)model;
 
 @end

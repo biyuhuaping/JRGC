@@ -20,7 +20,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//    self.topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
 //    self.middleLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
 //    self.topSectionView.backgroundColor = [UIColor colorWithRed:231/255.0 green:230.0/255.0f blue:235.0f/255.0f alpha:1];
 //    self.bottomSectionView.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0f blue:247/255.0f alpha:1];

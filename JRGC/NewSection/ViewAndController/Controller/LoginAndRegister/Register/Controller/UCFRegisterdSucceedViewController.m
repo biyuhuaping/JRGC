@@ -158,9 +158,9 @@
     if (nil == _closeBtn) {
         _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         //        [_closeBtn setFrame:CGRectMake(25, 0, 25, 25)];
-        _closeBtn.myWidth = 25;
-        _closeBtn.myHeight = 25;
-        _closeBtn.myLeft = 25;
+        _closeBtn.myWidth = 50;
+        _closeBtn.myHeight = 50;
+        _closeBtn.myLeft = 0;
         _closeBtn.centerYPos.equalTo(self.navTitleLabel.centerYPos);
         [_closeBtn setBackgroundColor:[UIColor clearColor]];
 //        [_closeBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];

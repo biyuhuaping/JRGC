@@ -75,7 +75,7 @@
         self.navigationItem.titleView = baseTitleLabel;
         baseTitleLabel.textAlignment = NSTextAlignmentCenter;
         [baseTitleLabel setTextColor:[UIColor whiteColor]];
-        [baseTitleLabel setTextColor:UIColorWithRGB(0x333333)];
+        [baseTitleLabel setTextColor:UIColorWithRGB(0x000000)];
         [baseTitleLabel setBackgroundColor:[UIColor clearColor]];
     } else {
         self.navigationItem.titleView = baseTitleLabel;

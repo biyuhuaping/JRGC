@@ -34,9 +34,10 @@
     baseTitleLabel.text = @"消息设置";
     self.settingTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.settingTableView.contentInset =UIEdgeInsetsMake(10, 0, 0, 0);
-    
+    self.settingTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     _messageSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(ScreenWidth - 66, 7, 51, 30)];
-    _messageSwitch.onTintColor = [UIColor redColor];
+    _messageSwitch.onTintColor = [Color color:PGColorOpttonRateNoramlTextColor];
     [_messageSwitch addTarget:self action:@selector(messageSwitchChange:) forControlEvents:UIControlEventValueChanged];
     self.isReceiveMessage = YES;
     if (![Common isAllowedNotification]) {
@@ -67,7 +68,7 @@
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
+    return 50;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 44;
@@ -82,9 +83,9 @@
         UITableViewCell  *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.textLabel.textColor = UIColorWithRGB(0x555555);
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-        cell.detailTextLabel.textColor = UIColorWithRGB(0x999999);
+        cell.textLabel.textColor = UIColorWithRGB(0x000000);
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
+        cell.detailTextLabel.textColor = UIColorWithRGB(0xb1b5c2);
     if (indexPath.section == 0) {
         cell.textLabel.text = @"接收新消息通知";
         if ([Common isAllowedNotification]) {
@@ -96,12 +97,12 @@
         cell.textLabel.text = @"接收短信通知";
         [cell addSubview:_messageSwitch];
     }
-        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-        topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell.contentView addSubview:topLine];
-        UIView *downpLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(cell.frame)-0.5, ScreenWidth, 0.5)];
-        downpLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell.contentView addSubview:downpLine];
+//        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+//        topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//        [cell.contentView addSubview:topLine];
+//        UIView *downpLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(cell.frame)-0.5, ScreenWidth, 0.5)];
+//        downpLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//        [cell.contentView addSubview:downpLine];
 //    messagedetail
     return cell;
 }
@@ -112,11 +113,11 @@
 #pragma mark 创建footerView
 -(UIView *)getFooterView :(NSInteger)section{
     UIView * footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    footerView.backgroundColor = UIColorWithRGB(0xebebee);
+    footerView.backgroundColor = UIColorWithRGB(0xf5f5f5);
     UILabel * footerLab =[[UILabel alloc]initWithFrame:CGRectMake(15, 5, ScreenWidth -30, 24)];
     footerLab.numberOfLines = 0;
-    footerLab.font = [UIFont systemFontOfSize:10];
-    footerLab.textColor = UIColorWithRGB(0x999999);
+    footerLab.font = [UIFont systemFontOfSize:12];
+    footerLab.textColor = UIColorWithRGB(0xb1b5c2);
     if(section == 0){
         footerLab.text = @"如果你要关闭或打开消息通知，请在iPhone的“设置”-“通知”功能中找到应用程序“金融工场”更改。";
     }

@@ -15,6 +15,13 @@
 #define activeWidth 34
 #define inactiveWidth 14
 #define activeHeight 4
+
+@interface HQImagePageControl ()
+
+@property(nonatomic, copy) NSString *type;
+
+@end
+
 @implementation HQImagePageControl
 
 -(id)initWithFrame:(CGRect)frame
@@ -26,7 +33,15 @@
     
     return self;
 }
+-(id)initWithFrame:(CGRect)frame withType:(NSString *)type
+{
+    self = [super initWithFrame:frame];
+    if (self) {
 
+        _type = type;
+    }
+    return self;
+}
 -(void)updateDots
 {
     for (int i = 0; i < [self.subviews count]; i++)
@@ -61,11 +76,17 @@
         size.height = activeHeight;
         if (subviewIndex == page) {
             subview.backgroundColor = [UIColor whiteColor];
+            if ([self.type isEqualToString: @"Asset"]) {
+                subview.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+            }
             subview.alpha = 1;
             size.width = activeWidth;
             subview.layer.cornerRadius = 2.0f;
         } else {
             subview.backgroundColor = [UIColor whiteColor];
+            if ([self.type isEqualToString: @"Asset"]) {
+                subview.backgroundColor = [Color color:PGColorOptionInputDefaultBlackGray];
+            }
             size.width = inactiveWidth;
             subview.alpha = 0.4;
             subview.layer.cornerRadius = 2.0f;
@@ -78,7 +99,7 @@
     }
     
     
-//    [self updateDots];
+    //    [self updateDots];
 }
 - (void)layoutSubviews
 {

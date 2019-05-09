@@ -217,32 +217,18 @@
     if (tag.integerValue == kSXTagFundsDetail) {
 //        YPersonModel *model = [YYPersonModel modelWithDictionary:dic];
         UCFAccountDetailWZAndZXModel *model = [UCFAccountDetailWZAndZXModel yy_modelWithDictionary:[data objectFromJSONString]];
-        
-        //倒序遍历
-        //        [array enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        //            NSLog(@"%@----%@",array[idx],[NSThread currentThread]);
-        //        }];;
-        
-        //顺序遍历
-//        NSMutableArray *tempArray = [NSMutableArray array];
-//        [model.pageData.result enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-////            self.arryData
-//            UCFAccountDetailWZAndZXResult *resul = obj;
-//
-//            if (<#condition#>) {
-//                <#statements#>
-//            }
-//        }];
-   
-        if (!model.pageData.pagination.hasNextPage ) {
-            //没有下一页数据后,隐藏上拉加载,
-            self.tableView.enableRefreshFooter = NO;
-            self.page = model.pageData.pagination.pageNo;
-        }
-        else
+      
+//        if (!model.pageData.pagination.hasNextPage  && model.pageData.result.count != 10)
+        if (model.pageData.pagination.hasNextPage  && model.pageData.result.count == 10)
         {
             self.page = model.pageData.pagination.pageNo + 1;
             self.tableView.enableRefreshFooter = YES;
+        }
+        else
+        {
+            //没有下一页数据后,隐藏上拉加载,
+            self.tableView.enableRefreshFooter = NO;
+            self.page = model.pageData.pagination.pageNo;
         }
         NSMutableDictionary *dic = [data objectFromJSONString];
         NSInteger isSucess = [dic[@"status"] integerValue];

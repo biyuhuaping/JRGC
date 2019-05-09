@@ -8,7 +8,7 @@
 
 #import "UCFMessageCenterCell.h"
 #import "UIDic+Safe.h"
-
+#import "UILabel+Misc.h"
 @interface UCFMessageCenterCell()
 
 @property (weak, nonatomic) IBOutlet UIView *upView;
@@ -71,7 +71,7 @@
         [button addTarget:self action:@selector(clickEditButton:) forControlEvents:UIControlEventTouchUpInside];
         _editButton = button;
         [self addSubview:_editButton];
-        
+        self.unreadOrReadVIew.backgroundColor = [Color color:PGColorOpttonRateNoramlTextColor];
     }
     return self;
 }
@@ -84,6 +84,7 @@
     }
     self.messageTitleLab.text =messageCenterModel.title;
     self.messageDetailLab.text = messageCenterModel.delHTMLTagContent;
+    [self.messageDetailLab setLineSpace:5 string:self.messageDetailLab.text];
     self.messageDateLab.text =messageCenterModel.createTime;
 }
 #pragma mark -点击编辑状态按钮

@@ -59,6 +59,7 @@
 @property (nonatomic, strong) UIView      *frozenBalanceRound;
 
 @property (nonatomic, strong) UIView      *frozenBalanceLinView;
+
 @end
 
 @implementation UCFAssetAccountViewTotalTitleListView
@@ -105,10 +106,17 @@
 {
     if (nil == _titleVerticalView) {
         _titleVerticalView = [UIView new];
-        _titleVerticalView.myTop = 25;
+        _titleVerticalView.myTop = 20;
         _titleVerticalView.myHeight = 18;
         _titleVerticalView.myWidth = 3;
         _titleVerticalView.myLeft = 15;
+        _titleVerticalView.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
+        {
+            //设置圆角的半径
+            sbv.layer.cornerRadius = 1.5;
+            //切割超出圆角范围的子视图
+            sbv.layer.masksToBounds = YES;
+        };
     }
     return _titleVerticalView;
 }
@@ -471,10 +479,10 @@
 - (void)reloadAccountContent:(UCFAccountCenterAssetsOverViewAssetlist *)model{
     
     UCFAccountCenterAssetsOverViewAssetlist *ass = model;
-    self.availBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.availBalance];
-    self.waitPrincipalContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.waitPrincipal];
-    self.waitInterestContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.waitInterest];
-    self.frozenBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.frozenBalance];
+    self.availBalanceContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:ass.availBalance]];
+    self.waitPrincipalContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:ass.waitPrincipal]];
+    self.waitInterestContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:ass.waitInterest]];
+    self.frozenBalanceContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:ass.frozenBalance]];
     
     [self.availBalanceContentLabel sizeToFit] ;
     [self.waitPrincipalContentLabel sizeToFit];
@@ -484,7 +492,7 @@
 //    “P2P” :微金账户 “ZX”：尊享账户 "GOLD":黄金账户
     if ([ass.type isEqualToString:@"P2P"]) {
         self.titleVerticalView.backgroundColor = PNBlue;
-        self.titleLabel.text = @"微金资金流水";
+        self.titleLabel.text = @"微金账户总资产";
         [self.enterButton setTitle:@"微金资金流水" forState:UIControlStateNormal];
         self.enterButton.tag = 1000;
     }

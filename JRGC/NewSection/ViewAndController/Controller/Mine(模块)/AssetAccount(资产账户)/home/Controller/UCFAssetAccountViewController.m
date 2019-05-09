@@ -33,7 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.rootLayout = [MyRelativeLayout new];
-    self.rootLayout.backgroundColor = [UIColor whiteColor];
+    self.rootLayout.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     [self addLeftButton];
@@ -53,6 +53,23 @@
     [self.accountControllerArray addObject:vcEarnings];
     
     [self.rootLayout addSubview:self.pageController];
+    
+    
+    UIView *topLineView = [UIView new];
+    topLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    topLineView.myTop = 0;
+    topLineView.myHeight = 0.5;
+    topLineView.myLeft = 0;
+    topLineView.myRight = 0;
+    [self.rootLayout addSubview:topLineView];
+    
+    UIView *bottomLineView = [UIView new];
+    bottomLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    bottomLineView.myTop = 44;
+    bottomLineView.myHeight = 0.5;
+    bottomLineView.myLeft = 0;
+    bottomLineView.myRight = 0;
+    [self.rootLayout addSubview:bottomLineView];
 }
 - (UCFPageHeadView *)pageHeadView
 {

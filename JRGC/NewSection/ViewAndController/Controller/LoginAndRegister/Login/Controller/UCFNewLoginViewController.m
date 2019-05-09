@@ -17,7 +17,7 @@
 //#import "UCFLockHandleViewController.h"
 #import "UCFNewLockContainerViewController.h"
 #import "UCFWebViewJavascriptBridgeBanner.h"
-@interface UCFNewLoginViewController ()<UITextFieldDelegate,YTKChainRequestDelegate>
+@interface UCFNewLoginViewController ()<UITextFieldDelegate,YTKChainRequestDelegate,PublicPopupWindowViewDelegate>
 
 @property (nonatomic, strong) NZLabel     *loginLabel;//注册
 
@@ -252,6 +252,15 @@
             }];
             
         }
+        else if (model.code == 31013){
+            
+            UCFPopViewWindow *popView = [UCFPopViewWindow new];
+            popView.delegate = self;
+            popView.type = POPLoginVerifyPhoneNum;
+            popView.contentStr = model.message;
+            popView.popViewTag = 10001;
+            [popView startPopView];
+        }
         else{
             ShowCodeMessage(model.code, model.message);
         }
@@ -282,11 +291,22 @@
 //    // start to send request
 //    [chainReq start];
 //
-    
-    
-    
-    
 }
+- (void)popEnterButtonClick:(UIButton *)btn
+{
+    if (btn.tag == 10001 ) //
+    {
+       
+    }
+}
+-(void)popCancelButtonClick:(UIButton *)btn
+{
+    if (btn.tag == 10001)
+    {
+        [self clickRightBtn];
+    }
+}
+
 - (UCFNewLockContainerViewController *)cretateLockViewWithType:(RCLockViewType)type
 {
     UCFNewLockContainerViewController *lockVc = [[UCFNewLockContainerViewController alloc] initWithType:type];

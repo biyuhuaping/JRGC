@@ -16,5 +16,6 @@
     UIImage* activeImage;
     UIImage* inactiveImage;
 }
+-(id)initWithFrame:(CGRect)frame withType:(NSString *)type;
 
 @end

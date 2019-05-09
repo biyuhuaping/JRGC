@@ -43,7 +43,7 @@
     baseTitleLabel.text = @"交易记录";
     _baseTableView.delegate = self;
     _baseTableView.dataSource = self;
-    _baseTableView.backgroundColor = UIColorWithRGB(0xebebee);
+    _baseTableView.backgroundColor = UIColorWithRGB(0xf5f5f5);
     [self addLeftButton];
     if (!self.noDataView) {
         self.noDataView = [[UCFNoDataView alloc] initGoldWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 100) errorTitle:@"你还没有交易记录" buttonTitle:@""];
@@ -144,7 +144,15 @@
 #pragma UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
+    return 43;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.001;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return nil;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -203,6 +211,7 @@
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 /*
 #pragma mark - Navigation
 

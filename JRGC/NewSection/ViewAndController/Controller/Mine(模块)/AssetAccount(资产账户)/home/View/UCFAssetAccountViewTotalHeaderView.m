@@ -10,7 +10,6 @@
 #import "PieView.h"
 #import "PieModel.h"
 #import "UCFAccountCenterAssetsOverViewModel.h"
-
 @interface UCFAssetAccountViewTotalHeaderView ()
 
 @property (nonatomic, strong) MyRelativeLayout *totalAssetsLayout;// 账户
@@ -152,7 +151,7 @@
 {
    [self.pieView reloadWithAry:ary];
    if ([totalAssets isKindOfClass:[NSString class]] && totalAssets.length > 0) {
-    self.totalAssetsLabel.text = [NSString stringWithFormat:@"￥%@",totalAssets];
+    self.totalAssetsLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:totalAssets]];
     [self.totalAssetsLabel sizeToFit];
    }
 }
