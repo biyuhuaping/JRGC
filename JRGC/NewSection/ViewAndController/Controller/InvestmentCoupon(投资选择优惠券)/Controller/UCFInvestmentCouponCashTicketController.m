@@ -32,6 +32,8 @@
 
 @property (nonatomic, strong) UIView *noDataView;
 
+@property (nonatomic, strong) UIView *lineView;
+
 @end
 
 @implementation UCFInvestmentCouponCashTicketController
@@ -48,9 +50,22 @@
     [self.rootLayout addSubview:self.useEnterBtn];
     [self.rootLayout addSubview:self.shadowView];
     
+    [self.rootLayout addSubview:self.lineView];
+    
     [self starCouponPopup];
 }
-
+- (UIView *)lineView
+{
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.leftPos.equalTo(@(0));
+        _lineView.rightPos.equalTo(@(0));
+        _lineView.heightSize.equalTo(@0.5);
+        _lineView.topPos.equalTo(@(0));
+        _lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    }
+    return _lineView;
+}
 -(void)starCouponPopup
 {
     self.arryData = [NSMutableArray arrayWithArray:self.cashArray];

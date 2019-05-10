@@ -111,32 +111,51 @@
 
 - (void)addrightButtonWithImageArray:(NSArray *)imageArray
 {
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setBackgroundColor:[UIColor clearColor]];
+    if (imageArray.count == 2) {
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [rightButton setBackgroundColor:[UIColor clearColor]];
+        
+        [rightButton setImage:[UIImage imageNamed:imageArray[0]]forState:UIControlStateNormal];
+        [rightButton addTarget:self action:@selector(rightBarClicked:) forControlEvents:UIControlEventTouchUpInside];
+        //    [rightButton sizeToFit];
+        rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+        rightButton.tag = 100;
+        
+        [rightButton setFrame:CGRectMake(0, 0, 40, 40)];
+        
+        UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+        //    rightItem1.tag = 100;
+        
+        UIButton *rightButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [rightButton1 setBackgroundColor:[UIColor clearColor]];
+        [rightButton1 setImage:[UIImage imageNamed:imageArray[1]]forState:UIControlStateNormal];
+        [rightButton1 addTarget:self action:@selector(rightBarClicked:) forControlEvents:UIControlEventTouchUpInside];
+        //    [rightButton1 sizeToFit];
+        rightButton1.tag = 101;
+        [rightButton1 setFrame:CGRectMake(0, 0, 40, 40)];
+        rightButton1.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -10);
+        UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithCustomView:rightButton1];
+        //    rightItem2.tag = 101;
+        
+        self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
+    } else {
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [rightButton setBackgroundColor:[UIColor clearColor]];
+        
+        [rightButton setImage:[UIImage imageNamed:imageArray[0]]forState:UIControlStateNormal];
+        [rightButton addTarget:self action:@selector(rightBarClicked:) forControlEvents:UIControlEventTouchUpInside];
+        //    [rightButton sizeToFit];
+        rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+        rightButton.tag = 101;
+        
+        [rightButton setFrame:CGRectMake(0, 0, 40, 40)];
+        
+        UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+        self.navigationItem.rightBarButtonItems = @[rightItem1];
+
+    }
     
-    [rightButton setImage:[UIImage imageNamed:imageArray[0]]forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(rightBarClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [rightButton sizeToFit];
-    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
-    rightButton.tag = 100;
-
-    [rightButton setFrame:CGRectMake(0, 0, 40, 40)];
-
-    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-//    rightItem1.tag = 100;
-    
-    UIButton *rightButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton1 setBackgroundColor:[UIColor clearColor]];
-    [rightButton1 setImage:[UIImage imageNamed:imageArray[1]]forState:UIControlStateNormal];
-    [rightButton1 addTarget:self action:@selector(rightBarClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [rightButton1 sizeToFit];
-    rightButton1.tag = 101;
-    [rightButton1 setFrame:CGRectMake(0, 0, 40, 40)];
-    rightButton1.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -10);
-    UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithCustomView:rightButton1];
-//    rightItem2.tag = 101;
-
-    self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
+  
 }
 - (void)rightBarClicked:(UIButton *)button
 {

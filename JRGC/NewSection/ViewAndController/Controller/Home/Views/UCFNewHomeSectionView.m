@@ -21,10 +21,10 @@
         self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 //        self.backgroundColor = [UIColor redColor];
         UIImageView *iconView = [[UIImageView alloc] init];
-        iconView.myHeight = 18;
+        iconView.myHeight = 16;
         iconView.myWidth = 3;
         iconView.leftPos.equalTo(@15);
-        iconView.myBottom = 10;
+        iconView.myBottom = 12;
         iconView.backgroundColor = UIColorWithRGB(0xFF4133);
         iconView.clipsToBounds = YES;
         iconView.layer.cornerRadius = 1.5;

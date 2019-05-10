@@ -31,6 +31,9 @@
 @property (nonatomic, strong) NSIndexPath *oldIndexPath;//记录上一次的选择
 
 @property (nonatomic, strong)UCFNewCouponParentViewController *db;
+
+@property (nonatomic, strong) UIView *lineView;
+
 @end
 
 @implementation UCFInvestmentCouponInterestTicketController
@@ -50,7 +53,8 @@
     [self.rootLayout addSubview:self.instructionsView];
     [self.rootLayout addSubview:self.useEnterBtn];
     [self.rootLayout addSubview:self.shadowView];
-    
+    [self.rootLayout addSubview:self.lineView];
+
     [self starCouponPopup];
 }
 - (void)viewDidAppear:(BOOL)animated
@@ -58,7 +62,18 @@
     [super viewDidAppear:animated];
 
 }
-
+- (UIView *)lineView
+{
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.leftPos.equalTo(@(0));
+        _lineView.rightPos.equalTo(@(0));
+        _lineView.heightSize.equalTo(@0.5);
+        _lineView.topPos.equalTo(@(0));
+        _lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    }
+    return _lineView;
+}
 -(void)starCouponPopup
 {
     self.arryData = [NSMutableArray arrayWithArray:self.couponArray];

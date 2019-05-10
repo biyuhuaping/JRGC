@@ -393,7 +393,7 @@
     _interestNumLab.backgroundColor = [UIColor clearColor];
     _interestNumLab.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
     _interestNumLab.text = @"¥0.00";
-    _interestNumLab.leftPos.equalTo(expectedInterestLab.rightPos).offset(17);
+    _interestNumLab.leftPos.equalTo(expectedInterestLab.rightPos).offset(18);
     _interestNumLab.centerYPos.equalTo(expectedInterestLab.centerYPos);
     _interestNumLab.font = [Color gc_ANC_font:18];
     _interestNumLab.heightSize.equalTo(expectedInterestLab.heightSize);

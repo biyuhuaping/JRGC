@@ -26,6 +26,7 @@
 {
     [super awakeFromNib];
     _bottomLineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    _hoursLabel.textColor = _minutesLabel.textColor = _secondsLabel.textColor = [Color color:PGColorOptionTitlerRead];
 }
 //- (instancetype)initWithFrame:(CGRect)frame
 //{
@@ -81,7 +82,7 @@
         for (UILabel *label in self.subviews) {
             if (label.tag == 101) {
                 label.hidden = NO;
-                label.textColor = UIColorWithRGB(0x999999);
+                label.textColor = [Color color:PGColorOptionTitleGray];
             }else{
                 label.hidden = YES;
             }
