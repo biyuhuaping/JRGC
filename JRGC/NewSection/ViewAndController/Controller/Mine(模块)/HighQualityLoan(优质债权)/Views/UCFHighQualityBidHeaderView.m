@@ -23,7 +23,7 @@
         
         UILabel *principalMarkLab = [UILabel new];
         principalMarkLab.text = @"待收本金";
-        principalMarkLab.textColor = [Color color:PGColorOptionThemeWhite];
+        principalMarkLab.textColor = [Color color:PGColorOpttonRateRedTextColor];
         principalMarkLab.font = [Color gc_Font:12];
         principalMarkLab.leftPos.equalTo(@15);
         principalMarkLab.topPos.equalTo(@25);
@@ -35,14 +35,14 @@
         principalValueLab.textColor = [Color color:PGColorOptionThemeWhite];
         principalValueLab.font = [Color gc_Font:32];
         principalValueLab.leftPos.equalTo(@15);
-        principalValueLab.topPos.equalTo(@48);
+        principalValueLab.topPos.equalTo(@40);
         [self addSubview:principalValueLab];
         [principalValueLab sizeToFit];
         self.principalValueLab = principalValueLab;
         
         UILabel *interestMarkLab = [UILabel new];
         interestMarkLab.text = @"待收利息";
-        interestMarkLab.textColor = [Color color:PGColorOptionThemeWhite];
+        interestMarkLab.textColor = [Color color:PGColorOpttonRateRedTextColor];
         interestMarkLab.font = [Color gc_Font:12];
         interestMarkLab.leftPos.equalTo(@15);
         interestMarkLab.topPos.equalTo(@93);

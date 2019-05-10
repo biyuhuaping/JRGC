@@ -797,7 +797,7 @@
                 imageView.tag = 104;
                 [cell.contentView addSubview:imageView];
                 
-                UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, placeHolderYPos, 160, 9)];
+                UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, yPos, 160, 12)];
                 placehoderLabel.font = [UIFont systemFontOfSize:12];
                 placehoderLabel.textColor = [Color color:PGColorOptionTitleGray];
                 placehoderLabel.textAlignment = NSTextAlignmentLeft;

@@ -73,6 +73,7 @@
 
     [investmentButton addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
     [investmentButton setTitle:@"立即出借" forState:UIControlStateNormal];
+    investmentButton.titleLabel.font = [Color gc_Font:16];
     [self addSubview:investmentButton];
     
     self.investmentButton = investmentButton;

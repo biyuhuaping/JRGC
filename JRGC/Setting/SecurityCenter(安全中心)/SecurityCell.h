@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *itemImgView;
 @property (weak, nonatomic) IBOutlet UILabel *itemNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemSubTitleLabel;
+@property (strong, nonatomic) UIView *bottomLineView;
 
 @property (weak, nonatomic) id<SecurityCellDelegate> delegate;
 @end

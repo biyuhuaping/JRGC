@@ -1293,19 +1293,27 @@
 {
     UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)] autorelease];
     view.backgroundColor = [UIColor whiteColor];
-    view.layer.borderWidth = 0.8;
+    view.layer.borderWidth = 1;
     view.layer.cornerRadius = 5;
     view.layer.borderColor = [UIColorWithRGB(0xe3e5ea) CGColor];
     return [self getImageFromView:view];
 }
-+ (UIImage *)getImageFromView:(UIView *)theView
++ (UIImage *)getImageFromView:(UIView *)view
 {
-    //UIGraphicsBeginImageContext(theView.bounds.size);
-    UIGraphicsBeginImageContextWithOptions(theView.bounds.size, NO, theView.layer.contentsScale);
-    [theView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image=UIGraphicsGetImageFromCurrentImageContext();
+    CGSize s = view.bounds.size;
+
+    UIGraphicsBeginImageContextWithOptions(s, NO, [UIScreen mainScreen].scale);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+    
+    //UIGraphicsBeginImageContext(theView.bounds.size);
+//    UIGraphicsBeginImageContextWithOptions(theView.bounds.size, NO, theView.layer.contentsScale);
+//    [theView.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *image=UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return image;
 }
 //四舍五入方法
 +(NSString *)notRounding:(double)price afterPoint:(int)position

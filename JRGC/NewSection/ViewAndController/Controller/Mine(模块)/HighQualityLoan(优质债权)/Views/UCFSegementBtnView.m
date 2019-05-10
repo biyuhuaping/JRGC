@@ -86,6 +86,7 @@
     view.layer.cornerRadius = 13.5;
     view.layer.borderWidth = 1.0f;
     view.layer.borderColor = [Color color:PGColorOptionTitleGray].CGColor;
+    view.layer.contentsScale = [[UIScreen mainScreen] scale];
     return view;
 }
 - (UIView *)drawSelectImage
@@ -96,6 +97,7 @@
     view.layer.cornerRadius = 13.5;
     view.layer.borderWidth = 1.0f;
     view.layer.borderColor = [Color color:PGColorOpttonRateNoramlTextColor].CGColor;
+    view.layer.contentsScale = [[UIScreen mainScreen] scale];
     return view;
 }
 @end

@@ -25,7 +25,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+//    NSLog(@"%@",@"BEGINBEGINBEGINBEGINBEGINBEGINBEGINBEGINBEGIN");
+    
     [self.navigationController setNavigationBarHidden:YES];
+    lineViewAA.hidden = YES;
     //本地存储的广告地址 为空或者不存在 则不显示广告
     NSString *imagUrl = [[NSUserDefaults standardUserDefaults] valueForKey:@"adversementImageUrl"];
     SDImageCache *cache = [[SDImageCache alloc] init];
@@ -37,14 +41,7 @@
         _isShowAdversement = NO;
     }
 
-    //获取广告地址
-    if ([[Common machineName] isEqualToString:@"4"]) {
-        [self getAdversementImageStyle:1];
-    } else if ([[Common machineName] isEqualToString:@"8"])
-        [self getAdversementImageStyle:4];
-    else {
-        [self getAdversementImageStyle:3];
-    }
+    [self getAdversementImageStyle:0];
     //显示广告
     if (_isShowAdversement) {
         [self showAdvertisement];
@@ -52,11 +49,7 @@
         UIImage *placehoderImage = [Common getTheLaunchImage];
         _advertisementView.contentMode = UIViewContentModeScaleToFill;
         _advertisementView.image = placehoderImage;
-        
-        //请求开关状态kSXTagGetAppleInfoForOnOff
         [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetAppleInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
-        
-//        [self performSelector:@selector(disapperAdversement) withObject:nil afterDelay:2];
     }
 
 
@@ -177,6 +170,8 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(switchRootView)]) {
         [self.delegate switchRootView];
     }
+//    NSLog(@"%@",@"BEGINBEGINBEGINBEGINBEGINBEGINBEGINBEGINBEGIN");
+
 }
 - (void)dealloc
 {

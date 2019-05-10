@@ -76,7 +76,13 @@
 - (void)rightBarClicked:(UIButton *)button
 {
     if (button.tag == 100) {
-        [SingleUserInfo loadLoginViewController];
+        if (SingleUserInfo.loginData.userInfo.userId) {
+            UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
+        } else {
+            [SingleUserInfo loadLoginViewController];
+        }
     } else {
         UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
@@ -93,7 +99,12 @@
     
     [self addLeftButtonTitle:@"首页"];
 //    [self addRightbuttonImageName:@"home_icon_news"];
-    [self addrightButtonWithImageArray:@[@"home_icon_sgin",@"home_icon_news"]];
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        [self addrightButtonWithImageArray:@[@"home_icon_news"]];
+    } else {
+        [self addrightButtonWithImageArray:@[@"home_icon_sgin",@"home_icon_news"]];
+
+    }
     self.showTableView.myVertMargin = 0;
     self.showTableView.myHorzMargin = 0;
     [self.rootLayout addSubview:self.showTableView];
@@ -418,13 +429,25 @@
         [self.ucfCp request];
     }
 }
+- (void)refreshRightBtn
+{
+    if (SingleUserInfo.loginData.userInfo.userId) {
+        [self addrightButtonWithImageArray:@[@"home_icon_news"]];
+    } else {
+        [self addrightButtonWithImageArray:@[@"home_icon_sgin",@"home_icon_news"]];
+        
+    }
+}
 - (void)monitorUserLogin
 {
     [self fetchData];
+    [self refreshRightBtn];
 }
 - (void)monitorUserGetOut
 {
     [self fetchData];
+    [self refreshRightBtn];
+
 }
 - (void)monitorOpenStatueChange
 {

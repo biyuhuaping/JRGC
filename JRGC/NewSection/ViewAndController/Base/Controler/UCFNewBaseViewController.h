@@ -104,6 +104,9 @@ NS_ASSUME_NONNULL_BEGIN
  web页面关闭需要刷新某页面的数据
  */
 - (void)refreshPageData;
+
+- (void)setTopLineViewHide;
+
 @end
 
 NS_ASSUME_NONNULL_END

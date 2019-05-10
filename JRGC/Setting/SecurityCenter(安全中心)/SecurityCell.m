@@ -24,14 +24,26 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"SecurityCell" owner:self options:0] lastObject];
         cell.contentView.backgroundColor = [UIColor clearColor];
-        UIView *aView = [[UIView alloc] initWithFrame:cell.contentView.frame];
-        aView.backgroundColor = UIColorWithRGB(0xf5f5f5);
-        cell.selectedBackgroundView = aView;
+        cell.itemNameLabel.textColor = [Color color:PGColorOptionTitleBlack];
+        cell.itemSubTitleLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
+        cell.bottomLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+//        cell.bottomLineView.backgroundColor = [Color color:PGColorOptionTitleOrange];
+        UIView *lineview= [[UIView alloc] init];
+        lineview.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+        [cell addSubview:lineview];
+        cell.bottomLineView = lineview;
     }
     return cell;
 }
 
-
+//- (UIView *)bottomLineView
+//{
+//    if (!_bottomLineView) {
+//        _bottomLineView = [[UIView alloc] init];
+//        _bottomLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+//    }
+//    return _bottomLineView;
+//}
 - (void)setItem:(UCFSettingItem *)item
 {
     super.item = item;
@@ -80,8 +92,8 @@
 
     } else {
         self.accessoryView = nil;
-        self.itemSubTitleLabel.textColor = UIColorWithRGB(0x555555);
-        self.itemSubTitleLabel.font = [UIFont boldSystemFontOfSize:12];
+        self.itemSubTitleLabel.textColor = [Color color:PGColorOptionTitleGray];
+        self.itemSubTitleLabel.font = [UIFont boldSystemFontOfSize:14];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 }

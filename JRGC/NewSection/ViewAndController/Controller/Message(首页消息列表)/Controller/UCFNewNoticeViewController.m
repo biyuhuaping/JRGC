@@ -66,10 +66,11 @@
         if (model.data.pageData.pagination.hasNextPage) {
             selfWeak.pageIndex++;
             [selfWeak.dataArray addObjectsFromArray:model.data.pageData.result];
-        } else {
             self.showTableView.enableRefreshFooter = YES;
+        } else {
+            self.showTableView.enableRefreshFooter = NO;
         }
-        [selfWeak.showTableView reloadData];
+        [selfWeak.showTableView cyl_reloadData];
         [selfWeak.showTableView endRefresh];
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         [selfWeak.showTableView endRefresh];
@@ -78,10 +79,9 @@
 }
 - (void)refreshTableViewHeader
 {
-    _pageIndex = 0;
     self.showTableView.enableRefreshFooter = NO;
+    _pageIndex = 0;
     [self fetchData];
-    [self.showTableView endRefresh];
 }
 
 /**
@@ -145,13 +145,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NoticeResult*model = [self.dataArray objectAtIndex:indexPath.row];
-    if (model.noviceUrl.length > 0) {
-        UCFWebViewJavascriptBridgeController *webView = [[UCFWebViewJavascriptBridgeController alloc]initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];
-        webView.rootVc = self;
-        webView.url = model.noviceUrl;
-        webView.navTitle = model.title;
-        [self.rt_navigationController pushViewController:webView animated:YES];
-    }
+    UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+    web.url = [NSString stringWithFormat:@"https://www.9888keji.com/mobileCms/xxplContent.html?id=%ld",model.ID];
+    web.navTitle = model.title;
+    [self.rt_navigationController pushViewController:web animated:YES];
 }
 /*
 #pragma mark - Navigation

@@ -12,6 +12,7 @@
 #import "UCFSegementBtnView.h"
 #import "UCFToolsMehod.h"
 #import "UCFInvestmentDetailViewController.h"
+#import "UILabel+Misc.h"
 @interface UCFHighQualityViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelegate,UCFSegementBtnViewDelegate>
 @property(nonatomic, assign)NSInteger currentPage;
 @property(nonatomic, assign)NSInteger index;
@@ -82,6 +83,7 @@
 //            self.interestsLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:interests]];//累计收益
             id principal = data[@"noPrincipal"];
             self.board.principalValueLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:principal]];//待收本金
+            [self.board.principalValueLab setFont:[Color gc_Font:18] string:@"¥"];
             [self.board.principalValueLab sizeToFit];
             
             id noInterests = data[@"noInterests"];

@@ -41,7 +41,7 @@
 - (UCFPageHeadView *)pageHeadView
 {
     if (nil == _pageHeadView) {
-        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NavigationBarHeight1) WithTitleArray:@[@"优质债权",@"债权转让"]];
+        _pageHeadView = [[UCFPageHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NavigationBarHeight1) WithTitleArray:self.accoutType == SelectAccoutTypeP2P ?   @[@"优质债权",@"债权转让"] : @[@"我的项目",@"转入项目"]];
         _pageHeadView.leftSpace = 50;
         _pageHeadView.rightSpace = 50;
         _pageHeadView.leftBackImage = @"icon_left";
