@@ -25,7 +25,9 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"SecurityCell" owner:self options:0] lastObject];
         cell.contentView.backgroundColor = [UIColor clearColor];
         UIView *aView = [[UIView alloc] initWithFrame:cell.contentView.frame];
-        aView.backgroundColor = UIColorWithRGB(0xf5f5f5);
+        aView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+        cell.itemNameLabel.textColor = [Color color:PGColorOptionTitleBlack];
+        cell.itemSubTitleLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
         cell.selectedBackgroundView = aView;
     }
     return cell;
@@ -80,8 +82,8 @@
 
     } else {
         self.accessoryView = nil;
-        self.itemSubTitleLabel.textColor = UIColorWithRGB(0x555555);
-        self.itemSubTitleLabel.font = [UIFont boldSystemFontOfSize:12];
+        self.itemSubTitleLabel.textColor = [Color color:PGColorOptionTitleGray];
+        self.itemSubTitleLabel.font = [UIFont boldSystemFontOfSize:14];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 }

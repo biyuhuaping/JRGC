@@ -171,65 +171,53 @@
     [self reloadUI];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
-- (void)addRightButtonWithName:(NSString *)rightButtonName
-{
-    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 66, 44);
-    rightbutton.backgroundColor = [UIColor clearColor];
-    [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
-    rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
-    [rightbutton setTitleColor:UIColorWithRGB(0x333333) forState:UIControlStateNormal];
-    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
-    self.navigationItem.rightBarButtonItem = rightItem;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self addLeftButton];
-//    [self addRightButtonWithName:@"每日签到"];
 
-//    baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";账户设置
     baseTitleLabel.text = @"账户设置";
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
+    self.tableview.separatorColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.tableview.separatorInset = UIEdgeInsetsMake(0,45, 0, 0);
-    self.tableview.backgroundColor = [UIColor clearColor];
-    UIView *footerview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 70)];
+//    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    UIView *footerview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 150)];
     self.tableview.tableFooterView = footerview;
-    [footerview setBackgroundColor:UIColorWithRGB(0xebebee)];
+    [footerview setBackgroundColor:[Color color:PGColorOpttonTabeleViewBackgroundColor]];
     
     UIButton *logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [logOutButton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
-    logOutButton.translatesAutoresizingMaskIntoConstraints = NO;
+//    logOutButton.translatesAutoresizingMaskIntoConstraints = NO;
     [logOutButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [logOutButton setBackgroundColor:[Color color:PGColorOptionThemeWhite]];
+    [logOutButton setTitleColor:[Color color:PGColorOptionTitleOrange] forState:UIControlStateNormal];
     [logOutButton setTitle:@"退出登录" forState:UIControlStateNormal];
+    
     [footerview addSubview:logOutButton];
 
     // 添加约束
-    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[logOutButton]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
-    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[logOutButton]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
-    [footerview addConstraints:constraints1H];
-    [footerview addConstraints:constraints1V];
+//    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[logOutButton]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
+//    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[logOutButton]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
+//    [footerview addConstraints:constraints1H];
+//    [footerview addConstraints:constraints1V];
     
-//    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-//    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
-    [logOutButton setBackgroundColor:[Color color:PGColorOptionThemeWhite]];
-    [logOutButton setTitleColor:[Color color:PGColorOptionTitleOrange] forState:UIControlStateNormal];
-    self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
+
+
+    self.tableview.separatorColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     
     // 获取网络数据
     [self getSecurityCenterNetData];
     
-    self.view.backgroundColor = UIColorWithRGB(0xebebee);
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     _userLevelImage = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth - 63, 9, 25, 25)];
     if ([SingleUserInfo.loginData.userInfo.openStatus integerValue] == 4) {
         _setChangePassword.title = @"修改交易密码";
     } else {
         _setChangePassword.title = @"设置交易密码";
     }
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    self.tableview.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];;
 }
 //  退出登录按钮点击事件
 - (void)logOutClicked:(UIButton *)btn
@@ -494,14 +482,10 @@
 {
     SecurityCell *cell = [SecurityCell cellWithTableView:tableView];
     UCFSettingGroup *group = self.itemsData[indexPath.section];
-    if(indexPath.row == 0) {
-        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(45, 0, ScreenWidth, 0.5)];
-        topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell addSubview:topLine];
-    }
+
     if (indexPath.row == group.items.count-1) {
         UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(45,49.5, ScreenWidth, 0.5)];
-          bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+          bottomLine.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
         [cell.contentView addSubview:bottomLine];
     }
     cell.item = group.items[indexPath.row];
@@ -568,97 +552,6 @@
     }
 }
 
-//- (void)touchIDVerificationSwitchState:(BOOL)gestureState WithCell:(SecurityCell *)cell
-//{
-//
-//    LAContext *lol = [[LAContext alloc] init];
-//    lol.localizedFallbackTitle = @"";
-//    NSError *error = nil;
-//    NSString *showStr = @"";
-//    if (gestureState) {
-//        showStr =  _isFaceID ? @"验证并开启面部解锁" : @"验证并开启指纹解锁";
-//    } else {
-//        showStr = _isFaceID ? @"验证并关闭面部解锁" : @"验证并关闭指纹解锁";
-//    }
-//
-//    //TODO:TOUCHID是否存在
-//    if ([lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-//        //TODO:TOUCHID开始运作
-//        [lol evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:showStr reply:^(BOOL succes, NSError *error)
-//         {
-//             if (succes) {
-//                 NSLog(@"指纹验证成功");
-//                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                         //打开指纹手势
-//                     [[NSUserDefaults standardUserDefaults] setBool:gestureState forKey:@"isUserShowTouchIdLockView"];
-//                     [[NSUserDefaults standardUserDefaults] synchronize];
-//                 }];
-//             }
-//             else
-//             {
-//                 NSLog(@"%@",error.localizedDescription);
-//                 switch (error.code) {
-//                     case LAErrorSystemCancel:
-//                     {
-//                         NSLog(@"Authentication was cancelled by the system");
-//                         //切换到其他APP，系统取消验证Touch ID
-//                         break;
-//                     }
-//                     case LAErrorUserCancel:
-//                     {
-//                         NSLog(@"Authentication was cancelled by the user");
-//                         //用户取消验证Touch ID
-//                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                             [cell.switchView setOn:!gestureState animated:YES];
-//                         }];
-//                         break;
-//                     }
-//                     case LAErrorUserFallback:
-//                     {
-//                         NSLog(@"User selected to enter custom password");
-//                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                             //用户选择输入密码，切换主线程处理
-//                         }];
-//                         break;
-//                     }
-//                     default:
-//                     {
-//                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                             //其他情况，切换主线程处理
-//                             [cell.switchView setOn:!gestureState animated:YES];
-//                         }];
-//                         break;
-//                     }
-//                 }
-//             }
-//         }];
-//
-//    }
-//    else
-//    {
-//        switch (error.code) {
-//            case LAErrorTouchIDNotEnrolled:
-//            {
-//                NSLog(@"TouchID is not enrolled");
-//                break;
-//            }
-//            case LAErrorPasscodeNotSet:
-//            {
-//                //没有touchID 的报错
-//                NSLog(@"A passcode has not been set");
-//                break;
-//            }
-//            default:
-//            {
-//                NSLog(@"TouchID not available");
-//                break;
-//            }
-//        }
-//    }
-//
-//
-//
-//}
 - (BOOL)checkTouchIdIsOpen
 {
     LAContext *lol = [[LAContext alloc] init];
