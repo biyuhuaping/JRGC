@@ -123,9 +123,6 @@
         self.userLevel.isShowOrHide = YES;//不显示
 
 
-        
-        
-
 
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
 
@@ -178,21 +175,21 @@
     [self addLeftButton];
 
     baseTitleLabel.text = @"账户设置";
-    self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.tableview.separatorColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-    self.tableview.separatorInset = UIEdgeInsetsMake(0,45, 0, 0);
-//    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//    self.tableview.separatorColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+//    self.tableview.separatorInset = UIEdgeInsetsMake(0,45, 0, 0);
+    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     UIView *footerview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 150)];
     self.tableview.tableFooterView = footerview;
     [footerview setBackgroundColor:[Color color:PGColorOpttonTabeleViewBackgroundColor]];
     
     UIButton *logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [logOutButton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    logOutButton.translatesAutoresizingMaskIntoConstraints = NO;
     [logOutButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
     [logOutButton setBackgroundColor:[Color color:PGColorOptionThemeWhite]];
     [logOutButton setTitleColor:[Color color:PGColorOptionTitleOrange] forState:UIControlStateNormal];
     [logOutButton setTitle:@"退出登录" forState:UIControlStateNormal];
+    logOutButton.frame = CGRectMake(0, 20, ScreenWidth, 50);
     
     [footerview addSubview:logOutButton];
 
@@ -482,11 +479,12 @@
 {
     SecurityCell *cell = [SecurityCell cellWithTableView:tableView];
     UCFSettingGroup *group = self.itemsData[indexPath.section];
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row == group.items.count-1) {
-        UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(45,49.5, ScreenWidth, 0.5)];
-          bottomLine.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
-        [cell.contentView addSubview:bottomLine];
+        cell.bottomLineView.hidden = YES;
+    } else {
+        cell.bottomLineView.frame = CGRectMake(45, 49.5, ScreenWidth, 0.5);
+        cell.bottomLineView.hidden = NO;
     }
     cell.item = group.items[indexPath.row];
     cell.delegate = self;

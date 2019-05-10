@@ -24,16 +24,26 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"SecurityCell" owner:self options:0] lastObject];
         cell.contentView.backgroundColor = [UIColor clearColor];
-        UIView *aView = [[UIView alloc] initWithFrame:cell.contentView.frame];
-        aView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         cell.itemNameLabel.textColor = [Color color:PGColorOptionTitleBlack];
         cell.itemSubTitleLabel.textColor = [Color color:PGColorOptionInputDefaultBlackGray];
-        cell.selectedBackgroundView = aView;
+        cell.bottomLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+//        cell.bottomLineView.backgroundColor = [Color color:PGColorOptionTitleOrange];
+        UIView *lineview= [[UIView alloc] init];
+        lineview.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+        [cell addSubview:lineview];
+        cell.bottomLineView = lineview;
     }
     return cell;
 }
 
-
+//- (UIView *)bottomLineView
+//{
+//    if (!_bottomLineView) {
+//        _bottomLineView = [[UIView alloc] init];
+//        _bottomLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+//    }
+//    return _bottomLineView;
+//}
 - (void)setItem:(UCFSettingItem *)item
 {
     super.item = item;
