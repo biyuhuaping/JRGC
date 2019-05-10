@@ -47,9 +47,11 @@
     navView.delegate = self;
     [self.rootLayout addSubview:navView];
     
+    
     MyRelativeLayout *contentLayout = [MyRelativeLayout new];
     contentLayout.myHorzMargin = 0;         //同时指定左右边距为0表示宽度和父视图一样宽
     self.contentLayout = contentLayout;
+    
     
     UCFNewBidDetaiInfoView *bidinfoView = [[UCFNewBidDetaiInfoView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight1, ScreenWidth, 155)];
     self.bidinfoView = bidinfoView;
@@ -133,7 +135,8 @@
     [self.investView blindVM:self.VM];
     
     [self blindVM:self.VM];
-    
+    [self setTopLineViewHide];
+
 }
 - (void)blindVM:(UVFBidDetailViewModel *)vm
 {

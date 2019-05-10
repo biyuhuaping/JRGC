@@ -11,7 +11,7 @@
 //#import "RTRootNavigationController.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 @interface UCFNewBaseViewController ()
-
+@property(nonatomic,strong) UIView *lineViewAA;
 @end
 
 @implementation UCFNewBaseViewController
@@ -147,11 +147,15 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [Color color:PGColorOptionThemeWhite];
     self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-    UIView *lineViewAA = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-    lineViewAA.backgroundColor = UIColorWithRGB(0xe2e2e2);
-    [self.view addSubview:lineViewAA];
+    
+    _lineViewAA = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+    _lineViewAA.backgroundColor = UIColorWithRGB(0xe2e2e2);
+    [self.view addSubview:_lineViewAA];
 }
-
+- (void)setTopLineViewHide
+{
+    _lineViewAA.hidden = YES;
+}
 - (void)monitorUserLgoinOrRegist
 {
 

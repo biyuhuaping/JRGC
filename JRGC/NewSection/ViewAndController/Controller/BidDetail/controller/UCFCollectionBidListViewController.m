@@ -26,6 +26,8 @@
 {
     [super loadView];
     [self.rootLayout addSubview:self.showTableView];
+//    [self setTopLineViewHide];
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +40,7 @@
 {
     if (!_showTableView) {
         _showTableView = [[BaseTableView alloc]init];
-        _showTableView.backgroundColor = UIColorWithRGB(0xebebee);
+        _showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _showTableView.delegate = self;
         _showTableView.dataSource =self;
         _showTableView.tableRefreshDelegate = self;

@@ -49,6 +49,7 @@
     self.navView = navView;
     navView.delegate = self;
     [self.rootLayout addSubview:navView];
+
     
     MyRelativeLayout *contentLayout = [MyRelativeLayout new];
     contentLayout.myHorzMargin = 0; //同时指定左右边距为0表示宽度和父视图一样宽
@@ -102,6 +103,9 @@
     [self.remind blindTransVM:self.VM];
 
     [self.investView blindTransVM:self.VM];
+    
+    [self setTopLineViewHide];
+
 //
 //    [self blindVM:self.VM];
 }

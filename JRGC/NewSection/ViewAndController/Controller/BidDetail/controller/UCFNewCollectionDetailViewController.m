@@ -53,6 +53,8 @@
     navView.delegate = self;
     [self.rootLayout addSubview:navView];
     
+
+    
     MyRelativeLayout *contentLayout = [MyRelativeLayout new];
     contentLayout.topPos.equalTo(self.navView.bottomPos);
     contentLayout.backgroundColor = [UIColor clearColor];
@@ -119,6 +121,9 @@
     [self.remind blindCollectionVM:self.VM];
     
     [self.investView blindBaseVM:self.VM];
+    
+    [self setTopLineViewHide];
+
 }
 - (void)blindVM
 {
