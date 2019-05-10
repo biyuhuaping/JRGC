@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CGFloat accoutBalance;//账户余额(微金,尊享,黄金)
 
+- (void)setAccoutBalanceMoney:(CGFloat)accoutBalance;
 @end
 
 NS_ASSUME_NONNULL_END

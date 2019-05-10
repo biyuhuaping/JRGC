@@ -40,9 +40,18 @@
     baseTitleLabel.text = @"资金流水";
 //    [self.tableView beginRefresh];
     self.page = 1;
+     self.arryData = [NSMutableArray array];
     [self.rootLayout addSubview:self.tableView];
     [self.tableView beginRefresh];
     [self addLeftButton];
+    
+    UIView *bottomLineView = [UIView new];
+    bottomLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+    bottomLineView.myTop = 0;
+    bottomLineView.myLeft = 0;
+    bottomLineView.myRight = 0;
+    bottomLineView.myHeight = 0.5;
+    [self.rootLayout addSubview:bottomLineView];
 }
 - (BaseTableView *)tableView
 {
@@ -150,55 +159,8 @@
     
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%@&rows=%@", SingleUserInfo.loginData.userInfo.userId, [NSString stringWithFormat:@"%lu", (unsigned long)self.page], @"10"];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFundsDetail owner:self Type:self.accoutType];
-//
-//    UCFMicroBankDepositoryGetHSAccountInfoBillApi * request = [[UCFMicroBankDepositoryGetHSAccountInfoBillApi alloc] initWithPage:page pageSize:20 accoutType:self.accoutType];
-//
-//    request.animatingView = self.view;
-//    //    request.tag =tag;
-//    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        // 你可以直接在这里使用 self
-//        UCFMicroBankDepositoryGetHSAccountInfoBillModel *model = [request.responseJSONModel copy];
-//        DDLogDebug(@"---------%@",model);
-//        if (model.ret == YES) {
-//
-//            [self.arryData addObjectsFromArray:model.data.pageData.result];
-//            if ([model.data.pageData.pagination.hasNextPage isEqualToString:@"false"]) {
-//                //没有下一页数据后,隐藏上拉加载,
-//                self.tableView.enableRefreshFooter = NO;
-//                self.page = [model.data.pageData.pagination.pageNo integerValue];
-//            }
-//            else
-//            {
-//                self.page = [model.data.pageData.pagination.pageNo integerValue]+ 1;
-//                self.tableView.enableRefreshFooter = YES;
-//            }
-//        }
-//        else{
-//            ShowMessage(model.message);
-//        }
-//        [self endRefreshAndReloadData];
-//
-//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        // 你可以直接在这里使用 self
-//        [self endRefreshAndReloadData];
-//    }];
 }
 
-//- (void)getFundsDetailNetData
-//{
-//    if (self.tableView.header.isRefreshing)
-//    {
-//        self.page = 1;
-//        self.tableView.footer.hidden = YES;
-//
-//    }else if (self.tableView.footer.isRefreshing)
-//    {
-//        self.page ++;
-//    }
-//    self.page = 1;
-//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%@&rows=%@", SingleUserInfo.loginData.userInfo.userId, [NSString stringWithFormat:@"%lu", (unsigned long)self.page], @"10"];
-//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFundsDetail owner:self Type:self.accoutType];
-//}
 //开始请求
 - (void)beginPost:(kSXTag)tag
 {
@@ -212,36 +174,18 @@
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    self.arryData = [NSMutableArray array];
     NSString *data = (NSString *)result;
     if (tag.integerValue == kSXTagFundsDetail) {
 //        YPersonModel *model = [YYPersonModel modelWithDictionary:dic];
         UCFAccountDetailWZAndZXModel *model = [UCFAccountDetailWZAndZXModel yy_modelWithDictionary:[data objectFromJSONString]];
-      
-//        if (!model.pageData.pagination.hasNextPage  && model.pageData.result.count != 10)
-        if (model.pageData.pagination.hasNextPage  && model.pageData.result.count == 10)
-        {
-            self.page = model.pageData.pagination.pageNo + 1;
-            self.tableView.enableRefreshFooter = YES;
-        }
-        else
-        {
-            //没有下一页数据后,隐藏上拉加载,
-            self.tableView.enableRefreshFooter = NO;
-            self.page = model.pageData.pagination.pageNo;
-        }
         NSMutableDictionary *dic = [data objectFromJSONString];
-        NSInteger isSucess = [dic[@"status"] integerValue];
-        BOOL hasNextPage = [[[dic[@"pageData"] objectForKey:@"pagination"] valueForKey:@"hasNextPage"] boolValue];
-        if (isSucess == 1)
-        {
-            if ([self.tableView.header isRefreshing])
+        NSArray *datalist = [[dic objectForKey:@"pageData"] objectForKey:@"result"];
+        if ([model.status integerValue] == 1) {
+            
+            if (model.pageData.pagination.pageNo == 1)
             {
                 [self.arryData removeAllObjects];
             }
-            NSDictionary *result = dic[@"pageData"];
-            NSArray *datalist = [result objectForKey:@"result"];
-            // 解析资金流水
             NSMutableArray *temp = [NSMutableArray array];
             for (NSDictionary *dict in datalist) {
                 FundsDetailModel *model = [FundsDetailModel fundDetailModelWithDict:dict];
@@ -251,7 +195,18 @@
             }
             [self.arryData addObjectsFromArray:temp];
             [self regroupWithArray:self.arryData];
-            [self.tableView reloadData];
+            
+            if (model.pageData.pagination.hasNextPage  && model.pageData.result.count == 10)
+            {
+                self.page = model.pageData.pagination.pageNo + 1;
+                self.tableView.enableRefreshFooter = YES;
+            }
+            else
+            {
+                //没有下一页数据后,隐藏上拉加载,
+                self.tableView.enableRefreshFooter = NO;
+                self.page = model.pageData.pagination.pageNo;
+            }
         }
         else {
             [AuxiliaryFunc showToastMessage:dic[@"statusdes"] withView:self.view];

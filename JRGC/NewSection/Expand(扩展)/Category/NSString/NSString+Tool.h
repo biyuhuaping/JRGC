@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
  @return 如果为空返回@“”
  */
 - (NSString *)dealNullString;
+
+//给字符串添加¥,并判断是金额是否为负数
++ (NSString *)AddCNY:(NSString *)string;
 @end
 
 NS_ASSUME_NONNULL_END

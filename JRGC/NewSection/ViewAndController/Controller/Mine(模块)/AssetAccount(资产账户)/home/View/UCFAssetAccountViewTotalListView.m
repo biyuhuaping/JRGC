@@ -421,10 +421,10 @@
 - (void)reloadAccountContent:(UCFAccountCenterAssetsOverViewModel *)model{
     
     UCFAccountCenterAssetsOverViewAssetlist *ass = model.data.assetList.firstObject;
-    self.availBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.availBalance];
-    self.waitPrincipalContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.waitPrincipal];
-    self.waitInterestContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.waitInterest];
-    self.frozenBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.frozenBalance];
+    self.availBalanceContentLabel.text = [NSString AddCNY:ass.availBalance];
+    self.waitPrincipalContentLabel.text = [NSString AddCNY:ass.waitPrincipal];
+    self.waitInterestContentLabel.text = [NSString AddCNY:ass.waitInterest];
+    self.frozenBalanceContentLabel.text = [NSString AddCNY:ass.frozenBalance];
     
     [self.availBalanceContentLabel sizeToFit] ;
     [self.waitPrincipalContentLabel sizeToFit];

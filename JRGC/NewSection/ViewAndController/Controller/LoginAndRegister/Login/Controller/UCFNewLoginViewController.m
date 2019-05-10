@@ -23,6 +23,10 @@
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
+@property (nonatomic, strong) UIButton *closeButton;
+
+@property (nonatomic, strong) UIButton *registerButton;
+
 @property (nonatomic, strong) UCFNewLoginInputView *loginInputView;
 
 @property (nonatomic, strong) NZLabel     *serviceLabel;
@@ -50,7 +54,8 @@
     self.rootLayout.backgroundColor = [UIColor whiteColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
-    
+    [self.rootLayout addSubview:self.closeButton];
+    [self.rootLayout addSubview:self.registerButton];
     [self.rootLayout addSubview:self.loginLabel];
     [self.rootLayout addSubview:self.loginInputView];
     [self.rootLayout addSubview:self.serviceLabel];
@@ -58,47 +63,44 @@
     [self.rootLayout addSubview:self.rightView];
     
     [self setSetNavgationPopDisabled:YES];
-    [self addLeftButtons];
-    [self addRightButton];
+//    [self addLeftButtons];
+//    [self addRightButton];
+    [self.navigationController.navigationBar setHidden:YES];
 }
-- (void)addRightButton
-{
-    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 44, 44);
-    rightbutton.backgroundColor = [UIColor whiteColor];
-    [rightbutton setTitle:@"注册" forState:UIControlStateNormal];
-    rightbutton.titleLabel.font = [UIFont systemFontOfSize:18.0];
-    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
-    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateNormal];
-    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateHighlighted];
-    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
-    self.navigationItem.rightBarButtonItem = rightItem;
 
-}
-- (void)clickRightBtn
+- (UIButton *)closeButton
 {
-    [self.navigationController popViewControllerAnimated:NO];
-    UCFRegisterInputPhoneNumViewController *uc = [[UCFRegisterInputPhoneNumViewController alloc] init];
-    [SingGlobalView.rootNavController pushViewController:uc animated:NO complete:^(BOOL finished) {
-//        [SingGlobalView.rootNavController removeViewController:self];
-    }];
+    if (nil == _closeButton) {
+        _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_closeButton setBackgroundColor:[UIColor clearColor]];
+        [_closeButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+        [_closeButton setImage:[UIImage imageNamed:@"calculator_gray_close.png"]forState:UIControlStateNormal];
+        [_closeButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+        _closeButton.myTop = PGStatusBarHeight;
+        _closeButton.myWidth = 44;
+        _closeButton.myHeight = 44;
+        _closeButton.myLeft = 15;
+    }
+    return  _closeButton;
 }
-- (void)addLeftButtons
+- (UIButton *)registerButton
 {
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [leftButton setBackgroundColor:[UIColor clearColor]];
-    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
-    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
-    [leftButton setImage:[UIImage imageNamed:@"calculator_gray_close.png"]forState:UIControlStateNormal];
-    //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
-    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-
-    self.navigationItem.leftBarButtonItem = leftItem;
+    if (nil == _registerButton) {
+        _registerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_registerButton setBackgroundColor:[UIColor clearColor]];
+        _registerButton.backgroundColor = [UIColor whiteColor];
+        [_registerButton setTitle:@"注册" forState:UIControlStateNormal];
+        _registerButton.titleLabel.font = [UIFont systemFontOfSize:18.0];
+        [_registerButton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+        [_registerButton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateNormal];
+        [_registerButton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateHighlighted];
+//        [_registerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        _registerButton.centerYPos.equalTo(self.closeButton.centerYPos);
+        _registerButton.myWidth = 85;
+        _registerButton.myHeight = 44;
+        _registerButton.myRight = 0;
+    }
+    return  _registerButton;
 }
 - (void)getToBack
 {
@@ -113,17 +115,59 @@
     }
     
     if ([bs isKindOfClass:[UCFWebViewJavascriptBridgeBanner class]]) {
-//        [bs.rt_navigationController popViewControllerAnimated:NO];
+        //        [bs.rt_navigationController popViewControllerAnimated:NO];
         [bs.rt_navigationController removeViewController:bs];
     }
     [SingGlobalView.rootNavController popViewControllerAnimated:YES];
     
 }
+- (void)clickRightBtn
+{
+    [self.navigationController popViewControllerAnimated:NO];
+    UCFRegisterInputPhoneNumViewController *uc = [[UCFRegisterInputPhoneNumViewController alloc] init];
+    [SingGlobalView.rootNavController pushViewController:uc animated:NO complete:^(BOOL finished) {
+        //        [SingGlobalView.rootNavController removeViewController:self];
+    }];
+}
+//- (void)addRightButton
+//{
+//    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    rightbutton.frame = CGRectMake(0, 0, 44, 44);
+//    rightbutton.backgroundColor = [UIColor whiteColor];
+//    [rightbutton setTitle:@"注册" forState:UIControlStateNormal];
+//    [rightbutton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -30, 0.0, 0.0)];
+//    rightbutton.titleLabel.font = [UIFont systemFontOfSize:18.0];
+//    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+//    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateNormal];
+//    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateHighlighted];
+//    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+//
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+//    self.navigationItem.rightBarButtonItem = rightItem;
+//
+//}
+//
+//- (void)addLeftButtons
+//{
+//    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [leftButton setFrame:CGRectMake(0, 0, 44, 44)];
+//    [leftButton setBackgroundColor:[UIColor clearColor]];
+//    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+//    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+//    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, 5, 0.0, 0.0)];
+//    [leftButton setImage:[UIImage imageNamed:@"calculator_gray_close.png"]forState:UIControlStateNormal];
+//    //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
+//    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+//
+//    self.navigationItem.leftBarButtonItem = leftItem;
+//}
+
 - (NZLabel *)loginLabel
 {
     if (nil == _loginLabel) {
         _loginLabel = [NZLabel new];
-        _loginLabel.myTop = 40;
+        _loginLabel.topPos.equalTo(self.closeButton.bottomPos).offset(45);
         _loginLabel.leftPos.equalTo(@26);
         _loginLabel.textAlignment = NSTextAlignmentLeft;
         _loginLabel.font = [Color gc_Font:30.0];

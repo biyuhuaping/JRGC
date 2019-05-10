@@ -9,7 +9,7 @@
 #import "UCFAccountDetailTurnoverCell.h"
 #import "NZLabel.h"
 #import "UCFAccountCenterAssetsOverViewModel.h"
-#define LabelLeft 25
+#define LabelLeft 15
 #define LayoutHeight 37
 #import "FundsDetailFrame.h"
 #import "FundsDetailModel.h"
@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NZLabel     *titleLabel;
 
 @property (nonatomic, strong) NZLabel     *contentLabel;
+
+@property (nonatomic, strong) UIView      *titleLineView;
 
 @property (nonatomic, strong) MyRelativeLayout *availBalanceLayout;// 可用余额
 
@@ -88,6 +90,7 @@
         [self.bkLayout addSubview:self.titleVerticalView];
         [self.bkLayout addSubview:self.titleLabel];
         [self.bkLayout addSubview:self.contentLabel];
+        [self.bkLayout addSubview:self.titleLineView];
         
         [self.bkLayout addSubview:self.availBalanceLayout];
         //        [self.availBalanceLayout addSubview:self.availBalanceRound];
@@ -136,13 +139,34 @@
 {
     if (nil == _titleVerticalView) {
         _titleVerticalView = [UIView new];
-        _titleVerticalView.myTop = 25;
-        _titleVerticalView.myHeight = 18;
-        _titleVerticalView.myWidth = 3;
+        _titleVerticalView.backgroundColor = [Color color:PGColorOptionTitlerRead];
+        _titleVerticalView.myTop = 18;
+        _titleVerticalView.myHeight = 16;
+        _titleVerticalView.myWidth = 4;
         _titleVerticalView.myLeft = 15;
+        _titleVerticalView.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
+        {
+            //设置圆角的半径
+            sbv.layer.cornerRadius = 2;
+            //切割超出圆角范围的子视图
+            sbv.layer.masksToBounds = YES;
+        };
     }
     return _titleVerticalView;
 }
+-(UIView *)titleLineView
+{
+    if (nil == _titleLineView) {
+        _titleLineView = [UIView new];
+        _titleLineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
+        _titleLineView.topPos.equalTo(self.titleVerticalView.bottomPos).offset(15);
+        _titleLineView.myHeight = 0.5;
+        _titleLineView.myRight = 15;
+        _titleLineView.myLeft = 15;
+    }
+    return _titleLineView;
+}
+
 - (NZLabel *)contentLabel
 {
     if (nil == _contentLabel) {
@@ -180,7 +204,8 @@
         _availBalanceLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _availBalanceLayout.myWidth = PGScreenWidth;
         _availBalanceLayout.myHeight = LayoutHeight;
-        _availBalanceLayout.topPos.equalTo(self.titleVerticalView.bottomPos).offset(14);
+        _availBalanceLayout.myLeft = 0;
+        _availBalanceLayout.topPos.equalTo(self.titleLineView.bottomPos).offset(5);
         //        _wjLayout.myCenterX = - 70;
     }
     return _availBalanceLayout;
@@ -257,6 +282,7 @@
         _waitPrincipalLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _waitPrincipalLayout.myWidth = PGScreenWidth;
         _waitPrincipalLayout.myHeight = LayoutHeight;
+        _waitPrincipalLayout.myLeft = 0;
         _waitPrincipalLayout.topPos.equalTo(self.availBalanceLayout.bottomPos);
         //        _wjLayout.myCenterX = - 70;
     }
@@ -333,6 +359,7 @@
         _waitInterestLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _waitInterestLayout.myWidth = PGScreenWidth;
         _waitInterestLayout.myHeight = LayoutHeight;
+        _waitInterestLayout.myLeft = 0;
         _waitInterestLayout.topPos.equalTo(self.waitPrincipalLayout.bottomPos);
         //        _wjLayout.myCenterX = - 70;
     }
@@ -409,6 +436,7 @@
         _frozenBalanceLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _frozenBalanceLayout.myWidth = PGScreenWidth;
         _frozenBalanceLayout.myHeight = LayoutHeight;
+        _frozenBalanceLayout.myLeft = 0;
         _frozenBalanceLayout.topPos.equalTo(self.waitInterestLayout.bottomPos);
         //        _wjLayout.myCenterX = - 70;
     }
@@ -524,11 +552,11 @@
         return;
     }
 //    FAccountDetailWZAndZXViewController: 0x10ef06ad0>请求返回数据:{"status":"1","pageData":{"result":[{"waterTypeName":"成功放款，扣除冻结资金","createTime":"2017-10-11 18:07:17","cashValue":"0.00","frozen":"-100.00","actType":"","remark":"消费贷-掌0002","yearMonth":"2017年10月"}
-    self.titleVerticalView.backgroundColor = [Color color:PGColorOptionTitlerRead];
     FundsDetailFrame *newModel = model;
     FundsDetailModel *ass = newModel.fundsDetailModel;
-    self.availBalanceContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.cashValue];
-    self.waitPrincipalContentLabel.text = [NSString stringWithFormat:@"￥%@",ass.frozen];
+   
+    self.availBalanceContentLabel.text = [NSString AddCNY:ass.cashValue];
+    self.waitPrincipalContentLabel.text = [NSString AddCNY:ass.frozen];
     self.waitInterestContentLabel.text = ass.createTime;
     self.frozenBalanceContentLabel.text = ass.remark;
 

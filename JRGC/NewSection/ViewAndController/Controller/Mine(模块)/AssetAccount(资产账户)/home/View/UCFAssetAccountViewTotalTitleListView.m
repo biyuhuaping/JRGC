@@ -479,16 +479,17 @@
 - (void)reloadAccountContent:(UCFAccountCenterAssetsOverViewAssetlist *)model{
     
     UCFAccountCenterAssetsOverViewAssetlist *ass = model;
-    self.availBalanceContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:ass.availBalance]];
-    self.waitPrincipalContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:ass.waitPrincipal]];
-    self.waitInterestContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:ass.waitInterest]];
-    self.frozenBalanceContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:ass.frozenBalance]];
+    self.availBalanceContentLabel.text = [NSString AddCNY:ass.availBalance];
+    self.waitPrincipalContentLabel.text = [NSString AddCNY:ass.waitPrincipal];
+    self.waitInterestContentLabel.text = [NSString AddCNY:ass.waitInterest];
+    self.frozenBalanceContentLabel.text = [NSString AddCNY:ass.frozenBalance];
     
+    self.contentLabel.text = [NSString AddCNY:ass.totalAsset];
     [self.availBalanceContentLabel sizeToFit] ;
     [self.waitPrincipalContentLabel sizeToFit];
     [self.waitInterestContentLabel sizeToFit];
     [self.frozenBalanceContentLabel sizeToFit];
-    
+    [self.contentLabel sizeToFit];
 //    “P2P” :微金账户 “ZX”：尊享账户 "GOLD":黄金账户
     if ([ass.type isEqualToString:@"P2P"]) {
         self.titleVerticalView.backgroundColor = PNBlue;

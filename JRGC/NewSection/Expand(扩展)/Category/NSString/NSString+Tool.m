@@ -103,4 +103,21 @@
         return NO;
     }
 }
+
+//给字符串添加¥,并判断是金额是否为负数
++ (NSString *)AddCNY:(NSString *)string
+{
+    if ([string containsString:@"-"])
+    {
+        NSString *str =  [self AddComma:[string stringByReplacingOccurrencesOfString:@"-"withString:@""]];
+        str = [NSString stringWithFormat:@"-¥%@",str];
+        return str;
+    }
+    else
+    {
+        NSString *str =  [self AddComma:string];
+        str = [NSString stringWithFormat:@"¥%@",str];
+        return str;
+    }
+}
 @end

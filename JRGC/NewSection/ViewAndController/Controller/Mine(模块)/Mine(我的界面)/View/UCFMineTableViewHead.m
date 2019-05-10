@@ -395,10 +395,10 @@
         self.totalDueIn = myModel.data.totalDueIn;//总待收利息
         self.cashBalance = myModel.data.cashBalance;//余额
         
-        self.totalAssetsMoneyLabel.text = [NSString stringWithFormat:@"¥%@",self.total];//总资产
+        self.totalAssetsMoneyLabel.text =  [NSString AddCNY:self.total];//总资产
         [self.totalAssetsMoneyLabel setFont:[Color gc_Font:22.0] string:@"¥"];
-        self.expectedInterestMoneyLabel.text = [NSString stringWithFormat:@"¥%@",self.totalDueIn];//总待收利息
-        self.accountBalanceMoneyLabel.text = [NSString stringWithFormat:@"¥%@",self.cashBalance];//余额
+        self.expectedInterestMoneyLabel.text = [NSString AddCNY:self.totalDueIn];//总待收利息
+        self.accountBalanceMoneyLabel.text = [NSString AddCNY:self.cashBalance];//余额
 
     }
     [self.totalAssetsMoneyLabel sizeToFit];

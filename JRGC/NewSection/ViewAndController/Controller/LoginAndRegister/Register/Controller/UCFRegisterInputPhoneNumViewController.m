@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
-@property (nonatomic, strong) UIButton *closeBtn; //关闭按钮
+@property (nonatomic, strong) UIButton *closeButton; //关闭按钮
 
 @property (nonatomic, strong) UIButton *loginBtn; //d切换到登录按钮
 
@@ -55,8 +55,8 @@
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     
-//    [self.rootLayout addSubview:self.closeBtn];
-//    [self.rootLayout addSubview:self.loginBtn];
+    [self.rootLayout addSubview:self.closeButton];
+    [self.rootLayout addSubview:self.loginBtn];
     [self.rootLayout addSubview:self.registerLabel];
     [self.rootLayout addSubview:self.registerContentLabel];
     [self.rootLayout addSubview:self.registerImageView];
@@ -65,10 +65,9 @@
     [self.rootLayout addSubview:self.registerPhoneLine];
     [self.rootLayout addSubview:self.nextBtn];
     [self.rootLayout addSubview:self.registerAgreeLabel];
-    [self addLeftButtons];
-    [self addRightButton];
     
     [self setSetNavgationPopDisabled:YES];
+    [self.navigationController.navigationBar setHidden:YES];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -82,21 +81,36 @@
     IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
     keyboardManager.enable = NO;
 }
-- (void)addRightButton
-{
-    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 44, 44);
-    rightbutton.backgroundColor = [UIColor whiteColor];
-    [rightbutton setTitle:@"登录" forState:UIControlStateNormal];
-    rightbutton.titleLabel.font = [UIFont systemFontOfSize:18.0];
-    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
-    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateNormal];
-    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateHighlighted];
-    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
-    self.navigationItem.rightBarButtonItem = rightItem;
-}
+//- (void)addRightButton
+//{
+//    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    rightbutton.frame = CGRectMake(0, 0, 44, 44);
+//    rightbutton.backgroundColor = [UIColor whiteColor];
+//    [rightbutton setTitle:@"登录" forState:UIControlStateNormal];
+//    rightbutton.titleLabel.font = [UIFont systemFontOfSize:18.0];
+//    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+//    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateNormal];
+//    [rightbutton setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateHighlighted];
+//    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+//
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+//    self.navigationItem.rightBarButtonItem = rightItem;
+//}
+//- (void)addLeftButtons
+//{
+//    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [leftButton setFrame:CGRectMake(0, 0, 30, 30)];
+//    [leftButton setBackgroundColor:[UIColor clearColor]];
+//    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+//    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+//    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
+//    [leftButton setImage:[UIImage imageNamed:@"calculator_gray_close.png"]forState:UIControlStateNormal];
+//    //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
+//    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+//
+//    self.navigationItem.leftBarButtonItem = leftItem;
+//}
 - (void)clickRightBtn
 {
     [self.navigationController popViewControllerAnimated:NO];
@@ -105,21 +119,7 @@
 //        [SingGlobalView.rootNavController removeViewController:self];
     }];
 }
-- (void)addLeftButtons
-{
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [leftButton setBackgroundColor:[UIColor clearColor]];
-    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
-    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
-    [leftButton setImage:[UIImage imageNamed:@"calculator_gray_close.png"]forState:UIControlStateNormal];
-    //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
-    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-    
-    self.navigationItem.leftBarButtonItem = leftItem;
-}
+
 - (void)getToBack
 {
     
@@ -134,34 +134,38 @@
 {
     [SingGlobalView.rootNavController popViewControllerAnimated:YES];
 }
-- (UIButton *)closeBtn
+- (UIButton *)closeButton
 {
-    if (nil == _closeBtn) {
-        _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _closeBtn.topPos.equalTo(@0);
-        _closeBtn.leftPos.equalTo(@25);
-        _closeBtn.myHeight = 35;
-        _closeBtn.myHeight = 35;
-        _closeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [_closeBtn setImage:[UIImage imageNamed:@"registericon_close.png"] forState:UIControlStateNormal];
-        [_closeBtn addTarget:self action:@selector(buttonCloseClick:) forControlEvents:UIControlEventTouchUpInside];
+    if (nil == _closeButton) {
+        _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_closeButton setBackgroundColor:[UIColor clearColor]];
+        [_closeButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+        [_closeButton setImage:[UIImage imageNamed:@"calculator_gray_close.png"]forState:UIControlStateNormal];
+        [_closeButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+        _closeButton.myTop = PGStatusBarHeight;
+        _closeButton.myWidth = 44;
+        _closeButton.myHeight = 44;
+        _closeButton.myLeft = 15;
     }
-    return _closeBtn;
+    return _closeButton;
 }
 
 - (UIButton *)loginBtn
 {
     if (nil == _loginBtn) {
         _loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _loginBtn.myRight = 25;
-        _loginBtn.topPos.equalTo(self.closeBtn.topPos);
-        _loginBtn.myHeight = 35;
-        _loginBtn.myHeight = 45;
+        [_loginBtn setBackgroundColor:[UIColor clearColor]];
+        _loginBtn.backgroundColor = [UIColor whiteColor];
         [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-        _loginBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        _loginBtn.titleLabel.font = [Color gc_Font:18.0];
+        _loginBtn.titleLabel.font = [UIFont systemFontOfSize:18.0];
+        [_loginBtn addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
         [_loginBtn setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateNormal];
-        [_loginBtn addTarget:self action:@selector(buttonloginClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_loginBtn setTitleColor:[Color color:PGColorOptionTitlerRead] forState:UIControlStateHighlighted];
+        //        [_registerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        _loginBtn.centerYPos.equalTo(self.closeButton.centerYPos);
+        _loginBtn.myWidth = 85;
+        _loginBtn.myHeight = 44;
+        _loginBtn.myRight = 0;
     }
     return _loginBtn;
 }
@@ -170,8 +174,8 @@
 {
     if (nil == _registerLabel) {
         _registerLabel = [NZLabel new];
-        _registerLabel.topPos.equalTo(self.closeBtn.bottomPos).offset(0);
-        _registerLabel.leftPos.equalTo(self.closeBtn.leftPos);
+        _registerLabel.topPos.equalTo(self.closeButton.bottomPos).offset(40);
+        _registerLabel.myLeft = 25;
         _registerLabel.textAlignment = NSTextAlignmentLeft;
         _registerLabel.font = [Color gc_Font:30.0];
         _registerLabel.textColor = [Color color:PGColorOptionTitleBlack];
@@ -205,6 +209,13 @@
         _registerImageView.myRight = 25;
         _registerImageView.myHeight = 160;
         [_registerImageView getBannerImageStyle:UserRegistration];
+        _registerImageView.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
+        { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
+            //设置圆角的半径
+            sbv.layer.cornerRadius = 5;
+            //切割超出圆角范围的子视图
+            sbv.layer.masksToBounds = YES;
+        };
     }
     return _registerImageView;
 }

@@ -38,8 +38,6 @@
 
 @property (nonatomic, strong) UCFAssetAccountViewTotalListView *listView;
 
-@property (nonatomic, strong) UCFAssetAccountViewTotalTitleListView *titleListView;
-
 @property (nonatomic, strong) UCFAccountCenterAssetsOverViewModel *model;
 
 @property (nonatomic, strong) BaseScrollview *listScrollView;
@@ -113,26 +111,13 @@
         _listScrollView.topPos.equalTo(self.headerAccountView.bottomPos);
         _listScrollView.leftPos.equalTo(@0);
         _listScrollView.myWidth = PGScreenWidth;
-        if (self.model.data.assetList.count > 1) {//279 243
-             _listScrollView.myHeight = 243;
-        }
-        else
-        {
-            _listScrollView.myHeight = 265;
-        }
+        _listScrollView.myHeight = 285;
     }
     return _listScrollView;
 }
 
 - (MyRelativeLayout *)listScrollLayout
 {
-//    MyRelativeLayout *aLayout = [MyRelativeLayout new];
-//    aLayout.backgroundColor = [UIColor yellowColor];
-//    aLayout.widthSize.equalTo(self.listScrollView.widthSize);
-//    aLayout.heightSize.equalTo(self.listScrollView.heightSize);
-//    aLayout.padding = UIEdgeInsetsMake(10, 10, 10, 10);
-//    aLayout.wrapContentHeight = YES;
-//    [self.listScrollView addSubview:aLayout];
     if (nil == _listScrollLayout) {
         _listScrollLayout = [MyRelativeLayout new];
         _listScrollLayout.backgroundColor = [Color color:PGColorOptionThemeWhite];
@@ -169,42 +154,30 @@
 {
     if (nil == _listView) {
 
-        _listView = [[UCFAssetAccountViewTotalListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 243)];//不带标题,只显示列表
+        _listView = [[UCFAssetAccountViewTotalListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 285)];//不带标题,只显示列表
         _listView.myTop =0;
         [_listView.enterButton setTitle:@"资金流水" forState:UIControlStateNormal];
         _listView.myLeft = 0;
     }
     return _listView;
 }
-- (UCFAssetAccountViewTotalTitleListView *)titleListView
-{
-    if (nil == _titleListView) {
-        
-        _titleListView = [[UCFAssetAccountViewTotalTitleListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 265)];//带账户标题
-        _titleListView.myTop = 0;
-        _titleListView.myLeft = 0;
-    }
-    return _titleListView;
-}
+//- (UCFAssetAccountViewTotalTitleListView *)titleListView
+//{
+//    if (nil == _titleListView) {
+//
+//        _titleListView = [[UCFAssetAccountViewTotalTitleListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 265)];//带账户标题
+//        _titleListView.myTop = 0;
+//        _titleListView.myLeft = 0;
+//    }
+//    return _titleListView;
+//}
 - (HQImagePageControl *)pageC
 {
-//    if (!_pageC) {
-//        _pageC = [[HQImagePageControl alloc]initWithFrame:CGRectMake(0, PGScreenHeight - 40, self.scrollView.frame.size.width, 7.5)];
-//        [_pageC setCurrentPage:0];
-//    }
-//    [self.pageFlowView.pageControl setCurrentPage:0];
-    
-//    return _pageC;
-    //初始化pageControl
     if (nil == _pageC) {
         _pageC = [[HQImagePageControl alloc] initWithFrame:CGRectMake(0, 0,PGScreenWidth, 7.5) withType:@"Asset"];
-        //            _pageC.backgroundColor = [UIColor redColor];
-//        _pageC.bottomPos.equalTo(self.listScrollView.bottomPos);
         _pageC.myTop = 0;
         _pageC.centerXPos.equalTo(self.scrollView.centerXPos);
         _pageC.numberOfPages = 3;
-        //        [_pageC addTarget:self action:@selector(onChangePage) forControlEvents:UIControlEventValueChanged];
-//        _pageC.myVisibility = MyVisibility_Gone;
         [_pageC setCurrentPage:0];
         _pageC.myVisibility = MyVisibility_Invisible;
     }
@@ -268,6 +241,7 @@
         self.listScrollLayout.myWidth = self.model.data.assetList.count *PGScreenWidth;
         NSMutableArray *pieArray = [NSMutableArray array];
         @PGWeakObj(self);
+        CGFloat titleListViewHeight = 265;
         [model.data.assetList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 //            NSLog(@"顺序遍历array：%zi-->%@", idx, obj);
             //“P2P” :微金账户 “ZX”：尊享账户 "GOLD":黄金账户
@@ -287,7 +261,7 @@
             
             [pieArray addObject: availBalanceModel];
             
-            UCFAssetAccountViewTotalTitleListView *titleListView = [[UCFAssetAccountViewTotalTitleListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 265)];//带账户标题
+            UCFAssetAccountViewTotalTitleListView *titleListView = [[UCFAssetAccountViewTotalTitleListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, titleListViewHeight)];//带账户标题
             titleListView.myTop = 0;
             titleListView.myLeft = idx *PGScreenWidth;
             [titleListView reloadAccountContent:asset];
@@ -299,8 +273,7 @@
         self.headerAccountView.myVisibility = MyVisibility_Visible;
         self.headerAccountView.bottomLineView.myVisibility = MyVisibility_Visible;
         [self.headerAccountView reloadAccountLayout:model];
-        
-        
+        self.listScrollView.myHeight = titleListViewHeight;
     }
 }
 
@@ -314,10 +287,6 @@
     }
     else if (btn.tag == 1001) {
         //尊享流水
-//        UCFAccountDetailViewController *accountDetailVC = [[UCFAccountDetailViewController alloc] initWithNibName:@"UCFAccountDetailViewController" bundle:nil];
-//        accountDetailVC.selectedSegmentIndex = 1;
-//        accountDetailVC.accoutType = SelectAccoutTypeP2P;
-//        [self.rt_navigationController pushViewController:accountDetailVC animated:YES];
         UCFAccountDetailWZAndZXViewController *accountDetailVC = [[UCFAccountDetailWZAndZXViewController alloc] init];
         accountDetailVC.accoutType = SelectAccoutTypeHoner;
         [self.rt_navigationController pushViewController:accountDetailVC animated:YES];
@@ -383,8 +352,5 @@
         self.pageC.currentPage = page;
     };
 }
-//- (void) onChangePage
-//{
-//    [self.scrollView setCurrentPage:_pageController.currentPage animated:YES];
-//}
+
 @end

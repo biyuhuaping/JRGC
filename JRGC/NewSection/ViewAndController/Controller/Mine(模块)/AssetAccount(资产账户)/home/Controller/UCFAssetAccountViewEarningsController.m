@@ -91,7 +91,7 @@
 {
     if (nil == _listView) {
         
-        _listView = [[UCFAssetAccountViewEarningsListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 279)];//不带标题,只显示列表
+        _listView = [[UCFAssetAccountViewEarningsListView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 339)];//不带标题,只显示列表
         _listView.myTop =0;
         _listView.myLeft = 0;
         if (!self.zxAccountIsShow) {

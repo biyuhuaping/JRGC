@@ -8,6 +8,7 @@
 
 #import "UCFRechargeWebViewController.h"
 #import "AppDelegate.h"
+#import "UCFNewMineViewController.h"
 @interface UCFRechargeWebViewController ()
 @property BOOL flagInvestSuc;
 @end
@@ -99,6 +100,11 @@
             }];
         }
         else{
+            
+            UCFNewMineViewController *vc =  self.rt_navigationController.rt_viewControllers.firstObject;
+            if ([vc isKindOfClass:[UCFNewMineViewController class]]) {
+                [vc refreshMessagePoint];
+            }
             [self.navigationController popToRootViewControllerAnimated:NO];
         }
     }else{

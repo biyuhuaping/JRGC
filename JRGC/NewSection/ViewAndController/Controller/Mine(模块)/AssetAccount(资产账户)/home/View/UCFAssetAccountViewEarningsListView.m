@@ -580,27 +580,27 @@
 }
 - (void)reloadAccountContent:(UCFAccountCenterAlreadyProfitModel *)model
 {
-    self.wjProfitContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:model.data.wjProfit]];
+    self.wjProfitContentLabel.text =  [NSString AddCNY:model.data.wjProfit];
     if ([model.data.zxProfit floatValue] == 0) {
-        self.zxProfitContentLabel.myVisibility = MyVisibility_Gone;
+        self.zxProfitLayout.myVisibility = MyVisibility_Gone;
     }
     else
     {
-        self.zxProfitContentLabel.text =[NSString stringWithFormat:@"¥%@",[NSString AddComma:model.data.zxProfit]];
-        self.zxProfitContentLabel.myVisibility = MyVisibility_Visible;
+        self.zxProfitContentLabel.text = [NSString AddCNY:model.data.zxProfit];
+        self.zxProfitLayout.myVisibility = MyVisibility_Visible;
     }
     if ([model.data.goldProfit floatValue] == 0) {
-         self.goldProfitContentLabel.myVisibility = MyVisibility_Gone;
+         self.goldProfitLayout.myVisibility = MyVisibility_Gone;
     }
     else
     {
-        self.goldProfitContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:model.data.goldProfit]];
-         self.goldProfitContentLabel.myVisibility = MyVisibility_Visible;
+        self.goldProfitContentLabel.text = [NSString AddCNY:model.data.goldProfit];
+         self.goldProfitLayout.myVisibility = MyVisibility_Visible;
     }
     
-    self.couponProfitContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:model.data.couponProfit]];
-    self.beanProfitContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:model.data.beanProfit]];
-    self.balanceProfitContentLabel.text = [NSString stringWithFormat:@"¥%@",[NSString AddComma:model.data.balanceProfit]];
+    self.couponProfitContentLabel.text = [NSString AddCNY:model.data.couponProfit];
+    self.beanProfitContentLabel.text = [NSString AddCNY:model.data.beanProfit];
+    self.balanceProfitContentLabel.text = [NSString AddCNY:model.data.balanceProfit];
     
     [self.wjProfitContentLabel sizeToFit];
     [self.zxProfitContentLabel sizeToFit];

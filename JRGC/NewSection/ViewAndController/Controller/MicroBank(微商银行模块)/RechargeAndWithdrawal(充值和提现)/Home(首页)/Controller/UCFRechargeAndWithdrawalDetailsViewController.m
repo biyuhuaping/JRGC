@@ -554,7 +554,11 @@
     [MBProgressHUD displayHudError:@"网络连接异常"];
 }
 
-
+- (void)setAccoutBalanceMoney:(CGFloat)accoutBalance
+{
+    self.accoutLabel.text = [NSString stringWithFormat:@"¥%@",[NSString  AddComma:[NSString stringWithFormat:@"%0.2f", accoutBalance]]] ;
+    [self.accoutLabel sizeToFit];
+}
 
 //在价格，金额的计算中，如果直接使用<, >, =去计算金额会导致由精度导致的不准确问题。好的做法是：
 //NSNumber *totalPriceNumber = [NSNumber numberWithFloat:totalPrice];

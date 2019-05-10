@@ -50,7 +50,7 @@
     [self.rootLayout addSubview:self.findPwdPhoneLine];
     [self.rootLayout addSubview:self.serviceLabel];
     [self.rootLayout addSubview:self.nextBtn];
-    [self addLeftButton];
+//    [self addLeftButton];
 }
 - (void)viewWillAppear:(BOOL)animated
 {

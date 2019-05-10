@@ -8,6 +8,7 @@
 
 #import "UCFNewRechargeViewController.h"
 #import "UCFNewMineViewController.h"
+#import "UCFRechargeAndWithdrawalViewController.h"
 #import "RechargeListViewController.h"
 @interface UCFNewRechargeViewController ()<UIScrollViewDelegate>
 @property(strong, nonatomic)UIScrollView *baseScroView;
@@ -27,6 +28,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self setSetNavgationPopDisabled:YES];
 }
 
 - (void)viewDidLoad {
@@ -78,9 +80,13 @@
 }
 - (void)getToBack
 {
-    UCFNewMineViewController *vc =  self.rt_navigationController.rt_viewControllers.firstObject;
-    if ([vc isKindOfClass:[UCFNewMineViewController class]]) {
-    [vc refreshMessagePoint];
+    for (UCFBaseViewController *vc in self.rt_navigationController.rt_viewControllers) {
+        if ([vc isKindOfClass:[UCFNewMineViewController class]]) {
+            [(UCFNewMineViewController *)vc refreshMessagePoint];
+        }
+        if ([vc isKindOfClass:[UCFRechargeAndWithdrawalViewController class]]) {
+            [vc refreshPageData];
+        }
     }
     [self.rt_navigationController popViewControllerAnimated:YES];
 }

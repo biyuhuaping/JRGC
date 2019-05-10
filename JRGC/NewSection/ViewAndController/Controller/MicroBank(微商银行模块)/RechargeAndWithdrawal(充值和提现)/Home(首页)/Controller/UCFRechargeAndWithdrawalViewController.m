@@ -9,7 +9,7 @@
 #import "UCFRechargeAndWithdrawalViewController.h"
 #import "UCFRechargeAndWithdrawalAccountBalancePageModel.h"
 #import "UCFRechargeAndWithdrawalAccountBalancePageApi.h"
-
+#import "UCFNewMineViewController.h"
 #import "UCFPageHeadView.h"
 #import "UCFPageControlTool.h"
 #import "UCFRechargeAndWithdrawalDetailsViewController.h"
@@ -140,6 +140,39 @@
         // 你可以直接在这里使用 self
         
     }];
+}
+
+- (void)refreshPageData
+{
+    UCFRechargeAndWithdrawalAccountBalancePageApi * request = [[UCFRechargeAndWithdrawalAccountBalancePageApi alloc] init];
+    
+    request.animatingView = self.view;
+    //    request.tag =tag;
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        self.model = [request.responseJSONModel copy];
+        DDLogDebug(@"---------%@",self.model);
+        if (self.model.ret == YES) {
+            UCFRechargeAndWithdrawalDetailsViewController *vc = self.accountControllerArray.firstObject;
+            if ([vc isKindOfClass:[UCFRechargeAndWithdrawalDetailsViewController class]]) {
+                [vc setAccoutBalanceMoney:self.model.data.p2pBalance];
+            }
+        }
+        else{
+            ShowCodeMessage(self.model.code, self.model.message);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        // 你可以直接在这里使用 self
+        
+    }];
+}
+
+- (void)getToBack {
+    UCFNewMineViewController *vc =  self.rt_navigationController.rt_viewControllers.firstObject;
+    if ([vc isKindOfClass:[UCFNewMineViewController class]]) {
+        [vc refreshMessagePoint];
+    }
+    [self.rt_navigationController popViewControllerAnimated:YES];
 }
 /*
 #pragma mark - Navigation
