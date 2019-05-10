@@ -19,6 +19,8 @@
 }
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
+@property (nonatomic, strong) UIButton *backButton; //返回按钮
+
 // 标题
 @property (strong, nonatomic) NZLabel *titleLabel;
 // 已绑定的手机号
@@ -51,8 +53,9 @@
     self.rootLayout.backgroundColor = [UIColor whiteColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
-    [self addLeftButton];
+//    [self addLeftButton];
     
+    [self.rootLayout addSubview:self.backButton];
     [self.rootLayout addSubview:self.titleLabel];
     [self.rootLayout addSubview:self.bindedPhoneLabel];
     [self.rootLayout addSubview:self.moddifyPhoneTextField];
@@ -64,13 +67,28 @@
     [self.rootLayout addSubview:self.passWordLine];
     [self.rootLayout addSubview:self.nextBtn];
     [self.rootLayout addSubview:self.forgetBtn];
-    
+    [self.navigationController.navigationBar setHidden:YES];
+}
+- (UIButton *)backButton
+{
+    if (nil == _backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setBackgroundColor:[UIColor clearColor]];
+        [_backButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+        [_backButton setImage:[UIImage imageNamed:@"icon_left"]forState:UIControlStateNormal];
+        [_backButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+        _backButton.myTop = PGStatusBarHeight;
+        _backButton.myWidth = 44;
+        _backButton.myHeight = 44;
+        _backButton.myLeft = 10;
+    }
+    return _backButton;
 }
 - (NZLabel *)titleLabel
 {
     if (nil == _titleLabel) {
         _titleLabel = [NZLabel new];
-        _titleLabel.myTop = 40;
+        _titleLabel.topPos.equalTo(self.backButton.bottomPos).offset(40);
         _titleLabel.leftPos.equalTo(@26);
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.font = [Color gc_Font:30.0];

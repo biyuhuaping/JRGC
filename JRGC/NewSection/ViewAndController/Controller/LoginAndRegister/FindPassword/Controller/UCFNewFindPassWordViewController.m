@@ -17,15 +17,17 @@
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
-@property (nonatomic, strong) NZLabel     *findPwdLabel;//注册
+@property (nonatomic, strong) UIButton *backButton; //返回按钮
 
-@property (nonatomic, strong) UIImageView *findPwdPhoneImageView;//注册的手机图片
+@property (nonatomic, strong) NZLabel     *findPwdLabel;//找回密码
 
-@property (nonatomic, strong) UITextField *findPwdPhoneField;//注册的手机号
+@property (nonatomic, strong) UIImageView *findPwdPhoneImageView;//找回密码的手机图片
 
-@property (nonatomic, strong) UIView *findPwdPhoneLine;//注册的分割线
+@property (nonatomic, strong) UITextField *findPwdPhoneField;//找回密码的手机号
 
-@property (nonatomic, strong) NZLabel     *serviceLabel;//注册协议
+@property (nonatomic, strong) UIView *findPwdPhoneLine;//找回密码的分割线
+
+@property (nonatomic, strong) NZLabel     *serviceLabel;//找回密码协议
 
 @property (nonatomic, strong) UIButton *nextBtn; //下一步按钮
 
@@ -44,12 +46,14 @@
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     
+    [self.rootLayout addSubview:self.backButton];
     [self.rootLayout addSubview:self.findPwdLabel];
     [self.rootLayout addSubview:self.findPwdPhoneImageView];
     [self.rootLayout addSubview:self.findPwdPhoneField];
     [self.rootLayout addSubview:self.findPwdPhoneLine];
     [self.rootLayout addSubview:self.serviceLabel];
     [self.rootLayout addSubview:self.nextBtn];
+    [self.navigationController.navigationBar setHidden:YES];
 //    [self addLeftButton];
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -64,13 +68,27 @@
     IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
     keyboardManager.enable = NO;
 }
-
+- (UIButton *)backButton
+{
+    if (nil == _backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setBackgroundColor:[UIColor clearColor]];
+        [_backButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+        [_backButton setImage:[UIImage imageNamed:@"icon_left"]forState:UIControlStateNormal];
+        [_backButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+        _backButton.myTop = PGStatusBarHeight;
+        _backButton.myWidth = 44;
+        _backButton.myHeight = 44;
+        _backButton.myLeft = 10;
+    }
+    return _backButton;
+}
 - (NZLabel *)findPwdLabel
 {
     if (nil == _findPwdLabel) {
         _findPwdLabel = [NZLabel new];
-        _findPwdLabel.myTop = 40;
-        _findPwdLabel.myLeft = 26;
+        _findPwdLabel.topPos.equalTo(self.backButton.bottomPos).offset(40);
+        _findPwdLabel.myLeft = 25;
         _findPwdLabel.textAlignment = NSTextAlignmentLeft;
         _findPwdLabel.font = [Color gc_Font:30.0];
         _findPwdLabel.textColor = [Color color:PGColorOptionTitleBlack];

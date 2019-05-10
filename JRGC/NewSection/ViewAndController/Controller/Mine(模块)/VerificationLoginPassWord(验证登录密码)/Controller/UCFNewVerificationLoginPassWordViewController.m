@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
+@property (nonatomic, strong) UIButton *backButton; //返回按钮
+
 @property (nonatomic, strong) NZLabel     *modifyLabel;//验证登录密码
 
 @property (nonatomic, strong) NZLabel     *titleLabel;
@@ -47,12 +49,13 @@
     self.rootLayout.backgroundColor = [UIColor whiteColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
-    [self addLeftButton];
+//    [self addLeftButton];
     //  设置隐藏导航栏
     self.isHideNavigationBar = YES;
     
     [self.oldPasswordTextField becomeFirstResponder];
     
+    [self.rootLayout addSubview:self.backButton];
     [self.rootLayout addSubview:self.modifyLabel];
     [self.rootLayout addSubview:self.titleLabel];
     [self.rootLayout addSubview:self.oldPassWordImageView];
@@ -62,12 +65,29 @@
     
     [self.rootLayout addSubview:self.handInButton];
     [self.rootLayout addSubview:self.forgetBtn];
+    
+    [self.navigationController.navigationBar setHidden:YES];
+}
+- (UIButton *)backButton
+{
+    if (nil == _backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setBackgroundColor:[UIColor clearColor]];
+        [_backButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+        [_backButton setImage:[UIImage imageNamed:@"icon_left"]forState:UIControlStateNormal];
+        [_backButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+        _backButton.myTop = PGStatusBarHeight;
+        _backButton.myWidth = 44;
+        _backButton.myHeight = 44;
+        _backButton.myLeft = 10;
+    }
+    return _backButton;
 }
 - (NZLabel *)modifyLabel
 {
     if (nil == _modifyLabel) {
         _modifyLabel = [NZLabel new];
-        _modifyLabel.myTop = 40;
+        _modifyLabel.topPos.equalTo(self.backButton.bottomPos).offset(40);
         _modifyLabel.leftPos.equalTo(@26);
         _modifyLabel.textAlignment = NSTextAlignmentLeft;
         _modifyLabel.font = [Color gc_Font:30.0];

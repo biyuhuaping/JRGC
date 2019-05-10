@@ -22,6 +22,8 @@
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
+@property (nonatomic, strong) UIButton *backButton; //返回按钮
+
 @property (nonatomic, strong) NZLabel     *passWordTitleLabel;//设置登录密码标题
 
 @property (nonatomic, strong) UIImageView *passWordImageView; //密码
@@ -56,6 +58,7 @@
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
    
+    [self.rootLayout addSubview:self.backButton];
     [self.rootLayout addSubview:self.passWordTitleLabel];
     [self.rootLayout addSubview:self.passWordImageView];
     [self.rootLayout addSubview:self.passWordField];
@@ -66,7 +69,8 @@
     [self.rootLayout addSubview:self.recommendLine];
     [self.rootLayout addSubview:self.recommendTitleLabel];
     [self.rootLayout addSubview:self.registerBtn];
-    [self addLeftButton];
+//    [self addLeftButton];
+    [self.navigationController.navigationBar setHidden:YES];
  
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -81,33 +85,32 @@
     IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
     keyboardManager.enable = NO;
 }
-- (void)addLeftButton
-{
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [leftButton setBackgroundColor:[UIColor clearColor]];
-    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
-    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
-    [leftButton setImage:[UIImage imageNamed:@"calculator_gray_close.png"]forState:UIControlStateNormal];
-    //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
-    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-    
-    self.navigationItem.leftBarButtonItem = leftItem;
-}
 
 - (void)getToBack
 {
     [self.rootLayout endEditing:NO];
     [self.rt_navigationController popToRootViewControllerAnimated:YES];
 }
-
+- (UIButton *)backButton
+{
+    if (nil == _backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setBackgroundColor:[UIColor clearColor]];
+        [_backButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+        [_backButton setImage:[UIImage imageNamed:@"icon_left"]forState:UIControlStateNormal];
+        [_backButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+        _backButton.myTop = PGStatusBarHeight;
+        _backButton.myWidth = 44;
+        _backButton.myHeight = 44;
+        _backButton.myLeft = 10;
+    }
+    return _backButton;
+}
 - (NZLabel *)passWordTitleLabel
 {
     if (nil == _passWordTitleLabel) {
         _passWordTitleLabel = [NZLabel new];
-        _passWordTitleLabel.myTop = 40;
+        _passWordTitleLabel.topPos.equalTo(self.backButton.bottomPos).offset(40);
         _passWordTitleLabel.leftPos.equalTo(@26);
         _passWordTitleLabel.textAlignment = NSTextAlignmentLeft;
         _passWordTitleLabel.font = [Color gc_Font:30.0];

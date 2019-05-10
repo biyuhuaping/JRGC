@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
+@property (nonatomic, strong) UIButton *backButton; //返回按钮
+
 @property (nonatomic, strong) NZLabel     *titleLabel;//重置密码
 
 @property (nonatomic, strong) NZLabel     *resetPhoneSMSLabel;//收不到短信？点击获取语音验证码
@@ -45,6 +47,7 @@
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
     
+    [self.rootLayout addSubview:self.backButton];
     [self.rootLayout addSubview:self.titleLabel];
     [self.rootLayout addSubview:self.resetPhoneSMSLabel];
     [self.rootLayout addSubview:self.moddifyPhoneTextField];
@@ -53,14 +56,30 @@
     [self.rootLayout addSubview:self.smsCodeView];
     [self.rootLayout addSubview:self.enterButton];
     
-    [self addLeftButton];
+    [self.navigationController.navigationBar setHidden:YES];
+//    [self addLeftButton];
     
+}
+- (UIButton *)backButton
+{
+    if (nil == _backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setBackgroundColor:[UIColor clearColor]];
+        [_backButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+        [_backButton setImage:[UIImage imageNamed:@"icon_left"]forState:UIControlStateNormal];
+        [_backButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+        _backButton.myTop = PGStatusBarHeight;
+        _backButton.myWidth = 44;
+        _backButton.myHeight = 44;
+        _backButton.myLeft = 10;
+    }
+    return _backButton;
 }
 - (NZLabel *)titleLabel
 {
     if (nil == _titleLabel) {
         _titleLabel = [NZLabel new];
-        _titleLabel.myTop = 40;
+        _titleLabel.topPos.equalTo(self.backButton.bottomPos).offset(40);
         _titleLabel.leftPos.equalTo(@26);
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.font = [Color gc_Font:30.0];

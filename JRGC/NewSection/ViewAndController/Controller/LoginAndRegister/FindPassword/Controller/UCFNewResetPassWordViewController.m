@@ -24,6 +24,8 @@
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
+@property (nonatomic, strong) UIButton *backButton; //关闭按钮
+
 @property (nonatomic, strong) MyLinearLayout *scrollLayout;
 
 @property (nonatomic, strong) BaseScrollview *scrollView;
@@ -57,7 +59,7 @@
 //    [self.rootLayout addSubview: self.scrollView];
 //    [self.scrollView addSubview:self.scrollLayout];
     
-    
+    [self.rootLayout addSubview:self.backButton];
     [self.rootLayout addSubview:self.resetPassWordLabel];
     [self.rootLayout addSubview:self.resetPassWordPhoneLabel];
     [self.rootLayout addSubview:self.resetPassWordSMSLabel];
@@ -68,8 +70,8 @@
     
     
     [self statVerifyCodeRequest:@"SMS"];
-    [self addLeftButton];
-    
+//    [self addLeftButton];
+    [self.navigationController.navigationBar setHidden:YES];
     
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -111,11 +113,26 @@
     }
     return _scrollLayout;
 }
+- (UIButton *)backButton
+{
+    if (nil == _backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setBackgroundColor:[UIColor clearColor]];
+        [_backButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+        [_backButton setImage:[UIImage imageNamed:@"icon_left"]forState:UIControlStateNormal];
+        [_backButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+        _backButton.myTop = PGStatusBarHeight;
+        _backButton.myWidth = 44;
+        _backButton.myHeight = 44;
+        _backButton.myLeft = 10;
+    }
+    return _backButton;
+}
 - (NZLabel *)resetPassWordLabel
 {
     if (nil == _resetPassWordLabel) {
         _resetPassWordLabel = [NZLabel new];
-        _resetPassWordLabel.myTop = 40;
+        _resetPassWordLabel.topPos.equalTo(self.backButton.bottomPos).offset(40);
         _resetPassWordLabel.myLeft = 26;
         _resetPassWordLabel.textAlignment = NSTextAlignmentLeft;
         _resetPassWordLabel.font = [Color gc_Font:30.0];

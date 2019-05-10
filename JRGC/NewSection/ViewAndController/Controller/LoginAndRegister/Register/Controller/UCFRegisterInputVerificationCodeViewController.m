@@ -22,6 +22,8 @@
 
 @property (nonatomic, strong) MyRelativeLayout *rootLayout;
 
+@property (nonatomic, strong) UIButton *backButton; //返回按钮
+
 @property (nonatomic, strong) NZLabel     *verificationCodeTitleLabel;//输入验证码标题
 
 @property (nonatomic, strong) NZLabel     *verificationCodeContentLabel;//输入验证码内容
@@ -43,11 +45,13 @@
     self.rootLayout.backgroundColor = [UIColor whiteColor];
     self.rootLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     self.view = self.rootLayout;
+     [self.rootLayout addSubview:self.backButton];
     [self.rootLayout addSubview:self.verificationCodeTitleLabel];
     [self.rootLayout addSubview:self.verificationCodeContentLabel];
     [self.rootLayout addSubview:self.verificationCodeView];
     [self.rootLayout addSubview:self.lineSendVCView];
-    [self addLeftButton];
+//    [self addLeftButton];
+    [self.navigationController.navigationBar setHidden:YES];
     [self starCountDown];
     [self.verificationCodeView textFieldResignFirstResponder];
 //    (^endLayoutBlock)(void)
@@ -85,12 +89,27 @@
         [self.lineSendVCView.voiceVerifyCodeButton startCountDown];
     }
 }
+- (UIButton *)backButton
+{
+    if (nil == _backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setBackgroundColor:[UIColor clearColor]];
+        [_backButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+        [_backButton setImage:[UIImage imageNamed:@"icon_left"]forState:UIControlStateNormal];
+        [_backButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+        _backButton.myTop = PGStatusBarHeight;
+        _backButton.myWidth = 44;
+        _backButton.myHeight = 44;
+        _backButton.myLeft = 10;
+    }
+    return _backButton;
+}
 
 - (NZLabel *)verificationCodeTitleLabel
 {
     if (nil == _verificationCodeTitleLabel) {
         _verificationCodeTitleLabel = [NZLabel new];
-        _verificationCodeTitleLabel.myTop = 40;
+        _verificationCodeTitleLabel.topPos.equalTo(self.backButton.bottomPos).offset(40);
         _verificationCodeTitleLabel.leftPos.equalTo(@26);
         _verificationCodeTitleLabel.textAlignment = NSTextAlignmentLeft;
         _verificationCodeTitleLabel.font = [Color gc_Font:30.0];

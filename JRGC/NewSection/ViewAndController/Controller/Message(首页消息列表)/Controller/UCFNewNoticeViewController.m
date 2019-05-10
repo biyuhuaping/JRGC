@@ -147,7 +147,8 @@
     NoticeResult*model = [self.dataArray objectAtIndex:indexPath.row];
     UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
     web.url = [NSString stringWithFormat:@"https://www.9888keji.com/mobileCms/xxplContent.html?id=%ld",model.ID];
-    web.navTitle = model.title;
+//    web.navTitle = model.title;
+    web.navTitle = @"公告详情";
     [self.rt_navigationController pushViewController:web animated:YES];
 }
 /*
