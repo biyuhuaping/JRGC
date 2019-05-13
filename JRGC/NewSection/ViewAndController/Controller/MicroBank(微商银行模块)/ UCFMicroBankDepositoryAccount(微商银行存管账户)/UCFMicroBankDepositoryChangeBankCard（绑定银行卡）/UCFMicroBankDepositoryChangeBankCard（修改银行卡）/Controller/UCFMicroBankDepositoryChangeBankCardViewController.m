@@ -510,9 +510,17 @@
             }
             if (self.GetOpenAccountModel.data.userInfo.idCardNo.length > 0)
             {
-                //                NSString *asteriskIdCardNo = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.idCardNo startLocation:3 lenght:self.GetOpenAccountModel.data.userInfo.idCardNo.length -7];
-                //                self.idView.contentField.text   = asteriskIdCardNo;
-                self.idView.contentField.text   = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.idCardNo startLocation:3 lenght:13];
+                if (self.GetOpenAccountModel.data.userInfo.idCardNo.length > 15) {
+                    self.idView.contentField.text   = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.idCardNo startLocation:3 lenght:self.GetOpenAccountModel.data.userInfo.idCardNo.length -7];
+                }
+                else
+                {
+                    self.idView.contentField.text = self.GetOpenAccountModel.data.userInfo.idCardNo;
+                }
+                
+                
+                
+//                self.idView.contentField.text   = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.idCardNo startLocation:3 lenght:11];
             }
 //            if (self.GetOpenAccountModel.data.userInfo.bankCard.length > 0) {
 //                //将银行卡（textField3）要显示的文字四位分隔

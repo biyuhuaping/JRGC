@@ -7,7 +7,11 @@
 //
 
 #import "UCFCommodityView.h"
+@interface UCFCommodityView ()
 
+@property (nonatomic, strong) UIImageView *moneyCoinImageView;
+
+@end
 @implementation UCFCommodityView
 
 - (instancetype)initWithFrame:(CGRect)frame withHeightOfCommodity:(CGFloat)height
@@ -44,14 +48,21 @@
         self.shopName = nameLal;
         [self addSubview:nameLal];
         
+        
         UILabel *beansLal = [[UILabel alloc] init];
-        beansLal.frame = CGRectMake(0, CGRectGetMaxY(nameLal.frame) + 3, frame.size.width, 13);
+        beansLal.frame = CGRectMake(10, CGRectGetMaxY(nameLal.frame) + 3, frame.size.width -10, 13);
         beansLal.font = [Color gc_Font:12.0f];
         beansLal.textAlignment = NSTextAlignmentCenter;
         beansLal.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
         beansLal.text = @"8000工贝";
         self.shopValue = beansLal;
         [self addSubview:beansLal];
+        
+        self.moneyCoinImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"moneycoin"]];
+        self.moneyCoinImageView.frame = CGRectMake(0, CGRectGetMaxY(nameLal.frame) + 10, 10, 10);
+        self.moneyCoinImageView.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.moneyCoinImageView];
+        
         
         UILabel *orginBeansLal = [[UILabel alloc] init];
         orginBeansLal.frame = CGRectMake(0, CGRectGetMaxY(beansLal.frame) + 3, frame.size.width, 13);
@@ -65,4 +76,63 @@
     return self;
 }
 
+
+
+- (void)setShopValueWithModel:(id )model
+{
+    if ([model isKindOfClass:[UCFHomeMallsale class]]) {
+        
+        UCFHomeMallsale *newModel = model;
+        [self setMoneyPrice:newModel.price andScore:newModel.score andDiscount:newModel.discount];
+        
+    }
+    else if ([model isKindOfClass:[UCFHomeMallrecommends class]])
+    {
+        UCFHomeMallrecommends *newModel = model;
+        [self setMoneyPrice:newModel.price andScore:newModel.score andDiscount:newModel.discount];
+    }
+}
+
+- (void)setMoneyPrice:(NSString *)price andScore:(NSString *)score andDiscount:(NSString *)discount
+{
+    NSMutableString *moneyStr = [[NSMutableString alloc] initWithCapacity:20];
+    if ([price floatValue] <= 0) //工贝
+    {
+        self.moneyCoinImageView.hidden = YES;
+    }
+    else
+    {
+        [moneyStr appendString:price];
+        self.moneyCoinImageView.hidden = NO;
+    }
+    
+    if ([score floatValue] >= 0)//人民币
+    {
+        [moneyStr appendFormat:@"¥%@",score];
+    }
+    self.shopValue.text = moneyStr;
+    [self.shopValue sizeToFit];
+    
+    if (!self.moneyCoinImageView.hidden) {
+        CGFloat textWidth = self.shopValue.frame.size.width;
+        if (textWidth + 10 > CGRectGetWidth(self.frame))
+        {
+            self.moneyCoinImageView.frame = CGRectMake(0, CGRectGetMinY(self.moneyCoinImageView.frame), 10, 10);
+            self.shopValue.frame = CGRectMake(CGRectGetMaxX(self.moneyCoinImageView.frame), CGRectGetMinY(self.shopValue.frame), CGRectGetWidth(self.frame) -10, CGRectGetHeight(self.shopValue.frame));
+        }
+        else
+        {
+            CGFloat xPos = (CGRectGetWidth(self.frame) - (textWidth + 10))/2;
+            self.moneyCoinImageView.frame = CGRectMake(xPos, CGRectGetMinY(self.moneyCoinImageView.frame), 10, 10);
+            
+            self.shopValue.frame = CGRectMake(CGRectGetMaxX(self.moneyCoinImageView.frame), CGRectGetMinY(self.shopValue.frame), textWidth, CGRectGetHeight(self.shopValue.frame));
+        }
+    }
+    if (discount.length > 0) {
+        self.discountLab.text = [NSString stringWithFormat:@"%@折",discount];
+        self.discountLab.superview.hidden = NO;
+    } else {
+        self.discountLab.superview.hidden = YES;
+    }
+}
 @end

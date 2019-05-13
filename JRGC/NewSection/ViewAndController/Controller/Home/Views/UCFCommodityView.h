@@ -7,7 +7,7 @@
 //
 
 #import "BaseView.h"
-
+#import "UCFHomeMallDataModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFCommodityView : BaseView
@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)UILabel     *discountLab;//折扣
 
 - (instancetype)initWithFrame:(CGRect)frame withHeightOfCommodity:(CGFloat)height;
+
+- (void)setShopValueWithModel:(id )model;
+
 @end
 
 NS_ASSUME_NONNULL_END

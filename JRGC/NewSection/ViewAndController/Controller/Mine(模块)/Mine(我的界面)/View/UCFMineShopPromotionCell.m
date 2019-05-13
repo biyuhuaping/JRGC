@@ -140,56 +140,13 @@
 
 - (UIView *)shopHListView:(UCFShopHListView *)shopListView cellForRowAtIndex:(NSInteger)index
 {
-    NSString *img;
-    NSString *title;
-    NSString *score;
-    NSString *price;
-    NSString *discount;
-//    if ([self.cellTitleString isEqualToString:@"mallRecommends"])
-//    {
-        UCFHomeMallrecommends *model = self.dataArray[index];
-        img = model.img;
-        title = model.title;
-        score = model.score;
-        price = model.price;
-        discount = model.discount;
-//    }
-//    else if ([self.cellTitleString isEqualToString:@"mallSale"])
-//    {
-//        UCFHomeMallsale *model = self.dataArray[index];
-//        img = model.img;
-//        title = model.title;
-//        score = model.score;
-//        price = model.price;
-//        discount = model.discount;
-//    }
-    
+    UCFHomeMallrecommends *model = self.dataArray[index];
     UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0,105, SHOPLISTHEIGHT )withHeightOfCommodity:105];
      view.shopValue.frame = CGRectMake(view.shopValue.frame.origin.x, view.shopValue.frame.origin.y +3, view.shopValue.frame.size.width, view.shopValue.frame.size.height);
-    [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:img] placeholderImage:nil];
-    view.shopName.text = title;
-    NSString *showValue;
-    if (price.length > 0 && score.length > 0) {
-        showValue = score;
-    } else if (price.length > 0 && score.length == 0) {
-        showValue = price;
-    } else if (price.length == 0 && score.length > 0) {
-        showValue = score;
-    }
-    view.shopValue.text = [NSString stringWithFormat:@"%@工贝",showValue];
-    if (discount.length > 0) {
-        view.discountLab.text = [NSString stringWithFormat:@"%@折",discount];
-        view.discountLab.superview.hidden = NO;
-    } else {
-        view.discountLab.superview.hidden = YES;
-    }
-    
+    [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:nil];
+    view.shopName.text = model.title;
+    [view setShopValueWithModel:model];
 
-//    NSString *showStr =  [NSString stringWithFormat:@"%@工贝",price];
-//    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-//    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:showStr attributes:attribtDic];
-//    view.shopOrginalValue.attributedText = attribtStr;
-    
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(view.frame.size.width -0.5, 0, 0.5, view.frame.size.height)];
     lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     [view addSubview:lineView];
