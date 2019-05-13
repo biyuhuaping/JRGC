@@ -63,7 +63,7 @@ static float const kUIemptyOverlayLabelHeight    = 20;
 
 - (void)addUIemptyOverlayImageView {
     self.emptyOverlayImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 65, 65)];
-    self.emptyOverlayImageView.center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2 - 100);
+    self.emptyOverlayImageView.center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2 - 100/2);
     self.emptyOverlayImageView.image = [UIImage imageNamed:@"no_data_icon"];
     [self addSubview:self.emptyOverlayImageView];
 }
@@ -87,13 +87,21 @@ static float const kUIemptyOverlayLabelHeight    = 20;
 
 - (void)setupUIemptyOverlay {
     self.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(longPressUIemptyOverlay:)];
+    tap.numberOfTapsRequired = 2;
+    [self addGestureRecognizer:tap];
+    self.userInteractionEnabled = YES;
+    /*  先前的长按事件 与左右滑动scrollView 滑动冲突，先屏蔽
     UILongPressGestureRecognizer *longPressUIemptyOverlay = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressUIemptyOverlay:)];
     [longPressUIemptyOverlay setMinimumPressDuration:0.001];
     [self addGestureRecognizer:longPressUIemptyOverlay];
     self.userInteractionEnabled = YES;
+     */
 }
 
 - (void)longPressUIemptyOverlay:(UILongPressGestureRecognizer *)gesture {
+    /*
     if (gesture.state == UIGestureRecognizerStateBegan) {
         self.emptyOverlayImageView.alpha = 1;
     }
@@ -102,6 +110,10 @@ static float const kUIemptyOverlayLabelHeight    = 20;
         if ([self.delegate respondsToSelector:@selector(emptyOverlayClicked:)]) {
             [self.delegate emptyOverlayClicked:nil];
         }
+    }
+    */
+    if ([self.delegate respondsToSelector:@selector(emptyOverlayClicked:)]) {
+        [self.delegate emptyOverlayClicked:nil];
     }
 }
 

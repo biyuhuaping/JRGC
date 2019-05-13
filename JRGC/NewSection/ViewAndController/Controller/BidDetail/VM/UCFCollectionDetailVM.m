@@ -84,7 +84,12 @@
 
 - (void)invetsButtonState
 {
-    self.bidInvestText = @"批量出借";
+    if (self.dataModel.data.isfull) {
+        self.bidInvestText = @"已售罄";
+    } else {
+        self.bidInvestText = @"批量出借";
+    }
+    
 }
 
 - (void)dealClickAction:(NSString *)title

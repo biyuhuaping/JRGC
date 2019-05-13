@@ -47,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *sex;//性别
 
+@property (nonatomic, copy) NSString *outBoundMess;
+
 
 
 @end

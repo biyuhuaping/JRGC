@@ -51,10 +51,11 @@
             if (bidInvestText.length > 0) {
                 if ([bidInvestText isEqualToString:@"立即出借"]) {
                     selfWeak.investButtom.enabled = YES;
+                    [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
                 } else {
                     selfWeak.investButtom.enabled = NO;
+                    [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateDisabled];
                 }
-                [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
             }
         }
     }];
@@ -70,10 +71,13 @@
             if (bidInvestText.length > 0) {
                 if ([bidInvestText isEqualToString:@"立即出借"]) {
                     selfWeak.investButtom.enabled = YES;
+                    [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
+
                 } else {
                     selfWeak.investButtom.enabled = NO;
+                    [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateDisabled];
+
                 }
-                [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
             }
         }
     }];
@@ -87,7 +91,14 @@
         if ([keyPath isEqualToString:@"bidInvestText"]) {
             NSString *bidInvestText = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (bidInvestText.length > 0) {
-                [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
+                if ([bidInvestText isEqualToString:@"批量出借"]) {
+                    [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
+                    selfWeak.investButtom.enabled = YES;
+                } else {
+                    selfWeak.investButtom.enabled = NO;
+                    [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateDisabled];
+
+                }
             }
         }
     }];

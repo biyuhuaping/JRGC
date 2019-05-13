@@ -102,7 +102,7 @@
         for (UCFCollcetionResult *tmpModel in model.data.pageData.result) {
             [selfWeak.dataArray addObject:tmpModel];
         }
-        [selfWeak.showTableView reloadData];
+        [selfWeak.showTableView cyl_reloadData];
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         
     }];

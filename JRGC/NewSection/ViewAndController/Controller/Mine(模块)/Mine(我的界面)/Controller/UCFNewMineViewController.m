@@ -60,7 +60,7 @@
 #import "UCFRegisterdSucceedViewController.h"
 
 #import "UCFHighQualityContainerViewController.h"
-
+#import "UCFTelAlertView.h"
 
 @interface UCFNewMineViewController ()<UITableViewDelegate, UITableViewDataSource,BaseTableViewDelegate>
 
@@ -75,6 +75,8 @@
 @property (nonatomic, assign) BOOL nmAccountIsShow;//黄金账户是否显示
 
 @property (nonatomic, assign) BOOL zxAccountIsShow;//尊享账户是否显示
+
+@property (nonatomic, copy)   NSString *outBoundMess;
 
 @end
 
@@ -215,8 +217,11 @@
         }
         else if ([cellConfig.title isEqualToString:@"客服热线"])
         {
-            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            UCFTelAlertView *view = [[UCFTelAlertView alloc] initWithNotiMessage:self.outBoundMess];
+            [view show];
+            
+//            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
     }
 }
@@ -940,6 +945,7 @@
         if ([simpleRequest isKindOfClass:[UCFMineMySimpleInfoApi class]])
         {
             UCFMineMySimpleInfoModel *model = [simpleRequest.responseJSONModel copy];
+            self.outBoundMess = model.data.outBoundMess;
             DDLogDebug(@"---------%@",model);
             if (model.ret == YES) {
                 

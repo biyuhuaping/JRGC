@@ -128,7 +128,7 @@ float const fontSize_bt              = 15.0 ;
         _lb.text = @"暂无网络";//NO_WIFI_WORDS
         _lb.font = [UIFont boldSystemFontOfSize:fontSize_labelshow] ;
         _lb.textAlignment = NSTextAlignmentCenter ;
-        _lb.textColor = UIColorWithRGB(0x8591b3);
+        _lb.textColor = UIColorWithRGB(0xB1B5C2);
         if (![_lb superview]) {
             [self addSubview:_lb] ;
         }

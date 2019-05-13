@@ -262,6 +262,7 @@
 		4AF9C5E91B0B419600E3BE7D /* RechargeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C5E71B0B419600E3BE7D /* RechargeListCell.m */; };
 		4AFAA8A71B0D76AB005C9BEC /* UCFSelectPayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAA8A61B0D76AB005C9BEC /* UCFSelectPayBackController.m */; };
 		4AFE198D1CA0006200EE6768 /* TopUpAndCash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */; };
+		4AFF3639228918B100E6B70C /* UCFTelAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF3637228918B000E6B70C /* UCFTelAlertView.m */; };
 		7404CA011FB44EA7002811E0 /* UCFExtractGoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7404CA001FB44EA7002811E0 /* UCFExtractGoldModel.m */; };
 		7404CA041FB4502E002811E0 /* UCFExtractGoldItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7404CA031FB4502E002811E0 /* UCFExtractGoldItemModel.m */; };
 		740586B91F417ADB00E2DE01 /* UCFGoldFlexibleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 740586B71F417ADB00E2DE01 /* UCFGoldFlexibleCell.m */; };
@@ -1876,6 +1877,8 @@
 		4AFAA8A51B0D76AB005C9BEC /* UCFSelectPayBackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSelectPayBackController.h; sourceTree = "<group>"; };
 		4AFAA8A61B0D76AB005C9BEC /* UCFSelectPayBackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSelectPayBackController.m; sourceTree = "<group>"; };
 		4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TopUpAndCash.storyboard; sourceTree = "<group>"; };
+		4AFF3637228918B000E6B70C /* UCFTelAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTelAlertView.m; sourceTree = "<group>"; };
+		4AFF3638228918B100E6B70C /* UCFTelAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTelAlertView.h; sourceTree = "<group>"; };
 		503AC35E381A55F9BCE67C57 /* Pods-JRGC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.debug.xcconfig"; path = "Target Support Files/Pods-JRGC/Pods-JRGC.debug.xcconfig"; sourceTree = "<group>"; };
 		575F10BB5246F1A5435FC63B /* libPods-JRGC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JRGC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7404C9FF1FB44EA7002811E0 /* UCFExtractGoldModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractGoldModel.h; sourceTree = "<group>"; };
@@ -9586,6 +9589,8 @@
 		E3B76E7121EC6E89009C9021 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4AFF3638228918B100E6B70C /* UCFTelAlertView.h */,
+				4AFF3637228918B000E6B70C /* UCFTelAlertView.m */,
 				E3C1EF2221EDC50D0014658E /* UCFMineActivitiesCell.h */,
 				E3C1EF2321EDC50D0014658E /* UCFMineActivitiesCell.m */,
 				E3C1EF2521EDE2200014658E /* UCFMineItemCell.h */,
@@ -10309,7 +10314,7 @@
 				TargetAttributes = {
 					7BFE3E7F1AC55C98002A53A2 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = EZRWM7P5C6;
+						DevelopmentTeam = MHG97AJ3LK;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -10729,15 +10734,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-JRGC/Pods-JRGC-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 			);
@@ -10751,15 +10752,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-JRGC-checkManifestLockResult.txt",
 			);
@@ -11659,6 +11656,7 @@
 				7BC8AA241AD4C74200BF4660 /* UCFTransterBidHeadDetail.m in Sources */,
 				835B88851E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m in Sources */,
 				83F2D59E1DCB508F0041F913 /* UCFAccountTool.m in Sources */,
+				4AFF3639228918B100E6B70C /* UCFTelAlertView.m in Sources */,
 				334D7D8B22266D8D0048CCDC /* UCFNoticeCenterApi.m in Sources */,
 				33CBEF802242688B007D977B /* UCFTransBidListViewController.m in Sources */,
 				E352FD8F21E4AFD800617AB7 /* NSObject+HXSwizzling.m in Sources */,
@@ -11883,7 +11881,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = MHG97AJ3LK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11928,7 +11926,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -11954,7 +11952,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = MHG97AJ3LK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11999,7 +11997,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

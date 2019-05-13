@@ -49,6 +49,7 @@
         
         UCFHomeListFooterView *footerView = (UCFHomeListFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListFooterView" owner:self options:nil] lastObject];
         footerView.homeListTipLabel.text  = [UserInfoSingle sharedManager].isSubmitTime ? @"市场有风险  购买需谨慎":@"市场有风险  出借需谨慎";
+        footerView.homeListTipLabel.textColor = [Color color:PGColorOptionTitleGray];
         self.tableView.tableFooterView = footerView;
         self.tableView.tableFooterView.clipsToBounds = YES;
         self.footerView = footerView;
