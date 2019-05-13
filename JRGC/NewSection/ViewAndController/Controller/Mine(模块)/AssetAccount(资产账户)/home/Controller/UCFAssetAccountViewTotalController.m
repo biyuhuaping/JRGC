@@ -247,7 +247,7 @@
             //“P2P” :微金账户 “ZX”：尊享账户 "GOLD":黄金账户
             UCFAccountCenterAssetsOverViewAssetlist *asset = [model.data.assetList objectAtIndex:idx];
             PieModel *availBalanceModel = [[PieModel alloc]init];
-            availBalanceModel.count = [asset.availBalance floatValue];
+            availBalanceModel.count = [asset.totalAsset floatValue];
             
             if ([asset.type isEqualToString:@"P2P"]) {
                 availBalanceModel.color = PNBlue;
