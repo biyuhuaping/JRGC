@@ -511,6 +511,9 @@
     
         self.waitInterestLayout.myVisibility = MyVisibility_Invisible;// 预期利息
         self.frozenBalanceLayout.myVisibility = MyVisibility_Invisible;// 冻结金额
+        
+        self.waitPrincipalLabel.text = @"待收资金";
+        [self.waitPrincipalLabel sizeToFit];
     }
     [self.titleLabel sizeToFit];
 }
