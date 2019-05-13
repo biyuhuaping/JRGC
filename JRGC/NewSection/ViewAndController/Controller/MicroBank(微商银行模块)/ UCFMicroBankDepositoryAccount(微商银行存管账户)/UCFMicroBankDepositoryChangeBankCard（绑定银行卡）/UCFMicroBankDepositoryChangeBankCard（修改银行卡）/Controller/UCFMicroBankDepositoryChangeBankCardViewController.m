@@ -401,16 +401,17 @@
     if (textField == self.nameView.contentField && [self inspectNameViewInPut] ) {//&& ![Common isChinese:_textField1.text]
         [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
         return;
-    }else if (textField == self.idView.contentField && ![self inspectIdViewInPut]){
-        if (SingleUserInfo.loginData.userInfo.isSpecial) {
-            [AuxiliaryFunc showToastMessage:@"请输入正确的证件号码" withView:self.view];
-        }
-        else
-        {
-            [AuxiliaryFunc showToastMessage:@"请输入正确的证件号码" withView:self.view];
-        }
-        return;
     }
+//    else if (textField == self.idView.contentField && ![self inspectIdViewInPut]){
+//        if (SingleUserInfo.loginData.userInfo.isSpecial) {
+//            [AuxiliaryFunc showToastMessage:@"请输入正确的证件号码" withView:self.view];
+//        }
+//        else
+//        {
+//            [AuxiliaryFunc showToastMessage:@"请输入正确的证件号码" withView:self.view];
+//        }
+//        return;
+//    }
     else if (textField == self.bankNumView.contentField && ![self inspectBankNumView]){
         [AuxiliaryFunc showToastMessage:@"请输入正确的银行卡号" withView:self.view];
         return;
@@ -423,7 +424,9 @@
 
 - (void)inspectTextField
 {
-    if ([self inspectNameViewInPut] && [self inspectIdViewInPut] && [self inspectSelectBankView] && [self inspectSmsView] && [self inspectBankNumView]) {
+//    if ([self inspectNameViewInPut] && [self inspectIdViewInPut] && [self inspectSelectBankView] && [self inspectSmsView] && [self inspectBankNumView])
+    if ([self inspectNameViewInPut] && [self inspectSelectBankView] && [self inspectSmsView] && [self inspectBankNumView])
+    {
         //输入正常,按钮可点击
         self.enterButton.userInteractionEnabled = YES;
         [self.enterButton setBackgroundImage:[Image gradientImageWithBounds:CGRectMake(0, 0, PGScreenWidth - 50, 40) andColors:@[(id)UIColorWithRGB(0xFF4133),(id)UIColorWithRGB(0xFF7F40)] andGradientType:1] forState:UIControlStateNormal];
@@ -445,16 +448,16 @@
         return NO;
     }
 }
-- (BOOL)inspectIdViewInPut
-{
-    if (![self.idView.contentField.text isEqualToString:@""] && self.idView.contentField.text.length > 0) {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-}
+//- (BOOL)inspectIdViewInPut
+//{
+//    if (![self.idView.contentField.text isEqualToString:@""] && self.idView.contentField.text.length > 0) {
+//        return YES;
+//    }
+//    else
+//    {
+//        return NO;
+//    }
+//}
 - (BOOL)inspectSelectBankView
 {
     if (self.selectBankView.oaContentLabel.text.length >0 && ![self.selectBankView.oaContentLabel.text isEqualToString:@""] && ![self.bankId isEqualToString:@""]) {
@@ -509,7 +512,7 @@
             {
                 //                NSString *asteriskIdCardNo = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.idCardNo startLocation:3 lenght:self.GetOpenAccountModel.data.userInfo.idCardNo.length -7];
                 //                self.idView.contentField.text   = asteriskIdCardNo;
-                self.idView.contentField.text   = self.GetOpenAccountModel.data.userInfo.idCardNo;
+                self.idView.contentField.text   = [NSString replaceStringWithAsterisk:self.GetOpenAccountModel.data.userInfo.idCardNo startLocation:3 lenght:13];
             }
 //            if (self.GetOpenAccountModel.data.userInfo.bankCard.length > 0) {
 //                //将银行卡（textField3）要显示的文字四位分隔
