@@ -36,43 +36,57 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:section] objectSafeForKey:@"title"]];
-        titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-        titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        float titlelableWidth = ScreenWidth -30;
+//        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:section] objectSafeForKey:@"title"]];
+//        titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+//        titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//        float titlelableWidth = ScreenWidth -30;
+//
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 55)];
+        headView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     
-        UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,8 , titlelableWidth, [self secondHeaderHeight:section])];
-        placehoderLabel.font = [UIFont systemFontOfSize:14];
-        placehoderLabel.textColor = UIColorWithRGB(0x333333);
+        UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 45)];
+        whiteView.backgroundColor = [Color color:PGColorOptionThemeWhite];
+        [headView addSubview:whiteView];
+    
+        UIView *redIconView = [[UIView alloc] initWithFrame:CGRectMake(15, 15, 3, 15)];
+        redIconView.backgroundColor = [Color color:PGColorOptionTitlerRead];
+        redIconView.layer.cornerRadius = 1.5;
+        redIconView.clipsToBounds = YES;
+        [whiteView addSubview:redIconView];
+    
+        UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,0 , 300, 45)];
+        placehoderLabel.font = [UIFont systemFontOfSize:16];
+        placehoderLabel.textColor = [Color color:PGColorOptionTitleBlack];
         placehoderLabel.textAlignment = NSTextAlignmentLeft;
         placehoderLabel.numberOfLines = 0;
         placehoderLabel.backgroundColor = [UIColor clearColor];
-        placehoderLabel.text = titleStr;
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, CGRectGetHeight(placehoderLabel.frame) + 8*2)];
-        view.backgroundColor = UIColorWithRGB(0xf9f9f9);
-        [view addSubview:placehoderLabel];
     
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(view.frame)+10)];
-        headView.backgroundColor = UIColorWithRGB(0xebebee);
-        [headView addSubview:view];
+        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:section ] objectSafeForKey:@"title"]];
+        NSArray *sepArr  = [titleStr componentsSeparatedByString:@"："];
+        if (sepArr.count > 0) {
+            placehoderLabel.text =sepArr[0];
+            [whiteView addSubview:placehoderLabel];
+        }
+
         return headView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return [self secondHeaderHeight:section] + 8 * 2 +10;
+    return 55;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+        float  titleHeight = [self secondHeaderHeight:indexPath.section];
         NSString *str = [[_dataArray objectAtIndex:[indexPath section]] objectSafeForKey:@"content"];
         str = [UCFToolsMehod isNullOrNilWithString:str];
-        CGSize size =  [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
     
-        if (!str) {
-            return 0;
+        CGSize size =  [Common getStrHeightWithStr:str AndStrFont:13 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
+    
+        if (!str || str.length == 0) {
+            return titleHeight + 30;
         }
-        return size.height + 20;
+        return 15 + titleHeight + 5 + size.height + 15;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -93,31 +107,50 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
           
-            UILabel *textLabel = [UILabel labelWithFrame:CGRectZero text:@"12个月" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
+            
+            UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, ScreenWidth - 30, 20)];
+            titleLab.font = [UIFont boldSystemFontOfSize:14];
+            titleLab.tag = 100;
+            titleLab.numberOfLines = 0;
+            titleLab.textColor = [Color color:PGColorOptionTitleBlack];
+            [cell.contentView addSubview:titleLab];
+            
+            UILabel *textLabel = [UILabel labelWithFrame:CGRectZero text:@"12个月" textColor:[Color color:PGColorOptionTitleBlack] font:[UIFont systemFontOfSize:13]];
             textLabel.tag = 101;
+            textLabel.textColor = [Color color:PGColorOptionTitleBlack];
             textLabel.lineBreakMode = NSLineBreakByWordWrapping;
             textLabel.textAlignment = NSTextAlignmentLeft;
-            [textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
             [cell.contentView addSubview:textLabel];
-            
-            NSDictionary *views = NSDictionaryOfVariableBindings(textLabel);
-            NSDictionary *metrics = @{@"vPadding":@10,@"hPadding":@15};
-            NSString *vfl1 = @"V:|-vPadding-[textLabel]";
-            NSString *vfl2 = @"|-hPadding-[textLabel]-hPadding-|";
-            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl1 options:0 metrics:metrics views:views]];
-            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl2 options:0 metrics:metrics views:views]];
+
         }
+        UILabel *lbl0 = (UILabel*)[cell.contentView viewWithTag:100];
         UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:101];
-        
+
+        float  titleHeight = [self secondHeaderHeight:indexPath.section];
+        lbl0.frame = CGRectMake(15, 15, ScreenWidth - 30, titleHeight);
+        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:indexPath.section] objectSafeForKey:@"title"]];
+        NSArray *sepArr  = [titleStr componentsSeparatedByString:@"："];
+        if (sepArr.count == 2) {
+            lbl0.text =  sepArr[1];
+        }
+        NSString *str = [[_dataArray objectAtIndex:[indexPath section]] objectSafeForKey:@"content"];
+        str = [UCFToolsMehod isNullOrNilWithString:str];
+        CGSize size =  [Common getStrHeightWithStr:str AndStrFont:13 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
+        lbl.frame = CGRectMake(15, CGRectGetMaxY(lbl0.frame) + 5, ScreenWidth - 30, size.height);
+    
         NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
         NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:[indexPath section]] objectSafeForKey:@"content"]];
         lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
-    return cell;
+        return cell;
 }
 
 -(float)secondHeaderHeight:(NSInteger)section
 {
     NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:section ] objectSafeForKey:@"title"]];
+    NSArray *arr = [titleStr componentsSeparatedByString:@"："];
+    if (arr.count == 2) {
+        titleStr = arr[1];
+    }
     titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
     titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     float titlelableWidth = ScreenWidth - 30;
