@@ -511,7 +511,7 @@
         
         UCFMineCellAccountModel *cellAccountRespect = [[UCFMineCellAccountModel alloc]init];//尊享项目
         cellAccountRespect.cellAccountTitle = @"尊享项目";
-        cellAccountRespect.cellAccountImage = @"mine_icon_gold.png";
+        cellAccountRespect.cellAccountImage = @"mine_icon_respect.png";
         [accountCellData insertObject:cellAccountRespect atIndex:accountCellData.count -1];
     }
     if (model.data.nmAccountIsShow) {
@@ -521,7 +521,7 @@
        
         UCFMineCellAccountModel *cellAccountGold = [[UCFMineCellAccountModel alloc]init];//持有黄金
         cellAccountGold.cellAccountTitle = @"持有黄金";
-        cellAccountGold.cellAccountImage = @"mine_icon_respect.png";
+        cellAccountGold.cellAccountImage = @"mine_icon_gold.png";
         [accountCellData insertObject:cellAccountGold atIndex:accountCellData.count -1];
     }
     //新的数据直接替换第二组内容
@@ -929,7 +929,7 @@
                 }
                 self.zxAccountIsShow = model.data.zxAccountIsShow;
                 self.nmAccountIsShow = model.data.nmAccountIsShow;
-                [self setTableViewArrayWithData:model];
+                [self setBatchTableViewArrayWithData:model];
             }
             else{
                 ShowCodeMessage(model.code, model.message);
@@ -943,7 +943,7 @@
             DDLogDebug(@"---------%@",model);
             if (model.ret == YES) {
                 
-                [self setTableViewArrayWithData:model];
+                [self setBatchTableViewArrayWithData:model];
             }
             else{
                 ShowCodeMessage(model.code, model.message);
@@ -956,7 +956,7 @@
             UCFQueryBannerByTypeModel *model = bannerRequest.responseJSONModel;
             if (model.ret) {
                 
-                [self setTableViewArrayWithData:model];
+                [self setBatchTableViewArrayWithData:model];
                 
             } else {
                 ShowCodeMessage(model.code, model.message);
@@ -969,7 +969,7 @@
             UCFHomeMallDataModel *model = mallRequest.responseJSONModel;
             if (model.ret) {
                 
-                [self setTableViewArrayWithData:model];
+                [self setBatchTableViewArrayWithData:model];
                 
             } else {
                 ShowCodeMessage(model.code, model.message);
