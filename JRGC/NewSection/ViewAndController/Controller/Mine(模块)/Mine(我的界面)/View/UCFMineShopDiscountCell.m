@@ -132,7 +132,7 @@
     UCFHomeMallsale *model = self.dataArray[index];
 
     UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0,105, SHOPLISTHEIGHT )withHeightOfCommodity:105];
-    view.shopValue.frame = CGRectMake(view.shopValue.frame.origin.x, view.shopValue.frame.origin.y +3, view.shopValue.frame.size.width, view.shopValue.frame.size.height);
+//    view.shopValue.frame = CGRectMake(view.shopValue.frame.origin.x, view.shopValue.frame.origin.y +3, view.shopValue.frame.size.width, view.shopValue.frame.size.height);
     [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:nil];
     view.shopName.text = model.title;
     [view setShopValueWithModel:model];
@@ -140,7 +140,7 @@
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(view.frame.size.width -0.5, 0, 0.5, view.frame.size.height)];
     lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     [view addSubview:lineView];
-    view.shopOrginalValue.hidden = YES;
+//    view.shopOrginalValue.hidden = YES;
     return view;
 }
 

@@ -97,27 +97,26 @@
     UCFCommodityView *view = [[UCFCommodityView alloc] initWithFrame:CGRectMake(0, 0, (ScreenWidth - 30)/3, (ScreenWidth - 30)/3 + _shopBottomSectionHeight) withHeightOfCommodity:(ScreenWidth - 30)/3];
     [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:nil];
     view.shopName.text = model.title;
-//    NSString *priceValue = model.price;
-//    NSString *scoreValue = model.score;
-    NSString *showValue = model.score;
-    if (model.price.length > 0 && model.score.length > 0) {
-        showValue = model.score;
-    } else if (model.price.length > 0 && model.score.length == 0) {
-        showValue = model.price;
-    } else if (model.price.length == 0 && model.score.length > 0) {
-        showValue = model.score;
-    }
-    CGRect react = view.shopValue.frame;
-    react.origin.y += 3;
-    view.shopValue.frame = react;
-    view.shopValue.text = [NSString stringWithFormat:@"%@工贝",showValue];
-    view.shopOrginalValue.hidden = YES;
-    if (model.discount.length > 0) {
-        view.discountLab.text = [NSString stringWithFormat:@"%@折",model.discount];
-        view.discountLab.superview.hidden = NO;
-    } else {
-        view.discountLab.superview.hidden = YES;
-    }
+    [view setShopValueWithModel:model];
+//    NSString *showValue = model.score;
+//    if (model.price.length > 0 && model.score.length > 0) {
+//        showValue = model.score;
+//    } else if (model.price.length > 0 && model.score.length == 0) {
+//        showValue = model.price;
+//    } else if (model.price.length == 0 && model.score.length > 0) {
+//        showValue = model.score;
+//    }
+//    CGRect react = view.shopValue.frame;
+//    react.origin.y += 3;
+//    view.shopValue.frame = react;
+//    view.shopValue.text = [NSString stringWithFormat:@"%@工贝",showValue];
+//    view.shopOrginalValue.hidden = YES;
+//    if (model.discount.length > 0) {
+//        view.discountLab.text = [NSString stringWithFormat:@"%@折",model.discount];
+//        view.discountLab.superview.hidden = NO;
+//    } else {
+//        view.discountLab.superview.hidden = YES;
+//    }
     
 //    NSString *showStr =  [NSString stringWithFormat:@"%@工贝",model.price];
 //    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};

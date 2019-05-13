@@ -64,25 +64,12 @@
     
     [view.shopImageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:nil];
     view.shopName.text = model.title;
-    NSString *showValue = model.score;
-    if (model.price.length > 0 && model.score.length > 0) {
-        showValue = model.score;
-    } else if (model.price.length > 0 && model.score.length == 0) {
-        showValue = model.price;
-    } else if (model.price.length == 0 && model.score.length > 0) {
-        showValue = model.score;
-    }
-    CGRect react = view.shopValue.frame;
-    react.origin.y += 3;
-    view.shopValue.frame = react;
-    view.shopValue.text = [NSString stringWithFormat:@"%@工贝",showValue];
-    view.shopOrginalValue.hidden = YES;
-    if (model.discount.length > 0) {
-        view.discountLab.text = [NSString stringWithFormat:@"%@折",model.discount];
-        view.discountLab.superview.hidden = NO;
-    } else {
-        view.discountLab.superview.hidden = YES;
-    }
+    [view setShopValueWithModel:model];
+
+//    CGRect react = view.shopValue.frame;
+//    react.origin.y += 3;
+//    view.shopValue.frame = react;
+ 
     return view;
 }
 

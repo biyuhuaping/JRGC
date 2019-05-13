@@ -59,19 +59,19 @@
         [self addSubview:beansLal];
         
         self.moneyCoinImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"moneycoin"]];
-        self.moneyCoinImageView.frame = CGRectMake(0, CGRectGetMaxY(nameLal.frame) + 10, 10, 10);
+        self.moneyCoinImageView.frame = CGRectMake(0, beansLal.center.y - 5, 10, 10);
         self.moneyCoinImageView.backgroundColor = [UIColor clearColor];
         [self addSubview:self.moneyCoinImageView];
         
         
-        UILabel *orginBeansLal = [[UILabel alloc] init];
-        orginBeansLal.frame = CGRectMake(0, CGRectGetMaxY(beansLal.frame) + 3, frame.size.width, 13);
-        orginBeansLal.font = [Color gc_Font:10.0f];
-        orginBeansLal.textAlignment = NSTextAlignmentCenter;
-        orginBeansLal.textColor = [Color color:PGColorOptionTitleGray];
-        orginBeansLal.text = @"18000工贝";
-        self.shopOrginalValue = orginBeansLal;
-        [self addSubview:orginBeansLal];
+//        UILabel *orginBeansLal = [[UILabel alloc] init];
+//        orginBeansLal.frame = CGRectMake(0, CGRectGetMaxY(beansLal.frame) + 3, frame.size.width, 13);
+//        orginBeansLal.font = [Color gc_Font:10.0f];
+//        orginBeansLal.textAlignment = NSTextAlignmentCenter;
+//        orginBeansLal.textColor = [Color color:PGColorOptionTitleGray];
+//        orginBeansLal.text = @"18000工贝";
+//        self.shopOrginalValue = orginBeansLal;
+//        [self addSubview:orginBeansLal];
     }
     return self;
 }
@@ -80,6 +80,7 @@
 
 - (void)setShopValueWithModel:(id )model
 {
+    
     if ([model isKindOfClass:[UCFHomeMallsale class]]) {
         
         UCFHomeMallsale *newModel = model;
@@ -108,7 +109,7 @@
     
     if ([score floatValue] >= 0)//人民币
     {
-        [moneyStr appendFormat:@"¥%@",score];
+        [moneyStr appendFormat:@"+¥%@",score];
     }
     self.shopValue.text = moneyStr;
     [self.shopValue sizeToFit];
@@ -117,14 +118,17 @@
         CGFloat textWidth = self.shopValue.frame.size.width;
         if (textWidth + 10 > CGRectGetWidth(self.frame))
         {
-            self.moneyCoinImageView.frame = CGRectMake(0, CGRectGetMinY(self.moneyCoinImageView.frame), 10, 10);
+//            self.moneyCoinImageView.frame = CGRectMake(0, CGRectGetMinY(self.moneyCoinImageView.frame), 10, 10);
+            self.moneyCoinImageView.frame = CGRectMake(0, self.shopValue.center.y - 5, 10, 10);
+
             self.shopValue.frame = CGRectMake(CGRectGetMaxX(self.moneyCoinImageView.frame), CGRectGetMinY(self.shopValue.frame), CGRectGetWidth(self.frame) -10, CGRectGetHeight(self.shopValue.frame));
         }
         else
         {
             CGFloat xPos = (CGRectGetWidth(self.frame) - (textWidth + 10))/2;
-            self.moneyCoinImageView.frame = CGRectMake(xPos, CGRectGetMinY(self.moneyCoinImageView.frame), 10, 10);
-            
+//            self.moneyCoinImageView.frame = CGRectMake(xPos, CGRectGetMinY(self.moneyCoinImageView.frame), 10, 10);
+            self.moneyCoinImageView.frame = CGRectMake(xPos, self.shopValue.center.y - 5, 10, 10);
+
             self.shopValue.frame = CGRectMake(CGRectGetMaxX(self.moneyCoinImageView.frame), CGRectGetMinY(self.shopValue.frame), textWidth, CGRectGetHeight(self.shopValue.frame));
         }
     }
