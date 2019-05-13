@@ -108,13 +108,14 @@
         tiplab.textColor = [Color color:PGColorOptionTitleOrange];
         [whitBaseView addSubview:tiplab];
         [tiplab sizeToFit];
-        
+
+        tiplab.layer.borderColor = [Color color:PGColorOptionTitleOrange].CGColor;
+        tiplab.layer.cornerRadius = 10;
+        tiplab.layer.borderWidth = 1.0f;
         tiplab.myWidth = size.width + 10;
-        [tiplab setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
-            v.layer.borderColor = [Color color:PGColorOptionTitleOrange].CGColor;
-            v.layer.cornerRadius = 10;
-            v.layer.borderWidth = 1.0f;
-        }];
+//        [tiplab setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
+//
+//        }];
         self.tiplabel = tiplab;
         
         self.progressView.mySize = CGSizeMake(65, 65);
@@ -207,7 +208,13 @@
         if ([projectLabel.labelPriority integerValue] == 1) {
             self.tiplabel.myVisibility = MyVisibility_Visible;
             self.tiplabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            
             [self.tiplabel sizeToFit];
+            CGSize size = [Common getStrWitdth:projectLabel.labelName Font:11];
+            self.tiplabel.layer.borderColor = [Color color:PGColorOptionTitleOrange].CGColor;
+            self.tiplabel.layer.cornerRadius = 10;
+            self.tiplabel.layer.borderWidth = 1.0f;
+            self.tiplabel.myWidth = size.width + 10;
         }
         else {
             self.tiplabel.myVisibility = MyVisibility_Gone;;
