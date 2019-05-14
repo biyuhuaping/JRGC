@@ -20,20 +20,63 @@
 @implementation UCFHomeViewModel
 - (void)fetchNetData
 {
-    if (self.isFetchDataLoading) {
-        return;
-    }
-    self.isFetchDataLoading = YES;
-    [self.dataArray removeAllObjects];
-    [self getBannerData];
-    
     if (SingleUserInfo.loginData.userInfo.userId.length > 0 && (SingleUserInfo.loginData.userInfo.isRisk == NO || SingleUserInfo.loginData.userInfo.isAutoBid == NO)) {
-        [self getUserAllStatue];
+        @PGWeakObj(self);
+        [SingleUserInfo requestUserAllStatueWithView:_rootViewController.view];
+        SingleUserInfo.requestUserbackBlock = ^(BOOL finish) {
+            [selfWeak beginBatchRequest];
+        };
     } else {
-        [self addUserGuideData];
-        [self getBidListData];
+        [self beginBatchRequest];
     }
+//    if (self.isFetchDataLoading) {
+//        return;
+//    }
+//    self.isFetchDataLoading = YES;
+//    [self.dataArray removeAllObjects];
+//    [self getBannerData];
+//
+//    if (SingleUserInfo.loginData.userInfo.userId.length > 0 && (SingleUserInfo.loginData.userInfo.isRisk == NO || SingleUserInfo.loginData.userInfo.isAutoBid == NO)) {
+//        [self getUserAllStatue];
+//    } else {
+//        [self addUserGuideData];
+//        [self getBidListData];
+//    }
 
+}
+- (void)beginBatchRequest
+{
+    //获取banner数据
+        @PGWeakObj(self);
+    UCFHomeBannerApi *bannerRequest = [[UCFHomeBannerApi alloc] init];
+    UCFHomeListRequest *bidListrequest = [[UCFHomeListRequest alloc] init];
+    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"index"];
+    YTKBatchRequest *batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:@[bannerRequest , bidListrequest,mallRequest]];
+    batchRequest.animatingView = _rootViewController.view;
+    [batchRequest setCompletionBlockWithSuccess:^(YTKBatchRequest * _Nonnull batchRequest) {
+        [selfWeak.dataArray removeAllObjects];
+        NSArray *requests = batchRequest.requestArray;
+        BaseRequest *receiptrRequest0 = requests[0];
+        if ([receiptrRequest0 isKindOfClass:[UCFHomeBannerApi class]]) {
+            [selfWeak dealBannerData:(UCFHomeBannerApi *)receiptrRequest0];
+        }
+        [selfWeak addUserGuideData];
+
+        BaseRequest *receiptrRequest1 = requests[1];
+        if ([receiptrRequest1 isKindOfClass:[UCFHomeListRequest class]]) {
+            [selfWeak dealRequestData:receiptrRequest1];
+        }
+        BaseRequest *receiptrRequest2 = requests[2];
+        if ([receiptrRequest2 isKindOfClass:[UCFMallProductApi class]]) {
+            [selfWeak dealMallRequestData:receiptrRequest2];
+        }
+        //给反射标识赋值
+        selfWeak.modelListArray = selfWeak.dataArray;
+    } failure:^(YTKBatchRequest * _Nonnull batchRequest) {
+        //给反射标识赋值
+        selfWeak.modelListArray = selfWeak.dataArray;
+    }];
+    [batchRequest start];
 }
 - (void)getUserAllStatue
 {
@@ -57,50 +100,53 @@
     UCFHomeBannerApi *api = [[UCFHomeBannerApi alloc] init];
     [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         
-        UCFNewBannerModel *bannerModel = request.responseJSONModel;
-        selfWeak.bannerModel = bannerModel;
-        if (bannerModel.ret) {
-            NSMutableArray *imgsArr = [NSMutableArray arrayWithCapacity:10];
-            for (Banner *bannermodel in bannerModel.data.banner) {
-                [imgsArr addObject:bannermodel.thumb];
-            }
-            selfWeak.imagesArr = imgsArr;
-        } else {
-            
-        }
-        NSString *siteNotice = bannerModel.data.siteNoticeMap.siteNotice;
-        if (siteNotice.length > 0) {
-            selfWeak.siteNoticeStr = siteNotice;
-        }
-        //推荐array
-        if (bannerModel.data.recommendBanner.count > 0) {
-            NSMutableArray *recommendArr = [NSMutableArray arrayWithCapacity:10];
-            for (RecommendBanner *model in bannerModel.data.recommendBanner) {
-                [recommendArr addObject:model];
-            }
-            selfWeak.recommendBannerArray = recommendArr;
-        }
-        //coinBanner
-        if (bannerModel.data.coinBanner.count > 0) {
-            NSMutableArray *coinBannerArr = [NSMutableArray arrayWithCapacity:10];
-            for (CoinBanner *model in bannerModel.data.coinBanner) {
-                [coinBannerArr addObject:model];
-            }
-            selfWeak.coinBannerArray = coinBannerArr;
-        }
-        if (selfWeak.dataArray.count > 0) {
-           
-            CellConfig *data1 =  [[selfWeak.dataArray objectSafeAtIndex:0] objectSafeAtIndex:0];
-            if ([data1.className isEqualToString:@"UCFOldUserNoticeCell"]) {
-                data1.dataModel = selfWeak.bannerModel.data.siteNoticeMap;
-            }
-            //给反射标识赋值
-//            selfWeak.modelListArray = self.dataArray;
-        }
-
+        [selfWeak dealBannerData:request];
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
     }];
     [api start];
+}
+- (void)dealBannerData:(YTKBaseRequest *)request
+{
+    UCFNewBannerModel *bannerModel = request.responseJSONModel;
+    self.bannerModel = bannerModel;
+    if (bannerModel.ret) {
+        NSMutableArray *imgsArr = [NSMutableArray arrayWithCapacity:10];
+        for (Banner *bannermodel in bannerModel.data.banner) {
+            [imgsArr addObject:bannermodel.thumb];
+        }
+        self.imagesArr = imgsArr;
+    } else {
+        
+    }
+    NSString *siteNotice = bannerModel.data.siteNoticeMap.siteNotice;
+    if (siteNotice.length > 0) {
+        self.siteNoticeStr = siteNotice;
+    }
+    //推荐array
+    if (bannerModel.data.recommendBanner.count > 0) {
+        NSMutableArray *recommendArr = [NSMutableArray arrayWithCapacity:10];
+        for (RecommendBanner *model in bannerModel.data.recommendBanner) {
+            [recommendArr addObject:model];
+        }
+        self.recommendBannerArray = recommendArr;
+    }
+    //coinBanner
+    if (bannerModel.data.coinBanner.count > 0) {
+        NSMutableArray *coinBannerArr = [NSMutableArray arrayWithCapacity:10];
+        for (CoinBanner *model in bannerModel.data.coinBanner) {
+            [coinBannerArr addObject:model];
+        }
+        self.coinBannerArray = coinBannerArr;
+    }
+//    if (self.dataArray.count > 0) {
+//
+//        CellConfig *data1 =  [[self.dataArray objectSafeAtIndex:0] objectSafeAtIndex:0];
+//        if ([data1.className isEqualToString:@"UCFOldUserNoticeCell"]) {
+//            data1.dataModel = self.bannerModel.data.siteNoticeMap;
+//        }
+//        //给反射标识赋值
+//        //            selfWeak.modelListArray = self.dataArray;
+//    }
 }
 - (void)addUserGuideData
 {
@@ -118,7 +164,7 @@
     
     [self.dataArray addObject:section1];
     //给反射标识赋值
-    self.modelListArray = self.dataArray;
+//    self.modelListArray = self.dataArray;
     
 }
 - (void)getBidListData
@@ -140,9 +186,9 @@
     mallRequest.animatingView = _loaingSuperView;
     [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         [selfWeak dealMallRequestData:request];
-        selfWeak.isFetchDataLoading = NO;
+//        selfWeak.isFetchDataLoading = NO;
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        selfWeak.isFetchDataLoading = NO;
+//        selfWeak.isFetchDataLoading = NO;
     }];
     [mallRequest start];
 } 
@@ -242,12 +288,11 @@
             }
         }
         
-        //给反射标识赋值
-        self.modelListArray = self.dataArray;
+
     } else {
         ShowCodeMessage(model.code, model.message);
     }
-    [self getMallData];
+//    [self getMallData];
 
     
 }
@@ -304,7 +349,7 @@
         [section5 addObject:data5_0];
         [self.dataArray addObject:section5];
     }
-    self.modelListArray = self.dataArray;
+//    self.modelListArray = self.dataArray;
 }
 
 - (void)cycleViewSelectIndex:(NSInteger)index
@@ -321,6 +366,7 @@
     shareModel.url = bannermodel.url;
     shareModel.thumb = bannermodel.thumb;
     shareModel.title = bannermodel.title;
+    shareModel.desc = bannermodel.url;
     webView.dicForShare = shareModel;
     webView.hidesBottomBarWhenPushed = YES;
     [_rootViewController.rt_navigationController pushViewController:webView animated:YES];

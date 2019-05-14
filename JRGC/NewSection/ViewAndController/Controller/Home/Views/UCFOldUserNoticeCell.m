@@ -86,6 +86,10 @@
 {
     UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
     web.url = self.mapModel.noticeUrl;
+    
+//    web.url = [NSString stringWithFormat:@"https://www.9888keji.com/mobileCms/xxplContent.html?id=%ld",self.mapModel.ID];
+
+    
     web.title = @"公告";
     web.isHidenNavigationbar = YES;
     [((UIViewController *)self.bc).navigationController pushViewController:web animated:YES];
