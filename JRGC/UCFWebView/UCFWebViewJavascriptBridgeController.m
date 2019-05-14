@@ -93,6 +93,16 @@
 //    [self viewDidLayoutSubviews];
 //    self.webView.frame = CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height);
 //}
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
+        self.topConSpace.constant = StatusBarHeight1;
+    } else {
+        self.topConSpace.constant = 0;
+    }
+    self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
+}
 - (void)setController
 {
     if (![self isKindOfClass:[UCFLoanViewController class]] && ![self isKindOfClass:[UCFDiscoveryViewController class]]) {
@@ -273,7 +283,7 @@
 {
     if (_bridge) { return; }
     
-    _webView.backgroundColor=[UIColor clearColor];
+    _webView.backgroundColor=[Color color:PGColorOpttonTabeleViewBackgroundColor];
     _webView.scalesPageToFit = YES;
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
@@ -289,7 +299,7 @@
     {
         if ([subView isKindOfClass:[UIScrollView class]])
         {
-//            ((UIScrollView *)subView).bounces = YES; //去掉UIWebView的底图
+            ((UIScrollView *)subView).bounces = YES; //去掉UIWebView的底图
             [(UIScrollView *)subView setShowsVerticalScrollIndicator:NO]; //右侧的滚动条
             [(UIScrollView *)subView setShowsHorizontalScrollIndicator:NO]; //底下的滚动条
             for (UIView *scrollview in subView.subviews)
@@ -476,11 +486,14 @@
         }else if ([nativeData[@"action"] isEqualToString:@"hide_header"]) {
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
             [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
-            if (StatusBarHeight1 > 20) {
-                if (self.parentViewController) {
-                    weakSelf.topConSpace.constant = 0;
+            if (StatusBarHeight1 > 20 ) {
+//                if (self.navigationController.navigationBar.hidden) {
+//                    weakSelf.topConSpace.constant = StatusBarHeight1;
+//                }
+                if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
+                     weakSelf.topConSpace.constant = StatusBarHeight1;
                 } else {
-                    weakSelf.topConSpace.constant = StatusBarHeight1;
+                    weakSelf.topConSpace.constant = 0;
                 }
             } else {
                 weakSelf.topConSpace.constant = 0;

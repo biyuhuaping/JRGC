@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  是否在数据加载中，加载中，不接受第二次，数据刷新
  */
-@property(nonatomic, assign) BOOL  isFetchDataLoading;
+//@property(nonatomic, assign) BOOL  isFetchDataLoading;
 
 - (void)fetchNetData;
 

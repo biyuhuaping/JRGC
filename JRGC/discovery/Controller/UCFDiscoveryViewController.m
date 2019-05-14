@@ -22,8 +22,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.webView.frame = CGRectMake(0, 0.5, CGRectGetWidth(self.webView.frame), CGRectGetHeight(self.webView.frame));
-    self.view.backgroundColor = UIColorWithRGB(0xeeeeee);
+//    self.webView.frame = CGRectMake(0, 0.5, CGRectGetWidth(self.webView.frame), CGRectGetHeight(self.webView.frame));
+//    self.view.backgroundColor = UIColorWithRGB(0xeeeeee);
     [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
     [self.webView reload];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
