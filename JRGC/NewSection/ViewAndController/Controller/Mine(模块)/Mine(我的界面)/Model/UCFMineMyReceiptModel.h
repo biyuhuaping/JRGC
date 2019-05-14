@@ -37,6 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *totalDueIn;//总待收利息
 
+@property (nonatomic, assign) NSInteger unReadMsgCount;//未读消息数量
+
+@property (nonatomic, copy) NSString *memberLever;//用户等级
+
 @end
 
 NS_ASSUME_NONNULL_END

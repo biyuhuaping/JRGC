@@ -82,7 +82,7 @@
 {
     for (UCFBaseViewController *vc in self.rt_navigationController.rt_viewControllers) {
         if ([vc isKindOfClass:[UCFNewMineViewController class]]) {
-            [(UCFNewMineViewController *)vc refreshMessagePoint];
+            [(UCFNewMineViewController *)vc refreshPageData];
         }
         if ([vc isKindOfClass:[UCFRechargeAndWithdrawalViewController class]]) {
             [vc refreshPageData];

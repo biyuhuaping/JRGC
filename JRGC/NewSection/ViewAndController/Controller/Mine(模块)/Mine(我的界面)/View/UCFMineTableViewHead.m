@@ -388,6 +388,9 @@
         self.totalAssetsMoneyLabel.text = @"   ";//总资产
         self.expectedInterestMoneyLabel.text = @"";//总待收利息
         self.accountBalanceMoneyLabel.text = @"";//余额
+        [self.memberLeverBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [self.memberLeverBtn setTitle:@"" forState:UIControlStateNormal];
+        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
     }
     else
     {
@@ -399,21 +402,9 @@
         [self.totalAssetsMoneyLabel setFont:[Color gc_Font:22.0] string:@"¥"];
         self.expectedInterestMoneyLabel.text = [NSString AddCNY:self.totalDueIn];//总待收利息
         self.accountBalanceMoneyLabel.text = [NSString AddCNY:self.cashBalance];//余额
-
-    }
-    [self.totalAssetsMoneyLabel sizeToFit];
-    [self.expectedInterestMoneyLabel sizeToFit];
-    [self.accountBalanceMoneyLabel sizeToFit];
-    
-}
-
-- (void)showMySimple:(UCFMineMySimpleInfoModel *__nonnull)myModel
-{
-    if (myModel != nil && [myModel isKindOfClass:[UCFMineMySimpleInfoModel class]])
-    {
         
         if (myModel.data.unReadMsgCount > 0) {
-             [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
         }
         else
         {
@@ -425,30 +416,62 @@
         }
         else
         {
-//            self.memberLeverBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
             [self.memberLeverBtn setImage:[UIImage imageNamed:@"icon_vip"] forState:UIControlStateNormal];
             [self.memberLeverBtn setTitle:[NSString stringWithFormat:@"VIP%ld",(long)[myModel.data.memberLever integerValue] - 1] forState:UIControlStateNormal];
-//            typedef struct UIEdgeInsets {
-//                CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
-//            } UIEdgeInsets
-
             CGFloat gap = 10.f;
             self.memberLeverBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -gap / 2 +5 , 0, gap / 2);
             self.memberLeverBtn.titleEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0 ,  gap / 2 );
             self.memberLeverBtn.contentEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0, gap / 2);
         }
     }
-    else
-    {
-        [self.memberLeverBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [self.memberLeverBtn setTitle:@"" forState:UIControlStateNormal];
-        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
-    }
+    [self.totalAssetsMoneyLabel sizeToFit];
+    [self.expectedInterestMoneyLabel sizeToFit];
+    [self.accountBalanceMoneyLabel sizeToFit];
+    
 }
+
+//- (void)showMySimple:(UCFMineMySimpleInfoModel *__nonnull)myModel
+//{
+//    if (myModel != nil && [myModel isKindOfClass:[UCFMineMySimpleInfoModel class]])
+//    {
+//
+//        if (myModel.data.unReadMsgCount > 0) {
+//             [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
+//        }
+//        else
+//        {
+//            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
+//        }
+//        if ([myModel.data.memberLever integerValue] <= 1)
+//        {
+//            [self.memberLeverBtn setTitle:@"普通会员" forState:UIControlStateNormal];
+//        }
+//        else
+//        {
+////            self.memberLeverBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//            [self.memberLeverBtn setImage:[UIImage imageNamed:@"icon_vip"] forState:UIControlStateNormal];
+//            [self.memberLeverBtn setTitle:[NSString stringWithFormat:@"VIP%ld",(long)[myModel.data.memberLever integerValue] - 1] forState:UIControlStateNormal];
+////            typedef struct UIEdgeInsets {
+////                CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
+////            } UIEdgeInsets
+//
+//            CGFloat gap = 10.f;
+//            self.memberLeverBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -gap / 2 +5 , 0, gap / 2);
+//            self.memberLeverBtn.titleEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0 ,  gap / 2 );
+//            self.memberLeverBtn.contentEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0, gap / 2);
+//        }
+//    }
+//    else
+//    {
+//        [self.memberLeverBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+//        [self.memberLeverBtn setTitle:@"" forState:UIControlStateNormal];
+//        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
+//    }
+//}
 
 - (void)removeHeadViewUserData
 {
-    [self showMySimple:nil];
+//    [self showMySimple:nil];
     [self showMyReceipt:nil];
 }
 - (void)hiddenMoney:(BOOL )isHiddenMoney

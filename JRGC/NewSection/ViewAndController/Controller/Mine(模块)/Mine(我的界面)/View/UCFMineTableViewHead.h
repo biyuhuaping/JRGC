@@ -22,7 +22,7 @@ typedef void(^tableHeadCallBack) (UIButton *btn);//1
 
 - (void)showMyReceipt:(UCFMineMyReceiptModel *__nonnull)myModel;
 
-- (void)showMySimple:(UCFMineMySimpleInfoModel *__nonnull)myModel;
+//- (void)showMySimple:(UCFMineMySimpleInfoModel *__nonnull)myModel;
 
 - (void)hiddenMoney:(BOOL )isHiddenMoney;
 

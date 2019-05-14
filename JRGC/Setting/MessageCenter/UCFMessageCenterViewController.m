@@ -71,7 +71,7 @@
 {
     UCFNewMineViewController *vc = self.rt_navigationController.rt_viewControllers.firstObject;
     if ([vc isKindOfClass:[UCFNewMineViewController class]]) {
-        [vc refreshMessagePoint];
+        [vc refreshPageData];
     }
     [self.rt_navigationController popViewControllerAnimated:YES];
 }
