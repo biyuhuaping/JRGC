@@ -52,7 +52,10 @@
     UCFHomeListRequest *bidListrequest = [[UCFHomeListRequest alloc] init];
     UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"index"];
     YTKBatchRequest *batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:@[bannerRequest , bidListrequest,mallRequest]];
-    batchRequest.animatingView = _rootViewController.view;
+    if (_rootViewController.view.window != nil) {
+        batchRequest.animatingView = _rootViewController.view;
+    }
+    
     [batchRequest setCompletionBlockWithSuccess:^(YTKBatchRequest * _Nonnull batchRequest) {
         [selfWeak.dataArray removeAllObjects];
         NSArray *requests = batchRequest.requestArray;

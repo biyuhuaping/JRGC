@@ -45,7 +45,7 @@
         self.addRateTipView.rightPos.equalTo(whitBaseView.rightPos);
         self.addRateTipView.widthSize.equalTo(@90);
         self.addRateTipView.heightSize.equalTo(@20);
-        self.addRateTipView.topPos.equalTo(@20);
+        self.addRateTipView.topPos.equalTo(@14);
         [self.addRateTipView setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
             [v rc_bezierPathWithRoundedRect:v.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(10, 10)];
         }];

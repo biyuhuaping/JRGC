@@ -200,7 +200,9 @@
 {
     if (self.loginData.userInfo.userId.length > 0) {
         UCFUserAllStatueRequest *request1 = [[UCFUserAllStatueRequest alloc] initWithUserId:SingleUserInfo.loginData.userInfo.userId];
-        request1.animatingView = view;
+        if (view.window != nil) {
+            request1.animatingView = view;
+        }
         [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
             NSDictionary *dic = request.responseObject;
             if ([dic[@"ret"] boolValue]) {

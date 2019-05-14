@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFPublicPopupWindowView : BaseView
 
+@property (nonatomic, assign)POPWINDOWS type;
+
 @property (nonatomic, weak)id<PublicPopupWindowViewDelegate> delegate; //声明协议变量
 
 + (void)loadPopupWindowWithType:(POPWINDOWS)type

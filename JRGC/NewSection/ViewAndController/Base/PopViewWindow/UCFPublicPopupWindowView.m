@@ -73,7 +73,6 @@ static BOOL isForcedUpdating = NO;//强制更新
 
 @property (nonatomic, strong) NZLabel     *contentLabel;
 
-@property (nonatomic, assign) POPWINDOWS type;
 
 @property (nonatomic, copy)   NSString  *contentStr;
 
@@ -86,6 +85,8 @@ static BOOL isForcedUpdating = NO;//强制更新
 @property (nonatomic, assign) CGFloat *contentHeight;
 
 @property (nonatomic ,assign) NSInteger popViewTag;
+
+//@property (nonatomic) POPWINDOWS alertType;
 
 @end
 @implementation UCFPublicPopupWindowView
@@ -103,6 +104,7 @@ static BOOL isForcedUpdating = NO;//强制更新
                  withPopViewTag:(NSInteger )viewTag
 {
 
+    
     if ([UCFPublicPopupWindowView checkPopupWindowView])
     {
         //如果有退出登录或者强制更新,则不让弹框出现
@@ -110,17 +112,18 @@ static BOOL isForcedUpdating = NO;//强制更新
     else
     {
         UCFPublicPopupWindowView *popup = [[UCFPublicPopupWindowView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, PGScreenHeight) withType:type withContent:contentStr withTitle:titletStr withPopViewTag:viewTag];
-        if (type == POPMessageLoginOut || type == POPMessageLoginOutService || type == POPMessageLoginInvalid) {
-            [popup setLoginOut:YES];
-        }
-        if (type == POPMessageForcedUpdating) {
-            [popup setForcedUpdating:YES];
-        }
+//        if (type == POPMessageLoginOut || type == POPMessageLoginOutService || type == POPMessageLoginInvalid) {
+//            [popup setLoginOut:YES];
+//        }
+//        if (type == POPMessageForcedUpdating) {
+//            [popup setForcedUpdating:YES];
+//        }
         
         if (delegate != nil) {
             popup.delegate = delegate;
         }
         if (controller == nil || ![controller isKindOfClass:[UIViewController class]]) {
+            popup.type = type;
             [popup showInWindow];
         }
         else{
@@ -139,36 +142,46 @@ static BOOL isForcedUpdating = NO;//强制更新
     //主线程中
     NSLock *lock = [[NSLock alloc] init];
     [lock lock];
-    BOOL tempBl;
-    if (isForcedUpdating || isLoginOut )
-    {
-        tempBl = YES;
+    BOOL tempBl = NO;
+//    if (isForcedUpdating || isLoginOut )
+//    {
+//        tempBl = YES;
+//    }
+//    else
+//    {
+//        tempBl = NO;
+//    }
+    for (UIView *view in [UIApplication sharedApplication].keyWindow.subviews) {
+        if ([view isKindOfClass:[UCFPublicPopupWindowView class]]) {
+            POPWINDOWS type = ((UCFPublicPopupWindowView *)view).type;
+            if (type == POPMessageLoginOut || type == POPMessageLoginOutService || type == POPMessageLoginInvalid || type == POPMessageForcedUpdating) {
+                tempBl = YES;
+                break;
+            }
+        }
     }
-    else
-    {
-        tempBl = NO;
-    }
+    
     [lock unlock];
     return tempBl;
 }
 
-- (void)setForcedUpdating:(BOOL)forcedUpdating
-{
-    //主线程中
-    NSLock *lock = [[NSLock alloc] init];
-    [lock lock];
-    isForcedUpdating = forcedUpdating;
-    [lock unlock];
-}
+//- (void)setForcedUpdating:(BOOL)forcedUpdating
+//{
+//    //主线程中
+//    NSLock *lock = [[NSLock alloc] init];
+//    [lock lock];
+//    isForcedUpdating = forcedUpdating;
+//    [lock unlock];
+//}
 
-- (void)setLoginOut:(BOOL)loginOut
-{
-    //主线程中
-    NSLock *lock = [[NSLock alloc] init];
-    [lock lock];
-    isLoginOut = loginOut;
-    [lock unlock];
-}
+//- (void)setLoginOut:(BOOL)loginOut
+//{
+//    //主线程中
+//    NSLock *lock = [[NSLock alloc] init];
+//    [lock lock];
+//    isLoginOut = loginOut;
+//    [lock unlock];
+//}
 
 
 
@@ -181,7 +194,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     else
     {
         if (self.type == POPMessageLoginOut  || self.type == POPMessageLoginOutService || self.type == POPMessageLoginInvalid) {
-            [self setLoginOut:NO];
+//            [self setLoginOut:NO];
         }
         [self clearPopupWindowView];
     }
