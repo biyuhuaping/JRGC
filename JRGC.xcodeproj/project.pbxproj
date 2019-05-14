@@ -8796,7 +8796,7 @@
 		E352FD2821E4AF0B00617AB7 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				E3980E0822522217006936C4 /* New Group */,
+				E3980E0822522217006936C4 /* PopViewWindow */,
 				E34B5E8E222541DC0027718C /* Scrollview */,
 				33E3032921F1830200FD657C /* ViewModel */,
 				33480A2221E6E5E4007C8AAA /* Controler */,
@@ -9293,7 +9293,7 @@
 			path = timer;
 			sourceTree = "<group>";
 		};
-		E3980E0822522217006936C4 /* New Group */ = {
+		E3980E0822522217006936C4 /* PopViewWindow */ = {
 			isa = PBXGroup;
 			children = (
 				E30B07662264991E0090BFB8 /* UCFPopViewWindow.h */,
@@ -9301,7 +9301,7 @@
 				E3980E0C225234A9006936C4 /* UCFPublicPopupWindowView.h */,
 				E3980E0D225234A9006936C4 /* UCFPublicPopupWindowView.m */,
 			);
-			path = "New Group";
+			path = PopViewWindow;
 			sourceTree = "<group>";
 		};
 		E39962712237E79F00C5B96C /* UCFMicroBankDepositoryChangePassWord（修改交易密码） */ = {

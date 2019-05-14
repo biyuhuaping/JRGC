@@ -16,7 +16,7 @@
 //一个按钮的高度
 #define ContentButtonHeight 170
 //两个按钮的高度
-#define ContentBothButtonHeight 193
+#define ContentBothButtonHeight 210
 static NSString *TextTitleHint = @"提示";
 static NSString *TextButtonTitleEnter = @"确定";
 static NSString *TextButtonTitleLogin = @"去登录";
@@ -33,7 +33,7 @@ static NSString *TextButtonMomentCancel = @"一会再说";
 static NSString *TextButtonIKnowEnter = @"知道了";
 static NSString *TextButtonStartEnter = @"开启";
 static NSString *TextButtonCancelEnter = @"取消";
-static NSString *TextButtonVersionEnter = @"更新";
+static NSString *TextButtonVersionEnter = @"立即更新";
 static NSString *TextButtonAgainCancel = @"下次再说";
 static NSString *TextButtonAgainLogin = @"重新登录";
 static NSString *TextButtonContactService = @"联系客服";
@@ -253,10 +253,10 @@ static BOOL isForcedUpdating = NO;//强制更新
         {
             [self addPOPOpenAccountPassWord];
         }
-        else if (type == POPMessageWindow)
-        {
-            [self addPOPMessageWindow];
-        }
+//        else if (type == POPMessageWindow)
+//        {
+//            [self addPOPMessageWindow];
+//        }
         else if (type == POPRegisterVerifyPhoneNum)
         {
             [self addPOPRegisterVerifyPhoneNum];
@@ -448,8 +448,6 @@ static BOOL isForcedUpdating = NO;//强制更新
     {
         _cancelButton = [UIButton buttonWithType:0];
         _cancelButton.topPos.equalTo(self.enterButton.bottomPos).offset(7);
-//        _cancelButton.rightPos.equalTo(self.enterButton.rightPos);
-//        _cancelButton.leftPos.equalTo(self.enterButton.leftPos);
         _cancelButton.myLeft = 0;
         _cancelButton.myRight = 0;
         _cancelButton.heightSize.equalTo(@40);
@@ -536,37 +534,37 @@ static BOOL isForcedUpdating = NO;//强制更新
     
     [self addSingleGesture];
 }
-- (void)addPOPMessageWindow
-{
-    [self.bkLayout addSubview:self.titleLabel];
-    [self.bkLayout addSubview:self.contentLabel];
-    [self.bkLayout addSubview:self.enterButton];
-    
-    self.bkLayout.myHeight = 347;
-    self.bkLayout.myCenterX = 0;
-    self.bkLayout.myCenterY = 0;
-    self.bkLayout.myWidth = getWidth(310);
-    
-    self.bkImageView.myTop = 30;
-    self.bkImageView.myWidth = 288;
-    self.bkImageView.myHeight = 184;
-    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
-    self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
-    
-    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
-    self.contentLabel.myLeft= 25;
-    self.contentLabel.myRight= 25;
-    self.contentLabel.text = TextOpenAccountHint;
-    [self.contentLabel sizeToFit];
-    
-    self.enterButton.myBottom = 25;
-    self.enterButton.rightPos.equalTo(@25);
-    self.enterButton.leftPos.equalTo(@25);
-    self.enterButton.heightSize.equalTo(@40);
-    [_enterButton setTitle:TextButtonOpenAccount forState:UIControlStateNormal];
-    
-    [self addSingleGesture];
-} 
+//- (void)addPOPMessageWindow
+//{
+//    [self.bkLayout addSubview:self.titleLabel];
+//    [self.bkLayout addSubview:self.contentLabel];
+//    [self.bkLayout addSubview:self.enterButton];
+//
+//    self.bkLayout.myHeight = 347;
+//    self.bkLayout.myCenterX = 0;
+//    self.bkLayout.myCenterY = 0;
+//    self.bkLayout.myWidth = getWidth(310);
+//
+//    self.bkImageView.myTop = 30;
+//    self.bkImageView.myWidth = 288;
+//    self.bkImageView.myHeight = 184;
+//    self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
+//    self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
+//
+//    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
+//    self.contentLabel.myLeft= 25;
+//    self.contentLabel.myRight= 25;
+//    self.contentLabel.text = TextOpenAccountHint;
+//    [self.contentLabel sizeToFit];
+//
+//    self.enterButton.myBottom = 25;
+//    self.enterButton.rightPos.equalTo(@25);
+//    self.enterButton.leftPos.equalTo(@25);
+//    self.enterButton.heightSize.equalTo(@40);
+//    [_enterButton setTitle:TextButtonOpenAccount forState:UIControlStateNormal];
+//
+//    [self addSingleGesture];
+//}
 
 - (void)addPOPRegisterVerifyPhoneNum
 {
@@ -613,14 +611,14 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.bkLayout.myWidth = getWidth(310);
     self.bkLayout.myCenterX = 0;
     self.bkLayout.myCenterY = 0;
-    self.bkLayout.myHeight = 433;
+    self.bkLayout.myHeight = 415;
     
     self.bkImageView.myTop = 30;
-    self.bkImageView.widthSize.equalTo(self.bkLayout.widthSize);
-    self.bkImageView.heightSize.equalTo(self.bkLayout.widthSize).multiply(0.64);
+    self.bkImageView.myWidth = 288;
+    self.bkImageView.myHeight = 184;
     self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
     self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
-
+    
     self.titleLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(16);
     self.titleLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
     self.titleLabel.text = TextRegisterRenounceTitle;
@@ -818,7 +816,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.bkLayout.myWidth = getWidth(310);
     self.bkLayout.myCenterX = 0;
     self.bkLayout.myCenterY = 0;
-    self.bkLayout.myHeight = 375;
+    self.bkLayout.myHeight = 380;
     
     self.bkImageView.myTop = 30;
     self.bkImageView.myWidth = 288;
@@ -826,7 +824,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
     self.bkImageView.image = [UIImage imageNamed:@"risk_assessment"];
     
-    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(10);
+    self.contentLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(15);
     self.contentLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
     self.contentLabel.text = TextOpenAccountRiskHint;
     self.contentLabel.font = [Color gc_Font:15.0];
@@ -1005,6 +1003,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.bkLayout.myCenterX = 0;
     self.bkLayout.myCenterY = 0;
     
+    
     self.titleLabel.myTop = 26;
     self.titleLabel.myLeft= 22;
     self.titleLabel.text = self.titleStr;
@@ -1039,13 +1038,13 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.bkLayout.myCenterX = 0;
     self.bkLayout.myCenterY = 0;
     
-    self.titleLabel.myTop = 20;
+    self.titleLabel.myTop = 26;
     self.titleLabel.myLeft= 22;
     self.titleLabel.text = TextTitleHint;
     self.titleLabel.font = [Color gc_Font:25.0];
     [self.titleLabel sizeToFit];
     
-    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(20);
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(26);
     self.contentLabel.myLeft= 22;
     self.contentLabel.myRight= 22;
     self.contentLabel.text = self.contentStr;
@@ -1079,7 +1078,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.titleLabel.font = [Color gc_Font:25.0];
     [self.titleLabel sizeToFit];
     
-    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(26);
     self.contentLabel.myLeft= 22;
     self.contentLabel.myRight= 22;
     self.contentLabel.text = self.contentStr;
@@ -1114,7 +1113,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.titleLabel.font = [Color gc_Font:25.0];
     [self.titleLabel sizeToFit];
     
-    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(26);
     self.contentLabel.myLeft= 22;
     self.contentLabel.myRight= 22;
     self.contentLabel.text = self.contentStr;
@@ -1148,14 +1147,14 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.titleLabel.font = [Color gc_Font:25.0];
     [self.titleLabel sizeToFit];
     
-    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(26);
     self.contentLabel.myLeft= 22;
     self.contentLabel.myRight= 22;
     self.contentLabel.text = self.contentStr;
     self.contentLabel.font = [Color gc_Font:14.0];
     [self.contentLabel sizeToFit];
     
-    self.enterButton.myBottom = 25;
+    self.enterButton.myBottom = 20;
     self.enterButton.rightPos.equalTo(@25);
     self.enterButton.leftPos.equalTo(@25);
     self.enterButton.heightSize.equalTo(@40);
@@ -1181,7 +1180,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.titleLabel.font = [Color gc_Font:25.0];
     [self.titleLabel sizeToFit];
     
-    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(26);
     self.contentLabel.myLeft= 22;
     self.contentLabel.myRight= 22;
     self.contentLabel.text = self.contentStr;
@@ -1216,14 +1215,14 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.titleLabel.font = [Color gc_Font:25.0];
     [self.titleLabel sizeToFit];
     
-    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(26);
     self.contentLabel.myLeft= 22;
     self.contentLabel.myRight= 22;
     self.contentLabel.text = self.contentStr;
     self.contentLabel.font = [Color gc_Font:14.0];
     [self.contentLabel sizeToFit];
     
-    self.enterButton.myBottom = 25;
+    self.enterButton.myBottom = 20;
     self.enterButton.rightPos.equalTo(@25);
     self.enterButton.leftPos.equalTo(@25);
     self.enterButton.heightSize.equalTo(@40);
@@ -1250,7 +1249,7 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.titleLabel.font = [Color gc_Font:25.0];
     [self.titleLabel sizeToFit];
     
-    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(22);
+    self.contentLabel.topPos.equalTo(self.titleLabel.bottomPos).offset(26);
     self.contentLabel.myLeft= 22;
     self.contentLabel.myRight= 22;
     self.contentLabel.text = self.contentStr;

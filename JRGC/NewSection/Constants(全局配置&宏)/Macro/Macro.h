@@ -103,7 +103,6 @@ typedef NS_ENUM(NSInteger, POPWINDOWS) {
     POPOpenAccountPassWord,//设置交易密码
     POPRegisterVerifyPhoneNum, //注册检测手机号提示
     POPRegisterRenounce,//放弃注册提示
-    POPMessageWindow,//带提示信息的
     POPRegisterSucceedRenounce,//注册成功,放弃开户
     POPLoginVerifyPhoneNum,//登录检测手机号提示
     POPOpenAccountRenounce,//放弃开户
