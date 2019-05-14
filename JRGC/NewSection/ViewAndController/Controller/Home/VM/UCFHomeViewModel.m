@@ -366,6 +366,7 @@
     shareModel.url = bannermodel.url;
     shareModel.thumb = bannermodel.thumb;
     shareModel.title = bannermodel.title;
+    shareModel.desc = bannermodel.url;
     webView.dicForShare = shareModel;
     webView.hidesBottomBarWhenPushed = YES;
     [_rootViewController.rt_navigationController pushViewController:webView animated:YES];
