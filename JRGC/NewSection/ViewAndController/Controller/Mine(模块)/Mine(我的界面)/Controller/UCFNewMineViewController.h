@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)signInButtonClick:(NSInteger )tag;
 
-- (void)refreshMessagePoint;
 
 @end
 

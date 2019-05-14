@@ -95,10 +95,6 @@
     [self loadCellConfig];
     [self.tableView beginRefresh];
     [self blindUserStatue];
-    
-//    [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPRegisterVerifyPhoneNum withContent:@"该手机号已被注册，如需帮助请拨打客服电话。111111111111111111111111111111111111111111111111111111111111111"];
-//    [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPLoginSucceedVerifyTouchID];
-//     [[UCFPublicPopupWindow sharedManager] showPopViewInController:self andType:POPMessageIKnowWindow withContent:@"1.返现券和返息券可在一笔出借中公用；\n 2.返现券可叠加使用; \n3.返息券只能使用一张，不可叠加。"];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -163,13 +159,7 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-//    UCFNewAiLoanViewController *vc = [[UCFNewAiLoanViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-//    return;
-//    UCFHighQualityContainerViewController *vc = [[UCFHighQualityContainerViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-//    return;
+
     CellConfig *cellConfig = self.cellConfigData[indexPath.section][indexPath.row];
     if (indexPath.section == 1) {
         if ([cellConfig.title isEqualToString:@"回款日历"])
@@ -197,7 +187,6 @@
         }
         else if ([cellConfig.title isEqualToString:@"持有黄金"])
         {
-//            __weak typeof(self) weakSelf = self;
             UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
             [self.navigationController pushViewController:subVC animated:YES];
         }
@@ -219,9 +208,6 @@
         {
             UCFTelAlertView *view = [[UCFTelAlertView alloc] initWithNotiMessage:self.outBoundMess];
             [view show];
-            
-//            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
-//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
     }
 }
@@ -229,17 +215,15 @@
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 10)];
     view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-//    view.backgroundColor = [UIColor blackColor];
     return view;
 
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
    
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 10)];
-        view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-//        view.backgroundColor = [UIColor redColor];
-        return view;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PGScreenWidth, 10)];
+    view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    return view;
 
 }
 
@@ -258,51 +242,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     //设置尾视图高度为0.01
     return 0.001;
-//    if (section == 3) {
-//        return 0.01;
-//    }
-//    else
-//    {
-//       return 10;
-//    }
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-//- (void)getRecharngeBindingBankCardNet
-//{
-//    UCFGetBindingBankCardListApi *request1 = [[UCFGetBindingBankCardListApi alloc] init];
-//    request1.animatingView = self.view;
-//    [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        NSDictionary *dic = request.responseObject;
-//        if ([dic[@"ret"] boolValue]) {
-//
-//            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
-//            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
-//            rechargeCashVC.dataDict = dataDict;
-//            rechargeCashVC.isRechargeOrCash = NO;//充值
-//            UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
-//            rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-//
-//        }
-//        else
-//        {
-//            ShowMessage(dic[@"message"]);
-//        }
-//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//
-//        self.requestUserbackBlock(NO);
-//    }];
-//    [request1 start];
-//}
-
 
 #pragma mark- 点击事件
 - (void)signInButtonClick:(NSInteger )tag
@@ -350,9 +290,6 @@
 
 -(void)layoutClick:(UIGestureRecognizer *)sender
 {
-    //    if ([self.bc isKindOfClass:[UCFNewMineViewController class]]) {
-    //        [(UCFNewMineViewController *)self.bc signInButtonClick:sender.view.tag];
-    //    }
     UCFAssetAccountViewController *vc = [[UCFAssetAccountViewController alloc] init];
     vc.zxAccountIsShow = self.zxAccountIsShow;
     vc.nmAccountIsShow = self.nmAccountIsShow;
@@ -422,34 +359,23 @@
     }
 }
 
-
 #pragma mark - CellConfig
 - (void)loadCellConfig
 {
-    //cellArrayData
     self.arryData = [NSMutableArray array];
+    
     [self.arryData addObject:[NSArray arrayWithObjects:[NSArray array], nil]]; //签到
     [self.arryData addObject:[self getCellAccountArrayData]]; //回款,债权,出借,商城
     [self.arryData addObject:[self getCellAccountCentreArrayData]];//客服,服务中心
     
-    
-    //cellConfigData
     self.cellConfigData = [NSMutableArray array];
-    
     //第一组内容
-    
     CellConfig *cellConfigTicket = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineActivitiesCell class]) title:@"签到" showInfoMethod:@selector(showInfo:) heightOfCell:95];
     [self.cellConfigData addObject:[NSArray arrayWithObjects:cellConfigTicket, nil]];
-    
     //第二组内容
     [self.cellConfigData addObject:[self loadingAccountCellConfig]];
-
     //第三组内容
-    CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineItemCell class]) title:@"服务中心" showInfoMethod:@selector(showInfo:) heightOfCell:50];
-    
-    CellConfig *cellConfigService = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineItemCell class]) title:@"客服热线" showInfoMethod:@selector(showInfo:) heightOfCell:50];
-    
-    [self.cellConfigData addObject:[NSArray arrayWithObjects:cellConfigCentre,cellConfigService, nil]];
+    [self.cellConfigData addObject:[self getCellAccountCentreArray]];
     
     [self.tableView cyl_reloadData];
 }
@@ -489,6 +415,13 @@
     return [NSArray arrayWithObjects:cellAccountCalendar,cellAccountCreditorr,cellAccountLend,cellAccountMall, nil];
 }
 
+- (NSArray *)getCellAccountCentreArray
+{
+    CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineItemCell class]) title:@"服务中心" showInfoMethod:@selector(showInfo:) heightOfCell:50];
+    
+    CellConfig *cellConfigService = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineItemCell class]) title:@"客服热线" showInfoMethod:@selector(showInfo:) heightOfCell:50];
+    return [NSArray arrayWithObjects:cellConfigCentre,cellConfigService, nil];
+}
 
 - (NSArray *)getCellAccountCentreArrayData{
     UCFMineCellAccountModel *cellAccountCentre = [[UCFMineCellAccountModel alloc]init];//服务中心
@@ -500,7 +433,6 @@
     cellAccountService.cellAccountImage = @"mine_icon_noble.png";
     return [NSArray arrayWithObjects:cellAccountCentre,cellAccountService, nil];
 }
-
 
 //账户是否展示
 - (void)getAccountCellConfig:(UCFMineMyReceiptModel  *)model
@@ -529,134 +461,28 @@
         cellAccountGold.cellAccountImage = @"mine_icon_gold.png";
         [accountCellData insertObject:cellAccountGold atIndex:accountCellData.count -1];
     }
-    //新的数据直接替换第二组内容
-    [self.cellConfigData replaceObjectAtIndex:1 withObject:[accountCellConfigArray copy]];
-    [self.arryData replaceObjectAtIndex:1 withObject:[accountCellData copy]];
+    //新的数据直接添加第二组内容
+    [self.cellConfigData addObject:[accountCellConfigArray copy]];
+    [self.arryData addObject:[accountCellData copy]];
     
+    
+    //第三组内容
+    [self.arryData addObject:[self getCellAccountCentreArrayData]];//客服,服务中心
+    [self.cellConfigData addObject:[self getCellAccountCentreArray]];
 }
-
 
 #pragma mark - 请求
 
 - (void)refreshTableViewHeader
 {
-//    [self refreshHomeRequest];
     [self requestMineMessage];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
 }
-- (void)refreshHomeRequest
-{
-//    [self requestMyReceipt];
-//    [self requestMySimpleInfo];
-//    [self getMallData];
-//    [self getBannerData];
-    
-    
-}
+
 - (void)refreshPageData
 {
-//    [self refreshHomeRequest];
     [self.tableView beginRefresh];
 }
-- (void)requestMyReceipt//请求总资产信息
-{
-    UCFMineMyReceiptApi * request = [[UCFMineMyReceiptApi alloc] init];
-    
-    //    request.animatingView = self.view;
-    //    request.tag =tag;
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        UCFMineMyReceiptModel *model = [request.responseJSONModel copy];
-        
-        [self.tableView endRefresh];
-        //        DDLogDebug(@"---------%@",model);
-        if (model.ret == YES) {
-            
-            if (SingleUserInfo.loginData.userInfo.zxIsNew != !model.data.zxAccountIsShow)
-            {
-                SingleUserInfo.loginData.userInfo.zxIsNew = !model.data.zxAccountIsShow;
-                [SingleUserInfo setUserData:SingleUserInfo.loginData];
-            }
-            self.zxAccountIsShow = model.data.zxAccountIsShow;
-            self.nmAccountIsShow = model.data.nmAccountIsShow;
-            [self setTableViewArrayWithData:model];
-        }
-        else{
-            ShowCodeMessage(model.code, model.message);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        [self.tableView endRefresh];
-    }];
-    
-}
-
-- (void)requestMySimpleInfo//查询用户工豆,工分,等信
-{
-    UCFMineMySimpleInfoApi * request = [[UCFMineMySimpleInfoApi alloc] init];
-    
-    request.animatingView = self.view;
-    //    request.tag =tag;
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        UCFMineMySimpleInfoModel *model = [request.responseJSONModel copy];
-        DDLogDebug(@"---------%@",model);
-        [self.tableView endRefresh];
-        if (model.ret == YES) {
-            
-            [self setTableViewArrayWithData:model];
-        }
-        else{
-            ShowCodeMessage(model.code, model.message);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        // 你可以直接在这里使用 self
-        [self.tableView endRefresh];
-    }];
-    
-}
-
-- (void)getMallData
-{
-    //    @PGWeakObj(self);
-    UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"home"];
-    [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
-        [self.tableView endRefresh];
-        UCFHomeMallDataModel *model = request.responseJSONModel;
-        if (model.ret) {
-            
-            [self setTableViewArrayWithData:model];
-            
-        } else {
-            ShowCodeMessage(model.code, model.message);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        [self.tableView endRefresh];
-    }];
-    [mallRequest start];
-}
-
-- (void)getBannerData
-{
-    //    @PGWeakObj(self);
-    UCFQueryBannerByTypeAPI *mallRequest = [[UCFQueryBannerByTypeAPI alloc] initWithBannerType:17];
-    [mallRequest setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
-        [self.tableView endRefresh];
-        UCFQueryBannerByTypeModel *model = request.responseJSONModel;
-        if (model.ret) {
-            
-            [self setTableViewArrayWithData:model];
-            
-        } else {
-            ShowCodeMessage(model.code, model.message);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        [self.tableView endRefresh];
-    }];
-    [mallRequest start];
-}
-
 
 - (void)requestMyCoin:(NSString *)vip//请求我的工贝
 {
@@ -696,45 +522,16 @@
     
 }
 
-
-- (void)setTableViewArrayWithData:(id)model
+- (void)showMySimpleInfo:(UCFMineMySimpleInfoModel *)model
 {
-    @synchronized(self) {
-        
-        if ([model isKindOfClass:[UCFMineMyReceiptModel class]]) {
-            
-            //查询账户信息
-            [self getAccountCellConfig:model];
-            //赋值 账户信息
-            [self.tableHead showMyReceipt:model];
-        }
-        if ([model isKindOfClass:[UCFMineMySimpleInfoModel class]]) {
-            
-            //查询工豆优惠券信息 和未读消息
-            //赋值 未读消息
-            [self.tableHead showMySimple:model];
-            [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:model, nil]];
-        }
-        if ([model isKindOfClass:[UCFHomeMallDataModel class]]) {
-            
-            [self showShopUrl:model];
-        }
-        if ([model isKindOfClass:[UCFQueryBannerByTypeModel class]]) {
-            
-            [self showBannerUrl:model];
-        }
-        
-        [self.tableView cyl_reloadData];
-    }
-    
+    //查询工豆优惠券信息 和未读消息
+    [self.arryData addObject:[NSArray arrayWithObjects:model, nil]];
+    CellConfig *cellConfigTicket = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMineActivitiesCell class]) title:@"签到" showInfoMethod:@selector(showInfo:) heightOfCell:95];
+    [self.cellConfigData addObject:[NSArray arrayWithObjects:cellConfigTicket, nil]];
 }
-
 
 - (void)showShopUrl:(UCFHomeMallDataModel *)model
 {
-    NSArray *cellArrayData = [self.cellConfigData lastObject];
-    CellConfig *cellConfig = [cellArrayData firstObject];
-    
     //当前没有活动内容
     NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:5];
     NSMutableArray *cellArray = [NSMutableArray arrayWithCapacity:5];
@@ -751,78 +548,25 @@
         [cellArray addObject:cellConfigCentre];
         [dataArray addObject:model.data];
     }
-    
-    
-    
-    if ([cellConfig.title isEqualToString:@"mallRecommends"] || [cellConfig.title isEqualToString:@"mallSale"]) {
-        //说明当前是有活动这组内容
-        [self.arryData replaceObjectAtIndex:4 withObject:[dataArray copy]];
-        [self.cellConfigData replaceObjectAtIndex:4 withObject:[cellArray copy]];
-    }
-    else
-    {
         //没有活动这组数据,就直接插入
         [self.arryData addObject:dataArray];
         [self.cellConfigData addObject:cellArray];
-    }
-    [self.tableView cyl_reloadData];
-    
-    //    [self.cellConfigData enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    ////        NSLog(@"%@----%@",array[idx],[NSThread currentThread]);
-    //
-    //
-    //    }];
 }
 
 - (void)showBannerUrl:(UCFQueryBannerByTypeModel *)model
 {
-    NSArray *cellArrayData ;
-    CellConfig *cellConfig ;
-    if (self.cellConfigData.count < 4) {
-        cellArrayData = [self.cellConfigData lastObject];
-        cellConfig = [cellArrayData firstObject];
-    }
-    else
-    {
-        cellArrayData = [self.cellConfigData objectAtIndex:3];
-        cellConfig = [cellArrayData firstObject];
-    }
-    
     //当前没有活动内容
     NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:5];
     NSMutableArray *cellArray = [NSMutableArray arrayWithCapacity:5];
-    
     if (model.data.bannerList.count)
     {
         //当前banner有数据
         CellConfig *cellConfigCentre = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFMinePromotionCell class]) title:@"banner" showInfoMethod:@selector(showInfo:) heightOfCell:108];
         [cellArray addObject:cellConfigCentre];
         [dataArray addObject:model.data];
-        
-        if ([cellConfig.title isEqualToString:@"banner"])
-        {
-            //第三组是否是banner,如果是直接替换,不是就插入到第三行
-            //说明当前是有活动这组内容
-            [self.arryData replaceObjectAtIndex:3 withObject:[dataArray copy]];
-            [self.cellConfigData replaceObjectAtIndex:3 withObject:[cellArray copy]];
-        }
-        else
-        {
-            //没有活动这组数据,就直接插入
-            [self.arryData insertObject:dataArray atIndex:3];
-            [self.cellConfigData insertObject:cellArray atIndex:3];
-        }
     }
-    else
-    {
-        //当前banner没有数据,需要隐藏
-        if ([cellConfig.title isEqualToString:@"banner"]){
-            [self.cellConfigData removeObjectAtIndex:3];
-            [self.arryData removeObjectAtIndex:3];
-        }
-        
-    }
-    [self.tableView cyl_reloadData];
+    [self.cellConfigData addObject:cellArray];
+    [self.arryData addObject:dataArray];
 }
 
 //登录或者注册
@@ -839,18 +583,16 @@
     self.zxAccountIsShow = NO;
     self.nmAccountIsShow = NO;
     [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:[UCFMineMySimpleInfoModel new], nil]];
+    //第二组内容
+    [self.cellConfigData replaceObjectAtIndex:1 withObject:[self loadingAccountCellConfig]];
+    [self.arryData replaceObjectAtIndex:1 withObject:[self getCellAccountArrayData]]; //回款,债权,出借,商城
+    
     [self.tableView cyl_reloadData];
 }
 //用户在登录的情况下，更改用户状态的时候，请求数据
 - (void)monitorOpenStatueChange
 {
    [self.tableView beginRefresh];
-}
-- (void)refreshMessagePoint
-{
-   [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
-//   [self requestMySimpleInfo];
-    [self.tableView beginRefresh];
 }
 
 #pragma mark - 用户状态检测
@@ -910,17 +652,39 @@
 
 - (void)requestMineMessage
 {
-    UCFMineMyReceiptApi * receiptrRequest = [[UCFMineMyReceiptApi alloc] init];
     UCFMineMySimpleInfoApi * simpleRequest = [[UCFMineMySimpleInfoApi alloc] init];
+    UCFMineMyReceiptApi * receiptrRequest = [[UCFMineMyReceiptApi alloc] init];
     UCFQueryBannerByTypeAPI *bannerRequest = [[UCFQueryBannerByTypeAPI alloc] initWithBannerType:17];
     UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"home"];
     
-    YTKBatchRequest *batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:@[receiptrRequest , simpleRequest,bannerRequest, mallRequest]];
+    YTKBatchRequest *batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:@[simpleRequest, receiptrRequest ,bannerRequest ,mallRequest]];
     batchRequest.animatingView = self.view;
     [batchRequest startWithCompletionBlockWithSuccess:^(YTKBatchRequest *batchRequest) {
-//        NSLog(@"succeed");
         NSArray *requests = batchRequest.requestArray;
-        UCFMineMyReceiptApi *receiptrRequest   = (UCFMineMyReceiptApi *)requests[0];
+        
+        NSInteger unReadMsgCount = 0;
+        NSString *memberLever = @"";
+        [self.arryData removeAllObjects];
+        [self.cellConfigData removeAllObjects];
+        
+        UCFMineMySimpleInfoApi * simpleRequest = (UCFMineMySimpleInfoApi *)requests[0]; //请求我的工贝,工豆,优惠券,未读消息信息
+        if ([simpleRequest isKindOfClass:[UCFMineMySimpleInfoApi class]])
+        {
+            UCFMineMySimpleInfoModel *model = [simpleRequest.responseJSONModel copy];
+            self.outBoundMess = model.data.outBoundMess;
+            DDLogDebug(@"---------%@",model);
+            if (model.ret == YES) {
+                
+                unReadMsgCount = model.data.unReadMsgCount;
+                memberLever = model.data.memberLever;
+                [self setBatchTableViewArrayWithData:model];
+            }
+            else{
+                ShowCodeMessage(model.code, model.message);
+            }
+        }
+        
+        UCFMineMyReceiptApi *receiptrRequest   = (UCFMineMyReceiptApi *)requests[1];//请求我总资产,列表尊享,黄金账户显隐
         if ([receiptrRequest isKindOfClass:[UCFMineMyReceiptApi class]])
         {
             UCFMineMyReceiptModel *model = [receiptrRequest.responseJSONModel copy];
@@ -934,28 +698,15 @@
                 }
                 self.zxAccountIsShow = model.data.zxAccountIsShow;
                 self.nmAccountIsShow = model.data.nmAccountIsShow;
+                model.data.memberLever = memberLever;
+                model.data.unReadMsgCount = unReadMsgCount; //把请求工贝工豆的接口数据放到这
                 [self setBatchTableViewArrayWithData:model];
             }
             else{
                 ShowCodeMessage(model.code, model.message);
             }
         }
-        
-        UCFMineMySimpleInfoApi * simpleRequest = (UCFMineMySimpleInfoApi *)requests[1];
-        if ([simpleRequest isKindOfClass:[UCFMineMySimpleInfoApi class]])
-        {
-            UCFMineMySimpleInfoModel *model = [simpleRequest.responseJSONModel copy];
-            self.outBoundMess = model.data.outBoundMess;
-            DDLogDebug(@"---------%@",model);
-            if (model.ret == YES) {
-                
-                [self setBatchTableViewArrayWithData:model];
-            }
-            else{
-                ShowCodeMessage(model.code, model.message);
-            }
-        }
-        
+
         UCFQueryBannerByTypeAPI *bannerRequest = (UCFQueryBannerByTypeAPI *)requests[2];
         if ([bannerRequest isKindOfClass:[UCFQueryBannerByTypeAPI class]])
         {
@@ -991,19 +742,18 @@
 }
 - (void)setBatchTableViewArrayWithData:(id)model
 {
-    if ([model isKindOfClass:[UCFMineMyReceiptModel class]]) {
-        
-        //查询账户信息
-        [self getAccountCellConfig:model];
-        //赋值 账户信息
-        [self.tableHead showMyReceipt:model];
-    }
     if ([model isKindOfClass:[UCFMineMySimpleInfoModel class]]) {
         
         //查询工豆优惠券信息 和未读消息
-        //赋值 未读消息
-        [self.tableHead showMySimple:model];
-        [self.arryData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObjects:model, nil]];
+        [self showMySimpleInfo:model];
+    }
+    if ([model isKindOfClass:[UCFMineMyReceiptModel class]]) {
+        
+        //赋值 账户信息
+        [self.tableHead showMyReceipt:model];
+        //查询账户信息
+        [self getAccountCellConfig:model];
+        
     }
     if ([model isKindOfClass:[UCFHomeMallDataModel class]]) {
         
