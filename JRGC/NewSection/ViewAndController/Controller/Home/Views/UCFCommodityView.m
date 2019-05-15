@@ -97,7 +97,8 @@
 - (void)setMoneyPrice:(NSString *)price andScore:(NSString *)score andDiscount:(NSString *)discount
 {
     NSMutableString *moneyStr = [[NSMutableString alloc] initWithCapacity:20];
-    if ([price floatValue] <= 0) //工贝
+    
+    if (price.length <= 0 ||[price floatValue] <= 0) //工贝
     {
         self.moneyCoinImageView.hidden = YES;
     }
@@ -107,10 +108,20 @@
         self.moneyCoinImageView.hidden = NO;
     }
     
-    if ([score floatValue] >= 0)//人民币
+    if (score.length > 0 && [score floatValue] >= 0)//人民币
     {
-        [moneyStr appendFormat:@"+¥%@",score];
+        
+        if (price.length <= 0 || [price floatValue] <= 0) {
+            
+            [moneyStr appendFormat:@"¥%@",score];
+        }
+        else
+        {
+            [moneyStr appendFormat:@"+¥%@",score];
+        }
     }
+    
+    
     self.shopValue.text = moneyStr;
     [self.shopValue sizeToFit];
     
