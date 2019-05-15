@@ -627,10 +627,10 @@ static BOOL isForcedUpdating = NO;//强制更新
     self.bkLayout.myHeight = 415;
     
     self.bkImageView.myTop = 30;
-    self.bkImageView.myWidth = 288;
-    self.bkImageView.myHeight = 184;
+    self.bkImageView.myWidth = 290;
+    self.bkImageView.myHeight = 185;
     self.bkImageView.centerXPos.equalTo(self.bkLayout.centerXPos);
-    self.bkImageView.image = [UIImage imageNamed:@"bg_huishang"];
+    self.bkImageView.image = [UIImage imageNamed:@"registered_assessment"];
     
     self.titleLabel.topPos.equalTo(self.bkImageView.bottomPos).offset(16);
     self.titleLabel.centerXPos.equalTo(self.bkLayout.centerXPos);
