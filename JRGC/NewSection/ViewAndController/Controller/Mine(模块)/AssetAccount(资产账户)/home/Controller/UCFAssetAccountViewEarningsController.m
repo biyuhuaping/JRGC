@@ -157,13 +157,13 @@
     
     PieModel *couponProfitModel = [[PieModel alloc]init];
     couponProfitModel.count = [model.data.couponProfit floatValue];
-    couponProfitModel.color = PNLightBlue;
+    couponProfitModel.color = PNPinkRed ;
     [array addObject:couponProfitModel];
     
     
     PieModel *beanProfitModel = [[PieModel alloc]init];
     beanProfitModel.count = [model.data.beanProfit floatValue];
-    beanProfitModel.color = PNPinkRed;
+    beanProfitModel.color = PNLightBlue;
     [array addObject:beanProfitModel];
     
     PieModel *balanceProfitModel = [[PieModel alloc]init];
