@@ -110,7 +110,7 @@
     {
         float  imageViewHight = _scrollViewWidth/2*3.0;
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(_scrollViewWidth * i, 0,_scrollViewWidth, imageViewHight )];
-        NSString *thumbUrl = [cmsPictureArray[i] objectForKey:@"thumb"];
+        NSString *thumbUrl = [cmsPictureArray objectSafeAtIndex:i];
         UIImage *cmsImage = [self getCMSImage:thumbUrl];
         if (cmsImage == nil)
         {
@@ -127,6 +127,8 @@
         [self.scrollView addSubview:imageView];
    }
    [self changeScrollLeftOrRightBtnState:self.scrollView.contentOffset.x];
+    
+    self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
 }
 -(UIImage *)getCMSImage:(NSString*)url
 {
