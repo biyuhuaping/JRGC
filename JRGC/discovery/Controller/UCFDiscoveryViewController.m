@@ -35,7 +35,7 @@
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
 
-    
+    [self addRefresh];
     [self gotoURL:self.url];
 //    self.webView.scrollView.bounces = NO;
     
