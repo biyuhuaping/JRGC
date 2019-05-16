@@ -47,6 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.dataArr = [NSMutableArray arrayWithCapacity:20];
     _selectedStateArray = [[NSMutableArray alloc] init];// 已选中状态存储数组
     _currentPage = 1;
     if (_sourceVC == 1) {
@@ -188,12 +189,7 @@
         if (model.ret) {
             BOOL hasNextPage = [model.data.pageData.pagination.hasNextPage boolValue];
     
-            if (hasNextPage) {
-                selfWeak.tableView.enableRefreshFooter = YES;
-                selfWeak.currentPage ++ ;
-            } else {
-                selfWeak.tableView.enableRefreshFooter = NO;
-            }
+
             selfWeak.presentFriendExist = [model.data.presentFriendExist boolValue];
             NSArray *dataArr = model.data.pageData.result;
             NSMutableArray *temp1 = [NSMutableArray array];
@@ -205,9 +201,16 @@
             selfWeak.unUserFxCount.text = [NSString stringWithFormat:@"%@ 张",unUserFxCount?unUserFxCount:@"0"];
             [selfWeak.unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@" 张"];
             if (_currentPage == 1) {
+                [selfWeak.dataArr removeAllObjects];
                 selfWeak.dataArr = [NSMutableArray arrayWithArray:temp1];
             }else{
                 [selfWeak.dataArr addObjectsFromArray:temp1];
+            }
+            if (hasNextPage) {
+                selfWeak.tableView.enableRefreshFooter = YES;
+                selfWeak.currentPage ++ ;
+            } else {
+                selfWeak.tableView.enableRefreshFooter = NO;
             }
             [selfWeak.tableView cyl_reloadData];
         } else {

@@ -188,12 +188,7 @@
         UCFCouponListModel *model = request.responseJSONModel;
         if (model.ret) {
             BOOL hasNextPage = [model.data.pageData.pagination.hasNextPage boolValue];
-            if (hasNextPage) {
-                selfWeak.tableView.enableRefreshFooter = YES;
-                selfWeak.currentPage ++ ;
-            } else {
-                selfWeak.tableView.enableRefreshFooter = NO;
-            }
+   
             selfWeak.presentFriendExist = [model.data.presentFriendExist boolValue];
             NSArray *dataArr = model.data.pageData.result;
             NSMutableArray *temp1 = [NSMutableArray array];
@@ -204,11 +199,17 @@
             id unUserFxCount = model.data.unUserFxCount;
             selfWeak.unUserFxCount.text = [NSString stringWithFormat:@"%@ 张",unUserFxCount?unUserFxCount:@"0"];
             [selfWeak.unUserFxCount setFont:[UIFont systemFontOfSize:12] string:@" 张"];
-            if (_currentPage == 1) {
+            if (selfWeak.currentPage == 1) {
                 selfWeak.dataArr = [NSMutableArray arrayWithArray:temp1];
             }else{
                 [selfWeak.tableView endRefresh];
                 [selfWeak.dataArr addObjectsFromArray:temp1];
+            }
+            if (hasNextPage) {
+                selfWeak.tableView.enableRefreshFooter = YES;
+                selfWeak.currentPage ++ ;
+            } else {
+                selfWeak.tableView.enableRefreshFooter = NO;
             }
             [selfWeak.tableView cyl_reloadData];
         } else {
