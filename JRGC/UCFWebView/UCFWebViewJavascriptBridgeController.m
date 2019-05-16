@@ -96,8 +96,12 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
-        self.topConSpace.constant = StatusBarHeight1;
+    if (StatusBarHeight1 > 20 ) {
+        if ([self.parentViewController isKindOfClass:[UINavigationController class]] && self.navigationController.navigationBar.hidden == YES) {
+            self.topConSpace.constant = StatusBarHeight1;
+        } else {
+            self.topConSpace.constant = 0;
+        }
     } else {
         self.topConSpace.constant = 0;
     }
