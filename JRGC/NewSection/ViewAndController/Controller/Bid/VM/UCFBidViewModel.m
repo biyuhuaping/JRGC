@@ -644,7 +644,8 @@
         BOOL noSelectCoupon = self.couponIDStr.length == 0 ? YES : NO;
         //返现券和返息券都未勾选
         if (noSelectCash && noSelectCoupon) {
-            NSString *messageStr = @"有可用优惠券，确认不使用并继续出借吗？";
+//            NSString *messageStr = @"有可用优惠券，确认不使用并继续出借吗？";
+             NSString *messageStr = @"确认不使用优惠券并继续出借吗？";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 4000;
             [alert show];
@@ -662,7 +663,8 @@
                 [alert show];
                 return;
             }
-            NSString *messageStr =@"有可用返息券，确认不使用并继续出借吗？";
+//            NSString *messageStr =@"有可用返息券，确认不使用并继续出借吗？";
+            NSString *messageStr = @"确认不使用优惠券并继续出借吗？";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 4000;
             [alert show];
@@ -681,7 +683,8 @@
                 [alert show];
                 return;
             }
-            NSString *messageStr =@"有可用返现券，确认不使用并继续出借吗？";
+//            NSString *messageStr =@"有可用返现券，确认不使用并继续出借吗？";
+            NSString *messageStr = @"确认不使用优惠券并继续出借吗？";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 4000;
             [alert show];
@@ -731,7 +734,8 @@
             }
             
         } else {
-            NSString *messageStr = [NSString stringWithFormat:@"有可用返息券,确认不使用继续出借吗"];
+//            NSString *messageStr = [NSString stringWithFormat:@"有可用返息券,确认不使用继续出借吗"];
+            NSString *messageStr = @"确认不使用优惠券并继续出借吗？";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 4000;
             [alert show];
@@ -755,7 +759,8 @@
             }
             
         } else {
-            NSString *messageStr = [NSString stringWithFormat:@"有可用返现券,确认不使用并继续出借吗"];
+//            NSString *messageStr = [NSString stringWithFormat:@"有可用返现券,确认不使用并继续出借吗"];
+            NSString *messageStr = @"确认不使用优惠券并继续出借吗？";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 4000;
             [alert show];

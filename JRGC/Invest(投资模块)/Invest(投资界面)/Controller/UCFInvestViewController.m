@@ -58,7 +58,13 @@
         _pageHeadView.isNavBar = YES;
         _pageHeadView.leftSpace = _pageHeadView.rightSpace = 30;
         _pageHeadView.isSacle = YES;
+
         [_pageHeadView reloaShowView];
+        
+        if ([self.selectedType isEqualToString:@"IntelligentLoan"]) {
+            [_pageHeadView setSelectIndex:1];
+        }
+        
     }
     return _pageHeadView;
 }
@@ -71,55 +77,55 @@
 }
 
 - (void)refresh {
-    [self currentControllerUpdate];
+//    [self currentControllerUpdate];
 }
 
-- (void)currentControllerUpdate
-{
-    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-        if (self.childViewControllers.count >= 1) {
-            UCFBaseViewController *baseVc = [self.childViewControllers firstObject];
-            [self updateViewControllerTableWithC:baseVc];
-        }
-    }
-    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-        if (self.childViewControllers.count >= 2) {
-            UCFBaseViewController *baseVc = [self.childViewControllers objectAtIndex:1];
-            [self updateViewControllerTableWithC:baseVc];
-        }
-    }
-    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
-        if (self.childViewControllers.count >= 3) {
-            UCFBaseViewController *baseVc = [self.childViewControllers objectAtIndex:2];
-            [self updateViewControllerTableWithC:baseVc];
-        }
-    }
-    else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
-        if (self.childViewControllers.count >= 4) {
-            UCFBaseViewController *baseVc = [self.childViewControllers lastObject];
-            [self updateViewControllerTableWithC:baseVc];
-        }
-    }
-}
+//- (void)currentControllerUpdate
+//{
+//    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+//        if (self.childViewControllers.count >= 1) {
+//            UCFBaseViewController *baseVc = [self.childViewControllers firstObject];
+//            [self updateViewControllerTableWithC:baseVc];
+//        }
+//    }
+//    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+//        if (self.childViewControllers.count >= 2) {
+//            UCFBaseViewController *baseVc = [self.childViewControllers objectAtIndex:1];
+//            [self updateViewControllerTableWithC:baseVc];
+//        }
+//    }
+//    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+//        if (self.childViewControllers.count >= 3) {
+//            UCFBaseViewController *baseVc = [self.childViewControllers objectAtIndex:2];
+//            [self updateViewControllerTableWithC:baseVc];
+//        }
+//    }
+//    else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
+//        if (self.childViewControllers.count >= 4) {
+//            UCFBaseViewController *baseVc = [self.childViewControllers lastObject];
+//            [self updateViewControllerTableWithC:baseVc];
+//        }
+//    }
+//}
 
-- (void)updateViewControllerTableWithC:(UCFBaseViewController *)baseVc
-{
-    if ([baseVc isEqual:self.microMoney]) {
-        if (![self.microMoney.tableview.header isRefreshing]) {
-            [self.microMoney.tableview.header beginRefreshing];
-        }
-    }
-    else if ([baseVc isEqual:self.honorInvest]) {
-        if (![self.honorInvest.tableview.header isRefreshing]) {
-            [self.honorInvest.tableview.header beginRefreshing];
-        }
-    }
-    else if ([baseVc isEqual:self.investTransfer]) {
-        if (![self.investTransfer.tableview.header isRefreshing]) {
-            [self.investTransfer.tableview.header beginRefreshing];
-        }
-    }
-}
+//- (void)updateViewControllerTableWithC:(UCFBaseViewController *)baseVc
+//{
+//    if ([baseVc isEqual:self.microMoney]) {
+//        if (![self.microMoney.tableview.header isRefreshing]) {
+//            [self.microMoney.tableview.header beginRefreshing];
+//        }
+//    }
+//    else if ([baseVc isEqual:self.honorInvest]) {
+//        if (![self.honorInvest.tableview.header isRefreshing]) {
+//            [self.honorInvest.tableview.header beginRefreshing];
+//        }
+//    }
+//    else if ([baseVc isEqual:self.investTransfer]) {
+//        if (![self.investTransfer.tableview.header isRefreshing]) {
+//            [self.investTransfer.tableview.header beginRefreshing];
+//        }
+//    }
+//}
 
 
 - (UCFMicroMoneyViewController *)microMoney
@@ -148,13 +154,13 @@
 - (void)changeView {
     if ([self.selectedType isEqualToString:@"IntelligentLoan"]) {//智能出借
       
-        [_pagerView setSelectIndex:1];
+        [_pageHeadView setSelectIndex:1];
     }
     else if ([self.selectedType isEqualToString:@"QualityClaims"]) {//优质债权
-        [_pagerView setSelectIndex:0];
+        [_pageHeadView setSelectIndex:0];
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
-        [_pagerView setSelectIndex:2];
+        [_pageHeadView setSelectIndex:2];
     }
 }
 
