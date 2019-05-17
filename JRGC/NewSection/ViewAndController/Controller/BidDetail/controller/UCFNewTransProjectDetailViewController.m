@@ -22,7 +22,7 @@
 #import "UCFNewPureTransBidViewController.h"
 #import "HSHelper.h"
 #import "RiskAssessmentViewController.h"
-@interface UCFNewTransProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate,UCFBidDetailNavViewDelegate,UCFNewInvestBtnViewDelegate>
+@interface UCFNewTransProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate,UCFBidDetailNavViewDelegate,UCFNewInvestBtnViewDelegate,UCFRemindFlowViewDelegate>
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
 @property(nonatomic, strong)UCFNewBidDetaiInfoView *bidinfoView;
@@ -68,6 +68,7 @@
     UCFRemindFlowView *remind = [UCFRemindFlowView new];
     remind.topPos.equalTo(bidinfoView.bottomPos);
     remind.myHorzMargin = 0;
+    remind.delegate = self;
     remind.heightSize.equalTo(@40);
     remind.subviewVSpace = 5;
     remind.subviewHSpace = 10;
@@ -92,6 +93,14 @@
     investView.bottomPos.equalTo(@0);
     [self.rootLayout addSubview:investView];
     self.investView = investView;
+}
+- (void)remindFlowView:(UCFRemindFlowView *)flowView noticeLastViewMaxY:(CGFloat)postionY
+{
+    self.contentLayout.heightSize.equalTo(@(155 +  postionY + 10));
+    self.showTableView.tableHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 155 + postionY + 10);
+    self.showTableView.tableHeaderView = self.contentLayout;
+    [self.showTableView layoutIfNeeded];
+
 }
 - (void)topLeftButtonClick:(UIButton *)button
 {

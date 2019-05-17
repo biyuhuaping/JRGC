@@ -8,7 +8,9 @@
 
 #import "UCFRemindFlowView.h"
 @interface UCFRemindFlowView()
-
+{
+    
+}
 @end
 @implementation UCFRemindFlowView
 - (instancetype)init
@@ -23,21 +25,23 @@
 - (void)reloadViewContentWithTextArr:(NSArray *)textArr
 {
     
-    for (NSString *showStr in textArr) {
-        [self createTagButton:showStr];
-    }
-    [self layoutAnimationWithDuration:0];
-    self.leftPadding = 20.0f;
-    if (textArr.count > 3) {
-        self.topPadding = 3.0f;
-    } else {
-        self.topPadding = 10.0f;
-    }
-    self.rightPadding = 20.0f;
-    
+    for (int i = 0; i < textArr.count; i++) {
+        NSString *showStr = textArr[i];
 
+        [self createTagButton:showStr isEnd: (i == textArr.count - 1 ? YES : NO)];
+    }
+//    [self layoutAnimationWithDuration:0];
+    self.leftPadding = 20.0f;
+//    if (textArr.count >= 3) {
+//        self.topPadding = 3.0f;
+//    } else {
+        self.topPadding = 10.0f;
+//    }
+    self.rightPadding = 20.0f;
+//    lastButtonY += 10;
+//    self.heightSize.equalTo(@(lastButtonY));
 }
-- (void)createTagButton:(NSString *)text
+- (void)createTagButton:(NSString *)text isEnd:(BOOL)end
 {
     UIButton *tagButton = [UIButton new];
     [tagButton setTitle:text forState:UIControlStateNormal];
@@ -47,13 +51,23 @@
     tagButton.titleLabel.font = [UIFont systemFontOfSize:12];
     tagButton.layer.borderColor = [Color color:PGColorOpttonRateNoramlTextColor].CGColor;
     tagButton.titleEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2);
-    //这里可以看到尺寸宽度等于自己的尺寸宽度并且再增加10，且最小是40，意思是按钮的宽度是等于自身内容的宽度再加10，但最小的宽度是40
+    if (end) {
+        tagButton.tag = 10000;
+    } //这里可以看到尺寸宽度等于自己的尺寸宽度并且再增加10，且最小是40，意思是按钮的宽度是等于自身内容的宽度再加10，但最小的宽度是40
     //如果没有这个设置，而是直接调用了sizeToFit则按钮的宽度就是内容的宽度。
     tagButton.widthSize.equalTo(tagButton.widthSize).add(10);
     tagButton.heightSize.equalTo(tagButton.heightSize).add(6).max(20); //高度根据自身的内容再增加10
     [tagButton sizeToFit];
+     @PGWeakObj(self);
     [tagButton setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
         v.layer.cornerRadius = v.frame.size.height/2;
+        if (v.tag == 10000) {
+            selfWeak.heightSize.equalTo(@(CGRectGetMaxY(v.frame) + 10));
+            if (selfWeak.delegate) {
+                [selfWeak.delegate remindFlowView:selfWeak noticeLastViewMaxY:CGRectGetMaxY(v.frame)];
+            }
+        }
+//        lastButtonY =  CGRectGetMaxY(v.frame);
     }];
     [self addSubview:tagButton];
 }
@@ -67,7 +81,7 @@
             NSArray *markList = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (markList.count > 0) {
                 [selfWeak  reloadViewContentWithTextArr:markList];
-                selfWeak.heightSize.equalTo(@40);
+//                selfWeak.heightSize.equalTo(@(40));
                 selfWeak.myVisibility = MyVisibility_Visible;
             } else {
                 selfWeak.myVisibility = MyVisibility_Visible;
@@ -87,7 +101,7 @@
             NSArray *markList = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (markList.count > 0) {
                 [selfWeak  reloadViewContentWithTextArr:markList];
-                selfWeak.heightSize.equalTo(@40);
+//                selfWeak.heightSize.equalTo(@(40));
                 selfWeak.myVisibility = MyVisibility_Visible;
             } else {
                 selfWeak.heightSize.equalTo(@10);
@@ -106,7 +120,7 @@
             NSArray *markList = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (markList.count > 0) {
                 [selfWeak  reloadViewContentWithTextArr:markList];
-                selfWeak.heightSize.equalTo(@40);
+//                selfWeak.heightSize.equalTo(@(40 ));
                 selfWeak.myVisibility = MyVisibility_Visible;
             } else {
                 selfWeak.myVisibility = MyVisibility_Visible;
@@ -126,7 +140,7 @@
             NSArray *markList = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (markList.count > 0) {
                 [selfWeak  reloadViewContentWithTextArr:markList];
-                selfWeak.heightSize.equalTo(@40);
+//                selfWeak.heightSize.equalTo(@40);
                 selfWeak.myVisibility = MyVisibility_Visible;
             } else {
                 selfWeak.myVisibility = MyVisibility_Visible;

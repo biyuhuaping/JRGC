@@ -20,7 +20,7 @@
 #import "HSHelper.h"
 #import "RiskAssessmentViewController.h"
 #import "UCFNewPureCollectionViewController.h"
-@interface UCFNewCollectionDetailViewController ()<UCFBidDetailNavViewDelegate,MjAlertViewDelegate>
+@interface UCFNewCollectionDetailViewController ()<UCFBidDetailNavViewDelegate,MjAlertViewDelegate,UCFRemindFlowViewDelegate>
 {
     NSInteger _currentSelectSortTag;//当前选择排序tag
 
@@ -70,9 +70,10 @@
     remind.topPos.equalTo(bidinfoView.bottomPos);
     remind.myHorzMargin = 0;
     remind.heightSize.equalTo(@40);
+    remind.delegate = self;
     remind.backgroundColor = [UIColor clearColor];
     remind.subviewVSpace = 5;
-    remind.subviewHSpace = 5;
+    remind.subviewHSpace = 10;
     self.remind = remind;
     [self.contentLayout addSubview:remind];
     
@@ -98,6 +99,14 @@
     investView.bottomPos.equalTo(@0);
     self.investView = investView;
     [self.rootLayout addSubview:investView];
+}
+- (void)remindFlowView:(UCFRemindFlowView *)flowView noticeLastViewMaxY:(CGFloat)postionY
+{
+    self.contentLayout.heightSize.equalTo(@(155 + 45 + postionY + 10));
+//    self.contentLayout.tableHeaderView.frame = CGRectMake(0, 0, 155 + 45 + postionY + 10);
+//    self.showTableView.tableHeaderView = self.contentLayout;
+//    [self.showTableView layoutIfNeeded];
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {

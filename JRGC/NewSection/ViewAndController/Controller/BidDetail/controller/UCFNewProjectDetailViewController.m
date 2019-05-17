@@ -19,7 +19,7 @@
 #import "UCFNewInvestBtnView.h"
 #import "RiskAssessmentViewController.h"
 #import "HSHelper.h"
-@interface UCFNewProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate,UCFBidDetailNavViewDelegate>
+@interface UCFNewProjectDetailViewController ()<UITableViewDelegate,UITableViewDataSource,NetworkModuleDelegate,UCFBidDetailNavViewDelegate,UCFRemindFlowViewDelegate>
 @property(nonatomic, strong)BaseTableView *showTableView;
 @property(nonatomic, strong)NSMutableArray  *dataArray;
 @property(nonatomic, strong)UCFNewBidDetaiInfoView *bidinfoView;
@@ -64,12 +64,11 @@
     [self.contentLayout addSubview:bidinfoView];
     
     
-    NSArray *prdLabelsList = self.model.data.prdLabelsList;
-    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
 
     UCFRemindFlowView *remind = [UCFRemindFlowView new];
     remind.topPos.equalTo(bidinfoView.bottomPos);
     remind.myHorzMargin = 0;
+    remind.delegate = self;
     remind.heightSize.equalTo(@40);
     remind.subviewVSpace = 5;
     remind.subviewHSpace = 10;
@@ -85,6 +84,9 @@
     _minuteCountDownView.sourceVC = @"UCFProjectDetailVC";//投资页面
     _minuteCountDownView.backgroundColor = [UIColor whiteColor];
     [self.contentLayout addSubview:self.minuteCountDownView];
+   
+    NSArray *prdLabelsList = self.model.data.prdLabelsList;
+    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
 
     if (![prdLabelsList isEqual:[NSNull null]]) {
         for (DetailPrdlabelslist *tmpModel in prdLabelsList) {
@@ -106,7 +108,6 @@
     self.showTableView.bottomPos.equalTo(@50);
     self.showTableView.myHorzMargin = 0;
     self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-//    self.showTableView.backgroundColor = [UIColor redColor];
 
     [self.rootLayout addSubview:self.showTableView];
     
@@ -119,6 +120,14 @@
     investView.bottomPos.equalTo(@0);
     [self.rootLayout addSubview:investView];
     self.investView = investView;
+}
+- (void)remindFlowView:(UCFRemindFlowView *)flowView noticeLastViewMaxY:(CGFloat)postionY
+{
+    self.contentLayout.heightSize.equalTo(@(155 + 45 + postionY + 10));
+    self.showTableView.tableHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 155 + 45 + postionY + 10);
+    self.showTableView.tableHeaderView = self.contentLayout;
+    [self.showTableView layoutIfNeeded];
+
 }
 - (void)topLeftButtonClick:(UIButton *)button
 {
@@ -144,6 +153,7 @@
     [self setTopLineViewHide];
 
 }
+
 - (void)blindVM:(UVFBidDetailViewModel *)vm
 {
     @PGWeakObj(self);

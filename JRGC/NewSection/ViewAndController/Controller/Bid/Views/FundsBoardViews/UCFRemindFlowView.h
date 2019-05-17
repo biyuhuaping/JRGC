@@ -6,6 +6,13 @@
 //  Copyright © 2018 JRGC. All rights reserved.
 //
 
+@class UCFRemindFlowView;
+@protocol UCFRemindFlowViewDelegate <NSObject>
+
+- (void)remindFlowView:(UCFRemindFlowView *_Nullable)flowView noticeLastViewMaxY:(CGFloat)postionY;
+
+@end
+
 #import "MyFlowLayout.h"
 #import "UCFBidViewModel.h"
 #import "UVFBidDetailViewModel.h"
@@ -13,6 +20,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFRemindFlowView : MyFlowLayout
+
+
+
 - (void)reloadViewContentWithTextArr:(NSArray *)textArr;
 
 - (void)showView:(UCFBidViewModel *)viewModel;
@@ -22,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)blindTransVM:(BaseViewModel *)vm;
 
 - (void)blindCollectionVM:(BaseViewModel *)vm;
+
+@property(weak, nonatomic)id<UCFRemindFlowViewDelegate>delegate;
+
 @end
 
 NS_ASSUME_NONNULL_END

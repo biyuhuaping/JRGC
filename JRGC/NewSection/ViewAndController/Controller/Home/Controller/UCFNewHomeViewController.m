@@ -109,7 +109,7 @@
     self.showTableView.myHorzMargin = 0;
     [self.rootLayout addSubview:self.showTableView];
     self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-    
+    self.navigationController.navigationBar.tintColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
     homeHeadView.myTop = 0;
     CGFloat height =  ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
