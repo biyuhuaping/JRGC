@@ -24,10 +24,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzG-OX-JER">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <subviews>
                         <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSQ-Nf-Fps">
-                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="快捷充值">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -40,7 +40,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVp-R0-IXD">
-                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="44"/>
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="转账充值">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -53,7 +53,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scA-S4-6tr">
-                            <rect key="frame" x="100" y="34" width="36" height="4"/>
+                            <rect key="frame" x="100" y="40" width="36" height="4"/>
                             <color key="backgroundColor" red="1" green="0.25490196078431371" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="4" id="5sl-xV-KgY"/>
@@ -73,7 +73,7 @@
                         <constraint firstItem="CVp-R0-IXD" firstAttribute="top" secondItem="gzG-OX-JER" secondAttribute="top" id="8eJ-fd-iwy"/>
                         <constraint firstAttribute="bottom" secondItem="YSQ-Nf-Fps" secondAttribute="bottom" id="GGJ-X1-udw"/>
                         <constraint firstAttribute="bottom" secondItem="scA-S4-6tr" secondAttribute="bottom" constant="6" id="GJP-Li-hSE"/>
-                        <constraint firstAttribute="height" constant="44" id="N6T-dm-3wJ"/>
+                        <constraint firstAttribute="height" constant="50" id="N6T-dm-3wJ"/>
                         <constraint firstItem="CVp-R0-IXD" firstAttribute="leading" secondItem="YSQ-Nf-Fps" secondAttribute="trailing" id="PnZ-E4-Orq"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="VLO-GT-IQ0"/>
                         <constraint firstItem="YSQ-Nf-Fps" firstAttribute="leading" secondItem="gzG-OX-JER" secondAttribute="leading" id="eHX-bP-ltP"/>

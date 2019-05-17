@@ -171,18 +171,53 @@
     _warnSendLabel.text = @"";
     
     
-    NSString *holderText = @"请输入提现金额";
-    NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
-    [placeholder addAttribute:NSForegroundColorAttributeName
-                        value:[Color color:PGColorOptionInputDefaultBlackGray]
-                        range:NSMakeRange(0, holderText.length)];
-    [placeholder addAttribute:NSFontAttributeName
-                        value:[Color gc_Font:15.0]
-                        range:NSMakeRange(0, holderText.length)];
-    _crachTextField.attributedPlaceholder = placeholder;
+//    NSString *holderText = @"请输入提现金额";
+//    NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:holderText];
+//    [placeholder addAttribute:NSForegroundColorAttributeName
+//                        value:[Color color:PGColorOptionInputDefaultBlackGray]
+//                        range:NSMakeRange(0, holderText.length)];
+//    [placeholder addAttribute:NSFontAttributeName
+//                        value:[Color gc_Font:15.0]
+//                        range:NSMakeRange(0, holderText.length)];
+//    _crachTextField.attributedPlaceholder = placeholder;
+    
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+//    style.alignment = NSTextAlignmentCenter;
+    style.minimumLineHeight = _crachTextField.font.lineHeight - (_crachTextField.font.lineHeight - [Color gc_Font:15.0].lineHeight) * 0.5; // 垂直居中
+    NSAttributedString *attri = [[NSAttributedString alloc] initWithString:@"请输入提现金额" attributes:@{NSForegroundColorAttributeName:[Color color:PGColorOptionInputDefaultBlackGray],NSFontAttributeName:[Color gc_Font:15.0], NSParagraphStyleAttributeName:style}];
+    _crachTextField.attributedPlaceholder = attri;
+    
+ 
+
     self.bkView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
      self.baseScrollView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 }
+
+#pragma mark UITextField Delegate
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    if (range.length == 1 && range.location == 0 && [string isEqualToString:@""]) {
+//        self.youTextFeild.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"" attributes:nil]; // 避免占位字符由大变小跳动
+//        [self.youTextFeild performSelector:@selector(setAttributedPlaceholder:) withObject:[self getTextFeildAttributedPlaceholder] afterDelay:0.1f];
+//    }
+//    return YES;
+//}
+//
+//- (BOOL)textFieldShouldClear:(UITextField *)textField
+//{
+//    if (self.isGetCashInterface && [textField isEqual:self.getCashTextFeild]) {
+//        self.youTextFeild.attributedPlaceholder = [self getTextFeildAttributedPlaceholder];
+//    }
+//    return YES;
+//}
+//
+//- (NSAttributedString *)getTextFeildAttributedPlaceholder
+//{
+//    _crachTextField.font = [UIFont systemFontOfSize:50];
+//    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+//    style.minimumLineHeight = _crachTextField.font.lineHeight - (_crachTextField.font.lineHeight - [UIFont systemFontOfSize:16].lineHeight) * 0.5; // 垂直居中
+//    return [[NSAttributedString alloc] initWithString:@"请输入提现金额" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16], NSParagraphStyleAttributeName : style}];
+//}
 - (void)addRightButtonWithName:(NSString *)rightButtonName;
 {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];

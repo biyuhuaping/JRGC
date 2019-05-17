@@ -12,6 +12,9 @@
 #import "UCFMineMyReceiptModel.h"
 #import "UCFMineMySimpleInfoModel.h"
 
+#import "FirstWaves.h"
+#import "SecondWaves.h"
+#import "ThirdWaves.h"
 @interface UCFMineTableViewHead ()
 
 @property (nonatomic, strong) UIImageView *bkImageView;//背景图
@@ -35,6 +38,12 @@
 @property (nonatomic, strong) UIButton    *payBtn;//充值按钮
 
 @property (nonatomic, strong) UIImageView *waveImageView;//背景图
+
+@property (nonatomic,strong)FirstWaves *firstWare;
+
+@property (nonatomic,strong)SecondWaves *secondWare;
+
+@property (nonatomic,strong)ThirdWaves *thirdWare;
 
 @property (nonatomic, strong) MyRelativeLayout *topUpWithdrawalLayout; //充值提现
 
@@ -74,7 +83,12 @@
         [self.userMesageLayout addSubview:self.expectedInterestMoneyLabel];
         [self.userMesageLayout addSubview:self.amountShownBtn];
         [self.userMesageLayout addSubview:self.payBtn];
-        [self.userMesageLayout addSubview:self.waveImageView];
+//        [self.userMesageLayout addSubview:self.waveImageView];
+        
+        [self.userMesageLayout addSubview:self.firstWare];
+        [self.userMesageLayout addSubview:self.secondWare];
+        [self.userMesageLayout addSubview:self.thirdWare];
+        
         
         [self.rootLayout addSubview:self.topUpWithdrawalLayout];
         [self.topUpWithdrawalLayout addSubview:self.accountBalanceLabel];
@@ -82,9 +96,48 @@
         [self.topUpWithdrawalLayout addSubview:self.topUpWithdrawalLabel];
         [self.topUpWithdrawalLayout addSubview:self.arrowImageView];
         [self.topUpWithdrawalLayout addSubview:self.arrowBtn];
+        
+        
     }
     return self;
 }
+
+- (SecondWaves *)secondWare
+{
+    if (nil == _secondWare) {
+        _secondWare = [[SecondWaves alloc]initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
+        _secondWare.transform = CGAffineTransformMakeRotation(180 *M_PI / 180.0);
+        _secondWare.alpha=0.5;
+        _secondWare.myLeft = 0;
+        _secondWare.myBottom = 0;
+    }
+    return _secondWare;
+}
+
+- (ThirdWaves *)thirdWare
+{
+    if (nil == _thirdWare) {
+        _thirdWare = [[ThirdWaves alloc]initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
+        _thirdWare.transform = CGAffineTransformMakeRotation(180 *M_PI / 180.0);
+        _thirdWare.alpha=0.5;
+        _thirdWare.myLeft = 0;
+        _thirdWare.myBottom = 0;
+    }
+    return _thirdWare;
+}
+
+- (FirstWaves *)firstWare
+{
+    if (nil == _firstWare) {
+        _firstWare = [[FirstWaves alloc]initWithFrame:CGRectMake(0, 0, PGScreenWidth, 50)];
+        _firstWare.transform = CGAffineTransformMakeRotation(180 *M_PI / 180.0);
+        _firstWare.alpha=1.0;
+        _firstWare.myLeft = 0;
+        _firstWare.myBottom = 0;
+    }
+    return _firstWare;
+}
+
 - (MyRelativeLayout *)topUpWithdrawalLayout
 {
     if (nil == _topUpWithdrawalLayout) {
