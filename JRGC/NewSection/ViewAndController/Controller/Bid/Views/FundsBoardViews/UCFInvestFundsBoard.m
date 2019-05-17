@@ -110,7 +110,7 @@
                 selfWeak.beansBoard.myVisibility = MyVisibility_Visible;
             }
         } else if ([keyPath isEqualToString:@"riskDes"]) {
-            NSString *riskDes = [change objectForKey:NSKeyValueChangeNewKey];
+            NSString *riskDes = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (riskDes.length > 0) {
                 selfWeak.riskTypeLab.text = riskDes;
                 [selfWeak.riskTypeLab sizeToFit];
@@ -364,6 +364,21 @@
     [_inputMoenyBoard addSubview:_investMoneyTextfield];
     [_investMoneyTextfield setValue:[Color color:PGColorOptionTitleGray] forKeyPath:@"_placeholderLabel.textColor"];
     [_investMoneyTextfield setValue:[Color gc_Font:19] forKeyPath:@"_placeholderLabel.font"];
+    
+    
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    //    style.alignment = NSTextAlignmentCenter;
+    style.minimumLineHeight = _investMoneyTextfield.font.lineHeight - (_investMoneyTextfield.font.lineHeight - [Color gc_Font:15.0].lineHeight) * 0.5; // 垂直居中
+    NSAttributedString *attri = [[NSAttributedString alloc] initWithString:@"100元起投" attributes:@{NSForegroundColorAttributeName:[Color color:PGColorOptionInputDefaultBlackGray],NSFontAttributeName:[Color gc_Font:19.0], NSParagraphStyleAttributeName:style}];
+    _investMoneyTextfield.attributedPlaceholder = attri;
+    
+//    CGPoint centerPoint = _investMoneyTextfield.center;
+//    [_investMoneyTextfield setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
+    
+//        CGRect frame = CGRectMake(placeX, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
+//        [_investMoneyTextfield setValue:[NSNumber nu] centerPoint forKeyPath:@"_placeholderLabel.center"];
+
+//    }];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"全投" forState:UIControlStateNormal];

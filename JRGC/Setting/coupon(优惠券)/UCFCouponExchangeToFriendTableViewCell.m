@@ -13,6 +13,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.contentView.backgroundColor = [Color color:PGColorOptionThemeWhite];
+    self.nameLabel.textColor = [Color color:PGColorOptionTitleBlack];
+    self.phoneNumber.textColor = [Color color:PGColorOptionTitleGray];
+    self.blueBtn.textColor = [Color color:PGColorOptionCellContentBlue];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

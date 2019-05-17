@@ -250,6 +250,7 @@
             
         case MJRefreshFooterStateNoMoreData:
             self.noMoreLabel.text = title;
+            self.noMoreLabel.textColor = [Color color:PGColorOptionTitleGray];
             break;
             
         default:

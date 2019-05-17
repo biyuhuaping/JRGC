@@ -66,6 +66,7 @@
     }
     return _lineView;
 }
+
 -(void)starCouponPopup
 {
     self.arryData = [NSMutableArray arrayWithArray:self.cashArray];
@@ -133,12 +134,13 @@
 {
     if (nil == _shadowView) {
         UIImageView *shadowView = [[UIImageView alloc] init];
-        shadowView.topPos.equalTo(self.useEnterBtn.topPos).offset(-2);
+        shadowView.topPos.equalTo(self.useEnterBtn.topPos).offset(-10);
         shadowView.leftPos.equalTo(self.useEnterBtn.leftPos);
         shadowView.rightPos.equalTo(self.useEnterBtn.rightPos);
-        shadowView.myHeight = 2;
+        shadowView.myHeight = 10;
         UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
         shadowView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
+        _shadowView = shadowView;
     }
     return _shadowView;
 }

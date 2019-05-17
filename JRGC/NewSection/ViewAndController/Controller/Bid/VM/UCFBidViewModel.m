@@ -59,7 +59,7 @@
     [self dealBidHeader];
     //标信息
     [self dealBidInfo];
-    //二级标签
+//    二级标签
     [self dealMarkView];
     //我的资金
     [self dealMyFunds];

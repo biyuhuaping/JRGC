@@ -165,6 +165,7 @@
 - (UIView *)weChatStylePlaceHolder {
     WeChatStylePlaceHolder *weChatStylePlaceHolder = [[WeChatStylePlaceHolder alloc] initWithFrame:self.frame];
     weChatStylePlaceHolder.delegate = self;
+    weChatStylePlaceHolder.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     return weChatStylePlaceHolder;
 }
 

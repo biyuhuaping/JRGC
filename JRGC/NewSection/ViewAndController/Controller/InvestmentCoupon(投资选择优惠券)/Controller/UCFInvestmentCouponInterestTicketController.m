@@ -140,12 +140,13 @@
 {
     if (nil == _shadowView) {
         UIImageView *shadowView = [[UIImageView alloc] init];
-        shadowView.topPos.equalTo(self.instructionsView.topPos).offset(-2);
+        shadowView.topPos.equalTo(self.instructionsView.topPos).offset(-10);
         shadowView.leftPos.equalTo(self.instructionsView.leftPos);
         shadowView.rightPos.equalTo(self.instructionsView.rightPos);
-        shadowView.myHeight = 2;
+        shadowView.myHeight = 10;
         UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
         shadowView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
+        _shadowView = shadowView;
     }
     return _shadowView;
 }

@@ -41,6 +41,7 @@
     UCFSegementBtnView *segeView = [[UCFSegementBtnView alloc] initWithTitleArray:@[@"回款中",@"已回款"] delegate:self];
     segeView.heightSize.equalTo(@57);
     segeView.myHorzMargin = 0;
+    segeView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     segeView.topPos.equalTo(board.bottomPos);
     [headView addSubview:segeView];
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -57,6 +57,13 @@
                                 <constraint firstAttribute="height" constant="0.5" id="xFN-1B-5SY"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IyX-3M-n5L">
+                            <rect key="frame" x="0.0" y="99.5" width="375" height="0.5"/>
+                            <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="gUb-Ql-UuS"/>
+                            </constraints>
+                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可用返息券" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixC-Xo-ckL">
                             <rect key="frame" x="25" y="24.5" width="61.5" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -74,11 +81,14 @@
                         <constraint firstItem="Dg2-BP-Ynu" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" constant="25" id="PbR-Hp-Sqt"/>
                         <constraint firstAttribute="trailing" secondItem="Cjx-Y7-gpm" secondAttribute="trailing" constant="15" id="R2c-aG-mTS"/>
                         <constraint firstItem="ixC-Xo-ckL" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" constant="25" id="TnU-BS-qZ2"/>
+                        <constraint firstAttribute="bottom" secondItem="IyX-3M-n5L" secondAttribute="bottom" id="czs-N1-QWJ"/>
                         <constraint firstItem="Cjx-Y7-gpm" firstAttribute="top" secondItem="9ue-Vq-Hjw" secondAttribute="top" constant="52" id="e7r-Rg-8iY"/>
                         <constraint firstAttribute="bottom" secondItem="5HC-Mh-dfk" secondAttribute="bottom" id="q0q-5L-iSj"/>
+                        <constraint firstItem="IyX-3M-n5L" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" id="q8b-zR-jPp"/>
                         <constraint firstAttribute="trailing" secondItem="Me8-cn-IRd" secondAttribute="trailing" id="qsB-6i-otw"/>
                         <constraint firstItem="5HC-Mh-dfk" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" id="syo-5F-hDn"/>
                         <constraint firstItem="Me8-cn-IRd" firstAttribute="leading" secondItem="9ue-Vq-Hjw" secondAttribute="leading" id="tdJ-o7-2Gv"/>
+                        <constraint firstAttribute="trailing" secondItem="IyX-3M-n5L" secondAttribute="trailing" id="xiS-Lw-vfE"/>
                         <constraint firstItem="5HC-Mh-dfk" firstAttribute="top" secondItem="9ue-Vq-Hjw" secondAttribute="top" id="xyb-PJ-ZYU"/>
                     </constraints>
                 </view>

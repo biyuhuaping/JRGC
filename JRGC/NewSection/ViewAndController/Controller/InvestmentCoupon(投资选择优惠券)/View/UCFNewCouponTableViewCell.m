@@ -73,7 +73,7 @@
         [self.couponTypeLayout addSubview:self.overdueTimeLabel];
         
 
-        [self.rootLayout addSubview:self.willExpireLayout];
+//        [self.rootLayout addSubview:self.willExpireLayout];
         [self.couponTypeLayout addSubview:self.investMultipLabel];
         [self.couponTypeLayout addSubview:self.inverstPeriodLabel];
         
@@ -276,9 +276,9 @@
          
             self.investButton.titleLabel.font = [Color gc_Font:13];
             self.donateButton.titleLabel.font = [Color gc_Font:13];
-            if ([model.inverstPeriod isEqualToString:@"0"] || [model.inverstPeriod isEqualToString:@""]) {//0 通用   "" 旧返现券
-                self.inverstPeriodLabel.text = @"任意标可用";
-            }else{
+//            if ([model.inverstPeriod isEqualToString:@"0"] || [model.inverstPeriod isEqualToString:@""]) {//0 通用   "" 旧返现券
+//                self.inverstPeriodLabel.text = @"任意标可用";
+//            }else{
                 if (model.couponType == 1) {
                     [self.investButton setTitleColor:[Color color:PGColorOptionThemeWhite] forState:UIControlStateNormal];
                     [self.donateButton setTitleColor:[Color color:PGColorOptionCellContentBlue] forState:UIControlStateNormal];
@@ -297,16 +297,16 @@
                     [self.couponAmounLabel setFont:[UIFont systemFontOfSize:18] string:@"¥"];
                     self.couponAmounLabel.textColor = [Color color:PGColorOpttonRateNoramlTextColor];
                 }
-            }
+//            }
         }
             break;
         case 1:{ //已过期
             self.couponAmounLabel.textColor =  [Color color:PGColorOptionTitleGray];
             self.investButton.myVisibility = MyVisibility_Gone;
             self.donateButton.myVisibility = MyVisibility_Gone;
-            if ([model.inverstPeriod isEqualToString:@"0"] || [model.inverstPeriod isEqualToString:@""]) {//0 通用   "" 旧返现券
-                self.inverstPeriodLabel.text = @"任意标可用";
-            } else {
+//            if ([model.inverstPeriod isEqualToString:@"0"] || [model.inverstPeriod isEqualToString:@""]) {//0 通用   "" 旧返现券
+//                self.inverstPeriodLabel.text = @"任意标可用";
+//            } else {
                 self.printView.conponType = 2;
                 if (model.couponType == 1) {
                     self.couponAmounLabel.textColor = [Color color:PGColorOptionTitleGray];
@@ -317,26 +317,23 @@
                     self.couponAmounLabel.text = [NSString stringWithFormat:@"¥%@",model.useInvest];
                     [self.couponAmounLabel setFont:[UIFont systemFontOfSize:15] string:@"¥"];
                 }
-            }
+//            }
         }
             break;
         case 2:{ //已使用
             self.couponAmounLabel.textColor =  [Color color:PGColorOptionTitleGray];
             self.investButton.myVisibility = MyVisibility_Gone;
             self.donateButton.myVisibility = MyVisibility_Gone;
-            if ([model.inverstPeriod isEqualToString:@"0"] || [model.inverstPeriod isEqualToString:@""]) {//0 通用   "" 旧返现券
-                self.inverstPeriodLabel.text = @"任意标可用";
+
+            self.printView.useTime = model.useTime;
+            if (model.couponType == 1) {
+                self.couponAmounLabel.textColor = [Color color:PGColorOptionTitleGray];
+                self.couponAmounLabel.text = [NSString stringWithFormat:@"%@",model.backIntrestRate];
+                [self.couponAmounLabel setFont:[UIFont systemFontOfSize:15] string:@"%"];
             } else {
-                self.printView.useTime = model.useTime;
-                if (model.couponType == 1) {
-                    self.couponAmounLabel.textColor = [Color color:PGColorOptionTitleGray];
-                    self.couponAmounLabel.text = [NSString stringWithFormat:@"%@",model.backIntrestRate];
-                    [self.couponAmounLabel setFont:[UIFont systemFontOfSize:15] string:@"%"];
-                } else {
-                    self.couponAmounLabel.textColor = [Color color:PGColorOptionTitleGray];
-                    self.couponAmounLabel.text = [NSString stringWithFormat:@"¥%@",model.useInvest];
-                    [self.couponAmounLabel setFont:[UIFont systemFontOfSize:15] string:@"¥"];
-                }
+                self.couponAmounLabel.textColor = [Color color:PGColorOptionTitleGray];
+                self.couponAmounLabel.text = [NSString stringWithFormat:@"¥%@",model.useInvest];
+                [self.couponAmounLabel setFont:[UIFont systemFontOfSize:15] string:@"¥"];
             }
         }
             break;
@@ -350,7 +347,12 @@
     self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额 ≥%@元可用", temp];
     self.remarkLabel.text = model.remark;
     self.overdueTimeLabel.text = [NSString stringWithFormat:@"有效期至 %@", model.overdueTime];
-    self.inverstPeriodLabel.text = [NSString stringWithFormat:@"投资期限 ≥%@天可用",model.inverstPeriod];
+    
+    if ([model.inverstPeriod isEqualToString:@"0"] || [model.inverstPeriod isEqualToString:@""]) {//0 通用   "" 旧返现券
+        self.inverstPeriodLabel.text = @"任意标可用";
+    }  else {
+        self.inverstPeriodLabel.text = [NSString stringWithFormat:@"投资期限 ≥%@天可用",model.inverstPeriod];
+    }
     [self.couponAmounLabel sizeToFit];
     [self.investMultipLabel sizeToFit];
     [self.remarkLabel sizeToFit];

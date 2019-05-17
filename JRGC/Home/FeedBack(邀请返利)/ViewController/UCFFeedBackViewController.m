@@ -86,6 +86,7 @@
 - (IBAction)gotoShareLinkBtn;
 - (IBAction)gotoSharePictureBtn;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *baseScroView;
 
 @property (strong, nonatomic)  UCFShareBaseView  *shareBaseView;
 @end
@@ -153,7 +154,7 @@
         [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     }
 
-    self.secondView_lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    self.secondView_lineView.backgroundColor = [Color color:PGColorOptionCellSeparatorGray];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
     _CheckInstructionBtn.hidden = YES;
     
@@ -164,6 +165,7 @@
 
     [self getMyInvestDataList];
     [self getAppSetting];
+    _baseScroView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     // self.contentView为子控件
@@ -357,6 +359,7 @@
             NSString *P2PCountStr1 = [NSString stringWithFormat:@"微金返利(%@人出借）",[dictemp objectSafeForKey:@"p2pInviteFriendsCount"]];//微金人数
             NSString *P2PCountStr2 = [NSString stringWithFormat:@"(%@人出借）",[dictemp objectSafeForKey:@"p2pInviteFriendsCount"]];//微金人数
             _p2pInviteFriendsCountLab.text = P2PCountStr1;
+            _p2pInviteFriendsCountLab.textColor = [Color color:PGColorOptionTitleGray];
             [_p2pInviteFriendsCountLab setFont:[UIFont systemFontOfSize:10] string:P2PCountStr2];
             
             _p2pRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",dictemp[@"p2pRebateAmt"]];//微金返利
@@ -364,6 +367,8 @@
             P2PCountStr1 = [NSString stringWithFormat:@"尊享返利(%@人投资）",[dictemp objectSafeForKey:@"zxInviteFriendsCount"]];//尊享投资人数
             P2PCountStr2 = [NSString stringWithFormat:@"(%@人投资）",[dictemp objectSafeForKey:@"zxInviteFriendsCount"]];//尊享投资人数
             _zxInviteFriendsCountLab.text = P2PCountStr1;
+            _zxInviteFriendsCountLab.textColor = [Color color:PGColorOptionTitleGray];
+
             [_zxInviteFriendsCountLab setFont:[UIFont systemFontOfSize:10] string:P2PCountStr2];
             _zxRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",dictemp[@"zxRebateAmt"]];//尊享返利
  
@@ -382,7 +387,10 @@
             _recruitStatus = dictemp[@"recruitStatus"];
             _label_titleone.text = dictemp[@"enjoyAnnualAmountText"];
             _label_titletow.text = dictemp[@"enjoyCommissionProportionText"];
+            _label_titletow.textColor = [Color color:PGColorOptionTitleGray];
             _label_titlethree.text = dictemp[@"p2pYearCommissionText"];
+            _label_titlethree.textColor = [Color color:PGColorOptionTitleGray];
+
             
             NSString *tipsStr = dictemp[@"recruitDes"];
             if (tipsStr.length > 0) {
@@ -408,8 +416,8 @@
             
             if ([_gcmLab.text hasPrefix:@"A"]){
                 _view_secondHeight.constant = 55;
-                [_label_titletow setFontColor:UIColorWithRGB(0xfd4d4c) string:@"非等额标"];
-                [_label_titlethree setFontColor:UIColorWithRGB(0xfd4d4c) string:@"等额标"];
+                [_label_titletow setFontColor:[Color color:PGColorOptionTitlerRead] string:@"非等额标"];
+                [_label_titlethree setFontColor:[Color color:PGColorOptionTitlerRead] string:@"等额标"];
 
             }else{
                     NSDictionary* views = NSDictionaryOfVariableBindings(_view_Up);
@@ -459,7 +467,7 @@
         //1:红包URL   2：红包文字描述    3：工场码图片URL    4:工场码文字描述   5：红包标题  6：工场码标题
         for (NSDictionary *result in temArr) {
             if ([result[@"rank"] intValue] == 3) {//3：工场码图片URL
-                _shareImage = [Common getImageFromURL:result[@"desvalue"]];
+                _shareImage = [Common getImageFromURL:[result objectSafeForKey:@"desvalue"]];
             }else if ([result[@"rank"] intValue] == 4) {//4：工场码文字描述
                 _shareContent = result[@"desvalue"];
             }else if ([result[@"rank"] intValue] == 6) {//6：工场码标题

@@ -13,6 +13,7 @@
 #import "UCFCouponUseCell.h"
 #import "UCFCouponViewController.h"
 #import "UCFNewCouponTableViewCell.h"
+#import "UIImage+Compression.h"
 @interface UCFCouponExchangeToFriends ()<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *headView;
@@ -35,7 +36,10 @@
     baseTitleLabel.text = @"赠送好友";
     self.page = 1;
     self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64 -102) errorTitle:@"暂无数据"];
-    
+    [_searchBut setBackgroundColor:[Color color:PGColorOptionCellContentBlue]];
+    [_searchBut setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(_searchBut.frame.size.width, _searchBut.frame.size.height)] forState:UIControlStateNormal];
+    _searchBut.layer.cornerRadius = _searchBut.frame.size.height/2.0f;
+    _searchBut.clipsToBounds = YES;
     UCFNewCouponTableViewCell *cell = [[UCFNewCouponTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"11"];
     cell.frame = CGRectMake(0, 0, ScreenWidth, 125);
     cell.model = self.quanData;
@@ -46,9 +50,9 @@
     
 //    =========  下拉刷新、上拉加载更多  =========
     self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.myTableView.backgroundColor = UIColorWithRGB(0xebebee);
+    self.myTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     self.myTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
+    self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     __weak typeof(self) weakSelf = self;
     
     // 添加上拉加载更多
@@ -222,7 +226,7 @@
 
 #pragma mark - tableView的delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 50;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

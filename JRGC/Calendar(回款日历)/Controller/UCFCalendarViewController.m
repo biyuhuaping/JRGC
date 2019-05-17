@@ -52,11 +52,11 @@
     
     UCFCalendarHeaderView *calendarHeaderView = (UCFCalendarHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarHeaderView" owner:self options:nil] lastObject];
     calendarHeaderView.frame = CGRectMake(0, 0, ScreenWidth, [UCFCalendarHeaderView viewHeight]);
-    self.tableview.tableHeaderView = calendarHeaderView;
     calendarHeaderView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
     calendarHeaderView.accoutType = self.accoutType;
     calendarHeaderView.delegate = self;
     self.calendarHeader = calendarHeaderView;
+    self.tableview.tableHeaderView = calendarHeaderView;
 
     
     UCFPickView *pickerView = (UCFPickView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFPickView" owner:self options:nil] lastObject];
@@ -67,6 +67,10 @@
     
     [self getCanlendarHeaderInfoFromNet];
     self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 80)];
+    view.backgroundColor = [UIColor clearColor];
+    self.tableview.tableFooterView = view;
 }
 
 #pragma mark - tableView的数据源方法
@@ -205,7 +209,10 @@
                 [footView addSubview:noDataView];
                 self.tableview.tableFooterView = footView;
             } else {
-                self.tableview.tableFooterView = nil;
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 80)];
+                view.backgroundColor = [UIColor clearColor];
+                self.tableview.tableFooterView = view;
+//                self.tableview.tableFooterView = nil;
             }
             [self.tableview reloadData];
         }
