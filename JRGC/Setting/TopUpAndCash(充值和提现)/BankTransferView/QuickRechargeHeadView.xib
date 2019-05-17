@@ -81,7 +81,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="Y9X-Qd-Hxf"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                         </textField>
                     </subviews>

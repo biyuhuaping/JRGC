@@ -47,10 +47,10 @@
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bankcard_icon_fast" translatesAutoresizingMaskIntoConstraints="NO" id="XPY-Ns-z8T">
-                                                        <rect key="frame" x="324" y="22.5" width="36" height="20"/>
+                                                        <rect key="frame" x="315" y="21.5" width="45" height="22"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="Itv-QZ-WZK"/>
-                                                            <constraint firstAttribute="width" constant="36" id="VVa-OK-TMe"/>
+                                                            <constraint firstAttribute="height" constant="22" id="Itv-QZ-WZK"/>
+                                                            <constraint firstAttribute="width" constant="45" id="VVa-OK-TMe"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C76-xS-23j">

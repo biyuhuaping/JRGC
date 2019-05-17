@@ -52,7 +52,7 @@
 {
     [super viewDidLayoutSubviews];
 
-    _baseScroView.frame = CGRectMake(0, 40, ScreenWidth, CGRectGetHeight(self.view.frame) - 40);
+    _baseScroView.frame = CGRectMake(0, 50, ScreenWidth, CGRectGetHeight(self.view.frame) - 50);
     _baseScroView.contentSize = CGSizeMake(ScreenWidth * 2, CGRectGetHeight(_baseScroView.frame));
     _quickVC.view.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_baseScroView.frame));
     _transVC.view.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, CGRectGetHeight(_baseScroView.frame));

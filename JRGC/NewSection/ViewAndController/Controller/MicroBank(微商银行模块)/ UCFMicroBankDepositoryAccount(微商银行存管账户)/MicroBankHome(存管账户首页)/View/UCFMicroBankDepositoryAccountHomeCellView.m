@@ -52,7 +52,7 @@
     if (nil == _itemArrawImageView) {
         _itemArrawImageView = [[UIImageView alloc] init];
         _itemArrawImageView.centerYPos.equalTo(self.rootLayout.centerYPos);
-        _itemArrawImageView.myRight = 15;
+        _itemArrawImageView.myRight = 25;
         _itemArrawImageView.myWidth = 8;
         _itemArrawImageView.myHeight = 13;
         _itemArrawImageView.image = [UIImage imageNamed:@"list_icon_arrow.png"];

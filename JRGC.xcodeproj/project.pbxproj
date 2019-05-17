@@ -1053,6 +1053,9 @@
 		A8FF32E51F1666DC00066A80 /* UCFGoldBidSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */; };
 		AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */; };
 		AEC5EEC31D9B65BA000C0321 /* RechargeFixedTelNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */; };
+		E301FBD5228E9B8F0038B7E8 /* FirstWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = E301FBD0228E9B8D0038B7E8 /* FirstWaves.m */; };
+		E301FBD6228E9B8F0038B7E8 /* ThirdWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = E301FBD2228E9B8E0038B7E8 /* ThirdWaves.m */; };
+		E301FBD7228E9B8F0038B7E8 /* SecondWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = E301FBD3228E9B8F0038B7E8 /* SecondWaves.m */; };
 		E3041D2F21F6F89B007B09B6 /* UCFRegistVerificationMobileApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3041D2E21F6F89B007B09B6 /* UCFRegistVerificationMobileApi.m */; };
 		E3041D3221F6F8D9007B09B6 /* UCFRegistVerificationMobileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3041D3121F6F8D9007B09B6 /* UCFRegistVerificationMobileModel.m */; };
 		E3041D3821F7039C007B09B6 /* UCFRegisterGetRegisterInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E3041D3721F7039C007B09B6 /* UCFRegisterGetRegisterInfoApi.m */; };
@@ -3183,6 +3186,12 @@
 		AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFixedTelNumView.h; sourceTree = "<group>"; };
 		AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeFixedTelNumView.m; sourceTree = "<group>"; };
 		B0A8AA400A6B5149CBB4A656 /* Pods-JRGC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.release.xcconfig"; path = "Target Support Files/Pods-JRGC/Pods-JRGC.release.xcconfig"; sourceTree = "<group>"; };
+		E301FBCF228E9B8D0038B7E8 /* FirstWaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstWaves.h; sourceTree = "<group>"; };
+		E301FBD0228E9B8D0038B7E8 /* FirstWaves.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstWaves.m; sourceTree = "<group>"; };
+		E301FBD1228E9B8E0038B7E8 /* SecondWaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondWaves.h; sourceTree = "<group>"; };
+		E301FBD2228E9B8E0038B7E8 /* ThirdWaves.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdWaves.m; sourceTree = "<group>"; };
+		E301FBD3228E9B8F0038B7E8 /* SecondWaves.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondWaves.m; sourceTree = "<group>"; };
+		E301FBD4228E9B8F0038B7E8 /* ThirdWaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdWaves.h; sourceTree = "<group>"; };
 		E3041D2D21F6F89B007B09B6 /* UCFRegistVerificationMobileApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFRegistVerificationMobileApi.h; sourceTree = "<group>"; };
 		E3041D2E21F6F89B007B09B6 /* UCFRegistVerificationMobileApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRegistVerificationMobileApi.m; sourceTree = "<group>"; };
 		E3041D3021F6F8D9007B09B6 /* UCFRegistVerificationMobileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFRegistVerificationMobileModel.h; sourceTree = "<group>"; };
@@ -8040,6 +8049,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E301FBCB228E9A8F0038B7E8 /* WavesAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				E301FBCF228E9B8D0038B7E8 /* FirstWaves.h */,
+				E301FBD0228E9B8D0038B7E8 /* FirstWaves.m */,
+				E301FBD1228E9B8E0038B7E8 /* SecondWaves.h */,
+				E301FBD3228E9B8F0038B7E8 /* SecondWaves.m */,
+				E301FBD4228E9B8F0038B7E8 /* ThirdWaves.h */,
+				E301FBD2228E9B8E0038B7E8 /* ThirdWaves.m */,
+			);
+			path = WavesAnimation;
+			sourceTree = "<group>";
+		};
 		E30429AB224E2E1F005015E5 /* ModifyPassword(修改登录密码) */ = {
 			isa = PBXGroup;
 			children = (
@@ -9589,6 +9611,7 @@
 		E3B76E7121EC6E89009C9021 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E301FBCB228E9A8F0038B7E8 /* WavesAnimation */,
 				4AFF3638228918B100E6B70C /* UCFTelAlertView.h */,
 				4AFF3637228918B000E6B70C /* UCFTelAlertView.m */,
 				E3C1EF2221EDC50D0014658E /* UCFMineActivitiesCell.h */,
@@ -11305,6 +11328,7 @@
 				E3355432223FC3BF001FADEA /* UCFRechargeViewController.m in Sources */,
 				74931A361B1326FE00143424 /* OHASMarkupParserBase.m in Sources */,
 				74D6578E1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m in Sources */,
+				E301FBD6228E9B8F0038B7E8 /* ThirdWaves.m in Sources */,
 				33CBEF7A22426866007D977B /* UCFHighQualityContainerViewController.m in Sources */,
 				83D64F5E1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.m in Sources */,
 				7443C7311F1F3881009669C0 /* UCFGoldRecordHeaderFooterView.m in Sources */,
@@ -11463,6 +11487,7 @@
 				7BCE023C1AC915A80084C15C /* SFHFKeychainUtils.m in Sources */,
 				E39962802237ECCA00C5B96C /* UCFMicroBankDepositoryBankCardInfoView.m in Sources */,
 				7BCA210E1AEDCE67001CD258 /* InvestmentDetailTableViewCell.m in Sources */,
+				E301FBD7228E9B8F0038B7E8 /* SecondWaves.m in Sources */,
 				FB572C0C1C7C3000000031F1 /* UCFCouponInterest.m in Sources */,
 				E32D6964222E1C7800803CE5 /* UCFMicroBankOpenAccountDepositSMSCodeCellView.m in Sources */,
 				E352FDCD21E4B08D00617AB7 /* YTKBaseRequest+AnimatingAccessory.m in Sources */,
@@ -11537,6 +11562,7 @@
 				E3AF0773221C0096005CC653 /* UCFMineIdnoCheckInfoApi.m in Sources */,
 				7B2E56941ADBBE97008B0F9E /* UCFRetrievePasswordStepOneView.m in Sources */,
 				E34B5E8422253BB90027718C /* UCFMicroBankUserAccountInfoModel.m in Sources */,
+				E301FBD5228E9B8F0038B7E8 /* FirstWaves.m in Sources */,
 				7BD35A991AD61E4200389D6B /* LLLockView.m in Sources */,
 				E31BD53121C0C10100D3651F /* TYAlertController+BlurEffects.m in Sources */,
 				335BAC93221BEF2200F026BB /* UCFNewPureTransBidViewController.m in Sources */,
