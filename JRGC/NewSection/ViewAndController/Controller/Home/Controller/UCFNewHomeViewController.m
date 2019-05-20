@@ -33,7 +33,8 @@
 #import "UCFDiscoveryViewController.h"
 #import "UCFCouponPopup.h"
 #import "UCFNewLockContainerViewController.h"
-
+#import <Flutter/Flutter.h>
+#import "AppDelegate.h"
 //#import "UCFCreateLockViewController.h"
 //#import "UCFUnlockViewController.h"
 //#import "UCFTouchIDViewController.h"
@@ -75,6 +76,10 @@
 }
 - (void)rightBarClicked:(UIButton *)button
 {
+    FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
+    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
+    [self presentViewController:flutterViewController animated:false completion:nil];
+    return;
     if (button.tag == 100) {
         if (SingleUserInfo.loginData.userInfo.userId) {
             UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];

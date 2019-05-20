@@ -13,8 +13,8 @@
 #import "UCFNewLockContainerViewController.h"
 #import "NetworkModule.h"
 #import "FMDeviceManager.h"
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate,NetworkModuleDelegate>
+#import <Flutter/Flutter.h>
+@interface AppDelegate : FlutterAppDelegate <UIApplicationDelegate,UITabBarControllerDelegate,NetworkModuleDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic,strong)  UCFMainTabBarController *tabBarController;
@@ -22,6 +22,7 @@
 @property (nonatomic, assign) BOOL isSubmitAppStoreTestTime; //判断是否为苹果商店审核时间 YES为审核时间
 @property (nonatomic, strong) UIView                  *loadingBaseView;
 //@property (strong, nonatomic) UIImageView *advertisementView;
+@property (nonatomic,strong) FlutterEngine *flutterEngine;
 
 // 手势解锁相关
 //- (void)showLLLockViewController:(LLLockViewType)type;

@@ -48,6 +48,7 @@
 #import "RequestUrlArgumentsFilter.h"
 #import "BaseRequest.h"
 #import "GuideViewController.h"
+#import <FlutterPluginRegistrant/GeneratedPluginRegistrant.h>
 @interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate,GuideViewContlerDelegate,PublicPopupWindowViewDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
@@ -57,7 +58,6 @@
 @property (assign, nonatomic) BOOL isComeForceUpdate;
 @property (assign, nonatomic) BOOL isAfter;//是否延时（只在3DTouch启动时使用）
 @property (strong, nonatomic) RTRootNavigationController *rootNavigationController;
-
 @end
 
 @implementation AppDelegate
@@ -66,6 +66,8 @@
     
 //    [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: @"WebKitCacheModelPreferenceKey"];
 //    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey: @"WebKitMediaPlaybackAllowsInline"];
+    
+
     
     [self startGLobalRealReachability]; //开启网络监测
     [self startNetConfig];
@@ -92,7 +94,13 @@
     [[UITabBar appearance] setTranslucent:NO];
     [self IQBoardSetting];
     [self initializeLog];//初始化日志
-    return YES;
+    
+
+    self.flutterEngine = [[FlutterEngine alloc] initWithName:@"io.flutter" project:nil];
+    [self.flutterEngine runWithEntrypoint:nil];
+    [GeneratedPluginRegistrant registerWithRegistry:self.flutterEngine];
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+//    return YES;
 }
 - (void)startNetConfig
 {

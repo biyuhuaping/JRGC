@@ -24,4 +24,7 @@ pod 'RTRootNavigationController', '~> 0.7.1'
 
 pod 'MSWeakTimer', '~> 1.1.0'
 
+flutter_application_path = '../my_flutter/'
+eval(File.read(File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')), binding)
+
 end
