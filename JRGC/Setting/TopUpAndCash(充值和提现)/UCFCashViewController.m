@@ -187,7 +187,6 @@
     NSAttributedString *attri = [[NSAttributedString alloc] initWithString:@"请输入提现金额" attributes:@{NSForegroundColorAttributeName:[Color color:PGColorOptionInputDefaultBlackGray],NSFontAttributeName:[Color gc_Font:15.0], NSParagraphStyleAttributeName:style}];
     _crachTextField.attributedPlaceholder = attri;
     
- 
 
     self.bkView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
      self.baseScrollView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
