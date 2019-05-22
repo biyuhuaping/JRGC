@@ -142,10 +142,10 @@
         }
         else
         {
-            if ([ToolSingleTon sharedManager].netWorkStatus == RealStatusNotReachable) {
-                UIView *taobaoStyle = [self taoBaoStylePlaceHolder];
-                return taobaoStyle;
-            }
+//            if ([ToolSingleTon sharedManager].netWorkStatus == RealStatusNotReachable) {
+//                UIView *taobaoStyle = [self taoBaoStylePlaceHolder];
+//                return taobaoStyle;
+//            }
             UIView *weChatStyle = [self weChatStylePlaceHolder];
             return weChatStyle;
         }
