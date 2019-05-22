@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "160822FD4D40AF503A4F916DF2130AB9"
+               BlueprintIdentifier = "E95654B155D25890BE8E26081FCA8265"
+               BuildableName = "libCocoaLumberjack.a"
                BlueprintName = "CocoaLumberjack"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libCocoaLumberjack.a">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
