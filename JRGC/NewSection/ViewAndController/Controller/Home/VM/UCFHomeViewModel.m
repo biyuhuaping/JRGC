@@ -220,12 +220,7 @@
                     //因为最后要添加一个广告促销位，但是这个广告位可放在新手 智能出借 优质债权的每一组的最后，因此要看谁是最后一组，把广告位追加到最后一组
                     if (i == groupArr.count - 1) {
                         //添加促销广告banner
-                        CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
-                        UCFCellDataModel *dataMode = [UCFCellDataModel new];
-                        dataMode.modelType = @"coinArray";
-                        dataMode.data1 = self.coinBannerArray;
-                        data2_1.dataModel = dataMode;
-                        [section2 addObject:data2_1];
+                        [self addbidListBottomAd:section2 andSel:sel];
                     }
                     [self.dataArray addObject:section2];
                 }
@@ -242,12 +237,7 @@
                     }
                     if (i == groupArr.count - 1) {
                         //添加促销广告banner
-                        CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
-                        UCFCellDataModel *dataMode = [UCFCellDataModel new];
-                        dataMode.modelType = @"coinArray";
-                        dataMode.data1 = self.coinBannerArray;
-                        data2_1.dataModel = dataMode;
-                        [section3 addObject:data2_1];
+                        [self addbidListBottomAd:section3 andSel:sel];
                     }
                     [self.dataArray addObject:section3];
                 }
@@ -265,12 +255,8 @@
                     
                     if (i == groupArr.count - 1) {
                         //添加促销广告banner
-                        CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
-                        UCFCellDataModel *dataMode = [UCFCellDataModel new];
-                        dataMode.modelType = @"coinArray";
-                        dataMode.data1 = self.coinBannerArray;
-                        data2_1.dataModel = dataMode;
-                        [section4 addObject:data2_1];
+                        [self addbidListBottomAd:section4 andSel:sel];
+   
                     }
                     [self.dataArray addObject:section4];
                 }
@@ -298,6 +284,21 @@
 //    [self getMallData];
 
     
+}
+- (void)addbidListBottomAd:(NSMutableArray *)section andSel:(SEL)sel
+{
+    
+    CellConfig *data2_0 = [CellConfig cellConfigWithClassName:@"UCFJYRouteTableViewCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 9 /23) + 15];
+    [section addObject:data2_0];
+
+    
+    
+    CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
+    UCFCellDataModel *dataMode = [UCFCellDataModel new];
+    dataMode.modelType = @"coinArray";
+    dataMode.data1 = self.coinBannerArray;
+    data2_1.dataModel = dataMode;
+    [section addObject:data2_1];
 }
 - (void)dealMallRequestData:(YTKBaseRequest *)request
 {

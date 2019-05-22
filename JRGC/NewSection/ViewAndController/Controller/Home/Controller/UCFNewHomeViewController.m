@@ -84,89 +84,7 @@
 
 - (void)rightBarClicked:(UIButton *)button
 {
-    FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
-    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
-    [self presentViewController:flutterViewController animated:false completion:nil];
     
-    
-    
-    FlutterMethodChannel *presentChannel = [FlutterMethodChannel methodChannelWithName:@"com.eten.jingyuan/crayfish" binaryMessenger:flutterViewController];
-    __weak typeof(self) weakSelf = self;
-    // 注册方法等待flutter页面调用
-    [presentChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
-        NSLog(@"%@", call.method);
-        NSLog(@"%@", result);
-        NSDictionary *dic = call.arguments;
-        if ([call.method isEqualToString:@"getTokenInfo"])
-        {
-            NSString *name = [weakSelf getDeiveName];
-            if (name == nil) {
-                FlutterError *error = [FlutterError errorWithCode:@"UNAVAILABLE" message:@"Device info unavailable" details:nil];
-                result(error);
-            } else {
-                // 通过result返回给Flutter回调结果
-                NSDictionary *parameterDic;
-                if (SingleUserInfo.loginData.userInfo.userId == nil)
-                {
-                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion]};
-                }
-                else
-                {
-                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr};
-                }
-               NSString *str =  [parameterDic JSONString];
-                result(str);
-            }
-        }
-        else if ([call.method isEqualToString:@"showPDFView"])
-        {
-            
-            NSLog(@"%@", dic);
-        }
-        else if ([call.method isEqualToString:@"showWebView"])
-        {
-            UCFWebViewJavascriptBridgeController *web = [[UCFWebViewJavascriptBridgeController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];
-            web.title = [dic objectSafeForKey:@"title"];
-            web.url = [dic objectSafeForKey:@"url"];
-            [self.rt_navigationController pushViewController:web animated:YES];
-        }
-        else if ([call.method isEqualToString:@"showBankApp"])
-        {
-            
-        }
-        else if ([call.method isEqualToString:@"logout"])
-        {
-            UCFRequestSucceedDetection *re = [[UCFRequestSucceedDetection alloc] init];
-            [re requestSucceedDetection:dic];
-        }
-        else {
-            result(FlutterMethodNotImplemented);
-        }
-    }];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    return;
     if (button.tag == 100) {
         if (SingleUserInfo.loginData.userInfo.userId) {
             UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
@@ -448,6 +366,8 @@
                         
                     }];
                 }
+            } else if ([title isEqualToString:@"京元"]) {
+                [self skipToJY];
             }
         }
     } else if ([model isKindOfClass:[UCFHomeMallrecommends class]]) {
@@ -593,5 +513,69 @@
     UIWindow* window = [[[UIApplication sharedApplication] delegate] window];
     NSAssert(window, @"The window is empty");
     return window.rootViewController;
+}
+
+- (void)skipToJY
+{
+    FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
+    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
+    [self presentViewController:flutterViewController animated:false completion:nil];
+    
+    
+    
+    FlutterMethodChannel *presentChannel = [FlutterMethodChannel methodChannelWithName:@"com.eten.jingyuan/crayfish" binaryMessenger:flutterViewController];
+    __weak typeof(self) weakSelf = self;
+    // 注册方法等待flutter页面调用
+    [presentChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
+        NSLog(@"%@", call.method);
+        NSLog(@"%@", result);
+        NSDictionary *dic = call.arguments;
+        if ([call.method isEqualToString:@"getTokenInfo"])
+        {
+            NSString *name = [weakSelf getDeiveName];
+            if (name == nil) {
+                FlutterError *error = [FlutterError errorWithCode:@"UNAVAILABLE" message:@"Device info unavailable" details:nil];
+                result(error);
+            } else {
+                // 通过result返回给Flutter回调结果
+                NSDictionary *parameterDic;
+                if (SingleUserInfo.loginData.userInfo.userId == nil)
+                {
+                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion]};
+                }
+                else
+                {
+                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr};
+                }
+                NSString *str =  [parameterDic JSONString];
+                result(str);
+            }
+        }
+        else if ([call.method isEqualToString:@"showPDFView"])
+        {
+            
+            NSLog(@"%@", dic);
+        }
+        else if ([call.method isEqualToString:@"showWebView"])
+        {
+            UCFWebViewJavascriptBridgeController *web = [[UCFWebViewJavascriptBridgeController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];
+            web.title = [dic objectSafeForKey:@"title"];
+            web.url = [dic objectSafeForKey:@"url"];
+            [self.rt_navigationController pushViewController:web animated:YES];
+        }
+        else if ([call.method isEqualToString:@"showBankApp"])
+        {
+            
+        }
+        else if ([call.method isEqualToString:@"logout"])
+        {
+            UCFRequestSucceedDetection *re = [[UCFRequestSucceedDetection alloc] init];
+            [re requestSucceedDetection:dic];
+        }
+        else {
+            result(FlutterMethodNotImplemented);
+        }
+    }];
+    
 }
 @end

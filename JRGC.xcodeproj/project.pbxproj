@@ -231,6 +231,7 @@
 		4A6EDBD21D5AC650004D40FF /* MD5Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6EDBD11D5AC650004D40FF /* MD5Util.m */; };
 		4A6FAFC51D743CF300AD4DF8 /* CJLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6FAFC21D743CF300AD4DF8 /* CJLabel.m */; };
 		4A6FAFC61D743CF300AD4DF8 /* NSString+CJString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6FAFC41D743CF300AD4DF8 /* NSString+CJString.m */; };
+		4A766E8222953F8800573AD5 /* UCFJYRouteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A766E8122953F8800573AD5 /* UCFJYRouteTableViewCell.m */; };
 		4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A809CCE1B40F4DF00164EE5 /* SubInvestmentCell.m */; };
 		4A809CD11B40F7A200164EE5 /* SubInvestmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A809CD01B40F7A200164EE5 /* SubInvestmentCell.xib */; };
 		4A837B7E1D0E5B70007DCE69 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A837B7D1D0E5B70007DCE69 /* JavaScriptCore.framework */; };
@@ -1829,6 +1830,8 @@
 		4A6FAFC21D743CF300AD4DF8 /* CJLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJLabel.m; sourceTree = "<group>"; };
 		4A6FAFC31D743CF300AD4DF8 /* NSString+CJString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CJString.h"; sourceTree = "<group>"; };
 		4A6FAFC41D743CF300AD4DF8 /* NSString+CJString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CJString.m"; sourceTree = "<group>"; };
+		4A766E8022953F8800573AD5 /* UCFJYRouteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFJYRouteTableViewCell.h; sourceTree = "<group>"; };
+		4A766E8122953F8800573AD5 /* UCFJYRouteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFJYRouteTableViewCell.m; sourceTree = "<group>"; };
 		4A809CCD1B40F4DF00164EE5 /* SubInvestmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubInvestmentCell.h; sourceTree = "<group>"; };
 		4A809CCE1B40F4DF00164EE5 /* SubInvestmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubInvestmentCell.m; sourceTree = "<group>"; };
 		4A809CD01B40F7A200164EE5 /* SubInvestmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubInvestmentCell.xib; sourceTree = "<group>"; };
@@ -4188,6 +4191,8 @@
 				33E3032F21F1E00A00FD657C /* UCFOldUserNoticeCell.m */,
 				33E3033121F1E98800FD657C /* UCFSiteNoticeView.h */,
 				33E3033221F1E98800FD657C /* UCFSiteNoticeView.m */,
+				4A766E8022953F8800573AD5 /* UCFJYRouteTableViewCell.h */,
+				4A766E8122953F8800573AD5 /* UCFJYRouteTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -11438,6 +11443,7 @@
 				83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */,
 				83D42A8C1FCE6175004C96EF /* UCFShareBaseView.m in Sources */,
 				74877CBA1FB2A95200F32428 /* PageView.m in Sources */,
+				4A766E8222953F8800573AD5 /* UCFJYRouteTableViewCell.m in Sources */,
 				74931A331B1326FE00143424 /* OHTouchesGestureRecognizer.m in Sources */,
 				74270C991EC58F6800F9419B /* UCFHomeListPresenter.m in Sources */,
 				E37003DF22801D0400F9903C /* UCFMicroBankDepositoryBankCardInfoApi.m in Sources */,
