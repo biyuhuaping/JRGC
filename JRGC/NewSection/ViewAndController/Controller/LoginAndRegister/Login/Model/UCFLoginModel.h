@@ -91,6 +91,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign)BOOL zxIsShow;
 
+@property(nonatomic, assign)BOOL jyIsShow;
+
 /**
  是否新手
  */

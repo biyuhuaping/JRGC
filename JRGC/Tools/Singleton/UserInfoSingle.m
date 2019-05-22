@@ -206,15 +206,18 @@
         [request1 setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
             NSDictionary *dic = request.responseObject;
             if ([dic[@"ret"] boolValue]) {
-                NSDictionary *userDict = dic[@"data"][@"userSatus"];
-                self.loginData.userInfo.zxOpenStatus = [NSString stringWithFormat:@"%@",userDict[@"zxOpenStatus"]];
-                self.loginData.userInfo.openStatus = [NSString stringWithFormat:@"%@",userDict[@"openStatus"]];
+                NSDictionary *userDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"userSatus"];
+                
+   
+                self.loginData.userInfo.zxOpenStatus = [NSString stringWithFormat:@"%@",[userDict objectSafeForKey:@"zxOpenStatus"]];
+                self.loginData.userInfo.openStatus = [NSString stringWithFormat:@"%@",[userDict objectSafeForKey:@"openStatus"]];
                 self.loginData.userInfo.nmAuthorization = [userDict[@"nmGoldAuthStatus"] boolValue];
                 self.loginData.userInfo.isNewUser = [userDict[@"isNew"] boolValue];
                 self.loginData.userInfo.isRisk = [userDict[@"isRisk"] boolValue];
                 self.loginData.userInfo.isAutoBid = [userDict[@"isAutoBid"] boolValue];
                 self.loginData.userInfo.zxAuthorization = [userDict[@"zxAuthorization"] boolValue];
                 self.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
+                self.loginData.userInfo.jyIsShow = [userDict[@"jyIsShow"] boolValue];
                 [self updateUserData];
                 if (self.requestUserbackBlock) {
                     self.requestUserbackBlock(YES);

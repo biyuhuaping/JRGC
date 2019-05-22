@@ -47,7 +47,7 @@
 - (void)beginBatchRequest
 {
     //获取banner数据
-        @PGWeakObj(self);
+    @PGWeakObj(self);
     UCFHomeBannerApi *bannerRequest = [[UCFHomeBannerApi alloc] init];
     UCFHomeListRequest *bidListrequest = [[UCFHomeListRequest alloc] init];
     UCFMallProductApi *mallRequest = [[UCFMallProductApi alloc] initWithPageType:@"index"];
