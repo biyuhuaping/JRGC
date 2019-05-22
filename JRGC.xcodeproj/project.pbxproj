@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		08E9A4E21B845E1200099F30 /* UCFTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E9A4E11B845E1200099F30 /* UCFTextField.m */; };
-		21486AC6F314096DA147193F /* libPods-JRGC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 575F10BB5246F1A5435FC63B /* libPods-JRGC.a */; };
 		2509C3BE1D6590C400D9F9B5 /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2509C3BD1D6590C400D9F9B5 /* PulsingHaloLayer.m */; };
 		2509C3C41D65A63100D9F9B5 /* GFWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2509C3C31D65A63100D9F9B5 /* GFWaterView.m */; };
 		2510E3E71D6F1524006BB5F8 /* alertViewCS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2510E3E61D6F1524006BB5F8 /* alertViewCS.m */; };
@@ -1882,8 +1881,6 @@
 		4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TopUpAndCash.storyboard; sourceTree = "<group>"; };
 		4AFF3637228918B000E6B70C /* UCFTelAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTelAlertView.m; sourceTree = "<group>"; };
 		4AFF3638228918B100E6B70C /* UCFTelAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTelAlertView.h; sourceTree = "<group>"; };
-		503AC35E381A55F9BCE67C57 /* Pods-JRGC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.debug.xcconfig"; path = "Target Support Files/Pods-JRGC/Pods-JRGC.debug.xcconfig"; sourceTree = "<group>"; };
-		575F10BB5246F1A5435FC63B /* libPods-JRGC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JRGC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7404C9FF1FB44EA7002811E0 /* UCFExtractGoldModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractGoldModel.h; sourceTree = "<group>"; };
 		7404CA001FB44EA7002811E0 /* UCFExtractGoldModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFExtractGoldModel.m; sourceTree = "<group>"; };
 		7404CA021FB4502E002811E0 /* UCFExtractGoldItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractGoldItemModel.h; sourceTree = "<group>"; };
@@ -3185,7 +3182,6 @@
 		AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeFixedTelNumView.xib; sourceTree = "<group>"; };
 		AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFixedTelNumView.h; sourceTree = "<group>"; };
 		AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeFixedTelNumView.m; sourceTree = "<group>"; };
-		B0A8AA400A6B5149CBB4A656 /* Pods-JRGC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.release.xcconfig"; path = "Target Support Files/Pods-JRGC/Pods-JRGC.release.xcconfig"; sourceTree = "<group>"; };
 		E301FBCF228E9B8D0038B7E8 /* FirstWaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstWaves.h; sourceTree = "<group>"; };
 		E301FBD0228E9B8D0038B7E8 /* FirstWaves.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstWaves.m; sourceTree = "<group>"; };
 		E301FBD1228E9B8E0038B7E8 /* SecondWaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondWaves.h; sourceTree = "<group>"; };
@@ -3921,7 +3917,6 @@
 				A824BFCC1FCD499200E32F39 /* UShareUI.framework in Frameworks */,
 				7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */,
 				7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */,
-				21486AC6F314096DA147193F /* libPods-JRGC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6963,7 +6958,6 @@
 				7BCE02411AC91A680084C15C /* MobileCoreServices.framework */,
 				7BCE023F1AC91A5E0084C15C /* SystemConfiguration.framework */,
 				7BCE023D1AC91A050084C15C /* libxml2.dylib */,
-				575F10BB5246F1A5435FC63B /* libPods-JRGC.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -7129,7 +7123,6 @@
 				7BFE3E9F1AC55C98002A53A2 /* JRGCTests */,
 				7BCE02651AC91CBE0084C15C /* Frameworks */,
 				7BFE3E811AC55C98002A53A2 /* Products */,
-				C67838E87BE226A85BF3CDFB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -8038,15 +8031,6 @@
 				A8F742B11F18939800EF001A /* UCFGoldTradeListModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		C67838E87BE226A85BF3CDFB /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				503AC35E381A55F9BCE67C57 /* Pods-JRGC.debug.xcconfig */,
-				B0A8AA400A6B5149CBB4A656 /* Pods-JRGC.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		E301FBCB228E9A8F0038B7E8 /* WavesAnimation */ = {
@@ -10292,14 +10276,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BFE3EA61AC55C98002A53A2 /* Build configuration list for PBXNativeTarget "JRGC" */;
 			buildPhases = (
-				E26308C55ABD7FA0C50865B7 /* [CP] Check Pods Manifest.lock */,
 				7BFE3E7C1AC55C98002A53A2 /* Sources */,
 				7BFE3E7D1AC55C98002A53A2 /* Frameworks */,
 				7BFE3E7E1AC55C98002A53A2 /* Resources */,
 				83F2D5121DCB3F950041F913 /* Embed Watch Content */,
 				4A26A8142292453000D4B433 /* ShellScript */,
-				64CC31D2B819E42EBC10F787 /* [CP] Embed Pods Frameworks */,
-				8C9C1C5E755C93D3A07409EE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -10770,68 +10751,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed\n";
-		};
-		64CC31D2B819E42EBC10F787 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh",
-				"${PODS_ROOT}/../../my_flutter/.ios/Flutter/engine/Flutter.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flutter.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8C9C1C5E755C93D3A07409EE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JRGC/Pods-JRGC-resources.sh",
-				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JRGC/Pods-JRGC-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E26308C55ABD7FA0C50865B7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-JRGC-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -11940,7 +11859,6 @@
 		};
 		7BFE3EA71AC55C98002A53A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 503AC35E381A55F9BCE67C57 /* Pods-JRGC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -12012,7 +11930,6 @@
 		};
 		7BFE3EA81AC55C98002A53A2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0A8AA400A6B5149CBB4A656 /* Pods-JRGC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
