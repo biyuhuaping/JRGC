@@ -10297,8 +10297,6 @@
 				7BFE3E7D1AC55C98002A53A2 /* Frameworks */,
 				7BFE3E7E1AC55C98002A53A2 /* Resources */,
 				83F2D5121DCB3F950041F913 /* Embed Watch Content */,
-				CFD84751D046CA2C4270EF3A /* [CP] Copy Pods Resources */,
-				8472B101D551E998B385BEFD /* [CP] Embed Pods Frameworks */,
 				4A26A8142292453000D4B433 /* ShellScript */,
 			);
 			buildRules = (
@@ -10770,42 +10768,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed\n";
-		};
-		8472B101D551E998B385BEFD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh",
-				"${PODS_ROOT}/../../my_flutter/.ios/Flutter/engine/Flutter.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flutter.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CFD84751D046CA2C4270EF3A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JRGC/Pods-JRGC-resources.sh",
-				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JRGC/Pods-JRGC-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		E26308C55ABD7FA0C50865B7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
