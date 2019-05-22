@@ -518,10 +518,9 @@
 - (void)skipToJY
 {
     FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
-    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
-    [self presentViewController:flutterViewController animated:false completion:nil];
+    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithProject:nil nibName:nil bundle:nil];
     
-    
+//    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
     
     FlutterMethodChannel *presentChannel = [FlutterMethodChannel methodChannelWithName:@"com.eten.jingyuan/crayfish" binaryMessenger:flutterViewController];
     __weak typeof(self) weakSelf = self;
@@ -547,7 +546,11 @@
                 {
                     parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr};
                 }
+//                Encryption
+                
                 NSString *str =  [parameterDic JSONString];
+//              NSString *str = [Encryption dictionaryToJson:parameterDic];
+                
                 result(str);
             }
         }
@@ -576,6 +579,7 @@
             result(FlutterMethodNotImplemented);
         }
     }];
-    
+    [self presentViewController:flutterViewController animated:false completion:nil];
+
 }
 @end
