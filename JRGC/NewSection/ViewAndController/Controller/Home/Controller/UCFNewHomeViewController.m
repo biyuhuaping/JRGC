@@ -37,6 +37,8 @@
 #import <Flutter/Flutter.h>
 #import "AppDelegate.h"
 #import "UCFRequestSucceedDetection.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
+
 //#import "UCFCreateLockViewController.h"
 //#import "UCFUnlockViewController.h"
 //#import "UCFTouchIDViewController.h"
@@ -575,12 +577,26 @@
             UCFRequestSucceedDetection *re = [[UCFRequestSucceedDetection alloc] init];
             [re requestSucceedDetection:dic];
         }
+        else if ([call.method isEqualToString:@"closeNative"])
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
         else {
             result(FlutterMethodNotImplemented);
         }
     }];
 //    [self presentViewController:flutterViewController animated:false completion:nil];
-    [self.rt_navigationController pushViewController:flutterViewController animated:YES];
-    
+//    flutterViewController.fd_interactivePopDisabled = YES;
+//    [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.rt_navigationController pushViewController:flutterViewController animated:YES complete:^(BOOL finished) {
+////        [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
+//        flutterViewController.fd_interactivePopDisabled = YES;
+//    }];
+    [self.navigationController pushViewController:flutterViewController animated:YES];
+    [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
+    flutterViewController.fd_interactivePopDisabled = YES;
+    if ([flutterViewController.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        flutterViewController.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 }
 @end
