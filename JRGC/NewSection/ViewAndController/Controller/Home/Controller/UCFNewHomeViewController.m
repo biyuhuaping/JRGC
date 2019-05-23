@@ -544,12 +544,12 @@
                 }
                 else
                 {
-                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr};
+                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr,@"phone":@"13051026044"};
                 }
 //                Encryption
                 
-                NSString *str =  [parameterDic JSONString];
-//              NSString *str = [Encryption dictionaryToJson:parameterDic];
+//                NSString *str =  [parameterDic JSONString];
+              NSString *str = [Encryption dictionaryToJson:parameterDic];
                 
                 result(str);
             }
