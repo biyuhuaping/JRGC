@@ -517,7 +517,7 @@
 
 - (void)skipToJY
 {
-    FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
+//    FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
     FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithProject:nil nibName:nil bundle:nil];
     
 //    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
@@ -544,12 +544,12 @@
                 }
                 else
                 {
-                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr};
+                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr,@"phone": @"13641331112"};
                 }
 //                Encryption
                 
-                NSString *str =  [parameterDic JSONString];
-//              NSString *str = [Encryption dictionaryToJson:parameterDic];
+//                NSString *str =  [parameterDic JSONString];
+              NSString *str = [Encryption dictionaryToJson:parameterDic];
                 
                 result(str);
             }
@@ -579,7 +579,8 @@
             result(FlutterMethodNotImplemented);
         }
     }];
-    [self presentViewController:flutterViewController animated:false completion:nil];
-
+//    [self presentViewController:flutterViewController animated:false completion:nil];
+    [self.rt_navigationController pushViewController:flutterViewController animated:YES];
+    
 }
 @end
