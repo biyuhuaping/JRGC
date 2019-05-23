@@ -566,7 +566,7 @@
             UCFWebViewJavascriptBridgeController *web = [[UCFWebViewJavascriptBridgeController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];
             web.title = [dic objectSafeForKey:@"title"];
             web.url = [dic objectSafeForKey:@"url"];
-            [self.rt_navigationController pushViewController:web animated:YES];
+            [weakSelf.rt_navigationController pushViewController:web animated:YES];
         }
         else if ([call.method isEqualToString:@"showBankApp"])
         {
@@ -579,7 +579,7 @@
         }
         else if ([call.method isEqualToString:@"closeNative"])
         {
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         else {
             result(FlutterMethodNotImplemented);
