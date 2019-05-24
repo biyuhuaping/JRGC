@@ -72,6 +72,8 @@
     [self startGLobalRealReachability]; //开启网络监测
     [self startNetConfig];
 
+
+    
     //请求开关状态
     [self checkNovicePoliceOnOff];
     [self luachNormalCode:launchOptions];

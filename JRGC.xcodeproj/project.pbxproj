@@ -243,6 +243,7 @@
 		4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F15B91B0EC9B1009A7365 /* CoupleHeadView.m */; };
 		4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */; };
 		4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */; };
+		4AA82E232297849300530372 /* BankSchemeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AA82E222297849300530372 /* BankSchemeList.plist */; };
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
@@ -1850,6 +1851,7 @@
 		4AA2AA7D1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchSetNumWebViewController.h; sourceTree = "<group>"; };
 		4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchSetNumWebViewController.m; sourceTree = "<group>"; };
 		4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchSetNumWebViewController.xib; sourceTree = "<group>"; };
+		4AA82E222297849300530372 /* BankSchemeList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BankSchemeList.plist; sourceTree = "<group>"; };
 		4AB126081AEF8EA400E915F1 /* UCFPurchaseBidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPurchaseBidViewController.h; sourceTree = "<group>"; };
 		4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseBidViewController.xib; sourceTree = "<group>"; };
 		4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAssessmentViewController.h; sourceTree = "<group>"; };
@@ -4781,6 +4783,14 @@
 			);
 			name = ImageNetClass;
 			path = Tools/ImageNetClass;
+			sourceTree = "<group>";
+		};
+		4AA82E212297846800530372 /* BankList */ = {
+			isa = PBXGroup;
+			children = (
+				4AA82E222297849300530372 /* BankSchemeList.plist */,
+			);
+			path = BankList;
 			sourceTree = "<group>";
 		};
 		4AB126071AEF8EA400E915F1 /* BidViewController */ = {
@@ -8906,6 +8916,7 @@
 		E352FD6521E4AF2600617AB7 /* tools(工具类) */ = {
 			isa = PBXGroup;
 			children = (
+				4AA82E212297846800530372 /* BankList */,
 				334B9E79223A7AA400E278D8 /* PublicModel */,
 				E3951B4E21F95F5300D7E999 /* timer */,
 				33459CEC21F07C330048443C /* Singleton */,
@@ -10344,7 +10355,7 @@
 				TargetAttributes = {
 					7BFE3E7F1AC55C98002A53A2 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = MHG97AJ3LK;
+						DevelopmentTeam = EZRWM7P5C6;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -10454,6 +10465,7 @@
 				A8DAEAD01FD929890088AF70 /* assets.png in Resources */,
 				A81A6F571FBD910000BDCE50 /* ServiceChargeView2.xib in Resources */,
 				4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */,
+				4AA82E232297849300530372 /* BankSchemeList.plist in Resources */,
 				83881D311FB58A01004CB2AF /* UCFDrawGoldHeaderView.xib in Resources */,
 				744EB7F91EE7E858003C57C4 /* UCFMicroMoneyViewController.xib in Resources */,
 				840A79441C2A7C160059A946 /* UCFMessageCenterViewController.xib in Resources */,
@@ -11955,7 +11967,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = MHG97AJ3LK;
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12000,7 +12012,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -12026,7 +12038,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MHG97AJ3LK;
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12071,7 +12083,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.0.00</string>
+	<string>4.1.00</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -77,7 +77,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>1</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -112,6 +112,22 @@
 		<string>mqzoneopensdkapi19</string>
 		<string>mqzoneopensdkapi</string>
 		<string>mqzoneopensdk</string>
+		<string>BOCMBCIWidget</string>
+		<string>com.icbc.iphoneclient</string>
+		<string>bankabc</string>
+		<string>ccbmobilebank</string>
+		<string>wx862767be0919d45a</string>
+		<string>cmbmobilebank</string>
+		<string>wxf505f9da589b9506</string>
+		<string>wx1cb534bb13ba3dbd</string>
+		<string>paebqw</string>
+		<string>wb801126555</string>
+		<string>cibmb</string>
+		<string>psbcmbank</string>
+		<string>wxb57101c34cb7773e</string>
+		<string>com.cmbc.cn.iphone</string>
+		<string>com.hx.hxbank</string>
+		<string>bankofshanghai</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

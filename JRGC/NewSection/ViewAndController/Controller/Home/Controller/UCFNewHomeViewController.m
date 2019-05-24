@@ -87,6 +87,34 @@
 - (void)rightBarClicked:(UIButton *)button
 {
     
+//    NSString *code = @"BOC";
+//
+//    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"BankSchemeList.plist" ofType:nil];
+//    NSDictionary *infoDic = [NSDictionary dictionaryWithContentsOfFile:filePath];
+//    NSArray *bankArr = [infoDic objectForKey:@"bankList"];
+//    for (NSDictionary *bankDict in bankArr) {
+//        if ([[bankDict objectForKey:@"code"] isEqualToString:code]) {
+//
+//            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://",bankDict[@"scheme"]]];
+//
+//            BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+//            // 调起app
+//            if (canOpen) {
+//                NSLog(@"可以调起");
+//                if (@available(iOS 10.0, *)) {
+//                    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+//                } else {
+//                    [[UIApplication sharedApplication] openURL:url];
+//                }
+//            }else {
+//                NSLog(@"未安装手机银行");
+//            }
+//            break;
+//        }
+//
+//    }
+//
+//    return;
     if (button.tag == 100) {
         if (SingleUserInfo.loginData.userInfo.userId) {
             UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
@@ -570,7 +598,38 @@
         }
         else if ([call.method isEqualToString:@"showBankApp"])
         {
+            NSString *code = [dic objectSafeForKey:@"bankid"];
+
+            NSString *filePath = [[NSBundle mainBundle]pathForResource:@"BankSchemeList.plist" ofType:nil];
+            NSDictionary *infoDic = [NSDictionary dictionaryWithContentsOfFile:filePath];
+            NSArray *bankArr = [infoDic objectForKey:@"bankList"];
+            for (NSDictionary *bankDict in bankArr) {
+                if ([[bankDict objectForKey:@"code"] isEqualToString:code]) {
+                    
+                    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://",bankDict[@"scheme"]]];
+                    
+                    BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+                    // 调起app
+                    if (canOpen) {
+                        NSLog(@"可以调起");
+                        if (@available(iOS 10.0, *)) {
+                            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+                        } else {
+                            [[UIApplication sharedApplication] openURL:url];
+                        }
+                    }else {
+                        NSLog(@"未安装手机银行");
+                    }
+                    break;
+                }
+                
+            }
+
             
+            
+            
+
+
         }
         else if ([call.method isEqualToString:@"logout"])
         {
