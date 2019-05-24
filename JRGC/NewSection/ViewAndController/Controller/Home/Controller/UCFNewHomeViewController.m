@@ -39,6 +39,7 @@
 #import "UCFRequestSucceedDetection.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "UCFGetUserPhoneNumRequest.h"
+#import "UCFFlutterContainerViewController.h"
 //#import "UCFCreateLockViewController.h"
 //#import "UCFUnlockViewController.h"
 //#import "UCFTouchIDViewController.h"
@@ -399,9 +400,10 @@
             } else if ([title isEqualToString:@"京元"]) {
                 
                 
+                UCFFlutterContainerViewController *controller = [[UCFFlutterContainerViewController alloc] init];
+                [self.rt_navigationController pushViewController:controller animated:YES complete:nil];
                 
-                
-                [self getUserPhoneNum];
+//                [self getUserPhoneNum];
             }
         }
     } else if ([model isKindOfClass:[UCFHomeMallrecommends class]]) {
@@ -549,24 +551,30 @@
     return window.rootViewController;
 }
 
-- (void)getUserPhoneNum
-{
-    
-    @PGWeakObj(self);
-    UCFGetUserPhoneNumRequest *api = [[UCFGetUserPhoneNumRequest alloc] init];
-    api.animatingView = self.view;
-    [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        NSString *phoneNo = [[request.responseObject objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"phoneNo"];
-
-        [selfWeak skipToJY:phoneNo];
-    
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
-    }];
-    [api start];
-}
-- (void)skipToJY:(NSString *)phoneNo
-{
+//- (void)getUserPhoneNum
+//{
+//    UCFFlutterContainerViewController *controller = [[UCFFlutterContainerViewController alloc] init];
+//    [self.rt_navigationController pushViewController:controller animated:YES complete:nil];
+//    @PGWeakObj(self);
+//    UCFGetUserPhoneNumRequest *api = [[UCFGetUserPhoneNumRequest alloc] init];
+//    api.animatingView = self.view;
+//    [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+//        NSString *phoneNo = [[request.responseObject objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"phoneNo"];
+//
+//        [selfWeak skipToJY:phoneNo];
+//
+//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//
+//    }];
+//    [api start];
+//}
+//- (void)skipToJY:(NSString *)phoneNo
+//{
+//
+//    UCFFlutterContainerViewController *controller = [[UCFFlutterContainerViewController alloc] init];
+//    [self.rt_navigationController pushViewController:controller animated:YES complete:nil];
+//    return;
+    /*
     FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithProject:nil nibName:nil bundle:nil];
     FlutterMethodChannel *presentChannel = [FlutterMethodChannel methodChannelWithName:@"com.eten.jingyuan/crayfish" binaryMessenger:flutterViewController];
     __weak typeof(self) weakSelf = self;
@@ -653,9 +661,11 @@
     
     [self.navigationController pushViewController:flutterViewController animated:YES];
     [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
+    ((RTContainerController *)flutterViewController).fd_interactivePopDisabled = YES;
     flutterViewController.fd_interactivePopDisabled = YES;
     if ([flutterViewController.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         flutterViewController.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-}
+    */
+//}
 @end

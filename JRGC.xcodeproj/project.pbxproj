@@ -53,7 +53,6 @@
 		3328796321EEC68100832CE8 /* Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796221EEC68100832CE8 /* Encryption.m */; };
 		3328796721EEC75500832CE8 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796621EEC75500832CE8 /* NSString+MD5.m */; };
 		3328796B21EECE7600832CE8 /* UCFHomeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */; };
-		3328796F21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		332B605F221F9558008893EF /* RCFFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6057221F9558008893EF /* RCFFlowView.m */; };
 		332B6060221F9558008893EF /* HQFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6058221F9558008893EF /* HQFlowView.m */; };
 		332B6061221F9558008893EF /* HQIndexBannerSubview.m in Sources */ = {isa = PBXBuildFile; fileRef = 332B6059221F9558008893EF /* HQIndexBannerSubview.m */; };
@@ -245,6 +244,8 @@
 		4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */; };
 		4AA82E232297849300530372 /* BankSchemeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AA82E222297849300530372 /* BankSchemeList.plist */; };
 		4AA82E262297C69A00530372 /* UCFGetUserPhoneNumRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA82E252297C69A00530372 /* UCFGetUserPhoneNumRequest.m */; };
+		4AA82E292297D28600530372 /* UCFFlutterContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA82E282297D28600530372 /* UCFFlutterContainerViewController.m */; };
+		4AA82E2F2297F0B600530372 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA82E2E2297F0B600530372 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
@@ -1512,8 +1513,6 @@
 		3328796621EEC75500832CE8 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		3328796921EECE7600832CE8 /* UCFHomeListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHomeListRequest.h; sourceTree = "<group>"; };
 		3328796A21EECE7600832CE8 /* UCFHomeListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListRequest.m; sourceTree = "<group>"; };
-		3328796D21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
-		3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		332B6057221F9558008893EF /* RCFFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCFFlowView.m; sourceTree = "<group>"; };
 		332B6058221F9558008893EF /* HQFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQFlowView.m; sourceTree = "<group>"; };
 		332B6059221F9558008893EF /* HQIndexBannerSubview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQIndexBannerSubview.m; sourceTree = "<group>"; };
@@ -1855,6 +1854,10 @@
 		4AA82E222297849300530372 /* BankSchemeList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BankSchemeList.plist; sourceTree = "<group>"; };
 		4AA82E242297C69A00530372 /* UCFGetUserPhoneNumRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGetUserPhoneNumRequest.h; sourceTree = "<group>"; };
 		4AA82E252297C69A00530372 /* UCFGetUserPhoneNumRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGetUserPhoneNumRequest.m; sourceTree = "<group>"; };
+		4AA82E272297D28600530372 /* UCFFlutterContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFFlutterContainerViewController.h; sourceTree = "<group>"; };
+		4AA82E282297D28600530372 /* UCFFlutterContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFFlutterContainerViewController.m; sourceTree = "<group>"; };
+		4AA82E2D2297F0B600530372 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		4AA82E2E2297F0B600530372 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		4AB126081AEF8EA400E915F1 /* UCFPurchaseBidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPurchaseBidViewController.h; sourceTree = "<group>"; };
 		4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseBidViewController.xib; sourceTree = "<group>"; };
 		4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAssessmentViewController.h; sourceTree = "<group>"; };
@@ -4054,15 +4057,6 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
-		3328796C21EF1C1F00832CE8 /* FDFullscreenPopGesture */ = {
-			isa = PBXGroup;
-			children = (
-				3328796D21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.h */,
-				3328796E21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m */,
-			);
-			path = FDFullscreenPopGesture;
-			sourceTree = "<group>";
-		};
 		332B6056221F9558008893EF /* HQFlowView */ = {
 			isa = PBXGroup;
 			children = (
@@ -4167,6 +4161,8 @@
 			children = (
 				33480A2621E6E8EE007C8AAA /* UCFNewHomeViewController.h */,
 				33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */,
+				4AA82E272297D28600530372 /* UCFFlutterContainerViewController.h */,
+				4AA82E282297D28600530372 /* UCFFlutterContainerViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4796,6 +4792,15 @@
 				4AA82E222297849300530372 /* BankSchemeList.plist */,
 			);
 			path = BankList;
+			sourceTree = "<group>";
+		};
+		4AA82E2C2297F0B600530372 /* FDFullscreenPopGesture */ = {
+			isa = PBXGroup;
+			children = (
+				4AA82E2D2297F0B600530372 /* UINavigationController+FDFullscreenPopGesture.h */,
+				4AA82E2E2297F0B600530372 /* UINavigationController+FDFullscreenPopGesture.m */,
+			);
+			path = FDFullscreenPopGesture;
 			sourceTree = "<group>";
 		};
 		4AB126071AEF8EA400E915F1 /* BidViewController */ = {
@@ -7267,7 +7272,7 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
-				3328796C21EF1C1F00832CE8 /* FDFullscreenPopGesture */,
+				4AA82E2C2297F0B600530372 /* FDFullscreenPopGesture */,
 				33B17641215A14F4007D1F91 /* LMJScrollTextView */,
 				A84EC2401FE1081E00B0C46A /* ImageScanner */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
@@ -11364,6 +11369,7 @@
 				334B9E6F223A2C6300E278D8 /* UCFCollectionDetailVM.m in Sources */,
 				7BC304821ACBC22D007767F1 /* UIButton+Misc.m in Sources */,
 				E30C797F21F17E6A000183FA /* UCFMineNewSignModel.m in Sources */,
+				4AA82E292297D28600530372 /* UCFFlutterContainerViewController.m in Sources */,
 				E352FD9621E4AFD800617AB7 /* DDLogDetailedMessage.m in Sources */,
 				3328796B21EECE7600832CE8 /* UCFHomeListRequest.m in Sources */,
 				A8BF2E5C1F739DCB003ABDE7 /* UCFLoginBaseView.m in Sources */,
@@ -11395,6 +11401,7 @@
 				74D6578E1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m in Sources */,
 				E301FBD6228E9B8F0038B7E8 /* ThirdWaves.m in Sources */,
 				33CBEF7A22426866007D977B /* UCFHighQualityContainerViewController.m in Sources */,
+				4AA82E2F2297F0B600530372 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				83D64F5E1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.m in Sources */,
 				7443C7311F1F3881009669C0 /* UCFGoldRecordHeaderFooterView.m in Sources */,
 				EDEE0D411C5F42D200021CCC /* BJGridItem.m in Sources */,
@@ -11440,7 +11447,6 @@
 				74AFB12F1EE8F848007DBAFC /* UCFTransferHeaderView.m in Sources */,
 				334B9E82223A7C8200E278D8 /* BaseRootModel.m in Sources */,
 				7456D3C71E82700500207349 /* UIView+Extension.m in Sources */,
-				3328796F21EF1C1F00832CE8 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				A81A6F5A1FBD92CD00BDCE50 /* ServiceChargeView2.m in Sources */,
 				E352FDC221E4B08D00617AB7 /* YTKChainRequest.m in Sources */,
 				E3041D2F21F6F89B007B09B6 /* UCFRegistVerificationMobileApi.m in Sources */,
