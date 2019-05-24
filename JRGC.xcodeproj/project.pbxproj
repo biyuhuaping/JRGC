@@ -244,6 +244,7 @@
 		4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */; };
 		4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */; };
 		4AA82E232297849300530372 /* BankSchemeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AA82E222297849300530372 /* BankSchemeList.plist */; };
+		4AA82E262297C69A00530372 /* UCFGetUserPhoneNumRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA82E252297C69A00530372 /* UCFGetUserPhoneNumRequest.m */; };
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
@@ -1852,6 +1853,8 @@
 		4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchSetNumWebViewController.m; sourceTree = "<group>"; };
 		4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchSetNumWebViewController.xib; sourceTree = "<group>"; };
 		4AA82E222297849300530372 /* BankSchemeList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BankSchemeList.plist; sourceTree = "<group>"; };
+		4AA82E242297C69A00530372 /* UCFGetUserPhoneNumRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGetUserPhoneNumRequest.h; sourceTree = "<group>"; };
+		4AA82E252297C69A00530372 /* UCFGetUserPhoneNumRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGetUserPhoneNumRequest.m; sourceTree = "<group>"; };
 		4AB126081AEF8EA400E915F1 /* UCFPurchaseBidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPurchaseBidViewController.h; sourceTree = "<group>"; };
 		4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseBidViewController.xib; sourceTree = "<group>"; };
 		4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAssessmentViewController.h; sourceTree = "<group>"; };
@@ -4045,6 +4048,8 @@
 				334D7D912226B2770048CCDC /* UCFBatchBidRequest.m */,
 				333979522229267000BB40BC /* UCFMallProductApi.h */,
 				333979532229267000BB40BC /* UCFMallProductApi.m */,
+				4AA82E242297C69A00530372 /* UCFGetUserPhoneNumRequest.h */,
+				4AA82E252297C69A00530372 /* UCFGetUserPhoneNumRequest.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -11308,6 +11313,7 @@
 				E352FD5A21E4AF0B00617AB7 /* UCFBidInfoView.m in Sources */,
 				E3D6D520221E8FD300261622 /* UCFMicroBankDepositoryAccountHomeViewController.m in Sources */,
 				746748DA1F3C561A0067294D /* UCFGoldBankLimitHeader.m in Sources */,
+				4AA82E262297C69A00530372 /* UCFGetUserPhoneNumRequest.m in Sources */,
 				745D37DA1F3AE9B200897F1A /* UCFColdChargeThirdCell.m in Sources */,
 				E32490BE223648D300F84ECD /* UCFRegisterUserBaseMessVerifCodeModel.m in Sources */,
 				748ED7A11CC74B9800690215 /* UCFMenuItemModel.m in Sources */,

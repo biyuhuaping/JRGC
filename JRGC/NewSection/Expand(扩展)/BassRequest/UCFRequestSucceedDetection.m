@@ -31,6 +31,7 @@
     if (![succeedDetectionDic isKindOfClass:[NSDictionary class]] || succeedDetectionDic == nil) {
         return;
     }
+    DDLogDebug(@"%@",succeedDetectionDic);
     NSDictionary *dic = [NSDictionary dictionaryWithDictionary:succeedDetectionDic];
     NSInteger rstcode = [dic[@"code"] integerValue];
     BOOL ret = [dic[@"ret"] boolValue];

@@ -38,7 +38,7 @@
 #import "AppDelegate.h"
 #import "UCFRequestSucceedDetection.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
-
+#import "UCFGetUserPhoneNumRequest.h"
 //#import "UCFCreateLockViewController.h"
 //#import "UCFUnlockViewController.h"
 //#import "UCFTouchIDViewController.h"
@@ -397,7 +397,11 @@
                     }];
                 }
             } else if ([title isEqualToString:@"京元"]) {
-                [self skipToJY];
+                
+                
+                
+                
+                [self getUserPhoneNum];
             }
         }
     } else if ([model isKindOfClass:[UCFHomeMallrecommends class]]) {
@@ -545,13 +549,25 @@
     return window.rootViewController;
 }
 
-- (void)skipToJY
+- (void)getUserPhoneNum
 {
-//    FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
+    
+    @PGWeakObj(self);
+    UCFGetUserPhoneNumRequest *api = [[UCFGetUserPhoneNumRequest alloc] init];
+    api.animatingView = self.view;
+    [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        NSString *phoneNo = [[request.responseObject objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"phoneNo"];
+
+        [selfWeak skipToJY:phoneNo];
+    
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+    [api start];
+}
+- (void)skipToJY:(NSString *)phoneNo
+{
     FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithProject:nil nibName:nil bundle:nil];
-    
-//    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
-    
     FlutterMethodChannel *presentChannel = [FlutterMethodChannel methodChannelWithName:@"com.eten.jingyuan/crayfish" binaryMessenger:flutterViewController];
     __weak typeof(self) weakSelf = self;
     // 注册方法等待flutter页面调用
@@ -574,19 +590,16 @@
                 }
                 else
                 {
-                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr,@"phone": @"13641331112"};
+                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr,@"phone": phoneNo};
                 }
-//                Encryption
-                
-//                NSString *str =  [parameterDic JSONString];
-              NSString *str = [Encryption dictionaryToJson:parameterDic];
-                
+                NSString *str = [Encryption dictionaryToJson:parameterDic];
                 result(str);
             }
         }
         else if ([call.method isEqualToString:@"showPDFView"])
         {
-            
+            NSString *title =  [dic objectSafeForKey:@"title"];
+            NSString * downloadUrl = [dic objectSafeForKey:@"downloadUrl"];
             NSLog(@"%@", dic);
         }
         else if ([call.method isEqualToString:@"showWebView"])
@@ -599,7 +612,7 @@
         else if ([call.method isEqualToString:@"showBankApp"])
         {
             NSString *code = [dic objectSafeForKey:@"bankid"];
-
+            
             NSString *filePath = [[NSBundle mainBundle]pathForResource:@"BankSchemeList.plist" ofType:nil];
             NSDictionary *infoDic = [NSDictionary dictionaryWithContentsOfFile:filePath];
             NSArray *bankArr = [infoDic objectForKey:@"bankList"];
@@ -622,14 +635,7 @@
                     }
                     break;
                 }
-                
             }
-
-            
-            
-            
-
-
         }
         else if ([call.method isEqualToString:@"logout"])
         {
@@ -644,13 +650,7 @@
             result(FlutterMethodNotImplemented);
         }
     }];
-//    [self presentViewController:flutterViewController animated:false completion:nil];
-//    flutterViewController.fd_interactivePopDisabled = YES;
-//    [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
-//    [self.rt_navigationController pushViewController:flutterViewController animated:YES complete:^(BOOL finished) {
-////        [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
-//        flutterViewController.fd_interactivePopDisabled = YES;
-//    }];
+    
     [self.navigationController pushViewController:flutterViewController animated:YES];
     [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
     flutterViewController.fd_interactivePopDisabled = YES;
