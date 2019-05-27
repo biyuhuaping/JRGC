@@ -44,6 +44,7 @@
 #import "HSHelper.h"
 #import "UCFHighQualityContainerViewController.h"
 #import "UCFNewAiLoanViewController.h"
+#import "BaseNavigationViewController.h"
 #define MALLTIME  12.0
 #define SIGNATURETIME 30.0
 
@@ -70,7 +71,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    @PGWeakObj(self);
+//    [self.KVOController observe:self.navigationController.navigationBar keyPaths:@[@"hidden"] options:NSKeyValueObservingOptionNew  block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+//        NSLog(@"%@",change);
+//    }];
+    
     // Do any additional setup after loading the view from its nib.
+    self.isHideNativeNav = YES;
+//    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController.navigationBar setHidden:YES];
 
     [self setController];    //初始化当前控制器的一些属性
 
@@ -82,6 +92,9 @@
 //    id preferences = [webView1 valueForKey:@"preferences"];
 //    [preferences performSelector:@selector(_postCacheModelChangedNotification)];
     /** 想要goBack不刷新页面的核心代码 END */
+    
+
+    
 }
 /*- (void)viewDidDisappear:(BOOL)animated
 {
@@ -325,7 +338,6 @@
     
     [_bridge registerHandler:@"nativeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         
-//        weakSelf.isHideNativeNav = NO;
         NSDictionary *nativeData = data;
         
         if (nil == nativeData || [nativeData isKindOfClass:[NSNull class]] || nativeData.count == 0 || !nativeData[@"action"])
@@ -1067,12 +1079,12 @@
 //        }
 //        else
 //        {
-            web.isHidenNavigationbar = YES;
+//            web.isHidenNavigationbar = YES;
 //        }
         web.url = [dic objectSafeForKey:@"value"];
-        web.hidesBottomBarWhenPushed = YES;
+//        web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
-        web.hidesBottomBarWhenPushed = NO;
+//        web.hidesBottomBarWhenPushed = NO;
 
     }
     
