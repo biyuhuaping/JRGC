@@ -829,9 +829,9 @@
 }
 -(void)addProgressView{
     // 进度条
-    UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
+    UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, StatusBarHeight1 > 20 ?  StatusBarHeight1 : 0, self.view.frame.size.width, 2)];
     //progressView.tintColor = WebViewNav_TintColor;
-    progressView.tintColor = UIColorWithRGB(0xfd4d4c);
+    progressView.tintColor = [Color color:PGColorOptionTitlerRead];
     progressView.trackTintColor = [UIColor clearColor];
     [self.view addSubview:progressView];
     [self.view insertSubview:self.webView belowSubview:progressView];
