@@ -33,17 +33,16 @@
      [self addProgressView];//添加进度条
     [self gotoURL:self.url];
      self.webView.scrollView.bounces = NO;
-    if ([self.rootVc isEqualToString:@"UCFSecurityCenterVC"])
-    {
-        self.navigationController.navigationBar.hidden = YES;
-    }
+
     self.fd_interactivePopDisabled = YES;
+    self.isHideNativeNav = YES;
+//    [self.navigationController setNavigationBarHidden:YES];
 }
 
 //只要是豆哥商城的都去掉导航栏
 - (void)viewWillAppear:(BOOL)animated {
     
-    [self.navigationController setNavigationBarHidden:self.isHideNativeNav animated:animated];
+    [self.navigationController setNavigationBarHidden:self.isHideNativeNav animated:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
