@@ -287,12 +287,10 @@
 }
 - (void)addbidListBottomAd:(NSMutableArray *)section andSel:(SEL)sel
 {
-    
-    CellConfig *data2_0 = [CellConfig cellConfigWithClassName:@"UCFJYRouteTableViewCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 9 /23) + 15];
-    [section addObject:data2_0];
-
-    
-    
+    if (SingleUserInfo.loginData.userInfo.jyIsShow) {
+        CellConfig *data2_0 = [CellConfig cellConfigWithClassName:@"UCFJYRouteTableViewCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 9 /23) + 15];
+        [section addObject:data2_0];
+    }
     CellConfig *data2_1 = [CellConfig cellConfigWithClassName:@"UCFPromotionCell" title:@"新手专享" showInfoMethod:sel heightOfCell:((ScreenWidth - 30) * 6 /23)];
     UCFCellDataModel *dataMode = [UCFCellDataModel new];
     dataMode.modelType = @"coinArray";
