@@ -476,6 +476,9 @@
             self.memberLeverBtn.titleEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0 ,  gap / 2 );
             self.memberLeverBtn.contentEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0, gap / 2);
         }
+        if (self.amountShownBtn.selected) {
+            [self hiddenMoney:self.amountShownBtn.selected];
+        }
     }
     [self.totalAssetsMoneyLabel sizeToFit];
     [self.expectedInterestMoneyLabel sizeToFit];
@@ -540,6 +543,12 @@
         self.totalAssetsMoneyLabel.text = self.total;//总资产
         self.expectedInterestMoneyLabel.text = self.totalDueIn;//总待收利息
         self.accountBalanceMoneyLabel.text = self.cashBalance;//余额
+        
+        self.totalAssetsMoneyLabel.text =  [NSString AddCNY:self.total];//总资产
+        [self.totalAssetsMoneyLabel setFont:[Color gc_Font:22.0] string:@"¥"];
+        self.expectedInterestMoneyLabel.text = [NSString AddCNY:self.totalDueIn];//总待收利息
+        self.accountBalanceMoneyLabel.text = [NSString AddCNY:self.cashBalance];//余额
+    
         [self.amountShownBtn setImage:[UIImage imageNamed:@"MineShowCapital.png"] forState:UIControlStateNormal];
     }
     
