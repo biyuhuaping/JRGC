@@ -24,9 +24,12 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
 //    self.fd_interactivePopDisabled = YES;
-    self.rt_disableInteractivePop = YES;
-    self.rt_navigationController.rt_disableInteractivePop = YES;
+//    self.rt_disableInteractivePop = YES;
+//    self.rt_navigationController.rt_disableInteractivePop = YES;
 //    ((RTContainerController *) (self)).fd_interactivePopDisabled = YES;
+    [self setSetNavgationPopDisabled:YES];
+
+    
 }
 - (void)skipToJY:(NSString *)phoneNo
 {
@@ -122,22 +125,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    id traget = self.navigationController.interactivePopGestureRecognizer.delegate;
-//    UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc]initWithTarget:traget action:nil];
-//    [self.view addGestureRecognizer:pan];
-    UIViewController *controler11 = self.rt_navigationController.rt_topViewController;
-    controler11.fd_interactivePopDisabled = YES;
-
     @PGWeakObj(self);
     UCFGetUserPhoneNumRequest *api = [[UCFGetUserPhoneNumRequest alloc] init];
     api.animatingView = self.view;
     [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         NSString *phoneNo = [[request.responseObject objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"phoneNo"];
-        
+
         [selfWeak skipToJY:phoneNo];
-        
+
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
+
     }];
     [api start];
 }
