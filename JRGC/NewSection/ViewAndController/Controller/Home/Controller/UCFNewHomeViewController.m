@@ -40,6 +40,8 @@
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "UCFGetUserPhoneNumRequest.h"
 #import "UCFFlutterContainerViewController.h"
+
+#import "UCFZiZHIViewController.h"
 //#import "UCFCreateLockViewController.h"
 //#import "UCFUnlockViewController.h"
 //#import "UCFTouchIDViewController.h"
@@ -150,7 +152,8 @@
     self.showTableView.myHorzMargin = 0;
     [self.rootLayout addSubview:self.showTableView];
     self.showTableView.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-    self.navigationController.navigationBar.tintColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
+
+    [self.navigationController.navigationBar setBarTintColor:[Color color:PGColorOpttonTabeleViewBackgroundColor]];
     HomeHeadCycleView *homeHeadView = [HomeHeadCycleView new];
     homeHeadView.myTop = 0;
     CGFloat height =  ((([[UIScreen mainScreen] bounds].size.width - 54) * 9)/16);
@@ -258,6 +261,14 @@
         } else {
             if ([data.title isEqualToString:@"商城精选"] || [data.title isEqualToString:@"商城特惠"] || [data.title isEqualToString:@"智能出借"] || [data.title isEqualToString:@"优质债权"]) {
                 [sectionView showMore];
+            } else {
+                if ([UserInfoSingle sharedManager].isSubmitTime) {
+                    if ([data.title isEqualToString:@"新手入门"]) {
+                        [sectionView.checkMoreBtn setTitle:@"公司资质" forState:UIControlStateNormal];
+                        [sectionView showMore];
+                    }
+                    
+                }
             }
         }
         return sectionView;
@@ -290,6 +301,9 @@
             [vc changeView];
         }
         [SingGlobalView.tabBarController setSelectedIndex:1];
+    } else if ([title isEqualToString:@"新手入门"]){
+        UCFZiZHIViewController *vc = [[UCFZiZHIViewController alloc] initWithNibName:@"UCFZiZHIViewController" bundle:nil];
+        [self.rt_navigationController pushViewController:vc animated:YES complete:nil];
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
