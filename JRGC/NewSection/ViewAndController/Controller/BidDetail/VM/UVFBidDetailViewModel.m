@@ -155,7 +155,6 @@
 {
     NSString *statue = self.model.data.status;
     if ([statue isEqualToString:@"2"] || [statue isEqualToString:@"11"]) {
-
         self.bidInvestText = @"立即出借";
     } else if ([statue isEqualToString:@"5"]) {
         self.bidInvestText = @"回款中";
@@ -165,6 +164,9 @@
         self.bidInvestText = @"等待确认";
     } else if ([statue isEqualToString:@"0"]) {
         self.bidInvestText = @"待回款";
+    } else if ([statue isEqualToString:@"4"]) {
+        self.bidInvestText = @"已售罄";
+        
     }
 /*
     if ([_investmentState isEqualToString:@"2"] || [_investmentState isEqualToString:@"11"]) {

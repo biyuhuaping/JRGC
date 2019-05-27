@@ -171,6 +171,9 @@
     
     SingleUserInfo.loginType  = LoginDefalut;
     [UCFCouponPopup startQueryCouponPopup];//去调取首页优惠券弹框
+    //查询是否有可领优惠券
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
+
 }
 - (void)dealloc
 {

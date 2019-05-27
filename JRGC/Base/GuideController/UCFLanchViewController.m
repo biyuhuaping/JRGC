@@ -43,13 +43,19 @@
 
     [self getAdversementImageStyle:0];
     //显示广告
+    _isShowAdversement = NO;
+
     if (_isShowAdversement) {
         [self showAdvertisement];
     } else {
+        
+        
+        
         UIImage *placehoderImage = [Common getTheLaunchImage];
         _advertisementView.contentMode = UIViewContentModeScaleToFill;
         _advertisementView.image = placehoderImage;
-        [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetAppleInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
+        [self disapperAdversement];
+//        [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetAppleInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
     }
 
 

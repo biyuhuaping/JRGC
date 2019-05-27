@@ -38,7 +38,8 @@
 #import "AppDelegate.h"
 #import "UCFRequestSucceedDetection.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
-
+#import "UCFGetUserPhoneNumRequest.h"
+#import "UCFFlutterContainerViewController.h"
 //#import "UCFCreateLockViewController.h"
 //#import "UCFUnlockViewController.h"
 //#import "UCFTouchIDViewController.h"
@@ -87,6 +88,34 @@
 - (void)rightBarClicked:(UIButton *)button
 {
     
+//    NSString *code = @"BOC";
+//
+//    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"BankSchemeList.plist" ofType:nil];
+//    NSDictionary *infoDic = [NSDictionary dictionaryWithContentsOfFile:filePath];
+//    NSArray *bankArr = [infoDic objectForKey:@"bankList"];
+//    for (NSDictionary *bankDict in bankArr) {
+//        if ([[bankDict objectForKey:@"code"] isEqualToString:code]) {
+//
+//            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://",bankDict[@"scheme"]]];
+//
+//            BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+//            // 调起app
+//            if (canOpen) {
+//                NSLog(@"可以调起");
+//                if (@available(iOS 10.0, *)) {
+//                    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+//                } else {
+//                    [[UIApplication sharedApplication] openURL:url];
+//                }
+//            }else {
+//                NSLog(@"未安装手机银行");
+//            }
+//            break;
+//        }
+//
+//    }
+//
+//    return;
     if (button.tag == 100) {
         if (SingleUserInfo.loginData.userInfo.userId) {
             UCFNewNoticeViewController *vc = [[UCFNewNoticeViewController alloc] init];
@@ -369,7 +398,12 @@
                     }];
                 }
             } else if ([title isEqualToString:@"京元"]) {
-                [self skipToJY];
+                
+                
+                UCFFlutterContainerViewController *controller = [[UCFFlutterContainerViewController alloc] init];
+                [self.rt_navigationController pushViewController:controller animated:YES complete:nil];
+                
+//                [self getUserPhoneNum];
             }
         }
     } else if ([model isKindOfClass:[UCFHomeMallrecommends class]]) {
@@ -517,13 +551,31 @@
     return window.rootViewController;
 }
 
-- (void)skipToJY
-{
-//    FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
+//- (void)getUserPhoneNum
+//{
+//    UCFFlutterContainerViewController *controller = [[UCFFlutterContainerViewController alloc] init];
+//    [self.rt_navigationController pushViewController:controller animated:YES complete:nil];
+//    @PGWeakObj(self);
+//    UCFGetUserPhoneNumRequest *api = [[UCFGetUserPhoneNumRequest alloc] init];
+//    api.animatingView = self.view;
+//    [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+//        NSString *phoneNo = [[request.responseObject objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"phoneNo"];
+//
+//        [selfWeak skipToJY:phoneNo];
+//
+//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//
+//    }];
+//    [api start];
+//}
+//- (void)skipToJY:(NSString *)phoneNo
+//{
+//
+//    UCFFlutterContainerViewController *controller = [[UCFFlutterContainerViewController alloc] init];
+//    [self.rt_navigationController pushViewController:controller animated:YES complete:nil];
+//    return;
+    /*
     FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithProject:nil nibName:nil bundle:nil];
-    
-//    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
-    
     FlutterMethodChannel *presentChannel = [FlutterMethodChannel methodChannelWithName:@"com.eten.jingyuan/crayfish" binaryMessenger:flutterViewController];
     __weak typeof(self) weakSelf = self;
     // 注册方法等待flutter页面调用
@@ -546,19 +598,16 @@
                 }
                 else
                 {
-                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr,@"phone": @"13641331112"};
+                    parameterDic = @{@"imei": [Encryption getKeychain],@"version": [Encryption getIOSVersion],@"userId": SingleUserInfo.loginData.userInfo.userId,@"token": SingleUserInfo.signatureStr,@"phone": phoneNo};
                 }
-//                Encryption
-                
-//                NSString *str =  [parameterDic JSONString];
-              NSString *str = [Encryption dictionaryToJson:parameterDic];
-                
+                NSString *str = [Encryption dictionaryToJson:parameterDic];
                 result(str);
             }
         }
         else if ([call.method isEqualToString:@"showPDFView"])
         {
-            
+            NSString *title =  [dic objectSafeForKey:@"title"];
+            NSString * downloadUrl = [dic objectSafeForKey:@"downloadUrl"];
             NSLog(@"%@", dic);
         }
         else if ([call.method isEqualToString:@"showWebView"])
@@ -570,7 +619,31 @@
         }
         else if ([call.method isEqualToString:@"showBankApp"])
         {
+            NSString *code = [dic objectSafeForKey:@"bankid"];
             
+            NSString *filePath = [[NSBundle mainBundle]pathForResource:@"BankSchemeList.plist" ofType:nil];
+            NSDictionary *infoDic = [NSDictionary dictionaryWithContentsOfFile:filePath];
+            NSArray *bankArr = [infoDic objectForKey:@"bankList"];
+            for (NSDictionary *bankDict in bankArr) {
+                if ([[bankDict objectForKey:@"code"] isEqualToString:code]) {
+                    
+                    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://",bankDict[@"scheme"]]];
+                    
+                    BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+                    // 调起app
+                    if (canOpen) {
+                        NSLog(@"可以调起");
+                        if (@available(iOS 10.0, *)) {
+                            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+                        } else {
+                            [[UIApplication sharedApplication] openURL:url];
+                        }
+                    }else {
+                        NSLog(@"未安装手机银行");
+                    }
+                    break;
+                }
+            }
         }
         else if ([call.method isEqualToString:@"logout"])
         {
@@ -585,18 +658,14 @@
             result(FlutterMethodNotImplemented);
         }
     }];
-//    [self presentViewController:flutterViewController animated:false completion:nil];
-//    flutterViewController.fd_interactivePopDisabled = YES;
-//    [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
-//    [self.rt_navigationController pushViewController:flutterViewController animated:YES complete:^(BOOL finished) {
-////        [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
-//        flutterViewController.fd_interactivePopDisabled = YES;
-//    }];
+    
     [self.navigationController pushViewController:flutterViewController animated:YES];
     [flutterViewController.navigationController setNavigationBarHidden:YES animated:YES];
+    ((RTContainerController *)flutterViewController).fd_interactivePopDisabled = YES;
     flutterViewController.fd_interactivePopDisabled = YES;
     if ([flutterViewController.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         flutterViewController.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-}
+    */
+//}
 @end

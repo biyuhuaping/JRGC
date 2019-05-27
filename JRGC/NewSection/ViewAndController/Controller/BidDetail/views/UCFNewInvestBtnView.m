@@ -56,6 +56,8 @@
                     selfWeak.investButtom.enabled = NO;
                     [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateDisabled];
                 }
+            } else {
+                selfWeak.investButtom.enabled = NO;
             }
         }
     }];
