@@ -247,6 +247,7 @@
 		4AA82E292297D28600530372 /* UCFFlutterContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA82E282297D28600530372 /* UCFFlutterContainerViewController.m */; };
 		4AA82E2F2297F0B600530372 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA82E2E2297F0B600530372 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
+		4AB3AE18229E8C6F0037152C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02591AC91BEF0084C15C /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
 		4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -773,7 +774,7 @@
 		7BCE02401B833B7000F9D73F /* IPDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE023F1B833B7000F9D73F /* IPDetector.m */; };
 		7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02411AC91A680084C15C /* MobileCoreServices.framework */; };
 		7BCE02441AC91A720084C15C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02431AC91A720084C15C /* CoreGraphics.framework */; };
-		7BCE02461AC91A780084C15C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02451AC91A780084C15C /* CFNetwork.framework */; };
+		7BCE02461AC91A780084C15C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02451AC91A780084C15C /* CFNetwork.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7BCE02481AC91A860084C15C /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02471AC91A860084C15C /* libz.1.2.5.dylib */; };
 		7BCE024A1AC91B430084C15C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02491AC91B430084C15C /* AddressBook.framework */; };
 		7BCE024C1AC91B4A0084C15C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE024B1AC91B4A0084C15C /* AudioToolbox.framework */; };
@@ -783,7 +784,6 @@
 		7BCE02541AC91BA20084C15C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02531AC91BA20084C15C /* CoreTelephony.framework */; };
 		7BCE02561AC91BB40084C15C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02551AC91BB40084C15C /* Security.framework */; };
 		7BCE02581AC91BD60084C15C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02571AC91BD60084C15C /* UIKit.framework */; };
-		7BCE025A1AC91BEF0084C15C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02591AC91BEF0084C15C /* Foundation.framework */; };
 		7BCE025C1AC91C0B0084C15C /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE025B1AC91C0B0084C15C /* libresolv.dylib */; };
 		7BCE025E1AC91C400084C15C /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE025D1AC91C400084C15C /* libstdc++.dylib */; };
 		7BCE02601AC91C550084C15C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE025F1AC91C550084C15C /* libsqlite3.dylib */; };
@@ -3915,7 +3915,6 @@
 				7BCE02601AC91C550084C15C /* libsqlite3.dylib in Frameworks */,
 				7BCE025E1AC91C400084C15C /* libstdc++.dylib in Frameworks */,
 				7BCE025C1AC91C0B0084C15C /* libresolv.dylib in Frameworks */,
-				7BCE025A1AC91BEF0084C15C /* Foundation.framework in Frameworks */,
 				7BCE02581AC91BD60084C15C /* UIKit.framework in Frameworks */,
 				7BCE02541AC91BA20084C15C /* CoreTelephony.framework in Frameworks */,
 				FB5555331BCE37570013894F /* libMobClickLibrary.a in Frameworks */,
@@ -3927,11 +3926,12 @@
 				7BCE024A1AC91B430084C15C /* AddressBook.framework in Frameworks */,
 				7BCE02481AC91A860084C15C /* libz.1.2.5.dylib in Frameworks */,
 				A85510821FDA30CB0007F2F6 /* jpush-ios-3.0.7.a in Frameworks */,
-				7BCE02461AC91A780084C15C /* CFNetwork.framework in Frameworks */,
 				7BCE02441AC91A720084C15C /* CoreGraphics.framework in Frameworks */,
 				A824BFCC1FCD499200E32F39 /* UShareUI.framework in Frameworks */,
 				7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */,
 				7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */,
+				4AB3AE18229E8C6F0037152C /* Foundation.framework in Frameworks */,
+				7BCE02461AC91A780084C15C /* CFNetwork.framework in Frameworks */,
 				1FA22F3B59B3D3D6CECC523B /* libPods-JRGC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -12001,7 +12001,7 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK/**",
 				);
 				INFOPLIST_FILE = JRGC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12072,7 +12072,7 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK/**",
 				);
 				INFOPLIST_FILE = JRGC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
