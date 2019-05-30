@@ -166,7 +166,10 @@
         } else if ([keyPath isEqualToString:@"timeArray"]) {
             NSArray *timeArray = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
             if (timeArray.count > 0) {
+                selfWeak.tipLabel.font = [Color gc_Font:14];
                  selfWeak.tipLabel.text = [NSString stringWithFormat:@"筹标期: %@ 至 %@",timeArray[0],timeArray[1]];
+                [selfWeak.tipLabel sizeToFit];
+
             }
         } else if ([keyPath isEqualToString:@"stopStatus"]) {
             NSString *stopStatus = [change objectSafeForKey:NSKeyValueChangeNewKey];

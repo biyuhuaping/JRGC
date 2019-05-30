@@ -165,6 +165,10 @@
         self.bidInvestText = @"等待确认";
     } else if ([statue isEqualToString:@"0"]) {
         self.bidInvestText = @"待回款";
+    }else if ([statue isEqualToString:@"4"]) {
+        self.bidInvestText = @"满标";
+    }  else if ([statue isEqualToString:@"3"]) {
+        self.bidInvestText = @"流标";
     }
 /*
     if ([_investmentState isEqualToString:@"2"] || [_investmentState isEqualToString:@"11"]) {

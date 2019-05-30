@@ -410,6 +410,7 @@
         if (_type == PROJECTDETAILTYPEBONDSRRANSFER){//债权转让
             startTimeStr = [_dic objectSafeForKey:@"putawaytime"];
             endTimeStr = [_dic objectSafeForKey:@"soldOutTime"];
+            _minuteCountDownView.tipLabel.font = [Color gc_Font:14];
             _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"转让期: %@ 至 %@",startTimeStr,endTimeStr];
         }else{
             _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"筹标期: %@ 至 %@",startTimeStr,endTimeStr];
