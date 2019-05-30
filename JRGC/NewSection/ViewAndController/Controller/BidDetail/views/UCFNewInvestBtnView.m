@@ -93,7 +93,7 @@
         if ([keyPath isEqualToString:@"bidInvestText"]) {
             NSString *bidInvestText = [change objectSafeForKey:NSKeyValueChangeNewKey];
             if (bidInvestText.length > 0) {
-                if ([bidInvestText isEqualToString:@"批量出借"]) {
+                if ([bidInvestText isEqualToString:@"批量出借"] || [bidInvestText isEqualToString:@"查看奖励"]) {
                     [selfWeak.investButtom setTitle:bidInvestText forState:UIControlStateNormal];
                     selfWeak.investButtom.enabled = YES;
                 } else {
