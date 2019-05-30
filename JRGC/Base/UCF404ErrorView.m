@@ -37,8 +37,7 @@
     bkView = [[UIView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 323) / 2, self.frame.size.width, 323)];
     bkView.backgroundColor = [UIColor clearColor];
     
-    UIImageView *logoImageVW = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - 70)/2, 0, 70, 93)];
-    logoImageVW.image = [UIImage imageNamed:@"404bg.png"];
+    UIImageView *logoImageVW = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - 70)/2, (bkView.frame.size.height -70)/3, 70, 93)];    logoImageVW.image = [UIImage imageNamed:@"404bg.png"];
     [bkView addSubview:logoImageVW];
     
     UILabel *infoLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(logoImageVW.frame) + 20, ScreenWidth, 18) text:@"网络连接异常，请检查后重试" textColor:[Color color:PGColorOptionTitleGray] font:[UIFont systemFontOfSize:15]];
