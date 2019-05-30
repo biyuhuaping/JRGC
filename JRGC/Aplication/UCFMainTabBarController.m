@@ -241,7 +241,7 @@
             break;
             
         case 4:{
-            [_mineView refresh];
+//            [_mineView refresh];
         }
             break;
     }
@@ -265,7 +265,7 @@
         } else {
             
             if ([self.viewControllers indexOfObject:viewController] == 4) {
-                [_mineView refreshPageData];
+//                [_mineView refreshPageData];
             }
             return YES;
         }

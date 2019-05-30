@@ -943,12 +943,13 @@
     else if ([requestString newRangeOfString:@"https://m.9888.cn/static/wap/reset-deal-password/index.html"])
     {
         DDLogDebug(@"这个字符串中有\n");
-        TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
-        tradePasswordVC.title = @"修改交易密码";
-        tradePasswordVC.isCompanyAgent = SingleUserInfo.loginData.userInfo.isCompanyAgent;
-//        tradePasswordVC.site = [NSString stringWithFormat:@"%ld",self.accoutType];
-        tradePasswordVC.accoutType = self.accoutType;
-        [self.navigationController pushViewController:tradePasswordVC  animated:YES];
+//        TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
+//        tradePasswordVC.title = @"修改交易密码";
+//        tradePasswordVC.isCompanyAgent = SingleUserInfo.loginData.userInfo.isCompanyAgent;
+////        tradePasswordVC.site = [NSString stringWithFormat:@"%ld",self.accoutType];
+//        tradePasswordVC.accoutType = self.accoutType;
+//        [self.navigationController pushViewController:tradePasswordVC  animated:YES];
+         [self.rt_navigationController popViewControllerAnimated:YES];
         return NO;
     }
     else
