@@ -8,7 +8,7 @@
 
 #import "UCF404ErrorView.h"
 #import "UILabel+Misc.h"
-
+#import "UIImage+Compression.h"
 @interface UCF404ErrorView ()
 {
     NSString *_errorTitle;
@@ -23,7 +23,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorWithRGB(0xebebee);
+        self.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
         _errorTitle = titleStr;
         [self initViewControls];
     }
@@ -32,23 +32,26 @@
 
 - (void)initViewControls
 {
-    self.backgroundColor = UIColorWithRGB(0xebebee);
-
-    bkView = [[UIView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 323) / 2, self.frame.size.width, 323)];
+    self.backgroundColor =  [Color color:PGColorOpttonTabeleViewBackgroundColor];
     
-    UIImageView *logoImageVW = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - 219)/2, 0, 219, 262)];
+    bkView = [[UIView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 323) / 2, self.frame.size.width, 323)];
+    bkView.backgroundColor = [UIColor clearColor];
+    
+    UIImageView *logoImageVW = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - 70)/2, 0, 70, 93)];
     logoImageVW.image = [UIImage imageNamed:@"404bg.png"];
     [bkView addSubview:logoImageVW];
     
-    UILabel *infoLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(logoImageVW.frame) + 20, ScreenWidth, 18) text:@"网络不给力呀" textColor:UIColorWithRGB(0x8591b3) font:[UIFont systemFontOfSize:18]];
+    UILabel *infoLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(logoImageVW.frame) + 20, ScreenWidth, 18) text:@"网络连接异常，请检查后重试" textColor:[Color color:PGColorOptionTitleGray] font:[UIFont systemFontOfSize:15]];
     [bkView addSubview:infoLabel];
     
-    UILabel *infoLabel2 = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(infoLabel.frame) + 5, ScreenWidth, 18) text:@"点击屏幕重新加载" textColor:UIColorWithRGB(0x8591b3) font:[UIFont systemFontOfSize:18]];
-    [bkView addSubview:infoLabel2];
-    
     UIButton *reLoadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [reLoadBtn setBackgroundImage:[UIImage gc_styleImageSize:CGSizeMake(205, 40)] forState:UIControlStateNormal];
+    reLoadBtn.frame = CGRectMake((ScreenWidth - 205)/2, CGRectGetMaxY(infoLabel.frame) + 25, 205, 40);
     [reLoadBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    reLoadBtn.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    [reLoadBtn setTitle:@"重新加载" forState:UIControlStateNormal];
+    reLoadBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    reLoadBtn.layer.cornerRadius = 20.0f;
+    reLoadBtn.layer.masksToBounds = YES;
     [bkView addSubview:reLoadBtn];
     
     [self addSubview:bkView];

@@ -237,19 +237,36 @@
     // Set request task priority
     // !!Available on iOS 8 +
     if ([request.requestTask respondsToSelector:@selector(priority)]) {
-        switch (request.requestPriority) {
-            case YTKRequestPriorityHigh:
-                request.requestTask.priority = NSURLSessionTaskPriorityHigh;
-                break;
-            case YTKRequestPriorityLow:
-                request.requestTask.priority = NSURLSessionTaskPriorityLow;
-                break;
-            case YTKRequestPriorityDefault:
-                /*!!fall through*/
-            default:
-                request.requestTask.priority = NSURLSessionTaskPriorityDefault;
-                break;
+        if ([[[UIDevice currentDevice] systemVersion] intValue]>=9) {
+            switch (request.requestPriority) {
+                case YTKRequestPriorityHigh:
+                    request.requestTask.priority = NSURLSessionTaskPriorityHigh;
+                    break;
+                case YTKRequestPriorityLow:
+                    request.requestTask.priority = NSURLSessionTaskPriorityLow;
+                    break;
+                case YTKRequestPriorityDefault:
+                    /*!!fall through*/
+                default:
+                    request.requestTask.priority = NSURLSessionTaskPriorityDefault; //
+                    break;
+            }
+        } else {
+            switch (request.requestPriority) {
+                case YTKRequestPriorityHigh:
+                    request.requestTask.priority = 0.75;  //NSURLSessionTaskPriorityHigh
+                    break;
+                case YTKRequestPriorityLow:
+                    request.requestTask.priority = 0.25; //NSURLSessionTaskPriorityLow
+                    break;
+                case YTKRequestPriorityDefault:
+                    /*!!fall through*/
+                default:
+                    request.requestTask.priority = 0.5; //NSURLSessionTaskPriorityDefault
+                    break;
+            }
         }
+        
     }
 
     // Retain request

@@ -68,6 +68,9 @@
     else
     {
         UIFont *font =  [UIFont fontWithName:name size:size];
+        if (font == nil) {
+            font =  [UIFont systemFontOfSize:size];
+        }
         return  font;
     }
     
