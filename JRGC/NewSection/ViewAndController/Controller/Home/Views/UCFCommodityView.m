@@ -142,6 +142,8 @@
 
             self.shopValue.frame = CGRectMake(CGRectGetMaxX(self.moneyCoinImageView.frame), CGRectGetMinY(self.shopValue.frame), textWidth, CGRectGetHeight(self.shopValue.frame));
         }
+    } else {
+        self.shopValue.frame = CGRectMake(0, CGRectGetMinY(self.shopValue.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.shopValue.frame));
     }
     if (discount.length > 0) {
         self.discountLab.text = [NSString stringWithFormat:@"%@折",discount];
