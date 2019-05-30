@@ -45,10 +45,10 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
-
+    
 }
 - (void)viewDidLoad
-{   
+{
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redbag_toLend:) name:@"UCFRedBagViewController_to_lend" object:nil];
@@ -58,7 +58,7 @@
     [tapGestureRecognizer setNumberOfTapsRequired:2];
     [tapGestureRecognizer setNumberOfTouchesRequired:1];
     [self.tabBar addGestureRecognizer:tapGestureRecognizer];
-
+    
     UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
     UIImageView *imaview = [[UIImageView alloc]initWithFrame:CGRectMake(0, -10, ScreenWidth, 10)];
     imaview.image = tabImag;
@@ -66,15 +66,15 @@
     self.tabBar.clipsToBounds = NO;
     [self.tabBar addSubview:imaview];
     [[UITabBar appearance] setShadowImage:tabImag];
-
-//    @PGWeakObj(self);
-//    [self.KVOController observe:self.tabBar keyPaths:@[@"shadowImage"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
-//        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
-//        if ([keyPath isEqualToString:@"shadowImage"]) {
-//
-//        }
-//
-//    }];
+    
+    //    @PGWeakObj(self);
+    //    [self.KVOController observe:self.tabBar keyPaths:@[@"shadowImage"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    //        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+    //        if ([keyPath isEqualToString:@"shadowImage"]) {
+    //
+    //        }
+    //
+    //    }];
 }
 
 - (void)redbag_toLend:(NSNotification *)noty {
@@ -118,7 +118,7 @@
                                    @"tabbar_icon_find_normal",
                                    @"tabbar_icon_shop_normal",
                                    @"tabbar_icon_user_normal"];
-
+    
     NSArray *tabbarHighlightArray = @[@"tabbar_icon_homepage_highlight",
                                       @"tabbar_icon_project_highlight",
                                       @"tabbar_icon_find_highlight",
@@ -156,7 +156,7 @@
                 UCFNewMineViewController *mine = [[UCFNewMineViewController alloc] init];
                 controller = mine;
                 _mineView = mine;
-
+                
             }
                 break;
             default:
@@ -232,7 +232,7 @@
     
     switch (index) {
         case 0:{
-//            [_LatestView refresh];
+            //            [_LatestView refresh];
         }
             break;
         case 1:{
@@ -241,7 +241,7 @@
             break;
             
         case 4:{
-            [_mineView refresh];
+            //            [_mineView refresh];
         }
             break;
     }
@@ -253,9 +253,9 @@
     [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
     UIViewController *topView = nil;
     if (contrl.viewControllers.count != 0) {
-      topView = [contrl.viewControllers objectAtIndex:0];
+        topView = [contrl.viewControllers objectAtIndex:0];
     }
-
+    
     if ([self.viewControllers indexOfObject:viewController] == 4 || [self.viewControllers indexOfObject:viewController] == 2) {
         NSString *userId = SingleUserInfo.loginData.userInfo.userId;
         if(nil == userId) {
@@ -265,7 +265,7 @@
         } else {
             
             if ([self.viewControllers indexOfObject:viewController] == 4) {
-                [_mineView refreshPageData];
+                //                [_mineView refreshPageData];
             }
             return YES;
         }
@@ -302,14 +302,14 @@
 }
 - (void)tabBar:(UITabBar *)tabBar willBeginCustomizingItems:(NSArray *)items
 {
-
+    
 }
 
 #pragma mark -
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
-       [SingleUserInfo loadLoginViewController];
+        [SingleUserInfo loadLoginViewController];
     }
 }
 
@@ -363,18 +363,18 @@
 }
 - (void)showTabBar
 {
-//    if (self.tabBar.hidden == NO)
-//    {
-//        return;
-//    }
-//    UIView *contentView;
-//    if ([[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]]) {
-//        contentView = [self.view.subviews objectAtIndex:1];
-//    } else {
-//        contentView = [self.view.subviews objectAtIndex:0];
-//        contentView.frame = CGRectMake(contentView.bounds.origin.x, contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height - self.tabBar.frame.size.height);
-//        self.tabBarController.tabBar.hidden = NO;
-//    }
+    //    if (self.tabBar.hidden == NO)
+    //    {
+    //        return;
+    //    }
+    //    UIView *contentView;
+    //    if ([[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]]) {
+    //        contentView = [self.view.subviews objectAtIndex:1];
+    //    } else {
+    //        contentView = [self.view.subviews objectAtIndex:0];
+    //        contentView.frame = CGRectMake(contentView.bounds.origin.x, contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height - self.tabBar.frame.size.height);
+    //        self.tabBarController.tabBar.hidden = NO;
+    //    }
     if (self.tabBar.frame.origin.y == ScreenHeight - CGRectGetHeight(self.tabBar.frame)) {
         return;
     }
@@ -384,22 +384,22 @@
 }
 - (void)hideTabBar
 {
-//    if (self.tabBar.hidden == YES) {
-//        return;
-//    }
-//    UIView *contentView;
-//    if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
-//        contentView = [self.view.subviews objectAtIndex:1];
-//    else
-//        contentView = [self.view.subviews objectAtIndex:0];
-//    contentView.frame = CGRectMake(contentView.bounds.origin.x,  contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height + self.tabBar.frame.size.height);
-//    self.tabBar.hidden = YES;
-//    return;
+    //    if (self.tabBar.hidden == YES) {
+    //        return;
+    //    }
+    //    UIView *contentView;
+    //    if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
+    //        contentView = [self.view.subviews objectAtIndex:1];
+    //    else
+    //        contentView = [self.view.subviews objectAtIndex:0];
+    //    contentView.frame = CGRectMake(contentView.bounds.origin.x,  contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height + self.tabBar.frame.size.height);
+    //    self.tabBar.hidden = YES;
+    //    return;
     if (self.tabBar.frame.origin.y == ScreenHeight) {
         return;
     }
     self.tabBar.frame = CGRectMake(0, ScreenHeight, CGRectGetWidth(self.tabBar.frame), CGRectGetHeight(self.tabBar.frame));
-
+    
 }
 - (void)viewWillLayoutSubviews
 {
