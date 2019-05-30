@@ -779,7 +779,7 @@
 		7BCE02541AC91BA20084C15C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02531AC91BA20084C15C /* CoreTelephony.framework */; };
 		7BCE02561AC91BB40084C15C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02551AC91BB40084C15C /* Security.framework */; };
 		7BCE02581AC91BD60084C15C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02571AC91BD60084C15C /* UIKit.framework */; };
-		7BCE025A1AC91BEF0084C15C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02591AC91BEF0084C15C /* Foundation.framework */; };
+		7BCE025A1AC91BEF0084C15C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02591AC91BEF0084C15C /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7BCE025C1AC91C0B0084C15C /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE025B1AC91C0B0084C15C /* libresolv.dylib */; };
 		7BCE025E1AC91C400084C15C /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE025D1AC91C400084C15C /* libstdc++.dylib */; };
 		7BCE02601AC91C550084C15C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE025F1AC91C550084C15C /* libsqlite3.dylib */; };
@@ -3904,7 +3904,6 @@
 				7BCE02601AC91C550084C15C /* libsqlite3.dylib in Frameworks */,
 				7BCE025E1AC91C400084C15C /* libstdc++.dylib in Frameworks */,
 				7BCE025C1AC91C0B0084C15C /* libresolv.dylib in Frameworks */,
-				7BCE025A1AC91BEF0084C15C /* Foundation.framework in Frameworks */,
 				7BCE02581AC91BD60084C15C /* UIKit.framework in Frameworks */,
 				7BCE02541AC91BA20084C15C /* CoreTelephony.framework in Frameworks */,
 				FB5555331BCE37570013894F /* libMobClickLibrary.a in Frameworks */,
@@ -3920,6 +3919,7 @@
 				7BCE02441AC91A720084C15C /* CoreGraphics.framework in Frameworks */,
 				A824BFCC1FCD499200E32F39 /* UShareUI.framework in Frameworks */,
 				7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */,
+				7BCE025A1AC91BEF0084C15C /* Foundation.framework in Frameworks */,
 				7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */,
 				21486AC6F314096DA147193F /* libPods-JRGC.a in Frameworks */,
 			);
