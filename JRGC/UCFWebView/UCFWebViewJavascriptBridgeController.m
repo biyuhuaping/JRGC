@@ -78,9 +78,9 @@
 //    }];
     
     // Do any additional setup after loading the view from its nib.
-    self.isHideNativeNav = YES;
+//    self.isHideNativeNav = YES;
 //    [self.navigationController setNavigationBarHidden:YES];
-    [self.navigationController.navigationBar setHidden:YES];
+//    [self.navigationController.navigationBar setHidden:YES];
 
     [self setController];    //初始化当前控制器的一些属性
 
