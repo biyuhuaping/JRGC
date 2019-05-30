@@ -102,7 +102,8 @@
                             [[UIApplication sharedApplication] openURL:url];
                         }
                     }else {
-                        NSLog(@"未安装手机银行");
+                        ShowMessage(@"未安装手机银行");
+//                        NSLog(@"未安装手机银行");
                     }
                     break;
                 }
