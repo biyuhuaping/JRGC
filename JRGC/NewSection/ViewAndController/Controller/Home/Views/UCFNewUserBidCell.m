@@ -46,7 +46,7 @@
         button.clipsToBounds = YES;
         [whitBaseView addSubview:button];
         [button setTitle:@"立即出借" forState:UIControlStateNormal];
-        [button setTitle:@"已满标" forState:UIControlStateDisabled];
+        [button setTitle:@"已售罄" forState:UIControlStateDisabled];
 
         button.titleLabel.font = [Color gc_Font:16];
         [button setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
