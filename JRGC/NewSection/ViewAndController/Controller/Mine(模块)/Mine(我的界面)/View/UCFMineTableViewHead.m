@@ -83,7 +83,7 @@
         [self.userMesageLayout addSubview:self.expectedInterestMoneyLabel];
         [self.userMesageLayout addSubview:self.amountShownBtn];
         [self.userMesageLayout addSubview:self.payBtn];
-//        [self.userMesageLayout addSubview:self.waveImageView];
+        //        [self.userMesageLayout addSubview:self.waveImageView];
         
         [self.userMesageLayout addSubview:self.firstWare];
         [self.userMesageLayout addSubview:self.secondWare];
@@ -200,11 +200,11 @@
         _headImageBtn.myLeft = 0;
         _headImageBtn.myHeight = 63;
         _headImageBtn.myWidth = 67;
-//        表示 上 左 下 右的偏移量;解释下,这四个量的含义:
-//        top : 为正数的时候,是往下偏移,为负数的时候往上偏移;
-//        left : 为正数的时候往右偏移,为负数的时候往左偏移;
-//        bottom : 为正数的时候往上偏移,为负数的时候往下偏移;
-//        right :为正数的时候往左偏移,为负数的时候往右偏移;
+        //        表示 上 左 下 右的偏移量;解释下,这四个量的含义:
+        //        top : 为正数的时候,是往下偏移,为负数的时候往上偏移;
+        //        left : 为正数的时候往右偏移,为负数的时候往左偏移;
+        //        bottom : 为正数的时候往上偏移,为负数的时候往下偏移;
+        //        right :为正数的时候往左偏移,为负数的时候往右偏移;
         _headImageBtn.imageEdgeInsets = UIEdgeInsetsMake(30,15, 0, 0);
         _headImageBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [_headImageBtn setImage:[UIImage imageNamed:@"mine_icon_head"] forState:UIControlStateNormal];
@@ -476,6 +476,9 @@
             self.memberLeverBtn.titleEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0 ,  gap / 2 );
             self.memberLeverBtn.contentEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0, gap / 2);
         }
+        if (self.amountShownBtn.selected) {
+            [self hiddenMoney:self.amountShownBtn.selected];
+        }
     }
     [self.totalAssetsMoneyLabel sizeToFit];
     [self.expectedInterestMoneyLabel sizeToFit];
@@ -483,48 +486,8 @@
     
 }
 
-//- (void)showMySimple:(UCFMineMySimpleInfoModel *__nonnull)myModel
-//{
-//    if (myModel != nil && [myModel isKindOfClass:[UCFMineMySimpleInfoModel class]])
-//    {
-//
-//        if (myModel.data.unReadMsgCount > 0) {
-//             [self.messageImageBtn setImage:[UIImage imageNamed:@"MineUNMessageicon"] forState:UIControlStateNormal];
-//        }
-//        else
-//        {
-//            [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
-//        }
-//        if ([myModel.data.memberLever integerValue] <= 1)
-//        {
-//            [self.memberLeverBtn setTitle:@"普通会员" forState:UIControlStateNormal];
-//        }
-//        else
-//        {
-////            self.memberLeverBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//            [self.memberLeverBtn setImage:[UIImage imageNamed:@"icon_vip"] forState:UIControlStateNormal];
-//            [self.memberLeverBtn setTitle:[NSString stringWithFormat:@"VIP%ld",(long)[myModel.data.memberLever integerValue] - 1] forState:UIControlStateNormal];
-////            typedef struct UIEdgeInsets {
-////                CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to 'outset'
-////            } UIEdgeInsets
-//
-//            CGFloat gap = 10.f;
-//            self.memberLeverBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -gap / 2 +5 , 0, gap / 2);
-//            self.memberLeverBtn.titleEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0 ,  gap / 2 );
-//            self.memberLeverBtn.contentEdgeInsets = UIEdgeInsetsMake(0, gap / 2, 0, gap / 2);
-//        }
-//    }
-//    else
-//    {
-//        [self.memberLeverBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-//        [self.memberLeverBtn setTitle:@"" forState:UIControlStateNormal];
-//        [self.messageImageBtn setImage:[UIImage imageNamed:@"MineMessageicon"] forState:UIControlStateNormal];
-//    }
-//}
-
 - (void)removeHeadViewUserData
 {
-//    [self showMySimple:nil];
     [self showMyReceipt:nil];
 }
 - (void)hiddenMoney:(BOOL )isHiddenMoney
@@ -540,6 +503,12 @@
         self.totalAssetsMoneyLabel.text = self.total;//总资产
         self.expectedInterestMoneyLabel.text = self.totalDueIn;//总待收利息
         self.accountBalanceMoneyLabel.text = self.cashBalance;//余额
+        
+        self.totalAssetsMoneyLabel.text =  [NSString AddCNY:self.total];//总资产
+        [self.totalAssetsMoneyLabel setFont:[Color gc_Font:22.0] string:@"¥"];
+        self.expectedInterestMoneyLabel.text = [NSString AddCNY:self.totalDueIn];//总待收利息
+        self.accountBalanceMoneyLabel.text = [NSString AddCNY:self.cashBalance];//余额
+        
         [self.amountShownBtn setImage:[UIImage imageNamed:@"MineShowCapital.png"] forState:UIControlStateNormal];
     }
     
