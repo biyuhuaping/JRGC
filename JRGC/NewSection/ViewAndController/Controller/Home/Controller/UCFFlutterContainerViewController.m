@@ -95,14 +95,14 @@
                     BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
                     // 调起app
                     if (canOpen) {
-                        NSLog(@"可以调起");
+//                        NSLog(@"可以调起");
                         if (@available(iOS 10.0, *)) {
                             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
                         } else {
                             [[UIApplication sharedApplication] openURL:url];
                         }
                     }else {
-                        ShowMessage(@"未安装手机银行");
+                        ShowMessage(@"请安装银行最新版APP或自行启动");
 //                        NSLog(@"未安装手机银行");
                     }
                     break;

@@ -78,7 +78,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -119,10 +118,10 @@
 		<string>ccbmobilebank</string>
 		<string>wx862767be0919d45a</string>
 		<string>cmbmobilebank</string>
-		<string>wxf505f9da589b9506</string>
-		<string>wx1cb534bb13ba3dbd</string>
+		<string>com.cebbank.ebank</string>
+		<string>spdbbank</string>
 		<string>paebqw</string>
-		<string>wb801126555</string>
+		<string>cgbMobileHuidu</string>
 		<string>cibmb</string>
 		<string>psbcmbank</string>
 		<string>wxb57101c34cb7773e</string>

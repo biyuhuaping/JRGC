@@ -58,7 +58,7 @@
 			<key>code</key>
 			<string>CEB</string>
 			<key>scheme</key>
-			<string>wxf505f9da589b9506</string>
+			<string>com.cebbank.ebank</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -66,7 +66,7 @@
 			<key>code</key>
 			<string>SPDB</string>
 			<key>scheme</key>
-			<string>wx1cb534bb13ba3dbd</string>
+			<string>spdbbank</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -82,7 +82,7 @@
 			<key>code</key>
 			<string>GDB</string>
 			<key>scheme</key>
-			<string>wb801126555</string>
+			<string>cgbMobileHuidu</string>
 		</dict>
 		<dict>
 			<key>name</key>
