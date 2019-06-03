@@ -224,6 +224,7 @@
 		4A42BB2F1C27A7D20084AB08 /* NewCalculator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A42BB2E1C27A7D20084AB08 /* NewCalculator.xib */; };
 		4A42BB321C27AC7B0084AB08 /* NewCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A42BB311C27AC7B0084AB08 /* NewCalculator.m */; };
 		4A4C792D1D6EA41E007F268E /* UserInfoSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C792C1D6EA41E007F268E /* UserInfoSingle.m */; };
+		4A4FE87B22A4CCEE0011E325 /* UCFJYDownPDFAPi.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4FE87A22A4CCEE0011E325 /* UCFJYDownPDFAPi.m */; };
 		4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5552971E54413E00E69DA4 /* UCFBatchInvestmentViewController.m */; };
 		4A675E3E1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A675E3C1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m */; };
 		4A675E3F1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A675E3D1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib */; };
@@ -1820,6 +1821,8 @@
 		4A42BB311C27AC7B0084AB08 /* NewCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCalculator.m; sourceTree = "<group>"; };
 		4A4C792B1D6EA41E007F268E /* UserInfoSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoSingle.h; sourceTree = "<group>"; };
 		4A4C792C1D6EA41E007F268E /* UserInfoSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoSingle.m; sourceTree = "<group>"; };
+		4A4FE87922A4CCEE0011E325 /* UCFJYDownPDFAPi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFJYDownPDFAPi.h; sourceTree = "<group>"; };
+		4A4FE87A22A4CCEE0011E325 /* UCFJYDownPDFAPi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFJYDownPDFAPi.m; sourceTree = "<group>"; };
 		4A5552961E54413E00E69DA4 /* UCFBatchInvestmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchInvestmentViewController.h; sourceTree = "<group>"; };
 		4A5552971E54413E00E69DA4 /* UCFBatchInvestmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchInvestmentViewController.m; sourceTree = "<group>"; };
 		4A675E3B1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPayMoneyOrbeansCell.h; sourceTree = "<group>"; };
@@ -4161,8 +4164,6 @@
 			children = (
 				33480A2621E6E8EE007C8AAA /* UCFNewHomeViewController.h */,
 				33480A2721E6E8EE007C8AAA /* UCFNewHomeViewController.m */,
-				4AA82E272297D28600530372 /* UCFFlutterContainerViewController.h */,
-				4AA82E282297D28600530372 /* UCFFlutterContainerViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4743,6 +4744,33 @@
 				4A675E3D1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib */,
 			);
 			name = BidSubView;
+			sourceTree = "<group>";
+		};
+		4A4FE87622A4CCA10011E325 /* jingyuan */ = {
+			isa = PBXGroup;
+			children = (
+				4A4FE87822A4CCC30011E325 /* API */,
+				4A4FE87722A4CCB60011E325 /* Controller */,
+			);
+			path = jingyuan;
+			sourceTree = "<group>";
+		};
+		4A4FE87722A4CCB60011E325 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4AA82E272297D28600530372 /* UCFFlutterContainerViewController.h */,
+				4AA82E282297D28600530372 /* UCFFlutterContainerViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4A4FE87822A4CCC30011E325 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				4A4FE87922A4CCEE0011E325 /* UCFJYDownPDFAPi.h */,
+				4A4FE87A22A4CCEE0011E325 /* UCFJYDownPDFAPi.m */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		4A6EDBCF1D5AC61B004D40FF /* MD5Util */ = {
@@ -8652,6 +8680,7 @@
 		E352FCED21E4AF0A00617AB7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4A4FE87622A4CCA10011E325 /* jingyuan */,
 				334D7D77222638010048CCDC /* Message(首页消息列表) */,
 				E3D6D513221E48F000261622 /* MicroBank(微商银行模块) */,
 				E3E4D9B921F5A35C003D41E9 /* LoginAndRegister */,
@@ -11615,6 +11644,7 @@
 				833CC9F91FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.m in Sources */,
 				83F4DAF51D9561EC00A0632E /* UCFPrdTransferBIdWebView.m in Sources */,
 				3379DCAE226F42CA001CE1AB /* UCFCreateLockViewController.m in Sources */,
+				4A4FE87B22A4CCEE0011E325 /* UCFJYDownPDFAPi.m in Sources */,
 				7BA6E4BA1AD6731900FE8C37 /* SDImageCache.m in Sources */,
 				744B9EDA1F0B8E9A00440FBA /* UCFCalendarDayCell.m in Sources */,
 				7BDD8FD81AE1043C007A5CE8 /* SDBaseProgressView.m in Sources */,

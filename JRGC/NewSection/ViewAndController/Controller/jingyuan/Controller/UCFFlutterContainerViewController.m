@@ -14,6 +14,9 @@
 #import "UCFWebViewJavascriptBridgeController.h"
 #import "UCFGetUserPhoneNumRequest.h"
 #import "UCFRequestSucceedDetection.h"
+#import "UCFJYDownPDFAPi.h"
+#import "QLHeaderViewController.h"
+#import "NSString+Misc.h"
 @interface UCFFlutterContainerViewController ()
 
 @end
@@ -71,7 +74,31 @@
         {
             NSString *title =  [dic objectSafeForKey:@"title"];
             NSString * downloadUrl = [dic objectSafeForKey:@"downloadUrl"];
-            NSLog(@"%@", dic);
+            NSString * encryptParam = [NSString stringWithFormat:@"encryptParam=%@", [NSString  urlEncodeStr:[dic objectSafeForKey:@"encryptParam"]]] ;
+//           encryptParam = [NSString  urlEncodeStr:encryptParam];
+            
+             
+            UCFJYDownPDFAPi * api = [[UCFJYDownPDFAPi alloc] initWithURL:downloadUrl andParam:encryptParam];
+            [api setCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+                NSData *data = request.responseData;
+                if (data.length > 0) {
+                    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                    NSString *imagePath = [documentPath stringByAppendingString:[NSString stringWithFormat:@"/%@.pdf",title]];
+                   BOOL success = [data writeToFile:imagePath atomically:YES];
+                    if (success) {
+                        QLHeaderViewController *vc = [[QLHeaderViewController alloc] init];
+                        vc.localFilePath = imagePath;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                    
+                   
+                }
+                
+            } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+                
+            }];
+            [api start];
+            
         }
         else if ([call.method isEqualToString:@"showWebView"])
         {
