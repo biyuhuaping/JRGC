@@ -58,7 +58,7 @@
 #define WORK_SHOP_CODE      @"newfactoryCodeController/DimensionCode"//我的工场码
 //#define MY_COMMEND          @"prdClaimsFore/recommendBorrows"
 #define ACT_WITHDRAW        @"api/withdraw/v2/getWithdrawInfo.json"   //提现新接口 zrc fixed
-#define PRDORDERUINVEST     @"newprdOrder/uinvest"//我的投资
+#define PRDORDERUINVEST     @"api/investOrder/v2/myOrder.json"//我的投资
 #define PRDORDERUINVESTDETAIL     @"newprdOrder/detail"//我的投资详情
 #define PRDORDERREFUNDLSIT  @"NewRefund/refundLsit"//回款明细
 
@@ -180,7 +180,7 @@
 #define REDBAGRAIN          @"api/homePage/v2/getRedBagRainInfo.json"
 #define PROJECTLISTBATCHBID @"api/prdClaims/v2/colPrdclaimsList.json"  //项目列表中的批量列表
 #define MYINVESTBATCHBID    @"api/myInvest/v2/myBatchInvest.json"     //我的投资的批量投资列表
-#define MYINVESTHEADERINFO  @"newprdOrder/incomeInterest"             //我的投资头部信息
+#define MYINVESTHEADERINFO  @"api/investOrder/v2/queryMydueIn.json"             //我的投资头部信息
 
 #define PROJECTLIST         @"api/prdClaims/v2/more.json"     //项目标列表
 #define TRANSFERLIST        @"api/prdTransfer/v2/getTranPageList.json"     //转让列表

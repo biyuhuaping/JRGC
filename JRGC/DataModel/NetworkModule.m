@@ -250,9 +250,7 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetBatchContractMsg:
             parameter = [serverIP stringByAppendingString:GetBatchContractMsg];
             break;
-        case kSXTagMyInvestHeaderInfo:
-            parameter = [serverIP stringByAppendingString:MYINVESTHEADERINFO];
-            break;
+
         case kSXTagRegistCheckQUDAO:
             parameter = [serverIP stringByAppendingString:RegistCheckQdIsLimit];
             break;
@@ -1416,6 +1414,12 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagAppShareStyle:
             parameter = [NEW_SERVER_IP stringByAppendingString:APPSHARETOTER];
+            break;
+        case kSXTagMyInvestHeaderInfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYINVESTHEADERINFO];
+            break;
+        case kSXTagPrdOrderUinvest:
+            parameter = [NEW_SERVER_IP stringByAppendingString:PRDORDERUINVEST];
             break;
     }
     //给原有参数字典添加公共参数

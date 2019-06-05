@@ -218,7 +218,6 @@
                 self.loginData.userInfo.zxAuthorization = [userDict[@"zxAuthorization"] boolValue];
                 self.loginData.userInfo.isCompanyAgent = [userDict[@"company"] boolValue];
                 self.loginData.userInfo.jyIsShow = [userDict[@"jyIsShow"] boolValue];
-                self.loginData.userInfo.jyIsShow = YES;
 
                 [self updateUserData];
                 if (self.requestUserbackBlock) {

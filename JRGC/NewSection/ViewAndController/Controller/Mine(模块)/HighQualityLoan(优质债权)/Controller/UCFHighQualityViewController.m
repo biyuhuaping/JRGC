@@ -64,8 +64,8 @@
 - (void)getHeaderInfoRequest
 {
     if (SingleUserInfo.loginData.userInfo.userId) {
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",SingleUserInfo.loginData.userInfo.userId];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:self.accoutType];
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":SingleUserInfo.loginData.userInfo.userId} tag:kSXTagMyInvestHeaderInfo owner:self signature:YES Type:self.accoutType];
+//        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:self.accoutType];
     }
 }
 - (void)beginPost:(kSXTag)tag
@@ -76,44 +76,45 @@
     if (tag.integerValue == kSXTagMyInvestHeaderInfo) {
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
-        if([dic[@"status"] intValue] == 1)
+        if([dic[@"ret"] boolValue])
         {
             NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
 //            id interests = data[@"interests"];
 //            self.interestsLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:interests]];//累计收益
-            id principal = data[@"noPrincipal"];
+            NSString *principal = [NSString stringWithFormat:@"%@",data[@"waitPrincipal"]];
             self.board.principalValueLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:principal]];//待收本金
             [self.board.principalValueLab setFont:[Color gc_Font:18] string:@"¥"];
             [self.board.principalValueLab sizeToFit];
             
-            id noInterests = data[@"noInterests"];
+            NSString * noInterests = [NSString stringWithFormat:@"%@",data[@"waitInterest"]];
             self.board.interestValueLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:noInterests]];//待收利息
             [self.board.interestValueLab sizeToFit];
 
+        } else {
+            ShowMessage(dic[@"message"]);
         }
     }else if (tag.integerValue == kSXTagPrdOrderUinvest) {
         [self.showTableView endRefresh];
-        NSMutableDictionary *dic = [result objectFromJSONString];
-        NSString *rstcode = dic[@"status"];
-        NSString *rsttext = dic[@"statusdes"];
-        if ([rstcode intValue] == 1) {
+        NSDictionary *dic = [result objectFromJSONString];
+      
+        if (dic[@"ret"]) {
             if (_currentPage == 1) {
                 [self.dataArray removeAllObjects];
                 [self.showTableView reloadData];
             }
-            BOOL hasNextPage = [dic[@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
+            
+            BOOL hasNextPage = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] valueForKey:@"hasNextPage"] boolValue];
             if (hasNextPage) {
                 _currentPage++;
                 self.showTableView.enableRefreshFooter = YES;
             } else {
                 self.showTableView.enableRefreshFooter = NO;
             }
-            NSArray *dataArr = dic[@"pageData"][@"result"];
+            NSArray *dataArr = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"][@"result"];
             [self.dataArray addObjectsFromArray:dataArr];
             [self.showTableView cyl_reloadData];
         } else {
-//            ShowMessage(rsttext);
-//            ShowCodeMessage([rstcode integerValue], rsttext);
+            ShowMessage(dic[@"message"]);
         }
         
 
@@ -150,12 +151,21 @@
 {
     ShowHUD(self.view);
 
-    NSArray *tempArr = @[@"3",@"100",@"4"];
+    NSArray *tempArr = @[@"1",@"0",@"2"];
     NSString *userId = SingleUserInfo.loginData.userInfo.userId;
-    NSString *strParameters = [NSString stringWithFormat:@"page=%ld&rows=20&userId=%@&flag=%@&typeFlag=", (long)_currentPage,userId,tempArr[_index]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderUinvest owner:self Type:self.accoutType];
+//    NSString *strParameters = [NSString stringWithFormat:@"page=%ld&rows=20&userId=%@&flag=%@&typeFlag=", (long)_currentPage,userId,tempArr[_index]];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderUinvest owner:self Type:self.accoutType];
     
-    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithCapacity:2];
+    [paraDict setValue:[NSString stringWithFormat:@"%ld",(long)_currentPage] forKey:@"page"];
+    [paraDict setValue:@"20" forKey:@"rows"];
+    [paraDict setValue:userId forKey:@"userId"];
+    [paraDict setValue:tempArr[_index] forKey:@"statusFlag"];
+    [paraDict setValue:@"1" forKey:@"typeFlag"];
+
+
+
+    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagPrdOrderUinvest owner:self signature:YES Type:self.accoutType];
     
     /*
     @PGWeakObj(self);

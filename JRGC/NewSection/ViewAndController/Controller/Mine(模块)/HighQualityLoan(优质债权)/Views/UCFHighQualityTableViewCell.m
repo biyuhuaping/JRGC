@@ -196,31 +196,31 @@
 - (void)setDataDict:(NSDictionary *)dataDict isTrans:(BOOL)isTrans
 {
     if (isTrans) {
-        self.titleLab.text = dataDict[@"name"];
+        self.titleLab.text = dataDict[@"prdName"];
         [self.titleLab sizeToFit];
         int status =  [dataDict[@"status"] intValue];
         self.bidStatusLab.text = self.statusArr[status];
         [self.bidStatusLab sizeToFit];
         
         NSString *annualRate = [dataDict objectSafeForKey:@"annualRate"];
-        NSString *transfereeYearRate = [dataDict objectSafeForKey:@"transfereeYearRate"];
+//        NSString *transfereeYearRate = [dataDict objectSafeForKey:@"transfereeYearRate"];
         
-        NSString *ratestr = [transfereeYearRate.length == 0?annualRate:transfereeYearRate stringByAppendingString:@"%"];
+        NSString *ratestr = [annualRate stringByAppendingString:@"%"];
         
         self.loanRateValueLab.text = ratestr;
         [self.loanRateValueLab sizeToFit];
         
-        NSString *effactiveDate = dataDict[@"startInervestTime"];//起息日
-        NSString *repayPerDate = dataDict[@"repayPerDate"];//回款时间
+        NSString *effactiveDate = [dataDict objectSafeForKey:@"effactiveDate"];//起息日
+        NSString *repayPerDate = [dataDict objectSafeForKey:@"repayPerDate"];//回款时间
         self.loanPeriodValueLab.text = effactiveDate.length > 0?effactiveDate:@"--";
         [self.loanPeriodValueLab sizeToFit];
         self.playRepayValueLab.text = repayPerDate.length > 0?repayPerDate:@"--";
         [self.playRepayValueLab sizeToFit];
         
-        double investAmt = [dataDict[@"contributionAmt"] doubleValue];
+        double investAmt = [dataDict[@"investAmt"] doubleValue];
         self.loanMoneyValueLab.text = [NSString stringWithFormat:@"¥%0.2f",investAmt];//投资金额
         [self.loanMoneyValueLab sizeToFit];
-        self.loanTimeValueLab.text = dataDict[@"createdTime"];//交易时间
+        self.loanTimeValueLab.text = dataDict[@"applyDate"];//交易时间
         
         [self.loanTimeValueLab sizeToFit];
         
@@ -233,8 +233,8 @@
         self.loanRateValueLab.text = [dataDict[@"annualRate"] stringByAppendingString:@"%"];
         [self.loanRateValueLab sizeToFit];
         
-        NSString *effactiveDate = dataDict[@"effactiveDate"];//起息日
-        NSString *repayPerDate = dataDict[@"repayPerDate"];//回款时间
+        NSString *effactiveDate = [dataDict objectSafeForKey:@"effactiveDate"];//起息日
+        NSString *repayPerDate = [dataDict objectSafeForKey:@"repayPerDate"];//回款时间
         self.loanPeriodValueLab.text = effactiveDate.length > 0?effactiveDate:@"--";
         [self.loanPeriodValueLab sizeToFit];
         self.playRepayValueLab.text = repayPerDate.length > 0?repayPerDate:@"--";
