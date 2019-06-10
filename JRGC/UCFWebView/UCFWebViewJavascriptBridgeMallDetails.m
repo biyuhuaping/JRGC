@@ -34,7 +34,7 @@
     [self gotoURL:self.url];
      self.webView.scrollView.bounces = NO;
 
-    self.fd_interactivePopDisabled = YES;
+//    self.fd_interactivePopDisabled = YES;
     self.isHideNativeNav = YES;
 //    [self.navigationController setNavigationBarHidden:YES];
 }

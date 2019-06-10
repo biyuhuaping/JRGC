@@ -201,7 +201,7 @@
 {
     NSDictionary *dict = [self.dataArray objectAtIndex:indexPath.row];
     UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
-    controller.billId = dict[@"id"];
+    controller.billId = dict[@"orderId"];
     controller.accoutType = self.accoutType;
     controller.detailType = @"1";
     [self.navigationController pushViewController:controller animated:YES];

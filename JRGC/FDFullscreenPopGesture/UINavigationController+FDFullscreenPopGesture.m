@@ -40,6 +40,9 @@
     
     // Ignore when the active view controller doesn't allow interactive pop.
     UIViewController *topViewController = self.navigationController.viewControllers.lastObject;
+    if ([topViewController isKindOfClass:[RTContainerController class]]) {
+        topViewController = ((RTContainerController *)topViewController).contentViewController;
+    }
     if (topViewController.fd_interactivePopDisabled) {
         return NO;
     }
@@ -243,7 +246,8 @@ typedef void (^_FDViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 
 - (BOOL)fd_interactivePopDisabled
 {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
+    BOOL isAble =  [objc_getAssociatedObject(self, _cmd) boolValue];
+    return isAble;
 }
 
 - (void)setFd_interactivePopDisabled:(BOOL)disabled

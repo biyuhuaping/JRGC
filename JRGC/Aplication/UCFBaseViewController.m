@@ -42,6 +42,7 @@
     [self.navigationController.navigationBar setHidden:_isHideNavigationBar];
 
     self.view.backgroundColor = UIColorWithRGB(0xf5f5f5);
+//    self.fd_interactivePopMaxAllowedInitialDistanceToLeftEdge = 30.0;
 //    [GiFHUD setGifWithImageName:@"gif@3x.gif"];
 }
 

@@ -210,7 +210,7 @@
         self.loanRateValueLab.text = ratestr;
         [self.loanRateValueLab sizeToFit];
         
-        NSString *effactiveDate = [dataDict objectSafeForKey:@"effactiveDate"];//起息日
+        NSString *effactiveDate = [dataDict objectSafeForKey:@"loanDate"];//起息日
         NSString *repayPerDate = [dataDict objectSafeForKey:@"repayPerDate"];//回款时间
         self.loanPeriodValueLab.text = effactiveDate.length > 0?effactiveDate:@"--";
         [self.loanPeriodValueLab sizeToFit];
@@ -233,7 +233,7 @@
         self.loanRateValueLab.text = [dataDict[@"annualRate"] stringByAppendingString:@"%"];
         [self.loanRateValueLab sizeToFit];
         
-        NSString *effactiveDate = [dataDict objectSafeForKey:@"effactiveDate"];//起息日
+        NSString *effactiveDate = [dataDict objectSafeForKey:@"loanDate"];//起息日
         NSString *repayPerDate = [dataDict objectSafeForKey:@"repayPerDate"];//回款时间
         self.loanPeriodValueLab.text = effactiveDate.length > 0?effactiveDate:@"--";
         [self.loanPeriodValueLab sizeToFit];

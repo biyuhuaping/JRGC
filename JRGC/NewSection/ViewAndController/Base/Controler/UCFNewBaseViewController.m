@@ -166,7 +166,8 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [Color color:PGColorOptionThemeWhite];
     self.view.backgroundColor = [Color color:PGColorOpttonTabeleViewBackgroundColor];
-    
+//    self.fd_interactivePopMaxAllowedInitialDistanceToLeftEdge = 30.0;
+
     _lineViewAA = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     _lineViewAA.backgroundColor = UIColorWithRGB(0xe2e2e2);
     [self.view addSubview:_lineViewAA];

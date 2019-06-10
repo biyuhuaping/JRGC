@@ -45,6 +45,7 @@
 #import "UCFHighQualityContainerViewController.h"
 #import "UCFNewAiLoanViewController.h"
 #import "BaseNavigationViewController.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 #define MALLTIME  12.0
 #define SIGNATURETIME 30.0
 
@@ -81,12 +82,14 @@
 //    self.isHideNativeNav = YES;
 //    [self.navigationController setNavigationBarHidden:YES];
 //    [self.navigationController.navigationBar setHidden:YES];
-
+//    self.navigationController.fd_interactivePopMaxAllowedInitialDistanceToLeftEdge = 30.0f;
+     self.fd_interactivePopMaxAllowedInitialDistanceToLeftEdge = 30.0;
     [self setController];    //初始化当前控制器的一些属性
 
     [self setWebView];       //初始化webView 并加入js
     [self subErrorView];     //添加404页
 
+    
     /** 想要goBack不刷新页面的核心代码 BEGIN */
 //     id webView1 = [self.webView valueForKeyPath:@"_internal.browserView._webView"];
 //    id preferences = [webView1 valueForKey:@"preferences"];
