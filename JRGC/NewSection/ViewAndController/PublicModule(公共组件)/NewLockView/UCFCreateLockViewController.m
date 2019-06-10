@@ -42,7 +42,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.fd_interactivePopDisabled = YES;
     [self initData];
     self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
 }

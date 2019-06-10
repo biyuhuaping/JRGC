@@ -47,7 +47,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.fd_interactivePopDisabled = YES;
     _errorLabel.myVisibility = MyVisibility_Invisible;
 
     ((RTContainerController *) (self.rt_navigationController.viewControllers.lastObject)).fd_interactivePopDisabled = YES;
