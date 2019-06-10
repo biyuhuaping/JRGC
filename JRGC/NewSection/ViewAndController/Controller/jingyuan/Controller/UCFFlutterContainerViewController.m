@@ -30,7 +30,8 @@
 //    self.rt_disableInteractivePop = YES;
 //    self.rt_navigationController.rt_disableInteractivePop = YES;
 //    ((RTContainerController *) (self)).fd_interactivePopDisabled = YES;
-    [self setSetNavgationPopDisabled:YES];
+//    [self setSetNavgationPopDisabled:YES];
+    self.fd_interactivePopDisabled = YES;
 
     
 }
