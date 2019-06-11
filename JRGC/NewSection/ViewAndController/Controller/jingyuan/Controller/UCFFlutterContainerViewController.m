@@ -12,6 +12,7 @@
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "Encryption.h"
 #import "UCFWebViewJavascriptBridgeController.h"
+#import "FullWebViewController.h"
 #import "UCFGetUserPhoneNumRequest.h"
 #import "UCFRequestSucceedDetection.h"
 #import "UCFJYDownPDFAPi.h"
@@ -103,9 +104,10 @@
         }
         else if ([call.method isEqualToString:@"showWebView"])
         {
-            UCFWebViewJavascriptBridgeController *web = [[UCFWebViewJavascriptBridgeController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];
-            web.title = [dic objectSafeForKey:@"title"];
-            web.url = [dic objectSafeForKey:@"url"];
+            FullWebViewController *web = [[FullWebViewController alloc] initWithWebUrl:[dic objectSafeForKey:@"url"] title:[dic objectSafeForKey:@"title"]];
+//            web.title = [dic objectSafeForKey:@"title"];
+//            web.url = [dic objectSafeForKey:@"url"];
+            web.baseTitleType = @"specialUser";
             [weakSelf.rt_navigationController pushViewController:web animated:YES];
         }
         else if ([call.method isEqualToString:@"showBankApp"])
