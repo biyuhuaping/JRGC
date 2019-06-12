@@ -266,11 +266,11 @@
     
     UILabel *firstProtocolLabel = [[UILabel alloc] init];
     firstProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size = [Common getStrHeightWithStr:@"市场有风险 投资需谨慎" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
+    CGSize size = [Common getStrHeightWithStr:@"市场有风险 出借需谨慎" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
     firstProtocolLabel.numberOfLines = 0;
     firstProtocolLabel.textAlignment  = NSTextAlignmentCenter;
     firstProtocolLabel.frame = CGRectMake(15, 0, ScreenWidth - 15*2, size.height);
-    firstProtocolLabel.text = @"市场有风险 投资需谨慎";
+    firstProtocolLabel.text = @"市场有风险 出借需谨慎";
     firstProtocolLabel.textColor =  [Color color:PGColorOptionInputDefaultBlackGray];
     
     [footView addSubview:firstProtocolLabel];

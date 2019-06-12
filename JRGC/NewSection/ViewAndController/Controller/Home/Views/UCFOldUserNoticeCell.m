@@ -14,6 +14,7 @@
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFNewBannerModel.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
+#import "UCFWebViewJavascriptBridgeBanner.h"
 @interface UCFOldUserNoticeCell()<UCFShopHListViewDataSource,UCFShopHListViewDelegate,UCFSiteNoticeViewDelegate>
 @property(nonatomic, strong)NSMutableArray  *showImagesDataArr;
 @property(nonatomic, strong)UCFSiteNoticeView *notiView;
@@ -84,15 +85,25 @@
 }
 - (void)noticeSiteClick
 {
-    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    
+    
+    UCFWebViewJavascriptBridgeBanner *web = [[UCFWebViewJavascriptBridgeBanner alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
     web.url = self.mapModel.noticeUrl;
+    //    web.navTitle = model.title;
+    web.navTitle = @"公告";
+    [((UIViewController *)self.bc).navigationController pushViewController:web animated:YES];
+
+    
+    
+//    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+//    web.url = self.mapModel.noticeUrl;
     
 //    web.url = [NSString stringWithFormat:@"https://www.9888keji.com/mobileCms/xxplContent.html?id=%ld",self.mapModel.ID];
 
     
-    web.title = @"公告";
-    web.isHidenNavigationbar = YES;
-    [((UIViewController *)self.bc).navigationController pushViewController:web animated:YES];
+//    web.title = @"公告";
+//    web.isHidenNavigationbar = YES;
+//    [((UIViewController *)self.bc).navigationController pushViewController:web animated:YES];
 }
 - (NSInteger)numberOfListView:(UCFShopHListView *)shopListView
 {
