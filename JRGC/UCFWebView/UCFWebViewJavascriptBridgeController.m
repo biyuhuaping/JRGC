@@ -499,12 +499,12 @@
             
             UIImageWriteToSavedPhotosAlbum(savedImage, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)weakSelf);
         } else if ([nativeData[@"action"] isEqualToString:@"show_header"]) {
-            [weakSelf.navigationController setNavigationBarHidden:NO animated:NO];
+             weakSelf.navigationController.navigationBar.hidden = NO;
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
             weakSelf.topConSpace.constant = 0;
         }else if ([nativeData[@"action"] isEqualToString:@"hide_header"]) {
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
-            [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
+            weakSelf.navigationController.navigationBar.hidden = YES;
             if (StatusBarHeight1 > 20 ) {
 //                if (self.navigationController.navigationBar.hidden) {
 //                    weakSelf.topConSpace.constant = StatusBarHeight1;
@@ -1072,23 +1072,15 @@
             [self.navigationController pushViewController:loan animated:YES];
             return;
         }
+        
+
+        
         UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-//        if ([self isKindOfClass:[UCFDiscoveryViewController class]]) {
-//
-//            if ([[dic objectSafeForKey:@"value"] isEqualToString:@"https://m.dougemall.com"]) {
-//                web.isHidenNavigationbar = NO;
-//            } else {
-//                web.isHidenNavigationbar = YES;
-//            }
-//        }
-//        else
-//        {
-//            web.isHidenNavigationbar = YES;
-//        }
+        if ([NSStringFromClass([self class]) isEqualToString:@"UCFNewMallWebViewController"]) {
+            web.forbidenLeftBack = YES;
+        }
         web.url = [dic objectSafeForKey:@"value"];
-//        web.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:web animated:YES];
-//        web.hidesBottomBarWhenPushed = NO;
 
     }
     

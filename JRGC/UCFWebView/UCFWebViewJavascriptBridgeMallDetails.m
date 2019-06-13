@@ -36,7 +36,11 @@
 
 //    self.fd_interactivePopDisabled = YES;
     self.isHideNativeNav = YES;
-//    [self.navigationController setNavigationBarHidden:YES];
+    self.navigationController.navigationBar.hidden = YES;
+    if(_forbidenLeftBack) {
+        self.fd_interactivePopDisabled = YES;
+        self.fd_interactivePopMaxAllowedInitialDistanceToLeftEdge = 0.01;
+    }
 }
 
 //只要是豆哥商城的都去掉导航栏
