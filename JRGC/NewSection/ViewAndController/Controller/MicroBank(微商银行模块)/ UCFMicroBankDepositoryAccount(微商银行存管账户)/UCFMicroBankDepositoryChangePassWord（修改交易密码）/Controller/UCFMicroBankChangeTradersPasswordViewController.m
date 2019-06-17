@@ -53,6 +53,9 @@
 @property (nonatomic, strong) UCFMicroBankOpenAccountGetOpenAccountInfoModel *GetOpenAccountModel;
 
 @property (nonatomic, assign) BOOL isCompanyAgent; //是否是企业用户
+
+@property (nonatomic, copy) NSString *phoneStr;
+
 @end
 
 @implementation UCFMicroBankChangeTradersPasswordViewController
@@ -227,7 +230,9 @@
             AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
             webView.title = @"即将跳转";
             webView.url = model.data.url;
-            webView.webDataDic =  [NSDictionary dictionaryWithObjectsAndKeys:model.data.tradeReq.PARAMS,@"PARAMS", nil];
+//            webView.webDataDic =  [NSDictionary dictionaryWithObjectsAndKeys:model.data.tradeReq.PARAMS,@"PARAMS", nil];
+            NSDictionary *dic = request.responseObject;
+            webView.webDataDic = dic[@"data"][@"tradeReq"];
             [self.rt_navigationController pushViewController:webView animated:YES complete:^(BOOL finished) {
                 //进入设置交易密码页面,把开户页面的根视图去掉,返回不再返回到开户页面,直接到h开户页面的上一级
                 [self.rt_navigationController removeViewController: self.parentViewController];
@@ -360,34 +365,11 @@
     {
         return NO;
     }
-    
-    //    if (self.isCompanyAgent)
-    //    {
-    //        //如果是机构用户
-    //        if (![Common isEnglishAndNumbers:self.idView.contentField.text]) {
-    //            [AuxiliaryFunc showToastMessage:@"请输入正确的证件号" withView:self.view];
-    //            return NO;
-    //        }
-    //        else
-    //        {
-    //            return YES;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        //个人用户  //排除机构、和特殊用户(港澳台)
-    //        if (![self.idView.contentField.text isEqualToString:@""] && self.idView.contentField.text.length > 0 ) {
-    //            return YES;
-    //        }
-    //        else
-    //        {
-    //            return NO;
-    //        }
-    //    }
 }
+
 - (BOOL)inspectPhoneView
 {
-    if (self.phoneView.contentField.text.length == 11 && [Common isOnlyNumber:self.phoneView.contentField.text] ) {
+    if (self.GetOpenAccountModel.data.userInfo.phoneNum.length == 11 && [Common isOnlyNumber:self.GetOpenAccountModel.data.userInfo.phoneNum] ) {
         return YES;
     }
     else
@@ -395,6 +377,7 @@
         return NO;
     }
 }
+
 - (BOOL)inspectSmsView
 {
     if (self.smsView.contentField.text.length >0 && ![self.smsView.contentField.text isEqualToString:@""] ) {
