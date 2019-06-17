@@ -12,6 +12,7 @@
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "Encryption.h"
 #import "UCFWebViewJavascriptBridgeController.h"
+#import "FullWebViewController.h"
 #import "UCFGetUserPhoneNumRequest.h"
 #import "UCFRequestSucceedDetection.h"
 #import "UCFJYDownPDFAPi.h"
@@ -30,7 +31,8 @@
 //    self.rt_disableInteractivePop = YES;
 //    self.rt_navigationController.rt_disableInteractivePop = YES;
 //    ((RTContainerController *) (self)).fd_interactivePopDisabled = YES;
-    [self setSetNavgationPopDisabled:YES];
+//    [self setSetNavgationPopDisabled:YES];
+    self.fd_interactivePopDisabled = YES;
 
     
 }
@@ -102,9 +104,10 @@
         }
         else if ([call.method isEqualToString:@"showWebView"])
         {
-            UCFWebViewJavascriptBridgeController *web = [[UCFWebViewJavascriptBridgeController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];
-            web.title = [dic objectSafeForKey:@"title"];
-            web.url = [dic objectSafeForKey:@"url"];
+            FullWebViewController *web = [[FullWebViewController alloc] initWithWebUrl:[dic objectSafeForKey:@"url"] title:[dic objectSafeForKey:@"title"]];
+//            web.title = [dic objectSafeForKey:@"title"];
+//            web.url = [dic objectSafeForKey:@"url"];
+            web.baseTitleType = @"specialUser";
             [weakSelf.rt_navigationController pushViewController:web animated:YES];
         }
         else if ([call.method isEqualToString:@"showBankApp"])

@@ -10,4 +10,5 @@
 
 @interface UCFWebViewJavascriptBridgeMallDetails : UCFWebViewJavascriptBridgeController
 @property (nonatomic, assign) BOOL isHidenNavigationbar;
+@property (nonatomic, assign) BOOL forbidenLeftBack; //是否禁用手势滑动返回
 @end

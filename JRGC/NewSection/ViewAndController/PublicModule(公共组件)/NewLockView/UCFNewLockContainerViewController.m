@@ -29,7 +29,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    ((RTContainerController *) (SingGlobalView.rootNavController.viewControllers.lastObject)).fd_interactivePopDisabled = YES;
+//    ((RTContainerController *) (SingGlobalView.rootNavController.viewControllers.lastObject)).fd_interactivePopDisabled = YES;
 }
 - (id)initWithType:(RCLockViewType)type
 {
@@ -40,6 +40,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.fd_interactivePopDisabled = YES;
+
     if (_type == RCLockViewTypeCheck) {
         BOOL touchIDIsOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
         BOOL userLock = [[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"];

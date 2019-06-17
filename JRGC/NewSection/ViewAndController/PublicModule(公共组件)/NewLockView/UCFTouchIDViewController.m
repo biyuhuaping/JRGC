@@ -12,6 +12,7 @@
 #import <Security/Security.h>
 #import "UCFNewLockContainerViewController.h"
 #import "UCFNewVerificationLoginPassWordViewController.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 @interface UCFTouchIDViewController ()
 @property(nonatomic, strong)UIImageView *headImageView;
 
@@ -41,6 +42,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [Color color:PGColorOptionThemeWhite];
+    self.fd_interactivePopDisabled = YES;
 }
 
 - (void)switchPageBtnClick:(UIButton *)button

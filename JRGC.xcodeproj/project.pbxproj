@@ -10347,6 +10347,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BFE3EA61AC55C98002A53A2 /* Build configuration list for PBXNativeTarget "JRGC" */;
 			buildPhases = (
+				4A26A8142292453000D4B433 /* Run Script */,
 				1509B23E9ABBAEF402EA06CA /* [CP] Check Pods Manifest.lock */,
 				7BFE3E7C1AC55C98002A53A2 /* Sources */,
 				7BFE3E7D1AC55C98002A53A2 /* Frameworks */,
@@ -10354,7 +10355,6 @@
 				83F2D5121DCB3F950041F913 /* Embed Watch Content */,
 				71B93634EC1F5D94BD88E7AC /* [CP] Embed Pods Frameworks */,
 				C21C4262992EA357A7CCB7FB /* [CP] Copy Pods Resources */,
-				4A26A8142292453000D4B433 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -10394,7 +10394,7 @@
 				TargetAttributes = {
 					7BFE3E7F1AC55C98002A53A2 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = EZRWM7P5C6;
+						DevelopmentTeam = MHG97AJ3LK;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -10848,7 +10848,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed\n";
+			shellScript = "\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed\n\n#if [[ \"$CONFIGURATION\" =~ \"Release\" ]];then\n# Release环境删除Flutter.framework \"x86_64\" 框架\n#lipo -remove \"x86_64\" \"/Users/jinronggongchang/Desktop/JRGC_V4/my_flutter/.ios/Flutter/engine/Flutter.framework/Flutter\" -output \"/Users/jinronggongchang/Desktop/JRGC_V4/my_flutter/.ios/Flutter/engine/Flutter.framework/Flutter\"\n#fi\n\n\n\n";
 		};
 		71B93634EC1F5D94BD88E7AC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -11911,6 +11911,7 @@
 /* Begin XCBuildConfiguration section */
 		7BFE3EA41AC55C98002A53A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FCFF9F8059AA1E4CE5E416F /* Pods-JRGC.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -11957,6 +11958,7 @@
 		};
 		7BFE3EA51AC55C98002A53A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC45438A6BE3CD3408691B64 /* Pods-JRGC.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -12009,7 +12011,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = MHG97AJ3LK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12054,7 +12056,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp301;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -12080,7 +12082,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = MHG97AJ3LK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12125,7 +12127,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp301;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

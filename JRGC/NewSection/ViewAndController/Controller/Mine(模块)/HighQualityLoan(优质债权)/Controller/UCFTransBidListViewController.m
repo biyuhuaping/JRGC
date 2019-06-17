@@ -85,13 +85,13 @@
             NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
             //            id interests = data[@"interests"];
             //            self.interestsLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:interests]];//累计收益
-            NSString *principal = [NSString stringWithFormat:@"%@",data[@"waitPrincipal"]];
+            NSString *principal = [NSString stringWithFormat:@"%.2f",[data[@"waitPrincipal"] doubleValue]];
             self.board.principalValueLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:principal]];//待收本金
             [self.board.principalValueLab setFont:[Color gc_Font:18] string:@"¥"];
 
             [self.board.principalValueLab sizeToFit];
             
-            NSString * noInterests = [NSString stringWithFormat:@"%@",data[@"waitInterest"]];
+            NSString * noInterests = [NSString stringWithFormat:@"%.2f",[data[@"waitInterest"] doubleValue]];
             self.board.interestValueLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:noInterests]];//待收利息
             [self.board.interestValueLab sizeToFit];
             

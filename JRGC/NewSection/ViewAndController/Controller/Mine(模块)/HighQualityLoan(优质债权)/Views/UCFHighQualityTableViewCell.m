@@ -16,6 +16,7 @@
 @property(nonatomic, strong)UILabel   *loanRateValueLab;
 @property(nonatomic, strong)UILabel   *playRepayValueLab;
 @property(nonatomic, strong)NSArray   *statusArr;
+@property(nonatomic, strong)UILabel *playRepayMarkLab;
 @end
 @implementation UCFHighQualityTableViewCell
 - (NSArray *)statusArr
@@ -179,6 +180,7 @@
         playRepayMarkLab.topPos.equalTo(loanPeriodMarkLab.bottomPos).offset(VSpace);
         [playRepayMarkLab sizeToFit];
         [whiteView addSubview:playRepayMarkLab];
+        self.playRepayMarkLab = playRepayMarkLab;
         
         UILabel *playRepayValueLab = [UILabel new];
         playRepayValueLab.text = @"12个月";
@@ -199,11 +201,17 @@
         self.titleLab.text = dataDict[@"prdName"];
         [self.titleLab sizeToFit];
         int status =  [dataDict[@"status"] intValue];
+
+       
         self.bidStatusLab.text = self.statusArr[status];
         [self.bidStatusLab sizeToFit];
+        if ([self.bidStatusLab.text isEqualToString:@"已回款"]) {
+            self.playRepayMarkLab.text = @"实际回款日";
+        }else {
+            self.playRepayMarkLab.text = @"计划回款日";
+        }
         
         NSString *annualRate = [dataDict objectSafeForKey:@"annualRate"];
-//        NSString *transfereeYearRate = [dataDict objectSafeForKey:@"transfereeYearRate"];
         
         NSString *ratestr = [annualRate stringByAppendingString:@"%"];
         
@@ -230,6 +238,11 @@
         int status =  [dataDict[@"status"] intValue];
         self.bidStatusLab.text = self.statusArr[status];
         [self.bidStatusLab sizeToFit];
+        if ([self.bidStatusLab.text isEqualToString:@"已回款"]) {
+            self.playRepayMarkLab.text = @"实际回款日";
+        } else {
+            self.playRepayMarkLab.text = @"计划回款日";
+        }
         self.loanRateValueLab.text = [dataDict[@"annualRate"] stringByAppendingString:@"%"];
         [self.loanRateValueLab sizeToFit];
         
