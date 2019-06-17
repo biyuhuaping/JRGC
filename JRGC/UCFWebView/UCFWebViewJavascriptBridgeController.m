@@ -499,11 +499,13 @@
             
             UIImageWriteToSavedPhotosAlbum(savedImage, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)weakSelf);
         } else if ([nativeData[@"action"] isEqualToString:@"show_header"]) {
+            [weakSelf.navigationController setNavigationBarHidden:NO animated:NO];
              weakSelf.navigationController.navigationBar.hidden = NO;
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
             weakSelf.topConSpace.constant = 0;
         }else if ([nativeData[@"action"] isEqualToString:@"hide_header"]) {
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
+            [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
             weakSelf.navigationController.navigationBar.hidden = YES;
             if (StatusBarHeight1 > 20 ) {
 //                if (self.navigationController.navigationBar.hidden) {
